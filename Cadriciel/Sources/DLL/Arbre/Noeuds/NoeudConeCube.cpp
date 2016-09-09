@@ -98,9 +98,7 @@ void NoeudConeCube::animer(float temps)
 	angleY_ = fmod(angleY_ + temps / 3.0f * 2 * (float)utilitaire::PI, 2 * (float)utilitaire::PI);
 	// Le cube effectue une révolution à toutes les 15 secondes.
 	angleRotation_ = fmod(angleRotation_ + temps / 15.0f * 2 * (float)utilitaire::PI, 2 * (float)utilitaire::PI);
-}
+	
+	}
 
 
-///////////////////////////////////////////////////////////////////////////////
-/// @}
-///////////////////////////////////////////////////////////////////////////////

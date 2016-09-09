@@ -86,6 +86,9 @@ public:
    virtual void animer( float dt );
 
 
+   //accepter visiteur
+   virtual void accepter(Visiteur* v);
+
 protected:
    /// Le choix du conteneur pour les enfants.
 	using conteneur_enfants = std::vector<NoeudAbstrait*>;
