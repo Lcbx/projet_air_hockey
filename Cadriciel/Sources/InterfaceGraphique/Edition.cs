@@ -73,7 +73,15 @@ namespace InterfaceGraphique
             }
         }
 
-   
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            System.Console.WriteLine("Souris down : X = " + e.X + " et Y = " + e.Y);
+        }
+
+        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            System.Console.WriteLine("Souris up : X = " + e.X + " et Y = " + e.Y);
+        }
     }
 
     static partial class FonctionsNatives
