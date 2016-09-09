@@ -14,6 +14,8 @@ namespace InterfaceGraphique
 {
     public partial class Edition : Form
     {
+        private static MenuPrincipal menuPrincipal_;
+
 
         public Edition()
         {
@@ -72,8 +74,16 @@ namespace InterfaceGraphique
                 Program.peutAfficher = false;
             }
         }
+        public void setMenuPrincipal(MenuPrincipal menuPrincipal)
+        {
+            menuPrincipal_ = menuPrincipal;
+        }
 
-   
+        private void menuPrincipalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            menuPrincipal_.Show();
+            this.Hide();
+        }
     }
 
     static partial class FonctionsNatives

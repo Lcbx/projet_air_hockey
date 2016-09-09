@@ -51,6 +51,7 @@ namespace InterfaceGraphique
             //Application.Run(edition);
             menuPrincipal = new MenuPrincipal();
             menuPrincipal.setMenuEdition(edition);
+            edition.setMenuPrincipal(menuPrincipal);
             Application.Run(menuPrincipal);
         }
 
