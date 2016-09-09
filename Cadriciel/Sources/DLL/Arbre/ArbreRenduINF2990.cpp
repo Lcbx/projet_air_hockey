@@ -18,6 +18,7 @@ const std::string ArbreRenduINF2990::NOM_ARAIGNEE{ "araignee" };
 /// La chaîne représentant le type des cones-cubes.
 const std::string ArbreRenduINF2990::NOM_CONECUBE{ "conecube" };
 
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn ArbreRenduINF2990::ArbreRenduINF2990()

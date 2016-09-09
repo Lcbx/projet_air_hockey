@@ -25,6 +25,17 @@ namespace opengl{
 	class VBO;
 }
 
+//TODO: AJOUTEZ TOUS Classes Visiteurs 
+class Visiteur;
+class VisiteurDeplacement;
+class VisiteurSelection;
+class VisiteurRotation;
+class VisiteurMiseEchelle;
+
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////
 /// @class NoeudAbstrait
 /// @brief Classe de base du patron composite utilisée pour créer l'arbre

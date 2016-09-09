@@ -84,7 +84,24 @@ namespace InterfaceGraphique
             menuPrincipal_.Show();
             this.Hide();
         }
+        //gere la souris
+        private Boolean mousePressed = false;
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            System.Console.WriteLine("Souris down : X = " + e.X + " et Y = " + e.Y);
+            mousePressed = true;
+        }
+        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            System.Console.WriteLine("Souris up : X = " + e.X + " et Y = " + e.Y);
+            mousePressed = false;
+        }
+        private void Edition_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(mousePressed) System.Console.WriteLine("Souris in : X = " + e.X + " et Y = " + e.Y);
+        }
     }
+
 
     static partial class FonctionsNatives
     {
