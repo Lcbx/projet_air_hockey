@@ -54,16 +54,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Edition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Edition.Designer.cs">
+      <DependentUpon>Edition.cs</DependentUpon>
+    </Compile>
     <Compile Include="Exemple.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Exemple.Designer.cs">
       <DependentUpon>Exemple.cs</DependentUpon>
     </Compile>
+    <Compile Include="MenuPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuPrincipal.Designer.cs">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Edition.resx">
+      <DependentUpon>Edition.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Exemple.resx">
       <DependentUpon>Exemple.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuPrincipal.resx">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -87,6 +105,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Partie_rapide.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tournoi1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Éditeur.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

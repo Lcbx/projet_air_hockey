@@ -10,8 +10,6 @@
 #include "NoeudAbstrait.h"
 #include "Utilitaire.h"
 
-#include <../Visiteur.h>
-
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -446,9 +444,5 @@ void NoeudAbstrait::animer(float dt)
 
 
 ////////////////////////////////////////////////
-/// @}VISITEUR
+/// @}
 ////////////////////////////////////////////////
-void NoeudAbstrait::accepter(Visiteur* v)
-{
-	v->visiter(this);
-}

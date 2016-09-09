@@ -16,6 +16,7 @@ namespace InterfaceGraphique
         public static bool peutAfficher = true;
 
         private static Exemple exemple;
+        private static MenuPrincipal menuPrincipal;
         private static TimeSpan dernierTemps;
         private static TimeSpan tempsAccumule;
         private static Stopwatch chrono = Stopwatch.StartNew();
@@ -44,6 +45,8 @@ namespace InterfaceGraphique
             Application.SetCompatibleTextRenderingDefault(false);
             exemple = new Exemple();
             Application.Run(exemple);
+            menuPrincipal = new MenuPrincipal();
+            Application.Run(menuPrincipal);
         }
 
         static void ExecuterQuandInactif(object sender, EventArgs e)
