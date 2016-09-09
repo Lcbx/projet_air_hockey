@@ -33,36 +33,36 @@ namespace vue {
 class FacadeModele
 {
 public:
-   /// Obtient l'instance unique de la classe.
-   static FacadeModele* obtenirInstance();
-   /// Libère l'instance unique de la classe.
-   static void libererInstance();
+	/// Obtient l'instance unique de la classe.
+	static FacadeModele* obtenirInstance();
+	/// Libère l'instance unique de la classe.
+	static void libererInstance();
 
-   /// Crée un contexte OpenGL et initialise celui-ci.
-   void initialiserOpenGL(HWND hWnd);
-   /// Charge la configuration à partir d'un fichier XML.
-   void chargerConfiguration() const;
-   /// Enregistre la configuration courante dans un fichier XML.
-   void enregistrerConfiguration() const;
-   /// Libère le contexte OpenGL.
-   void libererOpenGL();
-   /// Affiche le contenu du modèle.
-   void afficher() const;
-   /// Affiche la base du contenu du modèle.
-   void afficherBase() const;
- 
-   /// Retourne la vue courante.
-   inline vue::Vue* obtenirVue();
-   /// Retourne l'arbre de rendu.
-   inline const ArbreRenduINF2990* obtenirArbreRenduINF2990() const;
-   /// Retourne l'arbre de rendu.
-   inline ArbreRenduINF2990* obtenirArbreRenduINF2990();
+	/// Crée un contexte OpenGL et initialise celui-ci.
+	void initialiserOpenGL(HWND hWnd);
+	/// Charge la configuration à partir d'un fichier XML.
+	void chargerConfiguration() const;
+	/// Enregistre la configuration courante dans un fichier XML.
+	void enregistrerConfiguration() const;
+	/// Libère le contexte OpenGL.
+	void libererOpenGL();
+	/// Affiche le contenu du modèle.
+	void afficher() const;
+	/// Affiche la base du contenu du modèle.
+	void afficherBase() const;
 
-   /// Réinitialise la scène.
-   void reinitialiser();
+	/// Retourne la vue courante.
+	inline vue::Vue* obtenirVue();
+	/// Retourne l'arbre de rendu.
+	inline const ArbreRenduINF2990* obtenirArbreRenduINF2990() const;
+	/// Retourne l'arbre de rendu.
+	inline ArbreRenduINF2990* obtenirArbreRenduINF2990();
 
-   /// Anime la scène.
-   void animer(float temps);
+	/// Réinitialise la scène.
+	void reinitialiser();
+
+	/// Anime la scène.
+	void animer(float temps);
 
 
 private:
@@ -94,7 +94,6 @@ private:
    ArbreRenduINF2990* arbre_{ nullptr };
 
 };
-
 
 
 
@@ -146,8 +145,22 @@ inline ArbreRenduINF2990* FacadeModele::obtenirArbreRenduINF2990()
 }
 
 
-#endif // __APPLICATION_FACADEMODELE_H__
 
+// Click
+class Selection {
+	int X_ = 0, Y_ = 0;	 //pour garder l'information (rectangle élastique)
+	Selection();
+	static Selection* instance_;
+public:
+	static Selection* obtenirInstance();
+	void libererInstance();
+	void setXY(int x, int y);			//les coordonnees du mouse_down
+	void currentPoint(int x, int y);	//les coordonnees du mouse_move
+	void finSelection(int x, int y);	//les coordonnees du mouse_up
+};
+
+
+#endif // __APPLICATION_FACADEMODELE_H__
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @}

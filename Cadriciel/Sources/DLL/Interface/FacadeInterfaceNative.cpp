@@ -183,8 +183,23 @@ extern "C"
 		bool reussite = BancTests::obtenirInstance()->executer();
 		return reussite ? 0 : 1;
 	}
-}
 
+	// Click
+	__declspec(dllexport) void __cdecl setXetY(int x, int y)
+	{
+		Selection::obtenirInstance()->setXY(x, y);
+	}
+	__declspec(dllexport) void __cdecl courantPoint(int x, int y)
+	{
+		Selection::obtenirInstance()->currentPoint(x, y);
+	}
+	__declspec(dllexport) void __cdecl finDeSelection(int x, int y)
+	{
+		Selection::obtenirInstance()->finSelection(x, y);
+	}
+
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @}

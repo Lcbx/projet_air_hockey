@@ -21,6 +21,11 @@ extern "C" {
 	__declspec(dllexport) int obtenirAffichagesParSeconde();
 	__declspec(dllexport) bool executerTests();
 
+	//Click
+	__declspec(dllexport) void setXetY(int x, int y);
+	__declspec(dllexport) void courantPoint(int x, int y);
+	__declspec(dllexport) void finDeSelection(int x, int y);
+
 }
 
 #endif // __FACADE_INTERFACE_NATIVE_H__

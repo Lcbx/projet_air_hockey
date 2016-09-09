@@ -45,6 +45,7 @@
 /// Pointeur vers l'instance unique de la classe.
 FacadeModele* FacadeModele::instance_{ nullptr };
 
+
 /// Chaîne indiquant le nom du fichier de configuration du projet.
 const std::string FacadeModele::FICHIER_CONFIGURATION{ "configuration.xml" };
 
@@ -331,6 +332,31 @@ void FacadeModele::animer(float temps)
 	vue_->animer(temps);
 }
 
+//Click
+
+Selection* Selection::instance_{ nullptr };
+
+Selection* Selection::obtenirInstance() {
+	if (instance_ == nullptr) instance_ = new Selection;
+	return instance_;
+}
+
+void Selection::libererInstance() {
+	delete instance_;
+	instance_ = nullptr;
+}
+
+void Selection::setXY(int x, int y) {
+	X_ = x; Y_ = y;
+}
+
+void Selection::currentPoint(int x, int y) {
+	X_ = x; Y_ = y;
+}
+
+void Selection::finSelection(int x, int y) {
+	X_ = x; Y_ = y;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
