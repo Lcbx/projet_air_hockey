@@ -15,7 +15,7 @@ namespace InterfaceGraphique
         public static Object unLock = new Object();
         public static bool peutAfficher = true;
 
-        private static Exemple exemple;
+        private static Edition edition;
         private static MenuPrincipal menuPrincipal;
         private static TimeSpan dernierTemps;
         private static TimeSpan tempsAccumule;
@@ -43,9 +43,14 @@ namespace InterfaceGraphique
             Application.Idle += ExecuterQuandInactif;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            exemple = new Exemple();
-            Application.Run(exemple);
+
+            edition = new Edition();
+            //menuPrincipal = new MenuPrincipal(edition);
+            //edition.setMenuPrincipale(menuPrincipal);
+
+            //Application.Run(edition);
             menuPrincipal = new MenuPrincipal();
+            menuPrincipal.setMenuEdition(edition);
             Application.Run(menuPrincipal);
         }
 
@@ -65,8 +70,8 @@ namespace InterfaceGraphique
                 {
                     lock (unLock)
                     {
-                        if (exemple != null && peutAfficher)
-                            exemple.MettreAJour((double)tempsAccumule.Ticks / TimeSpan.TicksPerSecond);
+                        if (edition != null && peutAfficher)
+                            edition.MettreAJour((double)tempsAccumule.Ticks / TimeSpan.TicksPerSecond);
                     }
                     tempsAccumule = TimeSpan.Zero;
                 }

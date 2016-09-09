@@ -146,6 +146,15 @@
 
         #endregion
 
+       //public MenuPrincipal(Edition exemple2)
+       //{
+          //exemple = exemple2;
+       //}
+
+
+      //private static Edition exemple;
+
+
         private System.Windows.Forms.Button partieRapide;
         private System.Windows.Forms.Button tournoi;
         private System.Windows.Forms.Button configuration;

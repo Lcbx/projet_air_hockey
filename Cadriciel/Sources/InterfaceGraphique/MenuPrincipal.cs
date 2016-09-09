@@ -12,11 +12,17 @@ namespace InterfaceGraphique
 {
     public partial class MenuPrincipal : Form
     {
+        private Edition edition_;
+
         public MenuPrincipal()
         {
             InitializeComponent();
         }
 
+        public void setMenuEdition(Edition edition)
+        {
+            edition_=edition;
+        }
         private void quitter_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -24,8 +30,9 @@ namespace InterfaceGraphique
 
         private void editeur_Click(object sender, EventArgs e)
         {
-            Edition edition = new Edition();  // crée un objet de type Edition
-            edition.Show();                   //  l'afficher 
+            
+            //Edition edition = new Edition();  // crée un objet de type Edition
+            edition_.Show();                   //  l'afficher
             this.Hide();                      // fermer la fenêtre Menu principal.
         }
     }
