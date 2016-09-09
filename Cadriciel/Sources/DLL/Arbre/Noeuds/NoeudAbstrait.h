@@ -35,6 +35,7 @@ class VisiteurMiseEchelle;
 
 
 
+
 ///////////////////////////////////////////////////////////////////////////
 /// @class NoeudAbstrait
 /// @brief Classe de base du patron composite utilisée pour créer l'arbre
@@ -141,12 +142,6 @@ public:
 	virtual void afficherConcret(const glm::mat4& vueProjection) const;
 	/// Anime le noeud.
 	virtual void animer(float dt);
-
-
-	//Accepter le visiteur
-	virtual void accepter(Visiteur* v) ;
-
-
 
 protected:
 	/// Type du noeud.

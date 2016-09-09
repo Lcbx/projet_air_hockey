@@ -12,10 +12,10 @@ using System.Runtime.InteropServices;
 
 namespace InterfaceGraphique
 {
-    public partial class Exemple : Form
+    public partial class Edition : Form
     {
 
-        public Exemple()
+        public Edition()
         {
             this.KeyPress += new KeyPressEventHandler(ToucheEnfonce);
             InitializeComponent();
@@ -25,6 +25,7 @@ namespace InterfaceGraphique
         public void InitialiserAnimation()
         {
             this.DoubleBuffered = false;
+
             FonctionsNatives.initialiserOpenGL(panel1.Handle);
             FonctionsNatives.dessinerOpenGL();
         }
@@ -71,6 +72,8 @@ namespace InterfaceGraphique
                 Program.peutAfficher = false;
             }
         }
+
+   
     }
 
     static partial class FonctionsNatives

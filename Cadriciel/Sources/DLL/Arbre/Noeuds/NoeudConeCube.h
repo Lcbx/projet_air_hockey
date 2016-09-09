@@ -36,7 +36,6 @@ public:
    virtual void animer( float temps );
 
 
-
 private:
    /// Angle selon l'axe des X.
    float angleX_{ 0.f };
