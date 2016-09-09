@@ -4,4 +4,12 @@
 #include "NoeudAraignee.h"
 #include "NoeudConeCube.h"
 
+#include "../NoeudBonus.h"
+#include "../NoeudMaillet.h"
+#include "../NoeudMuret.h"
+#include "../NoeudPortail.h"
+#include "../NoeudRondelle.h"
+
+
+
 #endif /// __NOEUD_TYPES_H__
