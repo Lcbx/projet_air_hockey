@@ -9,10 +9,11 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #pragma once
+#include "AideGL.h"
 
 // Click
 class Selection {
-	int X_ = 0, Y_ = 0;	 //pour garder l'information (rectangle élastique)
+	int X1, Y1, X2, Y2; //pour garder l'information (rectangle élastique)
 	Selection();
 	static Selection* instance_;
 public:

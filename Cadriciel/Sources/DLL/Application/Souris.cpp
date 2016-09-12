@@ -10,7 +10,9 @@
 
 
 #include "Souris.h"
+#include <AideGL.h>
 
+using namespace aidegl;
 
 Selection::Selection() {};
 
@@ -26,16 +28,18 @@ void Selection::libererInstance() {
 	instance_ = nullptr;
 }
 
-void Selection::startClick(int x, int y) {
-	X_ = x; Y_ = y;
+void Selection::currentClick(int x, int y) {
+	X1 = x; Y1 = y;
+	glm::ivec2 point = glm::ivec2(4, 5);
+	initialiserRectangleElastique(point);
 }
 
 void Selection::currentClick(int x, int y) {
-	X_ = x; Y_ = y;
+	X2 = x; Y2= y;
 }
 
 void Selection::endClick(int x, int y) {
-	X_ = x; Y_ = y;
+	X2 = x; Y2 = y;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
