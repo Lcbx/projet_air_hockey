@@ -22,9 +22,9 @@ extern "C" {
 	__declspec(dllexport) bool executerTests();
 
 	//Click
-	__declspec(dllexport) void setXetY(int x, int y);
-	__declspec(dllexport) void courantPoint(int x, int y);
-	__declspec(dllexport) void finDeSelection(int x, int y);
+	__declspec(dllexport) void clickStart(int x, int y);
+	__declspec(dllexport) void clickCurrent(int x, int y);
+	__declspec(dllexport) void clickEnd(int x, int y);
 
 }
 

@@ -154,9 +154,9 @@ class Selection {
 public:
 	static Selection* obtenirInstance();
 	void libererInstance();
-	void setXY(int x, int y);			//les coordonnees du mouse_down
-	void currentPoint(int x, int y);	//les coordonnees du mouse_move
-	void finSelection(int x, int y);	//les coordonnees du mouse_up
+	void startClick(int x, int y);			//les coordonnees du mouse_down
+	void currentClick(int x, int y);		//les coordonnees du mouse_move
+	void endClick(int x, int y);			//les coordonnees du mouse_up
 };
 
 

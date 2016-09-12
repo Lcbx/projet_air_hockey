@@ -346,15 +346,15 @@ void Selection::libererInstance() {
 	instance_ = nullptr;
 }
 
-void Selection::setXY(int x, int y) {
+void Selection::startClick(int x, int y) {
 	X_ = x; Y_ = y;
 }
 
-void Selection::currentPoint(int x, int y) {
+void Selection::currentClick(int x, int y) {
 	X_ = x; Y_ = y;
 }
 
-void Selection::finSelection(int x, int y) {
+void Selection::endClick(int x, int y) {
 	X_ = x; Y_ = y;
 }
 
