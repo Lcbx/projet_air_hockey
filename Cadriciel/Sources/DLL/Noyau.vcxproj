@@ -137,12 +137,15 @@
     <ClCompile Include="Arbre\ArbreRenduINF2990.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudAbstrait.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudComposite.cpp" />
-    <ClCompile Include="Interface\FacadeInterfaceNative.cpp" />
+    <ClCompile Include="Interface\FacadeInterfaceNative.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Trim\Desktop\inf2990-10\Cadriciel\Sources\DLL\Application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="NoeudBonus.cpp" />
     <ClCompile Include="NoeudMaillet.cpp" />
     <ClCompile Include="NoeudMuret.cpp" />
     <ClCompile Include="NoeudPortail.cpp" />
     <ClCompile Include="NoeudRondelle.cpp" />
+    <ClCompile Include="Application\Souris.cpp" />
     <ClCompile Include="Tests\BancTests.cpp" />
     <ClCompile Include="Tests\ConfigSceneTest.cpp" />
     <ClCompile Include="Tests\NoeudAbstraitTest.cpp" />
@@ -168,6 +171,7 @@
     <ClInclude Include="NoeudMuret.h" />
     <ClInclude Include="NoeudPortail.h" />
     <ClInclude Include="NoeudRondelle.h" />
+    <ClInclude Include="Application\Souris.h" />
     <ClInclude Include="Tests\BancTests.h" />
     <ClInclude Include="Tests\ConfigSceneTest.h" />
     <ClInclude Include="Tests\NoeudAbstraitTest.h" />

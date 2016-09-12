@@ -8,9 +8,9 @@
 ////////////////////////////////////////////////
 #include "FacadeInterfaceNative.h"
 #include "FacadeModele.h"
+#include "Souris.h"
 
 #include "glm\glm.hpp"
-#include "FacadeModele.h"
 #include "AideGL.h"
 #include "Vue.h"
 #include "ArbreRenduINF2990.h"
@@ -197,8 +197,7 @@ extern "C"
 	{
 		Selection::obtenirInstance()->endClick(x, y);
 	}
-
-
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////
