@@ -333,7 +333,7 @@ void FacadeModele::animer(float temps)
 }
 
 //Click
-
+Selection::Selection() {};
 Selection* Selection::instance_{ nullptr };
 
 Selection* Selection::obtenirInstance() {
