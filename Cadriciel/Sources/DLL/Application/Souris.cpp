@@ -12,6 +12,8 @@
 #include "Souris.h"
 #include <AideGL.h>
 
+#include "glm\glm.hpp"
+
 using namespace aidegl;
 
 Selection::Selection() {};
@@ -28,10 +30,10 @@ void Selection::libererInstance() {
 	instance_ = nullptr;
 }
 
+
 void Selection::currentClick(int x, int y) {
 	X1 = x; Y1 = y;
-	glm::ivec2 point = glm::ivec2(4, 5);
-	initialiserRectangleElastique(point);
+	initialiserRectangleElastique(glm::ivec2{ X1, Y1 });
 }
 
 void Selection::currentClick(int x, int y) {
