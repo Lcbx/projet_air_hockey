@@ -31,17 +31,19 @@ void Selection::libererInstance() {
 }
 
 
-void Selection::currentClick(int x, int y) {
+void Selection::startClick(int x, int y) {
 	X1 = x; Y1 = y;
+	X2 = x; Y2 = y;
 	initialiserRectangleElastique(glm::ivec2{ X1, Y1 });
 }
 
 void Selection::currentClick(int x, int y) {
-	X2 = x; Y2= y;
+	mettreAJourRectangleElastique(glm::ivec2{ X1, Y1 }, glm::ivec2{ X2, Y2 }, glm::ivec2{ x, y });
+	X2 = x; Y2 = y;
 }
 
 void Selection::endClick(int x, int y) {
-	X2 = x; Y2 = y;
+	terminerRectangleElastique(glm::ivec2{ X1, Y1 }, glm::ivec2{ x, y });
 }
 
 ///////////////////////////////////////////////////////////////////////////////
