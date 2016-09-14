@@ -271,14 +271,14 @@ namespace aidegl {
 	{
 		// On trace l'ancien rectangle pour l'effacer et restaurer la couleur qui
 		// était là avant (grâce au XOR).
-		glBegin(GL_LINE_LOOP);
+		/*glBegin(GL_LINE_LOOP);
 		{
 			glVertex2i(pointAncrage[0], pointAncrage[1]);
 			glVertex2i(pointAncrage[0], pointFinal[1]);
 			glVertex2i(pointFinal[0], pointFinal[1]);
 			glVertex2i(pointFinal[0], pointAncrage[1]);
 		}
-		glEnd();
+		glEnd();*/
 
 		// On rétablit les attributs initiaux.
 		glPopAttrib();

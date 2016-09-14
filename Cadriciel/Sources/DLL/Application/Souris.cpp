@@ -13,7 +13,6 @@
 #include <AideGL.h>
 
 #include "glm\glm.hpp"
-#include <cmath>
 
 using namespace aidegl;
 
@@ -47,8 +46,12 @@ void Selection::currentClick(int x, int y) {
 
 void Selection::endClick(int x, int y) {
 	X2 = x; Y2 = y;
-	if (pow(X1 - X2, 2) + pow(Y1 - Y2, 2) < 9) /* simple selection*/;
-	else /* rectangle selection */;
+	if ((X1 - X2)*(X1 - X2) + (Y1 - Y2)*(Y1 - Y2) < 9) {
+		/* simple selection*/
+	
+	}
+	else {	/* rectangle selection */
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -79,12 +79,14 @@ namespace InterfaceGraphique
         {
             System.Console.WriteLine("Souris down : X = " + e.X + " et Y = " + e.Y);
             FonctionsNatives.clickStart(e.X, e.Y);
+            Program.peutAfficher = false;
             mousePressed = true;
         }
         private void panel1_MouseUp(object sender, MouseEventArgs e)
         {
             System.Console.WriteLine("Souris up : X = " + e.X + " et Y = " + e.Y);
             FonctionsNatives.clickEnd(e.X, e.Y);
+            Program.peutAfficher = true;
             mousePressed = false;
         }
         private void Edition_MouseMove(object sender, MouseEventArgs e)
