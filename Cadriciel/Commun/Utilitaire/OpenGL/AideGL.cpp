@@ -260,7 +260,6 @@ namespace aidegl {
 	///
 	/// @param[in] pointAncrage : Point initial de localisation du rectangle.
 	/// @param[in] pointFinal   : Point final de localisation du rectangle.
-	/// @param[in] effacerDernierRectangle   : efface ou pas le dernier rectangle donné.
 	///
 	/// @return Aucune.
 	///
