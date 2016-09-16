@@ -8,9 +8,9 @@
 ////////////////////////////////////////////////
 #include "FacadeInterfaceNative.h"
 #include "FacadeModele.h"
+#include "Souris.h"
 
 #include "glm\glm.hpp"
-#include "FacadeModele.h"
 #include "AideGL.h"
 #include "Vue.h"
 #include "ArbreRenduINF2990.h"
@@ -184,11 +184,28 @@ extern "C"
 		return reussite ? 0 : 1;
 	}
 
-	__declspec(dllexport) void __cdecl etatDelaSouris(int etat) {
-		FacadeModele::obtenirInstance()->EtatdelaSouris(etat);
-	}
-}
 
+
+
+	// Click
+	__declspec(dllexport) void __cdecl etatDelaSouris(int etat) {
+		Souris::obtenirInstance()->EtatdelaSouris(etat);
+	}
+
+	__declspec(dllexport) void __cdecl clickStart(int x, int y)
+	{
+		Souris::obtenirInstance()->startClick(x, y);
+	}
+	__declspec(dllexport) void __cdecl clickCurrent(int x, int y)
+	{
+		Souris::obtenirInstance()->currentClick(x, y);
+	}
+	__declspec(dllexport) void __cdecl clickEnd(int x, int y)
+	{
+		Souris::obtenirInstance()->endClick(x, y);
+	}
+	
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @}

@@ -33,44 +33,38 @@ namespace vue {
 class FacadeModele
 {
 public:
-   /// Obtient l'instance unique de la classe.
-   static FacadeModele* obtenirInstance();
-   /// Libère l'instance unique de la classe.
-   static void libererInstance();
+	/// Obtient l'instance unique de la classe.
+	static FacadeModele* obtenirInstance();
+	/// Libère l'instance unique de la classe.
+	static void libererInstance();
 
-   /// Crée un contexte OpenGL et initialise celui-ci.
-   void initialiserOpenGL(HWND hWnd);
-   /// Charge la configuration à partir d'un fichier XML.
-   void chargerConfiguration() const;
-   /// Enregistre la configuration courante dans un fichier XML.
-   void enregistrerConfiguration() const;
-   /// Libère le contexte OpenGL.
-   void libererOpenGL();
-   /// Affiche le contenu du modèle.
-   void afficher() const;
-   /// Affiche la base du contenu du modèle.
-   void afficherBase() const;
- 
-   /// Retourne la vue courante.
-   inline vue::Vue* obtenirVue();
-   /// Retourne l'arbre de rendu.
-   inline const ArbreRenduINF2990* obtenirArbreRenduINF2990() const;
-   /// Retourne l'arbre de rendu.
-   inline ArbreRenduINF2990* obtenirArbreRenduINF2990();
+	/// Crée un contexte OpenGL et initialise celui-ci.
+	void initialiserOpenGL(HWND hWnd);
+	/// Charge la configuration à partir d'un fichier XML.
+	void chargerConfiguration() const;
+	/// Enregistre la configuration courante dans un fichier XML.
+	void enregistrerConfiguration() const;
+	/// Libère le contexte OpenGL.
+	void libererOpenGL();
+	/// Affiche le contenu du modèle.
+	void afficher() const;
+	/// Affiche la base du contenu du modèle.
+	void afficherBase() const;
 
-   /// Réinitialise la scène.
-   void reinitialiser();
+	/// Retourne la vue courante.
+	inline vue::Vue* obtenirVue();
+	/// Retourne l'arbre de rendu.
+	inline const ArbreRenduINF2990* obtenirArbreRenduINF2990() const;
+	/// Retourne l'arbre de rendu.
+	inline ArbreRenduINF2990* obtenirArbreRenduINF2990();
 
-   /// Anime la scène.
-   void animer(float temps);
+	/// Réinitialise la scène.
+	void reinitialiser();
 
-   //temp : etat de la souris
-   void EtatdelaSouris(int etat) { etatSouris = static_cast<Etats>(etat); }
+	/// Anime la scène.
+	void animer(float temps);
 
 private:
-
-	enum Etats { SELECTION=0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, AJOUT_MUR, AJOUT_PORTAIL };
-	Etats etatSouris = SELECTION;
 
    /// Constructeur par défaut.
    FacadeModele() = default;
@@ -100,7 +94,6 @@ private:
    ArbreRenduINF2990* arbre_{ nullptr };
 
 };
-
 
 
 
@@ -153,7 +146,6 @@ inline ArbreRenduINF2990* FacadeModele::obtenirArbreRenduINF2990()
 
 
 #endif // __APPLICATION_FACADEMODELE_H__
-
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
