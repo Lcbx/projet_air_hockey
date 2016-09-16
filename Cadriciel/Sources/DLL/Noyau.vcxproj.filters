@@ -123,6 +123,9 @@
     <ClCompile Include="Arbre\Noeuds\NoeudAbstrait.cpp">
       <Filter>Source Files\Arbre\Noeuds</Filter>
     </ClCompile>
+    <ClCompile Include="Application\Souris.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\FacadeModele.h">
@@ -199,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="VisiteurAjout.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Souris.h">
+      <Filter>Header Files\Application</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
