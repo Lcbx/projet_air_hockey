@@ -11,6 +11,7 @@
 
 #include "Souris.h"
 #include <AideGL.h>
+#include <FacadeModele.h>
 
 #include "glm\glm.hpp"
 
@@ -39,25 +40,27 @@ void Souris::startClick(int x, int y) {
 	X1 = x; Y1 = y;
 	X2 = x; Y2 = y;
 	//initialise les graphiques du rectangle elastique
-	initialiserRectangleElastique(glm::ivec2{ X1, Y1 }, 0x5555, 10);
+	if(etatSouris == SELECTION) initialiserRectangleElastique(glm::ivec2{ X1, Y1 }, 0x5555, 10);
 }
 
 void Souris::currentClick(int x, int y) {
 	//determine s'il y a besoin d'afficher le rectangle
-	if (rectangleSelection()) {
-		/* rectangle selection */
-		//affichage usuel : efface l'ancien rectangle par le nouveau
-		mettreAJourRectangleElastique(glm::ivec2{ X1, Y1 }, glm::ivec2{ X2, Y2 }, glm::ivec2{ x, y });
-		//regle le cas special du passage du clic au rectange elastique (qui laisse un rectangle d'affiché)
-		if(!effacerDernierRectangle) mettreAJourRectangleElastique(glm::ivec2{ X1, Y1 }, glm::ivec2{ X1, Y1 }, glm::ivec2{ X2, Y2 });
-		effacerDernierRectangle = true;
-	}
-	else {
-		/* simple selection*/
-		//regle le cas special du passage du rectange elastique au clic  (qui laisse un rectangle d'affiché)
-		if (effacerDernierRectangle) {
-			mettreAJourRectangleElastique(glm::ivec2{ X1, Y1 }, glm::ivec2{ X1, Y1 }, glm::ivec2{ X2, Y2 });
-			effacerDernierRectangle = false;
+	if (etatSouris == SELECTION) {
+		if (plusDe3px()) {
+			/* rectangle selection */
+			//affichage usuel : efface l'ancien rectangle par le nouveau
+			mettreAJourRectangleElastique(glm::ivec2{ X1, Y1 }, glm::ivec2{ X2, Y2 }, glm::ivec2{ x, y });
+			//regle le cas special du passage du clic au rectange elastique (qui laisse un rectangle d'affiché)
+			if (!effacerDernierRectangle) mettreAJourRectangleElastique(glm::ivec2{ X1, Y1 }, glm::ivec2{ X1, Y1 }, glm::ivec2{ X2, Y2 });
+			effacerDernierRectangle = true;
+		}
+		else {
+			/* simple selection*/
+			//regle le cas special du passage du rectange elastique au clic  (qui laisse un rectangle d'affiché)
+			if (effacerDernierRectangle) {
+				mettreAJourRectangleElastique(glm::ivec2{ X1, Y1 }, glm::ivec2{ X1, Y1 }, glm::ivec2{ X2, Y2 });
+				effacerDernierRectangle = false;
+			}
 		}
 	}
 	X2 = x; Y2 = y;
@@ -65,20 +68,47 @@ void Souris::currentClick(int x, int y) {
 
 void Souris::endClick(int x, int y) {
 	//fin de l'affichage des rectangles, efface le dernier rectangle
-	terminerRectangleElastique(glm::ivec2{ X1, Y1 }, glm::ivec2{ X2, Y2 }); 
+	if(etatSouris == SELECTION && plusDe3px()) terminerRectangleElastique(glm::ivec2{ X1, Y1 }, glm::ivec2{ X2, Y2 });
+	else if(etatSouris == SELECTION) terminerRectangleElastique(glm::ivec2{ X1, Y1 }, glm::ivec2{ X1, Y1 });
 	X2 = x; Y2 = y;
 	//opération
-	realiserOperation();
+	plusDe3px() ? operationDragClick() : operationShortClick();
 }
 
-bool Souris::rectangleSelection() {
-	return ( etatSouris == SELECTION && (X1 - X2)*(X1 - X2) + (Y1 - Y2)*(Y1 - Y2) > 9 );
+bool Souris::plusDe3px() {
+	return (X1 - X2)*(X1 - X2) + (Y1 - Y2)*(Y1 - Y2) > 9 ;
 }
 
 
-void Souris::realiserOperation() {
-	if (rectangleSelection()) {
-		
+void Souris::operationShortClick() {
+	switch (etatSouris) {
+	case SELECTION: { break; }
+	case LOUPE: { break; }
+	case DEPLACEMENT: { break; }
+	case ROTATION: { break; }
+	case DUPLICATION: { break; }
+	case AJOUT_ACCELERATEUR: { FacadeModele::obtenirInstance()->ajouterBonus(X1,Y1); break; }
+	case DEBUT_AJOUT_MUR: { break; }
+	case AJOUT_MUR: { break; }
+	case DEBUT_AJOUT_PORTAIL: { break; }
+	case AJOUT_PORTAIL: { break; }
+	default: break;
+	}
+}
+
+void Souris::operationDragClick() {
+	switch (etatSouris) {
+	case SELECTION: { break; }
+	case LOUPE: { break; }
+	case DEPLACEMENT: { break; }
+	case ROTATION: { break; }
+	case DUPLICATION: { break; }
+	case AJOUT_ACCELERATEUR: {}
+	case DEBUT_AJOUT_MUR: { break; }
+	case AJOUT_MUR: { break; }
+	case DEBUT_AJOUT_PORTAIL: { break; }
+	case AJOUT_PORTAIL: { break; }
+	default: break;
 	}
 }
 

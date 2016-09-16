@@ -186,12 +186,6 @@ extern "C"
 		return reussite ? 0 : 1;
 	}
 
-	__declspec(dllexport) void ajouterBonus(int x, int y)
-	{
-		cout << "dans la facade interface" << endl;
-		FacadeModele::obtenirInstance()->ajouterBonus(x,y);
-
-	}
 
 	// Click
 	__declspec(dllexport) void __cdecl etatDelaSouris(int etat) {
