@@ -89,16 +89,23 @@ namespace InterfaceGraphique
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             System.Console.WriteLine("Souris down : X = " + e.X + " et Y = " + e.Y);
+            FonctionsNatives.clickStart(e.X, e.Y);
+            Program.peutAfficher = false;
             mousePressed = true;
         }
         private void panel1_MouseUp(object sender, MouseEventArgs e)
         {
             System.Console.WriteLine("Souris up : X = " + e.X + " et Y = " + e.Y);
+            FonctionsNatives.clickEnd(e.X, e.Y);
+            Program.peutAfficher = true;
             mousePressed = false;
         }
         private void Edition_MouseMove(object sender, MouseEventArgs e)
         {
-            if(mousePressed) System.Console.WriteLine("Souris in : X = " + e.X + " et Y = " + e.Y);
+            if (mousePressed) {
+                System.Console.WriteLine("Souris in : X = " + e.X + " et Y = " + e.Y);
+                FonctionsNatives.clickCurrent(e.X, e.Y);
+            } 
         }
 
        
@@ -118,5 +125,18 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void animer(double temps);
+
+        
+        //Click
+  
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void clickStart(int x, int y);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void clickCurrent(int x, int y);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void clickEnd(int x, int y);
+
     }
 }
