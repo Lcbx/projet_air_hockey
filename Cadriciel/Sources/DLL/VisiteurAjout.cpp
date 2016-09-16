@@ -38,9 +38,9 @@ void VisiteurAjout::visiter(NoeudMuret* noeud)
 void VisiteurAjout::visiter(NoeudBonus* noeud)
 {
 	cout << "Heloo!!c'est le visiteur ajout du bonus" << endl;
-	
+	position.x -= 10;
 	noeud->assignerPositionRelative(position);
-
+	//verif dans la table 
 	
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeud);
 }

@@ -47,7 +47,7 @@ ArbreRenduINF2990::ArbreRenduINF2990()
 	// Construction des usines
 	ajouterUsine(NOM_ARAIGNEE, new UsineNoeud<NoeudAraignee>{ NOM_ARAIGNEE, std::string{ "media/spider.obj" } });
 	ajouterUsine(NOM_CONECUBE, new UsineNoeud<NoeudConeCube>{ NOM_CONECUBE, std::string{ "media/cubecone.obj" } });
-	ajouterUsine(NOM_BONUS, new UsineNoeud<NoeudBonus>{ NOM_BONUS, std::string{ "media/Rondelle.obj" } });
+	ajouterUsine(NOM_BONUS, new UsineNoeud<NoeudBonus>{ NOM_BONUS, std::string{ "media/rondelle.obj" } });
 }
 
 
@@ -107,8 +107,8 @@ void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos)
 
 	NoeudAbstrait* noeudBonus{ creerNoeud(NOM_BONUS) };
 	Visiteur* v1 = new VisiteurAjout(pos);
-
 	noeudBonus->accepter(v1);
+
 	cout << "Bonus x  : " << noeudBonus->obtenirPositionRelative().x << "  Bonus  y: " << noeudBonus->obtenirPositionRelative().y << "  Bonus z: " << noeudBonus->obtenirPositionRelative().z << endl;
 
 
