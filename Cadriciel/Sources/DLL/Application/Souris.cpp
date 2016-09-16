@@ -16,22 +16,25 @@
 
 using namespace aidegl;
 
-Selection::Selection() {};
+Souris::Souris() {};
 
-Selection* Selection::instance_{ nullptr };
+Souris* Souris::instance_{ nullptr };
 
-Selection* Selection::obtenirInstance() {
-	if (instance_ == nullptr) instance_ = new Selection;
+Souris* Souris::obtenirInstance() {
+	if (instance_ == nullptr) instance_ = new Souris;
 	return instance_;
 }
 
-void Selection::libererInstance() {
+void Souris::libererInstance() {
 	delete instance_;
 	instance_ = nullptr;
 }
 
+void Souris::EtatdelaSouris(int etat){
+	etatSouris = static_cast<Etats>(etat);
+}
 
-void Selection::startClick(int x, int y) {
+void Souris::startClick(int x, int y) {
 	//initialisation du clic
 	X1 = x; Y1 = y;
 	X2 = x; Y2 = y;
@@ -39,7 +42,7 @@ void Selection::startClick(int x, int y) {
 	initialiserRectangleElastique(glm::ivec2{ X1, Y1 }, 0x5555, 10);
 }
 
-void Selection::currentClick(int x, int y) {
+void Souris::currentClick(int x, int y) {
 	//determine s'il y a besoin d'afficher le rectangle
 	if (rectangleSelection()) {
 		/* rectangle selection */
@@ -60,7 +63,7 @@ void Selection::currentClick(int x, int y) {
 	X2 = x; Y2 = y;
 }
 
-void Selection::endClick(int x, int y) {
+void Souris::endClick(int x, int y) {
 	//fin de l'affichage des rectangles, efface le dernier rectangle
 	terminerRectangleElastique(glm::ivec2{ X1, Y1 }, glm::ivec2{ X2, Y2 }); 
 	X2 = x; Y2 = y;
@@ -73,7 +76,7 @@ void Selection::endClick(int x, int y) {
 	}
 }
 
-bool Selection::rectangleSelection() {
+bool Souris::rectangleSelection() {
 	return (X1 - X2)*(X1 - X2) + (Y1 - Y2)*(Y1 - Y2) > 9;
 }
 

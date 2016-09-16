@@ -69,6 +69,7 @@ public:
    void ajouterBonus(int x, int y);
 
 private:
+
    /// Constructeur par défaut.
    FacadeModele() = default;
    /// Destructeur.
