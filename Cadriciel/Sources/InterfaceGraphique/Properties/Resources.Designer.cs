@@ -123,6 +123,16 @@ namespace InterfaceGraphique.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap GestionDePoints {
+            get {
+                object obj = ResourceManager.GetObject("GestionDePoints", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap images44VJOJLN {
             get {
                 object obj = ResourceManager.GetObject("images44VJOJLN", resourceCulture);

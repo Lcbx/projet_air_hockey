@@ -78,12 +78,12 @@ namespace InterfaceGraphique
         {
             menuPrincipal_ = menuPrincipal;
         }
-
         private void menuPrincipalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             menuPrincipal_.Show();
             this.Hide();
         }
+
         //gere la souris
         private Boolean mousePressed = false;
         private void panel1_MouseDown(object sender, MouseEventArgs e)
@@ -100,6 +100,8 @@ namespace InterfaceGraphique
         {
             if(mousePressed) System.Console.WriteLine("Souris in : X = " + e.X + " et Y = " + e.Y);
         }
+
+       
     }
 
 

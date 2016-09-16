@@ -45,8 +45,7 @@ namespace InterfaceGraphique
             Application.SetCompatibleTextRenderingDefault(false);
 
             edition = new Edition();
-            //menuPrincipal = new MenuPrincipal(edition);
-            //edition.setMenuPrincipale(menuPrincipal);
+            
 
             //Application.Run(edition);
             menuPrincipal = new MenuPrincipal();
