@@ -106,7 +106,7 @@ void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos)
 {
 
 	NoeudAbstrait* noeudBonus{ creerNoeud(NOM_BONUS) };
-	Visiteur* v1 = new VisiteurAjout(glm::dvec3{50* pos.x, 50*pos.y, 0.0 });
+	Visiteur* v1 = new VisiteurAjout(pos);
 
 	noeudBonus->accepter(v1);
 	cout << "Bonus x  : " << noeudBonus->obtenirPositionRelative().x << "  Bonus  y: " << noeudBonus->obtenirPositionRelative().y << "  Bonus z: " << noeudBonus->obtenirPositionRelative().z << endl;

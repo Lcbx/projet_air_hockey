@@ -38,6 +38,7 @@ void VisiteurAjout::visiter(NoeudMuret* noeud)
 void VisiteurAjout::visiter(NoeudBonus* noeud)
 {
 	cout << "Heloo!!c'est le visiteur ajout du bonus" << endl;
+	
 	noeud->assignerPositionRelative(position);
 
 	
