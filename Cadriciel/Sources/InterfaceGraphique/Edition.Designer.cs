@@ -117,10 +117,10 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel1.Location = new System.Drawing.Point(114, 40);
+            this.panel1.Location = new System.Drawing.Point(127, 68);
             this.panel1.Margin = new System.Windows.Forms.Padding(6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1024, 834);
+            this.panel1.Size = new System.Drawing.Size(1000, 818);
             this.panel1.TabIndex = 0;
             this.panel1.TabStop = true;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
@@ -154,7 +154,7 @@
             this.menuPrincipalToolStripMenuItem});
             this.fichierToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Transparent;
             this.fichierToolStripMenuItem.Name = "fichierToolStripMenuItem";
-            this.fichierToolStripMenuItem.Size = new System.Drawing.Size(97, 38);
+            this.fichierToolStripMenuItem.Size = new System.Drawing.Size(97, 36);
             this.fichierToolStripMenuItem.Text = "Fichier";
             // 
             // nouveauToolStripMenuItem
