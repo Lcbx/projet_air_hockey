@@ -58,7 +58,7 @@
             this.informationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonSelection = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDeplacement = new System.Windows.Forms.ToolStripButton();
@@ -67,12 +67,12 @@
             this.toolStripButtonDuplication = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonZoom = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripTextBox2 = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripTextBox2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripButtonAccelerateur = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonPortail = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonMuret = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripTextBox3 = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripTextBox3 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -117,10 +117,10 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel1.Location = new System.Drawing.Point(138, 74);
+            this.panel1.Location = new System.Drawing.Point(114, 40);
             this.panel1.Margin = new System.Windows.Forms.Padding(6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1000, 800);
+            this.panel1.Size = new System.Drawing.Size(1024, 834);
             this.panel1.TabIndex = 0;
             this.panel1.TabStop = true;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
@@ -154,7 +154,7 @@
             this.menuPrincipalToolStripMenuItem});
             this.fichierToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Transparent;
             this.fichierToolStripMenuItem.Name = "fichierToolStripMenuItem";
-            this.fichierToolStripMenuItem.Size = new System.Drawing.Size(97, 36);
+            this.fichierToolStripMenuItem.Size = new System.Drawing.Size(97, 38);
             this.fichierToolStripMenuItem.Text = "Fichier";
             // 
             // nouveauToolStripMenuItem
@@ -187,6 +187,7 @@
             this.propriétésToolStripMenuItem.Name = "propriétésToolStripMenuItem";
             this.propriétésToolStripMenuItem.Size = new System.Drawing.Size(362, 38);
             this.propriétésToolStripMenuItem.Text = "Propriétés";
+            this.propriétésToolStripMenuItem.Click += new System.EventHandler(this.propriétésToolStripMenuItem_Click);
             // 
             // modeTestToolStripMenuItem
             // 
@@ -353,6 +354,7 @@
             this.toolStrip1.CanOverflow = false;
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Left;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripTextBox1,
             this.toolStripSeparator1,
@@ -380,7 +382,7 @@
             // 
             this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(104, 39);
+            this.toolStripTextBox1.Size = new System.Drawing.Size(106, 32);
             this.toolStripTextBox1.Text = "Outils";
             // 
             // toolStripSeparator1
@@ -390,9 +392,7 @@
             // 
             // toolStripButtonSelection
             // 
-            this.toolStripButtonSelection.Checked = true;
             this.toolStripButtonSelection.CheckOnClick = true;
-            this.toolStripButtonSelection.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripButtonSelection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonSelection.Image = global::InterfaceGraphique.Properties.Resources.Selection;
             this.toolStripButtonSelection.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -400,12 +400,11 @@
             this.toolStripButtonSelection.Size = new System.Drawing.Size(106, 24);
             this.toolStripButtonSelection.Text = "toolStripButtonSelection";
             this.toolStripButtonSelection.ToolTipText = "Sélection";
+            this.toolStripButtonSelection.Click += new System.EventHandler(this.toolStripButtonSelection_Click);
             // 
             // toolStripButtonDeplacement
             // 
-            this.toolStripButtonDeplacement.Checked = true;
             this.toolStripButtonDeplacement.CheckOnClick = true;
-            this.toolStripButtonDeplacement.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripButtonDeplacement.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonDeplacement.Image = global::InterfaceGraphique.Properties.Resources.deplacement_des_fleches_;
             this.toolStripButtonDeplacement.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -438,9 +437,7 @@
             // 
             // toolStripButtonDuplication
             // 
-            this.toolStripButtonDuplication.Checked = true;
             this.toolStripButtonDuplication.CheckOnClick = true;
-            this.toolStripButtonDuplication.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripButtonDuplication.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonDuplication.Image = global::InterfaceGraphique.Properties.Resources.Duplication;
             this.toolStripButtonDuplication.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -451,9 +448,7 @@
             // 
             // toolStripButtonZoom
             // 
-            this.toolStripButtonZoom.Checked = true;
             this.toolStripButtonZoom.CheckOnClick = true;
-            this.toolStripButtonZoom.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripButtonZoom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonZoom.Image = global::InterfaceGraphique.Properties.Resources.sans_titre;
             this.toolStripButtonZoom.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -470,14 +465,12 @@
             // toolStripTextBox2
             // 
             this.toolStripTextBox2.Name = "toolStripTextBox2";
-            this.toolStripTextBox2.Size = new System.Drawing.Size(104, 39);
+            this.toolStripTextBox2.Size = new System.Drawing.Size(106, 32);
             this.toolStripTextBox2.Text = "Objets";
             // 
             // toolStripButtonAccelerateur
             // 
-            this.toolStripButtonAccelerateur.Checked = true;
             this.toolStripButtonAccelerateur.CheckOnClick = true;
-            this.toolStripButtonAccelerateur.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripButtonAccelerateur.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonAccelerateur.Image = global::InterfaceGraphique.Properties.Resources.images44VJOJLN;
             this.toolStripButtonAccelerateur.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -488,9 +481,7 @@
             // 
             // toolStripButtonPortail
             // 
-            this.toolStripButtonPortail.Checked = true;
             this.toolStripButtonPortail.CheckOnClick = true;
-            this.toolStripButtonPortail.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripButtonPortail.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonPortail.Image = global::InterfaceGraphique.Properties.Resources.Portail;
             this.toolStripButtonPortail.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -501,9 +492,7 @@
             // 
             // toolStripButtonMuret
             // 
-            this.toolStripButtonMuret.Checked = true;
             this.toolStripButtonMuret.CheckOnClick = true;
-            this.toolStripButtonMuret.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripButtonMuret.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonMuret.Image = global::InterfaceGraphique.Properties.Resources.Muret;
             this.toolStripButtonMuret.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -520,14 +509,12 @@
             // toolStripTextBox3
             // 
             this.toolStripTextBox3.Name = "toolStripTextBox3";
-            this.toolStripTextBox3.Size = new System.Drawing.Size(104, 39);
+            this.toolStripTextBox3.Size = new System.Drawing.Size(106, 32);
             this.toolStripTextBox3.Text = "Contrôle";
             // 
             // toolStripButton1
             // 
-            this.toolStripButton1.Checked = true;
             this.toolStripButton1.CheckOnClick = true;
-            this.toolStripButton1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButton1.Image = global::InterfaceGraphique.Properties.Resources.GestionDePoints;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -541,7 +528,7 @@
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer1.Enabled = false;
             this.splitContainer1.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.splitContainer1.Location = new System.Drawing.Point(1147, 74);
+            this.splitContainer1.Location = new System.Drawing.Point(1147, 43);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -553,8 +540,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBoxProprietes);
-            this.splitContainer1.Size = new System.Drawing.Size(305, 703);
-            this.splitContainer1.SplitterDistance = 275;
+            this.splitContainer1.Size = new System.Drawing.Size(305, 734);
+            this.splitContainer1.SplitterDistance = 287;
             this.splitContainer1.SplitterWidth = 20;
             this.splitContainer1.TabIndex = 4;
             // 
@@ -580,7 +567,7 @@
             this.groupBoxConstantes.Controls.Add(this.numericUpDown1);
             this.groupBoxConstantes.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBoxConstantes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxConstantes.Location = new System.Drawing.Point(0, 60);
+            this.groupBoxConstantes.Location = new System.Drawing.Point(0, 72);
             this.groupBoxConstantes.Name = "groupBoxConstantes";
             this.groupBoxConstantes.Size = new System.Drawing.Size(301, 211);
             this.groupBoxConstantes.TabIndex = 0;
@@ -658,7 +645,7 @@
             this.groupBoxProprietes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxProprietes.Location = new System.Drawing.Point(0, 0);
             this.groupBoxProprietes.Name = "groupBoxProprietes";
-            this.groupBoxProprietes.Size = new System.Drawing.Size(301, 404);
+            this.groupBoxProprietes.Size = new System.Drawing.Size(301, 423);
             this.groupBoxProprietes.TabIndex = 0;
             this.groupBoxProprietes.TabStop = false;
             this.groupBoxProprietes.Text = "Propriétes";
@@ -821,21 +808,18 @@
         private System.Windows.Forms.ToolStripMenuItem orbiteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aideToolStripMenuItem;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolStripButtonSelection;
         private System.Windows.Forms.ToolStripButton toolStripButtonDeplacement;
         private System.Windows.Forms.ToolStripButton toolStripButtonRotation;
         private System.Windows.Forms.ToolStripButton toolStripButtonMiseAEchelle;
         private System.Windows.Forms.ToolStripButton toolStripButtonDuplication;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox2;
         private System.Windows.Forms.ToolStripButton toolStripButtonAccelerateur;
         private System.Windows.Forms.ToolStripButton toolStripButtonPortail;
         private System.Windows.Forms.ToolStripButton toolStripButtonMuret;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton toolStripButtonZoom;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox3;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.GroupBox groupBoxConstantes;
@@ -857,6 +841,9 @@
         private System.Windows.Forms.GroupBox groupBoxAngleDeRotation;
         private System.Windows.Forms.NumericUpDown numericUpDown6;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ToolStripLabel toolStripTextBox1;
+        private System.Windows.Forms.ToolStripLabel toolStripTextBox2;
+        private System.Windows.Forms.ToolStripLabel toolStripTextBox3;
     }
    
 }

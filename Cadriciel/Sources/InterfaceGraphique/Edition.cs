@@ -108,7 +108,15 @@ namespace InterfaceGraphique
             } 
         }
 
-       
+        private void propriétésToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.splitContainer1.Enabled = true;
+        }
+
+        private void toolStripButtonSelection_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 
 
