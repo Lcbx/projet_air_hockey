@@ -64,8 +64,14 @@ public:
    /// Anime la scène.
    void animer(float temps);
 
+   //temp : etat de la souris
+   void EtatdelaSouris(int etat) { etatSouris = static_cast<Etats>(etat); }
 
 private:
+
+	enum Etats { SELECTION=0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, AJOUT_MUR, AJOUT_PORTAIL };
+	Etats etatSouris = SELECTION;
+
    /// Constructeur par défaut.
    FacadeModele() = default;
    /// Destructeur.

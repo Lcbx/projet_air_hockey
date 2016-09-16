@@ -20,6 +20,7 @@ namespace InterfaceGraphique
             this.KeyPress += new KeyPressEventHandler(ToucheEnfonce);
             InitializeComponent();
             InitialiserAnimation();
+
         }
 
         public void InitialiserAnimation()
@@ -74,21 +75,35 @@ namespace InterfaceGraphique
         }
 
         //gere la souris
+        
+        public enum Etats { SELECTION=0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, AJOUT_MUR, AJOUT_PORTAIL };
+        private Etats EtatSouris = Etats.SELECTION;
+        public void changerMode(Etats nouvelEtat)
+        {
+            if (EtatSouris != nouvelEtat)
+            {
+                EtatSouris = nouvelEtat;
+                FonctionsNatives.etatDelaSouris((int)EtatSouris);
+            }
+        }
+
         private Boolean mousePressed = false;
-        private void panel1_MouseDown(object sender, MouseEventArgs e)
+
+        public void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             System.Console.WriteLine("Souris down : X = " + e.X + " et Y = " + e.Y);
             mousePressed = true;
         }
-        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        public void panel1_MouseUp(object sender, MouseEventArgs e)
         {
             System.Console.WriteLine("Souris up : X = " + e.X + " et Y = " + e.Y);
             mousePressed = false;
         }
-        private void Edition_MouseMove(object sender, MouseEventArgs e)
+        public void Edition_MouseMove(object sender, MouseEventArgs e)
         {
-            if(mousePressed) System.Console.WriteLine("Souris in : X = " + e.X + " et Y = " + e.Y);
+            
         }
+        
     }
 
 
@@ -105,5 +120,8 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void animer(double temps);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void etatDelaSouris(int etat);
     }
 }

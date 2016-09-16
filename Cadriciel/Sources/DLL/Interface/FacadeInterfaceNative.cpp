@@ -183,6 +183,10 @@ extern "C"
 		bool reussite = BancTests::obtenirInstance()->executer();
 		return reussite ? 0 : 1;
 	}
+
+	__declspec(dllexport) void __cdecl etatDelaSouris(int etat) {
+		FacadeModele::obtenirInstance()->EtatdelaSouris(etat);
+	}
 }
 
 
