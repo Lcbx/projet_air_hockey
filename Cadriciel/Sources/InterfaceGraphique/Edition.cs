@@ -108,9 +108,17 @@ namespace InterfaceGraphique
             } 
         }
 
-        private void panel1_MouseClick(object sender, MouseEventArgs e)
+      
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel1_MouseClick_1(object sender, MouseEventArgs e)
         {
             FonctionsNatives.ajouterBonus(e.X, e.Y);
+            System.Console.WriteLine("Souris clic");
         }
     }
 
