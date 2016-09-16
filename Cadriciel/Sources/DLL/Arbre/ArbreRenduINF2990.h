@@ -44,6 +44,17 @@ public:
    static const std::string NOM_ARAIGNEE;
 	/// La chaîne représentant le type des cones-cubes.
    static const std::string NOM_CONECUBE;
+
+
+   /// La chaîne représentant le type des BONUS.
+   static const std::string NOM_BONUS;
+   
+
+
+
+   void ajouterBonus(glm::dvec3 position);
+
+
 };
 
 

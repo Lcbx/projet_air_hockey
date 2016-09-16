@@ -17,6 +17,7 @@
 
 #include "Utilitaire.h"
 
+#include <../Visiteur.h>
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn NoeudMuret::NoeudMuret(const std::string& typeNoeud)
@@ -63,7 +64,7 @@ NoeudMuret::~NoeudMuret()
 ////////////////////////////////////////////////////////////////////////
 void NoeudMuret::afficherConcret(const glm::mat4& vueProjection) const
 {
-	// Révolution autour du centre.
+	/*// Révolution autour du centre.
 	auto modele = glm::rotate(transformationRelative_, angleRotation_, glm::vec3(0, 0, 1));
 	// Translation.
 	modele = glm::translate(modele, glm::vec3(10, 0, 0));
@@ -74,7 +75,7 @@ void NoeudMuret::afficherConcret(const glm::mat4& vueProjection) const
 	// Recentrage du cube.
 	modele = glm::translate(modele, glm::vec3(0, 0, -10));
 	// Affichage du modèle.
-	vbo_->dessiner(vueProjection * modele);
+	vbo_->dessiner(vueProjection * modele);*/
 }
 
 
@@ -99,6 +100,17 @@ void NoeudMuret::animer(float temps)
 	// Le cube effectue une révolution à toutes les 15 secondes.
 	angleRotation_ = fmod(angleRotation_ + temps / 15.0f * 2 * (float)utilitaire::PI, 2 * (float)utilitaire::PI);
 
+}
+
+
+////////////////////////////////////////////////
+/// @}
+/// @}VISITEUR
+////////////////////////////////////////////////
+
+void NoeudMuret::accepter(Visiteur* v)
+{
+	v->visiter(this);
 }
 
 

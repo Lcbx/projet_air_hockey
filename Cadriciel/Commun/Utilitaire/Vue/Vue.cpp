@@ -11,6 +11,7 @@
 #include "GL/glew.h"
 
 #include "Vue.h"
+#include "Projection.h"
 #include "Plan3D.h"
 #include "Droite3D.h"
 #include "glm/gtc/type_ptr.hpp"
@@ -22,9 +23,9 @@ namespace vue {
 	///
 	/// @fn Vue::Vue(const Camera& camera)
 	///
-	/// Ce constructeur permet d'assigner la caméra de cette vue.
+	/// Ce constructeur permet d'assigner la camï¿½ra de cette vue.
 	///
-	/// @param[in] camera : La caméra associée à cette vue.
+	/// @param[in] camera : La camï¿½ra associï¿½e ï¿½ cette vue.
 	///
 	/// @return Aucune (constructeur).
 	///
@@ -39,22 +40,22 @@ namespace vue {
 	///
 	/// @fn bool Vue::convertirClotureAVirtuelle(int x, int y, const math::Plan3D& plan, glm::dvec3& point) const
 	///
-	/// Cette fonction permet de transformer un point (donné en coordonnées
-	/// d'affichage) en coordonnées virtuelles étant donné un certain plan sur
+	/// Cette fonction permet de transformer un point (donnï¿½ en coordonnï¿½es
+	/// d'affichage) en coordonnï¿½es virtuelles ï¿½tant donnï¿½ un certain plan sur
 	/// lequel doit se trouver le point.  Elle utilise les fonction d'OpenGL
-	/// donc cette fonction s'applique peu importe la position de la caméra.
+	/// donc cette fonction s'applique peu importe la position de la camï¿½ra.
 	///
-	/// @param[in]      x     : La position @a X du point en coordonnée
+	/// @param[in]      x     : La position @a X du point en coordonnï¿½e
 	///                         d'affichage.
-	/// @param[in]      y     : La position @a Y du point en coordonnée
+	/// @param[in]      y     : La position @a Y du point en coordonnï¿½e
 	///                         d'affichage.
 	/// @param[in]      plan  : Le plan sur lequel on veut trouver la position
 	///                         correspondante en virtuel.
-	/// @param[in, out] point : point transformé @a (x,y) le @a z est le même
+	/// @param[in, out] point : point transformï¿½ @a (x,y) le @a z est le mï¿½me
 	///                         que le plan
 	///
 	/// @return Faux s'il est impossible de convertir le point en virtuel
-	///         puisque le plan est parallèle à la direction de la caméra, vrai
+	///         puisque le plan est parallï¿½le ï¿½ la direction de la camï¿½ra, vrai
 	///         autrement.
 	///
 	////////////////////////////////////////////////////////////////////////////
@@ -64,15 +65,13 @@ namespace vue {
 		const GLdouble MinZ{ 0.0 };
 		const GLdouble MaxZ{ 1.0 };
 
-		// Lire la matrice de modélisation et de visualisation.
-		glm::dmat4 matriceModelisation;
-		glGetDoublev(GL_MODELVIEW_MATRIX, glm::value_ptr(matriceModelisation));
+		// Obtenir la matrice de projection.
+		glm::dmat4 matriceCamera = this->obtenirCamera().obtenirMatrice();
 
-		// Lire la matrice de projection.
-		glm::dmat4 matriceProjection;
-		glGetDoublev(GL_PROJECTION_MATRIX, glm::value_ptr(matriceProjection));
+		// Obtenir la matrice de projection.
+		glm::dmat4 matriceProjection = this->obtenirProjection().obtenirMatrice();
 
-		// Lire la clôture.
+		// Lire la clï¿½ture.
 		glm::ivec4 cloture;
 		glGetIntegerv(GL_VIEWPORT, glm::value_ptr(cloture));
 
@@ -80,15 +79,15 @@ namespace vue {
 		glm::dvec3 point1;
 		gluUnProject(
 			x, cloture[3] - y, MinZ,
-			glm::value_ptr(matriceModelisation), glm::value_ptr(matriceProjection), glm::value_ptr(cloture),
+			glm::value_ptr(matriceCamera), glm::value_ptr(matriceProjection), glm::value_ptr(cloture),
 			&point1[0], &point1[1], &point1[2]
 			);
 
-		// Deuxième point.
+		// Deuxiï¿½me point.
 		glm::dvec3 point2;
 		gluUnProject(
 			x, cloture[3] - y, MaxZ,
-			glm::value_ptr(matriceModelisation), glm::value_ptr(matriceProjection), glm::value_ptr(cloture),
+			glm::value_ptr(matriceCamera), glm::value_ptr(matriceProjection), glm::value_ptr(cloture),
 			&point2[0], &point2[1], &point2[2]
 			);
 
@@ -103,18 +102,18 @@ namespace vue {
 	///
 	/// @fn bool Vue::convertirClotureAVirtuelle(int x, int y, glm::dvec3& point) const
 	///
-	/// Cette fonction permet de transformer un point (donné en coordonnées
-	/// d'affichage) en coordonnées virtuelles dans le plan XY.
+	/// Cette fonction permet de transformer un point (donnï¿½ en coordonnï¿½es
+	/// d'affichage) en coordonnï¿½es virtuelles dans le plan XY.
 	///
-	/// @param[in]      x     : La position @a X du point en coordonnée
+	/// @param[in]      x     : La position @a X du point en coordonnï¿½e
 	///                         d'affichage.
-	/// @param[in]      y     : La position @a Y du point en coordonnée
+	/// @param[in]      y     : La position @a Y du point en coordonnï¿½e
 	///                         d'affichage.
-	/// @param[in, out] point : point transformé @a (x,y) le @a z est le même
+	/// @param[in, out] point : point transformï¿½ @a (x,y) le @a z est le mï¿½me
 	///                         que le plan
 	///
 	/// @return Faux s'il est impossible de convertir le point en virtuel
-	///         puisque le plan est parallèle à la direction de la caméra.
+	///         puisque le plan est parallï¿½le ï¿½ la direction de la camï¿½ra.
 	///
 	////////////////////////////////////////////////////////////////////////////
 	bool Vue::convertirClotureAVirtuelle(int x, int y, glm::dvec3& point) const
@@ -128,11 +127,11 @@ namespace vue {
 	///
 	/// @fn void Vue::animer(double temps)
 	///
-	/// Cette fonction permet de faire évoluer la vue en fonction du temps, par
-	/// exemple lorsque cette dernière se déplace par rapport à un objet en
+	/// Cette fonction permet de faire ï¿½voluer la vue en fonction du temps, par
+	/// exemple lorsque cette derniï¿½re se dï¿½place par rapport ï¿½ un objet en
 	/// fonction du temps.
 	///
-	/// @param[in]  temps double : L'intervalle de temps pour lequel réaliser
+	/// @param[in]  temps double : L'intervalle de temps pour lequel rï¿½aliser
 	///                            l'animation.
 	///
 	/// @return Aucune.

@@ -12,6 +12,8 @@
 #include <cassert>
 
 
+#include <../Visiteur.h>
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn NoeudComposite::NoeudComposite(const std::string& type)
@@ -488,4 +490,10 @@ void NoeudComposite::animer(float dt)
 
 ////////////////////////////////////////////////
 /// @}
+/// @}VISITEUR
 ////////////////////////////////////////////////
+
+void NoeudComposite::accepter(Visiteur* v)
+{
+		v->visiter(this);
+}

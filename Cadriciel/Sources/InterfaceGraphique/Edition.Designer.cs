@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Edition));
             this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fichierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,11 +117,12 @@
             // 
             // panel1
             // 
+            this.panel1.AutoSize = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel1.Location = new System.Drawing.Point(127, 68);
-            this.panel1.Margin = new System.Windows.Forms.Padding(6);
+            this.panel1.Location = new System.Drawing.Point(143, 52);
+            this.panel1.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1000, 818);
+            this.panel1.Size = new System.Drawing.Size(1000, 800);
             this.panel1.TabIndex = 0;
             this.panel1.TabStop = true;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
@@ -374,21 +376,22 @@
             this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 40);
             this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip1.Size = new System.Drawing.Size(108, 889);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripTextBox1
             // 
-            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(106, 32);
+            this.toolStripTextBox1.Size = new System.Drawing.Size(107, 32);
             this.toolStripTextBox1.Text = "Outils";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(106, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(107, 6);
             // 
             // toolStripButtonSelection
             // 
@@ -397,7 +400,7 @@
             this.toolStripButtonSelection.Image = global::InterfaceGraphique.Properties.Resources.Selection;
             this.toolStripButtonSelection.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonSelection.Name = "toolStripButtonSelection";
-            this.toolStripButtonSelection.Size = new System.Drawing.Size(106, 24);
+            this.toolStripButtonSelection.Size = new System.Drawing.Size(107, 24);
             this.toolStripButtonSelection.Text = "toolStripButtonSelection";
             this.toolStripButtonSelection.ToolTipText = "Sélection";
             this.toolStripButtonSelection.Click += new System.EventHandler(this.toolStripButtonSelection_Click);
@@ -409,7 +412,7 @@
             this.toolStripButtonDeplacement.Image = global::InterfaceGraphique.Properties.Resources.deplacement_des_fleches_;
             this.toolStripButtonDeplacement.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonDeplacement.Name = "toolStripButtonDeplacement";
-            this.toolStripButtonDeplacement.Size = new System.Drawing.Size(106, 24);
+            this.toolStripButtonDeplacement.Size = new System.Drawing.Size(107, 24);
             this.toolStripButtonDeplacement.Text = "toolStripButtonDeplacement";
             this.toolStripButtonDeplacement.ToolTipText = "Déplacement";
             // 
@@ -420,7 +423,7 @@
             this.toolStripButtonRotation.Image = global::InterfaceGraphique.Properties.Resources.Rotation;
             this.toolStripButtonRotation.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonRotation.Name = "toolStripButtonRotation";
-            this.toolStripButtonRotation.Size = new System.Drawing.Size(106, 24);
+            this.toolStripButtonRotation.Size = new System.Drawing.Size(107, 24);
             this.toolStripButtonRotation.Text = "toolStripButtonRotation";
             this.toolStripButtonRotation.ToolTipText = "Rotation";
             // 
@@ -431,7 +434,7 @@
             this.toolStripButtonMiseAEchelle.Image = global::InterfaceGraphique.Properties.Resources.Mise_a_Echelle;
             this.toolStripButtonMiseAEchelle.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonMiseAEchelle.Name = "toolStripButtonMiseAEchelle";
-            this.toolStripButtonMiseAEchelle.Size = new System.Drawing.Size(106, 24);
+            this.toolStripButtonMiseAEchelle.Size = new System.Drawing.Size(107, 24);
             this.toolStripButtonMiseAEchelle.Text = "toolStripButtonMiseAEchelle";
             this.toolStripButtonMiseAEchelle.ToolTipText = "Mise à échelle";
             // 
@@ -442,7 +445,7 @@
             this.toolStripButtonDuplication.Image = global::InterfaceGraphique.Properties.Resources.Duplication;
             this.toolStripButtonDuplication.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonDuplication.Name = "toolStripButtonDuplication";
-            this.toolStripButtonDuplication.Size = new System.Drawing.Size(106, 24);
+            this.toolStripButtonDuplication.Size = new System.Drawing.Size(107, 24);
             this.toolStripButtonDuplication.Text = "toolStripButtonDuplication";
             this.toolStripButtonDuplication.ToolTipText = "Duplication";
             // 
@@ -453,19 +456,19 @@
             this.toolStripButtonZoom.Image = global::InterfaceGraphique.Properties.Resources.sans_titre;
             this.toolStripButtonZoom.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonZoom.Name = "toolStripButtonZoom";
-            this.toolStripButtonZoom.Size = new System.Drawing.Size(106, 24);
+            this.toolStripButtonZoom.Size = new System.Drawing.Size(107, 24);
             this.toolStripButtonZoom.Text = "toolStripButtonZoom";
             this.toolStripButtonZoom.ToolTipText = "Zoom";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(106, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(107, 6);
             // 
             // toolStripTextBox2
             // 
             this.toolStripTextBox2.Name = "toolStripTextBox2";
-            this.toolStripTextBox2.Size = new System.Drawing.Size(106, 32);
+            this.toolStripTextBox2.Size = new System.Drawing.Size(107, 32);
             this.toolStripTextBox2.Text = "Objets";
             // 
             // toolStripButtonAccelerateur
@@ -475,7 +478,7 @@
             this.toolStripButtonAccelerateur.Image = global::InterfaceGraphique.Properties.Resources.images44VJOJLN;
             this.toolStripButtonAccelerateur.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonAccelerateur.Name = "toolStripButtonAccelerateur";
-            this.toolStripButtonAccelerateur.Size = new System.Drawing.Size(106, 24);
+            this.toolStripButtonAccelerateur.Size = new System.Drawing.Size(107, 24);
             this.toolStripButtonAccelerateur.Text = "toolStripButtonAccelerateur";
             this.toolStripButtonAccelerateur.ToolTipText = "Bonus Accelerateur";
             // 
@@ -486,7 +489,7 @@
             this.toolStripButtonPortail.Image = global::InterfaceGraphique.Properties.Resources.Portail;
             this.toolStripButtonPortail.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonPortail.Name = "toolStripButtonPortail";
-            this.toolStripButtonPortail.Size = new System.Drawing.Size(106, 24);
+            this.toolStripButtonPortail.Size = new System.Drawing.Size(107, 24);
             this.toolStripButtonPortail.Text = "toolStripButtonPortail";
             this.toolStripButtonPortail.ToolTipText = "Portail";
             // 
@@ -497,19 +500,19 @@
             this.toolStripButtonMuret.Image = global::InterfaceGraphique.Properties.Resources.Muret;
             this.toolStripButtonMuret.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonMuret.Name = "toolStripButtonMuret";
-            this.toolStripButtonMuret.Size = new System.Drawing.Size(106, 24);
+            this.toolStripButtonMuret.Size = new System.Drawing.Size(107, 24);
             this.toolStripButtonMuret.Text = "toolStripButtonMuret";
             this.toolStripButtonMuret.ToolTipText = "Muret";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(106, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(107, 6);
             // 
             // toolStripTextBox3
             // 
             this.toolStripTextBox3.Name = "toolStripTextBox3";
-            this.toolStripTextBox3.Size = new System.Drawing.Size(106, 32);
+            this.toolStripTextBox3.Size = new System.Drawing.Size(107, 32);
             this.toolStripTextBox3.Text = "Contrôle";
             // 
             // toolStripButton1
@@ -519,16 +522,18 @@
             this.toolStripButton1.Image = global::InterfaceGraphique.Properties.Resources.GestionDePoints;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(106, 24);
+            this.toolStripButton1.Size = new System.Drawing.Size(107, 24);
             this.toolStripButton1.Text = "toolStripButtonControleDePoints";
             this.toolStripButton1.ToolTipText = "Gestion de Contrôle DePoints";
             // 
             // splitContainer1
             // 
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Right;
             this.splitContainer1.Enabled = false;
             this.splitContainer1.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.splitContainer1.Location = new System.Drawing.Point(1147, 43);
+            this.splitContainer1.Location = new System.Drawing.Point(1174, 40);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -540,19 +545,20 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBoxProprietes);
-            this.splitContainer1.Size = new System.Drawing.Size(305, 734);
-            this.splitContainer1.SplitterDistance = 287;
-            this.splitContainer1.SplitterWidth = 20;
+            this.splitContainer1.Size = new System.Drawing.Size(300, 889);
+            this.splitContainer1.SplitterDistance = 347;
+            this.splitContainer1.SplitterWidth = 38;
             this.splitContainer1.TabIndex = 4;
             // 
             // textBox1
             // 
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.textBox1.Location = new System.Drawing.Point(0, 0);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(301, 48);
+            this.textBox1.Size = new System.Drawing.Size(296, 48);
             this.textBox1.TabIndex = 5;
             this.textBox1.Text = "Configuration";
             // 
@@ -566,10 +572,12 @@
             this.groupBoxConstantes.Controls.Add(this.numericUpDown2);
             this.groupBoxConstantes.Controls.Add(this.numericUpDown1);
             this.groupBoxConstantes.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBoxConstantes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxConstantes.Location = new System.Drawing.Point(0, 72);
+            this.groupBoxConstantes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
+            this.groupBoxConstantes.Location = new System.Drawing.Point(0, 131);
+            this.groupBoxConstantes.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.groupBoxConstantes.Name = "groupBoxConstantes";
-            this.groupBoxConstantes.Size = new System.Drawing.Size(301, 211);
+            this.groupBoxConstantes.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxConstantes.Size = new System.Drawing.Size(296, 212);
             this.groupBoxConstantes.TabIndex = 0;
             this.groupBoxConstantes.TabStop = false;
             this.groupBoxConstantes.Text = "Constantes";
@@ -577,8 +585,10 @@
             // labelAccélération
             // 
             this.labelAccélération.AutoSize = true;
-            this.labelAccélération.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAccélération.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.labelAccélération.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.labelAccélération.Location = new System.Drawing.Point(6, 152);
+            this.labelAccélération.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelAccélération.Name = "labelAccélération";
             this.labelAccélération.Size = new System.Drawing.Size(146, 29);
             this.labelAccélération.TabIndex = 6;
@@ -587,8 +597,10 @@
             // labelRebond
             // 
             this.labelRebond.AutoSize = true;
-            this.labelRebond.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRebond.Location = new System.Drawing.Point(6, 101);
+            this.labelRebond.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.labelRebond.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.labelRebond.Location = new System.Drawing.Point(6, 102);
+            this.labelRebond.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelRebond.Name = "labelRebond";
             this.labelRebond.Size = new System.Drawing.Size(99, 29);
             this.labelRebond.TabIndex = 5;
@@ -597,7 +609,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 95);
+            this.label1.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.label1.Location = new System.Drawing.Point(28, 94);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 29);
             this.label1.TabIndex = 4;
@@ -605,8 +619,10 @@
             // labelFriction
             // 
             this.labelFriction.AutoSize = true;
-            this.labelFriction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFriction.Location = new System.Drawing.Point(6, 53);
+            this.labelFriction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.labelFriction.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.labelFriction.Location = new System.Drawing.Point(6, 54);
+            this.labelFriction.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelFriction.Name = "labelFriction";
             this.labelFriction.Size = new System.Drawing.Size(93, 29);
             this.labelFriction.TabIndex = 3;
@@ -614,24 +630,27 @@
             // 
             // numericUpDown3
             // 
-            this.numericUpDown3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown3.Location = new System.Drawing.Point(153, 146);
+            this.numericUpDown3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.numericUpDown3.Location = new System.Drawing.Point(152, 146);
+            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(120, 35);
             this.numericUpDown3.TabIndex = 2;
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown2.Location = new System.Drawing.Point(153, 95);
+            this.numericUpDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.numericUpDown2.Location = new System.Drawing.Point(152, 94);
+            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(120, 35);
             this.numericUpDown2.TabIndex = 1;
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown1.Location = new System.Drawing.Point(153, 47);
+            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.numericUpDown1.Location = new System.Drawing.Point(152, 46);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(120, 35);
             this.numericUpDown1.TabIndex = 0;
@@ -642,10 +661,12 @@
             this.groupBoxProprietes.Controls.Add(this.groupBoxAngleDeRotation);
             this.groupBoxProprietes.Controls.Add(this.groupBoxPosition);
             this.groupBoxProprietes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxProprietes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxProprietes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
             this.groupBoxProprietes.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxProprietes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBoxProprietes.Name = "groupBoxProprietes";
-            this.groupBoxProprietes.Size = new System.Drawing.Size(301, 423);
+            this.groupBoxProprietes.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBoxProprietes.Size = new System.Drawing.Size(296, 500);
             this.groupBoxProprietes.TabIndex = 0;
             this.groupBoxProprietes.TabStop = false;
             this.groupBoxProprietes.Text = "Propriétes";
@@ -654,17 +675,20 @@
             // 
             this.groupBoxFacteurDEchelle.Controls.Add(this.numericUpDown7);
             this.groupBoxFacteurDEchelle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxFacteurDEchelle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxFacteurDEchelle.Location = new System.Drawing.Point(3, 246);
+            this.groupBoxFacteurDEchelle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.groupBoxFacteurDEchelle.Location = new System.Drawing.Point(6, 249);
+            this.groupBoxFacteurDEchelle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBoxFacteurDEchelle.Name = "groupBoxFacteurDEchelle";
-            this.groupBoxFacteurDEchelle.Size = new System.Drawing.Size(295, 100);
+            this.groupBoxFacteurDEchelle.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxFacteurDEchelle.Size = new System.Drawing.Size(284, 100);
             this.groupBoxFacteurDEchelle.TabIndex = 2;
             this.groupBoxFacteurDEchelle.TabStop = false;
             this.groupBoxFacteurDEchelle.Text = "Facteur d\'échelle";
             // 
             // numericUpDown7
             // 
-            this.numericUpDown7.Location = new System.Drawing.Point(71, 49);
+            this.numericUpDown7.Location = new System.Drawing.Point(72, 48);
+            this.numericUpDown7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numericUpDown7.Name = "numericUpDown7";
             this.numericUpDown7.Size = new System.Drawing.Size(120, 35);
             this.numericUpDown7.TabIndex = 0;
@@ -673,17 +697,20 @@
             // 
             this.groupBoxAngleDeRotation.Controls.Add(this.numericUpDown6);
             this.groupBoxAngleDeRotation.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxAngleDeRotation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxAngleDeRotation.Location = new System.Drawing.Point(3, 146);
+            this.groupBoxAngleDeRotation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.groupBoxAngleDeRotation.Location = new System.Drawing.Point(6, 149);
+            this.groupBoxAngleDeRotation.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBoxAngleDeRotation.Name = "groupBoxAngleDeRotation";
-            this.groupBoxAngleDeRotation.Size = new System.Drawing.Size(295, 100);
+            this.groupBoxAngleDeRotation.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxAngleDeRotation.Size = new System.Drawing.Size(284, 100);
             this.groupBoxAngleDeRotation.TabIndex = 1;
             this.groupBoxAngleDeRotation.TabStop = false;
             this.groupBoxAngleDeRotation.Text = "Angle de rotation";
             // 
             // numericUpDown6
             // 
-            this.numericUpDown6.Location = new System.Drawing.Point(71, 44);
+            this.numericUpDown6.Location = new System.Drawing.Point(72, 44);
+            this.numericUpDown6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numericUpDown6.Name = "numericUpDown6";
             this.numericUpDown6.Size = new System.Drawing.Size(120, 35);
             this.numericUpDown6.TabIndex = 0;
@@ -695,24 +722,28 @@
             this.groupBoxPosition.Controls.Add(this.labelY);
             this.groupBoxPosition.Controls.Add(this.labelX);
             this.groupBoxPosition.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxPosition.Location = new System.Drawing.Point(3, 31);
+            this.groupBoxPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F);
+            this.groupBoxPosition.Location = new System.Drawing.Point(6, 34);
+            this.groupBoxPosition.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBoxPosition.Name = "groupBoxPosition";
-            this.groupBoxPosition.Size = new System.Drawing.Size(295, 115);
+            this.groupBoxPosition.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxPosition.Size = new System.Drawing.Size(284, 115);
             this.groupBoxPosition.TabIndex = 0;
             this.groupBoxPosition.TabStop = false;
             this.groupBoxPosition.Text = "Position";
             // 
             // numericUpDown5
             // 
-            this.numericUpDown5.Location = new System.Drawing.Point(71, 78);
+            this.numericUpDown5.Location = new System.Drawing.Point(72, 79);
+            this.numericUpDown5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numericUpDown5.Name = "numericUpDown5";
             this.numericUpDown5.Size = new System.Drawing.Size(120, 31);
             this.numericUpDown5.TabIndex = 3;
             // 
             // numericUpDown4
             // 
-            this.numericUpDown4.Location = new System.Drawing.Point(71, 42);
+            this.numericUpDown4.Location = new System.Drawing.Point(72, 42);
+            this.numericUpDown4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numericUpDown4.Name = "numericUpDown4";
             this.numericUpDown4.Size = new System.Drawing.Size(120, 31);
             this.numericUpDown4.TabIndex = 2;
@@ -720,7 +751,9 @@
             // labelY
             // 
             this.labelY.AutoSize = true;
-            this.labelY.Location = new System.Drawing.Point(26, 84);
+            this.labelY.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.labelY.Location = new System.Drawing.Point(26, 85);
+            this.labelY.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelY.Name = "labelY";
             this.labelY.Size = new System.Drawing.Size(23, 25);
             this.labelY.TabIndex = 1;
@@ -729,7 +762,9 @@
             // labelX
             // 
             this.labelX.AutoSize = true;
+            this.labelX.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.labelX.Location = new System.Drawing.Point(26, 42);
+            this.labelX.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelX.Name = "labelX";
             this.labelX.Size = new System.Drawing.Size(23, 25);
             this.labelX.TabIndex = 0;
@@ -745,7 +780,9 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
-            this.Margin = new System.Windows.Forms.Padding(6);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "Edition";
             this.Text = "Edition";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Exemple_FormClosing);

@@ -56,6 +56,8 @@ namespace opengl{
 		/// Permet de relâcher les données/commandes sur la crate graphique
 		virtual void liberer();
 
+
+
 	private:
 		/// Méthode "helper" pour passer les données du mesh vers la carte graphique
 		template <typename T>
@@ -75,6 +77,11 @@ namespace opengl{
 		modele::Modele3D const* modele_{ nullptr };
 		/// Les identifiants OpenGL.
 		std::vector<unsigned int> handles_;
+
+
+
+	
+
 
 		/// Nuanceurs gérant l'affichage des VBO
 		static Programme programme_;

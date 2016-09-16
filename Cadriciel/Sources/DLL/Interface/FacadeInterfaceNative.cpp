@@ -15,8 +15,10 @@
 #include "Vue.h"
 #include "ArbreRenduINF2990.h"
 #include "CompteurAffichage.h"
-
+#include <iostream>
 #include "BancTests.h"
+
+using namespace std;
 
 extern "C"
 {
@@ -184,18 +186,23 @@ extern "C"
 		return reussite ? 0 : 1;
 	}
 
+
 	// Click
+	__declspec(dllexport) void __cdecl etatDelaSouris(int etat) {
+		Souris::obtenirInstance()->EtatdelaSouris(etat);
+	}
+
 	__declspec(dllexport) void __cdecl clickStart(int x, int y)
 	{
-		Selection::obtenirInstance()->startClick(x, y);
+		Souris::obtenirInstance()->startClick(x, y);
 	}
 	__declspec(dllexport) void __cdecl clickCurrent(int x, int y)
 	{
-		Selection::obtenirInstance()->currentClick(x, y);
+		Souris::obtenirInstance()->currentClick(x, y);
 	}
 	__declspec(dllexport) void __cdecl clickEnd(int x, int y)
 	{
-		Selection::obtenirInstance()->endClick(x, y);
+		Souris::obtenirInstance()->endClick(x, y);
 	}
 	
 }

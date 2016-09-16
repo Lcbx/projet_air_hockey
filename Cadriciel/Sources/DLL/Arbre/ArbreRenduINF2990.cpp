@@ -11,6 +11,15 @@
 #include "Usines/UsineNoeud.h"
 #include "EtatOpenGL.h"
 #include "Noeuds/NoeudTypes.h"
+#include <iostream>
+#include "../Visiteur.h"
+#include "../VisiteurAjout.h"
+#include "../VisiteurDeplacement.h"
+#include "../VisiteurMiseEchelle.h"
+#include "../VisiteurRotation.h"
+#include "../VisiteurSelection.h"
+
+using namespace std;
 
 
 /// La chaîne représentant le type des araignées.
@@ -18,6 +27,8 @@ const std::string ArbreRenduINF2990::NOM_ARAIGNEE{ "araignee" };
 /// La chaîne représentant le type des cones-cubes.
 const std::string ArbreRenduINF2990::NOM_CONECUBE{ "conecube" };
 
+//Rondelle
+const std::string ArbreRenduINF2990::NOM_BONUS{ "bonus" };
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -30,12 +41,13 @@ const std::string ArbreRenduINF2990::NOM_CONECUBE{ "conecube" };
 ///
 /// @return Aucune (constructeur).
 ///
-////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 ArbreRenduINF2990::ArbreRenduINF2990()
 {
 	// Construction des usines
 	ajouterUsine(NOM_ARAIGNEE, new UsineNoeud<NoeudAraignee>{ NOM_ARAIGNEE, std::string{ "media/spider.obj" } });
 	ajouterUsine(NOM_CONECUBE, new UsineNoeud<NoeudConeCube>{ NOM_CONECUBE, std::string{ "media/cubecone.obj" } });
+	ajouterUsine(NOM_BONUS, new UsineNoeud<NoeudBonus>{ NOM_BONUS, std::string{ "media/rondelle.obj" } });
 }
 
 
@@ -69,11 +81,70 @@ void ArbreRenduINF2990::initialiser()
 	// On vide l'arbre
 	vider();
 
+	///TODO
+	///Chabnger l'araignee par la table / cube par les buts
+
+	/*
 	// On ajoute un noeud bidon seulement pour que quelque chose s'affiche.
 	NoeudAbstrait* noeudAraignee{ creerNoeud(NOM_ARAIGNEE) };
-	noeudAraignee->ajouter(creerNoeud(NOM_CONECUBE));
+	noeudAraignee->assignerPositionRelative(glm::dvec3{ 0.0, 0.0, 0.0 });
+	//noeudAraignee->ajouter(creerNoeud(NOM_CONECUBE));
 	ajouter(noeudAraignee);
+	
+	*/
+
+	
+	/*NoeudAbstrait* noeudRondelle{ creerNoeud(NOM_RONDELLE) };
+	ajouter(noeudRondelle);
+	*/
+
+	
+	
 }
+
+void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos) 
+{
+
+	NoeudAbstrait* noeudBonus{ creerNoeud(NOM_BONUS) };
+	Visiteur* v1 = new VisiteurAjout(pos);
+	noeudBonus->accepter(v1);
+
+	cout << "Bonus x  : " << noeudBonus->obtenirPositionRelative().x << "  Bonus  y: " << noeudBonus->obtenirPositionRelative().y << "  Bonus z: " << noeudBonus->obtenirPositionRelative().z << endl;
+
+
+
+	// toujours liberer la mémoire !!!!
+	delete v1;
+	
+/*
+	VisiteurAjout* v1 = new VisiteurAjout();
+
+	NoeudAbstrait* noeudBonus{ creerNoeud(NOM_BONUS) };
+
+	noeudBonus->assignerPositionRelative(position);
+	ajouter(noeudBonus);
+	noeudBonus->accepter(v1);
+
+	//tjrs supprimer pour ne pas avoir une fuite de memoire 
+	delete v1;
+
+	*/
+
+	/*
+	NoeudAbstrait* noeudRondelle{ creerNoeud(NOM_RONDELLE) };
+	
+	noeudRondelle->assignerPositionRelative(position);
+	ajouter(noeudRondelle);
+	*/
+	
+	std::printf("ARBRE RENDU 2990 \n ");
+	
+}
+
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
 ///////////////////////////////////////////////////////////////////////////////
