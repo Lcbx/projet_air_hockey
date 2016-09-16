@@ -21,6 +21,11 @@ extern "C" {
 	__declspec(dllexport) int obtenirAffichagesParSeconde();
 	__declspec(dllexport) bool executerTests();
 
+	//Click
+	__declspec(dllexport) void clickStart(int x, int y);
+	__declspec(dllexport) void clickCurrent(int x, int y);
+	__declspec(dllexport) void clickEnd(int x, int y);
+
 
 	__declspec(dllexport) void ajouterBonus(int x, int y);
 }

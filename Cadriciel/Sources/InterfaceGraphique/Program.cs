@@ -45,12 +45,12 @@ namespace InterfaceGraphique
             Application.SetCompatibleTextRenderingDefault(false);
 
             edition = new Edition();
-            //menuPrincipal = new MenuPrincipal(edition);
-            //edition.setMenuPrincipale(menuPrincipal);
+            
 
             //Application.Run(edition);
             menuPrincipal = new MenuPrincipal();
             menuPrincipal.setMenuEdition(edition);
+            edition.setMenuPrincipal(menuPrincipal);
             Application.Run(menuPrincipal);
         }
 

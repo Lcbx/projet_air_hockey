@@ -113,6 +113,51 @@
     <None Include="Resources\Exit.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Enregistrer.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Supprimer.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Selection1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deplacement-des-fleches-.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rotation.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mise_a_Echelle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Duplication.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sans-titre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images44VJOJLN.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Portail.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Muret.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Selection.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deplacement-des-fleches-1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rotation1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GestionDePoints.bmp" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Etat\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
