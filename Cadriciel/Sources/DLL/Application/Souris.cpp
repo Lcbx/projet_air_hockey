@@ -67,17 +67,19 @@ void Souris::endClick(int x, int y) {
 	//fin de l'affichage des rectangles, efface le dernier rectangle
 	terminerRectangleElastique(glm::ivec2{ X1, Y1 }, glm::ivec2{ X2, Y2 }); 
 	X2 = x; Y2 = y;
-	//le code réel de la sélection
-	if (rectangleSelection()) {
-
-	}
-	else {
-			
-	}
+	//opération
+	realiserOperation();
 }
 
 bool Souris::rectangleSelection() {
-	return (X1 - X2)*(X1 - X2) + (Y1 - Y2)*(Y1 - Y2) > 9;
+	return ( etatSouris == SELECTION && (X1 - X2)*(X1 - X2) + (Y1 - Y2)*(Y1 - Y2) > 9 );
+}
+
+
+void Souris::realiserOperation() {
+	if (rectangleSelection()) {
+		
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -21,7 +21,8 @@ public:
 	void currentClick(int x, int y);		//les coordonnees du mouse_move
 	void endClick(int x, int y);			//les coordonnees du mouse_up
 	bool rectangleSelection();				//indique s'il faut afficher un rectangle de sélection
-	void EtatdelaSouris(int etat);			//temp : etat de la souris
+	void EtatdelaSouris(int etat);			//permet de connaitre l'opération a realiser lors d'un click
+	void realiserOperation();				//lance l'opération adéquate selon le scénario du click
 
 private:
 	int X1, Y1, X2, Y2;						//pour garder l'information des points du rectangle élastique
