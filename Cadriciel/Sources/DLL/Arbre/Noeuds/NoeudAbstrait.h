@@ -31,7 +31,7 @@ class VisiteurDeplacement;
 class VisiteurSelection;
 class VisiteurRotation;
 class VisiteurMiseEchelle;
-
+class VisiteurAjout;
 
 
 
@@ -142,6 +142,12 @@ public:
 	virtual void afficherConcret(const glm::mat4& vueProjection) const;
 	/// Anime le noeud.
 	virtual void animer(float dt);
+
+
+	//Accepter le visiteur
+	virtual void accepter(Visiteur* v);
+
+
 
 protected:
 	/// Type du noeud.

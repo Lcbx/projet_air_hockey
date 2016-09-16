@@ -112,6 +112,9 @@
   <ItemGroup>
     <None Include="Resources\Exit.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Etat\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>$(TargetName).exe testsC++</PostBuildEvent>

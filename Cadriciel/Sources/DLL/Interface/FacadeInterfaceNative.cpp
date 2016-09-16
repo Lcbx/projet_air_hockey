@@ -15,8 +15,10 @@
 #include "Vue.h"
 #include "ArbreRenduINF2990.h"
 #include "CompteurAffichage.h"
-
+#include <iostream>
 #include "BancTests.h"
+
+using namespace std;
 
 extern "C"
 {
@@ -183,6 +185,19 @@ extern "C"
 		bool reussite = BancTests::obtenirInstance()->executer();
 		return reussite ? 0 : 1;
 	}
+
+
+
+
+
+
+	__declspec(dllexport) void __cdecl ajouterBonus(int x, int y)
+	{
+		cout << "Ajouter Bonus " << "X: "<< x << "Y: "<< y<< endl;
+		
+		FacadeModele::obtenirInstance()->ajouterBonus(x, y);
+	}
+
 }
 
 

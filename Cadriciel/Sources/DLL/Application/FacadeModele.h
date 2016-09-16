@@ -65,6 +65,9 @@ public:
    void animer(float temps);
 
 
+   //ajouter Rondelle
+   void ajouterBonus(int x, int y);
+
 private:
    /// Constructeur par défaut.
    FacadeModele() = default;

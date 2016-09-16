@@ -46,9 +46,10 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(623, 428);
             this.panel1.TabIndex = 0;
+            this.panel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseClick);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
-            this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Edition_MouseMove);
+            this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
             // 
             // menuStrip1
             // 

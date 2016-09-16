@@ -69,9 +69,6 @@
     <ClCompile Include="Arbre\ArbreRenduINF2990.cpp">
       <Filter>Source Files\Arbre</Filter>
     </ClCompile>
-    <ClCompile Include="Arbre\Noeuds\NoeudAbstrait.cpp">
-      <Filter>Source Files\Arbre\Noeuds</Filter>
-    </ClCompile>
     <ClCompile Include="Arbre\Noeuds\NoeudComposite.cpp">
       <Filter>Source Files\Arbre\Noeuds</Filter>
     </ClCompile>
@@ -93,18 +90,6 @@
     <ClCompile Include="Interface\FacadeInterfaceNative.cpp">
       <Filter>Source Files\Interface</Filter>
     </ClCompile>
-    <ClCompile Include="VisiteurDeplacement.cpp">
-      <Filter>Source Files\Visiteur</Filter>
-    </ClCompile>
-    <ClCompile Include="VisiteurSelection.cpp">
-      <Filter>Source Files\Visiteur</Filter>
-    </ClCompile>
-    <ClCompile Include="VisiteurRotation.cpp">
-      <Filter>Source Files\Visiteur</Filter>
-    </ClCompile>
-    <ClCompile Include="VisiteurMiseEchelle.cpp">
-      <Filter>Source Files\Visiteur</Filter>
-    </ClCompile>
     <ClCompile Include="NoeudRondelle.cpp">
       <Filter>Source Files\Arbre\Noeuds</Filter>
     </ClCompile>
@@ -118,6 +103,24 @@
       <Filter>Source Files\Arbre\Noeuds</Filter>
     </ClCompile>
     <ClCompile Include="NoeudPortail.cpp">
+      <Filter>Source Files\Arbre\Noeuds</Filter>
+    </ClCompile>
+    <ClCompile Include="VisiteurDeplacement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VisiteurMiseEchelle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VisiteurRotation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VisiteurSelection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VisiteurAjout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Arbre\Noeuds\NoeudAbstrait.cpp">
       <Filter>Source Files\Arbre\Noeuds</Filter>
     </ClCompile>
   </ItemGroup>
@@ -164,21 +167,6 @@
     <ClInclude Include="Arbre\Noeuds\NoeudTypes.h">
       <Filter>Header Files\Arbre\Noeuds</Filter>
     </ClInclude>
-    <ClInclude Include="Visiteur.h">
-      <Filter>Header Files\Visiteur</Filter>
-    </ClInclude>
-    <ClInclude Include="VisiteurDeplacement.h">
-      <Filter>Header Files\Visiteur</Filter>
-    </ClInclude>
-    <ClInclude Include="VisiteurSelection.h">
-      <Filter>Header Files\Visiteur</Filter>
-    </ClInclude>
-    <ClInclude Include="VisiteurRotation.h">
-      <Filter>Header Files\Visiteur</Filter>
-    </ClInclude>
-    <ClInclude Include="VisiteurMiseEchelle.h">
-      <Filter>Header Files\Visiteur</Filter>
-    </ClInclude>
     <ClInclude Include="NoeudBonus.h">
       <Filter>Header Files\Arbre\Noeuds</Filter>
     </ClInclude>
@@ -193,6 +181,24 @@
     </ClInclude>
     <ClInclude Include="NoeudRondelle.h">
       <Filter>Header Files\Arbre\Noeuds</Filter>
+    </ClInclude>
+    <ClInclude Include="Visiteur.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VisiteurDeplacement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VisiteurMiseEchelle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VisiteurRotation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VisiteurSelection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VisiteurAjout.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

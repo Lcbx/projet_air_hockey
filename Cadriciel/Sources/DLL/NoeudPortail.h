@@ -36,7 +36,8 @@ public:
 	virtual void animer(float temps);
 
 
-
+	//Accepter le visiteur
+	virtual void accepter(Visiteur* v);
 private:
 
 

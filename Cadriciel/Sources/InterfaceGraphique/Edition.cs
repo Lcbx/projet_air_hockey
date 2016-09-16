@@ -89,6 +89,11 @@ namespace InterfaceGraphique
         {
             if(mousePressed) System.Console.WriteLine("Souris in : X = " + e.X + " et Y = " + e.Y);
         }
+
+        private void panel1_MouseClick(object sender, MouseEventArgs e)
+        {
+            FonctionsNatives.ajouterBonus(e.X, e.Y);
+        }
     }
 
 
@@ -105,5 +110,8 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void animer(double temps);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ajouterBonus(int x, int y);
     }
 }

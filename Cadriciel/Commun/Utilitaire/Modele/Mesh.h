@@ -23,7 +23,7 @@ namespace modele{
 	///////////////////////////////////////////////////////////////////////////
 	/// @class Mesh
 	/// @brief Classe qui encapsule les données géométriques d'un modèle 3D, 
-	///		   donc les vertices, les normales, les coordonnées de texture, les
+	///		   donc les vertices, les normales, les nnées de texture, les
 	///		   couleurs des vertices et les faces.
 	///
 	/// @author Martin Paradis

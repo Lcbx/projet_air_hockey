@@ -16,7 +16,7 @@
 
 
 ///////////////////////////////////////////////////////////////////////////
-/// @class NoeudMuret
+/// @class NoeudRondelle
 /// @brief Classe qui représente un le noeud muret de l'arbre de rendu.
 ///
 /// @author Julien Gascon-Samson
@@ -36,7 +36,8 @@ public:
 	virtual void animer(float temps);
 
 
-
+	//Accepter le visiteur
+	virtual void accepter(Visiteur* v);
 private:
 
 

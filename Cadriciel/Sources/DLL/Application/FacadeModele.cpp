@@ -332,6 +332,14 @@ void FacadeModele::animer(float temps)
 }
 
 
+void FacadeModele::ajouterBonus(int x, int y)
+{
+	glm::dvec3 position;
+	vue_->convertirClotureAVirtuelle(x, y, position);
+	arbre_->ajouterBonus(position);
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
 ///////////////////////////////////////////////////////////////////////////////

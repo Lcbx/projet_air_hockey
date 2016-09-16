@@ -21,6 +21,8 @@ extern "C" {
 	__declspec(dllexport) int obtenirAffichagesParSeconde();
 	__declspec(dllexport) bool executerTests();
 
+
+	__declspec(dllexport) void ajouterBonus(int x, int y);
 }
 
 #endif // __FACADE_INTERFACE_NATIVE_H__
