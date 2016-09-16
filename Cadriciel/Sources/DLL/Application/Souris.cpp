@@ -35,6 +35,10 @@ void Souris::EtatdelaSouris(int etat){
 	etatSouris = static_cast<Etats>(etat);
 }
 
+void Souris::toucheControl(bool pressee) {
+	toucheControlPressee = pressee;
+}
+
 void Souris::startClick(int x, int y) {
 	//initialisation du clic
 	X1 = x; Y1 = y;

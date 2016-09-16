@@ -51,6 +51,7 @@ namespace InterfaceGraphique
 
         private void ToucheEnfonce(Object o, KeyPressEventArgs e)
         {
+            //if(e.KeyChar == (char)Keys.LControlKey) FonctionsNatives.toucheControle(true);
             if (e.KeyChar == (char)Keys.Space)
             {
                 System.Console.WriteLine("Barre d'espacement appuyée. mode change en : ");
@@ -172,5 +173,8 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void clickEnd(int x, int y);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void toucheControle(bool pressee);
     }
 }

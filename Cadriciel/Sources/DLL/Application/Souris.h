@@ -22,12 +22,14 @@ public:
 	void endClick(int x, int y);			//les coordonnees du mouse_up
 	bool plusDe3px();						//indique s'il faut afficher un rectangle de sélection
 	void EtatdelaSouris(int etat);			//permet de connaitre l'opération a realiser lors d'un click
-	void operationShortClick();			//lance l'opération adéquate selon le scénario du click
+	void operationShortClick();				//lance l'opération adéquate selon le scénario du click
 	void operationDragClick();				//lance l'opération adéquate selon le scénario du click
+	void toucheControl(bool pressee);		//appelee depuis facadeNative
 
 private:
 	int X1, Y1, X2, Y2;						//pour garder l'information des points du rectangle élastique
-	bool effacerDernierRectangle;			//pour permettre la transition au dessus de 3 pixels
+	bool effacerDernierRectangle=false;		//pour permettre la transition au dessus de 3 pixels
+	bool toucheControlPressee=false;		//pour les scenarios de selection	
 	Etats etatSouris = SELECTION;			//type d'operation en cours
 	//singleton
 	Souris();
