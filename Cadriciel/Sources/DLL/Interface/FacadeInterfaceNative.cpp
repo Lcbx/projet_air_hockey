@@ -204,7 +204,9 @@ extern "C"
 	{
 		Souris::obtenirInstance()->endClick(x, y);
 	}
-	
+	__declspec(dllexport) void __cdecl toucheControle(bool pressee) {
+		Souris::obtenirInstance()->toucheControl(pressee);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
