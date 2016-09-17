@@ -13,6 +13,7 @@
 #include <AideGL.h>
 
 #include "glm\glm.hpp"
+#include "../VisiteurSelection.h"
 
 using namespace aidegl;
 
@@ -69,6 +70,8 @@ void Souris::endClick(int x, int y) {
 	X2 = x; Y2 = y;
 	//opération
 	realiserOperation();
+
+	Selection::instance()->selectionner(glm::ivec2{ X1, Y1 }, glm::ivec2{ X2, Y2 });
 }
 
 bool Souris::rectangleSelection() {

@@ -147,7 +147,7 @@ public:
 	//Accepter le visiteur
 	virtual void accepter(Visiteur* v);
 
-
+	modele::Modele3D const* getModele() { return this->modele_; };
 
 protected:
 	/// Type du noeud.
