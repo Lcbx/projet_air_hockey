@@ -9,10 +9,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include<glm\glm.hpp>
-#include "AideGL.h"
 
-using namespace aidegl;
 
 class StrategieSouris {
 public:

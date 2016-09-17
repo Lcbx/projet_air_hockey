@@ -11,10 +11,11 @@
 #pragma once
 #include "../Selection.h"
 
+
 namespace Souris {
 	enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, DEBUT_AJOUT_MUR, AJOUT_MUR, DEBUT_AJOUT_PORTAIL, AJOUT_PORTAIL };
-	static Etats etatSouris = SELECTION;				//type d'operation en cours
-	static StrategieSouris* instance_ = new Selection;		//strategie
+	Etats etatSouris = SELECTION;				//type d'operation en cours
+	StrategieSouris* instance_ = new Selection;		//strategie
 
 	static void EtatdelaSouris(int etat) {				//operation en cours
 		etatSouris = static_cast<Etats>(etat);

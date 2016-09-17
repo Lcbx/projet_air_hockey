@@ -8,17 +8,11 @@
 /// @{
 ///////////////////////////////////////////////////////////////////////////////
 
-
-
-#include <AideGL.h>
-#include <FacadeModele.h>
+/*
 #include "Souris.h"
 #include "../Selection.h"
 
-#include "glm\glm.hpp"
 
-/*
-using namespace aidegl;
 
 
 Souris* Souris::instance_{ nullptr };
