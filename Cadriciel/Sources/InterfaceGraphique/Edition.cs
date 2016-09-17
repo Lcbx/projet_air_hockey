@@ -124,8 +124,8 @@ namespace InterfaceGraphique
         public void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             System.Console.WriteLine("Souris down : X = " + e.X + " et Y = " + e.Y);
-            FonctionsNatives.clickStart(e.X, e.Y);
             if( EtatSouris == Etats.SELECTION) Program.peutAfficher = false;
+            FonctionsNatives.clickStart(e.X, e.Y);
             mousePressed = true;
         }
         public void panel1_MouseUp(object sender, MouseEventArgs e)
