@@ -117,10 +117,10 @@
             // 
             // panel1
             // 
-            this.panel1.AutoSize = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Location = new System.Drawing.Point(143, 52);
-            this.panel1.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
+            this.panel1.Margin = new System.Windows.Forms.Padding(12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1000, 800);
             this.panel1.TabIndex = 0;
@@ -355,7 +355,7 @@
             this.toolStrip1.AutoSize = false;
             this.toolStrip1.CanOverflow = false;
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(25, 25);
             this.toolStrip1.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripTextBox1,
@@ -400,7 +400,7 @@
             this.toolStripButtonSelection.Image = global::InterfaceGraphique.Properties.Resources.Selection;
             this.toolStripButtonSelection.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonSelection.Name = "toolStripButtonSelection";
-            this.toolStripButtonSelection.Size = new System.Drawing.Size(107, 24);
+            this.toolStripButtonSelection.Size = new System.Drawing.Size(107, 29);
             this.toolStripButtonSelection.Text = "toolStripButtonSelection";
             this.toolStripButtonSelection.ToolTipText = "Sélection";
             this.toolStripButtonSelection.Click += new System.EventHandler(this.toolStripButtonSelection_Click);
@@ -412,9 +412,10 @@
             this.toolStripButtonDeplacement.Image = global::InterfaceGraphique.Properties.Resources.deplacement_des_fleches_;
             this.toolStripButtonDeplacement.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonDeplacement.Name = "toolStripButtonDeplacement";
-            this.toolStripButtonDeplacement.Size = new System.Drawing.Size(107, 24);
+            this.toolStripButtonDeplacement.Size = new System.Drawing.Size(107, 29);
             this.toolStripButtonDeplacement.Text = "toolStripButtonDeplacement";
             this.toolStripButtonDeplacement.ToolTipText = "Déplacement";
+            this.toolStripButtonDeplacement.Click += new System.EventHandler(this.toolStripButtonDeplacement_Click);
             // 
             // toolStripButtonRotation
             // 
@@ -423,9 +424,10 @@
             this.toolStripButtonRotation.Image = global::InterfaceGraphique.Properties.Resources.Rotation;
             this.toolStripButtonRotation.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonRotation.Name = "toolStripButtonRotation";
-            this.toolStripButtonRotation.Size = new System.Drawing.Size(107, 24);
+            this.toolStripButtonRotation.Size = new System.Drawing.Size(107, 29);
             this.toolStripButtonRotation.Text = "toolStripButtonRotation";
             this.toolStripButtonRotation.ToolTipText = "Rotation";
+            this.toolStripButtonRotation.Click += new System.EventHandler(this.toolStripButtonRotation_Click);
             // 
             // toolStripButtonMiseAEchelle
             // 
@@ -434,9 +436,10 @@
             this.toolStripButtonMiseAEchelle.Image = global::InterfaceGraphique.Properties.Resources.Mise_a_Echelle;
             this.toolStripButtonMiseAEchelle.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonMiseAEchelle.Name = "toolStripButtonMiseAEchelle";
-            this.toolStripButtonMiseAEchelle.Size = new System.Drawing.Size(107, 24);
+            this.toolStripButtonMiseAEchelle.Size = new System.Drawing.Size(107, 29);
             this.toolStripButtonMiseAEchelle.Text = "toolStripButtonMiseAEchelle";
             this.toolStripButtonMiseAEchelle.ToolTipText = "Mise à échelle";
+            this.toolStripButtonMiseAEchelle.Click += new System.EventHandler(this.toolStripButtonMiseAEchelle_Click);
             // 
             // toolStripButtonDuplication
             // 
@@ -445,9 +448,10 @@
             this.toolStripButtonDuplication.Image = global::InterfaceGraphique.Properties.Resources.Duplication;
             this.toolStripButtonDuplication.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonDuplication.Name = "toolStripButtonDuplication";
-            this.toolStripButtonDuplication.Size = new System.Drawing.Size(107, 24);
+            this.toolStripButtonDuplication.Size = new System.Drawing.Size(107, 29);
             this.toolStripButtonDuplication.Text = "toolStripButtonDuplication";
             this.toolStripButtonDuplication.ToolTipText = "Duplication";
+            this.toolStripButtonDuplication.Click += new System.EventHandler(this.toolStripButtonDuplication_Click);
             // 
             // toolStripButtonZoom
             // 
@@ -456,9 +460,10 @@
             this.toolStripButtonZoom.Image = global::InterfaceGraphique.Properties.Resources.sans_titre;
             this.toolStripButtonZoom.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonZoom.Name = "toolStripButtonZoom";
-            this.toolStripButtonZoom.Size = new System.Drawing.Size(107, 24);
+            this.toolStripButtonZoom.Size = new System.Drawing.Size(107, 29);
             this.toolStripButtonZoom.Text = "toolStripButtonZoom";
             this.toolStripButtonZoom.ToolTipText = "Zoom";
+            this.toolStripButtonZoom.Click += new System.EventHandler(this.toolStripButtonZoom_Click);
             // 
             // toolStripSeparator3
             // 
@@ -478,9 +483,10 @@
             this.toolStripButtonAccelerateur.Image = global::InterfaceGraphique.Properties.Resources.images44VJOJLN;
             this.toolStripButtonAccelerateur.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonAccelerateur.Name = "toolStripButtonAccelerateur";
-            this.toolStripButtonAccelerateur.Size = new System.Drawing.Size(107, 24);
+            this.toolStripButtonAccelerateur.Size = new System.Drawing.Size(107, 29);
             this.toolStripButtonAccelerateur.Text = "toolStripButtonAccelerateur";
             this.toolStripButtonAccelerateur.ToolTipText = "Bonus Accelerateur";
+            this.toolStripButtonAccelerateur.Click += new System.EventHandler(this.toolStripButtonAccelerateur_Click);
             // 
             // toolStripButtonPortail
             // 
@@ -489,9 +495,10 @@
             this.toolStripButtonPortail.Image = global::InterfaceGraphique.Properties.Resources.Portail;
             this.toolStripButtonPortail.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonPortail.Name = "toolStripButtonPortail";
-            this.toolStripButtonPortail.Size = new System.Drawing.Size(107, 24);
+            this.toolStripButtonPortail.Size = new System.Drawing.Size(107, 29);
             this.toolStripButtonPortail.Text = "toolStripButtonPortail";
             this.toolStripButtonPortail.ToolTipText = "Portail";
+            this.toolStripButtonPortail.Click += new System.EventHandler(this.toolStripButtonPortail_Click);
             // 
             // toolStripButtonMuret
             // 
@@ -500,9 +507,10 @@
             this.toolStripButtonMuret.Image = global::InterfaceGraphique.Properties.Resources.Muret;
             this.toolStripButtonMuret.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonMuret.Name = "toolStripButtonMuret";
-            this.toolStripButtonMuret.Size = new System.Drawing.Size(107, 24);
+            this.toolStripButtonMuret.Size = new System.Drawing.Size(107, 29);
             this.toolStripButtonMuret.Text = "toolStripButtonMuret";
             this.toolStripButtonMuret.ToolTipText = "Muret";
+            this.toolStripButtonMuret.Click += new System.EventHandler(this.toolStripButtonMuret_Click);
             // 
             // toolStripSeparator4
             // 
@@ -522,9 +530,10 @@
             this.toolStripButton1.Image = global::InterfaceGraphique.Properties.Resources.GestionDePoints;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(107, 24);
+            this.toolStripButton1.Size = new System.Drawing.Size(107, 29);
             this.toolStripButton1.Text = "toolStripButtonControleDePoints";
             this.toolStripButton1.ToolTipText = "Gestion de Contrôle DePoints";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // splitContainer1
             // 
@@ -532,8 +541,8 @@
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Right;
             this.splitContainer1.Enabled = false;
             this.splitContainer1.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.splitContainer1.Location = new System.Drawing.Point(1174, 40);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.splitContainer1.Location = new System.Drawing.Point(1189, 40);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(6);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -545,17 +554,16 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBoxProprietes);
-            this.splitContainer1.Size = new System.Drawing.Size(300, 889);
-            this.splitContainer1.SplitterDistance = 347;
+            this.splitContainer1.Size = new System.Drawing.Size(285, 889);
+            this.splitContainer1.SplitterDistance = 281;
             this.splitContainer1.SplitterWidth = 38;
             this.splitContainer1.TabIndex = 4;
             // 
             // textBox1
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(296, 48);
@@ -573,11 +581,11 @@
             this.groupBoxConstantes.Controls.Add(this.numericUpDown1);
             this.groupBoxConstantes.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBoxConstantes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
-            this.groupBoxConstantes.Location = new System.Drawing.Point(0, 131);
-            this.groupBoxConstantes.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBoxConstantes.Location = new System.Drawing.Point(0, 50);
+            this.groupBoxConstantes.Margin = new System.Windows.Forms.Padding(6);
             this.groupBoxConstantes.Name = "groupBoxConstantes";
-            this.groupBoxConstantes.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBoxConstantes.Size = new System.Drawing.Size(296, 212);
+            this.groupBoxConstantes.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBoxConstantes.Size = new System.Drawing.Size(281, 227);
             this.groupBoxConstantes.TabIndex = 0;
             this.groupBoxConstantes.TabStop = false;
             this.groupBoxConstantes.Text = "Constantes";
@@ -632,7 +640,7 @@
             // 
             this.numericUpDown3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.numericUpDown3.Location = new System.Drawing.Point(152, 146);
-            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(120, 35);
             this.numericUpDown3.TabIndex = 2;
@@ -641,7 +649,7 @@
             // 
             this.numericUpDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.numericUpDown2.Location = new System.Drawing.Point(152, 94);
-            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(120, 35);
             this.numericUpDown2.TabIndex = 1;
@@ -650,7 +658,7 @@
             // 
             this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.numericUpDown1.Location = new System.Drawing.Point(152, 46);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(120, 35);
             this.numericUpDown1.TabIndex = 0;
@@ -663,10 +671,10 @@
             this.groupBoxProprietes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxProprietes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
             this.groupBoxProprietes.Location = new System.Drawing.Point(0, 0);
-            this.groupBoxProprietes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxProprietes.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxProprietes.Name = "groupBoxProprietes";
-            this.groupBoxProprietes.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.groupBoxProprietes.Size = new System.Drawing.Size(296, 500);
+            this.groupBoxProprietes.Padding = new System.Windows.Forms.Padding(6);
+            this.groupBoxProprietes.Size = new System.Drawing.Size(281, 566);
             this.groupBoxProprietes.TabIndex = 0;
             this.groupBoxProprietes.TabStop = false;
             this.groupBoxProprietes.Text = "Propriétes";
@@ -676,11 +684,11 @@
             this.groupBoxFacteurDEchelle.Controls.Add(this.numericUpDown7);
             this.groupBoxFacteurDEchelle.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxFacteurDEchelle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.groupBoxFacteurDEchelle.Location = new System.Drawing.Point(6, 249);
-            this.groupBoxFacteurDEchelle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxFacteurDEchelle.Location = new System.Drawing.Point(6, 359);
+            this.groupBoxFacteurDEchelle.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxFacteurDEchelle.Name = "groupBoxFacteurDEchelle";
-            this.groupBoxFacteurDEchelle.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBoxFacteurDEchelle.Size = new System.Drawing.Size(284, 100);
+            this.groupBoxFacteurDEchelle.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBoxFacteurDEchelle.Size = new System.Drawing.Size(269, 166);
             this.groupBoxFacteurDEchelle.TabIndex = 2;
             this.groupBoxFacteurDEchelle.TabStop = false;
             this.groupBoxFacteurDEchelle.Text = "Facteur d\'échelle";
@@ -688,7 +696,7 @@
             // numericUpDown7
             // 
             this.numericUpDown7.Location = new System.Drawing.Point(72, 48);
-            this.numericUpDown7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown7.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown7.Name = "numericUpDown7";
             this.numericUpDown7.Size = new System.Drawing.Size(120, 35);
             this.numericUpDown7.TabIndex = 0;
@@ -698,11 +706,11 @@
             this.groupBoxAngleDeRotation.Controls.Add(this.numericUpDown6);
             this.groupBoxAngleDeRotation.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxAngleDeRotation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.groupBoxAngleDeRotation.Location = new System.Drawing.Point(6, 149);
-            this.groupBoxAngleDeRotation.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxAngleDeRotation.Location = new System.Drawing.Point(6, 211);
+            this.groupBoxAngleDeRotation.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxAngleDeRotation.Name = "groupBoxAngleDeRotation";
-            this.groupBoxAngleDeRotation.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBoxAngleDeRotation.Size = new System.Drawing.Size(284, 100);
+            this.groupBoxAngleDeRotation.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBoxAngleDeRotation.Size = new System.Drawing.Size(269, 148);
             this.groupBoxAngleDeRotation.TabIndex = 1;
             this.groupBoxAngleDeRotation.TabStop = false;
             this.groupBoxAngleDeRotation.Text = "Angle de rotation";
@@ -710,7 +718,7 @@
             // numericUpDown6
             // 
             this.numericUpDown6.Location = new System.Drawing.Point(72, 44);
-            this.numericUpDown6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown6.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown6.Name = "numericUpDown6";
             this.numericUpDown6.Size = new System.Drawing.Size(120, 35);
             this.numericUpDown6.TabIndex = 0;
@@ -724,10 +732,10 @@
             this.groupBoxPosition.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F);
             this.groupBoxPosition.Location = new System.Drawing.Point(6, 34);
-            this.groupBoxPosition.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxPosition.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxPosition.Name = "groupBoxPosition";
-            this.groupBoxPosition.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBoxPosition.Size = new System.Drawing.Size(284, 115);
+            this.groupBoxPosition.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBoxPosition.Size = new System.Drawing.Size(269, 177);
             this.groupBoxPosition.TabIndex = 0;
             this.groupBoxPosition.TabStop = false;
             this.groupBoxPosition.Text = "Position";
@@ -735,7 +743,7 @@
             // numericUpDown5
             // 
             this.numericUpDown5.Location = new System.Drawing.Point(72, 79);
-            this.numericUpDown5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown5.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown5.Name = "numericUpDown5";
             this.numericUpDown5.Size = new System.Drawing.Size(120, 31);
             this.numericUpDown5.TabIndex = 3;
@@ -743,7 +751,7 @@
             // numericUpDown4
             // 
             this.numericUpDown4.Location = new System.Drawing.Point(72, 42);
-            this.numericUpDown4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown4.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown4.Name = "numericUpDown4";
             this.numericUpDown4.Size = new System.Drawing.Size(120, 31);
             this.numericUpDown4.TabIndex = 2;
@@ -781,8 +789,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Edition";
             this.Text = "Edition";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Exemple_FormClosing);
@@ -859,7 +866,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.GroupBox groupBoxConstantes;
         private System.Windows.Forms.Label labelAccélération;
         private System.Windows.Forms.Label labelRebond;
         private System.Windows.Forms.Label label1;
@@ -881,6 +887,7 @@
         private System.Windows.Forms.ToolStripLabel toolStripTextBox1;
         private System.Windows.Forms.ToolStripLabel toolStripTextBox2;
         private System.Windows.Forms.ToolStripLabel toolStripTextBox3;
+        private System.Windows.Forms.GroupBox groupBoxConstantes;
     }
    
 }

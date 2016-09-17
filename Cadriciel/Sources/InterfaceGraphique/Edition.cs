@@ -91,7 +91,7 @@ namespace InterfaceGraphique
         /////////////////////////////////////////////////////////////////////////
         //  gere la souris
         /////////////////////////////////////////////////////////////////////////
-        public enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, DEBUT_AJOUT_MUR, AJOUT_MUR, DEBUT_AJOUT_PORTAIL, AJOUT_PORTAIL };
+        public enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, DEBUT_AJOUT_MUR, AJOUT_MUR, DEBUT_AJOUT_PORTAIL, AJOUT_PORTAIL, MISEAECHELLE };
 
         private Etats EtatSouris = Etats.SELECTION;
 
@@ -153,6 +153,54 @@ namespace InterfaceGraphique
 
         private void toolStripButtonSelection_Click(object sender, EventArgs e)
         {
+            this.changerMode(Etats.SELECTION);
+        }
+
+        private void toolStripButtonDeplacement_Click(object sender, EventArgs e)
+        {
+            this.changerMode(Etats.DEPLACEMENT);
+
+        }
+
+        private void toolStripButtonRotation_Click(object sender, EventArgs e)
+        {
+            this.changerMode(Etats.ROTATION);
+        }
+
+        private void toolStripButtonMiseAEchelle_Click(object sender, EventArgs e)
+        {
+            this.changerMode(Etats.MISEAECHELLE);
+        }
+
+        private void toolStripButtonDuplication_Click(object sender, EventArgs e)
+        {
+            this.changerMode(Etats.DUPLICATION);
+        }
+
+        private void toolStripButtonZoom_Click(object sender, EventArgs e)
+        {
+            this.changerMode(Etats.LOUPE);
+        }
+
+        private void toolStripButtonAccelerateur_Click(object sender, EventArgs e)
+        {
+            this.changerMode(Etats.AJOUT_ACCELERATEUR);
+
+        }
+
+        private void toolStripButtonPortail_Click(object sender, EventArgs e)
+        {
+            this.changerMode(Etats.AJOUT_PORTAIL);
+        }
+
+        private void toolStripButtonMuret_Click(object sender, EventArgs e)
+        {
+            this.changerMode(Etats.AJOUT_MUR);
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            //this.changerMode(Etats.CONTROLDEPOINTS);
 
         }
     }
