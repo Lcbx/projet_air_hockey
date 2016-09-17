@@ -66,9 +66,6 @@ extern "C"
 		// libération des listes d'affichages, par exemple, sera faite une fois que
 		// le contexte n'existera plus, et sera donc sans effet.
 		FacadeModele::libererInstance();
-
-		//idem pour Souris
-		Souris::obtenirInstance()->libererInstance();
 	}
 
 
@@ -193,24 +190,22 @@ extern "C"
 
 	// Click
 	__declspec(dllexport) void __cdecl etatDelaSouris(int etat) {
-		Souris::obtenirInstance()->EtatdelaSouris(etat);
+		Souris::EtatdelaSouris(etat);
 	}
 
 	__declspec(dllexport) void __cdecl clickStart(int x, int y)
 	{
-		Souris::obtenirInstance()->startClick(x, y);
+		Souris::instance_->start(x, y);
 	}
 	__declspec(dllexport) void __cdecl clickCurrent(int x, int y)
 	{
-		Souris::obtenirInstance()->currentClick(x, y);
+		Souris::instance_->current(x, y);
 	}
 	__declspec(dllexport) void __cdecl clickEnd(int x, int y)
 	{
-		Souris::obtenirInstance()->endClick(x, y);
+		Souris::instance_->end(x, y);
 	}
-	__declspec(dllexport) void __cdecl toucheControle(bool pressee) {
-		Souris::obtenirInstance()->toucheControl(pressee);
-	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

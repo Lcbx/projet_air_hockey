@@ -9,14 +9,16 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 
-#include "Souris.h"
+
 #include <AideGL.h>
 #include <FacadeModele.h>
+#include "Souris.h"
+#include "../Selection.h"
 
 #include "glm\glm.hpp"
 
+/*
 using namespace aidegl;
-
 
 
 Souris* Souris::instance_{ nullptr };
@@ -61,9 +63,6 @@ void Souris::creerStrategie(){
 	}
 }
 
-void Souris::toucheControl(bool pressee) {
-	toucheControlPressee = pressee;
-}
 
 void Souris::startClick(int x, int y) {
 	notreStrategie_->start(x, y);
@@ -76,6 +75,7 @@ void Souris::currentClick(int x, int y) {
 void Souris::endClick(int x, int y) {
 	notreStrategie_->end(x, y);
 }
+*/
 
 //FacadeModele::obtenirInstance()->ajouterBonus(X1,Y1); break;
 
