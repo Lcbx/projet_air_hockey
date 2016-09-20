@@ -24,12 +24,11 @@ public:
 	void EtatdelaSouris(int etat);			//permet de connaitre l'opération a realiser lors d'un click
 	void operationShortClick();				//lance l'opération adéquate selon le scénario du click
 	void operationDragClick();				//lance l'opération adéquate selon le scénario du click
-	void toucheControl(bool pressee);		//appelee depuis facadeNative
 
 private:
+	bool controlPresse();
 	int X1, Y1, X2, Y2;						//pour garder l'information des points du rectangle élastique
 	bool effacerDernierRectangle=false;		//pour permettre la transition au dessus de 3 pixels
-	bool toucheControlPressee=false;		//pour les scenarios de selection	
 	Etats etatSouris = SELECTION;			//type d'operation en cours
 	//singleton
 	Souris();

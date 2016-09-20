@@ -11,9 +11,10 @@
 
 #include "Souris.h"
 #include <AideGL.h>
+#include <GL/freeglut.h>
 #include <FacadeModele.h>
-
 #include "glm\glm.hpp"
+
 
 using namespace aidegl;
 
@@ -35,9 +36,6 @@ void Souris::EtatdelaSouris(int etat){
 	etatSouris = static_cast<Etats>(etat);
 }
 
-void Souris::toucheControl(bool pressee) {
-	toucheControlPressee = pressee;
-}
 
 void Souris::startClick(int x, int y) {
 	//initialisation du clic
@@ -82,7 +80,9 @@ void Souris::endClick(int x, int y) {
 bool Souris::plusDe3px() {
 	return (X1 - X2)*(X1 - X2) + (Y1 - Y2)*(Y1 - Y2) > 9 ;
 }
-
+bool Souris::controlPresse() {
+	return glutGetModifiers() == GLUT_ACTIVE_CTRL;
+}
 
 void Souris::operationShortClick() {
 	switch (etatSouris) {
