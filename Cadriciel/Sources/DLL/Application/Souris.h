@@ -16,7 +16,7 @@ class Souris {
 public:
 	enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, DEBUT_AJOUT_MUR, AJOUT_MUR, DEBUT_AJOUT_PORTAIL, AJOUT_PORTAIL};
 	static Souris* obtenirInstance();
-	void libererInstance();
+	static void libererInstance();
 	void startClick(int x, int y);			//les coordonnees du mouse_down
 	void currentClick(int x, int y);		//les coordonnees du mouse_move
 	void endClick(int x, int y);			//les coordonnees du mouse_up
