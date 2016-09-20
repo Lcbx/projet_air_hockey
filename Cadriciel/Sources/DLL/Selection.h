@@ -22,4 +22,6 @@ public:
 private: 
 	int X1, Y1, X2, Y2;						//pour garder l'information des points du Click
 	bool effacerDernierRectangle = false;	//pour permettre la transition au dessus de 3 pixels
+	bool controlPresse();					//si la touche controle est pressee
 };
+

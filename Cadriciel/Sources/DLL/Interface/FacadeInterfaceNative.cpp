@@ -14,12 +14,10 @@
 #include "FacadeModele.h"
 #include "Souris.h"
 
-//#include "glm\glm.hpp"
 #include "AideGL.h"
 #include "Vue.h"
 #include "ArbreRenduINF2990.h"
 #include "CompteurAffichage.h"
-//#include <iostream>
 #include "BancTests.h"
 
 //using namespace std;
@@ -72,6 +70,8 @@ extern "C"
 		// libération des listes d'affichages, par exemple, sera faite une fois que
 		// le contexte n'existera plus, et sera donc sans effet.
 		FacadeModele::libererInstance();
+		// meme chose avec souris
+		Souris::libererInstance();
 	}
 
 
@@ -193,7 +193,7 @@ extern "C"
 		return reussite ? 0 : 1;
 	}
 
-	/*
+	
 	// Click
 	__declspec(dllexport) void __cdecl etatDelaSouris(int etat) {
 		Souris::obtenirInstance()->EtatdelaSouris(etat);
@@ -211,9 +211,9 @@ extern "C"
 	{
 		Souris::obtenirInstance()->endClick(x, y);
 	}
-	*/
-
 	
+
+	/*
 	// Click
 	__declspec(dllexport) void __cdecl etatDelaSouris(int etat) {
 		Souris::EtatdelaSouris(etat);
@@ -230,9 +230,8 @@ extern "C"
 	__declspec(dllexport) void __cdecl clickEnd(int x, int y)
 	{
 		Souris::instance_->end(x, y);
-	}
+	}*/
 	
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////

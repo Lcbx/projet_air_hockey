@@ -8,10 +8,9 @@
 /// @{
 ///////////////////////////////////////////////////////////////////////////////
 
-/*
+
 #include "Souris.h"
 #include "../Selection.h"
-
 
 
 
@@ -27,10 +26,10 @@ Souris* Souris::obtenirInstance() {
 }
 
 void Souris::libererInstance() {
-	delete notreStrategie_;
+	delete instance_->notreStrategie_;
+	instance_->notreStrategie_ = nullptr;
 	delete instance_;
 	instance_ = nullptr;
-	notreStrategie_ = nullptr;
 }
 
 void Souris::EtatdelaSouris(int etat) {
@@ -38,6 +37,7 @@ void Souris::EtatdelaSouris(int etat) {
 	if (notreStrategie_ != nullptr) delete notreStrategie_;
 	creerStrategie();
 }
+
 
 void Souris::creerStrategie(){
 	switch (etatSouris) {
@@ -51,11 +51,12 @@ void Souris::creerStrategie(){
 	case AJOUT_MUR: { break; }
 	case DEBUT_AJOUT_PORTAIL: { break; }
 	case AJOUT_PORTAIL: { break; }
-	default: {
-		notreStrategie_ = nullptr;
-	}
+	default: {	notreStrategie_ = nullptr; break;  }
 	}
 }
+
+
+
 
 
 void Souris::startClick(int x, int y) {
@@ -69,7 +70,7 @@ void Souris::currentClick(int x, int y) {
 void Souris::endClick(int x, int y) {
 	notreStrategie_->end(x, y);
 }
-*/
+
 
 //FacadeModele::obtenirInstance()->ajouterBonus(X1,Y1); break;
 
