@@ -21,7 +21,8 @@ public:
 	void startClick(int x, int y);			//les coordonnees du mouse_down
 	void currentClick(int x, int y);		//les coordonnees du mouse_move
 	void endClick(int x, int y);			//les coordonnees du mouse_up
-	void  EtatdelaSouris(int etat);			//operation en cours
+	void EtatdelaSouris(int etat);			//operation en cours
+	void sourisPostition(int x, int y);		//position de la souris hors d'un click
 
 private:
 	Souris();								//singleton

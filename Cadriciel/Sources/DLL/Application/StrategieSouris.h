@@ -16,6 +16,7 @@ public:
 	virtual void start(int x, int y);			//les coordonnees du mouse_down
 	virtual void current(int x, int y);			//les coordonnees du mouse_move
 	virtual void end(int x, int y);				//les coordonnees du mouse_up
+	virtual void position(int x, int y);		//position de la souris hors d'un click
 	bool plusDe3px();							//indique s'il faut afficher un rectangle de sélection
 	virtual void operationShortClick() = 0;		//lance l'opération adéquate selon le scénario du click
 	virtual void operationDragClick() = 0;		//lance l'opération adéquate selon le scénario du click

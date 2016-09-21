@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// @file AjoutAccelerateur.cpp
+/// @file Loupe.cpp
 /// @author Luc Courbariaux
 /// @date 2016-09-21
 /// @version 1.0
@@ -8,8 +8,11 @@
 /// @{
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "AjoutAccelerateur.h"
-#include <FacadeModele.h>
+#include "Loupe.h"
 
-void AjoutAccelerateur::operationShortClick() { FacadeModele::obtenirInstance()->ajouterBonus(X1,Y1);  }
-void AjoutAccelerateur::operationDragClick() {}
+void Loupe::operationShortClick() {
+	//DO something
+}
+void Loupe::operationDragClick() {
+	//DO something
+}

@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// @file AjoutAccelerateur.cpp
+/// @file DebutAjoutPortail.cpp
 /// @author Luc Courbariaux
 /// @date 2016-09-21
 /// @version 1.0
@@ -8,8 +8,11 @@
 /// @{
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "AjoutAccelerateur.h"
-#include <FacadeModele.h>
+#include "DebutAjoutPortail.h"
 
-void AjoutAccelerateur::operationShortClick() { FacadeModele::obtenirInstance()->ajouterBonus(X1,Y1);  }
-void AjoutAccelerateur::operationDragClick() {}
+void DebutAjoutPortail::operationShortClick() {
+	//DO something
+}
+void DebutAjoutPortail::operationDragClick() {
+	//DO something
+}

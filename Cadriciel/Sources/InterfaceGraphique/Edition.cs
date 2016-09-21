@@ -137,10 +137,8 @@ namespace InterfaceGraphique
         }
         public void Edition_MouseMove(object sender, MouseEventArgs e)
         {
-            if (mousePressed) {
-                //System.Console.WriteLine("Souris in : X = " + e.X + " et Y = " + e.Y);
-                FonctionsNatives.clickCurrent(e.X, e.Y);
-            } 
+            if (mousePressed) FonctionsNatives.clickCurrent(e.X, e.Y);
+            else FonctionsNatives.positionSouris(e.X, e.Y);
         }
     }
 
@@ -173,5 +171,8 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void clickEnd(int x, int y);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void positionSouris(int x, int y);
     }
 }

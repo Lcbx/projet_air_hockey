@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// @file AjoutAccelerateur.cpp
+/// @file Rotation.cpp
 /// @author Luc Courbariaux
 /// @date 2016-09-21
 /// @version 1.0
@@ -8,8 +8,11 @@
 /// @{
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "AjoutAccelerateur.h"
-#include <FacadeModele.h>
+#include "Rotation.h"
 
-void AjoutAccelerateur::operationShortClick() { FacadeModele::obtenirInstance()->ajouterBonus(X1,Y1);  }
-void AjoutAccelerateur::operationDragClick() {}
+void Rotation::operationShortClick() {
+	//DO something
+}
+void Rotation::operationDragClick() {
+	//DO something
+}

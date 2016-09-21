@@ -212,7 +212,10 @@ extern "C"
 	{
 		Souris::obtenirInstance()->endClick(x, y);
 	}
-	
+	__declspec(dllexport) void __cdecl positionSouris(int x, int y)
+	{
+		Souris::obtenirInstance()->sourisPostition(x, y);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// @file AjoutAccelerateur.cpp
+/// @file AjoutMur.cpp
 /// @author Luc Courbariaux
 /// @date 2016-09-21
 /// @version 1.0
@@ -8,8 +8,11 @@
 /// @{
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "AjoutAccelerateur.h"
-#include <FacadeModele.h>
+#include "AjoutMur.h"
 
-void AjoutAccelerateur::operationShortClick() { FacadeModele::obtenirInstance()->ajouterBonus(X1,Y1);  }
-void AjoutAccelerateur::operationDragClick() {}
+void AjoutMur::operationShortClick() {
+	//DO something
+}
+void AjoutMur::operationDragClick() {
+	//DO something
+}
