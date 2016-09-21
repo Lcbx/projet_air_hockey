@@ -28,3 +28,4 @@ void StrategieSouris::end(int x, int y) {
 	X2 = x; Y2 = y;
 	//opération
 	plusDe3px() ? operationDragClick() : operationShortClick();
+}

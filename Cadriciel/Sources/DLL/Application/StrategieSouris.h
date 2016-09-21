@@ -23,4 +23,3 @@ private:
 	int X1, Y1, X2, Y2;							//pour garder l'information des points du Click
 };
 
-}
