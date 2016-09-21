@@ -11,34 +11,6 @@
 #pragma once
 #include "Selection.h"
 
-/*
-namespace Souris {
-	enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, DEBUT_AJOUT_MUR, AJOUT_MUR, DEBUT_AJOUT_PORTAIL, AJOUT_PORTAIL };
-	Etats etatSouris = SELECTION;				//type d'operation en cours
-	StrategieSouris* instance_ = new Selection;		//strategie
-
-	static void EtatdelaSouris(int etat) {				//operation en cours
-		etatSouris = static_cast<Etats>(etat);
-		if (instance_ != nullptr) delete instance_;
-		switch (etatSouris) {
-		case SELECTION: { instance_ = new Selection;  break; }
-		case LOUPE: { break; }
-		case DEPLACEMENT: { break; }
-		case ROTATION: { break; }
-		case DUPLICATION: { break; }
-		case AJOUT_ACCELERATEUR: {}
-		case DEBUT_AJOUT_MUR: { break; }
-		case AJOUT_MUR: { break; }
-		case DEBUT_AJOUT_PORTAIL: { break; }
-		case AJOUT_PORTAIL: { break; }
-		default: {
-			instance_ = nullptr;
-		}
-		}
-	}
-
-}*/
-
 
 // Click
 class Souris {

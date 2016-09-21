@@ -19,7 +19,7 @@ public:
 	bool plusDe3px();							//indique s'il faut afficher un rectangle de sélection
 	virtual void operationShortClick() = 0;		//lance l'opération adéquate selon le scénario du click
 	virtual void operationDragClick() = 0;		//lance l'opération adéquate selon le scénario du click
-private:
+protected:
 	int X1, Y1, X2, Y2;							//pour garder l'information des points du Click
 };
 

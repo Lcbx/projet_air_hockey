@@ -7,7 +7,6 @@
 /// @addtogroup inf2990 INF2990
 /// @{
 ///////////////////////////////////////////////////////////////////////////////
-#pragma once
 
 
 #include<glm\glm.hpp>
@@ -41,7 +40,7 @@ void Selection::current(int x, int y) {
 			effacerDernierRectangle = false;
 		}
 	}
-	X2 = x; Y2 = y;
+	StrategieSouris::current(x, y);
 }
 
 void Selection::end(int x, int y) {

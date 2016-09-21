@@ -129,6 +129,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Application\AjoutAccelerateur.cpp" />
     <ClCompile Include="Application\FacadeModele.cpp" />
     <ClCompile Include="Application\Selection.cpp" />
     <ClCompile Include="Application\StrategieSouris.cpp" />
@@ -160,6 +161,7 @@
     <ClCompile Include="VisiteurSelection.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Application\AjoutAccelerateur.h" />
     <ClInclude Include="Application\FacadeModele.h" />
     <ClInclude Include="Application\Selection.h" />
     <ClInclude Include="Application\StrategieSouris.h" />

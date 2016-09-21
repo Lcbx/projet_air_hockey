@@ -213,26 +213,6 @@ extern "C"
 		Souris::obtenirInstance()->endClick(x, y);
 	}
 	
-
-	/*
-	// Click
-	__declspec(dllexport) void __cdecl etatDelaSouris(int etat) {
-		Souris::EtatdelaSouris(etat);
-	}
-
-	__declspec(dllexport) void __cdecl clickStart(int x, int y)
-	{
-		Souris::instance_->start(x, y);
-	}
-	__declspec(dllexport) void __cdecl clickCurrent(int x, int y)
-	{
-		Souris::instance_->current(x, y);
-	}
-	__declspec(dllexport) void __cdecl clickEnd(int x, int y)
-	{
-		Souris::instance_->end(x, y);
-	}*/
-	
 }
 
 ///////////////////////////////////////////////////////////////////////////////

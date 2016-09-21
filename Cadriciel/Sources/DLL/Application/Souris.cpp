@@ -11,7 +11,7 @@
 
 #include "Souris.h"
 #include "Selection.h"
-
+#include "AjoutAccelerateur.h"
 
 
 Souris* Souris::instance_{ nullptr };
@@ -46,7 +46,7 @@ void Souris::creerStrategie(){
 	case DEPLACEMENT: { break; }
 	case ROTATION: { break; }
 	case DUPLICATION: { break; }
-	case AJOUT_ACCELERATEUR: {}
+	case AJOUT_ACCELERATEUR: { notreStrategie_ = new AjoutAccelerateur; break; }
 	case DEBUT_AJOUT_MUR: { break; }
 	case AJOUT_MUR: { break; }
 	case DEBUT_AJOUT_PORTAIL: { break; }
@@ -54,9 +54,6 @@ void Souris::creerStrategie(){
 	default: {	notreStrategie_ = nullptr; break;  }
 	}
 }
-
-
-
 
 
 void Souris::startClick(int x, int y) {
@@ -71,8 +68,6 @@ void Souris::endClick(int x, int y) {
 	notreStrategie_->end(x, y);
 }
 
-
-//FacadeModele::obtenirInstance()->ajouterBonus(X1,Y1); break;
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
