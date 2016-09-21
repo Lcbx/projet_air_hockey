@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="Application\FacadeModele.cpp" />
     <ClCompile Include="Application\Selection.cpp" />
+    <ClCompile Include="Application\StrategieSouris.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudAraignee.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudConeCube.cpp" />
     <ClCompile Include="Configuration\ConfigScene.cpp" />
