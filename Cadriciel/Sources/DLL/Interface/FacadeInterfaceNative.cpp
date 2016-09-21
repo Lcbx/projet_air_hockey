@@ -12,6 +12,7 @@
 
 #include "FacadeInterfaceNative.h"
 #include "FacadeModele.h"
+#include "Selection.h"
 #include "Souris.h"
 
 #include "AideGL.h"

@@ -126,7 +126,7 @@
     <ClCompile Include="Application\Souris.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
-    <ClCompile Include="Selection.cpp">
+    <ClCompile Include="Application\Selection.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
   </ItemGroup>
@@ -209,10 +209,10 @@
     <ClInclude Include="Application\Souris.h">
       <Filter>Header Files\Application</Filter>
     </ClInclude>
-    <ClInclude Include="Selection.h">
+    <ClInclude Include="Application\Selection.h">
       <Filter>Header Files\Application</Filter>
     </ClInclude>
-    <ClInclude Include="StrategieSouris.h">
+    <ClInclude Include="Application\StrategieSouris.h">
       <Filter>Header Files\Application</Filter>
     </ClInclude>
   </ItemGroup>

@@ -130,6 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application\FacadeModele.cpp" />
+    <ClCompile Include="Application\Selection.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudAraignee.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudConeCube.cpp" />
     <ClCompile Include="Configuration\ConfigScene.cpp" />
@@ -148,7 +149,6 @@
     <ClCompile Include="Application\Souris.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Include="Selection.cpp" />
     <ClCompile Include="Tests\BancTests.cpp" />
     <ClCompile Include="Tests\ConfigSceneTest.cpp" />
     <ClCompile Include="Tests\NoeudAbstraitTest.cpp" />
@@ -160,6 +160,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\FacadeModele.h" />
+    <ClInclude Include="Application\Selection.h" />
+    <ClInclude Include="Application\StrategieSouris.h" />
     <ClInclude Include="Arbre\Noeuds\NoeudAraignee.h" />
     <ClInclude Include="Arbre\Noeuds\NoeudConeCube.h" />
     <ClInclude Include="Arbre\Noeuds\NoeudTypes.h" />
@@ -176,8 +178,6 @@
     <ClInclude Include="NoeudPortail.h" />
     <ClInclude Include="NoeudRondelle.h" />
     <ClInclude Include="Application\Souris.h" />
-    <ClInclude Include="Selection.h" />
-    <ClInclude Include="StrategieSouris.h" />
     <ClInclude Include="Tests\BancTests.h" />
     <ClInclude Include="Tests\ConfigSceneTest.h" />
     <ClInclude Include="Tests\NoeudAbstraitTest.h" />
