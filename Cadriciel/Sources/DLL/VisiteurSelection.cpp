@@ -45,7 +45,7 @@ void VisiteurSelection::visiter(NoeudMaillet* noeud) { }
 
 void VisiteurSelection::visiter(NoeudPortail* noeud) { }
 
-void Selection::selectionner(
+void SingletonSelection::selectionner(
 	glm::ivec2 begin, 
 	glm::ivec2 end, 
 	SelectionState state) 

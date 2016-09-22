@@ -1,0 +1,18 @@
+///////////////////////////////////////////////////////////////////////////////
+/// @file AjoutMur.cpp
+/// @author Luc Courbariaux
+/// @date 2016-09-21
+/// @version 1.0
+///
+/// @addtogroup inf2990 INF2990
+/// @{
+///////////////////////////////////////////////////////////////////////////////
+
+#include "AjoutMur.h"
+
+void AjoutMur::operationShortClick() {
+	//DO something
+}
+void AjoutMur::operationDragClick() {
+	//DO something
+}

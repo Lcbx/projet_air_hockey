@@ -114,17 +114,17 @@ public:
 /// @author Carl-Vincent Landry-Duval
 /// @date 2016-09-09
 ///////////////////////////////////////////////////////////////////////////
-class Selection {
+class SingletonSelection : VisiteurSelection {
 private:
-	Selection() { };
+	SingletonSelection() { };
 	VisiteurSelection visiteur;
 
 public:
-	Selection(Selection& const) = delete;
-	void operator=(Selection& const) = delete;
+	SingletonSelection(SingletonSelection& const) = delete;
+	void operator=(SingletonSelection& const) = delete;
 
-	static Selection *instance() {
-		static Selection _instance;
+	static SingletonSelection *instance() {
+		static SingletonSelection _instance;
 		return &_instance;
 	}
 
