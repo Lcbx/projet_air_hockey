@@ -15,6 +15,7 @@
 //#include <GL/freeglut.h>
 
 #include "Selection.h"
+#include "../VisiteurSelection.h"
 
 
 
@@ -54,5 +55,12 @@ bool Selection::controlPresse() {
 	return false;//glutGetModifiers() == GLUT_ACTIVE_CTRL;
 }
 
-void Selection::operationShortClick() {}
-void Selection::operationDragClick() {}
+void Selection::operationShortClick() {
+	glm::ivec2 begin(X1, Y1);
+	glm::ivec2   end(X2, Y2);
+
+	SingletonSelection::instance()->selectionner(begin, end);
+}
+void Selection::operationDragClick() {
+	operationShortClick();
+}

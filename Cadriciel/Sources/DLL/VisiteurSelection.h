@@ -8,6 +8,8 @@
 #include "Visiteur.h"
 #include <vector>
 
+#include "Utilitaire.h"
+
 #include "glm/glm.hpp"
 #include "FacadeModele.h"
 #include "ArbreRenduINF2990.h"
@@ -31,8 +33,7 @@ class VisiteurSelection : public Visiteur
 	std::vector<NoeudAbstrait*> selectionnes;
 	SelectionState _state = SelectionState::SELECT;
 
-	glm::dvec3 _begin;
-	glm::dvec3 _end;
+	utilitaire::BoiteEnglobante _boundingBox;
 	
 public:
 	virtual void visiter(NoeudAbstrait* noeud);
@@ -73,7 +74,11 @@ public:
 	///
 	////////////////////////////////////////////////////////////////////////
 	void setBoundingBox(glm::dvec3 begin, glm::dvec3 end) {
-		_begin = begin; _end = end;
+		_boundingBox.coinMin = begin;
+		_boundingBox.coinMax = end;
+	};
+	void setBoundingBox(utilitaire::BoiteEnglobante _box) {
+		_boundingBox = _box;
 	};
 
 	////////////////////////////////////////////////////////////////////////
