@@ -55,7 +55,8 @@ public:
    /// La chaîne représentant le type des MURET.
    static const std::string NOM_MURET;
 
-
+   /// La chaîne représentant le type des Tables
+   static const std::string NOM_TABLE;
 
 
    void ajouterBonus(glm::dvec3 position);
