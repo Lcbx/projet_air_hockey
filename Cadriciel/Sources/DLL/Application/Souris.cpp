@@ -27,6 +27,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 
+#include "glm\glm.hpp"
+#include "../VisiteurSelection.h"
 #include "Duplication.h"
 #include "Rotation.h"
 #include "Loupe.h"
@@ -90,6 +92,16 @@ void Souris::endClick(int x, int y) {
 
 void Souris::sourisPostition(int x, int y) {
 	notreStrategie_->position(x, y);
+}
+
+#include <iostream>
+void Souris::setControl(bool presse) {
+	control_ = presse;
+	std::cout << "control " << (control_ ? "" : "pas") << " presse\n";
+}
+
+bool Souris::getControl() {
+	return control_;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

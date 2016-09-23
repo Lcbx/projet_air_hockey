@@ -11,7 +11,7 @@
 #pragma once
 #include "Selection.h"
 
-
+class Selection;
 // Click
 class Souris {
 public:
@@ -23,11 +23,14 @@ public:
 	void endClick(int x, int y);			//les coordonnees du mouse_up
 	void EtatdelaSouris(int etat);			//operation en cours
 	void sourisPostition(int x, int y);		//position de la souris hors d'un click
+	void setControl(bool presse);			//change l'etat de la touche control
+	bool getControl();						//donne l'etat de la touche control
 
 private:
 	Souris();								//singleton
 	static Souris* instance_;				//singleton
 	StrategieSouris* notreStrategie_;		//strategie
 	Etats etatSouris = SELECTION;			//type d'operation en cours
-	void creerStrategie();					//actualise la strategie en cours	
+	void creerStrategie();					//actualise la strategie en cours
+	bool control_ = false;
 };

@@ -147,6 +147,21 @@ public:
 	//Accepter le visiteur
 	virtual void accepter(Visiteur* v);
 
+	modele::Modele3D const* getModele() { return this->modele_; };
+	//set frere
+	virtual void setFrere(NoeudAbstrait* frere);
+
+	//get
+	virtual NoeudAbstrait* getFrere();
+
+
+	// set  du scale et angle
+	inline void setAngle(float angle);
+	inline void setScale(const glm::dvec3& scale);
+	
+	//get du scale et angle
+	inline float getAngle()const;
+	inline const glm::dvec3& getScale()const;
 
 
 protected:
@@ -178,6 +193,15 @@ protected:
 	modele::Modele3D const* modele_;
 	/// Storage pour le dessin du modèle
 	opengl::VBO const* vbo_;
+
+
+	// scale
+	glm::dvec3 scale_ = { 1.0, 1.0, 1.0 };
+	
+	// angle de rotation
+	float angle_;
+
+	NoeudAbstrait* frere_;
 };
 
 
@@ -433,6 +457,35 @@ inline void NoeudAbstrait::assignerObjetRendu(modele::Modele3D const* modele, op
 	modele_ = modele;
 	vbo_ = liste;
 }
+
+
+// set  du scale et angle
+inline void NoeudAbstrait::setAngle(float angle)
+{
+	angle_ = angle;
+}
+inline void NoeudAbstrait::setScale(const glm::dvec3& scale)
+{
+	scale_ = scale;
+}
+
+
+//get du scale et angle
+inline float NoeudAbstrait::getAngle()const
+{
+	return angle_;
+}
+
+
+inline const glm::dvec3& NoeudAbstrait::getScale()const
+{
+	return scale_;
+}
+
+
+
+
+
 #endif // __ARBRE_NOEUDS_NOEUDABSTRAIT_H__
 
 

@@ -13,8 +13,8 @@
 #include "AideGL.h" //ne surtout pas bouger, crait une erreur si mis après freeglut
 
 
-
 #include "Selection.h"
+#include "../VisiteurSelection.h"
 
 
 
@@ -50,10 +50,14 @@ void Selection::end(int x, int y) {
 	StrategieSouris::end(x, y);
 }
 
-bool Selection::controlPresse() {
 
-	return true;
+void Selection::operationShortClick() {
+	glm::ivec2 begin(X1, Y1);
+	glm::ivec2   end(X2, Y2);
+
+
+	SingletonSelection::instance()->selectionner(begin, end);
 }
-
-void Selection::operationShortClick() {}
-void Selection::operationDragClick() {}
+void Selection::operationDragClick() {
+	operationShortClick();
+}

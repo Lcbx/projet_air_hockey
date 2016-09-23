@@ -65,6 +65,7 @@ namespace vue {
 	void ProjectionOrtho::zoomerIn()
 	{
 		// À IMPLANTER.
+
 	}
 
 
