@@ -19,7 +19,8 @@ namespace InterfaceGraphique
 
         public Edition()
         {
-            this.KeyPress += new KeyPressEventHandler(ToucheEnfonce);
+            (this as Control).KeyDown += new KeyEventHandler(keyDownHandler);
+            (this as Control).KeyUp += new KeyEventHandler(keyUpHandler);
             InitializeComponent();
             InitialiserAnimation();
 
@@ -50,25 +51,28 @@ namespace InterfaceGraphique
         }
 
         bool supprimer = false;
-       private void ToucheEnfonce(Object o, KeyPressEventArgs e)
+
+        private void keyDownHandler(object sender, KeyEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.LControlKey) { FonctionsNatives.toucheControle(true);  }
-            if (e.KeyChar == (char)Keys.Space)
+            if (e.KeyCode == Keys.ControlKey) FonctionsNatives.toucheControl(true);
+        }
+        private void keyUpHandler(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ControlKey) FonctionsNatives.toucheControl(false);
+            if (e.KeyCode == Keys.Space)
             {
                 System.Console.WriteLine("Barre d'espacement appuyée. mode change en : ");
                 changerMode(EtatSouris == Etats.SELECTION ? Etats.AJOUT_ACCELERATEUR : Etats.SELECTION);
             }
-
-            //wajdi
-            if (e.KeyChar == (char)Keys.Escape)
+            if (e.KeyCode == Keys.Escape)
             {
                 System.Console.WriteLine("Echap. enfonce  ");
                 compteur = 0;
                 //Determiner l'etat : ajout Portail - muret ..
                 FonctionsNatives.escEnfonce(true);
                 supprimer = true;
-            }
 
+            }
         }
         
         private void nouveauToolStripMenuItem_Click(object sender, EventArgs e)
@@ -118,16 +122,16 @@ namespace InterfaceGraphique
                 string text = "";
                 switch (EtatSouris)
                 {
-                    case Etats.SELECTION: { text = "selection"; break; }
-                    case Etats.LOUPE: { text = "loupe"; break; }
-                    case Etats.DEPLACEMENT: { text = "deplacement"; break; }
-                    case Etats.ROTATION: { text = "rotation"; break; }
-                    case Etats.DUPLICATION: { text = "duplication"; break; }
-                    case Etats.AJOUT_ACCELERATEUR: { text = "ajout accelerateur"; break; }
-                    case Etats.DEBUT_AJOUT_MUR: { text = "debut ajout mur"; break; }
-                    case Etats.AJOUT_MUR: { text = "ajout mur"; break; }
-                    case Etats.DEBUT_AJOUT_PORTAIL: { text = "debut ajout portail"; break; }
-                    case Etats.AJOUT_PORTAIL: { text = "ajout portail"; break; }
+                    case Etats.SELECTION: {             text = "selection";         break; }
+                    case Etats.LOUPE: {                 text = "loupe";             break; }
+                    case Etats.DEPLACEMENT: {           text = "deplacement";       break; }
+                    case Etats.ROTATION: {              text = "rotation";          break; }
+                    case Etats.DUPLICATION: {           text = "duplication";       break; }
+                    case Etats.AJOUT_ACCELERATEUR: {    text = "ajout accelerateur"; break; }
+                    case Etats.DEBUT_AJOUT_MUR: {       text = "debut ajout mur";   break; }
+                    case Etats.AJOUT_MUR: {             text = "ajout mur";         break; }
+                    case Etats.DEBUT_AJOUT_PORTAIL: {   text = "debut ajout portail"; break; }
+                    case Etats.AJOUT_PORTAIL: {         text = "ajout portail";     break; }
                     default: break;
                 }
                 System.Console.WriteLine(text);
@@ -150,10 +154,10 @@ namespace InterfaceGraphique
         }
         public void Edition_MouseMove(object sender, MouseEventArgs e)
         {
-           /* if (mousePressed) {
+           if (mousePressed) {
                 System.Console.WriteLine("Souris move : X = " + e.X + " et Y = " + e.Y);
                 FonctionsNatives.clickCurrent(e.X, e.Y);
-            }*/
+            }
             //wajdi
 
                /* if (firstClick)
@@ -296,7 +300,6 @@ namespace InterfaceGraphique
            
         }
    
-
     }
 
 
@@ -329,10 +332,11 @@ namespace InterfaceGraphique
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void clickEnd(int x, int y);
 
+        //control
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void toucheControle(bool pressee);
+        public static extern void toucheControl(bool presse);
 
-        
+
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void ajouterPortail(int x1, int y1);

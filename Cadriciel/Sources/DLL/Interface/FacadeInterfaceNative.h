@@ -39,6 +39,7 @@ extern "C" {
 	__declspec(dllexport) void clickCurrent(int x, int y);
 	__declspec(dllexport) void clickEnd(int x, int y);
 	__declspec(dllexport) void etatDelaSouris(int etat);
-	__declspec(dllexport) void postitionSouris(int etat);
+	__declspec(dllexport) void postitionSouris(int x, int y);
+	__declspec(dllexport) void toucheControl(bool presse);
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__
