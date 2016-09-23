@@ -117,12 +117,15 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Location = new System.Drawing.Point(143, 52);
             this.panel1.Margin = new System.Windows.Forms.Padding(12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1000, 800);
+            this.panel1.Size = new System.Drawing.Size(1039, 875);
             this.panel1.TabIndex = 0;
             this.panel1.TabStop = true;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
@@ -140,7 +143,7 @@
             this.informationsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1474, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(1521, 40);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -377,7 +380,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 40);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.Size = new System.Drawing.Size(108, 889);
+            this.toolStrip1.Size = new System.Drawing.Size(108, 933);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -541,7 +544,7 @@
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Right;
             this.splitContainer1.Enabled = false;
             this.splitContainer1.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.splitContainer1.Location = new System.Drawing.Point(1189, 40);
+            this.splitContainer1.Location = new System.Drawing.Point(1236, 40);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(6);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -554,8 +557,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBoxProprietes);
-            this.splitContainer1.Size = new System.Drawing.Size(285, 889);
-            this.splitContainer1.SplitterDistance = 281;
+            this.splitContainer1.Size = new System.Drawing.Size(285, 933);
+            this.splitContainer1.SplitterDistance = 294;
             this.splitContainer1.SplitterWidth = 38;
             this.splitContainer1.TabIndex = 4;
             // 
@@ -581,7 +584,7 @@
             this.groupBoxConstantes.Controls.Add(this.numericUpDown1);
             this.groupBoxConstantes.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBoxConstantes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
-            this.groupBoxConstantes.Location = new System.Drawing.Point(0, 50);
+            this.groupBoxConstantes.Location = new System.Drawing.Point(0, 63);
             this.groupBoxConstantes.Margin = new System.Windows.Forms.Padding(6);
             this.groupBoxConstantes.Name = "groupBoxConstantes";
             this.groupBoxConstantes.Padding = new System.Windows.Forms.Padding(4);
@@ -674,7 +677,7 @@
             this.groupBoxProprietes.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxProprietes.Name = "groupBoxProprietes";
             this.groupBoxProprietes.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBoxProprietes.Size = new System.Drawing.Size(281, 566);
+            this.groupBoxProprietes.Size = new System.Drawing.Size(281, 597);
             this.groupBoxProprietes.TabIndex = 0;
             this.groupBoxProprietes.TabStop = false;
             this.groupBoxProprietes.Text = "Propriétes";
@@ -783,7 +786,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(1474, 929);
+            this.ClientSize = new System.Drawing.Size(1521, 973);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panel1);
