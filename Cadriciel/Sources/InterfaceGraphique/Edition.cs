@@ -303,14 +303,14 @@ namespace InterfaceGraphique
         {
             desactiverAutresBoutons();
             toolStripButtonPortail.Checked = true;
-            this.changerMode(Etats.AJOUT_PORTAIL);
+            this.changerMode(Etats.DEBUT_AJOUT_PORTAIL);
         }
 
         private void toolStripButtonMuret_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
             toolStripButtonMuret.Checked = true;
-            this.changerMode(Etats.AJOUT_MUR);
+            this.changerMode(Etats.DEBUT_AJOUT_MUR);
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
