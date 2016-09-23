@@ -51,10 +51,6 @@ void Selection::end(int x, int y) {
 	StrategieSouris::end(x, y);
 }
 
-bool Selection::controlPresse() {
-	return false;//glutGetModifiers() == GLUT_ACTIVE_CTRL;
-}
-
 void Selection::operationShortClick() {
 	glm::ivec2 begin(X1, Y1);
 	glm::ivec2   end(X2, Y2);
