@@ -27,6 +27,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 
+#include "glm\glm.hpp"
+#include "../VisiteurSelection.h"
 #include "Duplication.h"
 #include "Rotation.h"
 #include "Loupe.h"

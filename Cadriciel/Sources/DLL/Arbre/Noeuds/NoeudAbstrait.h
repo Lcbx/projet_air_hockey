@@ -147,6 +147,7 @@ public:
 	//Accepter le visiteur
 	virtual void accepter(Visiteur* v);
 
+	modele::Modele3D const* getModele() { return this->modele_; };
 	//set frere
 	virtual void setFrere(NoeudAbstrait* frere);
 

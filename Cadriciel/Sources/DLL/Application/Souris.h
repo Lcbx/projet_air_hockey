@@ -11,7 +11,7 @@
 #pragma once
 #include "Selection.h"
 
-
+class Selection;
 // Click
 class Souris {
 public:
