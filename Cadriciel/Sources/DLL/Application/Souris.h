@@ -30,7 +30,7 @@ private:
 	int X1, Y1, X2, Y2;						//pour garder l'information des points du rectangle élastique
 	bool effacerDernierRectangle=false;		//pour permettre la transition au dessus de 3 pixels
 	bool toucheControlPressee=false;		//pour les scenarios de selection	
-	Etats etatSouris = SELECTION;			//type d'operation en cours
+	Etats etatSouris;// = SELECTION;			//type d'operation en cours
 	//singleton
 	Souris();
 	static Souris* instance_;

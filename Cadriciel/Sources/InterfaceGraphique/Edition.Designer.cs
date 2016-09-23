@@ -122,6 +122,8 @@
             this.panel1.Size = new System.Drawing.Size(500, 416);
             this.panel1.TabIndex = 0;
             this.panel1.TabStop = true;
+            this.panel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseClick);
+    
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Edition_MouseMove);
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
@@ -372,7 +374,7 @@
             this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip1.Size = new System.Drawing.Size(54, 357);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
@@ -543,7 +545,7 @@
             this.splitContainer1.Enabled = false;
             this.splitContainer1.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.splitContainer1.Location = new System.Drawing.Point(574, 38);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -565,7 +567,7 @@
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(148, 27);
@@ -584,9 +586,9 @@
             this.groupBoxConstantes.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBoxConstantes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxConstantes.Location = new System.Drawing.Point(0, 29);
-            this.groupBoxConstantes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxConstantes.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxConstantes.Name = "groupBoxConstantes";
-            this.groupBoxConstantes.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxConstantes.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxConstantes.Size = new System.Drawing.Size(148, 110);
             this.groupBoxConstantes.TabIndex = 0;
             this.groupBoxConstantes.TabStop = false;
@@ -638,7 +640,7 @@
             // 
             this.numericUpDown3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDown3.Location = new System.Drawing.Point(76, 76);
-            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(60, 21);
             this.numericUpDown3.TabIndex = 2;
@@ -647,7 +649,7 @@
             // 
             this.numericUpDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDown2.Location = new System.Drawing.Point(76, 49);
-            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(60, 21);
             this.numericUpDown2.TabIndex = 1;
@@ -656,7 +658,7 @@
             // 
             this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDown1.Location = new System.Drawing.Point(76, 24);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(60, 21);
             this.numericUpDown1.TabIndex = 0;
@@ -669,9 +671,9 @@
             this.groupBoxProprietes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxProprietes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxProprietes.Location = new System.Drawing.Point(0, 0);
-            this.groupBoxProprietes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxProprietes.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxProprietes.Name = "groupBoxProprietes";
-            this.groupBoxProprietes.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxProprietes.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxProprietes.Size = new System.Drawing.Size(148, 209);
             this.groupBoxProprietes.TabIndex = 0;
             this.groupBoxProprietes.TabStop = false;
@@ -683,9 +685,9 @@
             this.groupBoxFacteurDEchelle.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxFacteurDEchelle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxFacteurDEchelle.Location = new System.Drawing.Point(2, 128);
-            this.groupBoxFacteurDEchelle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxFacteurDEchelle.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxFacteurDEchelle.Name = "groupBoxFacteurDEchelle";
-            this.groupBoxFacteurDEchelle.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxFacteurDEchelle.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxFacteurDEchelle.Size = new System.Drawing.Size(144, 52);
             this.groupBoxFacteurDEchelle.TabIndex = 2;
             this.groupBoxFacteurDEchelle.TabStop = false;
@@ -694,7 +696,7 @@
             // numericUpDown7
             // 
             this.numericUpDown7.Location = new System.Drawing.Point(36, 25);
-            this.numericUpDown7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown7.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown7.Name = "numericUpDown7";
             this.numericUpDown7.Size = new System.Drawing.Size(60, 21);
             this.numericUpDown7.TabIndex = 0;
@@ -705,9 +707,9 @@
             this.groupBoxAngleDeRotation.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxAngleDeRotation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxAngleDeRotation.Location = new System.Drawing.Point(2, 76);
-            this.groupBoxAngleDeRotation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxAngleDeRotation.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxAngleDeRotation.Name = "groupBoxAngleDeRotation";
-            this.groupBoxAngleDeRotation.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxAngleDeRotation.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxAngleDeRotation.Size = new System.Drawing.Size(144, 52);
             this.groupBoxAngleDeRotation.TabIndex = 1;
             this.groupBoxAngleDeRotation.TabStop = false;
@@ -716,7 +718,7 @@
             // numericUpDown6
             // 
             this.numericUpDown6.Location = new System.Drawing.Point(36, 23);
-            this.numericUpDown6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown6.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown6.Name = "numericUpDown6";
             this.numericUpDown6.Size = new System.Drawing.Size(60, 21);
             this.numericUpDown6.TabIndex = 0;
@@ -730,9 +732,9 @@
             this.groupBoxPosition.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxPosition.Location = new System.Drawing.Point(2, 16);
-            this.groupBoxPosition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxPosition.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxPosition.Name = "groupBoxPosition";
-            this.groupBoxPosition.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBoxPosition.Padding = new System.Windows.Forms.Padding(2);
             this.groupBoxPosition.Size = new System.Drawing.Size(144, 60);
             this.groupBoxPosition.TabIndex = 0;
             this.groupBoxPosition.TabStop = false;
@@ -741,7 +743,7 @@
             // numericUpDown5
             // 
             this.numericUpDown5.Location = new System.Drawing.Point(36, 41);
-            this.numericUpDown5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown5.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown5.Name = "numericUpDown5";
             this.numericUpDown5.Size = new System.Drawing.Size(60, 19);
             this.numericUpDown5.TabIndex = 3;
@@ -749,7 +751,7 @@
             // numericUpDown4
             // 
             this.numericUpDown4.Location = new System.Drawing.Point(36, 22);
-            this.numericUpDown4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown4.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown4.Name = "numericUpDown4";
             this.numericUpDown4.Size = new System.Drawing.Size(60, 19);
             this.numericUpDown4.TabIndex = 2;

@@ -455,3 +455,17 @@ void NoeudAbstrait::accepter(Visiteur *v)
 {
 	v->visiter(this);
 }
+
+
+void NoeudAbstrait::setFrere(NoeudAbstrait* frere)
+{
+	cout << "Dans le set " << endl;
+	this->frere_ = frere;
+}
+
+
+NoeudAbstrait* NoeudAbstrait::getFrere()
+{
+	return this->frere_;
+
+}

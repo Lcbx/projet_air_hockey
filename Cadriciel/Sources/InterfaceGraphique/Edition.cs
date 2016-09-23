@@ -49,16 +49,28 @@ namespace InterfaceGraphique
             
         }
 
-        private void ToucheEnfonce(Object o, KeyPressEventArgs e)
+        bool supprimer = false;
+       private void ToucheEnfonce(Object o, KeyPressEventArgs e)
         {
-            //if(e.KeyChar == (char)Keys.LControlKey) FonctionsNatives.toucheControle(true);
+            if (e.KeyChar == (char)Keys.LControlKey) { FonctionsNatives.toucheControle(true);  }
             if (e.KeyChar == (char)Keys.Space)
             {
                 System.Console.WriteLine("Barre d'espacement appuyée. mode change en : ");
                 changerMode( EtatSouris==Etats.SELECTION ? Etats.AJOUT_ACCELERATEUR:Etats.SELECTION );
             }
-        }
 
+            //wajdi
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                System.Console.WriteLine("Echap. enfonce  ");
+                compteur = 0;
+                //Determiner l'etat : ajout Portail - muret ..
+                FonctionsNatives.escEnfonce(true);
+                supprimer = true;
+            }
+
+        }
+        
         private void nouveauToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Console.WriteLine("Nouveau");            
@@ -91,7 +103,7 @@ namespace InterfaceGraphique
         /////////////////////////////////////////////////////////////////////////
         //  gere la souris
         /////////////////////////////////////////////////////////////////////////
-        public enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, DEBUT_AJOUT_MUR, AJOUT_MUR, DEBUT_AJOUT_PORTAIL, AJOUT_PORTAIL };
+       public enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, DEBUT_AJOUT_MUR, AJOUT_MUR, DEBUT_AJOUT_PORTAIL, AJOUT_PORTAIL };
 
         private Etats EtatSouris = Etats.SELECTION;
 
@@ -125,7 +137,7 @@ namespace InterfaceGraphique
         {
             System.Console.WriteLine("Souris down : X = " + e.X + " et Y = " + e.Y);
             FonctionsNatives.clickStart(e.X, e.Y);
-            if( EtatSouris == Etats.SELECTION) Program.peutAfficher = false;
+            if (EtatSouris == Etats.SELECTION) { Program.peutAfficher = false; }
             mousePressed = true;
         }
         public void panel1_MouseUp(object sender, MouseEventArgs e)
@@ -137,11 +149,93 @@ namespace InterfaceGraphique
         }
         public void Edition_MouseMove(object sender, MouseEventArgs e)
         {
-            if (mousePressed) {
-                //System.Console.WriteLine("Souris in : X = " + e.X + " et Y = " + e.Y);
+           /* if (mousePressed) {
+                System.Console.WriteLine("Souris move : X = " + e.X + " et Y = " + e.Y);
                 FonctionsNatives.clickCurrent(e.X, e.Y);
-            } 
+            }*/
+            //wajdi
+
+                if (firstClick)
+                {
+                    if (coordXin != e.X && coordYin != e.Y)
+                    {
+                        if (!supprimer)
+                        {
+                            FonctionsNatives.ajouterMuretFantome(coordXin, coordYin, e.X, e.Y);
+                            supprimer = true;
+                        }
+                       // int nb = FonctionsNatives.obtenirNombreElemntSurScene();
+                        FonctionsNatives.ajouterMuret(coordXin, coordYin, e.X, e.Y);
+                       /*if ((nb + 1) == FonctionsNatives.obtenirNombreElemntSurScene())
+                        {
+                            supprimer = false;
+                        }*/
+
+                    }
+
+                }
+
+            }
+
+        
+
+
+        int compteur = 0;
+        bool firstClick = false;
+        int coordXin = 0, coordYin = 0;
+
+        private void panel1_MouseClick(object sender, MouseEventArgs e)
+        {
+            //ETAT AJOUT PORTAIL
+
+            /*
+                   //FonctionsNatives.ajouterPortail(e.X, e.Y);
+
+                   //Pour vérifier qu'on a cliqué 2 fois 
+                     compteur += 1;
+                     if (compteur <= 1)
+                     {
+                         compteur += 1;
+                         System.Console.WriteLine("Premier clic:  x=  " + e.X + " y= " + e.Y);
+                         FonctionsNatives.ajouterPortail(e.X, e.Y);
+
+                     }
+                     if (compteur > 2)
+                     {
+                           System.Console.WriteLine("Deuxieme clic:  x=  " + e.X + " y= " + e.Y);
+                           compteur = 0;
+                           FonctionsNatives.ajouterPortailDeux(e.X, e.Y);
+                      }
+                         */
+
+            //Etat AJOUT MURET
+            
+
+            //Pour vérifier qu'on a cliqué 2 fois 
+            compteur += 1;
+            if (compteur <= 1)
+            {
+                compteur += 1;
+                System.Console.WriteLine("Premier clic:  x=  " + e.X + " y= " + e.Y);
+                firstClick = true;
+                coordXin = e.X;
+                coordYin = e.Y;
+
+            }
+            if (compteur > 2)
+            {
+                System.Console.WriteLine("Deuxieme clic:  x=  " + e.X + " y= " + e.Y);
+                compteur = 0;
+                FonctionsNatives.ajouterMuret(coordXin, coordYin, e.X, e.Y);
+                firstClick = false;
+            }
+           
+            
+           
+
         }
+   
+
     }
 
 
@@ -176,5 +270,27 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void toucheControle(bool pressee);
+
+        
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ajouterPortail(int x1, int y1);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void escEnfonce(bool esc);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ajouterPortailDeux(int x2, int y2);
+
+
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ajouterMuret(int x1, int y1, int x2, int y2);
+
+
+
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ajouterMuretFantome(int corXin, int corYin, int corX, int corY);
     }
 }
