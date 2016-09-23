@@ -65,7 +65,7 @@ NoeudPortail::~NoeudPortail()
 ////////////////////////////////////////////////////////////////////////
 void NoeudPortail::afficherConcret(const glm::mat4& vueProjection) const
 {
-	/*// Révolution autour du centre.
+	// Révolution autour du centre.
 	auto modele = glm::rotate(transformationRelative_, angleRotation_, glm::vec3(0, 0, 1));
 	// Translation.
 	modele = glm::translate(modele, glm::vec3(10, 0, 0));
@@ -76,7 +76,7 @@ void NoeudPortail::afficherConcret(const glm::mat4& vueProjection) const
 	// Recentrage du cube.
 	modele = glm::translate(modele, glm::vec3(0, 0, -10));
 	// Affichage du modèle.
-	vbo_->dessiner(vueProjection * modele);*/
+	vbo_->dessiner(vueProjection * modele);
 }
 
 
@@ -94,12 +94,12 @@ void NoeudPortail::afficherConcret(const glm::mat4& vueProjection) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudPortail::animer(float temps)
 {
-	// Le cube effectue un tour à toutes les 7 secondes sur l'axe des X.
-	angleX_ = fmod(angleX_ + temps / 7.0f * 2 * (float)utilitaire::PI, 2 * (float)utilitaire::PI);
-	// Le cube effectue un tour à toutes les 3 secondes sur l'axe des Y.
-	angleY_ = fmod(angleY_ + temps / 3.0f * 2 * (float)utilitaire::PI, 2 * (float)utilitaire::PI);
-	// Le cube effectue une révolution à toutes les 15 secondes.
-	angleRotation_ = fmod(angleRotation_ + temps / 15.0f * 2 * (float)utilitaire::PI, 2 * (float)utilitaire::PI);
+	//// Le cube effectue un tour à toutes les 7 secondes sur l'axe des X.
+	//angleX_ = fmod(angleX_ + temps / 7.0f * 2 * (float)utilitaire::PI, 2 * (float)utilitaire::PI);
+	//// Le cube effectue un tour à toutes les 3 secondes sur l'axe des Y.
+	//angleY_ = fmod(angleY_ + temps / 3.0f * 2 * (float)utilitaire::PI, 2 * (float)utilitaire::PI);
+	//// Le cube effectue une révolution à toutes les 15 secondes.
+	//angleRotation_ = fmod(angleRotation_ + temps / 15.0f * 2 * (float)utilitaire::PI, 2 * (float)utilitaire::PI);
 
 }
 

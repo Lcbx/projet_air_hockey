@@ -9,7 +9,7 @@
 #include "../NoeudMuret.h"
 #include "../NoeudPortail.h"
 #include "../NoeudRondelle.h"
-
+#include "NoeudTable.h"
 
 
 #endif /// __NOEUD_TYPES_H__

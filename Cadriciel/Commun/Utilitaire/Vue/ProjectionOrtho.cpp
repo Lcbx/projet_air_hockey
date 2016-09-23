@@ -65,6 +65,7 @@ namespace vue {
 	void ProjectionOrtho::zoomerIn()
 	{
 		zoomerTo(zoomActuel_ + incrementZoom_);
+
 	}
 
 

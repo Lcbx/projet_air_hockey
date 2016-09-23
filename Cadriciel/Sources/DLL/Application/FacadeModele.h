@@ -65,8 +65,23 @@ public:
 	void animer(float temps);
 
 
-   //ajouter Rondelle
-   void ajouterBonus(int x, int y);
+   //ajouter Bonus
+	void ajouterBonus(int x, int y);
+
+	//ajouter Portail
+	void ajouterPortail(int x1, int y1);
+
+
+	//supprime le 1er Portail apres clic echap
+ 	void supprimerPortail(bool escTouche);
+
+
+	void ajouterPortailDeux(int x2, int y2);
+	
+
+
+	void ajouterMuret(int x1, int y1, int x2, int y2);
+	void ajouterMurFantome(int corXin, int corYin, int corX, int corY);
 
 private:
 
