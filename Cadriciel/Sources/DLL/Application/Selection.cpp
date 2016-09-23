@@ -58,4 +58,5 @@ void Selection::operationShortClick() {
 	SingletonSelection::instance()->selectionner(begin, end);
 }
 void Selection::operationDragClick() {
+	operationShortClick();
 }
