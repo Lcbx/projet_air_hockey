@@ -19,7 +19,8 @@ namespace InterfaceGraphique
 
         public Edition()
         {
-            this.KeyPress += new KeyPressEventHandler(ToucheEnfonce);
+            (this as Control).KeyDown += new KeyEventHandler(keyDownHandler);
+            (this as Control).KeyUp += new KeyEventHandler(keyUpHandler);
             InitializeComponent();
             InitialiserAnimation();
 
@@ -49,13 +50,17 @@ namespace InterfaceGraphique
             
         }
 
-        private void ToucheEnfonce(Object o, KeyPressEventArgs e)
+        private void keyDownHandler(object sender, KeyEventArgs e)
         {
-            //if(e.KeyChar == (char)Keys.LControlKey) FonctionsNatives.toucheControle(true);
-            if (e.KeyChar == (char)Keys.Space)
+            if (e.KeyCode == Keys.ControlKey) FonctionsNatives.toucheControl(true);
+        }
+        private void keyUpHandler(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ControlKey) FonctionsNatives.toucheControl(false);
+            if (e.KeyCode == Keys.Space)
             {
                 System.Console.WriteLine("Barre d'espacement appuyée. mode change en : ");
-                changerMode( EtatSouris==Etats.SELECTION ? Etats.AJOUT_ACCELERATEUR:Etats.SELECTION );
+                changerMode(EtatSouris == Etats.SELECTION ? Etats.AJOUT_ACCELERATEUR : Etats.SELECTION);
             }
         }
 
@@ -140,6 +145,7 @@ namespace InterfaceGraphique
             if (mousePressed) FonctionsNatives.clickCurrent(e.X, e.Y);
             else FonctionsNatives.positionSouris(e.X, e.Y);
         }
+
     }
 
 
@@ -174,5 +180,9 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void positionSouris(int x, int y);
+
+        //control
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void toucheControl(bool presse);
     }
 }
