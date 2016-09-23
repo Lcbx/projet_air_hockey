@@ -6,19 +6,24 @@
 /// @addtogroup inf2990 INF2990
 /// @{
 ////////////////////////////////////////////////
+
+#pragma once
+
+
 #include "FacadeInterfaceNative.h"
 #include "FacadeModele.h"
+#include "Selection.h"
 #include "Souris.h"
 
-#include "glm\glm.hpp"
 #include "AideGL.h"
 #include "Vue.h"
 #include "ArbreRenduINF2990.h"
 #include "CompteurAffichage.h"
-#include <iostream>
 #include "BancTests.h"
 
-using namespace std;
+//using namespace std;
+
+
 
 extern "C"
 {
@@ -59,12 +64,15 @@ extern "C"
 	__declspec(dllexport) void __cdecl libererOpenGL()
 	{
 		FacadeModele::obtenirInstance()->libererOpenGL();
+		
 
 		// Désinitialisation de la façade.  Le fait de le faire après la
 		// désinitialisation du contexte OpenGL aura pour conséquence que la
 		// libération des listes d'affichages, par exemple, sera faite une fois que
 		// le contexte n'existera plus, et sera donc sans effet.
 		FacadeModele::libererInstance();
+		// meme chose avec souris
+		Souris::libererInstance();
 	}
 
 
@@ -186,7 +194,7 @@ extern "C"
 		return reussite ? 0 : 1;
 	}
 
-
+	
 	// Click
 	__declspec(dllexport) void __cdecl etatDelaSouris(int etat) {
 		Souris::obtenirInstance()->EtatdelaSouris(etat);
@@ -204,8 +212,9 @@ extern "C"
 	{
 		Souris::obtenirInstance()->endClick(x, y);
 	}
-	__declspec(dllexport) void __cdecl toucheControle(bool pressee) {
-		Souris::obtenirInstance()->toucheControl(pressee);
+	__declspec(dllexport) void __cdecl positionSouris(int x, int y)
+	{
+		Souris::obtenirInstance()->sourisPostition(x, y);
 	}
 
 
