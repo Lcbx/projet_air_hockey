@@ -78,6 +78,8 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBoxConstantes = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.uniteAccelelration = new System.Windows.Forms.Label();
             this.labelAccélération = new System.Windows.Forms.Label();
             this.labelRebond = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -125,7 +127,7 @@
             this.panel1.Location = new System.Drawing.Point(143, 52);
             this.panel1.Margin = new System.Windows.Forms.Padding(12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1039, 875);
+            this.panel1.Size = new System.Drawing.Size(1039, 800);
             this.panel1.TabIndex = 0;
             this.panel1.TabStop = true;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
@@ -558,7 +560,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBoxProprietes);
             this.splitContainer1.Size = new System.Drawing.Size(285, 933);
-            this.splitContainer1.SplitterDistance = 258;
+            this.splitContainer1.SplitterDistance = 314;
             this.splitContainer1.SplitterWidth = 38;
             this.splitContainer1.TabIndex = 4;
             // 
@@ -575,6 +577,8 @@
             // 
             // groupBoxConstantes
             // 
+            this.groupBoxConstantes.Controls.Add(this.label2);
+            this.groupBoxConstantes.Controls.Add(this.uniteAccelelration);
             this.groupBoxConstantes.Controls.Add(this.labelAccélération);
             this.groupBoxConstantes.Controls.Add(this.labelRebond);
             this.groupBoxConstantes.Controls.Add(this.label1);
@@ -584,7 +588,7 @@
             this.groupBoxConstantes.Controls.Add(this.numericUpDown1);
             this.groupBoxConstantes.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBoxConstantes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
-            this.groupBoxConstantes.Location = new System.Drawing.Point(0, 27);
+            this.groupBoxConstantes.Location = new System.Drawing.Point(0, 83);
             this.groupBoxConstantes.Margin = new System.Windows.Forms.Padding(6);
             this.groupBoxConstantes.Name = "groupBoxConstantes";
             this.groupBoxConstantes.Padding = new System.Windows.Forms.Padding(4);
@@ -592,6 +596,26 @@
             this.groupBoxConstantes.TabIndex = 0;
             this.groupBoxConstantes.TabStop = false;
             this.groupBoxConstantes.Text = "Constantes";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(67, 174);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(24, 25);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "2";
+            // 
+            // uniteAccelelration
+            // 
+            this.uniteAccelelration.AutoSize = true;
+            this.uniteAccelelration.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uniteAccelelration.Location = new System.Drawing.Point(24, 183);
+            this.uniteAccelelration.Name = "uniteAccelelration";
+            this.uniteAccelelration.Size = new System.Drawing.Size(72, 25);
+            this.uniteAccelelration.TabIndex = 7;
+            this.uniteAccelelration.Text = "(m/s  )";
             // 
             // labelAccélération
             // 
@@ -647,6 +671,7 @@
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(120, 35);
             this.numericUpDown3.TabIndex = 2;
+            this.numericUpDown3.ValueChanged += new System.EventHandler(this.numericUpDown3_ValueChanged);
             // 
             // numericUpDown2
             // 
@@ -656,6 +681,7 @@
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(120, 35);
             this.numericUpDown2.TabIndex = 1;
+            this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
             // 
             // numericUpDown1
             // 
@@ -665,6 +691,7 @@
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(120, 35);
             this.numericUpDown1.TabIndex = 0;
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // groupBoxProprietes
             // 
@@ -677,7 +704,7 @@
             this.groupBoxProprietes.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxProprietes.Name = "groupBoxProprietes";
             this.groupBoxProprietes.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBoxProprietes.Size = new System.Drawing.Size(281, 633);
+            this.groupBoxProprietes.Size = new System.Drawing.Size(281, 577);
             this.groupBoxProprietes.TabIndex = 0;
             this.groupBoxProprietes.TabStop = false;
             this.groupBoxProprietes.Text = "Propriétes";
@@ -703,6 +730,7 @@
             this.numericUpDown7.Name = "numericUpDown7";
             this.numericUpDown7.Size = new System.Drawing.Size(120, 35);
             this.numericUpDown7.TabIndex = 0;
+            this.numericUpDown7.ValueChanged += new System.EventHandler(this.numericUpDown7_ValueChanged);
             // 
             // groupBoxAngleDeRotation
             // 
@@ -725,6 +753,7 @@
             this.numericUpDown6.Name = "numericUpDown6";
             this.numericUpDown6.Size = new System.Drawing.Size(120, 35);
             this.numericUpDown6.TabIndex = 0;
+            this.numericUpDown6.ValueChanged += new System.EventHandler(this.numericUpDown6_ValueChanged);
             // 
             // groupBoxPosition
             // 
@@ -750,6 +779,7 @@
             this.numericUpDown5.Name = "numericUpDown5";
             this.numericUpDown5.Size = new System.Drawing.Size(120, 31);
             this.numericUpDown5.TabIndex = 3;
+            this.numericUpDown5.ValueChanged += new System.EventHandler(this.numericUpDown5_ValueChanged);
             // 
             // numericUpDown4
             // 
@@ -758,6 +788,7 @@
             this.numericUpDown4.Name = "numericUpDown4";
             this.numericUpDown4.Size = new System.Drawing.Size(120, 31);
             this.numericUpDown4.TabIndex = 2;
+            this.numericUpDown4.ValueChanged += new System.EventHandler(this.numericUpDown4_ValueChanged);
             // 
             // labelY
             // 
@@ -796,6 +827,7 @@
             this.Name = "Edition";
             this.Text = "Edition";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Exemple_FormClosing);
+            
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -891,6 +923,8 @@
         private System.Windows.Forms.ToolStripLabel toolStripTextBox2;
         private System.Windows.Forms.ToolStripLabel toolStripTextBox3;
         private System.Windows.Forms.GroupBox groupBoxConstantes;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label uniteAccelelration;
     }
    
 }
