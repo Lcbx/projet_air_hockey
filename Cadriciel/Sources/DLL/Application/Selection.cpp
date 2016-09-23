@@ -12,7 +12,7 @@
 #include<glm\glm.hpp>
 #include "AideGL.h" //ne surtout pas bouger, crait une erreur si mis après freeglut
 
-#include <GL/freeglut.h>
+//#include <GL/freeglut.h>
 
 #include "Selection.h"
 
@@ -51,7 +51,8 @@ void Selection::end(int x, int y) {
 }
 
 bool Selection::controlPresse() {
-	return glutGetModifiers() == GLUT_ACTIVE_CTRL;
+	// glutGetModifiers() == GLUT_ACTIVE_CTRL;
+	return true;
 }
 
 void Selection::operationShortClick() {}

@@ -156,7 +156,7 @@ namespace InterfaceGraphique
             }*/
             //wajdi
 
-                if (firstClick)
+               /* if (firstClick)
                 {
                     if (coordXin != e.X && coordYin != e.Y)
                     {
@@ -172,9 +172,9 @@ namespace InterfaceGraphique
                             supprimer = false;
                         }*/
 
-                    }
+                  //  }
 
-                }
+               // }
 
             }
 
@@ -211,7 +211,7 @@ namespace InterfaceGraphique
 
             //Etat AJOUT MURET
             
-
+/*
             //Pour vérifier qu'on a cliqué 2 fois 
             compteur += 1;
             if (compteur <= 1)
@@ -231,7 +231,7 @@ namespace InterfaceGraphique
                 firstClick = false;
             }
            
-            
+            */
            
 
             if (mousePressed) FonctionsNatives.clickCurrent(e.X, e.Y);
@@ -353,5 +353,10 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void ajouterMuretFantome(int corXin, int corYin, int corX, int corY);
+
+
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void positionSouris(int x, int y);
     }
 }
