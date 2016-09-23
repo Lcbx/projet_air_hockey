@@ -29,7 +29,7 @@ namespace vue {
 	/// @param[in] zArriere			: distance du plan arrière (en @a z).
 	/// @param[in] zoomInMax		: facteur de zoom in maximal.
 	/// @param[in] zoomOutMax		: facteur de zoom out maximal.
-	/// @param[in] incrementZoom	: distance du plan arrière (en @a z).
+	/// @param[in] incrementZoom	: increment du facteur de zoom.
 	/// @param[in] largeurFenetre	: dimension en @a X de la fenêtre
 	///								  virtuelle.
 	/// @param[in] hauteurFenetre	: dimension en @a Y de la fenêtre
@@ -64,7 +64,7 @@ namespace vue {
 	////////////////////////////////////////////////////////////////////////
 	void ProjectionOrtho::zoomerIn()
 	{
-		// À IMPLANTER.
+		zoomerTo(zoomActuel_ + incrementZoom_);
 	}
 
 
@@ -79,7 +79,24 @@ namespace vue {
 	//////////////////////////////////////////////////////////////////////// 
 	void ProjectionOrtho::zoomerOut()
 	{
-		// À IMPLANTER.
+		zoomerTo(zoomActuel_ - incrementZoom_);
+	}
+
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn void ProjectionOrtho::zoomerTo(double zoomFacteur)
+	///
+	/// Permet de zoomer jusqu'a un facteur donné.
+	///
+	/// @return Aucune.
+	///
+	//////////////////////////////////////////////////////////////////////// 
+	void ProjectionOrtho::zoomerTo(double zoomFacteur)
+	{
+		zoomActuel_ = zoomFacteur;
+		largeurFenetre_ = zoomFacteur;
+		hauteurFenetre_ = zoomFacteur;
 	}
 
 
