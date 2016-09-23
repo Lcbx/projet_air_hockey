@@ -558,7 +558,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBoxProprietes);
             this.splitContainer1.Size = new System.Drawing.Size(285, 933);
-            this.splitContainer1.SplitterDistance = 294;
+            this.splitContainer1.SplitterDistance = 258;
             this.splitContainer1.SplitterWidth = 38;
             this.splitContainer1.TabIndex = 4;
             // 
@@ -584,7 +584,7 @@
             this.groupBoxConstantes.Controls.Add(this.numericUpDown1);
             this.groupBoxConstantes.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBoxConstantes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
-            this.groupBoxConstantes.Location = new System.Drawing.Point(0, 63);
+            this.groupBoxConstantes.Location = new System.Drawing.Point(0, 27);
             this.groupBoxConstantes.Margin = new System.Windows.Forms.Padding(6);
             this.groupBoxConstantes.Name = "groupBoxConstantes";
             this.groupBoxConstantes.Padding = new System.Windows.Forms.Padding(4);
@@ -677,7 +677,7 @@
             this.groupBoxProprietes.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxProprietes.Name = "groupBoxProprietes";
             this.groupBoxProprietes.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBoxProprietes.Size = new System.Drawing.Size(281, 597);
+            this.groupBoxProprietes.Size = new System.Drawing.Size(281, 633);
             this.groupBoxProprietes.TabIndex = 0;
             this.groupBoxProprietes.TabStop = false;
             this.groupBoxProprietes.Text = "Propriétes";

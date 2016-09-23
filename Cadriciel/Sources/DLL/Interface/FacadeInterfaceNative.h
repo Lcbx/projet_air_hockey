@@ -20,13 +20,12 @@ extern "C" {
 	__declspec(dllexport) void zoomOut();
 	__declspec(dllexport) int obtenirAffichagesParSeconde();
 	__declspec(dllexport) bool executerTests();
-	__declspec(dllexport) void ajouterBonus(int x, int y);
 
 	//Click
 	__declspec(dllexport) void clickStart(int x, int y);
 	__declspec(dllexport) void clickCurrent(int x, int y);
 	__declspec(dllexport) void clickEnd(int x, int y);
 	__declspec(dllexport) void etatDelaSouris(int etat);
-	__declspec(dllexport) void toucheControle(bool pressee);
+	__declspec(dllexport) void postitionSouris(int etat);
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__
