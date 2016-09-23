@@ -159,6 +159,9 @@
     <ClCompile Include="Application\Rotation.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
+    <ClCompile Include="Arbre\Noeuds\NoeudTable.cpp">
+      <Filter>Source Files\Arbre\Noeuds</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\FacadeModele.h">
@@ -271,6 +274,9 @@
     </ClInclude>
     <ClInclude Include="Application\AjoutPortail.h">
       <Filter>Header Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Arbre\Noeuds\NoeudTable.h">
+      <Filter>Source Files\Arbre\Noeuds</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

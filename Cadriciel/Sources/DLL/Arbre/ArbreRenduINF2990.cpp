@@ -37,6 +37,8 @@ const std::string ArbreRenduINF2990::NOM_PORTAIL{ "portail" };
 //Muret
 const std::string ArbreRenduINF2990::NOM_MURET{ "muret" };
 
+//Table
+const std::string ArbreRenduINF2990::NOM_TABLE{ "table" };
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -58,7 +60,7 @@ ArbreRenduINF2990::ArbreRenduINF2990()
 	ajouterUsine(NOM_BONUS, new UsineNoeud<NoeudBonus>{ NOM_BONUS, std::string{ "media/rondelle.obj" } });
 	ajouterUsine(NOM_PORTAIL, new UsineNoeud<NoeudPortail>{ NOM_PORTAIL, std::string{ "media/rondelle.obj" } });
 	ajouterUsine(NOM_MURET, new UsineNoeud<NoeudMuret>{ NOM_MURET, std::string{ "media/muret.obj" } });
-
+	ajouterUsine(NOM_TABLE, new UsineNoeud<NoeudTable>{ NOM_TABLE, std::string{ "" } });
 }
 
 
@@ -97,7 +99,7 @@ void ArbreRenduINF2990::initialiser()
 
 	
 	// On ajoute un noeud bidon seulement pour que quelque chose s'affiche.
-	NoeudAbstrait* noeudAraignee{ creerNoeud(NOM_ARAIGNEE) };
+	NoeudAbstrait* noeudAraignee{ creerNoeud(NOM_TABLE) };
 	noeudAraignee->assignerPositionRelative(glm::dvec3{ 0.0, 0.0, 0.0 });
 	//noeudAraignee->ajouter(creerNoeud(NOM_CONECUBE));
 	ajouter(noeudAraignee);
