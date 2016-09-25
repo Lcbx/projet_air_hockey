@@ -199,7 +199,6 @@ extern "C"
 	__declspec(dllexport) void __cdecl etatDelaSouris(int etat) {
 		Souris::obtenirInstance()->EtatdelaSouris(etat);
 	}
-
 	__declspec(dllexport) void __cdecl clickStart(int x, int y)
 	{
 		Souris::obtenirInstance()->startClick(x, y);
@@ -216,11 +215,16 @@ extern "C"
 	{
 		Souris::obtenirInstance()->sourisPostition(x, y);
 	}
+	//touche control
 	__declspec(dllexport) void __cdecl toucheControl(bool presse)
 	{
 		Souris::obtenirInstance()->setControl(presse);
 	}
-
+	//touche escape
+	__declspec(dllexport) void escEnfonce()
+	{
+		Souris::obtenirInstance()->escPresse();
+	}
 
 
 	////////////////////////////////////////////////////////////////////////
@@ -237,15 +241,6 @@ extern "C"
 	{
 		FacadeModele::obtenirInstance()->ajouterPortail(x1, y1);
 	}
-
-
-	__declspec(dllexport) void escEnfonce(bool escTouche) 
-	{
-		//prend un bool en param (touche esc est enfonce ou pas)
-		FacadeModele::obtenirInstance()->supprimerPortail(escTouche);
-
-	}
-
 
 	////////////////////////////////////////////////////////////////////////
 	///

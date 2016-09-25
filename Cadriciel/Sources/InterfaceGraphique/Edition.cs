@@ -66,17 +66,11 @@ namespace InterfaceGraphique
         bool supprimer = false;
         private void keyUpHandler(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.ControlKey) FonctionsNatives.toucheControl(false);
-            /*
-            if (e.KeyCode == Keys.Escape)
-            {
-                System.Console.WriteLine("Echap. enfonce  ");
-                compteur = 0;
-                //Determiner l'etat : ajout Portail - muret ..
-                FonctionsNatives.escEnfonce(true);
-                supprimer = true;
-
-            }*/
+            switch (e.KeyCode) {
+                case Keys.ControlKey:   FonctionsNatives.toucheControl(false);  break; 
+                case Keys.Escape:       FonctionsNatives.escEnfonce();          break;
+                default: break;
+            } 
         }
 
         private void nouveauToolStripMenuItem_Click(object sender, EventArgs e)
@@ -448,17 +442,16 @@ namespace InterfaceGraphique
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void positionSouris(int x, int y);
 
-        //control
+        //touche escape
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void toucheControl(bool presse);
 
-
+        //touche escape
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void escEnfonce();
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void ajouterPortail(int x1, int y1);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void escEnfonce(bool esc);
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void ajouterPortailDeux(int x2, int y2);

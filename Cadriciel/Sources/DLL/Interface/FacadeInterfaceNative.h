@@ -25,7 +25,6 @@ extern "C" {
 	
 	
 	__declspec(dllexport) void ajouterPortail(int x1, int y1);
-	__declspec(dllexport) void escEnfonce(bool esc);
 	__declspec(dllexport) void ajouterPortailDeux(int x2, int y2);
 
 
@@ -40,6 +39,9 @@ extern "C" {
 	__declspec(dllexport) void clickEnd(int x, int y);
 	__declspec(dllexport) void etatDelaSouris(int etat);
 	__declspec(dllexport) void positionSouris(int x, int y);
+	//touche control
 	__declspec(dllexport) void toucheControl(bool presse);
+	//touche escape
+	__declspec(dllexport) void escEnfonce();
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__

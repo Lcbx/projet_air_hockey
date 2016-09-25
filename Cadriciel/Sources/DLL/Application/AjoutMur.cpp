@@ -33,3 +33,7 @@ void AjoutMur::operationShortClick() {
 void AjoutMur::operationDragClick() {
 	//DO something
 }
+
+void AjoutMur::escEnfonce() {
+	Souris::obtenirInstance()->EtatdelaSouris(Souris::DEBUT_AJOUT_MUR);
+}

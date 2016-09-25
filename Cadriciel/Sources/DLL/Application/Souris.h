@@ -27,6 +27,7 @@ public:
 	void EtatdelaSouris(int etat);			//operation en cours
 	void setControl(bool presse);			//change l'etat de la touche control
 	bool getControl();						//donne l'etat de la touche control
+	void escPresse();						//permet de donner le signal que la touche escape est pressee
 	glm::ivec4& getPosition();				//position de Click courante
 
 private:
