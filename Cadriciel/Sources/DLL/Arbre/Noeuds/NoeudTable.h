@@ -77,6 +77,15 @@ private:
 	// la couleur des lignes sur le terrain
 	glm::vec4 couleurLignes_{ 1.,0.,0.,1. };
 	// les 8 points de controle de la table
+	/*
+	p0----------p2----------p4
+	|						 |
+	|						 |
+	p6			p8			p7
+	|						 |
+	|						 |
+	p1----------p3----------p5
+	*/
 	glm::vec3 pointControle_[8] = { 
 		{ -.8,  .8,  0. },	//P0
 		{ -.8, -.8,  0. },	//P1

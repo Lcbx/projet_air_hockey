@@ -34,8 +34,25 @@ NoeudPointControle::NoeudPointControle(const std::string& typeNoeud)
 	: NoeudAbstrait{ typeNoeud }
 {
 }
-
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn NoeudPointControle::NoeudPointControle(const std::string& typeNoeud, inr index)
+///
+/// Ce constructeur ne fait qu'appeler la version de la classe et base
+/// et donner des valeurs par défaut aux variables membres.
+///
+/// @param[in] typeNoeud : Le type du noeud.
+///				index : ID du noeud.
+///
+/// @return Aucune (constructeur).
+///
+////////////////////////////////////////////////////////////////////////
+NoeudPointControle::NoeudPointControle(const std::string& typeNoeud, int index)
+	: NoeudAbstrait{ typeNoeud }
+	
+{
+	index_ = index;
+}
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn NoeudPointControle::~NoeudPointControle()
@@ -48,8 +65,6 @@ NoeudPointControle::NoeudPointControle(const std::string& typeNoeud)
 NoeudPointControle::~NoeudPointControle()
 {
 }
-
-
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void NoeudPointControle::afficherConcret() const
@@ -64,7 +79,7 @@ NoeudPointControle::~NoeudPointControle()
 ////////////////////////////////////////////////////////////////////////
 void NoeudPointControle::afficherConcret(const glm::mat4& vueProjection) const
 {
-	glMatrixMode(GL_MODELVIEW);
+	//glMatrixMode(GL_MODELVIEW); 
 	//glLoadIdentity(); // deja fait dans la table --garder en commentaire pour l'instant
 	// deactiver les textures (la table ne prend plus la texture des autres noeuds)
 	//glDisable(GL_TEXTURE_2D); // deja fait dans la table -- garder en commentaire pour l'instant
@@ -72,21 +87,25 @@ void NoeudPointControle::afficherConcret(const glm::mat4& vueProjection) const
 	//glDisable(GL_DEPTH_TEST);// deja fait dans la table -- garder en commentaire pour l'instant
 	// activer l'anticrenelage
 	//glEnable(GL_MULTISAMPLE);// deja fait dans la table -- garder en commentaire pour l'instant
-#define delta 0.05
-	glm::vec3 p0{ coord_.x - delta,coord_.y + delta, coord_.z };
-	glm::vec3 p1{ coord_.x - delta,coord_.y - delta, coord_.z };
-	glm::vec3 p2{ coord_.x + delta,coord_.y - delta, coord_.z };
-	glm::vec3 p3{ coord_.x + delta,coord_.y + delta, coord_.z };
-#undef delta
+
+	glm::vec3 p0{ coord_.x - delta_/2,coord_.y + delta_/2, coord_.z };
+	glm::vec3 p1{ coord_.x - delta_/2,coord_.y - delta_/2, coord_.z };
+	glm::vec3 p2{ coord_.x + delta_/2,coord_.y - delta_/2, coord_.z };
+	glm::vec3 p3{ coord_.x + delta_/2,coord_.y + delta_/2, coord_.z };
+
+	//afficher p0
+	//std::cout << "x = " << p0.x << " y = " << p0.y << std::endl;
+	
+	glColor4f(couleur_[0], couleur_[1], couleur_[2], couleur_[3]);
 	glBegin(GL_QUADS);
-	{
-		glColor4f(couleur_[0], couleur_[1], couleur_[2], couleur_[3]);
+	{		
 		glVertex3f(p0.x,p0.y,p0.z);
 		glVertex3f(p1.x, p1.y, p1.z);
 		glVertex3f(p2.x, p2.y, p2.z);
 		glVertex3f(p3.x, p3.y, p3.z);
 	}
 	glEnd();
+
 	// reactiver le test de profondeur
 	//glEnable(GL_DEPTH_TEST);// deja fait dans la table -- garder en commentaire pour l'instant
 	// desactiver l'ancrenelage
@@ -186,12 +205,42 @@ bool NoeudPointControle::setCouleur(glm::vec4 couleur)
 ///
 /// Cette fonction permet d'obtenir la couleur du point de controle 
 ///  @param[in] 
-///		couleur : la valeur de la couleurdu  point de controle
+///		couleur : la valeur de la couleur du  point de controle
 /// @return bool
 ///
 ////////////////////////////////////////////////////////////////////////
 bool NoeudPointControle::getCouleur(glm::vec4 & couleur)
 {
 	couleur = couleur_;
+	return true;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudPointControle::getIndex(int & index)
+///
+/// Cette fonction permet d'obtenir la valeur de l'index (ID) du noeud
+///  @param[in] 
+///		index : la valeur de l'index du  point de controle
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool NoeudPointControle::getIndex(int & index)
+{
+	index = index_;
+	return true;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudPointControle::setIndex(int & index)
+///
+/// Cette fonction permet de modifier la valeur de l'index (ID) du noeud
+///  @param[in] 
+///		index : la nouvelle valeur de l'index du  point de controle
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool NoeudPointControle::setIndex(int index)
+{
+	index_ = index;
 	return true;
 }

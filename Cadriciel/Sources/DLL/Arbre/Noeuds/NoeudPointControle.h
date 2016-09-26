@@ -27,6 +27,8 @@ class NoeudPointControle : public NoeudAbstrait
 public:
 	/// Constructeur à partir du type du noeud.
 	NoeudPointControle(const std::string& typeNoeud);
+	/// Constructeur avec un identifiant
+	NoeudPointControle(const std::string& typeNoeud, int index);
 	/// Destructeur.
 	~NoeudPointControle();
 
@@ -43,11 +45,17 @@ public:
 	bool getCoord(glm::vec3 & point);
 	bool setCouleur(glm::vec4 couleur);
 	bool getCouleur(glm::vec4 & couleur);
+	bool setIndex(int index);
+	bool getIndex(int & index);
 private:
 	// coordonnees du centre du point de control
 	glm::vec3 coord_{ 0.,0.,0. };
 	// la couleur du point de controle
 	glm::vec4 couleur_{ 0.,0.,1.,0. }; // couleur bleu par default
+	// la longueur du cote' du carre' du point de controle
+	float delta_{ 0.05 };
+	// ID du point de controle
+	int index_{ 0 };
 
 	/// Angle selon l'axe des X.
 	float angleX_{ 0.f };

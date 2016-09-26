@@ -89,30 +89,104 @@ ArbreRenduINF2990::~ArbreRenduINF2990()
 ////////////////////////////////////////////////////////////////////////
 void ArbreRenduINF2990::ajouterTable()
 {
-	// On ajoute le noeud de la table du jeu
+	// On cree un objet Table et 8 points de controle
 	NoeudTable* noeudTable{ (NoeudTable *)creerNoeud(NOM_TABLE) };
-	//noeudTable->assignerPositionRelative(glm::dvec3{ 0.0, 0.0, 0.0 }); //position (0,0,0) par default
-	NoeudPointControle* noeudPointControle{ (NoeudPointControle *)creerNoeud(NOM_POINTCONTROLE) };
+	NoeudPointControle* noeudPointControle0{ (NoeudPointControle *)creerNoeud(NOM_POINTCONTROLE) };
+	NoeudPointControle* noeudPointControle1{ (NoeudPointControle *)creerNoeud(NOM_POINTCONTROLE) };
+	NoeudPointControle* noeudPointControle2{ (NoeudPointControle *)creerNoeud(NOM_POINTCONTROLE) };
+	NoeudPointControle* noeudPointControle3{ (NoeudPointControle *)creerNoeud(NOM_POINTCONTROLE) };
+	NoeudPointControle* noeudPointControle4{ (NoeudPointControle *)creerNoeud(NOM_POINTCONTROLE) };
+	NoeudPointControle* noeudPointControle5{ (NoeudPointControle *)creerNoeud(NOM_POINTCONTROLE) };
+	NoeudPointControle* noeudPointControle6{ (NoeudPointControle *)creerNoeud(NOM_POINTCONTROLE) };
+	NoeudPointControle* noeudPointControle7{ (NoeudPointControle *)creerNoeud(NOM_POINTCONTROLE) };
+	
 	// ajouter le noeud table a l'arbre
 	ajouter(noeudTable);
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//noeudTable->ajouter(noeudPointControle); // ajout du noeud (fils) point de controle dans la table (pere) -- pas fonctionnel !! pourquoi? sais pas
 	//ajouter(noeudPointControle); // ajout du point de controle comme un noeud fils de l'arbre du rendu -- fonctionnel!! pourquoi? sais pas XD
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//noeudTable->assignerPositionRelative(glm::dvec3{ 0.0, 0.0, 0.0 }); //position (0,0,0) par default
 	std::cout << "position Table : x=" << noeudTable->obtenirPositionRelative().x 
 		<<" y="<< noeudTable->obtenirPositionRelative().y<<" z="<< noeudTable->obtenirPositionRelative().z<<std::endl;
-
-	glm::vec3 p0;
-	if (noeudTable->getPointControle(0, p0) == false)
-		std::cout << "point de controle introuvable" << std::endl;
-	else
-		std::cout << "les coordonnees du point P0 : x =" << p0.x << " y=" << p0.y << " z=" << p0.z << std::endl;
-
-	noeudPointControle->setCoord(p0);
-	GLfloat couleur[4] = { ROUGE };
+	
+	// Associer les valeurs dd points de controle dans le noeudTable aux 8 noeudPointControle
+	glm::vec3 point;
+	// p0
+	if (noeudTable->getPointControle(0, point) == false)
+		std::cout << "point de controle 0 introuvable " << std::endl;
+	if (noeudPointControle0->setCoord(point) == false)
+		std::cout << "incapable de mofidier les coordonnnes du point de controle 0 " << std::endl;
+	// p1
+	if (noeudTable->getPointControle(1, point) == false)
+		std::cout << "point de controle 1 introuvable " << std::endl;
+	if (noeudPointControle1->setCoord(point) == false)
+		std::cout << "incapable de mofidier les coordonnnes du point de controle 1 " << std::endl;
+	// p2
+	if (noeudTable->getPointControle(2, point) == false)
+		std::cout << "point de controle 2 introuvable " << std::endl;
+	if (noeudPointControle2->setCoord(point) == false)
+		std::cout << "incapable de mofidier les coordonnnes du point de controle 2 " << std::endl;
+	// p3
+	if (noeudTable->getPointControle(3, point) == false)
+		std::cout << "point de controle 3 introuvable " << std::endl;
+	if (noeudPointControle3->setCoord(point) == false)
+		std::cout << "incapable de mofidier les coordonnnes du point de controle 3 " << std::endl;
+	// p4
+	if (noeudTable->getPointControle(4, point) == false)
+		std::cout << "point de controle 4 introuvable " << std::endl;
+	if (noeudPointControle4->setCoord(point) == false)
+		std::cout << "incapable de mofidier les coordonnnes du point de controle 4 " << std::endl;
+	// p5
+	if (noeudTable->getPointControle(5, point) == false)
+		std::cout << "point de controle 5 introuvable " << std::endl;
+	if (noeudPointControle5->setCoord(point) == false)
+		std::cout << "incapable de mofidier les coordonnnes du point de controle 5 " << std::endl;
+	// p6
+	if (noeudTable->getPointControle(6, point) == false)
+		std::cout << "point de controle 6 introuvable " << std::endl;
+	if (noeudPointControle6->setCoord(point) == false)
+		std::cout << "incapable de mofidier les coordonnnes du point de controle 6 " << std::endl;
+	// p7
+	if (noeudTable->getPointControle(7, point) == false)
+		std::cout << "point de controle 7 introuvable " << std::endl;
+	if (noeudPointControle7->setCoord(point) == false)
+		std::cout << "incapable de mofidier les coordonnnes du point de controle 7 " << std::endl;
+	
+	// modifier la couleur des points de controle
+	GLfloat couleur[4] = { GRIS };
 	glm::vec4 color;
 	color.x = couleur[0];color.y = couleur[1];color.z = couleur[2];color.w = couleur[3];
-	noeudPointControle->setCouleur(color);
-	// ajouter le noeud point de controle a l'arbre
-	ajouter(noeudPointControle);
+	noeudPointControle0->setCouleur(color);noeudPointControle1->setCouleur(color);
+	noeudPointControle2->setCouleur(color);noeudPointControle3->setCouleur(color);
+	noeudPointControle4->setCouleur(color);noeudPointControle5->setCouleur(color);
+	noeudPointControle6->setCouleur(color);noeudPointControle7->setCouleur(color);
+
+	// ajouter les noeuds des points de controle a l'arbre du rendu
+	ajouter(noeudPointControle0);ajouter(noeudPointControle1);
+	ajouter(noeudPointControle2);ajouter(noeudPointControle3);
+	ajouter(noeudPointControle4);ajouter(noeudPointControle5);
+	ajouter(noeudPointControle6);ajouter(noeudPointControle7);
+
+	
+	
+	// tests
+	// set p0
+	//glm::vec3 p0 = {-1.,1.,0.};
+	//// modifier la position du point de controle
+	//if (noeudTable->setPointControle(0, p0) == false)
+	//	std::cout << "point de controle introuvable -- pas de set" << std::endl;
+	//noeudTable->setPointControle(4, { 1.,1.,0. });
+	//// modifier la position du pointcontrole 0 de la table
+	//if (noeudTable->setPointControle(0, p0) == false)
+	//	std::cout << "point de controle introuvable -- pas de set" << std::endl;
+	//noeudPointControle0->setCoord(p0); // modifier aussi les coords du point de controle
+
+	//GLfloat couleur[4] = { GRIS };
+	//glm::vec4 color;
+	//color.x = couleur[0];color.y = couleur[1];color.z = couleur[2];color.w = couleur[3];
+	//noeudPointControle0->setCouleur(color);
+	
 
 }
 ////////////////////////////////////////////////////////////////////////

@@ -204,16 +204,13 @@ void NoeudTable::tracerTable(glm::vec4 couleurTable, glm::vec4 couleurMurs, glm:
 	p1----------p3----------p5
 	*/
 	// tracer la table (zone du jeur)
-	// voir notes 
 	glColor4f(couleurTable[0], couleurTable[1], couleurTable[2], couleurTable[3]);
-	glBegin(GL_TRIANGLES);
+	glBegin(GL_QUADS);
 	{
-		glVertex3f(p0);glVertex3f(p6);glVertex3f(p1);
-		glVertex3f(p2);glVertex3f(p0);glVertex3f(p4);
-		glVertex3f(p0);glVertex3f(p1);glVertex3f(p5);
-		glVertex3f(p4);glVertex3f(p0);glVertex3f(p5);
-		glVertex3f(p4);glVertex3f(p5);glVertex3f(p7);
-		glVertex3f(p5);glVertex3f(p1);glVertex3f(p3);
+		glVertex3f(p0);glVertex3f(p6);glVertex3f(p8);glVertex3f(p2);
+		glVertex3f(p2);glVertex3f(p8);glVertex3f(p7);glVertex3f(p4);
+		glVertex3f(p6);glVertex3f(p1);glVertex3f(p3);glVertex3f(p8);
+		glVertex3f(p8);glVertex3f(p3);glVertex3f(p5);glVertex3f(p7);
 	}
 	glEnd();
 
@@ -281,7 +278,17 @@ void NoeudTable::tracerTable(glm::vec4 couleurTable, glm::vec4 couleurMurs, glm:
 ////////////////////////////////////////////////////////////////////////
 void NoeudTable::tracerMurs()
 {
-
+	// tracer murs 
+	// probleme  gerer les jonctions lors du changement du placement des points de controle
+	glColor4f(couleurMurs_.x, couleurMurs_.y, couleurMurs_.z, couleurMurs_.w);
+	/*glBegin(GL_QUADS);
+	{			
+		glVertex3f(p0);
+		glVertex3f(p1);
+		glVertex3f(p5);
+		glVertex3f(p4);		
+	}
+	glEnd();*/
 }
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -296,6 +303,9 @@ void NoeudTable::tracerMurs()
 ////////////////////////////////////////////////////////////////////////
 void NoeudTable::tracerButs(float longueur)
 {
+	// trouvez l'equation des droites p6p0 et p6p1 pour le 1er but 
+
+	// trouvez l'equation des droites p7p4 et p7p5 pour le 2eme but 
 
 }
 ////////////////////////////////////////////////////////////////////////
