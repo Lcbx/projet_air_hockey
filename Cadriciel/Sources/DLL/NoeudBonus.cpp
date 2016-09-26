@@ -74,18 +74,9 @@ void NoeudBonus::afficherConcret(const glm::mat4& vueProjection) const
 	modele = glm::rotate(modele, angleY_, glm::vec3(0, 1, 0));
 	// Recentrage du cube.
 	modele = glm::translate(modele, glm::vec3(0, 0, -10));
-	
-	//change la couleur selon si est selectionne
-	if (estSelectionne()) {
-		// On active le mode XOR.
-		glEnable(GL_COLOR_LOGIC_OP);
-		glLogicOp(GL_XOR);
-		// Affichage du modèle.
-		vbo_->dessiner(vueProjection* modele);
-		//on désactive le mode XOR
-		glDisable(GL_COLOR_LOGIC_OP);
-	}
-	else vbo_->dessiner(vueProjection* modele);
+
+	// Affichage du modèle.
+	vbo_->dessiner(vueProjection* modele);
 
 }
 
