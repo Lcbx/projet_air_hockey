@@ -19,6 +19,8 @@
 #include "../VisiteurRotation.h"
 #include "../VisiteurSelection.h"
 
+#include "Couleurs.h"
+
 using namespace std;
 
 
@@ -26,19 +28,18 @@ using namespace std;
 const std::string ArbreRenduINF2990::NOM_ARAIGNEE{ "araignee" };
 /// La chaîne représentant le type des cones-cubes.
 const std::string ArbreRenduINF2990::NOM_CONECUBE{ "conecube" };
-
 //Bonus
 const std::string ArbreRenduINF2990::NOM_BONUS{ "bonus" };
-
-
 //Portail
 const std::string ArbreRenduINF2990::NOM_PORTAIL{ "portail" };
-
-//Muret
+//La chaîne représentant le type des murets
 const std::string ArbreRenduINF2990::NOM_MURET{ "muret" };
-
-//Table
+//La chaîne représentant le type des tables
 const std::string ArbreRenduINF2990::NOM_TABLE{ "table" };
+//La chaîne représentant le type des rondelles
+const std::string ArbreRenduINF2990::NOM_RONDELLE{ "rondelle" };
+//La chaîne représentant le type des points de controles de la table
+const std::string ArbreRenduINF2990::NOM_POINTCONTROLE{ "pointcontrole" };
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -51,19 +52,19 @@ const std::string ArbreRenduINF2990::NOM_TABLE{ "table" };
 ///
 /// @return Aucune (constructeur).
 ///
-/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////6
 ArbreRenduINF2990::ArbreRenduINF2990()
 {
 	// Construction des usines
 	ajouterUsine(NOM_ARAIGNEE, new UsineNoeud<NoeudAraignee>{ NOM_ARAIGNEE, std::string{ "media/spider.obj" } });
 	ajouterUsine(NOM_CONECUBE, new UsineNoeud<NoeudConeCube>{ NOM_CONECUBE, std::string{ "media/cubecone.obj" } });
-	ajouterUsine(NOM_BONUS, new UsineNoeud<NoeudBonus>{ NOM_BONUS, std::string{ "media/rondelle.obj" } });
-	ajouterUsine(NOM_PORTAIL, new UsineNoeud<NoeudPortail>{ NOM_PORTAIL, std::string{ "media/rondelle.obj" } });
+	ajouterUsine(NOM_BONUS, new UsineNoeud<NoeudBonus>{ NOM_BONUS, std::string{ "media/bonus.obj" } });
+	ajouterUsine(NOM_PORTAIL, new UsineNoeud<NoeudPortail>{ NOM_PORTAIL, std::string{ "media/portail.obj" } });
 	ajouterUsine(NOM_MURET, new UsineNoeud<NoeudMuret>{ NOM_MURET, std::string{ "media/muret.obj" } });
+	ajouterUsine(NOM_RONDELLE, new UsineNoeud<NoeudRondelle>{ NOM_RONDELLE, std::string{ "media/rondelle.obj" } });
 	ajouterUsine(NOM_TABLE, new UsineNoeud<NoeudTable>{ NOM_TABLE, std::string{ "" } });
+	ajouterUsine(NOM_POINTCONTROLE, new UsineNoeud<NoeudPointControle>{ NOM_POINTCONTROLE, std::string{ "" } });
 }
-
-
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn ArbreRenduINF2990::~ArbreRenduINF2990()
@@ -76,8 +77,44 @@ ArbreRenduINF2990::ArbreRenduINF2990()
 ArbreRenduINF2990::~ArbreRenduINF2990()
 {
 }
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void ArbreRenduINF2990::ajouterTable()
+///
+/// Cette fonction ajoute la table a l'arbre du rendu
+/// elle cree la table avec les 8 points de controle et l'affiche dans la fenetre opengl
+///
+/// @return Aucune
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::ajouterTable()
+{
+	// On ajoute le noeud de la table du jeu
+	NoeudTable* noeudTable{ (NoeudTable *)creerNoeud(NOM_TABLE) };
+	//noeudTable->assignerPositionRelative(glm::dvec3{ 0.0, 0.0, 0.0 }); //position (0,0,0) par default
+	NoeudPointControle* noeudPointControle{ (NoeudPointControle *)creerNoeud(NOM_POINTCONTROLE) };
+	// ajouter le noeud table a l'arbre
+	ajouter(noeudTable);
+	//noeudTable->ajouter(noeudPointControle); // ajout du noeud (fils) point de controle dans la table (pere) -- pas fonctionnel !! pourquoi? sais pas
+	//ajouter(noeudPointControle); // ajout du point de controle comme un noeud fils de l'arbre du rendu -- fonctionnel!! pourquoi? sais pas XD
+	std::cout << "position Table : x=" << noeudTable->obtenirPositionRelative().x 
+		<<" y="<< noeudTable->obtenirPositionRelative().y<<" z="<< noeudTable->obtenirPositionRelative().z<<std::endl;
 
+	glm::vec3 p0;
+	if (noeudTable->getPointControle(0, p0) == false)
+		std::cout << "point de controle introuvable" << std::endl;
+	else
+		std::cout << "les coordonnees du point P0 : x =" << p0.x << " y=" << p0.y << " z=" << p0.z << std::endl;
 
+	noeudPointControle->setCoord(p0);
+	GLfloat couleur[4] = { ROUGE };
+	glm::vec4 color;
+	color.x = couleur[0];color.y = couleur[1];color.z = couleur[2];color.w = couleur[3];
+	noeudPointControle->setCouleur(color);
+	// ajouter le noeud point de controle a l'arbre
+	ajouter(noeudPointControle);
+
+}
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void ArbreRenduINF2990::initialiser()
@@ -93,32 +130,26 @@ void ArbreRenduINF2990::initialiser()
 {
 	// On vide l'arbre
 	vider();
-
-	///TODO
-	///Chabnger l'araignee par la table / cube par les buts
-
-	
-	// On ajoute un noeud bidon seulement pour que quelque chose s'affiche.
-	NoeudAbstrait* noeudAraignee{ creerNoeud(NOM_TABLE) };
-	noeudAraignee->assignerPositionRelative(glm::dvec3{ 0.0, 0.0, 0.0 });
-	//noeudAraignee->ajouter(creerNoeud(NOM_CONECUBE));
-	ajouter(noeudAraignee);
-	
+	// afficher un message de test sur la console
+	std::cout << "Allo! je suis dans l'initialisation de l'arbre du rendu inf2990"<< std::endl;
+	// afficher la table avec les points de controles
+	ajouterTable();
 
 
-	
-	/*NoeudAbstrait* noeudRondelle{ creerNoeud(NOM_RONDELLE) };
-	ajouter(noeudRondelle);
-	*/
-
-	
-	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
+	// test original d'affichage , les 2 objets arraignee et cubecone sont affiches
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
+	//{
+	//	// On vide l'arbre
+	//	vider();
+	//	// On ajoute un noeud bidon seulement pour que quelque chose s'affiche.
+	//	NoeudAbstrait* noeudAraignee{ creerNoeud(NOM_ARAIGNEE) };
+	//	noeudAraignee->ajouter(creerNoeud(NOM_CONECUBE));
+	//	ajouter(noeudAraignee);
+	//}	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
 }
-
-
-
-
-
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos) 
@@ -128,7 +159,6 @@ void ArbreRenduINF2990::initialiser()
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-
 void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos) 
 {
 
@@ -142,9 +172,7 @@ void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos)
 	// toujours liberer la mémoire !!!!
 	delete v1;
 
-	
 }
-
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void ArbreRenduINF2990::ajouterPortail(glm::dvec3 pos) 

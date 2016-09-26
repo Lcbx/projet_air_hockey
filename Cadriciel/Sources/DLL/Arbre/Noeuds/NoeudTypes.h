@@ -10,6 +10,7 @@
 #include "../NoeudPortail.h"
 #include "../NoeudRondelle.h"
 #include "NoeudTable.h"
+#include "NoeudPointControle.h"
 
 
 #endif /// __NOEUD_TYPES_H__
