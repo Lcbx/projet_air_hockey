@@ -402,7 +402,7 @@ void NoeudAbstrait::afficher(const glm::mat4& vueProjection) const
 
 			// On active le mode XOR.
 			glEnable(GL_COLOR_LOGIC_OP);
-			glLogicOp(GL_XOR);
+			glLogicOp(GL_COPY_INVERTED);
 			// Affichage concret
 			afficherConcret(vueProjection);
 			//on désactive le mode XOR
