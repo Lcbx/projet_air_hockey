@@ -16,13 +16,15 @@ void AjoutMur::start(int x, int y) {
 	notrePosition_ = {x,y,x,y};
 }
 
-void AjoutMur::current(int x, int y) {
-	notrePosition_[2] = x; notrePosition_[3] = y;
-	FacadeModele::obtenirInstance()->ajouterMurFantome(X1(), Y1(), x, y);
-}
+void AjoutMur::current(int x, int y) {}
 
 void AjoutMur::end(int x, int y) {
 	plusDe3px(notrePosition_) ? operationDragClick() : operationShortClick();
+}
+
+void AjoutMur::position(int x, int y) {
+	notrePosition_[2] = x; notrePosition_[3] = y;
+	FacadeModele::obtenirInstance()->ajouterMurFantome(X1(), Y1(), x, y);
 }
 
 void AjoutMur::operationShortClick() {

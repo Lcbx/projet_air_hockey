@@ -397,8 +397,18 @@ void NoeudAbstrait::afficher(const glm::mat4& vueProjection) const
 		// Assignation du mode d'affichage des polygones
 		glPolygonMode(GL_FRONT_AND_BACK, modePolygones_);
 
-		// Affichage concret
-		afficherConcret(vueProjection);
+		//change la couleur selon si est selectionne
+		if (estSelectionne()) {
+
+			// On active le mode XOR.
+			glEnable(GL_COLOR_LOGIC_OP);
+			glLogicOp(GL_COPY_INVERTED);
+			// Affichage concret
+			afficherConcret(vueProjection);
+			//on désactive le mode XOR
+			glDisable(GL_COLOR_LOGIC_OP);
+
+		} else afficherConcret(vueProjection);
 
 		// Restauration
 		glPopAttrib();
