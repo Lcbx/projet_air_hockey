@@ -9,10 +9,15 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "Loupe.h"
+#include "FacadeModele.h"
+
+
 
 void Loupe::operationShortClick() {
-	//DO something
+	FacadeModele::obtenirInstance()->obtenirVue()->obtenirProjection()->zoomIn();
 }
 void Loupe::operationDragClick() {
 	//DO something
 }
+
+
