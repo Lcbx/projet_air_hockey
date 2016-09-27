@@ -309,7 +309,53 @@ double ArbreRenduINF2990::calculerAngle(glm::dvec3 pos, glm::dvec3 posf)
 }
 
 
+glm::dvec3 ArbreRenduINF2990::getPosi()
+{
 
+	
+	for (NoeudAbstrait * enfant : this->enfants_)
+	{
+		if (enfant->estSelectionne())
+		{
+			cout << "*************aloooooo*************" << endl;
+			return enfant->obtenirPositionRelative();
+		}
+	}
+}
+
+void ArbreRenduINF2990::deplacer(glm::dvec3 posInial, glm::dvec3 posFinal)
+{
+	conteneur_enfants copy = enfants_;
+	NoeudAbstrait* enfant;
+	
+	for (conteneur_enfants::iterator it{ copy.begin() }; it != copy.end(); ++it)
+	{
+		Visiteur* v1 = new VisiteurDeplacement(posInial, posFinal);
+		//if (enfant->obtenirNombreEnfants() == 0){
+
+		enfant = { (*it) };
+		enfant->accepter(v1);
+		// toujours toujours liberer la mémoire svp !!!!
+
+		//}
+		/*if (enfant->obtenirNombreEnfants()>0) {
+
+
+			for (unsigned int i = 0; i < enfant->obtenirNombreEnfants(); i++) {
+
+
+				NoeudAbstrait* fils = enfant->chercher(i);
+
+				fils->acceptVisitor(v1);
+				// toujours toujours liberer la mémoire svp !!!!
+			}
+		}*/
+
+		delete v1;
+
+	}
+
+}
 
 
 

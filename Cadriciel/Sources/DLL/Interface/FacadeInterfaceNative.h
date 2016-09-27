@@ -32,6 +32,9 @@ extern "C" {
 	__declspec(dllexport) void ajouterMuretFantome(int corXin, int corYin, int corX, int corY);
 
 
+	__declspec(dllexport) double getPos();
+
+
 
 	//Click
 	__declspec(dllexport) void clickStart(int x, int y);

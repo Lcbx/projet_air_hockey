@@ -36,6 +36,7 @@
 
 
 
+
 Souris* Souris::instance_{ nullptr };
 
 Souris::Souris() {

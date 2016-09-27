@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////
+/// @file VisiteurSelection.cpp
+/// @author Wajdi Gharsalli
+/// @date 2016-09-10
+/// @version 1.0
+///
+/// @addtogroup inf2990 INF2990
+/// @{
+///////////////////////////////////////////////////////////////////////////////
 #include <iostream>
 #include "VisiteurSelection.h"
 #include "Vue.h"
@@ -91,7 +100,18 @@ void VisiteurSelection::visiter(NoeudBonus* noeud) {
 	}
 
 	if (noeud->estSelectionne())
+	{
 		this->selectionner(noeud);
+		//data biding
+		posDataBinding.x = noeud->obtenirPositionRelative().x;
+		posDataBinding.y = noeud->obtenirPositionRelative().y;
+
+		std::cout << "Data Biding x: " << this->getPosDataBinding().x 
+			<< "y: " << this->getPosDataBinding().y << std::endl;
+
+	}
+
+
 }
 
 void VisiteurSelection::visiter(NoeudMaillet* noeud) { }

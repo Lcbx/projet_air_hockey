@@ -469,3 +469,5 @@ NoeudAbstrait* NoeudAbstrait::getFrere()
 	return this->frere_;
 
 }
+
+

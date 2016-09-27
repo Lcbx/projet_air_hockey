@@ -31,7 +31,7 @@ namespace InterfaceGraphique
             (this as Control).KeyUp += new KeyEventHandler(keyUpHandler);
             InitializeComponent();
             InitialiserAnimation();
-
+       
         }
 
         public void InitialiserAnimation()
@@ -141,8 +141,15 @@ namespace InterfaceGraphique
         {
             System.Console.WriteLine("Souris down : X = " + e.X + " et Y = " + e.Y);
             FonctionsNatives.clickStart(e.X, e.Y);
-            if (EtatSouris == Etats.SELECTION) Program.peutAfficher = false;
+            if (EtatSouris == Etats.SELECTION)
+            {
+                Program.peutAfficher = false;
+                mettreAjourPos();
+            }
+
             mousePressed = true;
+
+         
         }
         public void panel1_MouseUp(object sender, MouseEventArgs e)
         {
@@ -355,8 +362,10 @@ namespace InterfaceGraphique
         /// @return Vrai si la valeur est dans l'intervalle, faux autrement.
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            if (Dans_Intervalle(Convert.ToDouble(numericUpDown1.Value), 0.0, 1.5))
-                friction_ = Convert.ToDouble(numericUpDown1.Value);               
+             if (Dans_Intervalle(Convert.ToDouble(numericUpDown1.Value), 0.0, 1.5))
+                 friction_ = Convert.ToDouble(numericUpDown1.Value);    
+
+            
         }
 
         ///  //////////////////////////////////////////////////////////////////////
@@ -400,12 +409,34 @@ namespace InterfaceGraphique
                 angleDeRotation_ = Convert.ToDouble(numericUpDown6.Value);
             System.Console.WriteLine("Rotation:" + angleDeRotation_);
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
         private void numericUpDown7_ValueChanged(object sender, EventArgs e)
         {
             if (Dans_Intervalle(Convert.ToDouble(numericUpDown7.Value), 0.0, 200))
                 facteurEchelle_ = Convert.ToDouble(numericUpDown7.Value);
                 System.Console.WriteLine("Facteur d' échelle:" + facteurEchelle_);
         }
+
+
+        //data Biding
+        private void mettreAjourPos()
+        {
+            System.Console.WriteLine("Mettre a jour");
+            decimal posX= System.Convert.ToDecimal(FonctionsNatives.getPos());
+
+            numericUpDown1.Value = posX;
+        }
+
 
     }
 
@@ -461,5 +492,9 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void ajouterMuretFantome(int corXin, int corYin, int corX, int corY);
+
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern double getPos();
     }
 }

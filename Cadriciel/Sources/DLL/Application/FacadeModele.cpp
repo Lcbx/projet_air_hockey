@@ -42,6 +42,9 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
+#include "EtatOpenGL.h"
+
+
 /// Pointeur vers l'instance unique de la classe.
 FacadeModele* FacadeModele::instance_{ nullptr };
 
@@ -414,10 +417,27 @@ void FacadeModele::ajouterMuret(int x1, int y1, int x2, int y2)
 void FacadeModele::ajouterMurFantome(int corXin, int corYin, int corX, int corY)
 {
 	// bloc d'instruction
-	if (arbre_->chercher(arbre_->obtenirNombreEnfants() - 1)->obtenirType() == "mur")
+	if (arbre_->chercher(arbre_->obtenirNombreEnfants() - 1)->obtenirType() == "muret")
 		arbre_->effacer(arbre_->chercher(arbre_->obtenirNombreEnfants() - 1));
 	//ajouterMur(corXin, corYin, corX, corY);
 }
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
 ///////////////////////////////////////////////////////////////////////////////
+double FacadeModele::getPosDataBiding()
+{
+	return 9.7; //arbre_->getPosi().x;
+	
+}
+
+
+void FacadeModele::deplacerObjet(int x1, int y1, int x2, int y2)
+{
+	glm::dvec3 posInial;
+	vue_->convertirClotureAVirtuelle(x1, y1, posInial);
+
+	glm::dvec3 posFinal;
+	vue_->convertirClotureAVirtuelle(x2, y2, posFinal);
+
+	arbre_->deplacer(posInial, posFinal);
+}

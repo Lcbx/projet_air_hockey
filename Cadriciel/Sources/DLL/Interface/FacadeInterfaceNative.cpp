@@ -287,7 +287,10 @@ extern "C"
 		FacadeModele::obtenirInstance()->ajouterMurFantome(corXin, corYin, corX, corY);
 	}
 
-
+	__declspec(dllexport) double getPos()
+	{
+		return FacadeModele::obtenirInstance()->getPosDataBiding();
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

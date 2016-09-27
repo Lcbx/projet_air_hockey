@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////
+/// @file VisiteurDeplacement.h
+/// @author Wajdi Gharsalli
+/// @date 2016-09-10
+/// @version 1.0
+///
+/// @addtogroup inf2990 INF2990
+/// @{
+///////////////////////////////////////////////////////////////////////////////
 #pragma once
 #ifndef VISITEUR_DEPLACEMENT_H
 #define VISITEUR_DEPLACEMENT_H
@@ -14,6 +23,7 @@ class VisiteurDeplacement : public Visiteur
 {
 public:
 	
+	VisiteurDeplacement(glm::dvec3 posIni, glm::dvec3 posFin);
 
 	virtual void visiter(NoeudAbstrait* noeud);
 	virtual void visiter(NoeudComposite *noeud);
@@ -24,6 +34,10 @@ public:
 	virtual void visiter(NoeudBonus* noeud);
 	virtual void visiter(NoeudMaillet* noeud);
 	virtual void visiter(NoeudPortail* noeud);
-	
+
+private:	
+	glm::dvec3 posIni_;
+	glm::dvec3 posFin_;
+
 };
 #endif

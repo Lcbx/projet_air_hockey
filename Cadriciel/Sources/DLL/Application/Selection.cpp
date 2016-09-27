@@ -15,7 +15,7 @@
 
 #include "Selection.h"
 #include "../VisiteurSelection.h"
-
+#include <iostream>
 
 
 void Selection::start(int x, int y) {
@@ -48,6 +48,7 @@ void Selection::end(int x, int y) {
 	if (StrategieSouris::plusDe3px()) aidegl::terminerRectangleElastique(glm::ivec2{ X1(), Y1() }, glm::ivec2{ X2(), Y2() });
 	else aidegl::terminerRectangleElastique(glm::ivec2{ X1(), Y1() }, glm::ivec2{ X1(), Y1() });
 	StrategieSouris::end(x, y);
+
 }
 
 void Selection::operationShortClick() {
@@ -56,6 +57,8 @@ void Selection::operationShortClick() {
 
 
 	SingletonSelection::instance()->selectionner(begin, end);
+	
+
 }
 void Selection::operationDragClick() {
 	operationShortClick();
