@@ -309,7 +309,7 @@ double ArbreRenduINF2990::calculerAngle(glm::dvec3 pos, glm::dvec3 posf)
 }
 
 
-glm::dvec3 ArbreRenduINF2990::getPosi()
+double ArbreRenduINF2990::getPosi()
 {
 
 	
@@ -318,7 +318,13 @@ glm::dvec3 ArbreRenduINF2990::getPosi()
 		if (enfant->estSelectionne())
 		{
 			cout << "*************aloooooo*************" << endl;
-			return enfant->obtenirPositionRelative();
+
+			double posX = enfant->obtenirPositionRelative().x;
+			posX += 110;
+
+			cout << "**** POSX***** "<<posX << endl;
+			return posX;
+
 		}
 	}
 }

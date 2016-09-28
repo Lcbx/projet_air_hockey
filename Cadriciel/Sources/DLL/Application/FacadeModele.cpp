@@ -426,7 +426,7 @@ void FacadeModele::ajouterMurFantome(int corXin, int corYin, int corX, int corY)
 ///////////////////////////////////////////////////////////////////////////////
 double FacadeModele::getPosDataBiding()
 {
-	return 9.7; //arbre_->getPosi().x;
+	return arbre_->getPosi();
 	
 }
 
