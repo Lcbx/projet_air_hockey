@@ -400,12 +400,12 @@ void NoeudAbstrait::afficher(const glm::mat4& vueProjection) const
 		//change la couleur selon si est selectionne
 		if (estSelectionne()) {
 
-			// On active le mode XOR.
+			// On active le mode d'opération logique sur les couleurs.
 			glEnable(GL_COLOR_LOGIC_OP);
 			glLogicOp(GL_COPY_INVERTED);
 			// Affichage concret
 			afficherConcret(vueProjection);
-			//on désactive le mode XOR
+			//on désactive le mode logic_op 
 			glDisable(GL_COLOR_LOGIC_OP);
 
 		} else afficherConcret(vueProjection);
