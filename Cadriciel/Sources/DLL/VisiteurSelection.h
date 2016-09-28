@@ -30,11 +30,22 @@ enum SelectionState {
 ///////////////////////////////////////////////////////////////////////////
 class VisiteurSelection : public Visiteur
 {
+private:
 	std::vector<NoeudAbstrait*> selectionnes;
 	SelectionState _state = SelectionState::SELECT;
 
 	utilitaire::BoiteEnglobante _boundingBox;
-	
+
+	////////////////////////////////////////////////////////////////////////////////
+	/// @func void SetNodeSelectedState(NoeudAbstrait* noeud, bool InsideSelection)
+	/// @param[in] noeud Noeud ciblé
+	/// @param[in] isInsideSelection Si le noeud fait parti de la sélection
+	/// @return Nothing
+	/// TODO: Trouver un meilleur nom
+	/// Permet de changer l'état de sélection d'un noeud en fonction du scénario de sélection
+	////////////////////////////////////////////////////////////////////////////////	
+	void VisiteurSelection::setNodeSelectedState(NoeudAbstrait* noeud, bool isInsideSelection);
+
 public:
 	virtual void visiter(NoeudAbstrait* noeud);
 	virtual void visiter(NoeudComposite *noeud);
@@ -110,6 +121,8 @@ public:
 		FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
 		return selectionnes;
 	};
+
+	
 };
 
 ///////////////////////////////////////////////////////////////////////////

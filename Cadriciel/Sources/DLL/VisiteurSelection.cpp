@@ -49,6 +49,36 @@ bool SelectionInsideBoundingBox(utilitaire::BoiteEnglobante selectionRectangle, 
 	}
 }
 
+
+void VisiteurSelection::setNodeSelectedState(NoeudAbstrait* noeud, bool isInsideSelection) {
+	if (isInsideSelection) {
+		switch (_state) {
+		case SelectionState::SELECT:
+			noeud->assignerSelection(true);
+			break;
+		case SelectionState::INVSELECT:
+			noeud->inverserSelection();
+			break;
+		case SelectionState::UNSELECT:
+			noeud->assignerSelection(false);
+			break;
+		}
+	}
+	else {
+		switch (_state) {
+		case SelectionState::SELECT:
+			noeud->assignerSelection(false);
+			break;
+		/*case SelectionState::INVSELECT:
+			noeud->inverserSelection();
+			break;
+		case SelectionState::UNSELECT:
+			noeud->assignerSelection(false);
+			break;*/
+		}
+	}
+}
+
 void VisiteurSelection::visiter(NoeudAbstrait* noeud) { }
 
 void VisiteurSelection::visiter(NoeudComposite* noeud) {
@@ -59,7 +89,13 @@ void VisiteurSelection::visiter(NoeudComposite* noeud) {
 
 void VisiteurSelection::visiter(NoeudRondelle* noeud) { }
 
-void VisiteurSelection::visiter(NoeudMuret* noeud) { }
+void VisiteurSelection::visiter(NoeudMuret* noeud) { 
+	utilitaire::BoiteEnglobante boudingBox = utilitaire::calculerBoiteEnglobante(*(noeud->getModele()));
+	
+	if (SelectionInsideBoundingBox(_boundingBox, boudingBox)) {
+
+	}
+}
 
 void VisiteurSelection::visiter(NoeudBonus* noeud) {
 	utilitaire::BoiteEnglobante boundingBox = utilitaire::calculerBoiteEnglobante(*(noeud->getModele()));
@@ -68,32 +104,7 @@ void VisiteurSelection::visiter(NoeudBonus* noeud) {
 	boundingBox.coinMax += noeud->obtenirPositionRelative();
 	boundingBox.coinMax.x += 10;
 
-	if (SelectionInsideBoundingBox(_boundingBox, boundingBox)) {
-		switch (_state) {
-		case SelectionState::SELECT:
-			noeud->assignerSelection(true);
-			break;
-		/*case SelectionState::INVSELECT:
-			noeud->inverserSelection();
-			break;
-		case SelectionState::UNSELECT:
-			noeud->assignerSelection(false);
-			break;*/
-		}
-	}
-	else {
-		switch (_state) {
-		case SelectionState::SELECT:
-			noeud->assignerSelection(false);
-			break;
-			/*case SelectionState::INVSELECT:
-			noeud->inverserSelection();
-			break;
-			case SelectionState::UNSELECT:
-			noeud->assignerSelection(false);
-			break;*/
-		}
-	}
+	setNodeSelectedState(noeud, SelectionInsideBoundingBox(_boundingBox, boundingBox));
 
 	if (noeud->estSelectionne())
 		this->selectionner(noeud);
