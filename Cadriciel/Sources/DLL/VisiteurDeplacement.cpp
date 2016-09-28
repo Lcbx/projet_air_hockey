@@ -7,14 +7,13 @@
 
 
 void VisiteurDeplacement::visiter(NoeudAbstrait* noeud)
-
 {
 
 }
 
 void VisiteurDeplacement::visiter(NoeudComposite* noeud)
 {
-
+	
 
 
 }

@@ -12,9 +12,15 @@
 
 class VisiteurRotation : public Visiteur
 {
+	enum Etats { DETERMINER_CENTRE, APPLIQUER_ROTATION };
+	Etats etat_;
+	float angle_{0.f};
+	int nbrNoeudsVisites_{0};
+	glm::vec3 posCentre_{0.f,0.f,0.f};
+
 public:
-
-
+	VisiteurRotation();
+	void rotate(float angle);
 	virtual void visiter(NoeudAbstrait* noeud);
 	virtual void visiter(NoeudComposite *noeud);
 	
