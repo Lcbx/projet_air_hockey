@@ -9,6 +9,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "Deplacement.h"
+#include "../VisiteurDeplacement.h"
+
+void Deplacement::current(int x, int y) {
+	VisiteurDeplacement(glm::vec3(x-X1(), Y1()-y, 0.f));
+	X1() = x;
+	Y1() = y;
+}
 
 void Deplacement::operationShortClick() {
 	//DO something

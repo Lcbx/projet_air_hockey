@@ -5,23 +5,6 @@
 #include "ArbreRenduINF2990.h"
 
 
-#include <GL/glew.h>
-#include <GL/glut.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-
-#include "GL/glew.h"
-#include <cmath>
-
-#include <glm/vec3.hpp> // glm::vec3
-#include <glm/vec4.hpp> // glm::vec4, glm::ivec4
-#include <glm/mat4x4.hpp> // glm::mat4
-
-#include "Modele3D.h"
-#include "OpenGL_VBO.h"
-
-#include "Utilitaire.h"
-
 VisiteurRotation::VisiteurRotation() {
 	etat_ = DETERMINER_CENTRE;
 	nbrNoeudsVisites_ = 0;
