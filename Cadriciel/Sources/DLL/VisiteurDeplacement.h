@@ -12,8 +12,10 @@
 
 class VisiteurDeplacement : public Visiteur
 {
+	glm::vec3 dep_{0.f};
 public:
 	
+	VisiteurDeplacement(glm::vec3 dep);
 
 	virtual void visiter(NoeudAbstrait* noeud);
 	virtual void visiter(NoeudComposite *noeud);

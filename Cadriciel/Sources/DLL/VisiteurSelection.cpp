@@ -12,11 +12,6 @@
 /// @return Vrai si l'élément est sélectionné, autrement faux
 ////////////////////////////////////////////////////////////////////////////////
 bool PointInsideBoundingBox(utilitaire::BoiteEnglobante selectionRectangle, glm::dvec3 point) {
-	std::cout << "BoundingBox point"
-		<< min(selectionRectangle.coinMin.x, selectionRectangle.coinMax.x) << ":" 
-		<< max(selectionRectangle.coinMin.x, selectionRectangle.coinMax.x) << ":"
-		<< point.x << std::endl;
-
 	return (min(selectionRectangle.coinMin.x, selectionRectangle.coinMax.x) <= point.x &&
 		max(selectionRectangle.coinMin.x, selectionRectangle.coinMax.x) >= point.x &&
 		min(selectionRectangle.coinMin.y, selectionRectangle.coinMax.y) <= point.y &&

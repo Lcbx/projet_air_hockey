@@ -333,6 +333,18 @@ void FacadeModele::animer(float temps)
 }
 
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn FacadeModele::ajouterBonus(int x, int y)
+///
+/// Cette fonction permet d'ajouter le bonus accélerateur a la scene
+///
+/// @param[in] x, y : position de clic de la souris .
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+
 void FacadeModele::ajouterBonus(int x, int y)
 {
 	glm::dvec3 position;
@@ -340,7 +352,72 @@ void FacadeModele::ajouterBonus(int x, int y)
 	arbre_->ajouterBonus(position);
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn FacadeModele::void FacadeModele::ajouterPortail(int x1, int y1, int x2, int y2)
+///
+/// Cette fonction permet d'ajouter le portail a la scene
+///
+/// @param[in] x1, y1, x2, y2 : position de clic de la souris .
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::ajouterPortail(int x1, int y1)
+{
+	glm::dvec3 position1;
+	vue_->convertirClotureAVirtuelle(x1, y1, position1);
 
+	arbre_->ajouterPortail(position1);
+}
+
+void FacadeModele::supprimerPortail(bool escTouche)
+{
+	arbre_->supprimerPortail(escTouche);
+}
+
+
+
+void FacadeModele::ajouterPortailDeux(int x2, int y2)
+{
+	glm::dvec3 position2;
+	vue_->convertirClotureAVirtuelle(x2, y2, position2);
+
+	arbre_->ajouterPortailDeux(position2);
+}
+
+
+void FacadeModele::ajouterMuret(int x1, int y1, int x2, int y2)
+{
+	glm::dvec3 position1;
+	vue_->convertirClotureAVirtuelle(x1, y1, position1);
+
+	glm::dvec3 position2;
+	vue_->convertirClotureAVirtuelle(x2, y2, position2);
+
+	arbre_->ajouterMuret(position1, position2);
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::ajouterMurFantome(int corXin, int corYin, int corX, int corY)
+///
+/// Cette fonction effectue l'ajout des Murs.
+///
+/// @param[in] int corX : coordonnée dans l'axe des x
+///            int corY : coordonnée dans l'axe des y
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+
+void FacadeModele::ajouterMurFantome(int corXin, int corYin, int corX, int corY)
+{
+	// bloc d'instruction
+	if (arbre_->chercher(arbre_->obtenirNombreEnfants() - 1)->obtenirType() == "mur")
+		arbre_->effacer(arbre_->chercher(arbre_->obtenirNombreEnfants() - 1));
+	//ajouterMur(corXin, corYin, corX, corY);
+}
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
 ///////////////////////////////////////////////////////////////////////////////

@@ -94,6 +94,23 @@ void Souris::sourisPostition(int x, int y) {
 	notreStrategie_->position(x, y);
 }
 
+void Souris::setControl(bool presse) {
+	control_ = presse;
+}
+
+bool Souris::getControl() {
+	return control_;
+}
+
+void Souris::escPresse() {
+	notreStrategie_->escEnfonce();
+}
+
+
+glm::ivec4& Souris::getPosition() {
+	return position_;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
 ///////////////////////////////////////////////////////////////////////////////

@@ -11,5 +11,6 @@
 #include "AjoutAccelerateur.h"
 #include <FacadeModele.h>
 
-void AjoutAccelerateur::operationShortClick() { FacadeModele::obtenirInstance()->ajouterBonus(X1,Y1);  }
+#include <iostream>
+void AjoutAccelerateur::operationShortClick() { std::cout << "hi"; FacadeModele::obtenirInstance()->ajouterBonus(X1(), Y1()); }
 void AjoutAccelerateur::operationDragClick() {}

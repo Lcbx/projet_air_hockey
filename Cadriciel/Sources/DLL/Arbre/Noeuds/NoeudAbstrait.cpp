@@ -397,8 +397,18 @@ void NoeudAbstrait::afficher(const glm::mat4& vueProjection) const
 		// Assignation du mode d'affichage des polygones
 		glPolygonMode(GL_FRONT_AND_BACK, modePolygones_);
 
-		// Affichage concret
-		afficherConcret(vueProjection);
+		//change la couleur selon si est selectionne
+		if (estSelectionne()) {
+
+			// On active le mode d'opération logique sur les couleurs.
+			glEnable(GL_COLOR_LOGIC_OP);
+			glLogicOp(GL_COPY_INVERTED);
+			// Affichage concret
+			afficherConcret(vueProjection);
+			//on désactive le mode logic_op 
+			glDisable(GL_COLOR_LOGIC_OP);
+
+		} else afficherConcret(vueProjection);
 
 		// Restauration
 		glPopAttrib();
@@ -454,4 +464,18 @@ void NoeudAbstrait::animer(float dt)
 void NoeudAbstrait::accepter(Visiteur *v)
 {
 	v->visiter(this);
+}
+
+
+void NoeudAbstrait::setFrere(NoeudAbstrait* frere)
+{
+	cout << "Dans le set " << endl;
+	this->frere_ = frere;
+}
+
+
+NoeudAbstrait* NoeudAbstrait::getFrere()
+{
+	return this->frere_;
+
 }

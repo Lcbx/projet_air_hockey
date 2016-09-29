@@ -199,7 +199,6 @@ extern "C"
 	__declspec(dllexport) void __cdecl etatDelaSouris(int etat) {
 		Souris::obtenirInstance()->EtatdelaSouris(etat);
 	}
-
 	__declspec(dllexport) void __cdecl clickStart(int x, int y)
 	{
 		Souris::obtenirInstance()->startClick(x, y);
@@ -216,6 +215,79 @@ extern "C"
 	{
 		Souris::obtenirInstance()->sourisPostition(x, y);
 	}
+	//touche control
+	__declspec(dllexport) void __cdecl toucheControl(bool presse)
+	{
+		Souris::obtenirInstance()->setControl(presse);
+	}
+	//touche escape
+	__declspec(dllexport) void escEnfonce()
+	{
+		Souris::obtenirInstance()->escPresse();
+	}
+
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl ajouterPortail()
+	///
+	/// Cette fonction ajoute le premier portail a la table 
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
+
+	__declspec(dllexport) void ajouterPortail(int x1, int y1)
+	{
+		FacadeModele::obtenirInstance()->ajouterPortail(x1, y1);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl ajouterPortailDeux()
+	///
+	/// Cette fonction ajoute le deuxieme portail a la table 
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void ajouterPortailDeux(int x2, int y2)
+	{
+		FacadeModele::obtenirInstance()->ajouterPortailDeux(x2, y2);
+	}
+
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl ajouterMuret()
+	///
+	/// Cette fonction ajoute le muret dans la table
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void ajouterMuret(int x1, int y1, int x2, int y2)
+	{
+		FacadeModele::obtenirInstance()->ajouterMuret(x1, y1, x2, y2);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl ajouterMurFantome()
+	///
+	/// Cette fonction simule a quoi resemblera le mur si le deuxieme click est fait.
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
+
+	__declspec(dllexport) void __cdecl ajouterMuretFantome(int corXin, int corYin, int corX, int corY)
+	{
+
+		FacadeModele::obtenirInstance()->ajouterMurFantome(corXin, corYin, corX, corY);
+	}
+
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
