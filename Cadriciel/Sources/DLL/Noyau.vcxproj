@@ -144,6 +144,7 @@
     <ClCompile Include="Arbre\Noeuds\NoeudAraignee.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudConeCube.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudTable.cpp" />
+    <ClCompile Include="BoiteCollision.cpp" />
     <ClCompile Include="Configuration\ConfigScene.cpp" />
     <ClCompile Include="Arbre\ArbreRendu.cpp" />
     <ClCompile Include="Arbre\ArbreRenduINF2990.cpp" />
@@ -186,6 +187,8 @@
     <ClInclude Include="Arbre\Noeuds\NoeudConeCube.h" />
     <ClInclude Include="Arbre\Noeuds\NoeudTable.h" />
     <ClInclude Include="Arbre\Noeuds\NoeudTypes.h" />
+    <ClInclude Include="BoiteCollision.h" />
+    <ClInclude Include="BoiteCollisionAbstraite.h" />
     <ClInclude Include="Configuration\ConfigScene.h" />
     <ClInclude Include="Arbre\ArbreRendu.h" />
     <ClInclude Include="Arbre\ArbreRenduINF2990.h" />

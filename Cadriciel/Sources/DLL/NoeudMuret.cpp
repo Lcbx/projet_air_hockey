@@ -103,9 +103,52 @@ void NoeudMuret::animer(float temps)
 }
 
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn BoiteCollision obtenirBoiteCollision()
+///
+/// Cette fonction permet d'obtenir la boîte de collision du muret
+///
+/// @param[in] temps : Intervalle de temps sur lequel faire l'animation.
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+BoiteCollision NoeudMuret::obtenirBoiteCollision() {
+	utilitaire::BoiteEnglobante boudingBox = utilitaire::calculerBoiteEnglobante(*modele_);
+
+	// Initialisation des différents points
+	glm::dvec3 scale = this->getScale();
+	glm::dvec3 topLeft { - boudingBox.coinMin.x * scale.x, boudingBox.coinMax.y * scale.y, 0 };
+	glm::dvec3 bottomLeft { - boudingBox.coinMin.x * scale.x, - boudingBox.coinMin.y * scale.y, 0 };
+	glm::dvec3 topRight { boudingBox.coinMax.x * scale.x, boudingBox.coinMax.y * scale.y, 0 };
+	glm::dvec3 bottomRight { boudingBox.coinMax.x * scale.x, - boudingBox.coinMin.y * scale.y, 0};
+
+	// Points tournés
+	double angle = this->getAngle();
+	topLeft = utilitaire::rotater(topLeft, angle);
+	bottomLeft = utilitaire::rotater(bottomLeft, angle);
+	topRight = utilitaire::rotater(topRight, angle);
+	bottomRight = utilitaire::rotater(bottomRight, angle);
+
+	// Repositionnement absolu
+	topLeft += this->obtenirPositionRelative() - glm::vec3(-10, 0, 0); // -10x pour la translation de correction
+	bottomLeft += this->obtenirPositionRelative() - glm::vec3(-10, 0, 0);
+	topRight += this->obtenirPositionRelative() - glm::vec3(-10, 0, 0);
+	bottomRight += this->obtenirPositionRelative() - glm::vec3(-10, 0, 0);
+
+	math::Droite3D left(bottomLeft, topLeft);
+	math::Droite3D top(topLeft, topRight);
+	math::Droite3D right(topRight, bottomRight);
+	math::Droite3D bottom(bottomRight, bottomLeft);
+	std::vector<math::Droite3D> segments({ left, top, right, bottom });
+	BoiteCollision collidingBox(segments);
+
+	return collidingBox;
+}
+
 ////////////////////////////////////////////////
-/// @}
-/// @}VISITEUR
+/// @} VISITEUR
 ////////////////////////////////////////////////
 
 void NoeudMuret::accepter(Visiteur* v)

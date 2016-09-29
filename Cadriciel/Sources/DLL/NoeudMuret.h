@@ -13,6 +13,7 @@
 
 #include "NoeudAbstrait.h"
 #include "GL/glew.h"
+#include "BoiteCollision.h"
 
 
 ///////////////////////////////////////////////////////////////////////////
@@ -37,6 +38,9 @@ public:
 
 	//Accepter le visiteur
 	virtual void accepter(Visiteur* v);
+
+	///Permet d'obtenir la boite de collision pour le muret donné
+	virtual BoiteCollision obtenirBoiteCollision();
 
 private:
 	

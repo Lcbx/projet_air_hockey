@@ -291,20 +291,13 @@ double ArbreRenduINF2990::calculerAngle(glm::dvec3 pos, glm::dvec3 posf)
 
 	angle = glm::degrees(atan(sqrt(pow((double)((posf.y - pos.y) / (posf.x - pos.x)), 2.0))));
 
-	if (pos.x > posf.x && posf.y > pos.y)
-	{
+	if (pos.x > posf.x && posf.y > pos.y) {
 		angle = 180 - angle;
+	} else if (pos.x > posf.x && posf.y < pos.y) {
+		angle -= 180;
+	} else if (pos.x < posf.x && posf.y < pos.y) {
+		angle *= -1;
 	}
-	else
-		if (pos.x > posf.x && posf.y < pos.y)
-		{
-			angle -= 180;
-		}
-		else
-			if (pos.x < posf.x && posf.y < pos.y)
-			{
-				angle *= -1;
-			}
 	return angle;
 }
 

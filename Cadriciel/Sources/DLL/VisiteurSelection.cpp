@@ -85,11 +85,12 @@ void VisiteurSelection::visiter(NoeudComposite* noeud) {
 void VisiteurSelection::visiter(NoeudRondelle* noeud) { }
 
 void VisiteurSelection::visiter(NoeudMuret* noeud) { 
-	utilitaire::BoiteEnglobante boudingBox = utilitaire::calculerBoiteEnglobante(*(noeud->getModele()));
-	
-	if (SelectionInsideBoundingBox(_boundingBox, boudingBox)) {
+	BoiteCollision boundingBox = noeud->obtenirBoiteCollision();
 
-	}
+	
+	/*if (SelectionInsideBoundingBox(_boundingBox, boudingBox)) {
+
+	}*/
 }
 
 void VisiteurSelection::visiter(NoeudBonus* noeud) {
