@@ -88,6 +88,14 @@ public:
    GLfloat calculerScale(glm::dvec3 pos, glm::dvec3 posf);
    double calculerAngle(glm::dvec3 pos, glm::dvec3 posf);
 
+
+
+   double getPosiX();
+   double getPosiY();
+
+
+   void deplacerObjet(glm::dvec3 posDep);
+
 };
 
 

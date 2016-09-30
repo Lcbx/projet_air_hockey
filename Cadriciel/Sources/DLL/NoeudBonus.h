@@ -16,8 +16,8 @@
 
 
 ///////////////////////////////////////////////////////////////////////////
-/// @class NoeudMaillet
-/// @brief Classe qui représente un le noeud bonus de l'arbre de rendu.
+/// @class NoeudBonus
+/// @brief Classe qui représente le noeud bonus de l'arbre de rendu.
 ///
 /// @author Julien Gascon-Samson
 /// @date 2011-05-19
