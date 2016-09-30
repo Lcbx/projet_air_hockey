@@ -38,4 +38,4 @@ public:
 private:
 	glm::dvec3 position;
 };
-#endif#pragma once
+#endif
