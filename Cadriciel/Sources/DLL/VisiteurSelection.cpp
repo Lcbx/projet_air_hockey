@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////
+/// @file VisiteurSelection.cpp
+/// @author Wajdi Gharsalli
+/// @date 2016-09-10
+/// @version 1.0
+///
+/// @addtogroup inf2990 INF2990
+/// @{
+///////////////////////////////////////////////////////////////////////////////
 #include <iostream>
 #include "VisiteurSelection.h"
 #include "Vue.h"
@@ -91,12 +100,70 @@ void VisiteurSelection::visiter(NoeudBonus* noeud) {
 	}
 
 	if (noeud->estSelectionne())
+	{
 		this->selectionner(noeud);
+		//data biding
+		posDataBinding.x = noeud->obtenirPositionRelative().x;
+		posDataBinding.y = noeud->obtenirPositionRelative().y;
+
+		std::cout << "Data Biding x: " << this->getPosDataBinding().x 
+			<< "y: " << this->getPosDataBinding().y << std::endl;
+
+	}
+
+
 }
 
 void VisiteurSelection::visiter(NoeudMaillet* noeud) { }
 
-void VisiteurSelection::visiter(NoeudPortail* noeud) { }
+void VisiteurSelection::visiter(NoeudPortail* noeud) { 
+	utilitaire::BoiteEnglobante boundingBox = utilitaire::calculerBoiteEnglobante(*(noeud->getModele()));
+	boundingBox.coinMin += noeud->obtenirPositionRelative();
+	boundingBox.coinMin.x += 10;
+	boundingBox.coinMax += noeud->obtenirPositionRelative();
+	boundingBox.coinMax.x += 10;
+
+	if (SelectionInsideBoundingBox(_boundingBox, boundingBox)) {
+		switch (_state) {
+		case SelectionState::SELECT:
+			noeud->assignerSelection(true);
+			break;
+			/*case SelectionState::INVSELECT:
+			noeud->inverserSelection();
+			break;
+			case SelectionState::UNSELECT:
+			noeud->assignerSelection(false);
+			break;*/
+		}
+	}
+	else {
+		switch (_state) {
+		case SelectionState::SELECT:
+			noeud->assignerSelection(false);
+			break;
+			/*case SelectionState::INVSELECT:
+			noeud->inverserSelection();
+			break;
+			case SelectionState::UNSELECT:
+			noeud->assignerSelection(false);
+			break;*/
+		}
+	}
+
+	if (noeud->estSelectionne())
+	{
+		this->selectionner(noeud);
+		//data biding
+		posDataBinding.x = noeud->obtenirPositionRelative().x;
+		posDataBinding.y = noeud->obtenirPositionRelative().y;
+
+		std::cout << "Data Biding x: " << this->getPosDataBinding().x
+			<< "y: " << this->getPosDataBinding().y << std::endl;
+
+	}
+
+
+}
 
 void SingletonSelection::selectionner(
 	glm::ivec2 begin, 

@@ -16,6 +16,7 @@
 #include <map>
 #include <string>
 
+#include "Noeuds/NoeudTypes.h"
 
 ///////////////////////////////////////////////////////////////////////////
 /// @class ArbreRenduINF2990
@@ -38,47 +39,49 @@ public:
 
    /// Initialise l'arbre de rendu à son état initial.
    void initialiser();
-
-
+   
 	/// La chaîne représentant le type des araignées.
    static const std::string NOM_ARAIGNEE;
 	/// La chaîne représentant le type des cones-cubes.
    static const std::string NOM_CONECUBE;
-
-
-   /// La chaîne représentant le type des BONUS.
+    /// La chaîne représentant le type des BONUS.
    static const std::string NOM_BONUS;
-
-   /// La chaîne représentant le type des PORTAIl.
+    /// La chaîne représentant le type des PORTAIl.
    static const std::string NOM_PORTAIL;
-
-   /// La chaîne représentant le type des MURET.
+    /// La chaîne représentant le type des MURET.
    static const std::string NOM_MURET;
-
-   /// La chaîne représentant le type des Tables
+    /// La chaîne représentant le type des Tables
    static const std::string NOM_TABLE;
+    /// La chaîne représentant le type des rondelles
+   static const std::string NOM_RONDELLE;
+    /// La chaîne représentant le type des point de control de la table
+   static const std::string NOM_POINTCONTROLE;
 
+   // ajouter la table
+   void ArbreRenduINF2990::ajouterTable();
+   // get le noeud table -- pas fini
+   NoeudTable* ArbreRenduINF2990::getTable();
+   // get un point de controle -- pas implemente'
+   NoeudPointControle* ArbreRenduINF2990::getPointControle(int index);
 
    void ajouterBonus(glm::dvec3 position);
    void ajouterPortail(glm::dvec3 position);
-
-
    //supprime le 1er portail
    void supprimerPortail(bool escTouche);
-
    void ajouterPortailDeux(glm::dvec3 position);
 
-
    void ajouterMuret(glm::dvec3 position1, glm::dvec3 position2);
-
    bool premierEstajoute = false;
-
-
-
-
    // fonction de calcul valable pour les ligne et murs
    GLfloat calculerScale(glm::dvec3 pos, glm::dvec3 posf);
    double calculerAngle(glm::dvec3 pos, glm::dvec3 posf);
+   double getPosiX();
+   double getPosiY();
+
+   void deplacerObjet(glm::dvec3 posDep);
+private :
+	NoeudTable* noeudTable_;
+	NoeudPointControle* noeudPointControle_[8];
 
 };
 

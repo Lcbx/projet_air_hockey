@@ -13,6 +13,7 @@
 
 #include <windows.h>
 #include <string>
+#include "EtatOpenGL.h"
 
 class NoeudAbstrait;
 class ArbreRenduINF2990;
@@ -82,6 +83,21 @@ public:
 
 	void ajouterMuret(int x1, int y1, int x2, int y2);
 	void ajouterMurFantome(int corXin, int corYin, int corX, int corY);
+	// fonction bidon de test
+	void test();
+	// test deplacement du point de controle
+	void deplacerPointHaut(int index);
+
+
+	double getPosDataBidingX();
+	double getPosDataBidingY();
+
+	//void deplacerObjet(int x1 , int y1, int x2, int y2 );
+
+	void effacerObjet();
+
+	void deplacerObjet(double x, double y);
+
 
 private:
 

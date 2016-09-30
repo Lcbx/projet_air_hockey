@@ -10,20 +10,19 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
 
-
 namespace InterfaceGraphique
 {
     public partial class Edition : Form
     {
         private static MenuPrincipal menuPrincipal_;
-        private static double friction_;
-        private static double rebond_;
-        private static double acceleration_;
-        private static Point point_;
-        private static double angleDeRotation_;
-        private static double facteurEchelle_;
+        //private static double friction_;
+        //private static double rebond_;
+        //private static double acceleration_;
+        //private static Point point_;
+        //private static double angleDeRotation_;
+        //private static double facteurEchelle_;
 
-
+ BoitePropriete boiteProp = new BoitePropriete();
 
         public Edition()
         {
@@ -58,21 +57,30 @@ namespace InterfaceGraphique
 
         }
 
+        bool supprimer = false;
+
         private void keyDownHandler(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.ControlKey) FonctionsNatives.toucheControl(true);
+                       
         }
 
-        bool supprimer = false;
         private void keyUpHandler(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode) {
                 case Keys.ControlKey:   FonctionsNatives.toucheControl(false);  break; 
                 case Keys.Escape:       FonctionsNatives.escEnfonce();          break;
+                case Keys.Delete:
+                    {
+                        System.Console.WriteLine("touche Delete");
+                        FonctionsNatives.supprimerObjet();
+                    
+                        break; }
+                case Keys.O: FonctionsNatives.deplacerPointHaut(2); break;
                 default: break;
             } 
         }
-
+        
         private void nouveauToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Console.WriteLine("Nouveau");
@@ -100,7 +108,6 @@ namespace InterfaceGraphique
             menuPrincipal_.Show();
             this.Hide();
         }
-
 
 
         /////////////////////////////////////////////////////////////////////////
@@ -139,7 +146,13 @@ namespace InterfaceGraphique
         {
             System.Console.WriteLine("Souris down : X = " + e.X + " et Y = " + e.Y);
             FonctionsNatives.clickStart(e.X, e.Y);
-            if (EtatSouris == Etats.SELECTION) Program.peutAfficher = false;
+            mettreAjourPos();
+            if (EtatSouris == Etats.SELECTION)
+            {
+                Program.peutAfficher = false;
+                mettreAjourPos();
+            }
+
             mousePressed = true;
         }
         public void panel1_MouseUp(object sender, MouseEventArgs e)
@@ -235,9 +248,11 @@ namespace InterfaceGraphique
 
         }
 
+
         private void propriétésToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.splitContainer1.Enabled = true;
+        
+            boiteProp.Show();
         }
 
         private void toolStripButtonSelection_Click(object sender, EventArgs e)
@@ -342,68 +357,43 @@ namespace InterfaceGraphique
         {
             return (valeur >= borneMin) && (valeur <= borneMax);
         }
-        ///  //////////////////////////////////////////////////////////////////////
-        ///void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        /// Cette fonction affecte la valeur de friction de l'interface dans 
-        ///
-        /// @param[in] valeur   : La valeur à vérifier.
-        /// @param[in] borneMin : La borne inférieure de l'intervalle.
-        /// @param[in] borneMax : La borne supérieure de l'intervalle.
-        ///
-        /// @return Vrai si la valeur est dans l'intervalle, faux autrement.
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+      
+       
+
+   
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (Dans_Intervalle(Convert.ToDouble(numericUpDown1.Value), 0.0, 1.5))
-                friction_ = Convert.ToDouble(numericUpDown1.Value);               
+
         }
 
-        ///  //////////////////////////////////////////////////////////////////////
-        ///void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        /// Cette fonction affecte la valeur de friction de l'interface dans 
-        ///
-        /// @param[in] valeur   : La valeur à vérifier.
-        /// @param[in] borneMin : La borne inférieure de l'intervalle.
-        /// @param[in] borneMax : La borne supérieure de l'intervalle.
-        ///
-        /// @return Vrai si la valeur est dans l'intervalle, faux autrement.
-        /// ////////////////////////////////////////////////////////////////////
-        
-        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            if (Dans_Intervalle(Convert.ToDouble(numericUpDown2.Value), -1.0, 1.0))
-                rebond_ = Convert.ToDouble(numericUpDown2.Value);
-        }
-        private void numericUpDown3_ValueChanged(object sender, EventArgs e)
-        {
-            if (Dans_Intervalle(Convert.ToDouble(numericUpDown3.Value), 0.0, 200))
-                acceleration_ = Convert.ToDouble(numericUpDown3.Value);
-        }
-
-        private void numericUpDown4_ValueChanged(object sender, EventArgs e)
-        {
-            if (Dans_Intervalle(Convert.ToDouble(numericUpDown4.Value), 0.0, 200))
-                point_.X = Convert.ToInt32(numericUpDown4.Value);
-        }
-
-        private void numericUpDown5_ValueChanged(object sender, EventArgs e)
-        {
-            if (Dans_Intervalle(Convert.ToDouble(numericUpDown5.Value), 0.0, 200))
-                point_.Y = Convert.ToInt32(numericUpDown5.Value);
+            
         }
 
 
-        private void numericUpDown6_ValueChanged(object sender, EventArgs e)
+        //data Biding
+        private void mettreAjourPos()
         {
-            if (Dans_Intervalle(Convert.ToDouble(numericUpDown6.Value), 0.0, 200))
-                angleDeRotation_ = Convert.ToDouble(numericUpDown6.Value);
-            System.Console.WriteLine("Rotation:" + angleDeRotation_);
+
+            //Position en X
+            System.Console.WriteLine("Mettre a jour");
+            double posX= (FonctionsNatives.getPosX());
+            posX=Math.Round(posX, 2); //arrondi la position 
+
+            boiteProp.textBox1.Text = posX.ToString();
+
+            //Position Y
+
+            System.Console.WriteLine("Mettre a jour");
+            double posY = (FonctionsNatives.getPosY());
+            posX = Math.Round(posY, 2); //arrondi la position 
+
+            boiteProp.textBox2.Text = posY.ToString();
+
         }
-        private void numericUpDown7_ValueChanged(object sender, EventArgs e)
-        {
-            if (Dans_Intervalle(Convert.ToDouble(numericUpDown7.Value), 0.0, 200))
-                facteurEchelle_ = Convert.ToDouble(numericUpDown7.Value);
-                System.Console.WriteLine("Facteur d' échelle:" + facteurEchelle_);
-        }
+
 
     }
 
@@ -459,5 +449,29 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void ajouterMuretFantome(int corXin, int corYin, int corX, int corY);
+
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern double getPosX();
+
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern double getPosY();
+
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void supprimerObjet();
+
+
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void deplacerObjet(double x, double y);
+
+        //foction test bidon
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void test();
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void deplacerPointHaut(int index);
     }
 }
