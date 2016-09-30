@@ -30,6 +30,7 @@ namespace InterfaceGraphique
             (this as Control).KeyUp += new KeyEventHandler(keyUpHandler);
             InitializeComponent();
             InitialiserAnimation();
+            supprimerToolStripMenuItem.Enabled = false;
 
         }
 
@@ -380,6 +381,14 @@ namespace InterfaceGraphique
         private void éditionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int nbreObSelectionnes= FonctionsNatives.nombreObjetSelectionne();
+            if(nbreObSelectionnes >= 1)
+            {
+                supprimerToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                supprimerToolStripMenuItem.Enabled = false;
+            }
         }
 
         private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
