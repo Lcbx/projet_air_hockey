@@ -68,15 +68,18 @@ namespace InterfaceGraphique
         private void keyUpHandler(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode) {
-                case Keys.ControlKey:   FonctionsNatives.toucheControl(false);  break; 
-                case Keys.Escape:       FonctionsNatives.escEnfonce();          break;
-                case Keys.Delete:
-                    {
+                case Keys.ControlKey:        { FonctionsNatives.toucheControl(false); break; } 
+                case Keys.Escape:{ 
+                        System.Console.WriteLine("touche echapppp");
+                        FonctionsNatives.escEnfonce();
+                        break; }
+
+                case Keys.Delete:{
                         System.Console.WriteLine("touche Delete");
                         FonctionsNatives.supprimerObjet();
-                    
                         break; }
-                case Keys.O: FonctionsNatives.deplacerPointHaut(2); break;
+
+                case Keys.O: { FonctionsNatives.deplacerPointHaut(2); break; }
                 default: break;
             } 
         }
@@ -374,6 +377,16 @@ namespace InterfaceGraphique
             
         }
 
+        private void éditionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int nbreObSelectionnes= FonctionsNatives.nombreObjetSelectionne();
+        }
+
+        private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FonctionsNatives.supprimerObjet();
+        }
+
 
         //data Biding
         private void mettreAjourPos()
@@ -475,5 +488,8 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void deplacerPointHaut(int index);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int nombreObjetSelectionne();
     }
 }

@@ -379,6 +379,7 @@ void FacadeModele::ajouterPortail(int x1, int y1)
 
 void FacadeModele::supprimerPortail(bool escTouche)
 {
+	std::printf("A l'interieur de facade modele esti \n");
 	arbre_->supprimerPortail(escTouche);
 }
 
@@ -493,8 +494,15 @@ void FacadeModele::deplacerPointHaut(int index) {
 */
 	}
 #undef delta
+}
+
+int FacadeModele::nombreObjetSelectionne()
+{
+	return arbre_->obtenirNombreObjetSelctionnes();
 
 }
+
+
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
 ///////////////////////////////////////////////////////////////////////////////

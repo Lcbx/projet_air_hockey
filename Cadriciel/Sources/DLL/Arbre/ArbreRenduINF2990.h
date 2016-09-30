@@ -79,6 +79,10 @@ public:
    double getPosiY();
 
    void deplacerObjet(glm::dvec3 posDep);
+
+
+   int obtenirNombreObjetSelctionnes();
+
 private :
 	NoeudTable* noeudTable_;
 	NoeudPointControle* noeudPointControle_[8];
