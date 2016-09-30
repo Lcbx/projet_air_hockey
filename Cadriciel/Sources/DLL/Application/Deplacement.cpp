@@ -10,9 +10,13 @@
 
 #include "Deplacement.h"
 #include "../VisiteurDeplacement.h"
+#include "../Vue/Vue.h"
+#include "FacadeModele.h"
 
 void Deplacement::current(int x, int y) {
-	VisiteurDeplacement(glm::vec3(x-X1(), Y1()-y, 0.f));
+	glm::dvec3 nouvPoint; FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, nouvPoint);
+	glm::dvec3 ancPoint; FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(X1(), Y1(), ancPoint);
+	VisiteurDeplacement( nouvPoint - ancPoint );
 	X1() = x;
 	Y1() = y;
 }
