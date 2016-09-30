@@ -23,8 +23,6 @@ class VisiteurDeplacement : public Visiteur
 {
 public:
 	
-	VisiteurDeplacement(glm::dvec3 posIni, glm::dvec3 posFin);
-
 	virtual void visiter(NoeudAbstrait* noeud);
 	virtual void visiter(NoeudComposite *noeud);
 	
@@ -34,10 +32,6 @@ public:
 	virtual void visiter(NoeudBonus* noeud);
 	virtual void visiter(NoeudMaillet* noeud);
 	virtual void visiter(NoeudPortail* noeud);
-
-private:	
-	glm::dvec3 posIni_;
-	glm::dvec3 posFin_;
 
 };
 #endif
