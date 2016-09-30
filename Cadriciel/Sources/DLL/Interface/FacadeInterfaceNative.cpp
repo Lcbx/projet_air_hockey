@@ -221,11 +221,11 @@ extern "C"
 	{
 		Souris::obtenirInstance()->setControl(presse);
 	}
-	//touche escape
-	__declspec(dllexport) void escEnfonce()
-	{
-		Souris::obtenirInstance()->escPresse();
-	}
+	////touche escape
+	//__declspec(dllexport) void escEnfonce()
+	//{
+	//	Souris::obtenirInstance()->escPresse();
+	//}
 
 
 	////////////////////////////////////////////////////////////////////////

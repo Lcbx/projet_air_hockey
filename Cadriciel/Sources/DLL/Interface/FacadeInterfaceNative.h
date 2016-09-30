@@ -52,7 +52,8 @@ extern "C" {
 	//touche control
 	__declspec(dllexport) void toucheControl(bool presse);
 	//touche escape
-	__declspec(dllexport) void escEnfonce();
+
+	//__declspec(dllexport) void escEnfonce();
 
 
 	//Deplacer un objet avec la boite de configuration

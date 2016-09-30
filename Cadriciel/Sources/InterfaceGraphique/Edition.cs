@@ -62,9 +62,9 @@ namespace InterfaceGraphique
         private void keyDownHandler(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.ControlKey) FonctionsNatives.toucheControl(true);
+                       
         }
 
-        bool supprimer = false;
         private void keyUpHandler(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode) {
@@ -76,7 +76,7 @@ namespace InterfaceGraphique
                         FonctionsNatives.supprimerObjet();
                     
                         break; }
-
+                case Keys.O: FonctionsNatives.deplacerPointHaut(2); break;
                 default: break;
             } 
         }
