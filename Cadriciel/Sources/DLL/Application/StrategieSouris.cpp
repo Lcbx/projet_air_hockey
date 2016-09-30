@@ -39,3 +39,5 @@ void StrategieSouris::end(int x, int y) {
 }
 
 void StrategieSouris::position(int x, int y) {}
+
+void StrategieSouris::escEnfonce() {}

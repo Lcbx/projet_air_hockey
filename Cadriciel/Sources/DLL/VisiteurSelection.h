@@ -36,6 +36,7 @@ class VisiteurSelection : public Visiteur
 	utilitaire::BoiteEnglobante _boundingBox;
 	
 public:
+	VisiteurSelection() {};
 	virtual void visiter(NoeudAbstrait* noeud);
 	virtual void visiter(NoeudComposite *noeud);
 
@@ -44,7 +45,6 @@ public:
 	virtual void visiter(NoeudBonus* noeud);
 	virtual void visiter(NoeudMaillet* noeud);
 	virtual void visiter(NoeudPortail* noeud);
-
 
 	////////////////////////////////////////////////////////////////////////
 	///
@@ -110,6 +110,14 @@ public:
 		FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
 		return selectionnes;
 	};
+
+
+	glm::dvec3 getPosDataBinding() { return posDataBinding; }
+
+	glm::dvec3 posDataBinding;
+
+
+
 };
 
 ///////////////////////////////////////////////////////////////////////////

@@ -9,9 +9,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "DebutAjoutPortail.h"
+#include "FacadeModele.h"
+#include "Souris.h"
+
 
 void DebutAjoutPortail::operationShortClick() {
-	//DO something
+	FacadeModele::obtenirInstance()->ajouterPortail(X1(), Y1());
+	Souris::obtenirInstance()->EtatdelaSouris(Souris::AJOUT_PORTAIL);
 }
 void DebutAjoutPortail::operationDragClick() {
 	//DO something

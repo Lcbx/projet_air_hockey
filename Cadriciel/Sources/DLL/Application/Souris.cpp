@@ -36,6 +36,7 @@
 
 
 
+
 Souris* Souris::instance_{ nullptr };
 
 Souris::Souris() {
@@ -94,15 +95,18 @@ void Souris::sourisPostition(int x, int y) {
 	notreStrategie_->position(x, y);
 }
 
-#include <iostream>
 void Souris::setControl(bool presse) {
 	control_ = presse;
-	std::cout << "control " << (control_ ? "" : "pas") << " presse\n";
 }
 
 bool Souris::getControl() {
 	return control_;
 }
+
+void Souris::escPresse() {
+	notreStrategie_->escEnfonce();
+}
+
 
 glm::ivec4& Souris::getPosition() {
 	return position_;

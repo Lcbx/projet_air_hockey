@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////
+/// @file VisiteurAjout.h
+/// @author Wajdi Gharsalli
+/// @date 2016-09-10
+/// @version 1.0
+///
+/// @addtogroup inf2990 INF2990
+/// @{
+///////////////////////////////////////////////////////////////////////////////
 #pragma once
 #ifndef VISITEUR_AJOUT_H
 #define VISITEUR_AJOUT_H
@@ -29,4 +38,4 @@ public:
 private:
 	glm::dvec3 position;
 };
-#endif#pragma once
+#endif

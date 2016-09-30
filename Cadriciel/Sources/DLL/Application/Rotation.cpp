@@ -10,6 +10,13 @@
 
 #include "Rotation.h"
 
+
+
+void Rotation::current(int x, int y) {
+	visiteur_.rotate(Y1() - y);
+	Y1() = y;
+}
+
 void Rotation::operationShortClick() {
 	//DO something
 }
