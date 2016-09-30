@@ -95,6 +95,7 @@
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Edition_MouseMove);
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
+
             // 
             // menuStrip1
             // 
@@ -525,6 +526,7 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            this.MouseWheel += new System.Windows.Forms.MouseEventHandler(Edition_MouseWheel);
         }
         #endregion
 
