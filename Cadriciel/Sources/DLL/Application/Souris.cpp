@@ -58,7 +58,7 @@ void Souris::creerStrategie(){
 	case AJOUT_ACCELERATEUR: {	notreStrategie_ = new AjoutAccelerateur; break; }
 	case AJOUT_MUR: {			notreStrategie_ = new AjoutMur; break; }
 	case AJOUT_PORTAIL: {		notreStrategie_ = new AjoutPortail; break; }
-	default: {	notreStrategie_ = nullptr; break;  }
+	default: {	throw("Souris::strategie inconnue demandee"); break;  }
 	}
 }
 
