@@ -68,6 +68,10 @@ namespace vue {
 		double largeurFenetre_;
 		/// Hauteur de la fenêtre virtuelle.
 		double hauteurFenetre_;
+		/// Largeur initiale de la fenêtre virtuelle.
+		double largeurFenetreInit_;
+		/// Hauteur initiale de la fenêtre virtuelle.
+		double hauteurFenetreInit_;
 
 		/// Facteur de zoom actuel
 		double zoomActuel_;

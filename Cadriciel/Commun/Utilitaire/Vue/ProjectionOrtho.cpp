@@ -11,6 +11,8 @@
 #include "GL/glew.h"
 #include "ProjectionOrtho.h"
 #include <glm/gtc/matrix_transform.inl>
+#include <iostream>
+#include "C:\Users\Arthur\Desktop\Cours\inf2990-10\Cadriciel\Sources\DLL\Application\FacadeModele.h"
 
 
 namespace vue {
@@ -50,6 +52,9 @@ namespace vue {
 		hauteurFenetre_{ hauteurFenetre }
 	{
 		ajusterRapportAspect();
+		zoomActuel_ = 1;
+		largeurFenetreInit_ = largeurFenetre;
+		hauteurFenetreInit_ = hauteurFenetre;
 	}
 
 
@@ -64,8 +69,8 @@ namespace vue {
 	////////////////////////////////////////////////////////////////////////
 	void ProjectionOrtho::zoomerIn()
 	{
-		zoomerTo(zoomActuel_ + incrementZoom_);
-
+		if (zoomActuel_ != 5)
+			zoomerTo(zoomActuel_ + incrementZoom_);
 	}
 
 
@@ -80,7 +85,8 @@ namespace vue {
 	//////////////////////////////////////////////////////////////////////// 
 	void ProjectionOrtho::zoomerOut()
 	{
-		zoomerTo(zoomActuel_ - incrementZoom_);
+		if (zoomActuel_ != 0.5)
+			zoomerTo(zoomActuel_ - incrementZoom_);
 	}
 
 
@@ -95,9 +101,16 @@ namespace vue {
 	//////////////////////////////////////////////////////////////////////// 
 	void ProjectionOrtho::zoomerTo(double zoomFacteur)
 	{
+		std::cout << "zoomFacteur :" << std::endl;
+		std::cout << zoomActuel_ << std::endl;
 		zoomActuel_ = zoomFacteur;
-		largeurFenetre_ = zoomFacteur;
-		hauteurFenetre_ = zoomFacteur;
+		std::cout << zoomActuel_ << std::endl;
+
+		largeurFenetre_ = largeurFenetreInit_ * (1/zoomFacteur);
+		hauteurFenetre_ = hauteurFenetreInit_ * (1/zoomFacteur);
+
+		std::cout << largeurFenetre_ << " " << hauteurFenetre_ << std::endl;
+
 	}
 
 
