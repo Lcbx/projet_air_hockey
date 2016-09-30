@@ -292,6 +292,16 @@ extern "C"
 		FacadeModele::obtenirInstance()->ajouterMurFantome(corXin, corYin, corX, corY);
 	}
 
+	// fonction bidon test
+	__declspec(dllexport) void __cdecl test()
+	{
+		FacadeModele::obtenirInstance()->test();
+	}
+	// deplacer noeud de controle
+	__declspec(dllexport) void __cdecl deplacerPointHaut(int index)
+	{
+		FacadeModele::obtenirInstance()->deplacerPointHaut(index);
+	}
 
 }
 

@@ -73,8 +73,19 @@ namespace InterfaceGraphique
                 supprimer = true;
 
             }
+            // test
+            if (e.KeyCode == Keys.A) 
+            {
+                FonctionsNatives.test();
+            }
+            // tests de deplacement des points de controle
+            // up
+            if (e.KeyCode == Keys.O)
+            {
+                FonctionsNatives.deplacerPointHaut(1);
+            }
         }
-        
+
         private void nouveauToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Console.WriteLine("Nouveau");
@@ -362,5 +373,12 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void positionSouris(int x, int y);
+
+        //foction test bidon
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void test();
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void deplacerPointHaut(int index);
     }
 }

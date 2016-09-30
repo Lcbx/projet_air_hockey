@@ -41,5 +41,12 @@ extern "C" {
 	__declspec(dllexport) void etatDelaSouris(int etat);
 	__declspec(dllexport) void postitionSouris(int x, int y);
 	__declspec(dllexport) void toucheControl(bool presse);
+
+
+	// fonction bidon test
+	__declspec(dllexport) void test();
+	// fonctions de test pour les noeuds de controle
+	__declspec(dllexport) void deplacerPointHaut(int index);
+
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__
