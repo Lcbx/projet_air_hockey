@@ -312,6 +312,7 @@ void ArbreRenduINF2990::ajouterPortail(glm::dvec3 pos)
 		Visiteur* v1 = new VisiteurAjout(pos);
 	
 		noeudPortail->accepter(v1);
+		std::cout << "premier " << std::endl;
 
 		premierEstajoute = true;
 		// toujours liberer la mémoire !!!!
@@ -347,7 +348,7 @@ void ArbreRenduINF2990::ajouterPortailDeux(glm::dvec3 pos)
 	//premierPortail->ajouter(noeudPortail);
 	//ajouter(noeudPortail);
 	//noeudPortail->assignerParent(premierPortail);
-	std::cout << "++++type++: " << noeudPortail->obtenirType() << std::endl;
+	std::cout << "Deuxieme " << std::endl;
 	noeudPortail->accepter(v1);
 
 	premierEstajoute = false;
@@ -370,8 +371,11 @@ void ArbreRenduINF2990::supprimerPortail(bool escTouche)
 {
 //	this->effacer(this->enfants_.back());
 
+	cout << "arbre 1 " << endl;
 	if (escTouche == true)
 	{
+		cout << "arbre 2 " << endl;
+
 		if (this->enfants_.size() != NULL && premierEstajoute == true) 
 		{
 		
@@ -522,6 +526,19 @@ void ArbreRenduINF2990::deplacerObjet(glm::dvec3 posDep)
 	}
 }
 
+int ArbreRenduINF2990::obtenirNombreObjetSelctionnes()
+{
+	int comp = 0;
+	for (NoeudAbstrait * enfant : enfants_)
+	{
+		if (enfant->estSelectionne())
+		{
+			comp++;
+		}
+	}
+	std::cout << "Nombre objets selectionnes: " << comp << std::endl;
+	return comp;
+}
 
 
 

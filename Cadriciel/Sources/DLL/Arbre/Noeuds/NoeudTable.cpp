@@ -134,7 +134,7 @@ void NoeudTable::tracerTable() const
 	
 	// Affichage du modèle.
 	glMatrixMode(GL_MODELVIEW);
-	//glLoadIdentity();
+	glLoadIdentity();
 	
 	//quelques transformations bidons
 	//glTranslatef(-.5,-.5,0);
