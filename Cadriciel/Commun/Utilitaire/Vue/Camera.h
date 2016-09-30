@@ -54,7 +54,7 @@ namespace vue {
 		inline const glm::dvec3& obtenirDirectionHaut() const;
 
 		/// Déplacement dans le plan perpendiculaire à la direction visée.
-		void deplacerXY(double deplacementX, double deplacementY);
+		void deplacerXY(double deplacementX, double deplacementY, bool bougePointVise);
 		/// Déplacement dans l'axe de la direction visée.
 		void deplacerZ(double deplacement, bool bougePointVise);
 		/// Rotation de la caméra autour de sa position.

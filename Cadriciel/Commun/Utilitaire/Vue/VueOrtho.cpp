@@ -138,13 +138,19 @@ namespace vue {
 
 		//Pas encore fonctionnel
 		// Déplacement afin que le centre du rectangle elastique devienne le centre de la nouvelle cloture
-		/*glm::ivec2 deplacement;
-		deplacement[0] = (coin1[0] + coin2[0]) / 2 - projection_.obtenirDimensionCloture()[0] / 2;
-		deplacement[1] = (coin1[1] + coin2[1]) / 2 - projection_.obtenirDimensionCloture()[1] / 2;
 
-		std::cout << "Deplacement: (" << deplacement[0] << "," << deplacement[1] << ")" << std::endl;
+		glm::dvec3 vCentreActuel, vNouveauCentre;
+		convertirClotureAVirtuelle(projection_.obtenirDimensionCloture()[0] / 2, projection_.obtenirDimensionCloture()[1] / 2, vCentreActuel);
+		convertirClotureAVirtuelle((coin1[0] + coin2[0]) / 2, (coin1[1] + coin2[1]) / 2, vNouveauCentre);
 
-		deplacerXY(deplacement);*/
+		glm::ivec2 deplacementXY;
+
+		deplacementXY[0] = vNouveauCentre[0] - vCentreActuel[0];
+		deplacementXY[1] = vNouveauCentre[1] - vCentreActuel[1];
+		//deplacementZ[2] = vNouveauCentre[2] - vCentreActuel[2];
+
+
+		deplacerXY(deplacementXY);
 
 		
 	}
@@ -186,7 +192,7 @@ namespace vue {
 	void VueOrtho::deplacerXY(double deplacementX, double deplacementY)
 	{
 		camera_.deplacerXY(deplacementX * projection_.obtenirDimensionCloture()[0], 
-			deplacementY * projection_.obtenirDimensionCloture()[1]);
+			deplacementY * projection_.obtenirDimensionCloture()[1], true);
 	}
 
 
@@ -205,7 +211,7 @@ namespace vue {
 	////////////////////////////////////////////////////////////////////////
 	void VueOrtho::deplacerXY(const glm::ivec2& deplacement)
 	{
-		camera_.deplacerXY(deplacement[0], deplacement[1]);
+		camera_.deplacerXY(deplacement[0], deplacement[1], true);
 	}
 
 
