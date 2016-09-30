@@ -11,6 +11,8 @@
 #include "GL/glew.h"
 #include "ProjectionOrtho.h"
 #include <glm/gtc/matrix_transform.inl>
+#include <iostream>
+#include "C:\Users\Arthur\Desktop\Cours\inf2990-10\Cadriciel\Sources\DLL\Application\FacadeModele.h"
 
 
 namespace vue {
@@ -29,7 +31,7 @@ namespace vue {
 	/// @param[in] zArriere			: distance du plan arrière (en @a z).
 	/// @param[in] zoomInMax		: facteur de zoom in maximal.
 	/// @param[in] zoomOutMax		: facteur de zoom out maximal.
-	/// @param[in] incrementZoom	: distance du plan arrière (en @a z).
+	/// @param[in] incrementZoom	: increment du facteur de zoom.
 	/// @param[in] largeurFenetre	: dimension en @a X de la fenêtre
 	///								  virtuelle.
 	/// @param[in] hauteurFenetre	: dimension en @a Y de la fenêtre
@@ -50,6 +52,9 @@ namespace vue {
 		hauteurFenetre_{ hauteurFenetre }
 	{
 		ajusterRapportAspect();
+		zoomActuel_ = 1;
+		largeurFenetreInit_ = largeurFenetre;
+		hauteurFenetreInit_ = hauteurFenetre;
 	}
 
 
@@ -64,8 +69,8 @@ namespace vue {
 	////////////////////////////////////////////////////////////////////////
 	void ProjectionOrtho::zoomerIn()
 	{
-		// À IMPLANTER.
-
+		if (zoomActuel_ != 5)
+			zoomerTo(zoomActuel_ + incrementZoom_);
 	}
 
 
@@ -80,7 +85,32 @@ namespace vue {
 	//////////////////////////////////////////////////////////////////////// 
 	void ProjectionOrtho::zoomerOut()
 	{
-		// À IMPLANTER.
+		if (zoomActuel_ != 0.5)
+			zoomerTo(zoomActuel_ - incrementZoom_);
+	}
+
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn void ProjectionOrtho::zoomerTo(double zoomFacteur)
+	///
+	/// Permet de zoomer jusqu'a un facteur donné.
+	///
+	/// @return Aucune.
+	///
+	//////////////////////////////////////////////////////////////////////// 
+	void ProjectionOrtho::zoomerTo(double zoomFacteur)
+	{
+		std::cout << "zoomFacteur :" << std::endl;
+		std::cout << zoomActuel_ << std::endl;
+		zoomActuel_ = zoomFacteur;
+		std::cout << zoomActuel_ << std::endl;
+
+		largeurFenetre_ = largeurFenetreInit_ * (1/zoomFacteur);
+		hauteurFenetre_ = hauteurFenetreInit_ * (1/zoomFacteur);
+
+		std::cout << largeurFenetre_ << " " << hauteurFenetre_ << std::endl;
+
 	}
 
 
