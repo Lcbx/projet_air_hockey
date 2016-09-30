@@ -32,6 +32,15 @@ extern "C" {
 	__declspec(dllexport) void ajouterMuret(int x1, int y1, int x2, int y2);
 	__declspec(dllexport) void ajouterMuretFantome(int corXin, int corYin, int corX, int corY);
 
+	//Afficher les positions d'un objet 
+	__declspec(dllexport) double getPosX();
+	__declspec(dllexport) double getPosY();
+
+
+	//supprimer un objet de la table
+	__declspec(dllexport) void supprimerObjet();
+
+
 
 
 	//Click
@@ -39,10 +48,16 @@ extern "C" {
 	__declspec(dllexport) void clickCurrent(int x, int y);
 	__declspec(dllexport) void clickEnd(int x, int y);
 	__declspec(dllexport) void etatDelaSouris(int etat);
-	__declspec(dllexport) void postitionSouris(int x, int y);
+	__declspec(dllexport) void positionSouris(int x, int y);
+	//touche control
 	__declspec(dllexport) void toucheControl(bool presse);
+	//touche escape
+	__declspec(dllexport) void escEnfonce();
 
 
+	//Deplacer un objet avec la boite de configuration
+	__declspec(dllexport) void deplacerObjet(double x, double y);
+	
 	// fonction bidon test
 	__declspec(dllexport) void test();
 	// fonctions de test pour les noeuds de controle

@@ -216,11 +216,16 @@ extern "C"
 	{
 		Souris::obtenirInstance()->sourisPostition(x, y);
 	}
+	//touche control
 	__declspec(dllexport) void __cdecl toucheControl(bool presse)
 	{
 		Souris::obtenirInstance()->setControl(presse);
 	}
-
+	//touche escape
+	__declspec(dllexport) void escEnfonce()
+	{
+		Souris::obtenirInstance()->escPresse();
+	}
 
 
 	////////////////////////////////////////////////////////////////////////
@@ -292,7 +297,28 @@ extern "C"
 		FacadeModele::obtenirInstance()->ajouterMurFantome(corXin, corYin, corX, corY);
 	}
 
-	// fonction bidon test
+	__declspec(dllexport) double getPosX()
+	{
+		return FacadeModele::obtenirInstance()->getPosDataBidingX();
+	}
+
+	__declspec(dllexport) double getPosY()
+	{
+		return FacadeModele::obtenirInstance()->getPosDataBidingY();
+	}
+
+
+
+	__declspec(dllexport) void supprimerObjet()
+	{
+		return FacadeModele::obtenirInstance()->effacerObjet();
+	}
+
+	__declspec(dllexport) void deplacerObjet(double x, double y)
+	{
+		return FacadeModele::obtenirInstance()->deplacerObjet(x,y);
+	}
+// fonction bidon test
 	__declspec(dllexport) void __cdecl test()
 	{
 		FacadeModele::obtenirInstance()->test();
@@ -302,7 +328,6 @@ extern "C"
 	{
 		FacadeModele::obtenirInstance()->deplacerPointHaut(index);
 	}
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////

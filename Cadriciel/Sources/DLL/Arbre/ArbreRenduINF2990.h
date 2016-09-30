@@ -69,15 +69,20 @@ public:
    //supprime le 1er portail
    void supprimerPortail(bool escTouche);
    void ajouterPortailDeux(glm::dvec3 position);
+
    void ajouterMuret(glm::dvec3 position1, glm::dvec3 position2);
    bool premierEstajoute = false;
    // fonction de calcul valable pour les ligne et murs
    GLfloat calculerScale(glm::dvec3 pos, glm::dvec3 posf);
    double calculerAngle(glm::dvec3 pos, glm::dvec3 posf);
+   double getPosiX();
+   double getPosiY();
 
+   void deplacerObjet(glm::dvec3 posDep);
 private :
 	NoeudTable* noeudTable_;
 	NoeudPointControle* noeudPointControle_[8];
+
 };
 
 

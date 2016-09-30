@@ -9,9 +9,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "DebutAjoutMur.h"
+#include "Souris.h"
 
 void DebutAjoutMur::operationShortClick() {
-	//DO something
+	Souris::obtenirInstance()->EtatdelaSouris(Souris::AJOUT_MUR);
 }
 void DebutAjoutMur::operationDragClick() {
 	//DO something

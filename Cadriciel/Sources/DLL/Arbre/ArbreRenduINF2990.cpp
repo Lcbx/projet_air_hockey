@@ -28,8 +28,11 @@ using namespace std;
 const std::string ArbreRenduINF2990::NOM_ARAIGNEE{ "araignee" };
 /// La chaîne représentant le type des cones-cubes.
 const std::string ArbreRenduINF2990::NOM_CONECUBE{ "conecube" };
+
 //Bonus
 const std::string ArbreRenduINF2990::NOM_BONUS{ "bonus" };
+
+
 //Portail
 const std::string ArbreRenduINF2990::NOM_PORTAIL{ "portail" };
 //La chaîne représentant le type des murets
@@ -65,6 +68,8 @@ ArbreRenduINF2990::ArbreRenduINF2990()
 	ajouterUsine(NOM_TABLE, new UsineNoeud<NoeudTable>{ NOM_TABLE, std::string{ "" } });
 	ajouterUsine(NOM_POINTCONTROLE, new UsineNoeud<NoeudPointControle>{ NOM_POINTCONTROLE, std::string{ "" } });
 }
+
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn ArbreRenduINF2990::~ArbreRenduINF2990()
@@ -222,6 +227,8 @@ void ArbreRenduINF2990::initialiser()
 	// afficher la table avec les points de controles
 	ajouterTable();
 
+	///TODO
+	///Chabnger l'araignee par la table / cube par les buts
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	// test original d'affichage , les 2 objets arraignee et cubecone sont affiches
@@ -252,6 +259,10 @@ NoeudTable* ArbreRenduINF2990::getTable()
 }
 
 
+	
+	/*NoeudAbstrait* noeudRondelle{ creerNoeud(NOM_RONDELLE) };
+	ajouter(noeudRondelle);
+	*/
 
 
 
@@ -268,6 +279,7 @@ NoeudTable* ArbreRenduINF2990::getTable()
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
+
 void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos) 
 {
 
@@ -281,7 +293,9 @@ void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos)
 	// toujours liberer la mémoire !!!!
 	delete v1;
 
+	
 }
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void ArbreRenduINF2990::ajouterPortail(glm::dvec3 pos) 
@@ -324,12 +338,23 @@ void ArbreRenduINF2990::ajouterPortailDeux(glm::dvec3 pos)
 	noeudPortail->setFrere(premierPortail);
 	premierPortail->setFrere(noeudPortail);
 
+	/*NoeudAbstrait* noeudPortail = this->ajouterNouveauNoeud2(premierPortail, NOM_PORTAIL);
+	
+	noeudPortail->assignerParent(premierPortail);
+	enfants_.push_back(noeudPortail);
+	*/
+	
+	//premierPortail->ajouter(noeudPortail);
+	//ajouter(noeudPortail);
+	//noeudPortail->assignerParent(premierPortail);
+	std::cout << "++++type++: " << noeudPortail->obtenirType() << std::endl;
 	noeudPortail->accepter(v1);
 
 	premierEstajoute = false;
 	// toujours liberer la mémoire !!!!
 	delete v1;
 }
+
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -358,6 +383,8 @@ void ArbreRenduINF2990::supprimerPortail(bool escTouche)
 		}
 	}
 }
+
+
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -441,6 +468,62 @@ double ArbreRenduINF2990::calculerAngle(glm::dvec3 pos, glm::dvec3 posf)
 			}
 	return angle;
 }
+
+
+double ArbreRenduINF2990::getPosiX()
+{
+	for (NoeudAbstrait * enfant : this->enfants_)
+	{
+		if (enfant->estSelectionne())
+		{
+			double posX = enfant->obtenirPositionRelative().x;
+			return posX;
+		}
+	}
+}
+
+double ArbreRenduINF2990::getPosiY()
+{
+	for (NoeudAbstrait * enfant : this->enfants_)
+	{
+		if (enfant->estSelectionne())
+		{
+			double posY = enfant->obtenirPositionRelative().y;
+			return posY;
+		}
+	}
+}
+
+
+
+
+void ArbreRenduINF2990::deplacerObjet(glm::dvec3 posDep)
+{
+	int comp = 0;
+
+
+	for (NoeudAbstrait * enfant : enfants_)
+	{
+		if (enfant->estSelectionne())
+		{
+			comp++;
+		}
+	}
+
+	for (NoeudAbstrait * enfant : enfants_)
+	{
+		if (enfant->estSelectionne() && enfant->obtenirType() == "bonus" && comp==1)
+		{
+			//glm::dvec3 posTemp = enfant->obtenirPositionRelative();
+			enfant->assignerPositionRelative(posDep);
+
+		}
+
+	}
+}
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @}

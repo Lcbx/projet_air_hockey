@@ -9,10 +9,33 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "AjoutMur.h"
+#include "FacadeModele.h"
+#include "Souris.h"
+
+void AjoutMur::start(int x, int y) {
+	notrePosition_ = {x,y,x,y};
+}
+
+void AjoutMur::current(int x, int y) {}
+
+void AjoutMur::end(int x, int y) {
+	plusDe3px(notrePosition_) ? operationDragClick() : operationShortClick();
+}
+
+void AjoutMur::position(int x, int y) {
+	notrePosition_[2] = x; notrePosition_[3] = y;
+	FacadeModele::obtenirInstance()->ajouterMurFantome(X1(), Y1(), x, y);
+}
 
 void AjoutMur::operationShortClick() {
-	//DO something
+	FacadeModele::obtenirInstance()->ajouterMuret(X1(), Y1(), notrePosition_[2], notrePosition_[3]);
+	Souris::obtenirInstance()->EtatdelaSouris(Souris::DEBUT_AJOUT_MUR);
 }
+
 void AjoutMur::operationDragClick() {
 	//DO something
+}
+
+void AjoutMur::escEnfonce() {
+	Souris::obtenirInstance()->EtatdelaSouris(Souris::DEBUT_AJOUT_MUR);
 }

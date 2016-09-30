@@ -42,7 +42,7 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
-// ajoute'
+#include "EtatOpenGL.h"
 #include <iostream>
 #include "Noeuds/NoeudTypes.h"
 
@@ -424,7 +424,46 @@ void FacadeModele::ajouterMurFantome(int corXin, int corYin, int corX, int corY)
 		arbre_->effacer(arbre_->chercher(arbre_->obtenirNombreEnfants() - 1));
 	//ajouterMur(corXin, corYin, corX, corY);
 }
+///////////////////////////////////////////////////////////////////////////////
+/// @}
+///////////////////////////////////////////////////////////////////////////////
+double FacadeModele::getPosDataBidingX()
+{
+	return arbre_->getPosiX();
+	
+}
 
+/*
+void FacadeModele::deplacerObjet(int x1, int y1, int x2, int y2)
+{
+	glm::dvec3 posInial;
+	vue_->convertirClotureAVirtuelle(x1, y1, posInial);
+
+	glm::dvec3 posFinal;
+	vue_->convertirClotureAVirtuelle(x2, y2, posFinal);
+
+	arbre_->deplacer(posInial, posFinal);
+	
+}*/
+
+double FacadeModele::getPosDataBidingY()
+{
+	return arbre_->getPosiY();
+
+}
+
+void FacadeModele::effacerObjet()
+{
+	arbre_->effacerSelection();
+}
+
+void FacadeModele::deplacerObjet(double x, double y)
+{
+	glm::dvec3 NouvPos{x, y, 0.f};
+
+	arbre_->deplacerObjet(NouvPos);
+
+}
 
 // fonction bidon test
 void FacadeModele::test() {
