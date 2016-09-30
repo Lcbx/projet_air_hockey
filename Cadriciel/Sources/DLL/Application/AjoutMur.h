@@ -22,6 +22,7 @@ public:
 	void operationDragClick();			//lance l'opération adéquate selon le scénario du click
 	void escEnfonce();					//au cas ou si on doit arreter l'ajout
 private:
-	//int X1, Y1, X2, Y2;					//pour garder l'information des points du Click
-	glm::ivec4 notrePosition_;
+	//int X1, Y1, X2, Y2;				//pour garder l'information des points du Click
+	glm::ivec4 notrePosition_;			//pour garder la position du premier click
+	bool clickInitial = true;			//distinction entre les deux clicks
 };

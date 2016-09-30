@@ -106,7 +106,7 @@ namespace InterfaceGraphique
         /////////////////////////////////////////////////////////////////////////
         //  gere la souris
         /////////////////////////////////////////////////////////////////////////
-        public enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, DEBUT_AJOUT_MUR, AJOUT_MUR, DEBUT_AJOUT_PORTAIL, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, REDIMENSIONNEMENT, NBETATS };
+        public enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, AJOUT_MUR, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, REDIMENSIONNEMENT, NBETATS };
 
         private Etats EtatSouris = Etats.SELECTION;
 
@@ -127,9 +127,7 @@ namespace InterfaceGraphique
                     case Etats.ROTATION: {              text = "rotation";          break; }
                     case Etats.DUPLICATION: {           text = "duplication";       break; }
                     case Etats.AJOUT_ACCELERATEUR: {    text = "ajout accelerateur"; break; }
-                    case Etats.DEBUT_AJOUT_MUR: {       text = "debut ajout mur";   break; }
                     case Etats.AJOUT_MUR: {             text = "ajout mur";         break; }
-                    case Etats.DEBUT_AJOUT_PORTAIL: {   text = "debut ajout portail"; break; }
                     case Etats.AJOUT_PORTAIL: {         text = "ajout portail";     break; }
                     default: break;
                 }
@@ -297,14 +295,14 @@ namespace InterfaceGraphique
         {
             desactiverAutresBoutons();
             toolStripButtonPortail.Checked = true;
-            this.changerMode(Etats.DEBUT_AJOUT_PORTAIL);
+            this.changerMode(Etats.AJOUT_PORTAIL);
         }
 
         private void toolStripButtonMuret_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
             toolStripButtonMuret.Checked = true;
-            this.changerMode(Etats.DEBUT_AJOUT_MUR);
+            this.changerMode(Etats.AJOUT_MUR);
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)

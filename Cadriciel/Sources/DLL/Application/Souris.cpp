@@ -12,27 +12,13 @@
 #include "Souris.h"
 #include "Selection.h"
 #include "AjoutAccelerateur.h"
-#include "DebutAjoutMur.h"
 #include "AjoutMur.h"
-#include "DebutAjoutPortail.h"
 #include "AjoutPortail.h"
-///////////////////////////////////////////////////////////////////////////////
-/// @file Souris.cpp
-/// @author Luc Courbariaux
-/// @date 2016-09-17
-/// @version 1.0
-///
-/// @addtogroup inf2990 INF2990
-/// @{
-///////////////////////////////////////////////////////////////////////////////
-
-
-#include "glm\glm.hpp"
-#include "../VisiteurSelection.h"
 #include "Duplication.h"
 #include "Rotation.h"
 #include "Loupe.h"
 #include "Deplacement.h"
+
 
 
 
@@ -55,6 +41,7 @@ void Souris::libererInstance() {
 }
 
 void Souris::EtatdelaSouris(int etat) {
+	escPresse(); //evite de garder un portail non fini
 	etatSouris = static_cast<Etats>(etat);
 	if (notreStrategie_ != nullptr) delete notreStrategie_;
 	creerStrategie();
@@ -69,9 +56,7 @@ void Souris::creerStrategie(){
 	case ROTATION: {			notreStrategie_ = new Rotation; break; }
 	case DUPLICATION: {			notreStrategie_ = new Duplication; break; }
 	case AJOUT_ACCELERATEUR: {	notreStrategie_ = new AjoutAccelerateur; break; }
-	case DEBUT_AJOUT_MUR: {		notreStrategie_ = new DebutAjoutMur; break; }
 	case AJOUT_MUR: {			notreStrategie_ = new AjoutMur; break; }
-	case DEBUT_AJOUT_PORTAIL: {	notreStrategie_ = new DebutAjoutPortail; break; }
 	case AJOUT_PORTAIL: {		notreStrategie_ = new AjoutPortail; break; }
 	default: {	notreStrategie_ = nullptr; break;  }
 	}
