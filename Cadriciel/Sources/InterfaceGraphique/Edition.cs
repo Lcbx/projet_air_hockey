@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
 
+
 namespace InterfaceGraphique
 {
     public partial class Edition : Form
@@ -30,6 +31,8 @@ namespace InterfaceGraphique
             (this as Control).KeyUp += new KeyEventHandler(keyUpHandler);
             InitializeComponent();
             InitialiserAnimation();
+
+           
 
         }
 
@@ -57,14 +60,12 @@ namespace InterfaceGraphique
 
         }
 
-        bool supprimer = false;
-
         private void keyDownHandler(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.ControlKey) FonctionsNatives.toucheControl(true);
-                       
         }
 
+        bool supprimer = false;
         private void keyUpHandler(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode) {
@@ -76,11 +77,11 @@ namespace InterfaceGraphique
                         FonctionsNatives.supprimerObjet();
                     
                         break; }
-                case Keys.O: FonctionsNatives.deplacerPointHaut(2); break;
+
                 default: break;
             } 
         }
-        
+
         private void nouveauToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Console.WriteLine("Nouveau");
@@ -108,6 +109,7 @@ namespace InterfaceGraphique
             menuPrincipal_.Show();
             this.Hide();
         }
+
 
 
         /////////////////////////////////////////////////////////////////////////
@@ -156,6 +158,8 @@ namespace InterfaceGraphique
             }
 
             mousePressed = true;
+
+         
         }
         public void panel1_MouseUp(object sender, MouseEventArgs e)
         {
@@ -249,7 +253,6 @@ namespace InterfaceGraphique
                         */
 
         }
-
 
         private void propriétésToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -469,11 +472,5 @@ namespace InterfaceGraphique
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void deplacerObjet(double x, double y);
 
-        //foction test bidon
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void test();
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void deplacerPointHaut(int index);
     }
 }

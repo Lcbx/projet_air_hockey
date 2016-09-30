@@ -114,37 +114,33 @@ void NoeudPointControle::accepter(Visiteur* v)
 ////////////////////////////////////////////////////////////////////////
 void NoeudPointControle::afficherPointControle() const
 {
-	//glMatrixMode(GL_MODELVIEW); 
-	//glLoadIdentity(); // deja fait dans la table --garder en commentaire pour l'instant
-	// deactiver les textures (la table ne prend plus la texture des autres noeuds)
-	//glDisable(GL_TEXTURE_2D); // deja fait dans la table -- garder en commentaire pour l'instant
-	// desactiver le test de profondeur
-	//glDisable(GL_DEPTH_TEST);// deja fait dans la table -- garder en commentaire pour l'instant
-	// activer l'anticrenelage
-	//glEnable(GL_MULTISAMPLE);// deja fait dans la table -- garder en commentaire pour l'instant
-
-	glm::vec3 p0{ coord_.x - delta_ / 2,coord_.y + delta_ / 2, coord_.z };
-	glm::vec3 p1{ coord_.x - delta_ / 2,coord_.y - delta_ / 2, coord_.z };
-	glm::vec3 p2{ coord_.x + delta_ / 2,coord_.y - delta_ / 2, coord_.z };
-	glm::vec3 p3{ coord_.x + delta_ / 2,coord_.y + delta_ / 2, coord_.z };
-
-	//afficher p0
-	//std::cout << "x = " << p0.x << " y = " << p0.y << std::endl;
-
-	glColor4f(couleur_[0], couleur_[1], couleur_[2], couleur_[3]);
-	glBegin(GL_QUADS);
+	glPushMatrix();
 	{
-		glVertex3f(p0.x, p0.y, p0.z);
-		glVertex3f(p1.x, p1.y, p1.z);
-		glVertex3f(p2.x, p2.y, p2.z);
-		glVertex3f(p3.x, p3.y, p3.z);
-	}
-	glEnd();
+		glEnable(GL_NORMALIZE);
+		// Affichage du modèle.
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		//glDisable(GL_TEXTURE_2D);
+		glDisable(GL_LIGHTING);
+		glm::vec3 p0{ coord_.x - delta_ / 2,coord_.y + delta_ / 2, coord_.z };
+		glm::vec3 p1{ coord_.x - delta_ / 2,coord_.y - delta_ / 2, coord_.z };
+		glm::vec3 p2{ coord_.x + delta_ / 2,coord_.y - delta_ / 2, coord_.z };
+		glm::vec3 p3{ coord_.x + delta_ / 2,coord_.y + delta_ / 2, coord_.z };
 
-	// reactiver le test de profondeur
-	//glEnable(GL_DEPTH_TEST);// deja fait dans la table -- garder en commentaire pour l'instant
-	// desactiver l'ancrenelage
-	//glDisable(GL_MULTISAMPLE);// deja fait dans la table -- garder en commentaire pour l'instant
+		//afficher p0
+		//std::cout << "x = " << p0.x << " y = " << p0.y << std::endl;
+		glColor4f(couleur_[0], couleur_[1], couleur_[2], couleur_[3]);
+		glBegin(GL_QUADS);
+		{
+			glVertex3f(p0.x, p0.y, p0.z);
+			glVertex3f(p1.x, p1.y, p1.z);
+			glVertex3f(p2.x, p2.y, p2.z);
+			glVertex3f(p3.x, p3.y, p3.z);
+		}
+		glEnd();
+	}
+	glPopMatrix();
+	
 }
 ////////////////////////////////////////////////////////////////////////
 ///
