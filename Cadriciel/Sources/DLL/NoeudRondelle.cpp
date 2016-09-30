@@ -64,18 +64,8 @@ NoeudRondelle::~NoeudRondelle()
 ////////////////////////////////////////////////////////////////////////
 void NoeudRondelle::afficherConcret(const glm::mat4& vueProjection) const
 {
-	/// Révolution autour du centre.
-	auto modele = glm::rotate(transformationRelative_, angleRotation_, glm::vec3(0, 0, 0));
-	//// Translation.
-	//modele = glm::translate(modele, glm::vec3(10, 0, 0));
-	//// Rotation autour de l'axe des X.
-	//modele = glm::rotate(modele, angleX_, glm::vec3(1, 0, 0));
-	//// Rotation autour de l'axe des Y.
-	//modele = glm::rotate(modele, angleY_, glm::vec3(0, 1, 0));
-	//// Recentrage du cube.
-	//modele = glm::translate(modele, glm::vec3(0, 0, -10));
 	// Affichage du modèle.
-	vbo_->dessiner(vueProjection * modele);
+	vbo_->dessiner(vueProjection);
 }
 
 

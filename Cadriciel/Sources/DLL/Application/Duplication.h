@@ -17,7 +17,7 @@ class Duplication : public StrategieSouris {
 public:
 	Duplication(){}
 	//void start(int x, int y);				//les coordonnees du mouse_down
-	//void current(int x, int y);			//les coordonnees du mouse_move
+	void current(int x, int y);			//les coordonnees du mouse_move
 	//void end(int x, int y);				//les coordonnees du mouse_up
 	//void position(int x, int y);			//position de la souris hors d'un click
 	void operationShortClick();				//lance l'opération adéquate selon le scénario du click

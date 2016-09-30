@@ -20,6 +20,7 @@ void VisiteurRotation::visiter(NoeudAbstrait* noeud)
 		auto posNoeud = noeud->obtenirPositionRelative();
 		auto newpos = glm::vec4(posNoeud - posCentre_, 0.f) * glm::rotate(glm::mat4(1.f), glm::radians(angle_), { 0.f,0.f,1.f }) + glm::vec4(posCentre_, 0.f);
 		noeud->assignerPositionRelative(glm::vec3(newpos[0], newpos[1], newpos[2]));
+		noeud->setAngle(noeud->getAngle() - angle_/60);
 	}
 }
 

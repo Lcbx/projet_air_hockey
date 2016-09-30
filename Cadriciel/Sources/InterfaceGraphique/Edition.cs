@@ -144,9 +144,7 @@ namespace InterfaceGraphique
                     case Etats.ROTATION: {              text = "rotation";          break; }
                     case Etats.DUPLICATION: {           text = "duplication";       break; }
                     case Etats.AJOUT_ACCELERATEUR: {    text = "ajout accelerateur"; break; }
-                   
                     case Etats.AJOUT_MUR: {             text = "ajout mur";         break; }
-                   
                     case Etats.AJOUT_PORTAIL: {         text = "ajout portail";     break; }
                     default: break;
                 }

@@ -397,18 +397,30 @@ void NoeudAbstrait::afficher(const glm::mat4& vueProjection) const
 		// Assignation du mode d'affichage des polygones
 		glPolygonMode(GL_FRONT_AND_BACK, modePolygones_);
 
+		// Translation.
+		auto modele = glm::translate(transformationRelative_, glm::vec3(5, 0, 0));
+		// Révolution autour du centre.
+		modele = glm::rotate(modele, angleRotation_, glm::vec3(0, 0, 1));
+		// Rotation autour de l'axe des X.
+		modele = glm::rotate(modele, angleX_, glm::vec3(1, 0, 0));
+		// Rotation autour de l'axe des Y.
+		modele = glm::rotate(modele, angleY_, glm::vec3(0, 1, 0));
+
+
 		//change la couleur selon si est selectionne
 		if (estSelectionne()) {
 
 			// On active le mode d'opération logique sur les couleurs.
 			glEnable(GL_COLOR_LOGIC_OP);
 			glLogicOp(GL_COPY_INVERTED);
+
 			// Affichage concret
-			afficherConcret(vueProjection);
+			afficherConcret(vueProjection * modele);
+
 			//on désactive le mode logic_op 
 			glDisable(GL_COLOR_LOGIC_OP);
 
-		} else afficherConcret(vueProjection);
+		} else afficherConcret(vueProjection * modele);
 
 		// Restauration
 		glPopAttrib();
