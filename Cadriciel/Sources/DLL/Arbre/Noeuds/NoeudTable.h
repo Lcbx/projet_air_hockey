@@ -41,8 +41,9 @@ public:
 	void tracerTable()  const; // tracer la table
 	void tracerCercle(double cx, double cy, double r, int nb_segments) const; // tracer la table
 	void tracerMurs() const; //tracer les murs autour de la table
-	void tracerButs(float longueur) const; //tracer les buts
-
+	void tracerButs() const; //tracer les buts
+	// Calcul la pente de la droite faite par 2 points 
+	double calculPente(glm::vec3 P0 , glm::vec3 P1);
 	// fonctions get et set pour les points de controle de la table
 	// coordonnees point de controle
 	bool getPointControle(int numero, glm::vec3 & pointControle);

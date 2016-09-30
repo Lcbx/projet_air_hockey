@@ -84,9 +84,9 @@ namespace InterfaceGraphique
                 case Keys.Delete:{
                         System.Console.WriteLine("touche Delete");
                         FonctionsNatives.supprimerObjet();
+                    
                         break; }
-
-                case Keys.O: { FonctionsNatives.deplacerPointHaut(2); break; }
+                case Keys.O: FonctionsNatives.deplacerPointHaut(2); break;
                 default: break;
             } 
         }
@@ -144,7 +144,9 @@ namespace InterfaceGraphique
                     case Etats.ROTATION: {              text = "rotation";          break; }
                     case Etats.DUPLICATION: {           text = "duplication";       break; }
                     case Etats.AJOUT_ACCELERATEUR: {    text = "ajout accelerateur"; break; }
+                   
                     case Etats.AJOUT_MUR: {             text = "ajout mur";         break; }
+                   
                     case Etats.AJOUT_PORTAIL: {         text = "ajout portail";     break; }
                     default: break;
                 }

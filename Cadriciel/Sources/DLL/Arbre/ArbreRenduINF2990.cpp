@@ -284,16 +284,11 @@ void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos)
 {
 
 	NoeudAbstrait* noeudBonus{ creerNoeud(NOM_BONUS) };
-	Visiteur* v1 = new VisiteurAjout(pos);
-	noeudBonus->accepter(v1);
+	VisiteurAjout v1(pos);
+	noeudBonus->accepter(&v1);
 
 	cout << "Bonus x  : " << noeudBonus->obtenirPositionRelative().x << "  Bonus  y: " << noeudBonus->obtenirPositionRelative().y << "  Bonus z: " << noeudBonus->obtenirPositionRelative().z << endl;
 
-
-	// toujours liberer la mémoire !!!!
-	delete v1;
-
-	
 }
 
 ////////////////////////////////////////////////////////////////////////
