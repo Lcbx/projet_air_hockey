@@ -122,8 +122,8 @@ public:
 		this->_points.clear();
 		this->_points.push_back(glm::dvec3(this->_boundingBox.coinMin.x, this->_boundingBox.coinMin.y, 0));
 		this->_points.push_back(glm::dvec3(this->_boundingBox.coinMin.x, this->_boundingBox.coinMax.y, 0));
-		this->_points.push_back(glm::dvec3(this->_boundingBox.coinMax.x, this->_boundingBox.coinMin.y, 0));
 		this->_points.push_back(glm::dvec3(this->_boundingBox.coinMax.x, this->_boundingBox.coinMax.y, 0));
+		this->_points.push_back(glm::dvec3(this->_boundingBox.coinMax.x, this->_boundingBox.coinMin.y, 0));		
 	};
 
 	////////////////////////////////////////////////////////////////////////

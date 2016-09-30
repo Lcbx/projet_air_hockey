@@ -81,9 +81,7 @@ void VisiteurSelection::visiter(NoeudComposite* noeud) {
 }
 
 
-void VisiteurSelection::visiter(NoeudRondelle* noeud) { 
-	
-}
+void VisiteurSelection::visiter(NoeudRondelle* noeud) { }
 
 void VisiteurSelection::visiter(NoeudMuret* noeud) {
 	math::Droite3D droiteDirectrice = noeud->obtenirDroiteDirectrice();
@@ -91,9 +89,15 @@ void VisiteurSelection::visiter(NoeudMuret* noeud) {
 
 	double minDist = INFINITY;
 	int pointsSize = this->getPoints().size();
+
+	//Si un point est sur la droite et dans la droite du muret, 
+	double l = glm::length(droiteDirectrice.lireVecteur()); // Longeur de la droite
 	for (int i = 0; i < pointsSize; i++) {
-		//TODO : Fix when the projected point is not on the line
-		minDist = min(minDist, droiteDirectrice.distancePoint(this->getPoint(i)));
+		double a = glm::distance(droiteDirectrice.lirePoint(), this->getPoint(i)); // Longeur point A et autre point
+		double b = glm::distance(droiteDirectrice.lirePoint() + droiteDirectrice.lireVecteur(), this->getPoint(i)); // Longeur point B et autre point
+		if (a <= l && b <= l) {	//On reste dans la droite si a <= l et b <= l
+			minDist = min(minDist, droiteDirectrice.distancePoint(this->getPoint(i)));
+		}
 	}
 	
 	/// Click near or inside

@@ -39,7 +39,6 @@ public:
 	//Accepter le visiteur
 	virtual void accepter(Visiteur* v);
 
-
 private:
 
 

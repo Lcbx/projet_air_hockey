@@ -44,10 +44,7 @@ public:
 
 	///Permet d'obtenir la droite directrice du muret
 	virtual math::Droite3D obtenirDroiteDirectrice();
-
-	///Permet d'obtenir le rayon du modèle du muret
-	virtual double obtenirRayonModele();
-	
+		
 private:
 	
 	

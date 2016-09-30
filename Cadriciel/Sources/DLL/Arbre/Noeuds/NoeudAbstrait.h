@@ -17,6 +17,8 @@
 #include "glm\glm.hpp"
 #include "glm\gtc\matrix_transform.hpp"
 
+#include "Utilitaire.h"
+
 /// Déclarations avancées pour contenir un pointeur vers un modèle3D et son storage
 namespace modele{
 	class Modele3D;
@@ -142,6 +144,14 @@ public:
 	virtual void afficherConcret(const glm::mat4& vueProjection) const;
 	/// Anime le noeud.
 	virtual void animer(float dt);
+
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn double NoeudMuret::obtenirRayonModele()
+	/// Permet d'obtenir lle rayon du modele
+	/// @return Le rayon du modèle
+	////////////////////////////////////////////////////////////////////////
+	virtual double obtenirRayonModele() { return utilitaire::calculerCylindreEnglobant(*modele_).rayon; };
 
 
 	//Accepter le visiteur

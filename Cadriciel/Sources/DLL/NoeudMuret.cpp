@@ -148,20 +148,16 @@ void NoeudMuret::animer(float temps)
 }*/
 
 ////////////////////////////////////////////////////////////////////////
-///
 /// @fn math::Droite3D obtenirDroiteDirectrice()
-///
 /// Permet d'obtenir la droite directrice du muret
-///
 /// @return La droite directrice du muret
-///
 ////////////////////////////////////////////////////////////////////////
 math::Droite3D NoeudMuret::obtenirDroiteDirectrice() {
 	double rayon = this->obtenirRayonModele();
 
 	glm::dvec3 scale = this->getScale();
-	glm::dvec3 left { -(rayon * scale.x - rayon), 0, 0 };
-	glm::dvec3 right{ (rayon * scale.x - rayon), 0, 0 };
+	glm::dvec3 left { -(rayon + scale.x), 0, 0 };
+	glm::dvec3 right{ (rayon + scale.x), 0, 0 };
 
 	double angle = this->getAngle();
 
@@ -171,21 +167,6 @@ math::Droite3D NoeudMuret::obtenirDroiteDirectrice() {
 
 	math::Droite3D droite{ left, right};
 	return droite;
-}
-
-
-
-////////////////////////////////////////////////////////////////////////
-///
-/// @fn double NoeudMuret::obtenirRayonModele()
-///
-/// Permet d'obtenir lle rayon du modele
-///
-/// @return Le rayon du modèle
-///
-////////////////////////////////////////////////////////////////////////
-double NoeudMuret::obtenirRayonModele() {
-	return utilitaire::calculerCylindreEnglobant(*modele_).rayon;
 }
 
 ////////////////////////////////////////////////
