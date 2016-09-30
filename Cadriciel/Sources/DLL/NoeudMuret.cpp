@@ -114,7 +114,7 @@ void NoeudMuret::animer(float temps)
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-BoiteCollision NoeudMuret::obtenirBoiteCollision() {
+/*BoiteCollision NoeudMuret::obtenirBoiteCollision() {
 	utilitaire::BoiteEnglobante boudingBox = utilitaire::calculerBoiteEnglobante(*modele_);
 
 	// Initialisation des différents points
@@ -145,6 +145,47 @@ BoiteCollision NoeudMuret::obtenirBoiteCollision() {
 	BoiteCollision collidingBox(segments);
 
 	return collidingBox;
+}*/
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn math::Droite3D obtenirDroiteDirectrice()
+///
+/// Permet d'obtenir la droite directrice du muret
+///
+/// @return La droite directrice du muret
+///
+////////////////////////////////////////////////////////////////////////
+math::Droite3D NoeudMuret::obtenirDroiteDirectrice() {
+	double rayon = this->obtenirRayonModele();
+
+	glm::dvec3 scale = this->getScale();
+	glm::dvec3 left { -(rayon * scale.x - rayon), 0, 0 };
+	glm::dvec3 right{ (rayon * scale.x - rayon), 0, 0 };
+
+	double angle = this->getAngle();
+
+	glm::dvec3 pos = this->obtenirPositionRelative();
+	left = utilitaire::rotater(left, angle) + pos - (glm::dvec3{ -10, 0, 0 });
+	right = utilitaire::rotater(right, angle) + pos - (glm::dvec3{-10, 0, 0});
+
+	math::Droite3D droite{ left, right};
+	return droite;
+}
+
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn double NoeudMuret::obtenirRayonModele()
+///
+/// Permet d'obtenir lle rayon du modele
+///
+/// @return Le rayon du modèle
+///
+////////////////////////////////////////////////////////////////////////
+double NoeudMuret::obtenirRayonModele() {
+	return utilitaire::calculerCylindreEnglobant(*modele_).rayon;
 }
 
 ////////////////////////////////////////////////

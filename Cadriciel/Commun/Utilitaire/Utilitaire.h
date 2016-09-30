@@ -117,6 +117,14 @@ namespace utilitaire {
    /// Permet d'effectuer la rotation d'un point pour un angle donné
    glm::dvec3 rotater(const glm::dvec3 &point, const double angle);
 
+   /// Permet de vérifier si un point donné est dans un triandle
+   bool pointInTriangle(const glm::dvec2 &point, 
+	   const glm::dvec2 &sidePoint1, 
+	   const glm::dvec2 &sidePoint2, 
+	   const glm::dvec2 &sidePoint3);
+
+   /// Permet d'obtenir le déterminant d'une matrice vecteur
+   double det(glm::dmat2x2 matrice);
 
    ////////////////////////////////////////////////////////////////////////
    ///

@@ -542,6 +542,70 @@ namespace utilitaire {
 		return resultat;
 	}
 
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn bool pointInTriangle(const glm::dvec2 &point, const glm::dvec2 &sidePoint1, const glm::dvec2 &sidePoint2)
+	///
+	/// Cette fonction vérifier si le point est dans le triangle donné
+	///
+	/// @param [in] point : Point à vérifier
+	/// @param [in] sidePoint1 : Sommet 1 du triangle
+	/// @param [in] sidePoint2 : Sommet 2 du triangle
+	/// @param [in] sidePoint3 : Sommet 3 du triangle
+	///
+	/// @return Vrai si le point est situé dans le triangle
+	///
+	/// @author kingnosis
+	/// @source http://www.gamedev.net/topic/295943-is-this-a-better-point-in-triangle-test-2d/
+	/// @date 21 January 2005 - 03:42 PM
+	///
+	////////////////////////////////////////////////////////////////////////
+	bool pointInTriangle(const glm::dvec2 &point, 
+		const glm::dvec2 &sidePoint1, 
+		const glm::dvec2 &sidePoint2,
+		const glm::dvec2 &sidePoint3) {
+
+		bool b1, b2, b3;
+
+		glm::dmat2x2 matrice1{
+			point.x - sidePoint1.x,
+			point.y - sidePoint1.y,
+			sidePoint1.x - sidePoint2.x,
+			sidePoint1.y - sidePoint2.y
+		};
+		glm::dmat2x2 matrice2{
+			point.x - sidePoint2.x,
+			point.y - sidePoint2.y,
+			sidePoint2.x - sidePoint3.x,
+			sidePoint2.y - sidePoint3.y
+		};
+		glm::dmat2x2 matrice3{
+			point.x - sidePoint3.x,
+			point.y - sidePoint3.y,
+			sidePoint3.x - sidePoint1.x,
+			sidePoint3.y - sidePoint1.y
+		};
+		b1 = det(matrice1) < 0.0;
+		b2 = det(matrice2) < 0.0;
+		b3 = det(matrice3) < 0.0;
+
+		return ((b1 == b2) && (b2 == b3));
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn double det(glm::dmat2x2 matrice);
+	///
+	/// Permet d'obtenir le déterminant de la matrice
+	///
+	/// @param [in] matrice : Matrice que l'on veut obtenir le déterminant
+	///
+	/// @return Le déterminant de la matrice
+	////////////////////////////////////////////////////////////////////////
+	double det(glm::dmat2x2 matrice) {
+		return (matrice[0][0] * matrice[1][1]) - (matrice[0][1] * matrice[1][0]);
+	}
+
 }; // Fin de l'espace de nom utilitaire.
 
 

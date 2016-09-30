@@ -44,7 +44,6 @@ bool SelectionInsideBoundingBox(utilitaire::BoiteEnglobante selectionRectangle, 
 	}
 }
 
-
 void VisiteurSelection::setNodeSelectedState(NoeudAbstrait* noeud, bool isInsideSelection) {
 	if (isInsideSelection) {
 		switch (_state) {
@@ -82,15 +81,36 @@ void VisiteurSelection::visiter(NoeudComposite* noeud) {
 }
 
 
-void VisiteurSelection::visiter(NoeudRondelle* noeud) { }
-
-void VisiteurSelection::visiter(NoeudMuret* noeud) { 
-	BoiteCollision boundingBox = noeud->obtenirBoiteCollision();
-
+void VisiteurSelection::visiter(NoeudRondelle* noeud) { 
 	
-	/*if (SelectionInsideBoundingBox(_boundingBox, boudingBox)) {
+}
 
-	}*/
+void VisiteurSelection::visiter(NoeudMuret* noeud) {
+	math::Droite3D droiteDirectrice = noeud->obtenirDroiteDirectrice();
+	double rayon = noeud->obtenirRayonModele();
+
+	double minDist = INFINITY;
+	int pointsSize = this->getPoints().size();
+	for (int i = 0; i < pointsSize; i++) {
+		//TODO : Fix when the projected point is not on the line
+		minDist = min(minDist, droiteDirectrice.distancePoint(this->getPoint(i)));
+	}
+	
+	/// Click near or inside
+	if (rayon >= minDist) {
+		this->setNodeSelectedState(noeud, true);
+	} /// Object inside selection
+	else if (PointInsideBoundingBox(this->_boundingBox, noeud->obtenirPositionRelative())) {
+		this->setNodeSelectedState(noeud, true);
+	} /// Le rectangle coïncide avec la droite (collision)
+	else {
+		bool doesCollides = false;
+		for (int i = 0; i < pointsSize; i++) { //Est-ce que les deux droites s'intersectent
+			doesCollides |= droiteDirectrice.intersectionSegment(this->getPoint(i), this->getPoint(i + 1));
+		}
+
+		this->setNodeSelectedState(noeud, doesCollides);
+	}
 }
 
 void VisiteurSelection::visiter(NoeudBonus* noeud) {
@@ -133,5 +153,20 @@ void SingletonSelection::selectionner(
 	std::cout << d_end.x << ":" << d_end.y << ":" << d_end.z << std::endl;*/
 	for (auto node : x) {
 		std::cout << "Selection detected" << std::endl;
+	}
+}
+
+///Permet d'obtenir les points formant le rectangle
+inline std::vector<glm::dvec3> VisiteurSelection::getPoints() {
+	return this->_points;
+}
+
+///Permet d'obtenir le point à l'index donné avec wrapping (-1 = dernier item, n+1 = premier item
+glm::dvec3 VisiteurSelection::getPoint(int index) {
+	std::vector<glm::dvec3> vec = this->getPoints();
+	if (index % vec.size() >= 0) {
+		return vec[index % vec.size()];
+	} else {
+		return vec[vec.size() - (index % vec.size())];
 	}
 }

@@ -35,6 +35,7 @@ private:
 	SelectionState _state = SelectionState::SELECT;
 
 	utilitaire::BoiteEnglobante _boundingBox;
+	std::vector<glm::dvec3> _points; //Points formant le rectangle de sélection
 
 	////////////////////////////////////////////////////////////////////////////////
 	/// @func void SetNodeSelectedState(NoeudAbstrait* noeud, bool InsideSelection)
@@ -45,6 +46,22 @@ private:
 	/// Permet de changer l'état de sélection d'un noeud en fonction du scénario de sélection
 	////////////////////////////////////////////////////////////////////////////////	
 	void VisiteurSelection::setNodeSelectedState(NoeudAbstrait* noeud, bool isInsideSelection);
+
+
+	////////////////////////////////////////////////////////////////////////////////
+	/// @func std::vector<glm::dvec3> getPoints()
+	/// @return Vecteur de l'ensemble des points formant la boîte de séleciton
+	/// Permet d'obtenir les points formant le rectangle de sélection
+	////////////////////////////////////////////////////////////////////////////////
+	inline std::vector<glm::dvec3> getPoints();
+
+	////////////////////////////////////////////////////////////////////////////////
+	/// @func glm::dvec3 getPoint()
+	/// @return Point à l'index donné
+	/// Permet d'obtenir le point à l'index index. Si index est plus grand que la taille
+	/// du vecteur, un wrapping est réalisé. Un index négatif retourne le n dernier élément
+	////////////////////////////////////////////////////////////////////////////////
+	glm::dvec3 getPoint(int index);
 
 public:
 	virtual void visiter(NoeudAbstrait* noeud);
@@ -85,11 +102,28 @@ public:
 	///
 	////////////////////////////////////////////////////////////////////////
 	void setBoundingBox(glm::dvec3 begin, glm::dvec3 end) {
-		_boundingBox.coinMin = begin;
-		_boundingBox.coinMax = end;
+		setBoundingBox(utilitaire::BoiteEnglobante({ begin, end }));
 	};
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn setBoundingBox
+	///
+	/// Permet de changer le bounding box pour la sélection
+	///
+	/// @param[in] utilitaire::BoiteEnglobante _box Boîte englobante représentant le rectangle élastique
+	///
+	/// @return Nothing
+	///
+	////////////////////////////////////////////////////////////////////////
 	void setBoundingBox(utilitaire::BoiteEnglobante _box) {
 		_boundingBox = _box;
+
+		this->_points.clear();
+		this->_points.push_back(glm::dvec3(this->_boundingBox.coinMin.x, this->_boundingBox.coinMin.y, 0));
+		this->_points.push_back(glm::dvec3(this->_boundingBox.coinMin.x, this->_boundingBox.coinMax.y, 0));
+		this->_points.push_back(glm::dvec3(this->_boundingBox.coinMax.x, this->_boundingBox.coinMin.y, 0));
+		this->_points.push_back(glm::dvec3(this->_boundingBox.coinMax.x, this->_boundingBox.coinMax.y, 0));
 	};
 
 	////////////////////////////////////////////////////////////////////////

@@ -40,8 +40,14 @@ public:
 	virtual void accepter(Visiteur* v);
 
 	///Permet d'obtenir la boite de collision pour le muret donné
-	virtual BoiteCollision obtenirBoiteCollision();
+	//virtual BoiteCollision obtenirBoiteCollision();
 
+	///Permet d'obtenir la droite directrice du muret
+	virtual math::Droite3D obtenirDroiteDirectrice();
+
+	///Permet d'obtenir le rayon du modèle du muret
+	virtual double obtenirRayonModele();
+	
 private:
 	
 	
