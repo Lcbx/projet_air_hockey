@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
 
-
 namespace InterfaceGraphique
 {
     public partial class Edition : Form
@@ -31,8 +30,6 @@ namespace InterfaceGraphique
             (this as Control).KeyUp += new KeyEventHandler(keyUpHandler);
             InitializeComponent();
             InitialiserAnimation();
-
-           
 
         }
 
@@ -60,28 +57,33 @@ namespace InterfaceGraphique
 
         }
 
+        bool supprimer = false;
+
         private void keyDownHandler(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.ControlKey) FonctionsNatives.toucheControl(true);
+                       
         }
 
-        bool supprimer = false;
         private void keyUpHandler(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode) {
-                case Keys.ControlKey:   FonctionsNatives.toucheControl(false);  break; 
-                case Keys.Escape:       FonctionsNatives.escEnfonce();          break;
-                case Keys.Delete:
-                    {
-                        System.Console.WriteLine("touche Delete");
-                        FonctionsNatives.supprimerObjet();
-                    
+                case Keys.ControlKey:        { FonctionsNatives.toucheControl(false); break; } 
+                case Keys.Escape:{ 
+                        System.Console.WriteLine("touche echapppp");
+                        FonctionsNatives.escEnfonce();
                         break; }
 
+                case Keys.Delete:{
+                        System.Console.WriteLine("touche Delete");
+                        FonctionsNatives.supprimerObjet();
+                        break; }
+
+                case Keys.O: { FonctionsNatives.deplacerPointHaut(2); break; }
                 default: break;
             } 
         }
-
+        
         private void nouveauToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Console.WriteLine("Nouveau");
@@ -111,11 +113,10 @@ namespace InterfaceGraphique
         }
 
 
-
         /////////////////////////////////////////////////////////////////////////
         //  gere la souris
         /////////////////////////////////////////////////////////////////////////
-        public enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, DEBUT_AJOUT_MUR, AJOUT_MUR, DEBUT_AJOUT_PORTAIL, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, REDIMENSIONNEMENT, NBETATS };
+        public enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, AJOUT_MUR, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, REDIMENSIONNEMENT, NBETATS };
 
         private Etats EtatSouris = Etats.SELECTION;
 
@@ -136,9 +137,7 @@ namespace InterfaceGraphique
                     case Etats.ROTATION: {              text = "rotation";          break; }
                     case Etats.DUPLICATION: {           text = "duplication";       break; }
                     case Etats.AJOUT_ACCELERATEUR: {    text = "ajout accelerateur"; break; }
-                    case Etats.DEBUT_AJOUT_MUR: {       text = "debut ajout mur";   break; }
                     case Etats.AJOUT_MUR: {             text = "ajout mur";         break; }
-                    case Etats.DEBUT_AJOUT_PORTAIL: {   text = "debut ajout portail"; break; }
                     case Etats.AJOUT_PORTAIL: {         text = "ajout portail";     break; }
                     default: break;
                 }
@@ -158,8 +157,6 @@ namespace InterfaceGraphique
             }
 
             mousePressed = true;
-
-         
         }
         public void panel1_MouseUp(object sender, MouseEventArgs e)
         {
@@ -254,6 +251,7 @@ namespace InterfaceGraphique
 
         }
 
+
         private void propriétésToolStripMenuItem_Click(object sender, EventArgs e)
         {
         
@@ -315,14 +313,14 @@ namespace InterfaceGraphique
         {
             desactiverAutresBoutons();
             toolStripButtonPortail.Checked = true;
-            this.changerMode(Etats.DEBUT_AJOUT_PORTAIL);
+            this.changerMode(Etats.AJOUT_PORTAIL);
         }
 
         private void toolStripButtonMuret_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
             toolStripButtonMuret.Checked = true;
-            this.changerMode(Etats.DEBUT_AJOUT_MUR);
+            this.changerMode(Etats.AJOUT_MUR);
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -375,6 +373,16 @@ namespace InterfaceGraphique
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void éditionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int nbreObSelectionnes= FonctionsNatives.nombreObjetSelectionne();
+        }
+
+        private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FonctionsNatives.supprimerObjet();
         }
 
 
@@ -472,5 +480,14 @@ namespace InterfaceGraphique
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void deplacerObjet(double x, double y);
 
+        //foction test bidon
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void test();
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void deplacerPointHaut(int index);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int nombreObjetSelectionne();
     }
 }

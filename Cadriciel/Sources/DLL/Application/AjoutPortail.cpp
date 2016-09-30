@@ -12,23 +12,17 @@
 #include "FacadeModele.h"
 #include "Souris.h"
 
-void AjoutPortail::start(int x, int y) {
-	notrePosition_ = { x,y,x,y };
-}
 
-void AjoutPortail::current(int x, int y) {}
-
-void AjoutPortail::end(int x, int y) {
-	plusDe3px(notrePosition_) ? operationDragClick() : operationShortClick();
-}
-
-void AjoutPortail::position(int x, int y) {
-	notrePosition_[2] = x; notrePosition_[3] = y;
-}
 
 void AjoutPortail::operationShortClick() {
-	FacadeModele::obtenirInstance()->ajouterPortailDeux(notrePosition_[0], notrePosition_[1]);
-	Souris::obtenirInstance()->EtatdelaSouris(Souris::DEBUT_AJOUT_PORTAIL);
+	if (clickInitial) {
+		FacadeModele::obtenirInstance()->ajouterPortail( X1(), Y1() );
+		clickInitial = false;
+	}
+	else {
+		FacadeModele::obtenirInstance()->ajouterPortailDeux( X1(), Y1() );
+		clickInitial = true;
+	}
 }
 
 void AjoutPortail::operationDragClick() {
@@ -37,5 +31,5 @@ void AjoutPortail::operationDragClick() {
 
 void AjoutPortail::escEnfonce() {
 	FacadeModele::obtenirInstance()->supprimerPortail(true);
-	Souris::obtenirInstance()->EtatdelaSouris(Souris::DEBUT_AJOUT_PORTAIL);
+	clickInitial = true;
 }

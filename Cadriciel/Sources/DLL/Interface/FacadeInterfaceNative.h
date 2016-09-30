@@ -25,6 +25,7 @@ extern "C" {
 	
 	
 	__declspec(dllexport) void ajouterPortail(int x1, int y1);
+	//__declspec(dllexport) void escEnfonce(bool esc);
 	__declspec(dllexport) void ajouterPortailDeux(int x2, int y2);
 
 
@@ -51,11 +52,19 @@ extern "C" {
 	//touche control
 	__declspec(dllexport) void toucheControl(bool presse);
 	//touche escape
+
 	__declspec(dllexport) void escEnfonce();
 
 
 	//Deplacer un objet avec la boite de configuration
 	__declspec(dllexport) void deplacerObjet(double x, double y);
+	
+	// fonction bidon test
+	__declspec(dllexport) void test();
+	// fonctions de test pour les noeuds de controle
+	__declspec(dllexport) void deplacerPointHaut(int index);
 
+	//verifier le nombre d'objet sur la table
+	__declspec(dllexport) int nombreObjetSelectionne();
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__

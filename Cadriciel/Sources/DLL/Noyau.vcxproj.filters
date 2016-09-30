@@ -141,9 +141,6 @@
     <ClCompile Include="Application\AjoutPortail.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
-    <ClCompile Include="Application\DebutAjoutMur.cpp">
-      <Filter>Source Files\Application</Filter>
-    </ClCompile>
     <ClCompile Include="Application\DebutAjoutPortail.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
@@ -160,6 +157,9 @@
       <Filter>Source Files\Application</Filter>
     </ClCompile>
     <ClCompile Include="Arbre\Noeuds\NoeudTable.cpp">
+      <Filter>Source Files\Arbre\Noeuds</Filter>
+    </ClCompile>
+    <ClCompile Include="Arbre\Noeuds\NoeudPointControle.cpp">
       <Filter>Source Files\Arbre\Noeuds</Filter>
     </ClCompile>
   </ItemGroup>
@@ -263,9 +263,6 @@
     <ClInclude Include="Application\Duplication.h">
       <Filter>Header Files\Application</Filter>
     </ClInclude>
-    <ClInclude Include="Application\DebutAjoutMur.h">
-      <Filter>Header Files\Application</Filter>
-    </ClInclude>
     <ClInclude Include="Application\AjoutMur.h">
       <Filter>Header Files\Application</Filter>
     </ClInclude>
@@ -276,6 +273,12 @@
       <Filter>Header Files\Application</Filter>
     </ClInclude>
     <ClInclude Include="Arbre\Noeuds\NoeudTable.h">
+      <Filter>Header Files\Arbre\Noeuds</Filter>
+    </ClInclude>
+    <ClInclude Include="Arbre\Noeuds\NoeudPointControle.h">
+      <Filter>Header Files\Arbre\Noeuds</Filter>
+    </ClInclude>
+    <ClInclude Include="Arbre\Noeuds\Couleurs.h">
       <Filter>Header Files\Arbre\Noeuds</Filter>
     </ClInclude>
   </ItemGroup>

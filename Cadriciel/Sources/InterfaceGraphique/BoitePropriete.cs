@@ -16,6 +16,8 @@ namespace InterfaceGraphique
         {
             InitializeComponent();
             this.ControlBox = false;
+            this.MinimizeBox = false;
+            this.MaximizeBox = false;
         }
 
         private void label3_Click(object sender, EventArgs e)
