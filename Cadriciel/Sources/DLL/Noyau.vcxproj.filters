@@ -276,7 +276,7 @@
       <Filter>Header Files\Application</Filter>
     </ClInclude>
     <ClInclude Include="Arbre\Noeuds\NoeudTable.h">
-      <Filter>Source Files\Arbre\Noeuds</Filter>
+      <Filter>Header Files\Arbre\Noeuds</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -85,10 +85,15 @@ public:
 	void ajouterMurFantome(int corXin, int corYin, int corX, int corY);
 
 
-	double getPosDataBiding();
+	double getPosDataBidingX();
+	double getPosDataBidingY();
 
+	//void deplacerObjet(int x1 , int y1, int x2, int y2 );
 
-	void deplacerObjet(int x1 , int y1, int x2, int y2 );
+	void effacerObjet();
+
+	void deplacerObjet(double x, double y);
+
 
 private:
 

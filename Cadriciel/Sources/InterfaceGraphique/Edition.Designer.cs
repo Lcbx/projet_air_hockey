@@ -75,46 +75,8 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripTextBox3 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.groupBoxConstantes = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.uniteAccelelration = new System.Windows.Forms.Label();
-            this.labelAccélération = new System.Windows.Forms.Label();
-            this.labelRebond = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.labelFriction = new System.Windows.Forms.Label();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.groupBoxProprietes = new System.Windows.Forms.GroupBox();
-            this.groupBoxFacteurDEchelle = new System.Windows.Forms.GroupBox();
-            this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
-            this.groupBoxAngleDeRotation = new System.Windows.Forms.GroupBox();
-            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
-            this.groupBoxPosition = new System.Windows.Forms.GroupBox();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.labelY = new System.Windows.Forms.Label();
-            this.labelX = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            this.groupBoxConstantes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            this.groupBoxProprietes.SuspendLayout();
-            this.groupBoxFacteurDEchelle.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
-            this.groupBoxAngleDeRotation.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
-            this.groupBoxPosition.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -127,13 +89,12 @@
             this.panel1.Location = new System.Drawing.Point(72, 27);
             this.panel1.Margin = new System.Windows.Forms.Padding(6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(551, 458);
+            this.panel1.Size = new System.Drawing.Size(638, 458);
             this.panel1.TabIndex = 0;
             this.panel1.TabStop = true;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Edition_MouseMove);
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
-
             // 
             // menuStrip1
             // 
@@ -182,7 +143,7 @@
             // 
             this.enregistrerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("enregistrerToolStripMenuItem.Image")));
             this.enregistrerToolStripMenuItem.Name = "enregistrerToolStripMenuItem";
-            this.enregistrerToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.enregistrerToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
             this.enregistrerToolStripMenuItem.Text = "Enregistrer";
             // 
             // enregistrerSousToolStripMenuItem
@@ -542,285 +503,12 @@
             this.toolStripButton1.ToolTipText = "Gestion de Contrôle DePoints";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
-            // splitContainer1
-            // 
-            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitContainer1.Enabled = false;
-            this.splitContainer1.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.splitContainer1.Location = new System.Drawing.Point(568, 24);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.textBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.groupBoxConstantes);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.groupBoxProprietes);
-            this.splitContainer1.Size = new System.Drawing.Size(142, 401);
-            this.splitContainer1.SplitterDistance = 134;
-            this.splitContainer1.SplitterWidth = 20;
-            this.splitContainer1.TabIndex = 4;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(150, 27);
-            this.textBox1.TabIndex = 5;
-            this.textBox1.Text = "Configuration";
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // groupBoxConstantes
-            // 
-            this.groupBoxConstantes.Controls.Add(this.label2);
-            this.groupBoxConstantes.Controls.Add(this.uniteAccelelration);
-            this.groupBoxConstantes.Controls.Add(this.labelAccélération);
-            this.groupBoxConstantes.Controls.Add(this.labelRebond);
-            this.groupBoxConstantes.Controls.Add(this.label1);
-            this.groupBoxConstantes.Controls.Add(this.labelFriction);
-            this.groupBoxConstantes.Controls.Add(this.numericUpDown3);
-            this.groupBoxConstantes.Controls.Add(this.numericUpDown2);
-            this.groupBoxConstantes.Controls.Add(this.numericUpDown1);
-            this.groupBoxConstantes.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBoxConstantes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
-            this.groupBoxConstantes.Location = new System.Drawing.Point(0, 12);
-            this.groupBoxConstantes.Name = "groupBoxConstantes";
-            this.groupBoxConstantes.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBoxConstantes.Size = new System.Drawing.Size(138, 118);
-            this.groupBoxConstantes.TabIndex = 0;
-            this.groupBoxConstantes.TabStop = false;
-            this.groupBoxConstantes.Text = "Constantes";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(34, 90);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(13, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "2";
-            // 
-            // uniteAccelelration
-            // 
-            this.uniteAccelelration.AutoSize = true;
-            this.uniteAccelelration.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uniteAccelelration.Location = new System.Drawing.Point(12, 95);
-            this.uniteAccelelration.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.uniteAccelelration.Name = "uniteAccelelration";
-            this.uniteAccelelration.Size = new System.Drawing.Size(37, 13);
-            this.uniteAccelelration.TabIndex = 7;
-            this.uniteAccelelration.Text = "(m/s  )";
-            // 
-            // labelAccélération
-            // 
-            this.labelAccélération.AutoSize = true;
-            this.labelAccélération.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.labelAccélération.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.labelAccélération.Location = new System.Drawing.Point(3, 79);
-            this.labelAccélération.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelAccélération.Name = "labelAccélération";
-            this.labelAccélération.Size = new System.Drawing.Size(74, 15);
-            this.labelAccélération.TabIndex = 6;
-            this.labelAccélération.Text = "Accélération";
-            // 
-            // labelRebond
-            // 
-            this.labelRebond.AutoSize = true;
-            this.labelRebond.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.labelRebond.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.labelRebond.Location = new System.Drawing.Point(3, 53);
-            this.labelRebond.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelRebond.Name = "labelRebond";
-            this.labelRebond.Size = new System.Drawing.Size(51, 15);
-            this.labelRebond.TabIndex = 5;
-            this.labelRebond.Text = "Rebond";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.label1.Location = new System.Drawing.Point(14, 49);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 15);
-            this.label1.TabIndex = 4;
-            // 
-            // labelFriction
-            // 
-            this.labelFriction.AutoSize = true;
-            this.labelFriction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.labelFriction.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.labelFriction.Location = new System.Drawing.Point(3, 28);
-            this.labelFriction.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelFriction.Name = "labelFriction";
-            this.labelFriction.Size = new System.Drawing.Size(47, 15);
-            this.labelFriction.TabIndex = 3;
-            this.labelFriction.Text = "Friction";
-            // 
-            // numericUpDown3
-            // 
-            this.numericUpDown3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.numericUpDown3.Location = new System.Drawing.Point(76, 76);
-            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(60, 21);
-            this.numericUpDown3.TabIndex = 2;
-            this.numericUpDown3.ValueChanged += new System.EventHandler(this.numericUpDown3_ValueChanged);
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.numericUpDown2.Location = new System.Drawing.Point(76, 49);
-            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(60, 21);
-            this.numericUpDown2.TabIndex = 1;
-            this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.numericUpDown1.Location = new System.Drawing.Point(76, 24);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(60, 21);
-            this.numericUpDown1.TabIndex = 0;
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
-            // 
-            // groupBoxProprietes
-            // 
-            this.groupBoxProprietes.Controls.Add(this.groupBoxFacteurDEchelle);
-            this.groupBoxProprietes.Controls.Add(this.groupBoxAngleDeRotation);
-            this.groupBoxProprietes.Controls.Add(this.groupBoxPosition);
-            this.groupBoxProprietes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxProprietes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
-            this.groupBoxProprietes.Location = new System.Drawing.Point(0, 0);
-            this.groupBoxProprietes.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBoxProprietes.Name = "groupBoxProprietes";
-            this.groupBoxProprietes.Size = new System.Drawing.Size(138, 243);
-            this.groupBoxProprietes.TabIndex = 0;
-            this.groupBoxProprietes.TabStop = false;
-            this.groupBoxProprietes.Text = "Propriétes";
-            // 
-            // groupBoxFacteurDEchelle
-            // 
-            this.groupBoxFacteurDEchelle.Controls.Add(this.numericUpDown7);
-            this.groupBoxFacteurDEchelle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxFacteurDEchelle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.groupBoxFacteurDEchelle.Location = new System.Drawing.Point(3, 186);
-            this.groupBoxFacteurDEchelle.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBoxFacteurDEchelle.Name = "groupBoxFacteurDEchelle";
-            this.groupBoxFacteurDEchelle.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBoxFacteurDEchelle.Size = new System.Drawing.Size(132, 86);
-            this.groupBoxFacteurDEchelle.TabIndex = 2;
-            this.groupBoxFacteurDEchelle.TabStop = false;
-            this.groupBoxFacteurDEchelle.Text = "Facteur d\'échelle";
-            // 
-            // numericUpDown7
-            // 
-            this.numericUpDown7.Location = new System.Drawing.Point(36, 25);
-            this.numericUpDown7.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown7.Name = "numericUpDown7";
-            this.numericUpDown7.Size = new System.Drawing.Size(60, 21);
-            this.numericUpDown7.TabIndex = 0;
-            this.numericUpDown7.ValueChanged += new System.EventHandler(this.numericUpDown7_ValueChanged);
-            // 
-            // groupBoxAngleDeRotation
-            // 
-            this.groupBoxAngleDeRotation.Controls.Add(this.numericUpDown6);
-            this.groupBoxAngleDeRotation.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxAngleDeRotation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.groupBoxAngleDeRotation.Location = new System.Drawing.Point(3, 109);
-            this.groupBoxAngleDeRotation.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBoxAngleDeRotation.Name = "groupBoxAngleDeRotation";
-            this.groupBoxAngleDeRotation.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBoxAngleDeRotation.Size = new System.Drawing.Size(132, 77);
-            this.groupBoxAngleDeRotation.TabIndex = 1;
-            this.groupBoxAngleDeRotation.TabStop = false;
-            this.groupBoxAngleDeRotation.Text = "Angle de rotation";
-            // 
-            // numericUpDown6
-            // 
-            this.numericUpDown6.Location = new System.Drawing.Point(36, 23);
-            this.numericUpDown6.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown6.Name = "numericUpDown6";
-            this.numericUpDown6.Size = new System.Drawing.Size(60, 21);
-            this.numericUpDown6.TabIndex = 0;
-            this.numericUpDown6.ValueChanged += new System.EventHandler(this.numericUpDown6_ValueChanged);
-            // 
-            // groupBoxPosition
-            // 
-            this.groupBoxPosition.Controls.Add(this.numericUpDown5);
-            this.groupBoxPosition.Controls.Add(this.numericUpDown4);
-            this.groupBoxPosition.Controls.Add(this.labelY);
-            this.groupBoxPosition.Controls.Add(this.labelX);
-            this.groupBoxPosition.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F);
-            this.groupBoxPosition.Location = new System.Drawing.Point(3, 17);
-            this.groupBoxPosition.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBoxPosition.Name = "groupBoxPosition";
-            this.groupBoxPosition.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBoxPosition.Size = new System.Drawing.Size(132, 92);
-            this.groupBoxPosition.TabIndex = 0;
-            this.groupBoxPosition.TabStop = false;
-            this.groupBoxPosition.Text = "Position";
-            // 
-            // numericUpDown5
-            // 
-            this.numericUpDown5.Location = new System.Drawing.Point(36, 41);
-            this.numericUpDown5.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(60, 19);
-            this.numericUpDown5.TabIndex = 3;
-            this.numericUpDown5.ValueChanged += new System.EventHandler(this.numericUpDown5_ValueChanged);
-            // 
-            // numericUpDown4
-            // 
-            this.numericUpDown4.Location = new System.Drawing.Point(36, 22);
-            this.numericUpDown4.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(60, 19);
-            this.numericUpDown4.TabIndex = 2;
-            this.numericUpDown4.ValueChanged += new System.EventHandler(this.numericUpDown4_ValueChanged);
-            // 
-            // labelY
-            // 
-            this.labelY.AutoSize = true;
-            this.labelY.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.labelY.Location = new System.Drawing.Point(13, 44);
-            this.labelY.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelY.Name = "labelY";
-            this.labelY.Size = new System.Drawing.Size(12, 13);
-            this.labelY.TabIndex = 1;
-            this.labelY.Text = "y";
-            // 
-            // labelX
-            // 
-            this.labelX.AutoSize = true;
-            this.labelX.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.labelX.Location = new System.Drawing.Point(13, 22);
-            this.labelX.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelX.Name = "labelX";
-            this.labelX.Size = new System.Drawing.Size(12, 13);
-            this.labelX.TabIndex = 0;
-            this.labelX.Text = "x";
-            // 
             // Edition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(710, 425);
-            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
@@ -832,25 +520,6 @@
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            this.groupBoxConstantes.ResumeLayout(false);
-            this.groupBoxConstantes.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            this.groupBoxProprietes.ResumeLayout(false);
-            this.groupBoxFacteurDEchelle.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
-            this.groupBoxAngleDeRotation.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
-            this.groupBoxPosition.ResumeLayout(false);
-            this.groupBoxPosition.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -900,31 +569,9 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonZoom;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Label labelAccélération;
-        private System.Windows.Forms.Label labelRebond;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label labelFriction;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.GroupBox groupBoxProprietes;
-        private System.Windows.Forms.GroupBox groupBoxPosition;
-        private System.Windows.Forms.NumericUpDown numericUpDown5;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
-        private System.Windows.Forms.Label labelY;
-        private System.Windows.Forms.Label labelX;
-        private System.Windows.Forms.GroupBox groupBoxFacteurDEchelle;
-        private System.Windows.Forms.NumericUpDown numericUpDown7;
-        private System.Windows.Forms.GroupBox groupBoxAngleDeRotation;
-        private System.Windows.Forms.NumericUpDown numericUpDown6;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ToolStripLabel toolStripTextBox1;
         private System.Windows.Forms.ToolStripLabel toolStripTextBox2;
         private System.Windows.Forms.ToolStripLabel toolStripTextBox3;
-        private System.Windows.Forms.GroupBox groupBoxConstantes;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label uniteAccelelration;
     }
    
 }

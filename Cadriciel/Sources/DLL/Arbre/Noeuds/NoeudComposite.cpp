@@ -299,32 +299,60 @@ unsigned int NoeudComposite::obtenirNombreEnfants() const
 ////////////////////////////////////////////////////////////////////////
 void NoeudComposite::effacerSelection()
 {
+	bool estPortail = false ;
 	// On efface tous les noeuds sélectionnés descendants des enfants.
-	for (NoeudAbstrait * enfant : enfants_){
-		enfant->effacerSelection();
+	for (NoeudAbstrait * enfant : enfants_) {
+		if (enfant->obtenirType() != "portail") {
+			enfant->effacerSelection();
+			std::cout << "NOOOOOOOOOOOOOOOOOOOT" << std::endl;
+			estPortail = false;
+		}
+
+		/*if (enfant->obtenirType() == "portail")
+		{
+			enfant->getFrere()->assignerSelection(true);
+			enfant->getFrere()->effacerSelection();
+			std::cout << "allo********************" << std::endl;
+		}
+		else {
+			enfant->effacerSelection();
+
+		}*/
+		else 
+		if(enfant->obtenirType() == "portail" && enfant->getFrere()!=NULL)
+		{
+			std::cout << "allo********************" << std::endl;
+			estPortail = true;
+		}
 	}
 
 	// On efface les enfants sélectionnés.  On effectue ce traitement
 	// dans une seconde boucle pour éviter de faire des assomptions
 	// sur la robustesse des itérateurs lorsque le conteneur est
 	// modifié pendant une itération.
-	for (conteneur_enfants::iterator it{ enfants_.begin() };
-		it != enfants_.end();
-		) {
-		if ((*it)->estSelectionne()) {
-			NoeudAbstrait* enfant{ (*it) };
-			enfants_.erase(it);
-			delete enfant;
+	if (estPortail == false) {
+		for (conteneur_enfants::iterator it{ enfants_.begin() };
+			it != enfants_.end();
+			) {
+			if ((*it)->estSelectionne()) {
+				std::cout << "if2" << std::endl;
 
-			// On ramène l'itération au début de la boucle, car le destructeur
-			// de l'enfant pourrait éventuellement avoir retiré d'autres
-			// enfants de l'arbre, ce qui briserait l'itération.  Pourrait
-			// éventuellement être évité avec des itérateurs plus robustes.
-			// Peut-être une liste chaînée?
-			it = enfants_.begin();
-		}
-		else {
-			++it;
+				NoeudAbstrait* enfant{ (*it) };
+				enfants_.erase(it);
+				delete enfant;
+
+				// On ramène l'itération au début de la boucle, car le destructeur
+				// de l'enfant pourrait éventuellement avoir retiré d'autres
+				// enfants de l'arbre, ce qui briserait l'itération.  Pourrait
+				// éventuellement être évité avec des itérateurs plus robustes.
+				// Peut-être une liste chaînée?
+				it = enfants_.begin();
+			}
+			else {
+				++it;
+				std::cout << "else" << std::endl;
+
+			}
 		}
 	}
 }

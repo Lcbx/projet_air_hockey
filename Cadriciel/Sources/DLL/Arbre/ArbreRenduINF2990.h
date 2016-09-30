@@ -82,10 +82,11 @@ public:
 
 
 
-   double getPosi();
+   double getPosiX();
+   double getPosiY();
 
 
-   void deplacer(glm::dvec3 posInial, glm::dvec3 posFinal);
+   void deplacerObjet(glm::dvec3 posDep);
 
 };
 

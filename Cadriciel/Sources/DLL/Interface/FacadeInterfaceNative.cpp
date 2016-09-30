@@ -287,9 +287,25 @@ extern "C"
 		FacadeModele::obtenirInstance()->ajouterMurFantome(corXin, corYin, corX, corY);
 	}
 
-	__declspec(dllexport) double getPos()
+	__declspec(dllexport) double getPosX()
 	{
-		return FacadeModele::obtenirInstance()->getPosDataBiding();
+		return FacadeModele::obtenirInstance()->getPosDataBidingX();
+	}
+
+	__declspec(dllexport) double getPosY()
+	{
+		return FacadeModele::obtenirInstance()->getPosDataBidingY();
+	}
+
+
+	__declspec(dllexport) void supprimerObjet()
+	{
+		return FacadeModele::obtenirInstance()->effacerObjet();
+	}
+
+	__declspec(dllexport) void deplacerObjet(double x, double y)
+	{
+		return FacadeModele::obtenirInstance()->deplacerObjet(x,y);
 	}
 }
 
