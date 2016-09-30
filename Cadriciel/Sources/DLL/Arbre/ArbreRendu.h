@@ -65,6 +65,7 @@ public:
    static unsigned int calculerProfondeurMaximale();
 
 
+
 private:
    /// Définition du type pour l'association du nom d'un type vers l'usine
    /// correspondante.

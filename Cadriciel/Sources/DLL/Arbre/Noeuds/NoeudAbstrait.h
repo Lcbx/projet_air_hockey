@@ -164,6 +164,7 @@ public:
 	inline const glm::dvec3& getScale()const;
 
 
+
 protected:
 	/// Type du noeud.
 	std::string      type_;

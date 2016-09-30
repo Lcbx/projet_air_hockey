@@ -180,13 +180,24 @@ void ArbreRenduINF2990::ajouterPortailDeux(glm::dvec3 pos)
 {
 	NoeudAbstrait* premierPortail = this->enfants_.back();
 
+
 	NoeudAbstrait* noeudPortail{ creerNoeud(NOM_PORTAIL) };
 	Visiteur* v1 = new VisiteurAjout(pos);
 	
 	//etablir les liens entre les 2 portails
 	noeudPortail->setFrere(premierPortail);
-	premierPortail->setFrere(noeudPortail);
+	premierPortail->setFrere(noeudPortail); 
 
+	/*NoeudAbstrait* noeudPortail = this->ajouterNouveauNoeud2(premierPortail, NOM_PORTAIL);
+	
+	noeudPortail->assignerParent(premierPortail);
+	enfants_.push_back(noeudPortail);
+	*/
+	
+	//premierPortail->ajouter(noeudPortail);
+	//ajouter(noeudPortail);
+	//noeudPortail->assignerParent(premierPortail);
+	std::cout << "++++type++: " << noeudPortail->obtenirType() << std::endl;
 	noeudPortail->accepter(v1);
 
 	premierEstajoute = false;
@@ -214,8 +225,6 @@ void ArbreRenduINF2990::supprimerPortail(bool escTouche)
 		if (this->enfants_.size() != NULL && premierEstajoute == true) 
 		{
 		
-			cout<<"enfant du dernier: "<< this->enfants_.back()->obtenirNombreEnfants()<<endl;
-
 			//supprime le 1er portail			
 			this->effacer(this->enfants_.back());
 			premierEstajoute = false;
@@ -309,7 +318,57 @@ double ArbreRenduINF2990::calculerAngle(glm::dvec3 pos, glm::dvec3 posf)
 }
 
 
+double ArbreRenduINF2990::getPosiX()
+{
+	for (NoeudAbstrait * enfant : this->enfants_)
+	{
+		if (enfant->estSelectionne())
+		{
+			double posX = enfant->obtenirPositionRelative().x;
+			return posX;
+		}
+	}
+}
 
+double ArbreRenduINF2990::getPosiY()
+{
+	for (NoeudAbstrait * enfant : this->enfants_)
+	{
+		if (enfant->estSelectionne())
+		{
+			double posY = enfant->obtenirPositionRelative().y;
+			return posY;
+		}
+	}
+}
+
+
+
+
+void ArbreRenduINF2990::deplacerObjet(glm::dvec3 posDep)
+{
+	int comp = 0;
+
+
+	for (NoeudAbstrait * enfant : enfants_)
+	{
+		if (enfant->estSelectionne())
+		{
+			comp++;
+		}
+	}
+
+	for (NoeudAbstrait * enfant : enfants_)
+	{
+		if (enfant->estSelectionne() && enfant->obtenirType() == "bonus" && comp==1)
+		{
+			//glm::dvec3 posTemp = enfant->obtenirPositionRelative();
+			enfant->assignerPositionRelative(posDep);
+
+		}
+
+	}
+}
 
 
 

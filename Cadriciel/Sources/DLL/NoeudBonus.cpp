@@ -74,7 +74,7 @@ void NoeudBonus::afficherConcret(const glm::mat4& vueProjection) const
 	modele = glm::rotate(modele, angleY_, glm::vec3(0, 1, 0));
 	// Recentrage du cube.
 	modele = glm::translate(modele, glm::vec3(0, 0, -10));
-	
+
 	// Affichage du modèle.
 	vbo_->dessiner(vueProjection* modele);
 

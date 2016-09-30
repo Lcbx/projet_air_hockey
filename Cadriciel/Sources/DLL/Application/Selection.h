@@ -20,6 +20,8 @@ public:
 	//void position(int x, int y);			//position de la souris hors d'un click
 	void operationShortClick();				//lance l'opération adéquate selon le scénario du click
 	void operationDragClick();				//lance l'opération adéquate selon le scénario du click
+		
+
 private: 
 	//int X1, Y1, X2, Y2;					//pour garder l'information des points du Click
 	bool effacerDernierRectangle = false;	//pour permettre la transition au dessus de 3 pixels
