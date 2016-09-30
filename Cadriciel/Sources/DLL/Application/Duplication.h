@@ -10,10 +10,12 @@
 
 #pragma once
 #include "StrategieSouris.h"
+#include "../VisiteurDuplication.h"
 
 
 class Duplication : public StrategieSouris {
 public:
+	Duplication(){}
 	//void start(int x, int y);				//les coordonnees du mouse_down
 	//void current(int x, int y);			//les coordonnees du mouse_move
 	//void end(int x, int y);				//les coordonnees du mouse_up
@@ -22,4 +24,5 @@ public:
 	void operationDragClick();				//lance l'opération adéquate selon le scénario du click
 private:
 	//int X1, Y1, X2, Y2;					//pour garder l'information des points du Click
+	VisiteurDuplication visiteur_;
 };

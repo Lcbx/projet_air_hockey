@@ -165,7 +165,9 @@
     <ClCompile Include="Tests\NoeudAbstraitTest.cpp" />
     <ClCompile Include="VisiteurAjout.cpp" />
     <ClCompile Include="VisiteurDeplacement.cpp" />
+    <ClCompile Include="VisiteurDuplication.cpp" />
     <ClCompile Include="VisiteurMiseEchelle.cpp" />
+    <ClCompile Include="VisiteurPointMilieu.cpp" />
     <ClCompile Include="VisiteurRotation.cpp" />
     <ClCompile Include="VisiteurSelection.cpp" />
   </ItemGroup>
@@ -206,7 +208,9 @@
     <ClInclude Include="Visiteur.h" />
     <ClInclude Include="VisiteurAjout.h" />
     <ClInclude Include="VisiteurDeplacement.h" />
+    <ClInclude Include="VisiteurDuplication.h" />
     <ClInclude Include="VisiteurMiseEchelle.h" />
+    <ClInclude Include="VisiteurPointMilieu.h" />
     <ClInclude Include="VisiteurRotation.h" />
     <ClInclude Include="VisiteurSelection.h" />
   </ItemGroup>
