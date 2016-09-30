@@ -67,7 +67,7 @@ NoeudTable::~NoeudTable()
 void NoeudTable::afficherConcret(const glm::mat4& vueProjection) const
 {
 	// tracer la table en opengl
-	tracerTable(couleurTable_, couleurMurs_, couleurButs_);
+	tracerTable();
 	
 	
 	//// Révolution autour du centre.
@@ -108,17 +108,20 @@ void NoeudTable::accepter(Visiteur* v)
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn void NoeudTable::tracerTable(glm::vec4 couleurTable, glm::vec4 couleurMurs, glm::vec4 couleurButs)
+/// @fn void NoeudTable::tracerTable()
 ///
-/// @param[in] couleurTable : La couleur de la Table
-///			   couleurMurs : la couleur des murs autour de la table
-///            couleurButs : la couleur des buts
+/// @param[in] Aucun.
+///
 /// Cette fonction trace la Table et la zone du jeu
 ///
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudTable::tracerTable(glm::vec4 couleurTable, glm::vec4 couleurMurs, glm::vec4 couleurButs) const
+
+
+
+
+void NoeudTable::tracerTable() const
 {
 	//glMatrixMode(GL_PROJECTION);
 	//glLoadIdentity();
@@ -128,20 +131,24 @@ void NoeudTable::tracerTable(glm::vec4 couleurTable, glm::vec4 couleurMurs, glm:
 	//	1.0,   // top
 	//	1.0,  // near
 	//	-1.0);  // far
-		
+	
+	// Affichage du modèle.
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity(); 
-
+	//glLoadIdentity();
+	
 	//quelques transformations bidons
 	//glTranslatef(-.5,-.5,0);
 	//glScaled(1.25, 1.25, 1.25);
-
+	glEnable(GL_NORMALIZE);
 	// deactiver les textures (la table ne prend plus la texture des autres noeuds)
-	glDisable(GL_TEXTURE_2D); 
+	glDisable(GL_TEXTURE_2D);
+	// deactiver les lumieres
+	glDisable(GL_LIGHTING);
 	// desactiver le test de profondeur
 	glDisable(GL_DEPTH_TEST);
 	// activer l'anticrenelage - aucun effet a l'instant
-	glEnable(GL_MULTISAMPLE);
+	//glEnable(GL_MULTISAMPLE);
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 // tracage de la table avec les vao et les vbo -- pas fini! (on laisse tomber a l'instant)
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -193,6 +200,8 @@ void NoeudTable::tracerTable(glm::vec4 couleurTable, glm::vec4 couleurMurs, glm:
 #define p7 pointControle_[7].x, pointControle_[7].y, pointControle_[7].z
 // besoin pour tracage
 #define p8 (pointControle_[6].x + pointControle_[7].x)/2, (pointControle_[2].y + pointControle_[3].y)/2,pointControle_[0].z
+#define p8x (pointControle_[6].x + pointControle_[7].x)/2
+#define p8y (pointControle_[2].y + pointControle_[3].y)/2
 
 	/*
 	p0----------p2----------p4
@@ -204,70 +213,67 @@ void NoeudTable::tracerTable(glm::vec4 couleurTable, glm::vec4 couleurMurs, glm:
 	p1----------p3----------p5
 	*/
 	// tracer la table (zone du jeur)
-	// voir notes 
-	glColor4f(couleurTable[0], couleurTable[1], couleurTable[2], couleurTable[3]);
-	glBegin(GL_TRIANGLES);
+	glColor4f(couleurTable_[0], couleurTable_[1], couleurTable_[2], couleurTable_[3]);
+	glBegin(GL_QUADS);
 	{
-		glVertex3f(p0);glVertex3f(p6);glVertex3f(p1);
-		glVertex3f(p2);glVertex3f(p0);glVertex3f(p4);
-		glVertex3f(p0);glVertex3f(p1);glVertex3f(p5);
-		glVertex3f(p4);glVertex3f(p0);glVertex3f(p5);
-		glVertex3f(p4);glVertex3f(p5);glVertex3f(p7);
-		glVertex3f(p5);glVertex3f(p1);glVertex3f(p3);
+		glVertex3f(p0);glVertex3f(p6);glVertex3f(p8);glVertex3f(p2);
+		glVertex3f(p2);glVertex3f(p8);glVertex3f(p7);glVertex3f(p4);
+		glVertex3f(p6);glVertex3f(p1);glVertex3f(p3);glVertex3f(p8);
+		glVertex3f(p8);glVertex3f(p3);glVertex3f(p5);glVertex3f(p7);
 	}
 	glEnd();
 
-//	// tracer murs 
-//	glColor4f(couleurMurs[0], couleurMurs[1], couleurMurs[2], couleurMurs[3]);
-//	glBegin(GL_QUADS);
-//	{			
-//		glVertex3f(p0);
-//		glVertex3f(p1);
-//		glVertex3f(p5);
-//		glVertex3f(p4);		
-//	}
-//	glEnd();
-//	
-//#undef p0
-//#undef p1
-//#undef p2
-//#undef p3
-//#undef p4
-//#undef p5
-//#undef p6
-//#undef p7
-//
-//	//tracer la table
-//#define delta 0.05
-//	glColor4f(couleurTable[0], couleurTable[1], couleurTable[2], couleurTable[3]);
-//	glBegin(GL_QUAD_STRIP);
-//	{
-//		glVertex3f(GLfloat(pointControle_[0][0] + delta), GLfloat(pointControle_[0][1] - delta), GLfloat(pointControle_[0][2]) );
-//		glVertex3f(GLfloat(pointControle_[1][0] + delta), GLfloat(pointControle_[1][1] + delta), GLfloat(pointControle_[1][2]) );
-//		glVertex3f(GLfloat(pointControle_[2][0]), GLfloat(pointControle_[2][1] - delta), GLfloat(pointControle_[2][2]) );
-//		glVertex3f(GLfloat(pointControle_[3][0]), GLfloat(pointControle_[3][1] + delta), GLfloat(pointControle_[3][2]) );
-//		glVertex3f(GLfloat(pointControle_[4][0] - delta), GLfloat(pointControle_[4][1] - delta), GLfloat(pointControle_[4][2]) );
-//		glVertex3f(GLfloat(pointControle_[5][0] - delta), GLfloat(pointControle_[5][1] + delta), GLfloat(pointControle_[5][2]) );
-//	}
-//	glEnd();
-//	// tracer les lignes du terrain
-//	glLineWidth(5.);
-//	glColor4f(couleurLignes_[0], couleurLignes_[1], couleurLignes_[2], couleurLignes_[3]);
-//	glBegin(GL_LINES);
-//	{		
-//		glVertex3f(GLfloat(pointControle_[2][0]), GLfloat(pointControle_[2][1] - delta), GLfloat(pointControle_[2][2]));
-//		glVertex3f(GLfloat(pointControle_[3][0]), GLfloat(pointControle_[3][1] + delta), GLfloat(pointControle_[3][2]));
-//	}
-//	glEnd();
-//#undef delta
-//	// tracer un cercle au milieu du terrain
-//	tracerCercle(float(0.),float(0.),float(.2),100);
+	// tracer les murs 
+	tracerMurs();
+
+	// tracer les lignes de decoration 
+	// tracer le contour
+	glColor4f(couleurContour_[0], couleurContour_[1], couleurContour_[2], couleurContour_[3]);
+	glLineWidth(2.);
+	glBegin(GL_LINE_LOOP);
+	{
+		glVertex3f(p0);glVertex3f(p2);glVertex3f(p4);glVertex3f(p7);
+		glVertex3f(p5);glVertex3f(p3);glVertex3f(p1);glVertex3f(p6);
+	}
+	glEnd();
+
+	// tracer les lignes du terrain
+	glLineWidth(5.);
+	glColor4f(couleurLignes_[0], couleurLignes_[1], couleurLignes_[2], couleurLignes_[3]);
+	glBegin(GL_LINES);
+	{		
+		glVertex3f(p2);glVertex3f(p3);
+	}
+	glEnd();
+	// tracer un cercle au milieu du terrain
+	glLineWidth(3.);
+	glColor4f(1.,1.,0.,1.);
+	double rayon = 0.2;
+	double distance = abs( pointControle_[2].y - pointControle_[3].y ); 
+	//double distance = sqrt( pow(1,2) + pow(1,2) );
+	double coeff = 0.4;
+	rayon = distance/2*coeff;
+	//tracerCercle(double(pointControle_[8][0]),double(pointControle_[8][1]),rayon,100);
+	tracerCercle(p8x,p8y, rayon, 100);
+	
+
+#undef p0
+#undef p1
+#undef p2
+#undef p3
+#undef p4
+#undef p5
+#undef p6
+#undef p7
+#undef p8
+#undef p8x
+#undef p8y
 
 
-	 //Activer le test de profondeur
+   //Activer le test de profondeur
 	glEnable(GL_DEPTH_TEST);
 	 //Desactiver l'anticrenelage
-	glDisable(GL_MULTISAMPLE);
+	//glDisable(GL_MULTISAMPLE);
 }
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -279,9 +285,57 @@ void NoeudTable::tracerTable(glm::vec4 couleurTable, glm::vec4 couleurMurs, glm:
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudTable::tracerMurs()
+void NoeudTable::tracerMurs() const
 {
-
+	// tracer murs
+	glColor4f(couleurMurs_[0], couleurMurs_[1], couleurMurs_[2],couleurMurs_[3]);
+	glBegin(GL_QUADS);
+	{			
+		// mur p0p6
+		glVertex3f(pointControle_[0].x, pointControle_[0].y, pointControle_[0].z);
+		glVertex3f(pointControle_[0].x - largeur_, pointControle_[0].y, pointControle_[0].z);
+		glVertex3f(pointControle_[6].x - largeur_, pointControle_[6].y, pointControle_[6].z);
+		glVertex3f(pointControle_[6].x, pointControle_[6].y, pointControle_[6].z);
+		// mur p6p1
+		glVertex3f(pointControle_[6].x, pointControle_[6].y, pointControle_[6].z);
+		glVertex3f(pointControle_[6].x - largeur_, pointControle_[6].y, pointControle_[6].z);
+		glVertex3f(pointControle_[1].x - largeur_, pointControle_[1].y, pointControle_[1].z);
+		glVertex3f(pointControle_[1].x, pointControle_[1].y, pointControle_[1].z);
+		// mur p0p2
+		glVertex3f(pointControle_[2].x, pointControle_[2].y, pointControle_[2].z);
+		glVertex3f(pointControle_[2].x, pointControle_[2].y + largeur_, pointControle_[2].z);
+		glVertex3f(pointControle_[0].x, pointControle_[0].y + largeur_, pointControle_[0].z);
+		glVertex3f(pointControle_[0].x, pointControle_[0].y, pointControle_[0].z);
+		// mur p2p4
+		glVertex3f(pointControle_[4].x, pointControle_[4].y, pointControle_[4].z);
+		glVertex3f(pointControle_[4].x, pointControle_[4].y + largeur_, pointControle_[4].z);
+		glVertex3f(pointControle_[2].x, pointControle_[2].y + largeur_, pointControle_[2].z);
+		glVertex3f(pointControle_[2].x, pointControle_[2].y, pointControle_[2].z);
+		// mur p4p7
+		glVertex3f(pointControle_[4].x + +largeur_, pointControle_[4].y, pointControle_[4].z);
+		glVertex3f(pointControle_[4].x , pointControle_[4].y, pointControle_[4].z);
+		glVertex3f(pointControle_[7].x, pointControle_[7].y, pointControle_[7].z);
+		glVertex3f(pointControle_[7].x + largeur_, pointControle_[7].y, pointControle_[7].z);
+		// mur p7p5		
+		glVertex3f(pointControle_[7].x + largeur_, pointControle_[7].y, pointControle_[7].z);
+		glVertex3f(pointControle_[7].x, pointControle_[7].y, pointControle_[7].z);		
+		glVertex3f(pointControle_[5].x, pointControle_[5].y, pointControle_[5].z);
+		glVertex3f(pointControle_[5].x + largeur_, pointControle_[5].y, pointControle_[5].z);
+		// mur p5p3
+		glVertex3f(pointControle_[5].x, pointControle_[5].y - largeur_, pointControle_[5].z);
+		glVertex3f(pointControle_[5].x, pointControle_[5].y, pointControle_[5].z);
+		glVertex3f(pointControle_[3].x, pointControle_[3].y, pointControle_[3].z);
+		glVertex3f(pointControle_[3].x, pointControle_[3].y - largeur_, pointControle_[3].z);
+		// mur p3p1
+		glVertex3f(pointControle_[3].x, pointControle_[3].y - largeur_, pointControle_[3].z);
+		glVertex3f(pointControle_[3].x, pointControle_[3].y, pointControle_[3].z);
+		glVertex3f(pointControle_[1].x, pointControle_[1].y, pointControle_[1].z);
+		glVertex3f(pointControle_[1].x, pointControle_[1].y - largeur_, pointControle_[1].z);		
+	}
+	glEnd();
+	
+	
+	
 }
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -294,8 +348,19 @@ void NoeudTable::tracerMurs()
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudTable::tracerButs(float longueur)
+void NoeudTable::tracerButs(float longueur) const
 {
+	// tracez le 1er but
+	// pente de la droite p6p0
+	double a60 = (pointControle_[0].y - pointControle_[6].y) / (pointControle_[0].x - pointControle_[6].x);
+	double b60 = pointControle_[6].y - a60 * pointControle_[6].x;
+	// pente de la droite p6p1
+	double a61 = (pointControle_[1].y - pointControle_[6].y) / (pointControle_[1].x - pointControle_[6].x);
+	double b61 = pointControle_[6].y - a61 * pointControle_[6].x;
+
+
+	// tracer le 2eme but 
+	// trouvez l'equation des droites p7p4 et p7p5 pour le 2eme but 
 
 }
 ////////////////////////////////////////////////////////////////////////
@@ -312,15 +377,15 @@ void NoeudTable::tracerButs(float longueur)
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudTable::tracerCercle(float cx, float cy, float r, int nb_segments) const
+void NoeudTable::tracerCercle(double cx, double cy, double r, int nb_segments) const
 {
 	glBegin(GL_LINE_LOOP);
 	for (int ii = 0; ii < nb_segments; ii++)
 	{
-		float theta = 2.0f * 3.1415926f * float(ii) / float(nb_segments);//l'angle courant
+		double theta = 2.0f * 3.1415926f * double(ii) / double(nb_segments);//l'angle courant
 
-		float x = r * cosf(theta);
-		float y = r * sinf(theta);
+		double x = r * cosf(theta);
+		double y = r * sinf(theta);
 
 		glVertex2f(x + cx, y + cy);
 
@@ -352,7 +417,7 @@ bool NoeudTable::getPointControle(int numero, glm::vec3 & pointControle)
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn bool NoeudTable::setPointControle( glm::vec3 pointControle, int numero)
+/// @fn bool NoeudTable::setPointControle( int numero, glm::vec3 pointControle)
 ///
 /// Cette fonction modifie les coordonnes d'un des 8 points de controle de la table
 ///
@@ -372,6 +437,7 @@ bool NoeudTable::setPointControle(int numero, glm::vec3 pointControle)
 		return true;
 	}
 }
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn bool NoeudTable::setCouleurTable(glm::vec4 couleur)
@@ -387,6 +453,7 @@ bool NoeudTable::setCouleurTable(glm::vec4 couleur)
 	couleurTable_ = couleur;
 	return true;
 }
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn bool NoeudTable::getCouleurTable(glm::vec4 & couleur)
@@ -402,6 +469,7 @@ bool NoeudTable::getCouleurTable(glm::vec4 & couleur)
 	couleur = couleurTable_;
 	return true;
 }
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn bool NoeudTable::setCouleurMurs(glm::vec4 couleur)
@@ -417,6 +485,7 @@ bool NoeudTable::setCouleurMurs(glm::vec4 couleur)
 	couleurMurs_ = couleur;
 	return true;
 }
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn bool NoeudTable::getCouleurMurs(glm::vec4 & couleur)
@@ -432,6 +501,7 @@ bool NoeudTable::getCouleurMurs(glm::vec4 & couleur)
 	couleur = couleurMurs_;
 	return true;
 }
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn bool NoeudTable::setCouleurButs(glm::vec4 couleur)
@@ -447,6 +517,7 @@ bool NoeudTable::setCouleurButs(glm::vec4 couleur)
 	couleurButs_ = couleur;
 	return true;
 }
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn bool NoeudTable::getCouleurButs(glm::vec4 & couleur)
@@ -462,6 +533,7 @@ bool NoeudTable::getCouleurButs(glm::vec4 & couleur)
 	couleur = couleurButs_;
 	return true;
 }
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn bool NoeudTable::setCouleurLignes(glm::vec4 couleur)
@@ -477,6 +549,7 @@ bool NoeudTable::setCouleurLignes(glm::vec4 couleur)
 	couleurLignes_ = couleur;
 	return true;
 }
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn bool NoeudTable::getCouleurLignes(glm::vec4 & couleur)

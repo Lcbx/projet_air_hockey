@@ -199,6 +199,7 @@ extern "C"
 	__declspec(dllexport) void __cdecl etatDelaSouris(int etat) {
 		Souris::obtenirInstance()->EtatdelaSouris(etat);
 	}
+
 	__declspec(dllexport) void __cdecl clickStart(int x, int y)
 	{
 		Souris::obtenirInstance()->startClick(x, y);
@@ -220,11 +221,11 @@ extern "C"
 	{
 		Souris::obtenirInstance()->setControl(presse);
 	}
-	//touche escape
-	__declspec(dllexport) void escEnfonce()
-	{
-		Souris::obtenirInstance()->escPresse();
-	}
+	////touche escape
+	//__declspec(dllexport) void escEnfonce()
+	//{
+	//	Souris::obtenirInstance()->escPresse();
+	//}
 
 
 	////////////////////////////////////////////////////////////////////////
@@ -241,6 +242,15 @@ extern "C"
 	{
 		FacadeModele::obtenirInstance()->ajouterPortail(x1, y1);
 	}
+
+
+	__declspec(dllexport) void escEnfonce(bool escTouche) 
+	{
+		//prend un bool en param (touche esc est enfonce ou pas)
+		FacadeModele::obtenirInstance()->supprimerPortail(escTouche);
+
+	}
+
 
 	////////////////////////////////////////////////////////////////////////
 	///
@@ -298,6 +308,7 @@ extern "C"
 	}
 
 
+
 	__declspec(dllexport) void supprimerObjet()
 	{
 		return FacadeModele::obtenirInstance()->effacerObjet();
@@ -306,6 +317,16 @@ extern "C"
 	__declspec(dllexport) void deplacerObjet(double x, double y)
 	{
 		return FacadeModele::obtenirInstance()->deplacerObjet(x,y);
+	}
+// fonction bidon test
+	__declspec(dllexport) void __cdecl test()
+	{
+		FacadeModele::obtenirInstance()->test();
+	}
+	// deplacer noeud de controle
+	__declspec(dllexport) void __cdecl deplacerPointHaut(int index)
+	{
+		FacadeModele::obtenirInstance()->deplacerPointHaut(index);
 	}
 }
 

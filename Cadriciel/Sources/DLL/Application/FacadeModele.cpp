@@ -43,6 +43,9 @@
 #include "glm/gtc/type_ptr.hpp"
 
 #include "EtatOpenGL.h"
+#include <iostream>
+#include "Noeuds/NoeudTypes.h"
+
 
 
 /// Pointeur vers l'instance unique de la classe.
@@ -417,7 +420,7 @@ void FacadeModele::ajouterMuret(int x1, int y1, int x2, int y2)
 void FacadeModele::ajouterMurFantome(int corXin, int corYin, int corX, int corY)
 {
 	// bloc d'instruction
-	if (arbre_->chercher(arbre_->obtenirNombreEnfants() - 1)->obtenirType() == "muret")
+	if (arbre_->chercher(arbre_->obtenirNombreEnfants() - 1)->obtenirType() == "mur")
 		arbre_->effacer(arbre_->chercher(arbre_->obtenirNombreEnfants() - 1));
 	//ajouterMur(corXin, corYin, corX, corY);
 }
@@ -461,3 +464,37 @@ void FacadeModele::deplacerObjet(double x, double y)
 	arbre_->deplacerObjet(NouvPos);
 
 }
+
+// fonction bidon test
+void FacadeModele::test() {
+
+	std::printf("alooooooooooo test \n");
+}
+// deplacer un point de controle
+void FacadeModele::deplacerPointHaut(int index) {
+#define delta 0.1
+	if (index == 1)
+	{
+		std::cout << "Noeud deplace'" << std::endl;
+		//// effacer la table puis l'afficher avec les nouvelle coordonnees
+		//const NoeudAbstrait* noeudTable = arbre_->chercher("table");
+		//arbre_->effacer(noeudTable);
+		NoeudTable* noeudTable = arbre_->getTable();
+
+		glm::vec3 point;
+		noeudTable->getPointControle(2, point);
+		point.y += delta;
+		noeudTable->setPointControle(2, point);
+
+		// probleme la table n'est pas mis a jour
+
+		/*glm::vec3 pointControle;
+		(NoeudTable *) noeudTable->getPointControle(1, & pointControle);
+*/
+	}
+#undef delta
+
+}
+///////////////////////////////////////////////////////////////////////////////
+/// @}
+///////////////////////////////////////////////////////////////////////////////
