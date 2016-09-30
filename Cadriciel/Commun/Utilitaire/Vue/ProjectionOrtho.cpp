@@ -111,7 +111,6 @@ namespace vue {
 
 		std::cout << largeurFenetre_ << " " << hauteurFenetre_ << std::endl;
 
-		FacadeModele::obtenirInstance()->afficher();
 	}
 
 
