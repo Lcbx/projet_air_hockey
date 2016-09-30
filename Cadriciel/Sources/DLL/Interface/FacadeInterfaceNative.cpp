@@ -221,11 +221,13 @@ extern "C"
 	{
 		Souris::obtenirInstance()->setControl(presse);
 	}
+	
+	
 	////touche escape
-	//__declspec(dllexport) void escEnfonce()
-	//{
-	//	Souris::obtenirInstance()->escPresse();
-	//}
+	__declspec(dllexport) void escEnfonce()
+	{
+		Souris::obtenirInstance()->escPresse();
+	}
 
 
 	////////////////////////////////////////////////////////////////////////
@@ -244,12 +246,13 @@ extern "C"
 	}
 
 
-	__declspec(dllexport) void escEnfonce(bool escTouche) 
+	/*__declspec(dllexport) void escEnfonce(bool escTouche) 
 	{
+		std::printf("je suis ici dans facade native");
 		//prend un bool en param (touche esc est enfonce ou pas)
 		FacadeModele::obtenirInstance()->supprimerPortail(escTouche);
-
-	}
+		
+	}*/
 
 
 	////////////////////////////////////////////////////////////////////////
@@ -297,27 +300,68 @@ extern "C"
 		FacadeModele::obtenirInstance()->ajouterMurFantome(corXin, corYin, corX, corY);
 	}
 
-	__declspec(dllexport) double getPosX()
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) double __cdecl getPosX()
+	///
+	/// Cette fonction permet de determiner la positon relative X d'un objet
+	///
+	/// @return position d'un objet en X
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) double __cdecl getPosX()
 	{
 		return FacadeModele::obtenirInstance()->getPosDataBidingX();
 	}
 
-	__declspec(dllexport) double getPosY()
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) double __cdecl getPosY()
+	///
+	/// Cette fonction permet de determiner la positon relative y d'un objet
+	///
+	/// @return position d'un objet en Y
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) double __cdecl getPosY()
 	{
 		return FacadeModele::obtenirInstance()->getPosDataBidingY();
 	}
 
 
 
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl supprimerObjet()
+	///
+	/// Cette fonction permet de supprimer les objets
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void supprimerObjet()
 	{
 		return FacadeModele::obtenirInstance()->effacerObjet();
 	}
 
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl deplacerObjet(double x, double y)
+	///
+	/// Cette fonction de deplacer un objet a partir des coordonnees 
+	/// entrées dans la boite config
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void deplacerObjet(double x, double y)
 	{
 		return FacadeModele::obtenirInstance()->deplacerObjet(x,y);
 	}
+
+
+
 // fonction bidon test
 	__declspec(dllexport) void __cdecl test()
 	{
@@ -327,6 +371,20 @@ extern "C"
 	__declspec(dllexport) void __cdecl deplacerPointHaut(int index)
 	{
 		FacadeModele::obtenirInstance()->deplacerPointHaut(index);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) int __cdecl nombreObjetSelectionne()
+	///
+	/// Cette fonction permet de retourner le nonnbre d'objets selectionnes
+	///
+	/// @return Le nombre d'objets selectionnées
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) int __cdecl nombreObjetSelectionne()
+	{
+		return FacadeModele::obtenirInstance()->nombreObjetSelectionne();
 	}
 }
 

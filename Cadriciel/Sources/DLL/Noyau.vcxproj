@@ -132,7 +132,6 @@
     <ClCompile Include="Application\AjoutAccelerateur.cpp" />
     <ClCompile Include="Application\AjoutMur.cpp" />
     <ClCompile Include="Application\AjoutPortail.cpp" />
-    <ClCompile Include="Application\DebutAjoutMur.cpp" />
     <ClCompile Include="Application\DebutAjoutPortail.cpp" />
     <ClCompile Include="Application\Deplacement.cpp" />
     <ClCompile Include="Application\Duplication.cpp" />
@@ -166,7 +165,9 @@
     <ClCompile Include="Tests\NoeudAbstraitTest.cpp" />
     <ClCompile Include="VisiteurAjout.cpp" />
     <ClCompile Include="VisiteurDeplacement.cpp" />
+    <ClCompile Include="VisiteurDuplication.cpp" />
     <ClCompile Include="VisiteurMiseEchelle.cpp" />
+    <ClCompile Include="VisiteurPointMilieu.cpp" />
     <ClCompile Include="VisiteurRotation.cpp" />
     <ClCompile Include="VisiteurSelection.cpp" />
   </ItemGroup>
@@ -174,7 +175,6 @@
     <ClInclude Include="Application\AjoutAccelerateur.h" />
     <ClInclude Include="Application\AjoutMur.h" />
     <ClInclude Include="Application\AjoutPortail.h" />
-    <ClInclude Include="Application\DebutAjoutMur.h" />
     <ClInclude Include="Application\DebutAjoutPortail.h" />
     <ClInclude Include="Application\Deplacement.h" />
     <ClInclude Include="Application\Duplication.h" />
@@ -208,7 +208,9 @@
     <ClInclude Include="Visiteur.h" />
     <ClInclude Include="VisiteurAjout.h" />
     <ClInclude Include="VisiteurDeplacement.h" />
+    <ClInclude Include="VisiteurDuplication.h" />
     <ClInclude Include="VisiteurMiseEchelle.h" />
+    <ClInclude Include="VisiteurPointMilieu.h" />
     <ClInclude Include="VisiteurRotation.h" />
     <ClInclude Include="VisiteurSelection.h" />
   </ItemGroup>

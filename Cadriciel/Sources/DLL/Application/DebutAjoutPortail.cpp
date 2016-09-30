@@ -12,7 +12,7 @@
 #include "FacadeModele.h"
 #include "Souris.h"
 
-
+/*
 void DebutAjoutPortail::operationShortClick() {
 	FacadeModele::obtenirInstance()->ajouterPortail(X1(), Y1());
 	Souris::obtenirInstance()->EtatdelaSouris(Souris::AJOUT_PORTAIL);
@@ -20,3 +20,4 @@ void DebutAjoutPortail::operationShortClick() {
 void DebutAjoutPortail::operationDragClick() {
 	//DO something
 }
+*/

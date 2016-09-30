@@ -27,11 +27,14 @@ namespace opengl{
 
 //TODO: AJOUTEZ TOUS Classes Visiteurs 
 class Visiteur;
+class VisiteurPointMilieu;
 class VisiteurDeplacement;
+class VisiteurDuplication;
 class VisiteurSelection;
 class VisiteurRotation;
 class VisiteurMiseEchelle;
 class VisiteurAjout;
+
 
 
 

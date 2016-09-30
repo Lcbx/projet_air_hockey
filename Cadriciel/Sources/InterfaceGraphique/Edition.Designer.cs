@@ -95,6 +95,7 @@
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Edition_MouseMove);
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
+
             // 
             // menuStrip1
             // 
@@ -143,7 +144,7 @@
             // 
             this.enregistrerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("enregistrerToolStripMenuItem.Image")));
             this.enregistrerToolStripMenuItem.Name = "enregistrerToolStripMenuItem";
-            this.enregistrerToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+            this.enregistrerToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.enregistrerToolStripMenuItem.Text = "Enregistrer";
             // 
             // enregistrerSousToolStripMenuItem
@@ -180,13 +181,15 @@
             this.éditionToolStripMenuItem.Name = "éditionToolStripMenuItem";
             this.éditionToolStripMenuItem.Size = new System.Drawing.Size(56, 22);
             this.éditionToolStripMenuItem.Text = "Édition";
+            this.éditionToolStripMenuItem.Click += new System.EventHandler(this.éditionToolStripMenuItem_Click);
             // 
             // supprimerToolStripMenuItem
             // 
             this.supprimerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("supprimerToolStripMenuItem.Image")));
             this.supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
-            this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(168, 38);
             this.supprimerToolStripMenuItem.Text = "Supprimer";
+            this.supprimerToolStripMenuItem.Click += new System.EventHandler(this.supprimerToolStripMenuItem_Click);
             // 
             // outilsToolStripMenuItemPoints
             // 
@@ -523,6 +526,7 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            this.MouseWheel += new System.Windows.Forms.MouseEventHandler(Edition_MouseWheel);
         }
         #endregion
 

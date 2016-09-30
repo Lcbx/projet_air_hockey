@@ -169,7 +169,7 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 			glm::dvec3(0, 1, 0),   glm::dvec3(0, 1, 0)},
 		vue::ProjectionOrtho{ 
 				500, 500,
-				1, 1000, 1, 10000, 1.25,
+				1, 1000, 1, 10000, 0.25,
 				200, 200}
 	};
 }
@@ -379,6 +379,7 @@ void FacadeModele::ajouterPortail(int x1, int y1)
 
 void FacadeModele::supprimerPortail(bool escTouche)
 {
+	std::printf("A l'interieur de facade modele esti \n");
 	arbre_->supprimerPortail(escTouche);
 }
 
@@ -493,8 +494,15 @@ void FacadeModele::deplacerPointHaut(int index) {
 */
 	}
 #undef delta
+}
+
+int FacadeModele::nombreObjetSelectionne()
+{
+	return arbre_->obtenirNombreObjetSelctionnes();
 
 }
+
+
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
 ///////////////////////////////////////////////////////////////////////////////

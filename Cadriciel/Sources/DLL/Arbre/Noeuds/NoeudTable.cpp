@@ -143,8 +143,7 @@ void NoeudTable::tracerTable() const
 	glDisable(GL_LIGHTING);
 	// desactiver le test de profondeur
 	glDisable(GL_DEPTH_TEST);
-	// activer l'anticrenelage - aucun effet a l'instant
-	//glEnable(GL_MULTISAMPLE);
+	
 	//quelques transformations bidons
 	//glTranslatef(-.5,-.5,0);
 	//glScaled(1.25, 1.25, 1.25);
@@ -259,6 +258,8 @@ void NoeudTable::tracerTable() const
 	rayon = distance/2*coeff;
 	//tracerCercle(double(pointControle_[8][0]),double(pointControle_[8][1]),rayon,100);
 	tracerCercle(p8x,p8y, rayon, 100);
+	
+
 #undef p0
 #undef p1
 #undef p2
@@ -270,7 +271,9 @@ void NoeudTable::tracerTable() const
 #undef p8
 #undef p8x
 #undef p8y
-	//Activer le test de profondeur
+
+
+   //Activer le test de profondeur
 	glEnable(GL_DEPTH_TEST);
 	// activer le test de profondeur
 	//glEnable(GL_TEXTURE_2D);
