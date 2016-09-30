@@ -63,6 +63,14 @@ namespace InterfaceGraphique
         private void keyDownHandler(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.ControlKey) FonctionsNatives.toucheControl(true);
+            if (e.KeyCode == Keys.Add)
+            {
+                FonctionsNatives.zoomIn();
+            }
+            if (e.KeyCode == Keys.Subtract)
+            {
+                FonctionsNatives.zoomOut();
+            }
         }
 
         bool supprimer = false;
@@ -377,6 +385,15 @@ namespace InterfaceGraphique
             
         }
 
+        public void Edition_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if(e.Delta >  0)
+            { FonctionsNatives.zoomIn(); }
+            if(e.Delta < 0)
+            { FonctionsNatives.zoomOut(); }
+
+        }
+
 
         //data Biding
         private void mettreAjourPos()
@@ -471,6 +488,13 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void deplacerObjet(double x, double y);
+
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void zoomIn();
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void zoomOut();
 
     }
 }

@@ -69,7 +69,8 @@ namespace vue {
 	////////////////////////////////////////////////////////////////////////
 	void ProjectionOrtho::zoomerIn()
 	{
-		zoomerTo(zoomActuel_ + incrementZoom_);
+		if (zoomActuel_ != 5)
+			zoomerTo(zoomActuel_ + incrementZoom_);
 	}
 
 
@@ -84,7 +85,8 @@ namespace vue {
 	//////////////////////////////////////////////////////////////////////// 
 	void ProjectionOrtho::zoomerOut()
 	{
-		zoomerTo(zoomActuel_ - incrementZoom_);
+		if (zoomActuel_ != 0.5)
+			zoomerTo(zoomActuel_ - incrementZoom_);
 	}
 
 

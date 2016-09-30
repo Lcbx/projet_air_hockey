@@ -19,9 +19,9 @@
 
 
 void Loupe::operationShortClick() {
-	std::cout << "Test SourisLoupe 1" << std::endl;
+/*	std::cout << "Test SourisLoupe 1" << std::endl;
 	FacadeModele::obtenirInstance()->obtenirVue()->zoomerIn();
-	std::cout << "Test SourisLoupe 2" << std::endl;
+	std::cout << "Test SourisLoupe 2" << std::endl;*/
 }
 void Loupe::operationDragClick() {
 	//DO something

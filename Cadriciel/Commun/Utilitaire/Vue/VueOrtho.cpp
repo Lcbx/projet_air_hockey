@@ -132,7 +132,13 @@ namespace vue {
 	void VueOrtho::zoomerInElastique(const glm::ivec2& coin1,
 		const glm::ivec2& coin2)
 	{
-		/// À Faire: Redimensionner la projection et déplacer la caméra
+		// Déplacement afin que le centre du rectangle elastique devienne le centre de la nouvelle cloture
+		//glm::ivec2 deplacement;
+		//deplacement[0] = (coin1[0] + coin2[0]) / 2 - projection_.obtenirDimensionCloture[0] / 2;
+		//deplacement[1] = (coin1[1] + coin2[1]) / 2 - projection_.obtenirDimensionCloture[1] / 2;
+		//deplacerXY(deplacement);
+
+		//
 	}
 
 
