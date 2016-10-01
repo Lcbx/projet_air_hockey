@@ -299,10 +299,14 @@ unsigned int NoeudComposite::obtenirNombreEnfants() const
 ////////////////////////////////////////////////////////////////////////
 void NoeudComposite::effacerSelection()
 {
+	int comp = 0;
 	for (NoeudAbstrait * enfant : enfants_) {
 		if (enfant->obtenirType() == "portail" && enfant->getFrere() != NULL)
 		{
-			enfant->getFrere()->assignerSelection(true);
+			if (enfant->estSelectionne() == true)
+			{
+				enfant->getFrere()->assignerSelection(true);
+			}
 		}
 	}
 
