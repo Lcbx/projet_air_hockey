@@ -20,12 +20,13 @@ class VisiteurDuplication : public Visiteur
 {
 	glm::vec3 posCentre_ {0.f};
 	glm::vec3 posActuelle_{ 0.f };
-
+	
+	//liste de noeuds
+	///contient les originaux(selectionnés)
+	///et les clones (non selectionnés)
 	std::list<NoeudAbstrait*> nosClones_;
 
 	VisiteurDeplacement visDep_;
-
-	
 
 public:
 

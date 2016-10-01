@@ -373,7 +373,6 @@ void FacadeModele::ajouterPortail(int x1, int y1)
 {
 	glm::dvec3 position1;
 	vue_->convertirClotureAVirtuelle(x1, y1, position1);
-
 	arbre_->ajouterPortail(position1);
 }
 
@@ -389,7 +388,6 @@ void FacadeModele::ajouterPortailDeux(int x2, int y2)
 {
 	glm::dvec3 position2;
 	vue_->convertirClotureAVirtuelle(x2, y2, position2);
-
 	arbre_->ajouterPortailDeux(position2);
 }
 
@@ -398,10 +396,8 @@ void FacadeModele::ajouterMuret(int x1, int y1, int x2, int y2)
 {
 	glm::dvec3 position1;
 	vue_->convertirClotureAVirtuelle(x1, y1, position1);
-
 	glm::dvec3 position2;
 	vue_->convertirClotureAVirtuelle(x2, y2, position2);
-
 	arbre_->ajouterMuret(position1, position2);
 }
 
@@ -489,9 +485,10 @@ void FacadeModele::deplacerPointHaut(int index) {
 
 		// probleme la table n'est pas mis a jour
 
-		/*glm::vec3 pointControle;
+		/*
+		glm::vec3 pointControle;
 		(NoeudTable *) noeudTable->getPointControle(1, & pointControle);
-*/
+		*/
 	}
 #undef delta
 }
