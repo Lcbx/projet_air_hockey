@@ -287,7 +287,6 @@ void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos)
 	VisiteurAjout v1(pos);
 	noeudBonus->accepter(&v1);
 
-	cout << "Bonus x  : " << noeudBonus->obtenirPositionRelative().x << "  Bonus  y: " << noeudBonus->obtenirPositionRelative().y << "  Bonus z: " << noeudBonus->obtenirPositionRelative().z << endl;
 
 }
 
@@ -307,7 +306,6 @@ void ArbreRenduINF2990::ajouterPortail(glm::dvec3 pos)
 		Visiteur* v1 = new VisiteurAjout(pos);
 	
 		noeudPortail->accepter(v1);
-		std::cout << "premier " << std::endl;
 
 		premierEstajoute = true;
 		// toujours liberer la mémoire !!!!
@@ -334,16 +332,7 @@ void ArbreRenduINF2990::ajouterPortailDeux(glm::dvec3 pos)
 	noeudPortail->setFrere(premierPortail);
 	premierPortail->setFrere(noeudPortail);
 
-	/*NoeudAbstrait* noeudPortail = this->ajouterNouveauNoeud2(premierPortail, NOM_PORTAIL);
 	
-	noeudPortail->assignerParent(premierPortail);
-	enfants_.push_back(noeudPortail);
-	*/
-	
-	//premierPortail->ajouter(noeudPortail);
-	//ajouter(noeudPortail);
-	//noeudPortail->assignerParent(premierPortail);
-	std::cout << "Deuxieme " << std::endl;
 	noeudPortail->accepter(v1);
 
 	premierEstajoute = false;
@@ -366,16 +355,10 @@ void ArbreRenduINF2990::supprimerPortail(bool escTouche)
 {
 //	this->effacer(this->enfants_.back());
 
-	cout << "arbre 1 " << endl;
 	if (escTouche == true)
 	{
-		cout << "arbre 2 " << endl;
-
 		if (this->enfants_.size() != NULL && premierEstajoute == true) 
 		{
-		
-			cout<<"enfant du dernier: "<< this->enfants_.back()->obtenirNombreEnfants()<<endl;
-
 			//supprime le 1er portail			
 			this->effacer(this->enfants_.back());
 			premierEstajoute = false;

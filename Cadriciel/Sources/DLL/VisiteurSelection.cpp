@@ -99,18 +99,7 @@ void VisiteurSelection::visiter(NoeudBonus* noeud) {
 		}
 	}
 
-	if (noeud->estSelectionne())
-	{
-		this->selectionner(noeud);
-		//data biding
-		posDataBinding.x = noeud->obtenirPositionRelative().x;
-		posDataBinding.y = noeud->obtenirPositionRelative().y;
-
-		std::cout << "Data Biding x: " << this->getPosDataBinding().x 
-			<< "y: " << this->getPosDataBinding().y << std::endl;
-
-	}
-
+	
 
 }
 
@@ -149,19 +138,6 @@ void VisiteurSelection::visiter(NoeudPortail* noeud) {
 			break;*/
 		}
 	}
-
-	if (noeud->estSelectionne())
-	{
-		this->selectionner(noeud);
-		//data biding
-		posDataBinding.x = noeud->obtenirPositionRelative().x;
-		posDataBinding.y = noeud->obtenirPositionRelative().y;
-
-		std::cout << "Data Biding x: " << this->getPosDataBinding().x
-			<< "y: " << this->getPosDataBinding().y << std::endl;
-
-	}
-
 
 }
 

@@ -41,7 +41,6 @@ void VisiteurAjout::visiter(NoeudRondelle* noeud)
 
 void VisiteurAjout::visiter(NoeudMuret* noeud) 
 {
-	cout << "Heloo!!c'est le visiteur ajout du muret" << endl;
 	position.x -= 10;
 	noeud->assignerPositionRelative(position);
 	//verif dans la table 
@@ -51,7 +50,6 @@ void VisiteurAjout::visiter(NoeudMuret* noeud)
 
 void VisiteurAjout::visiter(NoeudBonus* noeud)
 {
-	cout << "Heloo!!c'est le visiteur ajout du bonus" << endl;
 	position.x -= 10;
 	noeud->assignerPositionRelative(position);
 	//verif dans la table 
@@ -64,7 +62,6 @@ void VisiteurAjout::visiter(NoeudMaillet* noeud)
 }
 void VisiteurAjout::visiter(NoeudPortail* noeud)
 {
-	cout << "Heloo!!c'est le visiteur ajout du portail" << endl;
 	position.x -= 10;
 	noeud->assignerPositionRelative(position);
 	//verif dans la table 
