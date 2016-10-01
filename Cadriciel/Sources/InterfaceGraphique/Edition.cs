@@ -426,7 +426,7 @@ namespace InterfaceGraphique
 
             System.Console.WriteLine("Mettre a jour");
             double posY = (FonctionsNatives.getPosY());
-            posX = Math.Round(posY, 2); //arrondi la position 
+            posY = Math.Round(posY, 2); //arrondi la position 
 
             boiteProp.textBox2.Text = posY.ToString();
 
