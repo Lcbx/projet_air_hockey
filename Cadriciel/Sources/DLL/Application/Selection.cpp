@@ -16,6 +16,7 @@
 #include "Selection.h"
 #include "../VisiteurSelection.h"
 #include <iostream>
+#include "Souris.h"
 
 
 void Selection::start(int x, int y) {
@@ -55,11 +56,13 @@ void Selection::operationShortClick() {
 	glm::ivec2 begin(X1(), Y1());
 	glm::ivec2   end(X2(), Y2());
 
+	SelectionState mode = SelectionState::DEFAULT;
+	if (Souris::obtenirInstance()->getControl())
+		mode = SelectionState::INVSELECT;
 
-	SingletonSelection::instance()->selectionner(begin, end);
-	
-
+	SingletonSelection::instance()->selectionner(begin, end, mode);
 }
+
 void Selection::operationDragClick() {
 	operationShortClick();
 }

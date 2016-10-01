@@ -15,7 +15,10 @@
 #include "ArbreRenduINF2990.h"
 ///TODO: REFACTOR
 enum SelectionState {
-	SELECT, INVSELECT, UNSELECT
+	SELECT = 0,
+	INVSELECT = 1,
+	UNSELECT = 2, 
+	DEFAULT = 0
 };
 
 ///////////////////////////////////////////////////////////////////////////
@@ -172,7 +175,7 @@ public:
 /// @author Carl-Vincent Landry-Duval
 /// @date 2016-09-09
 ///////////////////////////////////////////////////////////////////////////
-class SingletonSelection : VisiteurSelection {
+class SingletonSelection : private VisiteurSelection {
 private:
 	SingletonSelection() { };
 	VisiteurSelection visiteur;
@@ -187,13 +190,9 @@ public:
 	}
 
 	////////////////////////////////////////////////////////////////////////
-	///
 	/// @fn selectionner
-	///
 	/// Permet d'obtenir les objets sélectionnés dans le carré donné
-	///
 	/// @return Nothing
-	///
 	////////////////////////////////////////////////////////////////////////
 	void selectionner(
 		glm::ivec2 begin, 
