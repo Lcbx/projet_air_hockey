@@ -11,7 +11,7 @@
 #include "Duplication.h"
 
 void Duplication::current(int x, int y) {
-	
+	visiteur_.duplicate( glm::vec3(x, y, 0.f) );
 }
 void Duplication::operationShortClick() {
 	//DO something

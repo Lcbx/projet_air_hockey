@@ -7,18 +7,44 @@
 #include "../Vue/Vue.h"
 #include "FacadeModele.h"
 
-void VisiteurDuplication::fantomDuplicate(glm::vec3 point) {
-	FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle( (int)point.x, (int)point.y, (glm::dvec3) point);
+
+
+
+VisiteurDuplication::VisiteurDuplication() : visDep_(glm::vec3(0.f)) {
+	VisiteurPointMilieu v( posCentre_ );
+	selection_ = v.getSelection();
 }
 
-void VisiteurDuplication::finalDuplicate(glm::vec3 point) {
+void VisiteurDuplication::duplicate(glm::vec3 point) {
+	FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle((int)point.x, (int)point.y, (glm::dvec3) posActuelle_);
+	for (auto it = selection_.begin(); it != selection_.end(); it++) {
+		(*it)->accepter(this);
+	}
+}
+
+void VisiteurDuplication::actualiser(glm::vec3 point) {
+	FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle((int)point.x, (int)point.y, (glm::dvec3) point);
+	for (auto it = selection_.begin(); it != selection_.end(); it++) {
+		visDep_.setDep( (*it)->obtenirPositionRelative() + point - posActuelle_);
+		visDep_.visiter(*it);
+	}
+	posActuelle_ = point;
+}
+
+void VisiteurDuplication::supprimerClones() {
+	while (!selection_.empty()) selection_.front()->obtenirParent()->effacer(selection_.front());
+}
+
+void VisiteurDuplication::creerClones() {
 	
 }
 
 
+
 void VisiteurDuplication::visiter(NoeudAbstrait* noeud)
 {
-	if (noeud->estSelectionne()) {}
+	if (noeud->estSelectionne()) { 
+	}
 }
 
 void VisiteurDuplication::visiter(NoeudComposite* noeud)
@@ -30,26 +56,36 @@ void VisiteurDuplication::visiter(NoeudComposite* noeud)
 
 void VisiteurDuplication::visiter(NoeudRondelle* noeud)
 {
-	VisiteurDuplication::visiter((NoeudAbstrait*)noeud);
+	if (noeud->estSelectionne()) {
+	}
 }
 
 void VisiteurDuplication::visiter(NoeudMuret* noeud)
 {
-	VisiteurDuplication::visiter((NoeudAbstrait*)noeud);
+	if (noeud->estSelectionne()) {
+	}
 }
 
 void VisiteurDuplication::visiter(NoeudBonus* noeud)
 {
-	VisiteurDuplication::visiter((NoeudAbstrait*)noeud);
+	if (noeud->estSelectionne()) {
+		NoeudBonus* nouveauBonus = new NoeudBonus(*noeud);
+		nouveauBonus->assignerSelection(false);
+		nouveauBonus->assignerPositionRelative(  nouveauBonus->obtenirPositionRelative() + posActuelle_ - posCentre_ );
+		selection_.push_back( (NoeudAbstrait*)nouveauBonus );
+		FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter((NoeudAbstrait*)nouveauBonus);
+	}
 }
 
 
 void VisiteurDuplication::visiter(NoeudMaillet* noeud)
 {
-	VisiteurDuplication::visiter((NoeudAbstrait*)noeud);
+	if (noeud->estSelectionne()) {
+	}
 }
 
 void VisiteurDuplication::visiter(NoeudPortail* noeud)
 {
-	VisiteurDuplication::visiter((NoeudAbstrait*)noeud);
+	if (noeud->estSelectionne()) {
+	}
 }
