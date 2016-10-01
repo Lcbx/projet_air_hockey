@@ -12,34 +12,34 @@
 
 VisiteurDuplication::VisiteurDuplication() : visDep_(glm::vec3(0.f)) {
 	VisiteurPointMilieu v( posCentre_ );
-	selection_ = v.getSelection();
+	nosClones_ = v.getSelection();
 }
 
 void VisiteurDuplication::duplicate(glm::vec3 point) {
 	FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle((int)point.x, (int)point.y, (glm::dvec3) posActuelle_);
-	for (auto it = selection_.begin(); it != selection_.end(); it++) {
+	for (auto it = nosClones_.begin(); it != nosClones_.end() || !(*it)->estSelectionne(); nosClones_.pop_back()) {
 		(*it)->accepter(this);
 	}
 }
 
-void VisiteurDuplication::actualiser(glm::vec3 point) {
+void VisiteurDuplication::actualise(glm::vec3 point) {
 	FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle((int)point.x, (int)point.y, (glm::dvec3) point);
-	for (auto it = selection_.begin(); it != selection_.end(); it++) {
+	for (auto it = nosClones_.begin(); it != nosClones_.end(); it++) {
+		(*it)->assignerSelection(true);
 		visDep_.setDep( (*it)->obtenirPositionRelative() + point - posActuelle_);
 		visDep_.visiter(*it);
+		(*it)->assignerSelection(false);
 	}
 	posActuelle_ = point;
 }
 
 void VisiteurDuplication::supprimerClones() {
-	while (!selection_.empty()) selection_.front()->obtenirParent()->effacer(selection_.front());
+	while (!nosClones_.empty()) nosClones_.front()->obtenirParent()->effacer(nosClones_.front());
 }
 
-void VisiteurDuplication::creerClones() {
-	
+void VisiteurDuplication::escEnfonce() {
+	supprimerClones();
 }
-
-
 
 void VisiteurDuplication::visiter(NoeudAbstrait* noeud)
 {
@@ -72,7 +72,7 @@ void VisiteurDuplication::visiter(NoeudBonus* noeud)
 		NoeudBonus* nouveauBonus = new NoeudBonus(*noeud);
 		nouveauBonus->assignerSelection(false);
 		nouveauBonus->assignerPositionRelative(  nouveauBonus->obtenirPositionRelative() + posActuelle_ - posCentre_ );
-		selection_.push_back( (NoeudAbstrait*)nouveauBonus );
+		nosClones_.push_back( (NoeudAbstrait*)nouveauBonus );
 		FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter((NoeudAbstrait*)nouveauBonus);
 	}
 }

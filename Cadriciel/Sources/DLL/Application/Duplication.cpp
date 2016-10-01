@@ -10,9 +10,14 @@
 
 #include "Duplication.h"
 
-void Duplication::current(int x, int y) {
-	visiteur_.duplicate( glm::vec3(x, y, 0.f) );
+void Duplication::start(int x, int y) {
+	visiteur_.duplicate(glm::vec3(x, y, 0.f));
 }
+void Duplication::current(int x, int y) {
+	visiteur_.actualise(glm::vec3(x, y, 0.f));
+}
+void Duplication::end(int x, int y) {}
+
 void Duplication::operationShortClick() {
 	//DO something
 }

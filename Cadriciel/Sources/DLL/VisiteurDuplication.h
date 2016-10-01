@@ -21,11 +21,10 @@ class VisiteurDuplication : public Visiteur
 	glm::vec3 posCentre_ {0.f};
 	glm::vec3 posActuelle_{ 0.f };
 
-	std::list<NoeudAbstrait*> selection_;
+	std::list<NoeudAbstrait*> nosClones_;
 
 	VisiteurDeplacement visDep_;
 
-	void creerClones();
 	void supprimerClones();
 
 public:
@@ -33,8 +32,9 @@ public:
 	VisiteurDuplication();
 
 	void duplicate(glm::vec3 point);
-	void actualiser(glm::vec3 point);
+	void actualise(glm::vec3 point);
 	
+	void escEnfonce();	
 
 	virtual void visiter(NoeudAbstrait* noeud);
 	virtual void visiter(NoeudComposite *noeud);
