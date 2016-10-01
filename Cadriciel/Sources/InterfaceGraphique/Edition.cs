@@ -58,6 +58,9 @@ namespace InterfaceGraphique
 
         }
 
+        /////////////////////////////////////////////////////////////////////////
+        //  gere le clavier
+        /////////////////////////////////////////////////////////////////////////
 
         private void keyDownHandler(object sender, KeyEventArgs e)
         {
@@ -143,34 +146,7 @@ namespace InterfaceGraphique
                 default: break;
             }
         }
-        
-        private void nouveauToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            System.Console.WriteLine("Nouveau");
-        }
 
-        private void quitterToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            System.Console.WriteLine("Quitter");
-        }
-
-        private void Exemple_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            lock (Program.unLock)
-            {
-                FonctionsNatives.libererOpenGL();
-                Program.peutAfficher = false;
-            }
-        }
-        public void setMenuPrincipal(MenuPrincipal menuPrincipal)
-        {
-            menuPrincipal_ = menuPrincipal;
-        }
-        private void menuPrincipalToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            menuPrincipal_.Show();
-            this.Hide();
-        }
 
 
         /////////////////////////////////////////////////////////////////////////
@@ -181,6 +157,8 @@ namespace InterfaceGraphique
         private Etats EtatSouris = Etats.SELECTION;
 
         private Boolean mousePressed = false;
+
+        private int x, y;
 
         public void changerMode(Etats nouvelEtat)
         {
@@ -237,9 +215,42 @@ namespace InterfaceGraphique
         {
             if (mousePressed) FonctionsNatives.clickCurrent(e.X, e.Y);
             else FonctionsNatives.positionSouris(e.X, e.Y);
+            x = e.X; y = e.Y;
         }
 
 
+        /////////////////////////////////////////////////////////////////////////
+        //  ...
+        /////////////////////////////////////////////////////////////////////////
+
+
+        private void nouveauToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Console.WriteLine("Nouveau");
+        }
+
+        private void quitterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Console.WriteLine("Quitter");
+        }
+
+        private void Exemple_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            lock (Program.unLock)
+            {
+                FonctionsNatives.libererOpenGL();
+                Program.peutAfficher = false;
+            }
+        }
+        public void setMenuPrincipal(MenuPrincipal menuPrincipal)
+        {
+            menuPrincipal_ = menuPrincipal;
+        }
+        private void menuPrincipalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            menuPrincipal_.Show();
+            this.Hide();
+        }
 
         private void propriétésToolStripMenuItem_Click(object sender, EventArgs e)
         {
