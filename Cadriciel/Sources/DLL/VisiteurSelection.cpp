@@ -120,6 +120,7 @@ void VisiteurSelection::visiter(NoeudMuret* noeud) {
 	}
 }
 
+//TODO: Refactor
 void VisiteurSelection::visiter(NoeudBonus* noeud) {
 	utilitaire::BoiteEnglobante boundingBox = utilitaire::calculerBoiteEnglobante(*(noeud->getModele()));
 	boundingBox.coinMin += noeud->obtenirPositionRelative();
@@ -140,6 +141,7 @@ void VisiteurSelection::visiter(NoeudPortail* noeud) {
 
 	// TODO: Take into account transformations
 	glm::dvec3 centre = noeud->obtenirPositionRelative();
+	centre = centre + glm::dvec3{ 10,0,0 };
 
 	// Distance minimale du point
 	for (int i = 0; i < pointsSize; i++) {
@@ -151,8 +153,17 @@ void VisiteurSelection::visiter(NoeudPortail* noeud) {
 		this->setNodeSelectedState(noeud, true);
 	} else if (PointInsideBoundingBox(this->_boundingBox, centre)) {
 		this->setNodeSelectedState(noeud, true);
-	} else {// TODO: Include bounding box collision
-		this->setNodeSelectedState(noeud, false);
+	} else {
+		/// Calcul de collision entre le portail et la boîte de sélection
+		bool collides = false;
+		for (int i = 0; i < pointsSize; i++) {
+			aidecollision::Collision status = 
+				aidecollision::calculerCollisionSegment(this->getPoint(i), this->getPoint(i + 1), centre, rayon)
+				.type;
+			collides |= status != aidecollision::Collision::COLLISION_AUCUNE;
+		}
+
+		this->setNodeSelectedState(noeud, collides);
 	}
 }
 
