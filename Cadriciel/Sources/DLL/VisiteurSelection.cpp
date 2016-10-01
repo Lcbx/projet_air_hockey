@@ -99,6 +99,10 @@ void VisiteurSelection::visiter(NoeudBonus* noeud) {
 		}
 	}
 
+	if (noeud->estSelectionne())
+	{
+		this->selectionner(noeud);
+	}
 	
 
 }
@@ -138,7 +142,10 @@ void VisiteurSelection::visiter(NoeudPortail* noeud) {
 			break;*/
 		}
 	}
-
+	if (noeud->estSelectionne())
+	{
+		this->selectionner(noeud);
+	}
 }
 
 void SingletonSelection::selectionner(
