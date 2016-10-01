@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////
+/// @file VisiteurSelection.cpp
+/// @author Wajdi Gharsalli
+/// @date 2016-09-10
+/// @version 1.0
+///
+/// @addtogroup inf2990 INF2990
+/// @{
+///////////////////////////////////////////////////////////////////////////////
 #include <iostream>
 #include "VisiteurSelection.h"
 #include "Vue.h"
@@ -57,18 +66,11 @@ void VisiteurSelection::setNodeSelectedState(NoeudAbstrait* noeud, bool isInside
 			noeud->assignerSelection(false);
 			break;
 		}
-	}
-	else {
+	} else {
 		switch (_state) {
 		case SelectionState::SELECT:
 			noeud->assignerSelection(false);
 			break;
-		/*case SelectionState::INVSELECT:
-			noeud->inverserSelection();
-			break;
-		case SelectionState::UNSELECT:
-			noeud->assignerSelection(false);
-			break;*/
 		}
 	}
 }
@@ -83,6 +85,7 @@ void VisiteurSelection::visiter(NoeudComposite* noeud) {
 
 void VisiteurSelection::visiter(NoeudRondelle* noeud) { }
 
+//TODO: Refactor
 void VisiteurSelection::visiter(NoeudMuret* noeud) {
 	math::Droite3D droiteDirectrice = noeud->obtenirDroiteDirectrice();
 	double rayon = noeud->obtenirRayon();
@@ -125,9 +128,6 @@ void VisiteurSelection::visiter(NoeudBonus* noeud) {
 	boundingBox.coinMax.x += 10;
 
 	setNodeSelectedState(noeud, SelectionInsideBoundingBox(_boundingBox, boundingBox));
-
-	if (noeud->estSelectionne())
-		this->selectionner(noeud);
 }
 
 void VisiteurSelection::visiter(NoeudMaillet* noeud) { }
@@ -138,11 +138,12 @@ void VisiteurSelection::visiter(NoeudPortail* noeud) {
 	double minDist = INFINITY;
 	int pointsSize = this->getPoints().size();
 
+	// TODO: Take into account transformations
 	glm::dvec3 centre = noeud->obtenirPositionRelative();
 
-	//Distance minimale du point
+	// Distance minimale du point
 	for (int i = 0; i < pointsSize; i++) {
-		double a = glm::distance(centre, this->getPoint(i)); // Longeur point A et autre point
+		double a = glm::distance(centre, this->getPoint(i));
 		minDist = min(minDist, a);
 	}
 
@@ -150,11 +151,12 @@ void VisiteurSelection::visiter(NoeudPortail* noeud) {
 		this->setNodeSelectedState(noeud, true);
 	} else if (PointInsideBoundingBox(this->_boundingBox, centre)) {
 		this->setNodeSelectedState(noeud, true);
-	} else {
+	} else {// TODO: Include bounding box collision
 		this->setNodeSelectedState(noeud, false);
 	}
 }
 
+//TODO: Refactoriser
 void SingletonSelection::selectionner(
 	glm::ivec2 begin, 
 	glm::ivec2 end, 

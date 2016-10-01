@@ -147,9 +147,6 @@
     <ClCompile Include="Application\AjoutPortail.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
-    <ClCompile Include="Application\DebutAjoutMur.cpp">
-      <Filter>Source Files\Application</Filter>
-    </ClCompile>
     <ClCompile Include="Application\DebutAjoutPortail.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
@@ -167,6 +164,15 @@
     </ClCompile>
     <ClCompile Include="Arbre\Noeuds\NoeudTable.cpp">
       <Filter>Source Files\Arbre\Noeuds</Filter>
+    </ClCompile>
+    <ClCompile Include="Arbre\Noeuds\NoeudPointControle.cpp">
+      <Filter>Source Files\Arbre\Noeuds</Filter>
+    </ClCompile>
+    <ClCompile Include="VisiteurDuplication.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VisiteurPointMilieu.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BoiteCollision.cpp">
       <Filter>Source Files\Collision</Filter>
@@ -272,9 +278,6 @@
     <ClInclude Include="Application\Duplication.h">
       <Filter>Header Files\Application</Filter>
     </ClInclude>
-    <ClInclude Include="Application\DebutAjoutMur.h">
-      <Filter>Header Files\Application</Filter>
-    </ClInclude>
     <ClInclude Include="Application\AjoutMur.h">
       <Filter>Header Files\Application</Filter>
     </ClInclude>
@@ -285,13 +288,25 @@
       <Filter>Header Files\Application</Filter>
     </ClInclude>
     <ClInclude Include="Arbre\Noeuds\NoeudTable.h">
-      <Filter>Source Files\Arbre\Noeuds</Filter>
+      <Filter>Header Files\Arbre\Noeuds</Filter>
     </ClInclude>
     <ClInclude Include="BoiteCollisionAbstraite.h">
       <Filter>Header Files\Collision</Filter>
     </ClInclude>
     <ClInclude Include="BoiteCollision.h">
       <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Arbre\Noeuds\NoeudPointControle.h">
+      <Filter>Header Files\Arbre\Noeuds</Filter>
+    </ClInclude>
+    <ClInclude Include="Arbre\Noeuds\Couleurs.h">
+      <Filter>Header Files\Arbre\Noeuds</Filter>
+    </ClInclude>
+    <ClInclude Include="VisiteurDuplication.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VisiteurPointMilieu.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

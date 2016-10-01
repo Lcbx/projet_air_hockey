@@ -42,6 +42,12 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
+#include "EtatOpenGL.h"
+#include <iostream>
+#include "Noeuds/NoeudTypes.h"
+
+
+
 /// Pointeur vers l'instance unique de la classe.
 FacadeModele* FacadeModele::instance_{ nullptr };
 
@@ -162,8 +168,8 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 			glm::dvec3(0, 0, 200), glm::dvec3(0, 0, 0),
 			glm::dvec3(0, 1, 0),   glm::dvec3(0, 1, 0)},
 		vue::ProjectionOrtho{ 
-				500, 500,
-				1, 1000, 1, 10000, 1.25,
+				638, 398,
+				1, 1000, 1, 10000, 0.25,
 				200, 200}
 	};
 }
@@ -373,6 +379,7 @@ void FacadeModele::ajouterPortail(int x1, int y1)
 
 void FacadeModele::supprimerPortail(bool escTouche)
 {
+	std::printf("A l'interieur de facade modele esti \n");
 	arbre_->supprimerPortail(escTouche);
 }
 
@@ -418,6 +425,84 @@ void FacadeModele::ajouterMurFantome(int corXin, int corYin, int corX, int corY)
 		arbre_->effacer(arbre_->chercher(arbre_->obtenirNombreEnfants() - 1));
 	//ajouterMur(corXin, corYin, corX, corY);
 }
+///////////////////////////////////////////////////////////////////////////////
+/// @}
+///////////////////////////////////////////////////////////////////////////////
+double FacadeModele::getPosDataBidingX()
+{
+	return arbre_->getPosiX();
+	
+}
+
+/*
+void FacadeModele::deplacerObjet(int x1, int y1, int x2, int y2)
+{
+	glm::dvec3 posInial;
+	vue_->convertirClotureAVirtuelle(x1, y1, posInial);
+
+	glm::dvec3 posFinal;
+	vue_->convertirClotureAVirtuelle(x2, y2, posFinal);
+
+	arbre_->deplacer(posInial, posFinal);
+	
+}*/
+
+double FacadeModele::getPosDataBidingY()
+{
+	return arbre_->getPosiY();
+
+}
+
+void FacadeModele::effacerObjet()
+{
+	arbre_->effacerSelection();
+}
+
+void FacadeModele::deplacerObjet(double x, double y)
+{
+	glm::dvec3 NouvPos{x, y, 0.f};
+
+	arbre_->deplacerObjet(NouvPos);
+
+}
+
+// fonction bidon test
+void FacadeModele::test() {
+
+	std::printf("alooooooooooo test \n");
+}
+// deplacer un point de controle
+void FacadeModele::deplacerPointHaut(int index) {
+#define delta 0.1
+	if (index == 1)
+	{
+		std::cout << "Noeud deplace'" << std::endl;
+		//// effacer la table puis l'afficher avec les nouvelle coordonnees
+		//const NoeudAbstrait* noeudTable = arbre_->chercher("table");
+		//arbre_->effacer(noeudTable);
+		NoeudTable* noeudTable = arbre_->getTable();
+
+		glm::vec3 point;
+		noeudTable->getPointControle(2, point);
+		point.y += delta;
+		noeudTable->setPointControle(2, point);
+
+		// probleme la table n'est pas mis a jour
+
+		/*glm::vec3 pointControle;
+		(NoeudTable *) noeudTable->getPointControle(1, & pointControle);
+*/
+	}
+#undef delta
+}
+
+int FacadeModele::nombreObjetSelectionne()
+{
+	return arbre_->obtenirNombreObjetSelctionnes();
+
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
 ///////////////////////////////////////////////////////////////////////////////

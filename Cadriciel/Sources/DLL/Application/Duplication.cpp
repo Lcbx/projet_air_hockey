@@ -10,6 +10,9 @@
 
 #include "Duplication.h"
 
+void Duplication::current(int x, int y) {
+	
+}
 void Duplication::operationShortClick() {
 	//DO something
 }

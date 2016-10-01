@@ -64,6 +64,7 @@ private:
 	glm::dvec3 getPoint(int index);
 
 public:
+	VisiteurSelection() {};
 	virtual void visiter(NoeudAbstrait* noeud);
 	virtual void visiter(NoeudComposite *noeud);
 
@@ -72,7 +73,6 @@ public:
 	virtual void visiter(NoeudBonus* noeud);
 	virtual void visiter(NoeudMaillet* noeud);
 	virtual void visiter(NoeudPortail* noeud);
-
 
 	////////////////////////////////////////////////////////////////////////
 	///
@@ -156,7 +156,13 @@ public:
 		return selectionnes;
 	};
 
-	
+
+	glm::dvec3 getPosDataBinding() { return posDataBinding; }
+
+	glm::dvec3 posDataBinding;
+
+
+
 };
 
 ///////////////////////////////////////////////////////////////////////////

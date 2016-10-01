@@ -10,6 +10,7 @@
 
 #include "Utilitaire.h"
 #include "VueOrtho.h"
+#include <iostream>
 
 
 namespace vue {
@@ -132,7 +133,26 @@ namespace vue {
 	void VueOrtho::zoomerInElastique(const glm::ivec2& coin1,
 		const glm::ivec2& coin2)
 	{
-		/// À Faire: Redimensionner la projection et déplacer la caméra
+		std::cout << "Zoom elastique avec p1: (" << coin1[0] << "," << coin1[1] << ") et p2: (" << coin2[0] << "," << coin2[1] << ")" << std::endl;
+		std::cout << "Pas encore fonctionnel" << std::endl;
+
+		//Pas encore fonctionnel
+		// Déplacement afin que le centre du rectangle elastique devienne le centre de la nouvelle cloture
+
+		glm::dvec3 vCentreActuel, vNouveauCentre;
+		convertirClotureAVirtuelle(projection_.obtenirDimensionCloture()[0] / 2, projection_.obtenirDimensionCloture()[1] / 2, vCentreActuel);
+		convertirClotureAVirtuelle((coin1[0] + coin2[0]) / 2, (coin1[1] + coin2[1]) / 2, vNouveauCentre);
+
+		glm::ivec2 deplacementXY;
+
+		deplacementXY[0] = vNouveauCentre[0] - vCentreActuel[0];
+		deplacementXY[1] = vNouveauCentre[1] - vCentreActuel[1];
+		//deplacementZ[2] = vNouveauCentre[2] - vCentreActuel[2];
+
+
+		deplacerXY(deplacementXY);
+
+		
 	}
 
 
@@ -172,7 +192,7 @@ namespace vue {
 	void VueOrtho::deplacerXY(double deplacementX, double deplacementY)
 	{
 		camera_.deplacerXY(deplacementX * projection_.obtenirDimensionCloture()[0], 
-			deplacementY * projection_.obtenirDimensionCloture()[1]);
+			deplacementY * projection_.obtenirDimensionCloture()[1], true);
 	}
 
 
@@ -191,7 +211,7 @@ namespace vue {
 	////////////////////////////////////////////////////////////////////////
 	void VueOrtho::deplacerXY(const glm::ivec2& deplacement)
 	{
-		camera_.deplacerXY(deplacement[0], deplacement[1]);
+		camera_.deplacerXY(deplacement[0], deplacement[1], true);
 	}
 
 

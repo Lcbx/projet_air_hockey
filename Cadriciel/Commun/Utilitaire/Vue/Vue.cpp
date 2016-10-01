@@ -65,7 +65,7 @@ namespace vue {
 		const GLdouble MinZ{ 0.0 };
 		const GLdouble MaxZ{ 1.0 };
 
-		// Obtenir la matrice de projection.
+		// Obtenir la matrice de camera.
 		glm::dmat4 matriceCamera = this->obtenirCamera().obtenirMatrice();
 
 		// Obtenir la matrice de projection.
@@ -73,7 +73,7 @@ namespace vue {
 
 		// Lire la cl�ture.
 		glm::ivec4 cloture;
-		glGetIntegerv(GL_VIEWPORT, glm::value_ptr(cloture));
+		glGetIntegerv(GL_VIEWPORT, glm::value_ptr(cloture)); // Retourne la position et la taille de la fenêtre
 
 		// Premier point.
 		glm::dvec3 point1;

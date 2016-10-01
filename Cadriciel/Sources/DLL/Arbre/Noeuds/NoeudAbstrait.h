@@ -29,11 +29,14 @@ namespace opengl{
 
 //TODO: AJOUTEZ TOUS Classes Visiteurs 
 class Visiteur;
+class VisiteurPointMilieu;
 class VisiteurDeplacement;
+class VisiteurDuplication;
 class VisiteurSelection;
 class VisiteurRotation;
 class VisiteurMiseEchelle;
 class VisiteurAjout;
+
 
 
 
@@ -181,6 +184,7 @@ public:
 	inline const glm::dvec3& getScale()const;
 
 
+
 protected:
 	/// Type du noeud.
 	std::string      type_;
@@ -216,7 +220,12 @@ protected:
 	glm::dvec3 scale_ = { 1.0, 1.0, 1.0 };
 	
 	// angle de rotation
-	float angle_;
+	/// Angle selon l'axe des X.
+	float angleX_{ 0.f };
+	/// Angle selon l'axe des Y.
+	float angleY_{ 0.f };
+	/// Angle de rotation.
+	float angleRotation_{ 0.f };
 
 	NoeudAbstrait* frere_;
 };
@@ -479,7 +488,7 @@ inline void NoeudAbstrait::assignerObjetRendu(modele::Modele3D const* modele, op
 // set  du scale et angle
 inline void NoeudAbstrait::setAngle(float angle)
 {
-	angle_ = angle;
+	angleRotation_ = angle;
 }
 inline void NoeudAbstrait::setScale(const glm::dvec3& scale)
 {
@@ -490,7 +499,7 @@ inline void NoeudAbstrait::setScale(const glm::dvec3& scale)
 //get du scale et angle
 inline float NoeudAbstrait::getAngle()const
 {
-	return angle_;
+	return angleRotation_;
 }
 
 

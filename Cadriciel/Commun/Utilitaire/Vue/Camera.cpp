@@ -12,6 +12,7 @@
 #include "Utilitaire.h"
 #include "Camera.h"
 #include "glm\gtc\matrix_transform.hpp"
+#include <iostream>
 
 namespace vue {
 
@@ -54,12 +55,22 @@ namespace vue {
 	///                            la caméra.
 	/// @param[in]  deplacementY : Déplacement sur l'axe vertical du plan de la
 	///                            caméra.
+	/// @param[in]  bougePointVise : Si vrai, le point de visé est également
+	///                              déplacé.
 	///
 	/// @return Aucune.
 	///
 	////////////////////////////////////////////////////////////////////////////
-	void Camera::deplacerXY(double deplacementX, double deplacementY)
+	void Camera::deplacerXY(double deplacementX, double deplacementY, bool bougePointVise)
 	{
+		position_[0] += deplacementX;
+		position_[1] += deplacementY;
+		if (bougePointVise) {
+			std::cout << pointVise_[0] << " " << pointVise_[1] << std::endl;
+			pointVise_[0] += deplacementX;
+			pointVise_[1] += deplacementY;
+			std::cout << pointVise_[0] << " " << pointVise_[1] << std::endl;
+		}
 	}
 
 
@@ -78,6 +89,8 @@ namespace vue {
 	////////////////////////////////////////////////////////////////////////////
 	void Camera::deplacerZ(double deplacement, bool bougePointVise)
 	{
+		position_[2] += deplacement;
+		if (bougePointVise)pointVise_[2] += deplacement;
 	}
 
 
@@ -104,6 +117,7 @@ namespace vue {
 		bool   empecheInversion //=true
 		)
 	{
+		//TODO TODO TODO ST-TROPEZ
 	}
 
 
@@ -130,6 +144,7 @@ namespace vue {
 		bool   empecheInversion //=true
 		)
 	{
+		//TODO TODO TODO ST-TROPEZ
 	}
 
 
