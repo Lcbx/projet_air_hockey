@@ -444,7 +444,6 @@ GLfloat ArbreRenduINF2990::calculerScale(glm::dvec3 pos, glm::dvec3 posf)
 /// @return angle.
 ///
 ////////////////////////////////////////////////////////////////////////
-
 double ArbreRenduINF2990::calculerAngle(glm::dvec3 pos, glm::dvec3 posf)
 {
 	double angle;
@@ -469,6 +468,15 @@ double ArbreRenduINF2990::calculerAngle(glm::dvec3 pos, glm::dvec3 posf)
 }
 
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn double getPosiX()
+///
+/// Cette fonction de retourner une position X d'un objet selectionne
+///
+/// @return position X
+///
+////////////////////////////////////////////////////////////////////////
 double ArbreRenduINF2990::getPosiX()
 {
 	for (NoeudAbstrait * enfant : this->enfants_)
@@ -481,6 +489,18 @@ double ArbreRenduINF2990::getPosiX()
 	}
 }
 
+
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn double getPosiY()
+///
+/// Cette fonction de retourner une position Y d'un objet selectionne
+///
+/// @return position Y
+///
+////////////////////////////////////////////////////////////////////////
 double ArbreRenduINF2990::getPosiY()
 {
 	for (NoeudAbstrait * enfant : this->enfants_)
@@ -496,9 +516,18 @@ double ArbreRenduINF2990::getPosiY()
 
 
 
-void ArbreRenduINF2990::deplacerObjet(glm::dvec3 posDep)
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void deplacerObjet(glm::dvec3 posDep, double angle)
+///
+/// cette fonction permet de deplacer un objet 
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::deplacerObjet(glm::dvec3 posDep, double angle)
 {
-	int comp = 0;
+	/*int comp = 0;
 
 
 	for (NoeudAbstrait * enfant : enfants_)
@@ -508,19 +537,31 @@ void ArbreRenduINF2990::deplacerObjet(glm::dvec3 posDep)
 			comp++;
 		}
 	}
-
+	*/
 	for (NoeudAbstrait * enfant : enfants_)
 	{
-		if (enfant->estSelectionne() && enfant->obtenirType() == "bonus" && comp==1)
+		if (enfant->estSelectionne())// && enfant->obtenirType() == "bonus" && comp==1)
 		{
+			//TODO: reste a verifier si l'objet sort pas de la table 
 			//glm::dvec3 posTemp = enfant->obtenirPositionRelative();
 			enfant->assignerPositionRelative(posDep);
-
+			enfant->setAngle(angle);
 		}
 
 	}
 }
 
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn int obtenirNombreObjetSelectionnes()
+///
+/// Cette fonction de calculer le nombre des objets selectionnes 
+///
+/// @return nombre objet selectionnées
+///
+////////////////////////////////////////////////////////////////////////
 int ArbreRenduINF2990::obtenirNombreObjetSelctionnes()
 {
 	int comp = 0;
@@ -535,6 +576,26 @@ int ArbreRenduINF2990::obtenirNombreObjetSelctionnes()
 	return comp;
 }
 
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn doublegetAngleDataBinding()
+///
+/// Cette fonction de retourner l'angle d'un objet selectionné
+///
+/// @return l'angle d'un objet
+///
+////////////////////////////////////////////////////////////////////////
+double ArbreRenduINF2990::getAngleDataBinding()
+{
+		for (NoeudAbstrait * enfant : this->enfants_)
+		{
+			if (enfant->estSelectionne())
+			{
+				return enfant->getAngle();
+			}
+		}
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -99,11 +99,15 @@ public:
 	void effacerObjet();
 
 	//deplacer un objet a partir des coordonnes de la boite de configuration
-	void deplacerObjet(double x, double y);
+	void deplacerObjet(double x, double y, double angle);
 
 
 	//retourner le nombre d'objet selectionne
 	int nombreObjetSelectionne();
+
+
+	//obtenir l'angle d'un objet
+	double getAngle();
 
 
 
