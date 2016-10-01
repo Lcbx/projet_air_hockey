@@ -302,10 +302,7 @@ void NoeudComposite::effacerSelection()
 	for (NoeudAbstrait * enfant : enfants_) {
 		if (enfant->obtenirType() == "portail" && enfant->getFrere() != NULL)
 		{
-			if (enfant->estSelectionne() == true)
-			{
-				enfant->getFrere()->assignerSelection(true);
-			}
+			enfant->getFrere()->assignerSelection(true);
 		}
 	}
 
