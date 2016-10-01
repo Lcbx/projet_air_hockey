@@ -58,7 +58,6 @@ namespace InterfaceGraphique
 
         }
 
-        bool supprimer = false;
 
         private void keyDownHandler(object sender, KeyEventArgs e)
         {
@@ -85,9 +84,9 @@ namespace InterfaceGraphique
                 case Keys.Delete:{
                         System.Console.WriteLine("touche Delete");
                         FonctionsNatives.supprimerObjet();
+                    
                         break; }
-
-                case Keys.O: { FonctionsNatives.deplacerPointHaut(2); break; }
+                case Keys.O: FonctionsNatives.deplacerPointHaut(2); break;
                 default: break;
             } 
         }
@@ -177,87 +176,8 @@ namespace InterfaceGraphique
         {
             if (mousePressed) FonctionsNatives.clickCurrent(e.X, e.Y);
             else FonctionsNatives.positionSouris(e.X, e.Y);
-
-            //wajdi
-
-            /* if (firstClick)
-             {
-                 if (coordXin != e.X && coordYin != e.Y)
-                 {
-                     if (!supprimer)
-                     {
-                         FonctionsNatives.ajouterMuretFantome(coordXin, coordYin, e.X, e.Y);
-                         supprimer = true;
-                     }
-                    // int nb = FonctionsNatives.obtenirNombreElemntSurScene();
-                     FonctionsNatives.ajouterMuret(coordXin, coordYin, e.X, e.Y);
-                    /*if ((nb + 1) == FonctionsNatives.obtenirNombreElemntSurScene())
-                     {
-                         supprimer = false;
-                     }*/
-
-            //  }
-
-            // }
-
         }
 
-        
-
-
-        int compteur = 0;
-        bool firstClick = false;
-        int coordXin = 0, coordYin = 0;
-
-        private void panel1_MouseClick(object sender, MouseEventArgs e)
-        {
-            //ETAT AJOUT PORTAIL
-
-            /*
-                   //FonctionsNatives.ajouterPortail(e.X, e.Y);
-
-                   //Pour vérifier qu'on a cliqué 2 fois 
-                     compteur += 1;
-                     if (compteur <= 1)
-                     {
-                         compteur += 1;
-                         System.Console.WriteLine("Premier clic:  x=  " + e.X + " y= " + e.Y);
-                         FonctionsNatives.ajouterPortail(e.X, e.Y);
-
-                     }
-                     if (compteur > 2)
-                     {
-                           System.Console.WriteLine("Deuxieme clic:  x=  " + e.X + " y= " + e.Y);
-                           compteur = 0;
-                           FonctionsNatives.ajouterPortailDeux(e.X, e.Y);
-                      }
-                         */
-
-            //Etat AJOUT MURET
-
-            /*
-                        //Pour vérifier qu'on a cliqué 2 fois 
-                        compteur += 1;
-                        if (compteur <= 1)
-                        {
-                            compteur += 1;
-                            System.Console.WriteLine("Premier clic:  x=  " + e.X + " y= " + e.Y);
-                            firstClick = true;
-                            coordXin = e.X;
-                            coordYin = e.Y;
-
-                        }
-                        if (compteur > 2)
-                        {
-                            System.Console.WriteLine("Deuxieme clic:  x=  " + e.X + " y= " + e.Y);
-                            compteur = 0;
-                            FonctionsNatives.ajouterMuret(coordXin, coordYin, e.X, e.Y);
-                            firstClick = false;
-                        }
-
-                        */
-
-        }
 
 
         private void propriétésToolStripMenuItem_Click(object sender, EventArgs e)
@@ -468,7 +388,7 @@ namespace InterfaceGraphique
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void positionSouris(int x, int y);
 
-        //touche escape
+        //touche control
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void toucheControl(bool presse);
 

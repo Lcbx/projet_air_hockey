@@ -3,16 +3,13 @@
 
 #include "VisiteurRotation.h"
 #include "ArbreRenduINF2990.h"
-
+#include "VisiteurPointMilieu.h"
 
 VisiteurRotation::VisiteurRotation() {
-	etat_ = DETERMINER_CENTRE;
-	nbrNoeudsVisites_ = 0;
-	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
+	VisiteurPointMilieu v(posCentre_);	
 }
 
 void VisiteurRotation::rotate(float angle) {
-	etat_ = APPLIQUER_ROTATION;
 	angle_ = angle;
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
 }
@@ -21,16 +18,9 @@ void VisiteurRotation::visiter(NoeudAbstrait* noeud)
 {
 	if (noeud->estSelectionne()) {
 		auto posNoeud = noeud->obtenirPositionRelative();
-		if (etat_ == DETERMINER_CENTRE) {
-			posCentre_ *= nbrNoeudsVisites_++;
-			posCentre_ += posNoeud;
-			posCentre_ /= (float)nbrNoeudsVisites_;
-			cout << "noeud actuel X=" << posNoeud.x << " Y=" << posNoeud.y << " Z=" << posNoeud.z << "\n";
-		}
-		else {	//etat == APPLIQUER_ROTATION
-			auto newpos = glm::vec4(posNoeud - posCentre_, 1.f) * glm::rotate(glm::mat4(1.f), glm::radians(angle_), { 0,0,1 }) + glm::vec4(posCentre_, 1.f);
-			noeud->assignerPositionRelative(glm::vec3(newpos[0], newpos[1], newpos[2]));
-		}
+		auto newpos = glm::vec4(posNoeud - posCentre_, 0.f) * glm::rotate(glm::mat4(1.f), glm::radians(angle_), { 0.f,0.f,1.f }) + glm::vec4(posCentre_, 0.f);
+		noeud->assignerPositionRelative(glm::vec3(newpos[0], newpos[1], newpos[2]));
+		noeud->setAngle(noeud->getAngle() - angle_/60);
 	}
 }
 

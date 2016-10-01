@@ -1,35 +1,45 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// @file VisiteurRotation.h
-/// @author Wajdi Gharsalli
-/// @date 2016-09-10
+/// @file VisiteurDuplication.h
+/// @author Luc Courbariaux
+/// @date 2016-09-30
 /// @version 1.0
 ///
 /// @addtogroup inf2990 INF2990
 /// @{
 ///////////////////////////////////////////////////////////////////////////////
 #pragma once
-#ifndef VISITEUR_ROTATION_H
-#define VISITEUR_ROTATION_H
-
-#include <iostream>
 #include <string>
+#include <list>
 
 #include "Visiteur.h"
+#include "VisiteurDeplacement.h"
 
 
 
-
-class VisiteurRotation : public Visiteur
+class VisiteurDuplication : public Visiteur
 {
-	float angle_{0.f};
-	glm::vec3 posCentre_{0.f,0.f,0.f};
+	glm::vec3 posCentre_ {0.f};
+	glm::vec3 posActuelle_{ 0.f };
+
+	std::list<NoeudAbstrait*> nosClones_;
+
+	VisiteurDeplacement visDep_;
+
+	
 
 public:
-	VisiteurRotation();
-	void rotate(float angle);
+
+	VisiteurDuplication();
+
+	void duplicate(glm::vec3 point);
+	void actualise(glm::vec3 point);
+	void finalise();
+
+	void supprimerClones();
+
 	virtual void visiter(NoeudAbstrait* noeud);
 	virtual void visiter(NoeudComposite *noeud);
-	
+
 
 	virtual void visiter(NoeudRondelle* noeud);
 	virtual void visiter(NoeudMuret* noeud);
@@ -38,5 +48,4 @@ public:
 	virtual void visiter(NoeudPortail* noeud);
 
 };
-#endif
 

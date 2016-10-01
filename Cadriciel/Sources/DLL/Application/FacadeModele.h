@@ -71,18 +71,17 @@ public:
 
 	//ajouter Portail
 	void ajouterPortail(int x1, int y1);
-
-
 	//supprime le 1er Portail apres clic echap
  	void supprimerPortail(bool escTouche);
-
-
+	//ajouter second Portail
 	void ajouterPortailDeux(int x2, int y2);
 	
 
-
+	//murets
 	void ajouterMuret(int x1, int y1, int x2, int y2);
 	void ajouterMurFantome(int corXin, int corYin, int corX, int corY);
+
+
 	// fonction bidon de test
 	void test();
 	// test deplacement du point de controle

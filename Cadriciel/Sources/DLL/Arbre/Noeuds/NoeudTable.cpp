@@ -132,22 +132,24 @@ void NoeudTable::tracerTable() const
 	//	1.0,  // near
 	//	-1.0);  // far
 	
+	glPushMatrix();
+	glEnable(GL_NORMALIZE);
 	// Affichage du modèle.
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	
-	//quelques transformations bidons
-	//glTranslatef(-.5,-.5,0);
-	//glScaled(1.25, 1.25, 1.25);
-	glEnable(GL_NORMALIZE);
 	// deactiver les textures (la table ne prend plus la texture des autres noeuds)
 	glDisable(GL_TEXTURE_2D);
 	// deactiver les lumieres
 	glDisable(GL_LIGHTING);
 	// desactiver le test de profondeur
 	glDisable(GL_DEPTH_TEST);
-	// activer l'anticrenelage - aucun effet a l'instant
-	//glEnable(GL_MULTISAMPLE);
+	
+	//quelques transformations bidons
+	//glTranslatef(-.5,-.5,0);
+	//glScaled(1.25, 1.25, 1.25);
+	
+	
+	
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 // tracage de la table avec les vao et les vbo -- pas fini! (on laisse tomber a l'instant)
@@ -225,7 +227,8 @@ void NoeudTable::tracerTable() const
 
 	// tracer les murs 
 	tracerMurs();
-
+	// tracer les buts 
+	tracerButs();
 	// tracer les lignes de decoration 
 	// tracer le contour
 	glColor4f(couleurContour_[0], couleurContour_[1], couleurContour_[2], couleurContour_[3]);
@@ -272,8 +275,9 @@ void NoeudTable::tracerTable() const
 
    //Activer le test de profondeur
 	glEnable(GL_DEPTH_TEST);
-	 //Desactiver l'anticrenelage
-	//glDisable(GL_MULTISAMPLE);
+	// activer le test de profondeur
+	//glEnable(GL_TEXTURE_2D);
+	glPopMatrix();	
 }
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -337,6 +341,30 @@ void NoeudTable::tracerMurs() const
 	
 	
 }
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn double NoeudTable::calculPente(glm::vec3 P0, glm::vec3 P1)
+///
+/// @param[in] 
+///		P0 : le premier point de la droite
+///		P1 : le 2eme point de la droite
+/// Cette fonction calcul la pente de la droite forme' par 2 points
+///
+/// @return double
+///
+////////////////////////////////////////////////////////////////////////
+double NoeudTable::calculPente(glm::vec3 P0, glm::vec3 P1)
+{
+	if ((P0.x - P1.x) == 0)
+		return (double)P0.x;
+	else
+		if ((P0.y - P1.y) == 0)
+			return (double)P0.y;
+
+		else
+			return (double) (P0.y - P1.y) / (P0.x - P1.x);
+}
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void NoeudTable::tracerButs(float longueur)
@@ -348,16 +376,52 @@ void NoeudTable::tracerMurs() const
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudTable::tracerButs(float longueur) const
+void NoeudTable::tracerButs() const
 {
 	// tracez le 1er but
-	// pente de la droite p6p0
-	double a60 = (pointControle_[0].y - pointControle_[6].y) / (pointControle_[0].x - pointControle_[6].x);
-	double b60 = pointControle_[6].y - a60 * pointControle_[6].x;
-	// pente de la droite p6p1
-	double a61 = (pointControle_[1].y - pointControle_[6].y) / (pointControle_[1].x - pointControle_[6].x);
-	double b61 = pointControle_[6].y - a61 * pointControle_[6].x;
-
+	//// pente de la droite p6p0
+	//double a60 = (pointControle_[0].y - pointControle_[6].y) / (pointControle_[0].x - pointControle_[6].x);
+	//double b60 = pointControle_[6].y - a60 * pointControle_[6].x;
+	double longueurP6P0 = sqrt(pow((pointControle_[0].x - pointControle_[6].x),2)+pow(pointControle_[0].y - pointControle_[6].y,2));
+	//double aPerp60 = -1/a60;
+	//
+	////std::cout << "longueur p0p6 = " << longueurP6P0 << std::endl;
+	//std::cout << "pente p0p6 = " << a60 << "pente perp "<<aPerp60<< std::endl;
+	//// pente de la droite p6p1
+	//double a61 = (pointControle_[1].y - pointControle_[6].y) / (pointControle_[1].x - pointControle_[6].x);
+	//double b61 = pointControle_[6].y - a61 * pointControle_[6].x;
+	
+	
+	glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
+	glBegin(GL_QUADS);
+	{	
+		//1er but
+		// 1er morceau
+		glVertex3f(pointControle_[6].x, pointControle_[6].y, pointControle_[6].z);
+		glVertex3f(pointControle_[6].x, pointControle_[6].y + longueurP6P0/4, pointControle_[6].z);
+		glVertex3f(pointControle_[6].x - largeur_, pointControle_[6].y + longueurP6P0/4, pointControle_[6].z);
+		glVertex3f(pointControle_[6].x - largeur_, pointControle_[6].y, pointControle_[6].z);
+		// 2eme morceau
+		glVertex3f(pointControle_[6].x, pointControle_[6].y, pointControle_[6].z);
+		glVertex3f(pointControle_[6].x - largeur_, pointControle_[6].y, pointControle_[6].z);
+		glVertex3f(pointControle_[6].x - largeur_, pointControle_[6].y - longueurP6P0/4, pointControle_[6].z);
+		glVertex3f(pointControle_[6].x , pointControle_[6].y - longueurP6P0/4, pointControle_[6].z);
+		
+		//2eme but
+		// 1ere morceau
+		glVertex3f(pointControle_[7].x + largeur_, pointControle_[7].y, pointControle_[7].z);
+		glVertex3f(pointControle_[7].x + largeur_, pointControle_[7].y + longueurP6P0 / 4, pointControle_[7].z);
+		glVertex3f(pointControle_[7].x, pointControle_[7].y + longueurP6P0 / 4, pointControle_[7].z);
+		glVertex3f(pointControle_[7].x, pointControle_[7].y, pointControle_[7].z);
+				
+		// 2eme morceau
+		glVertex3f(pointControle_[7].x + largeur_, pointControle_[7].y, pointControle_[7].z);
+		glVertex3f(pointControle_[7].x, pointControle_[7].y, pointControle_[7].z);
+		glVertex3f(pointControle_[7].x, pointControle_[7].y - longueurP6P0 / 4, pointControle_[7].z);
+		glVertex3f(pointControle_[7].x + largeur_, pointControle_[7].y - longueurP6P0 / 4, pointControle_[7].z);
+								
+	}
+	glEnd();
 
 	// tracer le 2eme but 
 	// trouvez l'equation des droites p7p4 et p7p5 pour le 2eme but 
