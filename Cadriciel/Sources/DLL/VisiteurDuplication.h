@@ -25,7 +25,7 @@ class VisiteurDuplication : public Visiteur
 
 	VisiteurDeplacement visDep_;
 
-	void supprimerClones();
+	
 
 public:
 
@@ -33,8 +33,9 @@ public:
 
 	void duplicate(glm::vec3 point);
 	void actualise(glm::vec3 point);
-	
-	void escEnfonce();	
+	void finalise();
+
+	void supprimerClones();
 
 	virtual void visiter(NoeudAbstrait* noeud);
 	virtual void visiter(NoeudComposite *noeud);

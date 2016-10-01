@@ -18,7 +18,8 @@ public:
 	Duplication(){}
 	void start(int x, int y);				//les coordonnees du mouse_down
 	void current(int x, int y);				//les coordonnees du mouse_move
-	void end(int x, int y);				//les coordonnees du mouse_up
+	void end(int x, int y);					//les coordonnees du mouse_up
+	void escEnfonce();						//interromp pour changement de mode
 	//void position(int x, int y);			//position de la souris hors d'un click
 	void operationShortClick();				//lance l'opération adéquate selon le scénario du click
 	void operationDragClick();				//lance l'opération adéquate selon le scénario du click
