@@ -85,7 +85,7 @@ void VisiteurSelection::visiter(NoeudRondelle* noeud) { }
 
 void VisiteurSelection::visiter(NoeudMuret* noeud) {
 	math::Droite3D droiteDirectrice = noeud->obtenirDroiteDirectrice();
-	double rayon = noeud->obtenirRayonModele();
+	double rayon = noeud->obtenirRayon();
 
 	double minDist = INFINITY;
 	int pointsSize = this->getPoints().size();
@@ -132,7 +132,28 @@ void VisiteurSelection::visiter(NoeudBonus* noeud) {
 
 void VisiteurSelection::visiter(NoeudMaillet* noeud) { }
 
-void VisiteurSelection::visiter(NoeudPortail* noeud) { }
+void VisiteurSelection::visiter(NoeudPortail* noeud) {
+	double rayon = noeud->obtenirRayon();
+
+	double minDist = INFINITY;
+	int pointsSize = this->getPoints().size();
+
+	glm::dvec3 centre = noeud->obtenirPositionRelative();
+
+	//Distance minimale du point
+	for (int i = 0; i < pointsSize; i++) {
+		double a = glm::distance(centre, this->getPoint(i)); // Longeur point A et autre point
+		minDist = min(minDist, a);
+	}
+
+	if (rayon >= minDist) {
+		this->setNodeSelectedState(noeud, true);
+	} else if (PointInsideBoundingBox(this->_boundingBox, centre)) {
+		this->setNodeSelectedState(noeud, true);
+	} else {
+		this->setNodeSelectedState(noeud, false);
+	}
+}
 
 void SingletonSelection::selectionner(
 	glm::ivec2 begin, 
