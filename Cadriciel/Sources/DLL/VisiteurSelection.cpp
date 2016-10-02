@@ -85,7 +85,7 @@ void VisiteurSelection::visiter(NoeudComposite* noeud) {
 
 void VisiteurSelection::visiter(NoeudRondelle* noeud) { }
 
-//TODO: Refactor
+
 void VisiteurSelection::visiter(NoeudMuret* noeud) {
 	math::Droite3D droiteDirectrice = noeud->obtenirDroiteDirectrice();
 	double rayon = noeud->obtenirRayon();
@@ -120,15 +120,38 @@ void VisiteurSelection::visiter(NoeudMuret* noeud) {
 	}
 }
 
-//TODO: Refactor
 void VisiteurSelection::visiter(NoeudBonus* noeud) {
-	utilitaire::BoiteEnglobante boundingBox = utilitaire::calculerBoiteEnglobante(*(noeud->getModele()));
-	boundingBox.coinMin += noeud->obtenirPositionRelative();
-	boundingBox.coinMin.x += 10;
-	boundingBox.coinMax += noeud->obtenirPositionRelative();
-	boundingBox.coinMax.x += 10;
+	math::Droite3D droiteDirectrice = noeud->obtenirDroiteDirectrice();
+	double rayon = noeud->obtenirRayon();
 
-	setNodeSelectedState(noeud, SelectionInsideBoundingBox(_boundingBox, boundingBox));
+	double minDist = INFINITY;
+	size_t pointsSize = this->getPoints().size();
+
+	//Si un point est sur la droite et dans la droite du muret, 
+	double l = glm::length(droiteDirectrice.lireVecteur()); // Longeur de la droite
+	for (size_t i = 0; i < pointsSize; i++) {
+		double a = glm::distance(droiteDirectrice.lirePoint(), this->getPoint(i)); // Longeur point A et autre point
+		double b = glm::distance(droiteDirectrice.lirePoint() + droiteDirectrice.lireVecteur(), this->getPoint(i)); // Longeur point B et autre point
+		if (a <= l && b <= l) {	//On reste dans la droite si a <= l et b <= l
+			minDist = min(minDist, droiteDirectrice.distancePoint(this->getPoint(i)));
+		}
+	}
+
+	/// Click near or inside
+	if (rayon >= minDist) {
+		this->setNodeSelectedState(noeud, true);
+	} /// Object inside selection
+	else if (PointInsideBoundingBox(this->_boundingBox, noeud->obtenirPositionRelative())) {
+		this->setNodeSelectedState(noeud, true);
+	} /// Le rectangle coïncide avec la droite (collision)
+	else {
+		bool doesCollides = false;
+		for (int i = 0; i < pointsSize; i++) { //Est-ce que les deux droites s'intersectent
+			doesCollides |= droiteDirectrice.intersectionSegment(this->getPoint(i), this->getPoint(i + 1));
+		}
+
+		this->setNodeSelectedState(noeud, doesCollides);
+	}
 }
 
 void VisiteurSelection::visiter(NoeudMaillet* noeud) { }

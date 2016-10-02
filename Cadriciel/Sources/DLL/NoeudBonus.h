@@ -13,6 +13,7 @@
 
 #include "NoeudAbstrait.h"
 #include "GL/glew.h"
+#include "BoiteCollision.h"
 
 
 ///////////////////////////////////////////////////////////////////////////
@@ -38,7 +39,9 @@ public:
 
 	//Accepter le visiteur
 	virtual void accepter(Visiteur* v);
-	
+
+	/// Permet d'obtenir la droite directrice du noeud bonus
+	math::Droite3D obtenirDroiteDirectrice();
 };
 
 

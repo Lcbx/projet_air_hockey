@@ -143,7 +143,8 @@ void NoeudMuret::animer(float temps)
 /// @return La droite directrice du muret
 ////////////////////////////////////////////////////////////////////////
 math::Droite3D NoeudMuret::obtenirDroiteDirectrice() {
-	double rayon = this->obtenirRayonModele();
+	utilitaire::BoiteEnglobante box = utilitaire::calculerBoiteEnglobante(*this->modele_);
+	double rayon = max(abs(box.coinMax.x - box.coinMin.x), abs(box.coinMin.y - box.coinMax.y)) / 2;
 
 	glm::dvec3 scale = this->getScale();
 	glm::dvec3 left { -(rayon + scale.x), 0, 0 };
@@ -152,8 +153,8 @@ math::Droite3D NoeudMuret::obtenirDroiteDirectrice() {
 	double angle = this->getAngle();
 
 	glm::dvec3 pos = this->obtenirPositionRelative();
-	left = utilitaire::rotater(left, angle) + pos - (glm::dvec3{ -10, 0, 0 }); // -10 pour corriger le positionnement
-	right = utilitaire::rotater(right, angle) + pos - (glm::dvec3{-10, 0, 0});
+	left = utilitaire::rotater(left, angle) + pos;
+	right = utilitaire::rotater(right, angle) + pos;
 
 	math::Droite3D droite{ left, right};
 	return droite;
