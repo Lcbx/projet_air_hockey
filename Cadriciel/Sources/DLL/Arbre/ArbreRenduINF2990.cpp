@@ -509,27 +509,19 @@ double ArbreRenduINF2990::getPosiY()
 /// @return rien
 ///
 ////////////////////////////////////////////////////////////////////////
-void ArbreRenduINF2990::deplacerObjet(glm::dvec3 posDep, double angle)
+void ArbreRenduINF2990::deplacerObjet(glm::dvec3 posDep, double angle, double scale)
 {
-	/*int comp = 0;
 
-
-	for (NoeudAbstrait * enfant : enfants_)
-	{
-		if (enfant->estSelectionne())
-		{
-			comp++;
-		}
-	}
-	*/
 	for (NoeudAbstrait * enfant : enfants_)
 	{
 		if (enfant->estSelectionne())// && enfant->obtenirType() == "bonus" && comp==1)
 		{
 			//TODO: reste a verifier si l'objet sort pas de la table 
 			//glm::dvec3 posTemp = enfant->obtenirPositionRelative();
+			
 			enfant->assignerPositionRelative(posDep);
 			enfant->setAngle(angle);
+			enfant->setScale(glm::dvec3(scale, scale, 1.0));
 		}
 
 	}
@@ -582,7 +574,28 @@ double ArbreRenduINF2990::getAngleDataBinding()
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-/// @}
-///////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn doublegetScaleDataBinding()
+///
+/// Cette fonction de retourner le scale d'un objet selectionné
+///
+/// @return le scale d'un objet
+///
+////////////////////////////////////////////////////////////////////////
+double ArbreRenduINF2990::getScaleDataBinding()
+{
+	for (NoeudAbstrait * enfant : this->enfants_)
+	{
+		if (enfant->estSelectionne())
+		{
+			double myScale= enfant->getScale().x;
+			return myScale;
+		}
+	}
+
+
+}
+
+
 

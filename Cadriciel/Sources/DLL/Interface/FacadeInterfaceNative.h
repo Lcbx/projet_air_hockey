@@ -56,7 +56,7 @@ extern "C" {
 
 
 	//Deplacer un objet avec la boite de configuration
-	__declspec(dllexport) void deplacerObjet(double x, double y,double angle );
+	__declspec(dllexport) void configurerObjet(double x, double y,double angle, double scale);
 	
 	// fonction bidon test
 	__declspec(dllexport) void test();
@@ -66,9 +66,10 @@ extern "C" {
 	//verifier le nombre d'objet sur la table
 	__declspec(dllexport) int nombreObjetSelectionne();
 
-	//verifier le nombre d'objet sur la table
+	//obtenir l'Angle d'un objet
 	__declspec(dllexport) double getAngle();
 
-
+	//verifier le scale d'un objet 
+	__declspec(dllexport) double getScale();
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__

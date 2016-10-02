@@ -249,9 +249,9 @@
             this.label5.Location = new System.Drawing.Point(12, 86);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(38, 15);
+            this.label5.Size = new System.Drawing.Size(86, 15);
             this.label5.TabIndex = 6;
-            this.label5.Text = "Angle";
+            this.label5.Text = "Angle (Degré):";
             // 
             // label6
             // 

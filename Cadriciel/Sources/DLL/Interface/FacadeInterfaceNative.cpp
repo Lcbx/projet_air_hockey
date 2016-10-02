@@ -345,7 +345,7 @@ extern "C"
 
 	////////////////////////////////////////////////////////////////////////
 	///
-	/// @fn __declspec(dllexport) void __cdecl deplacerObjet(double x, double y)
+	/// @fn __declspec(dllexport) void __cdecl deplacerObjet(double x, double y, double angle, double scale)
 	///
 	/// Cette fonction de deplacer un objet a partir des coordonnees 
 	/// entrées dans la boite config
@@ -353,9 +353,9 @@ extern "C"
 	/// @return rien
 	///
 	////////////////////////////////////////////////////////////////////////
-	__declspec(dllexport) void deplacerObjet(double x, double y, double angle)
+	__declspec(dllexport) void configurerObjet(double x, double y, double angle, double scale)
 	{
-		return FacadeModele::obtenirInstance()->deplacerObjet(x,y, angle);
+		return FacadeModele::obtenirInstance()->deplacerObjet(x, y, angle, scale);
 	}
 
 
@@ -394,12 +394,27 @@ extern "C"
 	///
 	/// Cette fonction permet de retourner l'angle d'un objet 
 	///
-	/// @return Le nombre d'objets selectionnées
+	/// @return L'angle d'un objet
 	///
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) double __cdecl getAngle()
 	{
 		return FacadeModele::obtenirInstance()->getAngle();
+	}
+
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) double __cdecl getScale()
+	///
+	/// Cette fonction permet de retourner le scale d'un objet 
+	///
+	/// @return Le scale d'un objet
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) double __cdecl getScale()
+	{
+		return FacadeModele::obtenirInstance()->getScale();
 	}
 
 

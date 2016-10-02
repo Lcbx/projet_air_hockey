@@ -44,15 +44,6 @@ namespace InterfaceGraphique
 
         private void button3_Click(object sender, EventArgs e)
         {
-            double x = Convert.ToDouble(textBox1.Text);
-            double y = Convert.ToDouble(textBox2.Text);
-            double angle = Convert.ToDouble(textBox3.Text);
-
-            System.Console.WriteLine("mon x est: "+ x);
-            System.Console.WriteLine("mon y est: "+ y);
-            System.Console.WriteLine("L'angle est: " + angle);
-
-            FonctionsNatives.deplacerObjet(x,y,angle);
         }
 
         private void label7_Click(object sender, EventArgs e)
@@ -62,10 +53,7 @@ namespace InterfaceGraphique
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.textBox1.Text = "0";
-            this.textBox2.Text = "0";
-            this.textBox3.Text = "0";
-            
+
         }
     }
 }
