@@ -216,10 +216,17 @@ extern "C"
 	{
 		Souris::obtenirInstance()->sourisPostition(x, y);
 	}
+
 	//touche control
 	__declspec(dllexport) void __cdecl toucheControl(bool presse)
 	{
 		Souris::obtenirInstance()->setControl(presse);
+	}
+
+	//touche alt
+	__declspec(dllexport) void __cdecl toucheAlt(bool presse)
+	{
+		Souris::obtenirInstance()->setAlt(presse);
 	}
 	
 	

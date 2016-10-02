@@ -65,6 +65,8 @@ namespace InterfaceGraphique
         private void keyDownHandler(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.ControlKey) FonctionsNatives.toucheControl(true);
+            if (e.KeyCode == Keys.Alt) FonctionsNatives.toucheAlt(true);
+            if (e.KeyCode == Keys.Menu) FonctionsNatives.toucheAlt(true);
             if (e.KeyCode == Keys.Add) FonctionsNatives.zoomIn();
             if (e.KeyCode == Keys.Subtract) FonctionsNatives.zoomOut();
             if (e.KeyCode == Keys.Up) FonctionsNatives.deplacerVueXY(0,-0.1);
@@ -76,7 +78,9 @@ namespace InterfaceGraphique
         private void keyUpHandler(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode) {
-                case Keys.ControlKey:        { FonctionsNatives.toucheControl(false); break; } 
+                case Keys.ControlKey:        { FonctionsNatives.toucheControl(false); break; }
+                case Keys.Alt:               { FonctionsNatives.toucheAlt(false); break; }
+                case Keys.Menu: { FonctionsNatives.toucheAlt(false); break; }
                 case Keys.Escape:            { FonctionsNatives.escEnfonce(); break; }
                 case Keys.Delete:            {FonctionsNatives.supprimerObjet(); break; }
                 case Keys.D:
@@ -546,6 +550,10 @@ namespace InterfaceGraphique
         //touche control
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void toucheControl(bool presse);
+
+        //touche alt
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void toucheAlt(bool presse);
 
         //touche escape
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]

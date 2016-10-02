@@ -17,6 +17,7 @@
 #include "VueOrtho.h"
 #include "Projection.h"
 #include "ProjectionOrtho.h"
+#include "Souris.h"
 #include <iostream>
 
 void Loupe::start(int x, int y) {
@@ -59,11 +60,14 @@ void Loupe::operationShortClick() {
 }
 
 void Loupe::operationDragClick() {
-	glm::ivec2* point1 = new glm::ivec2(X1(), Y1());
-	glm::ivec2* point2 = new glm::ivec2(X2(), Y2());
+	glm::ivec2 point1 = glm::ivec2(X1(), Y1());
+	glm::ivec2 point2 = glm::ivec2(X2(), Y2());
 
-	FacadeModele::obtenirInstance()->obtenirVue()->zoomerInElastique(*point1, *point2);
-	delete point1, point2;
+	if (!Souris::obtenirInstance()->getAlt())
+		FacadeModele::obtenirInstance()->obtenirVue()->zoomerInElastique(point1, point2);
+	else 
+		FacadeModele::obtenirInstance()->obtenirVue()->zoomerOutElastique(point1, point2);
+
 }
 
 

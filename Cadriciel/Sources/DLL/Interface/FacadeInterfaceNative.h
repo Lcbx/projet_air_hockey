@@ -51,6 +51,8 @@ extern "C" {
 	__declspec(dllexport) void positionSouris(int x, int y);
 	//touche control
 	__declspec(dllexport) void toucheControl(bool presse);
+	//touche alt
+	__declspec(dllexport) void toucheAlt(bool presse);
 	//touche escape
 	__declspec(dllexport) void escEnfonce();
 

@@ -92,6 +92,14 @@ bool Souris::getControl() {
 	return control_;
 }
 
+void Souris::setAlt(bool presse) {
+	alt_ = presse;
+}
+
+bool Souris::getAlt() {
+	return alt_;
+}
+
 void Souris::escPresse() {
 	notreStrategie_->escEnfonce();
 }

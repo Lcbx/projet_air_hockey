@@ -27,6 +27,8 @@ public:
 	void EtatdelaSouris(int etat);			//operation en cours
 	void setControl(bool presse);			//change l'etat de la touche control
 	bool getControl();						//donne l'etat de la touche control
+	void setAlt(bool presse);			    //change l'etat de la touche alt
+	bool getAlt();						    //donne l'etat de la touche alt
 	void escPresse();						//permet de donner le signal que la touche escape est pressee
 	glm::ivec4& getPosition();				//position de Click courante
 
@@ -37,5 +39,6 @@ private:
 	Etats etatSouris = SELECTION;			//type d'operation en cours
 	void creerStrategie();					//actualise la strategie en cours
 	bool control_ = false;					//touche control enfoncee
+	bool alt_ = false;					    //touche alt enfoncee
 	glm::ivec4 position_;					//position de Click courante
 };
