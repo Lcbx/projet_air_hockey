@@ -65,6 +65,7 @@ private:
 	/// du vecteur, un wrapping est réalisé. Un index négatif retourne le n dernier élément
 	////////////////////////////////////////////////////////////////////////////////
 	glm::dvec3 getPoint(int index);
+	glm::dvec3 getPoint(size_t index);
 
 public:
 	VisiteurSelection() {};
@@ -181,8 +182,8 @@ private:
 	VisiteurSelection visiteur;
 
 public:
-	SingletonSelection(SingletonSelection& const) = delete;
-	void operator=(SingletonSelection& const) = delete;
+	SingletonSelection(const SingletonSelection&) = delete;
+	void operator=(const SingletonSelection&) = delete;
 
 	static SingletonSelection *instance() {
 		static SingletonSelection _instance;

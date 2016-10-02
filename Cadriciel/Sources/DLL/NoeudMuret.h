@@ -16,6 +16,7 @@
 #include "BoiteCollision.h"
 
 
+
 ///////////////////////////////////////////////////////////////////////////
 /// @class NoeudMuret
 /// @brief Classe qui représente un le noeud muret de l'arbre de rendu.
@@ -45,6 +46,10 @@ public:
 	///Permet d'obtenir la droite directrice du muret
 	virtual math::Droite3D obtenirDroiteDirectrice();
 		
+
+	///Permet d'obtenir le rayon minimal du modèle
+	virtual double obtenirRayonModele();
+
 private:
 	
 	

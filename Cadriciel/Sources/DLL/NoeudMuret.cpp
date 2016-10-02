@@ -152,11 +152,22 @@ math::Droite3D NoeudMuret::obtenirDroiteDirectrice() {
 	double angle = this->getAngle();
 
 	glm::dvec3 pos = this->obtenirPositionRelative();
-	left = utilitaire::rotater(left, angle) + pos - (glm::dvec3{ -10, 0, 0 });
+	left = utilitaire::rotater(left, angle) + pos - (glm::dvec3{ -10, 0, 0 }); // -10 pour corriger le positionnement
 	right = utilitaire::rotater(right, angle) + pos - (glm::dvec3{-10, 0, 0});
 
 	math::Droite3D droite{ left, right};
 	return droite;
+}
+
+
+////////////////////////////////////////////////////////////////////////
+/// @fn double obtenirRayonModele()
+/// Permet d'obtenir le rayon minimal du modèle
+/// @return Le rayon du modèle
+////////////////////////////////////////////////////////////////////////
+double NoeudMuret::obtenirRayonModele() {
+	utilitaire::BoiteEnglobante a = utilitaire::calculerBoiteEnglobante(*modele_);
+	return min(abs(a.coinMax.x - a.coinMin.x), abs(a.coinMax.y - a.coinMin.y)) / 2;
 }
 
 ////////////////////////////////////////////////

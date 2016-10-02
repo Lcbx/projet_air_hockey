@@ -91,11 +91,11 @@ void VisiteurSelection::visiter(NoeudMuret* noeud) {
 	double rayon = noeud->obtenirRayon();
 
 	double minDist = INFINITY;
-	int pointsSize = this->getPoints().size();
+	size_t pointsSize = this->getPoints().size();
 
 	//Si un point est sur la droite et dans la droite du muret, 
 	double l = glm::length(droiteDirectrice.lireVecteur()); // Longeur de la droite
-	for (int i = 0; i < pointsSize; i++) {
+	for (size_t i = 0; i < pointsSize; i++) {
 		double a = glm::distance(droiteDirectrice.lirePoint(), this->getPoint(i)); // Longeur point A et autre point
 		double b = glm::distance(droiteDirectrice.lirePoint() + droiteDirectrice.lireVecteur(), this->getPoint(i)); // Longeur point B et autre point
 		if (a <= l && b <= l) {	//On reste dans la droite si a <= l et b <= l
@@ -199,12 +199,20 @@ inline std::vector<glm::dvec3> VisiteurSelection::getPoints() {
 	return this->_points;
 }
 
-///Permet d'obtenir le point à l'index donné avec wrapping (-1 = dernier item, n+1 = premier item
+///Permet d'obtenir le point à l'index donné avec wrapping (-1 = dernier item, n+1 = premier item)
 glm::dvec3 VisiteurSelection::getPoint(int index) {
+	size_t index_ = index;
+	return this->getPoint(index_);
+}
+
+
+///Permet d'obtenir le point à l'index donné avec wrapping (-1 = dernier item, n+1 = premier item)
+glm::dvec3 VisiteurSelection::getPoint(size_t index) {
 	std::vector<glm::dvec3> vec = this->getPoints();
 	if (index % vec.size() >= 0) {
 		return vec[index % vec.size()];
-	} else {
+	}
+	else {
 		return vec[vec.size() - (index % vec.size())];
 	}
 }
