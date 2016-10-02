@@ -140,14 +140,14 @@ namespace vue {
 
 		glm::ivec2 deplacementXY;
 
-		deplacementXY[0] = 0 - projection_.obtenirDimensionCloture()[0] / 2;
-		deplacementXY[1] = 0 - projection_.obtenirDimensionCloture()[1] / 2;
+		deplacementXY[0] = (coin1[0] + coin2[0]) / 2 - projection_.obtenirDimensionCloture()[0] / 2;
+		deplacementXY[1] = (coin1[1] + coin2[1]) / 2 - projection_.obtenirDimensionCloture()[1] / 2;
 
 
 		deplacerXY(deplacementXY);
 		
 		// Zoom
-		/*
+		
 		double ratioElastique = glm::abs( double(coin2[0] - coin1[0]) / double(coin2[1] - coin1[1]) );
 		double ratioCloture = double(projection_.obtenirDimensionCloture()[0]) / double(projection_.obtenirDimensionCloture()[1]);
 
@@ -161,7 +161,7 @@ namespace vue {
 		else {
 			projection_.zoomerTo(projection_.obtenirZoomActuel() * (double(projection_.obtenirDimensionCloture()[0]) / glm::abs(coin2[0] - coin1[0])));
 		}
-		*/
+		
 		
 	}
 
