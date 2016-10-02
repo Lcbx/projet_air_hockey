@@ -299,43 +299,28 @@ unsigned int NoeudComposite::obtenirNombreEnfants() const
 ////////////////////////////////////////////////////////////////////////
 void NoeudComposite::effacerSelection()
 {
-	bool estPortail = false ;
-	// On efface tous les noeuds sélectionnés descendants des enfants.
 	for (NoeudAbstrait * enfant : enfants_) {
-		if (enfant->obtenirType() != "portail") {
-			enfant->effacerSelection();
-			std::cout << "NOOOOOOOOOOOOOOOOOOOT" << std::endl;
-			estPortail = false;
-		}
-
-		/*if (enfant->obtenirType() == "portail")
+		if (enfant->obtenirType() == "portail" && enfant->getFrere() != NULL)
 		{
 			enfant->getFrere()->assignerSelection(true);
-			enfant->getFrere()->effacerSelection();
-			std::cout << "allo********************" << std::endl;
-		}
-		else {
-			enfant->effacerSelection();
-
-		}*/
-		else 
-		if(enfant->obtenirType() == "portail" && enfant->getFrere()!=NULL)
-		{
-			std::cout << "allo********************" << std::endl;
-			estPortail = true;
 		}
 	}
+
+
+	// On efface tous les noeuds sélectionnés descendants des enfants.
+	for (NoeudAbstrait * enfant : enfants_) {
+			enfant->effacerSelection();		
+		}
+
 
 	// On efface les enfants sélectionnés.  On effectue ce traitement
 	// dans une seconde boucle pour éviter de faire des assomptions
 	// sur la robustesse des itérateurs lorsque le conteneur est
 	// modifié pendant une itération.
-	if (estPortail == false) {
 		for (conteneur_enfants::iterator it{ enfants_.begin() };
 			it != enfants_.end();
 			) {
 			if ((*it)->estSelectionne()) {
-				std::cout << "if2" << std::endl;
 
 				NoeudAbstrait* enfant{ (*it) };
 				enfants_.erase(it);
@@ -350,11 +335,8 @@ void NoeudComposite::effacerSelection()
 			}
 			else {
 				++it;
-				std::cout << "else" << std::endl;
-
 			}
-		}
-	}
+		}	
 }
 
 

@@ -95,7 +95,6 @@
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Edition_MouseMove);
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
-
             // 
             // menuStrip1
             // 
@@ -211,36 +210,41 @@
             // 
             this.sélectionToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("sélectionToolStripMenuItem.Image")));
             this.sélectionToolStripMenuItem.Name = "sélectionToolStripMenuItem";
-            this.sélectionToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.sélectionToolStripMenuItem.Size = new System.Drawing.Size(250, 38);
             this.sélectionToolStripMenuItem.Text = "Sélection";
+            this.sélectionToolStripMenuItem.Click += new System.EventHandler(this.sélectionToolStripMenuItem_Click);
             // 
             // déplacementToolStripMenuItem
             // 
             this.déplacementToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("déplacementToolStripMenuItem.Image")));
             this.déplacementToolStripMenuItem.Name = "déplacementToolStripMenuItem";
-            this.déplacementToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.déplacementToolStripMenuItem.Size = new System.Drawing.Size(250, 38);
             this.déplacementToolStripMenuItem.Text = "Déplacement";
+            this.déplacementToolStripMenuItem.Click += new System.EventHandler(this.déplacementToolStripMenuItem_Click);
             // 
             // rotationToolStripMenuItem
             // 
             this.rotationToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("rotationToolStripMenuItem.Image")));
             this.rotationToolStripMenuItem.Name = "rotationToolStripMenuItem";
-            this.rotationToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.rotationToolStripMenuItem.Size = new System.Drawing.Size(250, 38);
             this.rotationToolStripMenuItem.Text = "Rotation";
+            this.rotationToolStripMenuItem.Click += new System.EventHandler(this.rotationToolStripMenuItem_Click);
             // 
             // miseÀLéchelleToolStripMenuItem
             // 
             this.miseÀLéchelleToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("miseÀLéchelleToolStripMenuItem.Image")));
             this.miseÀLéchelleToolStripMenuItem.Name = "miseÀLéchelleToolStripMenuItem";
-            this.miseÀLéchelleToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.miseÀLéchelleToolStripMenuItem.Size = new System.Drawing.Size(250, 38);
             this.miseÀLéchelleToolStripMenuItem.Text = "Mise à l\'échelle";
+            this.miseÀLéchelleToolStripMenuItem.Click += new System.EventHandler(this.miseÀLéchelleToolStripMenuItem_Click);
             // 
             // duplicationToolStripMenuItem
             // 
             this.duplicationToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("duplicationToolStripMenuItem.Image")));
             this.duplicationToolStripMenuItem.Name = "duplicationToolStripMenuItem";
-            this.duplicationToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.duplicationToolStripMenuItem.Size = new System.Drawing.Size(250, 38);
             this.duplicationToolStripMenuItem.Text = "Duplication";
+            this.duplicationToolStripMenuItem.Click += new System.EventHandler(this.duplicationToolStripMenuItem_Click);
             // 
             // créationDobjetsToolStripMenuItem
             // 
@@ -249,7 +253,7 @@
             this.portailToolStripMenuItem,
             this.muretToolStripMenuItem});
             this.créationDobjetsToolStripMenuItem.Name = "créationDobjetsToolStripMenuItem";
-            this.créationDobjetsToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.créationDobjetsToolStripMenuItem.Size = new System.Drawing.Size(250, 38);
             this.créationDobjetsToolStripMenuItem.Text = "Création d\'objets";
             // 
             // ToolStripMenuItemAccelerateur
@@ -257,34 +261,38 @@
             this.ToolStripMenuItemAccelerateur.CheckOnClick = true;
             this.ToolStripMenuItemAccelerateur.Image = ((System.Drawing.Image)(resources.GetObject("ToolStripMenuItemAccelerateur.Image")));
             this.ToolStripMenuItemAccelerateur.Name = "ToolStripMenuItemAccelerateur";
-            this.ToolStripMenuItemAccelerateur.Size = new System.Drawing.Size(174, 22);
+            this.ToolStripMenuItemAccelerateur.Size = new System.Drawing.Size(190, 38);
             this.ToolStripMenuItemAccelerateur.Text = "Bonus accélérateur";
             this.ToolStripMenuItemAccelerateur.ToolTipText = "Bonus accélérateur";
+            this.ToolStripMenuItemAccelerateur.Click += new System.EventHandler(this.ToolStripMenuItemAccelerateur_Click);
             // 
             // portailToolStripMenuItem
             // 
             this.portailToolStripMenuItem.Name = "portailToolStripMenuItem";
-            this.portailToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.portailToolStripMenuItem.Size = new System.Drawing.Size(190, 38);
             this.portailToolStripMenuItem.Text = "Portail";
+            this.portailToolStripMenuItem.Click += new System.EventHandler(this.portailToolStripMenuItem_Click);
             // 
             // muretToolStripMenuItem
             // 
             this.muretToolStripMenuItem.Name = "muretToolStripMenuItem";
-            this.muretToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.muretToolStripMenuItem.Size = new System.Drawing.Size(190, 38);
             this.muretToolStripMenuItem.Text = "Muret";
+            this.muretToolStripMenuItem.Click += new System.EventHandler(this.muretToolStripMenuItem_Click);
             // 
             // zoomToolStripMenuItem
             // 
             this.zoomToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("zoomToolStripMenuItem.Image")));
             this.zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
-            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(250, 38);
             this.zoomToolStripMenuItem.Text = "Zoom";
             // 
             // gestionDesPointsDeContrôleToolStripMenuItem
             // 
             this.gestionDesPointsDeContrôleToolStripMenuItem.Name = "gestionDesPointsDeContrôleToolStripMenuItem";
-            this.gestionDesPointsDeContrôleToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.gestionDesPointsDeContrôleToolStripMenuItem.Size = new System.Drawing.Size(250, 38);
             this.gestionDesPointsDeContrôleToolStripMenuItem.Text = "Gestion des points de contrôle";
+            this.gestionDesPointsDeContrôleToolStripMenuItem.Click += new System.EventHandler(this.gestionDesPointsDeContrôleToolStripMenuItem_Click);
             // 
             // vuesToolStripMenuItem
             // 
@@ -318,8 +326,9 @@
             // aideToolStripMenuItem
             // 
             this.aideToolStripMenuItem.Name = "aideToolStripMenuItem";
-            this.aideToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.aideToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aideToolStripMenuItem.Text = "Aide";
+            this.aideToolStripMenuItem.Click += new System.EventHandler(this.aideToolStripMenuItem_Click);
             // 
             // toolStrip1
             // 
@@ -519,6 +528,7 @@
             this.Name = "Edition";
             this.Text = "Edition";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Exemple_FormClosing);
+            this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.Edition_MouseWheel);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -526,7 +536,6 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
-            this.MouseWheel += new System.Windows.Forms.MouseEventHandler(Edition_MouseWheel);
         }
         #endregion
 

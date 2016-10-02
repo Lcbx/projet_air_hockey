@@ -79,10 +79,13 @@ public:
    double getPosiX();
    double getPosiY();
 
-   void deplacerObjet(glm::dvec3 posDep);
+   void deplacerObjet(glm::dvec3 posDep, double angle);
 
 
    int obtenirNombreObjetSelctionnes();
+
+
+   double getAngleDataBinding();
 
 private :
 	NoeudTable* noeudTable_;

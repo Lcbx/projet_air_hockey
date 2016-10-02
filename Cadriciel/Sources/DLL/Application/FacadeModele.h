@@ -71,18 +71,17 @@ public:
 
 	//ajouter Portail
 	void ajouterPortail(int x1, int y1);
-
-
 	//supprime le 1er Portail apres clic echap
  	void supprimerPortail(bool escTouche);
-
-
+	//ajouter second Portail
 	void ajouterPortailDeux(int x2, int y2);
 	
 
-
+	//murets
 	void ajouterMuret(int x1, int y1, int x2, int y2);
 	void ajouterMurFantome(int corXin, int corYin, int corX, int corY);
+
+
 	// fonction bidon de test
 	void test();
 	// test deplacement du point de controle
@@ -100,11 +99,15 @@ public:
 	void effacerObjet();
 
 	//deplacer un objet a partir des coordonnes de la boite de configuration
-	void deplacerObjet(double x, double y);
+	void deplacerObjet(double x, double y, double angle);
 
 
 	//retourner le nombre d'objet selectionne
 	int nombreObjetSelectionne();
+
+
+	//obtenir l'angle d'un objet
+	double getAngle();
 
 
 

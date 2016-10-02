@@ -9,20 +9,34 @@
 ///////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include <string>
+#include <list>
 
 #include "Visiteur.h"
-
+#include "VisiteurDeplacement.h"
 
 
 
 class VisiteurDuplication : public Visiteur
 {
-	glm::vec3 posCentre_;
-	glm::vec3 posActuelle_;
+	glm::vec3 posCentre_ {0.f};
+	glm::vec3 posActuelle_{ 0.f };
+	
+	//liste de noeuds
+	///contient les originaux(selectionnés)
+	///et les clones (non selectionnés)
+	std::list<NoeudAbstrait*> nosClones_;
+
+	VisiteurDeplacement visDep_;
 
 public:
-	void fantomDuplicate(glm::vec3 point);
-	void finalDuplicate(glm::vec3 point);
+
+	VisiteurDuplication();
+
+	void duplicate(glm::vec3 point);
+	void actualise(glm::vec3 point);
+	void finalise();
+
+	void supprimerClones();
 
 	virtual void visiter(NoeudAbstrait* noeud);
 	virtual void visiter(NoeudComposite *noeud);
