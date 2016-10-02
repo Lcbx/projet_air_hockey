@@ -19,8 +19,10 @@
 #include "Loupe.h"
 #include "Deplacement.h"
 
-
-
+#include "FacadeModele.h"
+#include "../Arbre/ArbreRenduINF2990.h"
+#include "../Arbre/Noeuds/NoeudTable.h"
+#include "../Vue/Vue.h"
 
 Souris* Souris::instance_{ nullptr };
 
@@ -64,6 +66,9 @@ void Souris::creerStrategie(){
 
 
 void Souris::startClick(int x, int y) {
+	glm::dvec3 nouvPoint (x, y, 0);  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, nouvPoint);
+	std::cout << "click " << (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(nouvPoint) ? "dans table\n" : "exterieur\n");
+	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->setPointControle(0,nouvPoint);
 	notreStrategie_->start(x, y);
 }
 

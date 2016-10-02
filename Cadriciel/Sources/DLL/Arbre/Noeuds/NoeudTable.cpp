@@ -117,10 +117,6 @@ void NoeudTable::accepter(Visiteur* v)
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-
-
-
-
 void NoeudTable::tracerTable() const
 {
 	//glMatrixMode(GL_PROJECTION);
@@ -365,6 +361,8 @@ double NoeudTable::calculPente(glm::vec3 P0, glm::vec3 P1)
 		else
 			return (double) (P0.y - P1.y) / (P0.x - P1.x);
 }
+
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void NoeudTable::tracerButs(float longueur)
@@ -628,4 +626,58 @@ bool NoeudTable::getCouleurLignes(glm::vec4 & couleur)
 {
 	couleur = couleurLignes_;
 	return true;
+}
+
+
+//determiner si dans la table
+/// angle
+double NoeudTable::calculerAngle3D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C) {
+	// theta = arcos( u.v/(|u|.|v|) )
+	double angle;
+	glm::dvec3 u(A - B);
+	glm::dvec3 v(C - B);
+	angle = glm::acos(glm::dot(u, v) / (glm::length(u)*glm::length(v)));
+	return angle;
+}
+
+double NoeudTable::calculerAngle2D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C) {
+	//on ignore la composante en z
+	glm::dvec3 D(A.x, A.y, 0);
+	glm::dvec3 E(B.x, B.y, 0);
+	glm::dvec3 F(C.x, C.y, 0);
+	return calculerAngle3D(D, E, F);
+}
+
+/// dansTriangle
+bool NoeudTable::MdansTriangleABC(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C, glm::dvec3 M) {
+	//			B.							B.
+	//		   / \		. M     ou 		   /  \	
+	//		  /   \						  / .M \
+	//      A.______.C			         A.______.C
+	// -> M est dans ABC si la somme des angles AMC+AMB+BMC == 360
+	if (M == A || M == B || M == C) return true;
+	double angleTot = calculerAngle2D(A, M, B) + calculerAngle2D(B, M, C) + calculerAngle2D(C, M, A);
+	bool reponse = glm::degrees(angleTot) == 360;
+	return reponse;
+}
+
+/// dansTable
+bool NoeudTable::dansTable(glm::dvec3 M) {
+	/*
+		etapes du check :
+	p0----------p2----------p4
+	| 1  ______/ | \_____ 5	 |
+	|___/		 |		 \__ |
+	p6		3	p8	 4	  __ p7
+	| \____		 |	  ___/	 |
+	|	2  \__	 | __/	  6	 |
+	p1----------p3----------p5
+	*/
+
+	return MdansTriangleABC(pointControle_[0], pointControle_[2], pointControle_[6], M)
+		|| MdansTriangleABC(pointControle_[1], pointControle_[3], pointControle_[6], M)
+		|| MdansTriangleABC(pointControle_[2], pointControle_[3], pointControle_[6], M)
+		|| MdansTriangleABC(pointControle_[2], pointControle_[3], pointControle_[7], M)
+		|| MdansTriangleABC(pointControle_[2], pointControle_[4], pointControle_[7], M)
+		|| MdansTriangleABC(pointControle_[3], pointControle_[5], pointControle_[7], M);
 }
