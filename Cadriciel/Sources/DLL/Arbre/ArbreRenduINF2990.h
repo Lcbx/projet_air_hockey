@@ -72,6 +72,7 @@ public:
 
    void ajouterMuret(glm::dvec3 position1, glm::dvec3 position2);
    bool premierEstajoute = false;
+
    // fonction de calcul valable pour les ligne et murs
    GLfloat calculerScale(glm::dvec3 pos, glm::dvec3 posf);
    double calculerAngle(glm::dvec3 pos, glm::dvec3 posf);
@@ -92,7 +93,6 @@ public:
 private :
 	NoeudTable* noeudTable_;
 	NoeudPointControle* noeudPointControle_[8];
-
 };
 
 

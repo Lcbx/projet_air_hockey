@@ -26,18 +26,11 @@ namespace InterfaceGraphique
 
         public Edition()
         {
-            this.KeyPreview = true;
             (this as Control).KeyDown += new KeyEventHandler(keyDownHandler);
             (this as Control).KeyUp += new KeyEventHandler(keyUpHandler);
             InitializeComponent();
             InitialiserAnimation();
             supprimerToolStripMenuItem.Enabled = false;
-
-            textBox1.Enabled = false;
-            textBox2.Enabled = false;
-            textBox3.Enabled = false;
-            textBox4.Enabled = false;
-            label6.Show();
 
         }
 
@@ -72,8 +65,6 @@ namespace InterfaceGraphique
         private void keyDownHandler(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.ControlKey) FonctionsNatives.toucheControl(true);
-            if (e.KeyCode == Keys.Alt) FonctionsNatives.toucheAlt(true);
-            if (e.KeyCode == Keys.Menu) FonctionsNatives.toucheAlt(true);
             if (e.KeyCode == Keys.Add) FonctionsNatives.zoomIn();
             if (e.KeyCode == Keys.Subtract) FonctionsNatives.zoomOut();
             if (e.KeyCode == Keys.Up) FonctionsNatives.deplacerVueXY(0,-0.1);
@@ -85,9 +76,7 @@ namespace InterfaceGraphique
         private void keyUpHandler(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode) {
-                case Keys.ControlKey:        { FonctionsNatives.toucheControl(false); break; }
-                case Keys.Alt:               { FonctionsNatives.toucheAlt(false); break; }
-                case Keys.Menu: { FonctionsNatives.toucheAlt(false); break; }
+                case Keys.ControlKey:        { FonctionsNatives.toucheControl(false); break; } 
                 case Keys.Escape:            { FonctionsNatives.escEnfonce(); break; }
                 case Keys.Delete:            {FonctionsNatives.supprimerObjet(); break; }
                 case Keys.D:
@@ -186,7 +175,6 @@ namespace InterfaceGraphique
                     case Etats.AJOUT_ACCELERATEUR: {    text = "ajout accelerateur"; break; }
                     case Etats.AJOUT_MUR: {             text = "ajout mur";         break; }
                     case Etats.AJOUT_PORTAIL: {         text = "ajout portail";     break; }
-                    case Etats.MISEAECHELLE: {          text = "mise a l'echelle";  break; }
                     default: break;
                 }
                 System.Console.WriteLine(text);
@@ -197,8 +185,13 @@ namespace InterfaceGraphique
         {
             System.Console.WriteLine("Souris down : X = " + e.X + " et Y = " + e.Y);
             FonctionsNatives.clickStart(e.X, e.Y);
-          
+<<<<<<< HEAD
+            mettreAjourPos();
             if (EtatSouris == Etats.SELECTION || EtatSouris == Etats.LOUPE)
+=======
+          
+            if (EtatSouris == Etats.SELECTION)
+>>>>>>> 37ad7ba4725471725855dc756b9439be501f6aef
             {
                 Program.peutAfficher = false;
           
@@ -213,7 +206,7 @@ namespace InterfaceGraphique
             Program.peutAfficher = true;
             mousePressed = false;
 
-          //  mettreAjourPos();
+            mettreAjourPos();
             if (EtatSouris == Etats.SELECTION)
             {
                 mettreAjourPos();
@@ -370,7 +363,20 @@ namespace InterfaceGraphique
         {
             return (valeur >= borneMin) && (valeur <= borneMax);
         }
-     
+      
+       
+
+   
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
 
         private void éditionToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -405,42 +411,36 @@ namespace InterfaceGraphique
         {
             if (FonctionsNatives.nombreObjetSelectionne() == 1)
             {
-                textBox1.Enabled = true;
-                textBox2.Enabled = true;
-                textBox3.Enabled = true;
-                textBox4.Enabled = true;
-                label6.Hide();
+                boiteProp.textBox1.Enabled = true;
+                boiteProp.textBox2.Enabled = true;
+                boiteProp.textBox3.Enabled = true;
+               // boiteProp.Show();
 
                 //Position en X
                 double posX = (FonctionsNatives.getPosX());
                 posX = Math.Round(posX, 2); //arrondi la position 
-                textBox1.Text = posX.ToString();
+                boiteProp.textBox1.Text = posX.ToString();
 
                 //Position Y
                 double posY = (FonctionsNatives.getPosY());
                 posY = Math.Round(posY, 2); //arrondi la position 
-                textBox2.Text = posY.ToString();
+                boiteProp.textBox2.Text = posY.ToString();
 
                 //Angle
                 double angle = (FonctionsNatives.getAngle());
                 angle = Math.Round(angle, 2);
-                textBox3.Text = angle.ToString();
-
-                //Scale
-                double scale = (FonctionsNatives.getScale());
-                scale = Math.Round(scale, 2);
-                textBox4.Text = scale.ToString();
-
+                boiteProp.textBox3.Text = angle.ToString();
             }
             else
             {
-                textBox1.Enabled = false;
-                textBox2.Enabled = false;
-                textBox3.Enabled = false;
-                textBox4.Enabled = false;
+                boiteProp.textBox1.Enabled = false;
+                boiteProp.textBox2.Enabled = false;
+                boiteProp.textBox3.Enabled = false;
 
-                label6.Show();
-                
+                // boiteProp.label7.Show();
+                //boiteProp.textBox1.Text = " ";
+                //boiteProp.textBox2.Text = " ";
+
             }
         }
 
@@ -508,21 +508,6 @@ namespace InterfaceGraphique
             this.changerMode(Etats.POINTSDECONTROLE);
         }
 
-        //button ok 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            double x = Convert.ToDouble(textBox1.Text);
-            double y = Convert.ToDouble(textBox2.Text);
-            double angle = Convert.ToDouble(textBox3.Text);
-            double scale = Convert.ToDouble(textBox4.Text);
-
-            //assigner les nouvelles valeurs
-            FonctionsNatives.configurerObjet(x, y, angle, scale);
-        }
-
-
-        
-      
         private void aideToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BoiteAide helpbox = new BoiteAide();
@@ -567,10 +552,6 @@ namespace InterfaceGraphique
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void toucheControl(bool presse);
 
-        //touche alt
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void toucheAlt(bool presse);
-
         //touche escape
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void escEnfonce();
@@ -602,7 +583,7 @@ namespace InterfaceGraphique
 
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void configurerObjet(double x, double y, double angle, double scale);
+        public static extern void deplacerObjet(double x, double y, double angle);
 
         // Pour touche +
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -630,9 +611,5 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern double getAngle();
-
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern double getScale();
     }
 }

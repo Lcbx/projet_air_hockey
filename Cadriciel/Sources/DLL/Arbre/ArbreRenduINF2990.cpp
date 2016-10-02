@@ -98,6 +98,7 @@ void ArbreRenduINF2990::ajouterTable()
 	noeudTable_ = noeudTable;
 	//delete noeudTable;
 
+	
 	// On cree un objet Table et 8 points de controle
 	//NoeudTable* noeudTable{ (NoeudTable *)creerNoeud(NOM_TABLE) };
 	NoeudPointControle* noeudPointControle0{ (NoeudPointControle *)creerNoeud(NOM_POINTCONTROLE) };
@@ -109,8 +110,11 @@ void ArbreRenduINF2990::ajouterTable()
 	NoeudPointControle* noeudPointControle6{ (NoeudPointControle *)creerNoeud(NOM_POINTCONTROLE) };
 	NoeudPointControle* noeudPointControle7{ (NoeudPointControle *)creerNoeud(NOM_POINTCONTROLE) };
 	
+
 	// ajouter le noeud table a l'arbre
 	ajouter(noeudTable_);
+
+	
 	//GLfloat couleur[4] = { ROUGE };
 	std::vector<GLdouble> couleur;
 	couleur = { GRIS };
@@ -184,7 +188,7 @@ void ArbreRenduINF2990::ajouterTable()
 	ajouter(noeudPointControle2);ajouter(noeudPointControle3);
 	ajouter(noeudPointControle4);ajouter(noeudPointControle5);
 	ajouter(noeudPointControle6);ajouter(noeudPointControle7);
-
+	
 	
 	// modification des points de controle
 	//noeudTable->setPointControle(0, { -.9,.8,0 });
@@ -204,9 +208,10 @@ void ArbreRenduINF2990::ajouterTable()
 	//glm::vec4 color;
 	//color.x = couleur[0];color.y = couleur[1];color.z = couleur[2];color.w = couleur[3];
 	//noeudPointControle0->setCouleur(color);
-	
+
 
 }
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void ArbreRenduINF2990::initialiser()
@@ -257,15 +262,6 @@ NoeudTable* ArbreRenduINF2990::getTable()
 {
 	return noeudTable_;
 }
-
-
-	
-	/*NoeudAbstrait* noeudRondelle{ creerNoeud(NOM_RONDELLE) };
-	ajouter(noeudRondelle);
-	*/
-
-
-
 
 
 

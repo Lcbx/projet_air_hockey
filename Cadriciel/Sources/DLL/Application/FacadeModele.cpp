@@ -169,7 +169,7 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 			glm::dvec3(0, 1, 0),   glm::dvec3(0, 1, 0)},
 		vue::ProjectionOrtho{ 
 				638, 398,
-				1, 1000, 1, 10000, 0.25,
+				1, 1000, 5, 0.5, 0.25,
 				200, 200}
 	};
 }
