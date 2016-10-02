@@ -10,6 +10,10 @@ VisiteurDeplacement::VisiteurDeplacement(glm::vec3 dep) {
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
 }
 
+void VisiteurDeplacement::setDep(glm::vec3 dep) {
+	dep_ = dep;
+}
+
 
 void VisiteurDeplacement::visiter(NoeudAbstrait* noeud)
 {

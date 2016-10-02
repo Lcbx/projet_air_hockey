@@ -20,12 +20,17 @@ VisiteurPointMilieu::VisiteurPointMilieu(glm::vec3& pointARendre) : posCentre_(p
 void VisiteurPointMilieu::visiter(NoeudAbstrait* noeud)
 {
 	if (noeud->estSelectionne()) {
+		selection_.push_back(noeud);
 		auto posNoeud = noeud->obtenirPositionRelative();
 		posCentre_ *= nbrNoeudsVisites_++;
 		posCentre_ += posNoeud;
 		posCentre_ /= (float)nbrNoeudsVisites_;
 		cout << "noeud actuel X=" << posNoeud.x << " Y=" << posNoeud.y << " Z=" << posNoeud.z << "\n";
 	}
+}
+
+std::list<NoeudAbstrait*> VisiteurPointMilieu::getSelection() {
+	return selection_;
 }
 
 void VisiteurPointMilieu::visiter(NoeudComposite* noeud)

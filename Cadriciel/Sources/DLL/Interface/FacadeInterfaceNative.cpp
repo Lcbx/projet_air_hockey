@@ -239,7 +239,6 @@ extern "C"
 	/// @return Aucune.
 	///
 	////////////////////////////////////////////////////////////////////////
-
 	__declspec(dllexport) void ajouterPortail(int x1, int y1)
 	{
 		FacadeModele::obtenirInstance()->ajouterPortail(x1, y1);
@@ -293,7 +292,6 @@ extern "C"
 	/// @return Aucune.
 	///
 	////////////////////////////////////////////////////////////////////////
-
 	__declspec(dllexport) void __cdecl ajouterMuretFantome(int corXin, int corYin, int corX, int corY)
 	{
 
@@ -355,9 +353,9 @@ extern "C"
 	/// @return rien
 	///
 	////////////////////////////////////////////////////////////////////////
-	__declspec(dllexport) void deplacerObjet(double x, double y)
+	__declspec(dllexport) void deplacerObjet(double x, double y, double angle)
 	{
-		return FacadeModele::obtenirInstance()->deplacerObjet(x,y);
+		return FacadeModele::obtenirInstance()->deplacerObjet(x,y, angle);
 	}
 
 
@@ -386,6 +384,25 @@ extern "C"
 	{
 		return FacadeModele::obtenirInstance()->nombreObjetSelectionne();
 	}
+
+
+
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) double __cdecl getAngle()
+	///
+	/// Cette fonction permet de retourner l'angle d'un objet 
+	///
+	/// @return Le nombre d'objets selectionnées
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) double __cdecl getAngle()
+	{
+		return FacadeModele::obtenirInstance()->getAngle();
+	}
+
+
 
 	////////////////////////////////////////////////////////////////////////
 	///

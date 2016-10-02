@@ -30,6 +30,7 @@ namespace InterfaceGraphique
             (this as Control).KeyUp += new KeyEventHandler(keyUpHandler);
             InitializeComponent();
             InitialiserAnimation();
+            supprimerToolStripMenuItem.Enabled = false;
 
         }
 
@@ -57,7 +58,9 @@ namespace InterfaceGraphique
 
         }
 
-        bool supprimer = false;
+        /////////////////////////////////////////////////////////////////////////
+        //  gere le clavier
+        /////////////////////////////////////////////////////////////////////////
 
         private void keyDownHandler(object sender, KeyEventArgs e)
         {
@@ -74,21 +77,151 @@ namespace InterfaceGraphique
         {
             switch (e.KeyCode) {
                 case Keys.ControlKey:        { FonctionsNatives.toucheControl(false); break; } 
-                case Keys.Escape:{ 
-                        System.Console.WriteLine("touche echapppp");
-                        FonctionsNatives.escEnfonce();
-                        break; }
+                case Keys.Escape:            { FonctionsNatives.escEnfonce(); break; }
+                case Keys.Delete:            {FonctionsNatives.supprimerObjet(); break; }
+                case Keys.D:
+                    {
+                        desactiverAutresBoutons();
+                        toolStripButtonDeplacement.Checked = true;
+                        this.changerMode(Etats.DEPLACEMENT); break;
+                    }
+                case Keys.S:
+                    {
+                        desactiverAutresBoutons();
+                        toolStripButtonSelection.Checked = true;
+                        this.changerMode(Etats.SELECTION); break;
+                    }
+                case Keys.R:
+                    {
+                        desactiverAutresBoutons();
+                        toolStripButtonRotation.Checked = true;
+                        this.changerMode(Etats.ROTATION);break;
+                    }
+                case Keys.E:
+                    {
+                        desactiverAutresBoutons();
+                        toolStripButtonMiseAEchelle.Checked = true;
+                        this.changerMode(Etats.MISEAECHELLE);break;
+                    }
+                case Keys.C:
+                    {
+                        desactiverAutresBoutons();
+                        toolStripButtonDuplication.Checked = true;
+                        this.changerMode(Etats.DUPLICATION);break;
+                    }
+                case Keys.Z:
+                    {
+                        desactiverAutresBoutons();
+                        toolStripButtonZoom.Checked = true;
+                        this.changerMode(Etats.LOUPE);break;
+                    }
+                case Keys.M:
+                    {
+                        desactiverAutresBoutons();
+                        toolStripButtonMuret.Checked = true;
+                        this.changerMode(Etats.AJOUT_MUR);break;
+                    }
+                case Keys.P:
+                    {
+                        desactiverAutresBoutons();
+                        toolStripButtonPortail.Checked = true;
+                        this.changerMode(Etats.AJOUT_PORTAIL);break;
+                    }
+                case Keys.B:
+                    {
+                        desactiverAutresBoutons();
+                        toolStripButtonAccelerateur.Checked = true;
+                        this.changerMode(Etats.AJOUT_ACCELERATEUR);break;
+                    }
+                case Keys.G:
+                    {
+                        desactiverAutresBoutons();
+                        toolStripButton1.Checked = true;
+                        this.changerMode(Etats.POINTSDECONTROLE);break;
+                    }
 
-                case Keys.Delete:{
-                        System.Console.WriteLine("touche Delete");
-                        FonctionsNatives.supprimerObjet();
-                    
-                        break; }
-                case Keys.O: FonctionsNatives.deplacerPointHaut(2); break;
+                case Keys.O:        { FonctionsNatives.deplacerPointHaut(2); break; }//A Verifier ou a enlever !!
                 default: break;
-            } 
+            }
         }
-        
+
+
+
+        /////////////////////////////////////////////////////////////////////////
+        //  gere la souris
+        /////////////////////////////////////////////////////////////////////////
+        public enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, AJOUT_MUR, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, REDIMENSIONNEMENT, NBETATS };
+
+        private Etats EtatSouris = Etats.SELECTION;
+
+        private Boolean mousePressed = false;
+
+        private int x, y;
+
+        public void changerMode(Etats nouvelEtat)
+        {
+            if (EtatSouris != nouvelEtat)
+            {
+                EtatSouris = nouvelEtat;
+                FonctionsNatives.etatDelaSouris((int)EtatSouris);
+                string text = "";
+                switch (EtatSouris)
+                {
+                    case Etats.SELECTION: {             text = "selection";         break; }
+                    case Etats.LOUPE: {                 text = "loupe";             break; }
+                    case Etats.DEPLACEMENT: {           text = "deplacement";       break; }
+                    case Etats.ROTATION: {              text = "rotation";          break; }
+                    case Etats.DUPLICATION: {           text = "duplication";       break; }
+                    case Etats.AJOUT_ACCELERATEUR: {    text = "ajout accelerateur"; break; }
+                    case Etats.AJOUT_MUR: {             text = "ajout mur";         break; }
+                    case Etats.AJOUT_PORTAIL: {         text = "ajout portail";     break; }
+                    default: break;
+                }
+                System.Console.WriteLine(text);
+            }
+        }
+
+        public void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            System.Console.WriteLine("Souris down : X = " + e.X + " et Y = " + e.Y);
+            FonctionsNatives.clickStart(e.X, e.Y);
+          
+            if (EtatSouris == Etats.SELECTION || EtatSouris == Etats.LOUPE)
+            {
+                Program.peutAfficher = false;
+          
+            }
+
+            mousePressed = true;
+        }
+        public void panel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            System.Console.WriteLine("Souris up : X = " + e.X + " et Y = " + e.Y);
+            FonctionsNatives.clickEnd(e.X, e.Y);
+            Program.peutAfficher = true;
+            mousePressed = false;
+
+            mettreAjourPos();
+            if (EtatSouris == Etats.SELECTION)
+            {
+                mettreAjourPos();
+            }
+
+
+        }
+        public void Edition_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mousePressed) FonctionsNatives.clickCurrent(e.X, e.Y);
+            else FonctionsNatives.positionSouris(e.X, e.Y);
+            x = e.X; y = e.Y;
+        }
+
+
+        /////////////////////////////////////////////////////////////////////////
+        //  ...
+        /////////////////////////////////////////////////////////////////////////
+
+
         private void nouveauToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Console.WriteLine("Nouveau");
@@ -117,151 +250,9 @@ namespace InterfaceGraphique
             this.Hide();
         }
 
-
-        /////////////////////////////////////////////////////////////////////////
-        //  gere la souris
-        /////////////////////////////////////////////////////////////////////////
-        public enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, AJOUT_MUR, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, REDIMENSIONNEMENT, NBETATS };
-
-        private Etats EtatSouris = Etats.SELECTION;
-
-        private Boolean mousePressed = false;
-
-        public void changerMode(Etats nouvelEtat)
-        {
-            if (EtatSouris != nouvelEtat)
-            {
-                EtatSouris = nouvelEtat;
-                FonctionsNatives.etatDelaSouris((int)EtatSouris);
-                string text = "";
-                switch (EtatSouris)
-                {
-                    case Etats.SELECTION: {             text = "selection";         break; }
-                    case Etats.LOUPE: {                 text = "loupe";             break; }
-                    case Etats.DEPLACEMENT: {           text = "deplacement";       break; }
-                    case Etats.ROTATION: {              text = "rotation";          break; }
-                    case Etats.DUPLICATION: {           text = "duplication";       break; }
-                    case Etats.AJOUT_ACCELERATEUR: {    text = "ajout accelerateur"; break; }
-                   
-                    case Etats.AJOUT_MUR: {             text = "ajout mur";         break; }
-                   
-                    case Etats.AJOUT_PORTAIL: {         text = "ajout portail";     break; }
-                    default: break;
-                }
-                System.Console.WriteLine(text);
-            }
-        }
-
-        public void panel1_MouseDown(object sender, MouseEventArgs e)
-        {
-            System.Console.WriteLine("Souris down : X = " + e.X + " et Y = " + e.Y);
-            FonctionsNatives.clickStart(e.X, e.Y);
-            mettreAjourPos();
-            if (EtatSouris == Etats.SELECTION || EtatSouris == Etats.LOUPE)
-            {
-                Program.peutAfficher = false;
-                mettreAjourPos();
-            }
-
-            mousePressed = true;
-        }
-        public void panel1_MouseUp(object sender, MouseEventArgs e)
-        {
-            System.Console.WriteLine("Souris up : X = " + e.X + " et Y = " + e.Y);
-            FonctionsNatives.clickEnd(e.X, e.Y);
-            Program.peutAfficher = true;
-            mousePressed = false;
-        }
-        public void Edition_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mousePressed) FonctionsNatives.clickCurrent(e.X, e.Y);
-            else FonctionsNatives.positionSouris(e.X, e.Y);
-
-            //wajdi
-
-            /* if (firstClick)
-             {
-                 if (coordXin != e.X && coordYin != e.Y)
-                 {
-                     if (!supprimer)
-                     {
-                         FonctionsNatives.ajouterMuretFantome(coordXin, coordYin, e.X, e.Y);
-                         supprimer = true;
-                     }
-                    // int nb = FonctionsNatives.obtenirNombreElemntSurScene();
-                     FonctionsNatives.ajouterMuret(coordXin, coordYin, e.X, e.Y);
-                    /*if ((nb + 1) == FonctionsNatives.obtenirNombreElemntSurScene())
-                     {
-                         supprimer = false;
-                     }*/
-
-            //  }
-
-            // }
-
-        }
-
-        
-
-
-        int compteur = 0;
-        bool firstClick = false;
-        int coordXin = 0, coordYin = 0;
-
-        private void panel1_MouseClick(object sender, MouseEventArgs e)
-        {
-            //ETAT AJOUT PORTAIL
-
-            /*
-                   //FonctionsNatives.ajouterPortail(e.X, e.Y);
-
-                   //Pour vérifier qu'on a cliqué 2 fois 
-                     compteur += 1;
-                     if (compteur <= 1)
-                     {
-                         compteur += 1;
-                         System.Console.WriteLine("Premier clic:  x=  " + e.X + " y= " + e.Y);
-                         FonctionsNatives.ajouterPortail(e.X, e.Y);
-
-                     }
-                     if (compteur > 2)
-                     {
-                           System.Console.WriteLine("Deuxieme clic:  x=  " + e.X + " y= " + e.Y);
-                           compteur = 0;
-                           FonctionsNatives.ajouterPortailDeux(e.X, e.Y);
-                      }
-                         */
-
-            //Etat AJOUT MURET
-
-            /*
-                        //Pour vérifier qu'on a cliqué 2 fois 
-                        compteur += 1;
-                        if (compteur <= 1)
-                        {
-                            compteur += 1;
-                            System.Console.WriteLine("Premier clic:  x=  " + e.X + " y= " + e.Y);
-                            firstClick = true;
-                            coordXin = e.X;
-                            coordYin = e.Y;
-
-                        }
-                        if (compteur > 2)
-                        {
-                            System.Console.WriteLine("Deuxieme clic:  x=  " + e.X + " y= " + e.Y);
-                            compteur = 0;
-                            FonctionsNatives.ajouterMuret(coordXin, coordYin, e.X, e.Y);
-                            firstClick = false;
-                        }
-
-                        */
-
-        }
-
-
         private void propriétésToolStripMenuItem_Click(object sender, EventArgs e)
         {
-        
+            //afficher la boite de configuration
             boiteProp.Show();
         }
 
@@ -385,6 +376,14 @@ namespace InterfaceGraphique
         private void éditionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int nbreObSelectionnes= FonctionsNatives.nombreObjetSelectionne();
+            if(nbreObSelectionnes >= 1)
+            {
+                supprimerToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                supprimerToolStripMenuItem.Enabled = false;
+            }
         }
         public void Edition_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -405,25 +404,110 @@ namespace InterfaceGraphique
         //data Biding
         private void mettreAjourPos()
         {
+            if (FonctionsNatives.nombreObjetSelectionne() == 1)
+            {
+                boiteProp.textBox1.Enabled = true;
+                boiteProp.textBox2.Enabled = true;
+                boiteProp.textBox3.Enabled = true;
+               // boiteProp.Show();
 
-            //Position en X
-            System.Console.WriteLine("Mettre a jour");
-            double posX= (FonctionsNatives.getPosX());
-            posX=Math.Round(posX, 2); //arrondi la position 
+                //Position en X
+                double posX = (FonctionsNatives.getPosX());
+                posX = Math.Round(posX, 2); //arrondi la position 
+                boiteProp.textBox1.Text = posX.ToString();
 
-            boiteProp.textBox1.Text = posX.ToString();
+                //Position Y
+                double posY = (FonctionsNatives.getPosY());
+                posY = Math.Round(posY, 2); //arrondi la position 
+                boiteProp.textBox2.Text = posY.ToString();
 
-            //Position Y
+                //Angle
+                double angle = (FonctionsNatives.getAngle());
+                angle = Math.Round(angle, 2);
+                boiteProp.textBox3.Text = angle.ToString();
+            }
+            else
+            {
+                boiteProp.textBox1.Enabled = false;
+                boiteProp.textBox2.Enabled = false;
+                boiteProp.textBox3.Enabled = false;
 
-            System.Console.WriteLine("Mettre a jour");
-            double posY = (FonctionsNatives.getPosY());
-            posX = Math.Round(posY, 2); //arrondi la position 
+                // boiteProp.label7.Show();
+                //boiteProp.textBox1.Text = " ";
+                //boiteProp.textBox2.Text = " ";
 
-            boiteProp.textBox2.Text = posY.ToString();
+            }
+        }
+
+        private void sélectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            desactiverAutresBoutons();
+            toolStripButtonSelection.Checked = true;
+            this.changerMode(Etats.SELECTION);
+        }
+
+        private void déplacementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            desactiverAutresBoutons();
+            toolStripButtonDeplacement.Checked = true;
+            this.changerMode(Etats.DEPLACEMENT);
+        }
+
+        private void rotationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            desactiverAutresBoutons();
+            toolStripButtonRotation.Checked = true;
+            this.changerMode(Etats.ROTATION);
+        }
+
+        private void miseÀLéchelleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            desactiverAutresBoutons();
+            toolStripButtonMiseAEchelle.Checked = true;
+            this.changerMode(Etats.MISEAECHELLE);
+        }
+
+        private void duplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            desactiverAutresBoutons();
+            toolStripButtonDuplication.Checked = true;
+            this.changerMode(Etats.DUPLICATION);
+        }
+
+        private void ToolStripMenuItemAccelerateur_Click(object sender, EventArgs e)
+        {
+            desactiverAutresBoutons();
+            toolStripButtonAccelerateur.Checked = true;
+            this.changerMode(Etats.AJOUT_ACCELERATEUR);
 
         }
 
+        private void portailToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            desactiverAutresBoutons();
+            toolStripButtonPortail.Checked = true;
+            this.changerMode(Etats.AJOUT_PORTAIL);
+        }
 
+        private void muretToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            desactiverAutresBoutons();
+            toolStripButtonMuret.Checked = true;
+            this.changerMode(Etats.AJOUT_MUR);
+        }
+
+        private void gestionDesPointsDeContrôleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            desactiverAutresBoutons();
+            toolStripButton1.Checked = true;
+            this.changerMode(Etats.POINTSDECONTROLE);
+        }
+
+        private void aideToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BoiteAide helpbox = new BoiteAide();
+            helpbox.ShowDialog();
+        }
     }
 
 
@@ -459,7 +543,7 @@ namespace InterfaceGraphique
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void positionSouris(int x, int y);
 
-        //touche escape
+        //touche control
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void toucheControl(bool presse);
 
@@ -494,7 +578,7 @@ namespace InterfaceGraphique
 
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void deplacerObjet(double x, double y);
+        public static extern void deplacerObjet(double x, double y, double angle);
 
         // Pour touche +
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -517,5 +601,10 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int nombreObjetSelectionne();
+
+
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern double getAngle();
     }
 }

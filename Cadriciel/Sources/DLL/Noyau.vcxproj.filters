@@ -168,6 +168,9 @@
     <ClCompile Include="VisiteurPointMilieu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MiseEchelle.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\FacadeModele.h">
@@ -292,6 +295,9 @@
     </ClInclude>
     <ClInclude Include="VisiteurPointMilieu.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MiseEchelle.h">
+      <Filter>Header Files\Application</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
