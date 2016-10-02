@@ -15,7 +15,7 @@ void VisiteurRotation::rotate(float angle) {
 }
 
 void VisiteurRotation::visiter(NoeudAbstrait* noeud)
-{
+{ 
 	if (noeud->estSelectionne()) {
 		auto posNoeud = noeud->obtenirPositionRelative();
 		auto newpos = glm::vec4(posNoeud - posCentre_, 0.f) * glm::rotate(glm::mat4(1.f), glm::radians(angle_), { 0.f,0.f,1.f }) + glm::vec4(posCentre_, 0.f);

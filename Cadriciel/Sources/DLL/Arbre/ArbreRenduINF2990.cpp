@@ -285,6 +285,7 @@ void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos)
 
 	NoeudAbstrait* noeudBonus{ creerNoeud(NOM_BONUS) };
 	VisiteurAjout v1(pos);
+	noeudBonus->setScale({ 1, 1, 1 });
 	noeudBonus->accepter(&v1);
 
 
@@ -304,7 +305,7 @@ void ArbreRenduINF2990::ajouterPortail(glm::dvec3 pos)
 	
 		NoeudAbstrait* noeudPortail{ creerNoeud(NOM_PORTAIL) };
 		Visiteur* v1 = new VisiteurAjout(pos);
-	
+		
 		noeudPortail->accepter(v1);
 
 		premierEstajoute = true;
