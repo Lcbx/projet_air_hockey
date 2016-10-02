@@ -62,14 +62,12 @@ namespace InterfaceGraphique
         private void keyDownHandler(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.ControlKey) FonctionsNatives.toucheControl(true);
-            if (e.KeyCode == Keys.Add)
-            {
-                FonctionsNatives.zoomIn();
-            }
-            if (e.KeyCode == Keys.Subtract)
-            {
-                FonctionsNatives.zoomOut();
-            }
+            if (e.KeyCode == Keys.Add) FonctionsNatives.zoomIn();
+            if (e.KeyCode == Keys.Subtract) FonctionsNatives.zoomOut();
+            if (e.KeyCode == Keys.Up) FonctionsNatives.deplacerVueXY(0,-0.1);
+            if (e.KeyCode == Keys.Right) FonctionsNatives.deplacerVueXY(0.1, 0);
+            if (e.KeyCode == Keys.Down) FonctionsNatives.deplacerVueXY(0, 0.1);
+            if (e.KeyCode == Keys.Left) FonctionsNatives.deplacerVueXY(-0.1, 0);
         }
 
         private void keyUpHandler(object sender, KeyEventArgs e)
@@ -159,7 +157,7 @@ namespace InterfaceGraphique
             System.Console.WriteLine("Souris down : X = " + e.X + " et Y = " + e.Y);
             FonctionsNatives.clickStart(e.X, e.Y);
             mettreAjourPos();
-            if (EtatSouris == Etats.SELECTION)
+            if (EtatSouris == Etats.SELECTION || EtatSouris == Etats.LOUPE)
             {
                 Program.peutAfficher = false;
                 mettreAjourPos();
@@ -498,12 +496,17 @@ namespace InterfaceGraphique
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void deplacerObjet(double x, double y);
 
-
+        // Pour touche +
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void zoomIn();
 
+        // Pour touche -
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void zoomOut();
+
+        // Pour les touches de fleche
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void deplacerVueXY(double deplacementX, double deplacementY);
 
         //foction test bidon
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]

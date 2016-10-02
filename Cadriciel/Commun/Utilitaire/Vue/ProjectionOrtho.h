@@ -49,7 +49,11 @@ namespace vue {
 		virtual void zoomerIn();
 		/// Zoom out, c'est-à-dire un rapetissement.
 		virtual void zoomerOut();
+		/// Zoom in, c'est-à-dire un agrandissement.
+		virtual void zoomerIn(double facteur);
 		/// Zoom out, c'est-à-dire un rapetissement.
+		virtual void zoomerOut(double facteur);
+		/// Zoom à un facteur spécifié
 		virtual void zoomerTo(double zoomFacteur);
 		/// Modification de la clôture.
 		virtual void redimensionnerFenetre(int largeur, int hauteur);
@@ -58,6 +62,9 @@ namespace vue {
 
 		/// Obtenir les nnées de la fenêtre virtuelle.
 		inline glm::dvec2 obtenirDimensionFenetreVirtuelle() const;
+
+		// Obtenir le zoom actuel
+		double obtenirZoomActuel();
 
 
 	private:

@@ -69,8 +69,7 @@ namespace vue {
 	////////////////////////////////////////////////////////////////////////
 	void ProjectionOrtho::zoomerIn()
 	{
-		if (zoomActuel_ != 5)
-			zoomerTo(zoomActuel_ + incrementZoom_);
+		zoomerIn(incrementZoom_);
 	}
 
 
@@ -85,8 +84,36 @@ namespace vue {
 	//////////////////////////////////////////////////////////////////////// 
 	void ProjectionOrtho::zoomerOut()
 	{
-		if (zoomActuel_ != 0.5)
-			zoomerTo(zoomActuel_ - incrementZoom_);
+		zoomerOut(incrementZoom_);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn void ProjectionOrtho::zoomerIn(double facteur)
+	///
+	/// Permet de faire un zoom in avec un incrément spécifié.
+	/// 
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
+	void ProjectionOrtho::zoomerIn(double facteur)
+	{
+		zoomerTo(zoomActuel_ + facteur);
+	}
+
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn void ProjectionOrtho::zoomerOut(double facteur)
+	///
+	/// Permet de faire un zoom out avec un décrément spécifié.
+	///
+	/// @return Aucune.
+	///
+	//////////////////////////////////////////////////////////////////////// 
+	void ProjectionOrtho::zoomerOut(double facteur)
+	{
+		zoomerTo(zoomActuel_ - facteur);
 	}
 
 
@@ -101,6 +128,9 @@ namespace vue {
 	//////////////////////////////////////////////////////////////////////// 
 	void ProjectionOrtho::zoomerTo(double zoomFacteur)
 	{
+		if (zoomFacteur > zoomInMax_) zoomFacteur = zoomInMax_;
+		else if (zoomFacteur < zoomOutMax_) zoomFacteur = zoomOutMax_;
+
 		std::cout << "zoomFacteur :" << std::endl;
 		std::cout << zoomActuel_ << std::endl;
 		zoomActuel_ = zoomFacteur;
@@ -109,7 +139,6 @@ namespace vue {
 		largeurFenetre_ = largeurFenetreInit_ * (1/zoomFacteur);
 		hauteurFenetre_ = hauteurFenetreInit_ * (1/zoomFacteur);
 
-		std::cout << largeurFenetre_ << " " << hauteurFenetre_ << std::endl;
 
 	}
 
@@ -169,6 +198,21 @@ namespace vue {
 	void ProjectionOrtho::ajusterRapportAspect()
 	{
 		// À IMPLANTER.
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn double obtenirZoomActuel()
+	///
+	/// Cette fonction retourne le facteur de zoom actuel
+	///
+	/// @return l'attribut zoomActuel_
+	///
+	////////////////////////////////////////////////////////////////////////
+	// Obtenir le zoom actuel
+	double ProjectionOrtho::obtenirZoomActuel()
+	{
+		return zoomActuel_;
 	}
 
 }; // Fin du namespace vue.

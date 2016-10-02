@@ -10,8 +10,7 @@
 
 
 #include<glm\glm.hpp>
-#include "AideGL.h" //ne surtout pas bouger, crait une erreur si mis après freeglut
-
+#include "AideGL.h"
 
 #include "Selection.h"
 #include "../VisiteurSelection.h"

@@ -386,7 +386,24 @@ extern "C"
 	{
 		return FacadeModele::obtenirInstance()->nombreObjetSelectionne();
 	}
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void DeplacerVueXY();
+	///
+	/// Cette fonction permet de deplacer la camera de la vue sur le plan
+	///    perpendiculaire à la direction regardée
+	///
+	/// @return void
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl deplacerVueXY(double deplacementX, double deplacementY)
+	{
+		FacadeModele::obtenirInstance()->obtenirVue()->deplacerXY(deplacementX, deplacementY);
+	}
 }
+
+
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @}

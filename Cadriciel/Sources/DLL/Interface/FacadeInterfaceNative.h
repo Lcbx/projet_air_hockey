@@ -66,5 +66,8 @@ extern "C" {
 
 	//verifier le nombre d'objet sur la table
 	__declspec(dllexport) int nombreObjetSelectionne();
+
+	// Methode DeplacerXY de la camera, pour les touches de directions
+	__declspec(dllexport) void deplacerVueXY(double deplacementX, double deplacementY);
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__
