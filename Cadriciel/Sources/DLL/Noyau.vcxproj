@@ -153,6 +153,7 @@
     <ClCompile Include="Interface\FacadeInterfaceNative.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Trim\Desktop\inf2990-10\Cadriciel\Sources\DLL\Application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="MiseEchelle.cpp" />
     <ClCompile Include="NoeudBonus.cpp" />
     <ClCompile Include="NoeudMaillet.cpp" />
     <ClCompile Include="NoeudMuret.cpp" />
@@ -199,6 +200,7 @@
     <ClInclude Include="Arbre\Noeuds\NoeudAbstrait.h" />
     <ClInclude Include="Arbre\Noeuds\NoeudComposite.h" />
     <ClInclude Include="Interface\FacadeInterfaceNative.h" />
+    <ClInclude Include="MiseEchelle.h" />
     <ClInclude Include="NoeudBonus.h" />
     <ClInclude Include="NoeudMaillet.h" />
     <ClInclude Include="NoeudMuret.h" />

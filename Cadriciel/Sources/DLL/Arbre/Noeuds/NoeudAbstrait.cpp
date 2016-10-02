@@ -397,10 +397,8 @@ void NoeudAbstrait::afficher(const glm::mat4& vueProjection) const
 		// Assignation du mode d'affichage des polygones
 		glPolygonMode(GL_FRONT_AND_BACK, modePolygones_);
 
-		// Translation.
-		auto modele = glm::translate(transformationRelative_, glm::vec3(5, 0, 0));
 		// Révolution autour du centre.
-		modele = glm::rotate(modele, angleRotation_, glm::vec3(0, 0, 1));
+		auto modele = glm::rotate(transformationRelative_, angleRotation_, glm::vec3(0, 0, 1));
 		// Rotation autour de l'axe des X.
 		modele = glm::rotate(modele, angleX_, glm::vec3(1, 0, 0));
 		// Rotation autour de l'axe des Y.

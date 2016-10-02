@@ -161,9 +161,7 @@ public:
 	};
 
 
-	glm::dvec3 getPosDataBinding() { return posDataBinding; }
 
-	glm::dvec3 posDataBinding;
 
 
 

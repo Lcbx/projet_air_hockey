@@ -9,7 +9,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 #pragma once
 
-
+#include <list>
 #include "Visiteur.h"
 
 
@@ -17,9 +17,12 @@ class VisiteurPointMilieu : public Visiteur
 {
 	int nbrNoeudsVisites_;
 	glm::vec3& posCentre_;
+	std::list<NoeudAbstrait*> selection_;
 
 public:
 	VisiteurPointMilieu(glm::vec3& pointARendre);
+
+	std::list<NoeudAbstrait*> getSelection();
 
 	virtual void visiter(NoeudAbstrait* noeud);
 	virtual void visiter(NoeudComposite *noeud);

@@ -52,12 +52,11 @@ extern "C" {
 	//touche control
 	__declspec(dllexport) void toucheControl(bool presse);
 	//touche escape
-
 	__declspec(dllexport) void escEnfonce();
 
 
 	//Deplacer un objet avec la boite de configuration
-	__declspec(dllexport) void deplacerObjet(double x, double y);
+	__declspec(dllexport) void deplacerObjet(double x, double y,double angle );
 	
 	// fonction bidon test
 	__declspec(dllexport) void test();
@@ -66,5 +65,10 @@ extern "C" {
 
 	//verifier le nombre d'objet sur la table
 	__declspec(dllexport) int nombreObjetSelectionne();
+
+	//verifier le nombre d'objet sur la table
+	__declspec(dllexport) double getAngle();
+
+
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__

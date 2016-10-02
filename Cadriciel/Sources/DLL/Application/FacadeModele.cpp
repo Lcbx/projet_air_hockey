@@ -373,13 +373,11 @@ void FacadeModele::ajouterPortail(int x1, int y1)
 {
 	glm::dvec3 position1;
 	vue_->convertirClotureAVirtuelle(x1, y1, position1);
-
 	arbre_->ajouterPortail(position1);
 }
 
 void FacadeModele::supprimerPortail(bool escTouche)
 {
-	std::printf("A l'interieur de facade modele esti \n");
 	arbre_->supprimerPortail(escTouche);
 }
 
@@ -389,7 +387,6 @@ void FacadeModele::ajouterPortailDeux(int x2, int y2)
 {
 	glm::dvec3 position2;
 	vue_->convertirClotureAVirtuelle(x2, y2, position2);
-
 	arbre_->ajouterPortailDeux(position2);
 }
 
@@ -398,10 +395,8 @@ void FacadeModele::ajouterMuret(int x1, int y1, int x2, int y2)
 {
 	glm::dvec3 position1;
 	vue_->convertirClotureAVirtuelle(x1, y1, position1);
-
 	glm::dvec3 position2;
 	vue_->convertirClotureAVirtuelle(x2, y2, position2);
-
 	arbre_->ajouterMuret(position1, position2);
 }
 
@@ -417,7 +412,6 @@ void FacadeModele::ajouterMuret(int x1, int y1, int x2, int y2)
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-
 void FacadeModele::ajouterMurFantome(int corXin, int corYin, int corX, int corY)
 {
 	// bloc d'instruction
@@ -425,44 +419,74 @@ void FacadeModele::ajouterMurFantome(int corXin, int corYin, int corX, int corY)
 		arbre_->effacer(arbre_->chercher(arbre_->obtenirNombreEnfants() - 1));
 	//ajouterMur(corXin, corYin, corX, corY);
 }
-///////////////////////////////////////////////////////////////////////////////
-/// @}
-///////////////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn double FacadeModele::getPosDataBidingX()
+///
+/// cette fonction retourne la position X d'un objet
+///
+/// @param[in] rien
+/// @return position X.
+///
+////////////////////////////////////////////////////////////////////////
 double FacadeModele::getPosDataBidingX()
 {
 	return arbre_->getPosiX();
 	
 }
 
-/*
-void FacadeModele::deplacerObjet(int x1, int y1, int x2, int y2)
-{
-	glm::dvec3 posInial;
-	vue_->convertirClotureAVirtuelle(x1, y1, posInial);
-
-	glm::dvec3 posFinal;
-	vue_->convertirClotureAVirtuelle(x2, y2, posFinal);
-
-	arbre_->deplacer(posInial, posFinal);
-	
-}*/
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn double FacadeModele::getPosDataBidingY()
+///
+/// cette fonction retourne la position Y d'un objet
+///
+/// @param[in] rien
+/// @return position Y.
+///
+////////////////////////////////////////////////////////////////////////
 double FacadeModele::getPosDataBidingY()
 {
 	return arbre_->getPosiY();
 
 }
 
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::effacerObjet()
+///
+/// cette fonction enleve un objet de la scene
+///
+/// @param[in] rien
+/// @return rien.
+///
+////////////////////////////////////////////////////////////////////////
 void FacadeModele::effacerObjet()
 {
 	arbre_->effacerSelection();
 }
 
-void FacadeModele::deplacerObjet(double x, double y)
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::deplacerObjet(double x, double y)
+///
+/// cette deplace un objet selon les coordonnées en param
+///
+/// @param[in] double x: position en x
+///	    		double y : position en y			
+/// @return rien.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::deplacerObjet(double x, double y, double angle)
 {
 	glm::dvec3 NouvPos{x, y, 0.f};
 
-	arbre_->deplacerObjet(NouvPos);
+	arbre_->deplacerObjet(NouvPos, angle);
 
 }
 
@@ -489,13 +513,27 @@ void FacadeModele::deplacerPointHaut(int index) {
 
 		// probleme la table n'est pas mis a jour
 
-		/*glm::vec3 pointControle;
+		/*
+		glm::vec3 pointControle;
 		(NoeudTable *) noeudTable->getPointControle(1, & pointControle);
-*/
+		*/
 	}
 #undef delta
 }
 
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn int FacadeModele::nombreObjetSelectionne()
+///
+/// cette fonction permet de retourner le nombre des objets selectionnes sur la scene
+///
+/// @param[in] rien
+///	    		
+/// @return nombre des objets selectionnées .
+///
+////////////////////////////////////////////////////////////////////////
 int FacadeModele::nombreObjetSelectionne()
 {
 	return arbre_->obtenirNombreObjetSelctionnes();
@@ -503,6 +541,20 @@ int FacadeModele::nombreObjetSelectionne()
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-/// @}
-///////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn double FacadeModele::getAngle()
+///
+/// Cette fonction permet de retourner l'angle d'un objet
+/// 
+/// @param[in] rien
+///
+/// @return l'angle d'un objet
+///
+////////////////////////////////////////////////////////////////////////
+double FacadeModele::getAngle()
+{
+	return arbre_->getAngleDataBinding();
+}
+
+

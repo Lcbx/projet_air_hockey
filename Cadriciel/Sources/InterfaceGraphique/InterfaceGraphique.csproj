@@ -54,6 +54,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoiteAide.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BoiteAide.Designer.cs">
+      <DependentUpon>BoiteAide.cs</DependentUpon>
+    </Compile>
     <Compile Include="BoitePropriete.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BoiteAide.resx">
+      <DependentUpon>BoiteAide.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BoitePropriete.resx">
       <DependentUpon>BoitePropriete.cs</DependentUpon>
     </EmbeddedResource>
