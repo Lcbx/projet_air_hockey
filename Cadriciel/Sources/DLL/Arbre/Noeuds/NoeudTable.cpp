@@ -71,7 +71,7 @@ void NoeudTable::afficherConcret(const glm::mat4& vueProjection) const
 	//	1.0,  // near
 	//	-1.0);  // far
 
-
+	glPushMatrix();
 	glLoadIdentity();
 	// deactiver les textures (la table ne prend plus la texture des autres noeuds)
 	glDisable(GL_TEXTURE_2D);
@@ -81,11 +81,12 @@ void NoeudTable::afficherConcret(const glm::mat4& vueProjection) const
 	glVertex3fv( glm::value_ptr(  glm::vec3(0,0,0) ) );
 
 	//multiplication par la matrice de proj
-#define PROJvec(arg) glm::value_ptr(glm::vec3(vueProjection * glm::vec4(arg, 0)))
-#define PROJ(arg) glm::value_ptr(glm::vec3(vueProjection * glm::vec4(p(arg), 0)))
-#define vecPROJ(arg) glm::vec3(vueProjection * glm::vec4(p(arg), 0))
-#define PROJ8 glm::value_ptr(glm::vec3(vueProjection * glm::vec4(obtenirPositionRelative(), 0) ) )
-#define vecPROJ8 glm::vec3(vueProjection * glm::vec4(obtenirPositionRelative(), 0) )
+#define PROJvec(arg)	glm::value_ptr(	glm::vec3(vueProjection * glm::vec4(arg, 0)))
+#define PROJ(arg)		glm::value_ptr(	glm::vec3(vueProjection * glm::vec4(p(arg), 0)))
+#define vecPROJ(arg)					glm::vec3(vueProjection * glm::vec4(p(arg), 0))
+#define PROJ8			glm::value_ptr(	glm::vec3(vueProjection * glm::vec4(obtenirPositionRelative(), 0) ) )
+#define vecPROJ8						glm::vec3(vueProjection * glm::vec4(obtenirPositionRelative(), 0) )
+#define vecPROJvec(arg)					glm::vec3(vueProjection * glm::vec4(arg, 0))
 
 
 	/*
@@ -204,21 +205,20 @@ void NoeudTable::afficherConcret(const glm::mat4& vueProjection) const
 	glLineWidth(3.);
 	glColor4f(1., 1., 0., 1.);
 	double rayon = 0.2;
-	double distance = abs( (vecPROJ(2)).y - (vecPROJ(3)).y );
+#undef min
+	double distance = std::min({ glm::distance(vecPROJ(2), vecPROJ8), glm::distance(vecPROJ(6), vecPROJ8), glm::distance(vecPROJ(0), vecPROJ8), glm::distance(vecPROJ(1), vecPROJ8) });
 	//double distance = sqrt( pow(1,2) + pow(1,2) );
 	double coeff = 0.4;
 	rayon = distance / 2 * coeff;
 	//tracerCercle(double(pointControle_[8][0]),double(pointControle_[8][1]),rayon,100);
 	tracerCercle( (vecPROJ8).x, (vecPROJ8).y, rayon, 100);
 
-#undef PROJ(arg)
-#undef PROJ8
-#undef vecPROJ8
-
 	//Activer le test de profondeur
 	glEnable(GL_DEPTH_TEST);
 	// activer le test de profondeur
 	glEnable(GL_TEXTURE_2D);
+
+	glPopMatrix();
 
 	//pour afficher les noeuds composites
 	NoeudComposite::afficherConcret(vueProjection);
@@ -389,7 +389,9 @@ void NoeudTable::tracerCercle(double cx, double cy, double r, int nb_segments) c
 		double x = r * cosf(theta);
 		double y = r * sinf(theta);
 
-		glVertex2f(x + cx, y + cy);
+		glm::vec3 point(x+cx, y+cy, 0);
+
+		glVertex2f(point.x, point.y);
 
 	}
 	glEnd();
