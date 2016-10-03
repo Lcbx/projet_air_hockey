@@ -78,8 +78,10 @@ void NoeudTable::afficherConcret(const glm::mat4& vueProjection) const
 	// desactiver le test de profondeur
 	glDisable(GL_DEPTH_TEST);
 
+	glVertex3fv( glm::value_ptr(  glm::vec3(0,0,0) ) );
 
 	//multiplication par la matrice de proj
+#define PROJvec(arg) glm::value_ptr(glm::vec3(vueProjection * glm::vec4(arg, 0)))
 #define PROJ(arg) glm::value_ptr(glm::vec3(vueProjection * glm::vec4(p(arg), 0)))
 #define vecPROJ(arg) glm::vec3(vueProjection * glm::vec4(p(arg), 0))
 #define PROJ8 glm::value_ptr(glm::vec3(vueProjection * glm::vec4(obtenirPositionRelative(), 0) ) )
@@ -115,7 +117,56 @@ void NoeudTable::afficherConcret(const glm::mat4& vueProjection) const
 
 	
 	// tracer les murs 
-	//tracerMurs();
+	
+	// tracer murs
+	glColor4fv(glm::value_ptr(couleurMurs_));
+	glBegin(GL_QUADS);
+	{
+		// mur p0p6
+		glVertex3fv(PROJ(0));
+		glVertex3fv(PROJvec(glm::vec3(p(0).x - largeur_, p(0).y, p(0).z))) ;
+		glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y, p(6).z)));
+		glVertex3fv(PROJvec(glm::vec3(p(6).x, p(6).y, p(6).z)));
+
+		// mur p6p1
+		glVertex3f(pointControle_[6].x, pointControle_[6].y, pointControle_[6].z);
+		glVertex3f(pointControle_[6].x - largeur_, pointControle_[6].y, pointControle_[6].z);
+		glVertex3f(pointControle_[1].x - largeur_, pointControle_[1].y, pointControle_[1].z);
+		glVertex3f(pointControle_[1].x, pointControle_[1].y, pointControle_[1].z);
+		// mur p0p2
+		glVertex3f(pointControle_[2].x, pointControle_[2].y, pointControle_[2].z);
+		glVertex3f(pointControle_[2].x, pointControle_[2].y + largeur_, pointControle_[2].z);
+		glVertex3f(pointControle_[0].x, pointControle_[0].y + largeur_, pointControle_[0].z);
+		glVertex3f(pointControle_[0].x, pointControle_[0].y, pointControle_[0].z);
+		// mur p2p4
+		glVertex3f(pointControle_[4].x, pointControle_[4].y, pointControle_[4].z);
+		glVertex3f(pointControle_[4].x, pointControle_[4].y + largeur_, pointControle_[4].z);
+		glVertex3f(pointControle_[2].x, pointControle_[2].y + largeur_, pointControle_[2].z);
+		glVertex3f(pointControle_[2].x, pointControle_[2].y, pointControle_[2].z);
+		// mur p4p7
+		glVertex3f(pointControle_[4].x + +largeur_, pointControle_[4].y, pointControle_[4].z);
+		glVertex3f(pointControle_[4].x, pointControle_[4].y, pointControle_[4].z);
+		glVertex3f(pointControle_[7].x, pointControle_[7].y, pointControle_[7].z);
+		glVertex3f(pointControle_[7].x + largeur_, pointControle_[7].y, pointControle_[7].z);
+		// mur p7p5		
+		glVertex3f(pointControle_[7].x + largeur_, pointControle_[7].y, pointControle_[7].z);
+		glVertex3f(pointControle_[7].x, pointControle_[7].y, pointControle_[7].z);
+		glVertex3f(pointControle_[5].x, pointControle_[5].y, pointControle_[5].z);
+		glVertex3f(pointControle_[5].x + largeur_, pointControle_[5].y, pointControle_[5].z);
+		// mur p5p3
+		glVertex3f(pointControle_[5].x, pointControle_[5].y - largeur_, pointControle_[5].z);
+		glVertex3f(pointControle_[5].x, pointControle_[5].y, pointControle_[5].z);
+		glVertex3f(pointControle_[3].x, pointControle_[3].y, pointControle_[3].z);
+		glVertex3f(pointControle_[3].x, pointControle_[3].y - largeur_, pointControle_[3].z);
+		// mur p3p1
+		glVertex3f(pointControle_[3].x, pointControle_[3].y - largeur_, pointControle_[3].z);
+		glVertex3f(pointControle_[3].x, pointControle_[3].y, pointControle_[3].z);
+		glVertex3f(pointControle_[1].x, pointControle_[1].y, pointControle_[1].z);
+		glVertex3f(pointControle_[1].x, pointControle_[1].y - largeur_, pointControle_[1].z);
+	}
+	glEnd();
+
+
 	// tracer les buts 
 	//tracerButs();
 
@@ -228,52 +279,7 @@ void NoeudTable::tracerTable() const
 ////////////////////////////////////////////////////////////////////////
 void NoeudTable::tracerMurs() const
 {
-	// tracer murs
-	glColor4f(couleurMurs_[0], couleurMurs_[1], couleurMurs_[2],couleurMurs_[3]);
-	glBegin(GL_QUADS);
-	{			
-		// mur p0p6
-		glVertex3f(pointControle_[0].x, pointControle_[0].y, pointControle_[0].z);
-		glVertex3f(pointControle_[0].x - largeur_, pointControle_[0].y, pointControle_[0].z);
-		glVertex3f(pointControle_[6].x - largeur_, pointControle_[6].y, pointControle_[6].z);
-		glVertex3f(pointControle_[6].x, pointControle_[6].y, pointControle_[6].z);
-		// mur p6p1
-		glVertex3f(pointControle_[6].x, pointControle_[6].y, pointControle_[6].z);
-		glVertex3f(pointControle_[6].x - largeur_, pointControle_[6].y, pointControle_[6].z);
-		glVertex3f(pointControle_[1].x - largeur_, pointControle_[1].y, pointControle_[1].z);
-		glVertex3f(pointControle_[1].x, pointControle_[1].y, pointControle_[1].z);
-		// mur p0p2
-		glVertex3f(pointControle_[2].x, pointControle_[2].y, pointControle_[2].z);
-		glVertex3f(pointControle_[2].x, pointControle_[2].y + largeur_, pointControle_[2].z);
-		glVertex3f(pointControle_[0].x, pointControle_[0].y + largeur_, pointControle_[0].z);
-		glVertex3f(pointControle_[0].x, pointControle_[0].y, pointControle_[0].z);
-		// mur p2p4
-		glVertex3f(pointControle_[4].x, pointControle_[4].y, pointControle_[4].z);
-		glVertex3f(pointControle_[4].x, pointControle_[4].y + largeur_, pointControle_[4].z);
-		glVertex3f(pointControle_[2].x, pointControle_[2].y + largeur_, pointControle_[2].z);
-		glVertex3f(pointControle_[2].x, pointControle_[2].y, pointControle_[2].z);
-		// mur p4p7
-		glVertex3f(pointControle_[4].x + +largeur_, pointControle_[4].y, pointControle_[4].z);
-		glVertex3f(pointControle_[4].x , pointControle_[4].y, pointControle_[4].z);
-		glVertex3f(pointControle_[7].x, pointControle_[7].y, pointControle_[7].z);
-		glVertex3f(pointControle_[7].x + largeur_, pointControle_[7].y, pointControle_[7].z);
-		// mur p7p5		
-		glVertex3f(pointControle_[7].x + largeur_, pointControle_[7].y, pointControle_[7].z);
-		glVertex3f(pointControle_[7].x, pointControle_[7].y, pointControle_[7].z);		
-		glVertex3f(pointControle_[5].x, pointControle_[5].y, pointControle_[5].z);
-		glVertex3f(pointControle_[5].x + largeur_, pointControle_[5].y, pointControle_[5].z);
-		// mur p5p3
-		glVertex3f(pointControle_[5].x, pointControle_[5].y - largeur_, pointControle_[5].z);
-		glVertex3f(pointControle_[5].x, pointControle_[5].y, pointControle_[5].z);
-		glVertex3f(pointControle_[3].x, pointControle_[3].y, pointControle_[3].z);
-		glVertex3f(pointControle_[3].x, pointControle_[3].y - largeur_, pointControle_[3].z);
-		// mur p3p1
-		glVertex3f(pointControle_[3].x, pointControle_[3].y - largeur_, pointControle_[3].z);
-		glVertex3f(pointControle_[3].x, pointControle_[3].y, pointControle_[3].z);
-		glVertex3f(pointControle_[1].x, pointControle_[1].y, pointControle_[1].z);
-		glVertex3f(pointControle_[1].x, pointControle_[1].y - largeur_, pointControle_[1].z);		
-	}
-	glEnd();
+	
 	
 	
 	

@@ -76,7 +76,7 @@ public:
 private:
 
 	//la largueur des murs 
-	double largeur_{ 0.1 };
+	double largeur_{ 10 };
 	// la hauteur des murs 
 	double hauteur_{ 0.0 };
 	// la couleur de la table 
@@ -102,7 +102,7 @@ private:
 	*/
 
 	//pour obtenir p0, p1, ... des points de controle
-	glm::vec3 p(int i) const { return chercher(i)->obtenirPositionRelative();}
+	glm::vec3 p(int i) const { return chercher(i)->obtenirPositionRelative(); }
 
 	glm::vec3 pointControle_[8] = { 
 		{  -50,   50,  -0 },	//P0
