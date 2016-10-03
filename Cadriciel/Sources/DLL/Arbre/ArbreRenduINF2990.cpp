@@ -564,7 +564,8 @@ double ArbreRenduINF2990::getAngleDataBinding()
 		{
 			if (enfant->estSelectionne())
 			{
-				return enfant->getAngle();
+				 double angleDeg = utilitaire::RAD_TO_DEG( enfant->getAngle());
+				 return angleDeg;
 			}
 		}
 }

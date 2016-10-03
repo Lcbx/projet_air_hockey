@@ -15,11 +15,10 @@ namespace InterfaceGraphique
         public BoitePropriete()
         {
             InitializeComponent();
-            this.ControlBox = false;
+            //this.ControlBox = false;
             this.MinimizeBox = false;
             this.MaximizeBox = false;
 
-            label7.Hide();
         }
 
         private void label3_Click(object sender, EventArgs e)
