@@ -55,6 +55,12 @@
     <Filter Include="Source Files\Tests">
       <UniqueIdentifier>{d13df2a5-057c-4e3f-b7b4-d458ca9ae3b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Collision">
+      <UniqueIdentifier>{fb8be6a7-1b46-4c15-9ce0-c5819c0786a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Collision">
+      <UniqueIdentifier>{13bbe7ea-a117-4ff4-950d-08bd958cc530}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\FacadeModele.cpp">
@@ -167,6 +173,9 @@
     </ClCompile>
     <ClCompile Include="VisiteurPointMilieu.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BoiteCollision.cpp">
+      <Filter>Source Files\Collision</Filter>
     </ClCompile>
     <ClCompile Include="MiseEchelle.cpp">
       <Filter>Source Files\Application</Filter>
@@ -283,6 +292,12 @@
     </ClInclude>
     <ClInclude Include="Arbre\Noeuds\NoeudTable.h">
       <Filter>Header Files\Arbre\Noeuds</Filter>
+    </ClInclude>
+    <ClInclude Include="BoiteCollisionAbstraite.h">
+      <Filter>Header Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="BoiteCollision.h">
+      <Filter>Header Files\Collision</Filter>
     </ClInclude>
     <ClInclude Include="Arbre\Noeuds\NoeudPointControle.h">
       <Filter>Header Files\Arbre\Noeuds</Filter>

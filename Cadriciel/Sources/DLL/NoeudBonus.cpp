@@ -82,9 +82,47 @@ void NoeudBonus::afficherConcret(const glm::mat4& vueProjection) const
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudBonus::animer(float temps)
-{
+void NoeudBonus::animer(float temps) { }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void NoeudCube::animer(float temps)
+///
+/// Cette fonction effectue l'animation du noeud pour un certain
+/// intervalle de temps.
+///
+/// @param[in] temps : Intervalle de temps sur lequel faire l'animation.
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+math::Droite3D NoeudBonus::obtenirDroiteDirectrice() {
+	utilitaire::BoiteEnglobante box = utilitaire::calculerBoiteEnglobante(*this->modele_);
+	double rayon = max(abs(box.coinMax.x - box.coinMin.x), abs(box.coinMin.y - box.coinMax.y)) / 2;
+
+	glm::dvec3 scale = this->getScale();
+	glm::dvec3 left{ -(rayon + scale.x), 0, 0 };
+	glm::dvec3 right{ (rayon + scale.x), 0, 0 };
+
+	double angle = this->getAngle();
+
+	glm::dvec3 pos = this->obtenirPositionRelative();
+	left = utilitaire::rotater(left, angle) + pos;
+	right = utilitaire::rotater(right, angle) + pos;
+
+	math::Droite3D droite{ left, right };
+	return droite;
+}
+
+
+////////////////////////////////////////////////////////////////////////
+/// @fn double obtenirRayonModele()
+/// Permet d'obtenir le rayon minimal du modèle
+/// @return Le rayon du modèle
+////////////////////////////////////////////////////////////////////////
+double NoeudBonus::obtenirRayonModele() {
+	utilitaire::BoiteEnglobante a = utilitaire::calculerBoiteEnglobante(*modele_);
+	return min(abs(a.coinMax.x - a.coinMin.x), abs(a.coinMax.y - a.coinMin.y)) / 2;
 }
 
 ////////////////////////////////////////////////

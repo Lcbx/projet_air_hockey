@@ -39,6 +39,12 @@ public:
 	//Accepter le visiteur
 	virtual void accepter(Visiteur* v);
 
+	////////////////////////////////////////////////////////////////////////
+	/// @fn double NoeudPortail::obtenirRayon()
+	/// Permet d'obtenir le rayon de la forme en fonction du rayon du modèle
+	/// @return Le rayon de l'objet
+	////////////////////////////////////////////////////////////////////////
+	virtual double obtenirRayon() { return obtenirRayonModele() * getScale().x; };
 
 private:
 
