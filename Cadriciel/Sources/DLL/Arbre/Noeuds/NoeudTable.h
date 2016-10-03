@@ -43,11 +43,11 @@ public:
 	void tracerMurs() const; //tracer les murs autour de la table
 	void tracerButs() const; //tracer les buts
 	// Calcul la pente de la droite faite par 2 points 
-	double calculPente(glm::vec3 P0 , glm::vec3 P1);
+	double calculPente(glm::vec3 P0, glm::vec3 P1);
 	// fonctions get et set pour les points de controle de la table
 	// coordonnees point de controle
 	bool getPointControle(int numero, glm::vec3 & pointControle);
-	bool setPointControle(int numero,glm::vec3 pointControle);
+	bool setPointControle(int numero, glm::vec3 pointControle);
 	// couleur de la table
 	bool getCouleurTable(glm::vec4 & couleur);
 	bool setCouleurTable(glm::vec4 couleur);
@@ -63,7 +63,7 @@ public:
 	// couleur du contour autour de la zone du jeu
 	bool getCouleurContour(glm::vec4 & couleur);
 	bool setCouleurContour(glm::vec4 couleur);
-	
+
 	//determiner si dans la table
 	/// angle
 	double calculerAngle3D(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C);
@@ -74,21 +74,15 @@ public:
 	bool dansTable(glm::dvec3 M);
 
 private:
-	/// Angle selon l'axe des X.
-	float angleX_{ 0.f };
-	/// Angle selon l'axe des Y.
-	float angleY_{ 0.f };
-	/// Angle de rotation.
-	float angleRotation_{ 0.f };
-	
+
 	//la largueur des murs 
-	double largeur_{ 0.1 };
+	double largeur_{ 10 };
 	// la hauteur des murs 
 	double hauteur_{ 0.0 };
 	// la couleur de la table 
 	glm::vec4 couleurTable_ = { 1., 1., 1., 1. };
 	// la couleur des murs autour de la table
-	glm::vec4 couleurMurs_ = { 0.662745, 0.662745, 0.662745, 1.};
+	glm::vec4 couleurMurs_ = { 0.662745, 0.662745, 0.662745, 1. };
 	// la couleur des 2 buts 
 	glm::vec4 couleurButs_{ 0.,0.,1.,1. };
 	// la couleur des lignes sur le terrain
@@ -106,15 +100,19 @@ private:
 	|						 |
 	p1----------p3----------p5
 	*/
+
+	//pour obtenir p0, p1, ... des points de controle
+	glm::vec3 p(int i) const { return chercher(i)->obtenirPositionRelative(); }
+
 	glm::vec3 pointControle_[8] = { 
-		{ -.5,  .5,  -0.25 },	//P0
-		{ -.5, -.5,  -0.25 },	//P1
-		{  0.,  .5,  -0.25 },	//P2
-		{  0., -.5,  -0.25 },	//P3
-		{  .5,  .5,  -0.25 },	//P4
-		{  .5, -.5,  -0.25 },	//P5
-		{ -.5,  0.,  -0.25 },	//P6
-		{  .5,  0.,  -0.25 }	//P7
+		{  -50,   50,  -0 },	//P0
+		{  -50,  -50,  -0 },	//P1
+		{  0.,    50,  -0 },	//P2
+		{  0.,   -50,  -0 },	//P3
+		{  50,    50,  -0 },	//P4
+		{  50,   -50,  -0 },	//P5
+		{ -50,   0.,   -0 },	//P6
+		{  50,   0.,   -0 }		//P7
 	};
 
 };
