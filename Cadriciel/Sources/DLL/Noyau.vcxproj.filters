@@ -180,6 +180,9 @@
     <ClCompile Include="MiseEchelle.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
+    <ClCompile Include="Application\PointsControle.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\FacadeModele.h">
@@ -312,6 +315,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MiseEchelle.h">
+      <Filter>Header Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\PointsControle.h">
       <Filter>Header Files\Application</Filter>
     </ClInclude>
   </ItemGroup>
