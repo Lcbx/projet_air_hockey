@@ -65,7 +65,7 @@ void NoeudPointControle::afficherConcret(const glm::mat4& vueProjection) const
 	glm::vec3 coord3 = obtenirPositionRelative();
 		
 	//transformation en vec4 pour la multiplication
-	glm::vec4 coord4 = glm::vec4(coord_, 0) * vueProjection;
+	glm::vec4 coord4 = vueProjection * glm::vec4(coord3, 0);
 
 	glm::vec3 p0{ coord4.x - delta_ / 2,coord4.y + delta_ / 2, coord4.z };
 	glm::vec3 p1{ coord4.x - delta_ / 2,coord4.y - delta_ / 2, coord4.z };

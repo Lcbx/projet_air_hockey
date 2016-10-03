@@ -43,7 +43,7 @@ public:
 	void tracerMurs() const; //tracer les murs autour de la table
 	void tracerButs() const; //tracer les buts
 	// Calcul la pente de la droite faite par 2 points 
-	double calculPente(glm::vec3 P0 , glm::vec3 P1);
+	double calculPente(glm::vec3 P0, glm::vec3 P1);
 	// fonctions get et set pour les points de controle de la table
 	// coordonnees point de controle
 	bool getPointControle(int numero, glm::vec3 & pointControle);
@@ -63,7 +63,7 @@ public:
 	// couleur du contour autour de la zone du jeu
 	bool getCouleurContour(glm::vec4 & couleur);
 	bool setCouleurContour(glm::vec4 couleur);
-	
+
 	//determiner si dans la table
 	/// angle
 	double calculerAngle3D(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C);
@@ -82,7 +82,7 @@ private:
 	// la couleur de la table 
 	glm::vec4 couleurTable_ = { 1., 1., 1., 1. };
 	// la couleur des murs autour de la table
-	glm::vec4 couleurMurs_ = { 0.662745, 0.662745, 0.662745, 1.};
+	glm::vec4 couleurMurs_ = { 0.662745, 0.662745, 0.662745, 1. };
 	// la couleur des 2 buts 
 	glm::vec4 couleurButs_{ 0.,0.,1.,1. };
 	// la couleur des lignes sur le terrain
@@ -100,6 +100,10 @@ private:
 	|						 |
 	p1----------p3----------p5
 	*/
+
+	//pour obtenir p0, p1, ... des points de controle
+	glm::vec3 p(int i) const { return chercher(i)->obtenirPositionRelative();}
+
 	glm::vec3 pointControle_[8] = { 
 		{ -50,   50,  -0.25 },	//P0
 		{ -5,  -5,  -0.25 },	//P1
