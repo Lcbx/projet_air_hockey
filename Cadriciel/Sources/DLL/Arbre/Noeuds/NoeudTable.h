@@ -47,7 +47,7 @@ public:
 	// fonctions get et set pour les points de controle de la table
 	// coordonnees point de controle
 	bool getPointControle(int numero, glm::vec3 & pointControle);
-	bool setPointControle(int numero,glm::vec3 pointControle);
+	bool setPointControle(int numero, glm::vec3 pointControle);
 	// couleur de la table
 	bool getCouleurTable(glm::vec4 & couleur);
 	bool setCouleurTable(glm::vec4 couleur);
@@ -74,13 +74,7 @@ public:
 	bool dansTable(glm::dvec3 M);
 
 private:
-	/// Angle selon l'axe des X.
-	float angleX_{ 0.f };
-	/// Angle selon l'axe des Y.
-	float angleY_{ 0.f };
-	/// Angle de rotation.
-	float angleRotation_{ 0.f };
-	
+
 	//la largueur des murs 
 	double largeur_{ 0.1 };
 	// la hauteur des murs 
@@ -107,14 +101,14 @@ private:
 	p1----------p3----------p5
 	*/
 	glm::vec3 pointControle_[8] = { 
-		{ -.5,  .5,  -0.25 },	//P0
-		{ -.5, -.5,  -0.25 },	//P1
-		{  0.,  .5,  -0.25 },	//P2
-		{  0., -.5,  -0.25 },	//P3
-		{  .5,  .5,  -0.25 },	//P4
-		{  .5, -.5,  -0.25 },	//P5
-		{ -.5,  0.,  -0.25 },	//P6
-		{  .5,  0.,  -0.25 }	//P7
+		{ -5,   5,  -0.25 },	//P0
+		{ -5,  -5,  -0.25 },	//P1
+		{  0.,  5,  -0.25 },	//P2
+		{  0., -5,  -0.25 },	//P3
+		{  5,   5,  -0.25 },	//P4
+		{  5,  -5,  -0.25 },	//P5
+		{ -5,   0.,  -0.25 },	//P6
+		{  5,   0.,  -0.25 }	//P7
 	};
 
 };

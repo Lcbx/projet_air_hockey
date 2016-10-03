@@ -33,10 +33,9 @@
 NoeudTable::NoeudTable(const std::string& typeNoeud)
 	: NoeudComposite{ typeNoeud }
 {
-	// positionner les points de control selon la position relative
-	for (int i = 0 ; i <8; i++)
-		for (int j = 0; j <3; j++)
-			pointControle_[i][j] = obtenirPositionRelative().x + pointControle_[i][j];
+	for (int i = 0; i < obtenirNombreEnfants(); i++)
+		chercher(i)->assignerPositionRelative( pointControle_[i] );
+
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -68,14 +67,7 @@ void NoeudTable::afficherConcret(const glm::mat4& vueProjection) const
 {
 	// tracer la table en opengl
 	tracerTable();
-	
-	
-	//// Révolution autour du centre.
-	//auto modele = glm::rotate(transformationRelative_, angleRotation_, glm::vec3(0, 0, 1));
-	////// Affichage du modèle.
-	//vbo_->dessiner(vueProjection* modele);
-	//
-
+	NoeudComposite::afficherConcret(vueProjection);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -128,6 +120,7 @@ void NoeudTable::tracerTable() const
 	//	1.0,  // near
 	//	-1.0);  // far
 	
+
 	glPushMatrix();
 	glEnable(GL_NORMALIZE);
 	// Affichage du modèle.
@@ -140,53 +133,7 @@ void NoeudTable::tracerTable() const
 	// desactiver le test de profondeur
 	glDisable(GL_DEPTH_TEST);
 	
-	//quelques transformations bidons
-	//glTranslatef(-.5,-.5,0);
-	//glScaled(1.25, 1.25, 1.25);
 	
-	
-	
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-// tracage de la table avec les vao et les vbo -- pas fini! (on laisse tomber a l'instant)
-/////////////////////////////////////////////////////////////////////////////////////////////
-	//GLuint vao;
-	//GLuint vbo[2];
-	//// Charger le modele 
-	//// les sommets : 8 sommets * 3 coord.(x,y,z)
-	///*GLfloat sommets[] = { p0,p1,p2,p3,p4,p5,p6,p7 }; */
-	//GLfloat sommets[] = { -.8,0,0 , -.8,.4,0 , 0,.4,0 , .8,.4,0 , .8,0,0 , .8,-.4,0 , 0,-.4,0 , -.8,-.4,0  };
-	//// la connectivité : 6 faces * 3 indices
-	//GLuint connect[] = { 1,0,7, 3,2,1, 5,4,3, 5,6,7, 3,7,1, 3,7,5  }; 
-	///*GLuint connect[] = {3,7,1};*/
-	//GLfloat couleur[] = {1.,0.,0.};
-	//// allouer les objets openGL
-	//glGenVertexArrays(1,&vao);
-	//glGenBuffers(3, vbo);
-	////initialiser le vao
-	//glBindVertexArray(vao);
-	//// charger le vbo de sommets
-	//glBindBuffer(GL_ARRAY_BUFFER,vbo[0]);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(sommets), sommets, GL_STATIC_DRAW);
-	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	//glEnableVertexAttribArray(0);
-	//// charger le VBO pour les couleurs
-	//glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(couleur), couleur, GL_STATIC_DRAW);
-	//glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	//glEnableVertexAttribArray(3);
-	//// charger le VBO pour la connectivité
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo[2]);
-	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(connect), connect, GL_STATIC_DRAW);
-	//glBindVertexArray(0);
-	//// Défaire tous les liens
-	//glBindBuffer(GL_ARRAY_BUFFER, 0);
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	//glBindVertexArray(vao);         // sélectionner le second VAO
-	//glDrawElements(GL_TRIANGLES, 6*3, GL_UNSIGNED_INT, 0);
-	//glBindVertexArray(0);              // désélectionner le VAO
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
 
 #define p0 pointControle_[0].x, pointControle_[0].y, pointControle_[0].z
 #define p1 pointControle_[1].x, pointControle_[1].y, pointControle_[1].z
@@ -381,13 +328,6 @@ void NoeudTable::tracerButs() const
 	//double a60 = (pointControle_[0].y - pointControle_[6].y) / (pointControle_[0].x - pointControle_[6].x);
 	//double b60 = pointControle_[6].y - a60 * pointControle_[6].x;
 	double longueurP6P0 = sqrt(pow((pointControle_[0].x - pointControle_[6].x),2)+pow(pointControle_[0].y - pointControle_[6].y,2));
-	//double aPerp60 = -1/a60;
-	//
-	////std::cout << "longueur p0p6 = " << longueurP6P0 << std::endl;
-	//std::cout << "pente p0p6 = " << a60 << "pente perp "<<aPerp60<< std::endl;
-	//// pente de la droite p6p1
-	//double a61 = (pointControle_[1].y - pointControle_[6].y) / (pointControle_[1].x - pointControle_[6].x);
-	//double b61 = pointControle_[6].y - a61 * pointControle_[6].x;
 	
 	
 	glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);

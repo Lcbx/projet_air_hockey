@@ -61,8 +61,6 @@ public:
    void ArbreRenduINF2990::ajouterTable();
    // get le noeud table -- pas fini
    NoeudTable* ArbreRenduINF2990::getTable();
-   // get un point de controle -- pas implemente'
-   NoeudPointControle* ArbreRenduINF2990::getPointControle(int index);
 
    void ajouterBonus(glm::dvec3 position);
    void ajouterPortail(glm::dvec3 position);

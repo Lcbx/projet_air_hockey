@@ -37,15 +37,13 @@ public:
 	
 	//Accepter le visiteur
 	virtual void accepter(Visiteur* v);
-	//afficher le point de controle en openGL
-	void afficherPointControle() const;
+
 	// fonctions get et set des coordonnees et de la couleur du point
 	bool setCoord(glm::vec3 point);
 	bool getCoord(glm::vec3 & point);
 	bool setCouleur(glm::vec4 couleur);
 	bool getCouleur(glm::vec4 & couleur);
-	bool setIndex(int index);
-	bool getIndex(int & index);
+
 private:
 	// coordonnees du centre du point de control
 	glm::vec3 coord_{ 0.,0.,0. };
@@ -53,18 +51,6 @@ private:
 	glm::vec4 couleur_{ 0.,0.,1.,0. }; // couleur bleu par default
 	// la longueur du cote' du carre' du point de controle
 	double delta_{ 0.05 };
-	// ID du point de controle
-	int index_{ 0 };
-
-	/// Angle selon l'axe des X.
-	float angleX_{ 0.f };
-	/// Angle selon l'axe des Y.
-	float angleY_{ 0.f };
-	/// Angle de rotation.
-	float angleRotation_{ 0.f };
-
-
-
 };
 
 
