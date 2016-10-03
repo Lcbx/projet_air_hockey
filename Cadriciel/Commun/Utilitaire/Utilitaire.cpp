@@ -528,13 +528,13 @@ namespace utilitaire {
 	/// Cette fonction calcule la position d'un point pour un angle donné à l'origine
 	///
 	/// @param [in] point : Point à rotater
-	/// @param [in] angle : angle de rotation en degrés
+	/// @param [in] angle : angle de rotation en radian
 	///
 	/// @return Point résultant de la rotation 2D
 	///
 	////////////////////////////////////////////////////////////////////////
 	glm::dvec3 rotater(const glm::dvec3 &point, const double angle) {
-		double angleRad = DEG_TO_RAD(angle);
+		double angleRad = angle;// DEG_TO_RAD(angle);
 		glm::dvec3 resultat = { 
 			point.x * std::cos(angleRad) - point.y * std::sin(angleRad),
 			point.x * std::sin(angleRad) + point.y * std::cos(angleRad),

@@ -164,7 +164,7 @@ void VisiteurSelection::visiter(NoeudPortail* noeud) {
 
 	// TODO: Take into account transformations
 	glm::dvec3 centre = noeud->obtenirPositionRelative();
-	centre = centre + glm::dvec3{ 10,0,0 };
+	//centre = centre + glm::dvec3{ 10,0,0 };
 
 	// Distance minimale du point
 	for (int i = 0; i < pointsSize; i++) {

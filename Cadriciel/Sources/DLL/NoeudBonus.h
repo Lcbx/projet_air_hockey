@@ -42,6 +42,9 @@ public:
 
 	/// Permet d'obtenir la droite directrice du noeud bonus
 	math::Droite3D obtenirDroiteDirectrice();
+
+	///Permet d'obtenir le rayon minimal du modèle
+	virtual double obtenirRayonModele();
 };
 
 
