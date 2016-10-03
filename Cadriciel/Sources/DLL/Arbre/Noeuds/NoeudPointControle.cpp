@@ -113,36 +113,6 @@ void NoeudPointControle::accepter(Visiteur* v)
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn bool NoeudPointControle::getCoord(glm::vec3 & point)
-///
-/// Cette fonction permet d'obtenir les coordonnees du point de controle 
-///  @param[in] 
-///		point : la valeur du point de controle a recuperer
-/// @return bool
-///
-////////////////////////////////////////////////////////////////////////
-bool NoeudPointControle::getCoord(glm::vec3 & point)
-{
-	point = coord_;
-	return true;
-}
-////////////////////////////////////////////////////////////////////////
-///
-/// @fn bool NoeudPointControle::setCoord(glm::vec3 point)
-///
-/// Cette fonction permet de modifier les coordonnees du point de controle 
-///  @param[in] 
-///		point : la valeur du point de controle a modifier
-/// @return bool
-///
-////////////////////////////////////////////////////////////////////////
-bool NoeudPointControle::setCoord(glm::vec3 point)
-{
-	coord_ = point;
-	return true;
-}
-////////////////////////////////////////////////////////////////////////
-///
 /// @fn bool NoeudPointControle::setCouleur(glm::vec4 couleur)
 ///
 /// Cette fonction permet de modifier la couleur du point de controle

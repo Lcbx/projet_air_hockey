@@ -32,21 +32,18 @@ public:
 
 	/// Affiche le cube.
 	virtual void afficherConcret(const glm::mat4& vueProjection) const;
+
 	/// Effectue l'animation du cube.
 	virtual void animer(float temps);
 	
 	//Accepter le visiteur
 	virtual void accepter(Visiteur* v);
 
-	// fonctions get et set des coordonnees et de la couleur du point
-	bool setCoord(glm::vec3 point);
-	bool getCoord(glm::vec3 & point);
+	// fonctions get et set de la couleur du point
 	bool setCouleur(glm::vec4 couleur);
 	bool getCouleur(glm::vec4 & couleur);
 
 private:
-	// coordonnees du centre du point de control
-	glm::vec3 coord_{ 0.,0.,0. };
 	// la couleur du point de controle
 	glm::vec4 couleur_{ 0.,0.,1.,0. }; // couleur bleu par default
 	// la longueur du cote' du carre' du point de controle

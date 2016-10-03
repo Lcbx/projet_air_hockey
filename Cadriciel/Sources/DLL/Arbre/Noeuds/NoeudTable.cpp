@@ -614,10 +614,10 @@ bool NoeudTable::dansTable(glm::dvec3 M) {
 	p1----------p3----------p5
 	*/
 
-	return MdansTriangleABC(pointControle_[0], pointControle_[2], pointControle_[6], M)
-		|| MdansTriangleABC(pointControle_[1], pointControle_[3], pointControle_[6], M)
-		|| MdansTriangleABC(pointControle_[2], pointControle_[3], pointControle_[6], M)
-		|| MdansTriangleABC(pointControle_[2], pointControle_[3], pointControle_[7], M)
-		|| MdansTriangleABC(pointControle_[2], pointControle_[4], pointControle_[7], M)
-		|| MdansTriangleABC(pointControle_[3], pointControle_[5], pointControle_[7], M);
+	return MdansTriangleABC(p(0), p(2), p(6), M)
+		|| MdansTriangleABC(p(1), p(3), p(6), M)
+		|| MdansTriangleABC(p(2), p(3), p(6), M)
+		|| MdansTriangleABC(p(2), p(3), p(7), M)
+		|| MdansTriangleABC(p(2), p(4), p(7), M)
+		|| MdansTriangleABC(p(3), p(5), p(7), M);
 }
