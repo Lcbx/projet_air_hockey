@@ -66,22 +66,23 @@ void NoeudPointControle::afficherConcret(const glm::mat4& vueProjection) const
 
 	//position du point de controle
 	glm::vec3 coord3 = obtenirPositionRelative();
-		
-	//transformation en vec4 pour la multiplication
-	glm::vec4 coord4 = vueProjection * glm::vec4(coord3, 0);
+	
+	//multiplication
+#define PROJvec(arg)	glm::value_ptr(	glm::vec3(vueProjection * glm::vec4(arg, 0)))
 
-	glm::vec3 p0{ coord4.x - delta_ / 2,coord4.y + delta_ / 2, coord4.z };
-	glm::vec3 p1{ coord4.x - delta_ / 2,coord4.y - delta_ / 2, coord4.z };
-	glm::vec3 p2{ coord4.x + delta_ / 2,coord4.y - delta_ / 2, coord4.z };
-	glm::vec3 p3{ coord4.x + delta_ / 2,coord4.y + delta_ / 2, coord4.z };
+
+	glm::vec3 p0{ coord3.x - delta_ / 2, coord3.y + delta_ / 2, coord3.z };
+	glm::vec3 p1{ coord3.x - delta_ / 2, coord3.y - delta_ / 2, coord3.z };
+	glm::vec3 p2{ coord3.x + delta_ / 2, coord3.y - delta_ / 2, coord3.z };
+	glm::vec3 p3{ coord3.x + delta_ / 2, coord3.y + delta_ / 2, coord3.z };
 
 	glColor4fv(glm::value_ptr(couleur_));
 	glBegin(GL_QUADS);
 	{
-		glVertex3fv(glm::value_ptr(p0));
-		glVertex3fv(glm::value_ptr(p1));
-		glVertex3fv(glm::value_ptr(p2));
-		glVertex3fv(glm::value_ptr(p3));
+		glVertex3fv(PROJvec(p0));
+		glVertex3fv(PROJvec(p1));
+		glVertex3fv(PROJvec(p2));
+		glVertex3fv(PROJvec(p3));
 	}
 	glEnd();
 	glEnable(GL_TEXTURE_2D);
@@ -139,5 +140,34 @@ bool NoeudPointControle::setCouleur(glm::vec4 couleur)
 bool NoeudPointControle::getCouleur(glm::vec4 & couleur)
 {
 	couleur = couleur_;
+	return true;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudPointControle::setDelta(glm::vec4 & couleur)
+///
+/// Cette fonction permet de changer la taille du carré du point de controle
+///  @param[in] 
+///		delta : la valeur de delta
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool NoeudPointControle::setDelta(double delta) {
+	delta_ = delta;
+	return true;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudPointControle::getCouleur(glm::vec4 & couleur)
+///
+/// Cette fonction permet d'obtenir la taille du carré du point de controle
+///  @param[in] 
+///		delta : la valeur de delta
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool NoeudPointControle::getDelta(double& delta) {
+	delta = delta_;
 	return true;
 }

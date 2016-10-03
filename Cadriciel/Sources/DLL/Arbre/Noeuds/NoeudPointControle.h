@@ -39,15 +39,17 @@ public:
 	//Accepter le visiteur
 	virtual void accepter(Visiteur* v);
 
-	// fonctions get et set de la couleur du point
+	// fonctions get et set de la couleur du point et de sa taille
 	bool setCouleur(glm::vec4 couleur);
 	bool getCouleur(glm::vec4 & couleur);
+	bool setDelta(double delta);
+	bool getDelta(double& delta);
 
 private:
 	// la couleur du point de controle
 	glm::vec4 couleur_{ 0.,0.,1.,0. }; // couleur bleu par default
 	// la longueur du cote' du carre' du point de controle
-	double delta_{ 0.05 };
+	double delta_{ 5 };
 };
 
 

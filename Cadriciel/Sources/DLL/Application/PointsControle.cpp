@@ -14,15 +14,37 @@
 #include "../Arbre/Noeuds/NoeudTable.h"
 #include "../Vue/Vue.h"
 
+
 void PointsControle::start(int x, int y) {
-	//test du code de vérification de la table
-	glm::dvec3 nouvPoint(x, y, 0);  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, nouvPoint);
-	//std::cout << "click " << (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(nouvPoint) ? "dans La table\n" : " a l'exterieur de la table\n");
-	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->setPointControle(0,nouvPoint);
+
+	//conversion en coordonnees comme utilisees
+	glm::dvec3 pointClick(x, y, 0);  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, pointClick);
+
+	//evite de selectionner quelque chose qui ne l'est pas
+	noeud_ = PASDENOEUD;
+	
+	//la table
+	auto table = FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable();
+	
+	//on itere a travers ses enfants
+	for (int i = 0; i < table->obtenirNombreEnfants(); i++) {
+		//le point de controle etudie
+		auto Pcontrol = static_cast<NoeudPointControle*>(table->chercher(i));
+		//son delta
+		double delta; Pcontrol->getDelta(delta);
+		// si on est à la bonne distance, est selectionne
+		if (glm::distance(pointClick, glm::dvec3(Pcontrol->obtenirPositionRelative())) < 1, 2 * delta)
+			noeud_ = i;
+	}
 }
 
 void PointsControle::current(int x, int y) {
-
+	//si on a un noeud selectionné
+	if (noeud_ != PASDENOEUD) {
+		//on le met au point ou est la souris
+		glm::dvec3 pointClick(x, y, 0);  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, pointClick);
+		FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->chercher(noeud_)->assignerPositionRelative(pointClick);
+	}
 }
 
 void PointsControle::end(int x, int y) {
