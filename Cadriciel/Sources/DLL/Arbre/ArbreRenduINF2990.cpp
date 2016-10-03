@@ -123,7 +123,11 @@ void ArbreRenduINF2990::ajouterTable()
 	noeudTable_->ajouter(noeudPointControle5);
 	noeudTable_->ajouter(noeudPointControle6);
 	noeudTable_->ajouter(noeudPointControle7);
-
+	
+	//juste pour l'actualisation
+	glm::vec3 point;
+	noeudTable_->getPointControle(0, point);
+	noeudTable_->setPointControle(0, point);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -145,23 +149,6 @@ void ArbreRenduINF2990::initialiser()
 	std::cout << "Allo! je suis dans l'initialisation de l'arbre du rendu inf2990"<< std::endl;
 	// afficher la table avec les points de controles
 	ajouterTable();
-
-	///TODO
-	///Chabnger l'araignee par la table / cube par les buts
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////////
-	// test original d'affichage , les 2 objets arraignee et cubecone sont affiches
-	///////////////////////////////////////////////////////////////////////////////////////////////////////
-	//{
-	//	// On vide l'arbre
-	//	vider();
-	//	// On ajoute un noeud bidon seulement pour que quelque chose s'affiche.
-	//	NoeudAbstrait* noeudAraignee{ creerNoeud(NOM_ARAIGNEE) };
-	//	noeudAraignee->ajouter(creerNoeud(NOM_CONECUBE));
-	//	ajouter(noeudAraignee);
-	//}	
-	///////////////////////////////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -192,13 +179,10 @@ NoeudTable* ArbreRenduINF2990::getTable()
 
 void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos) 
 {
-
 	NoeudAbstrait* noeudBonus{ creerNoeud(NOM_BONUS) };
 	VisiteurAjout v1(pos);
 	noeudBonus->setScale({ 1, 1, 1 });
 	noeudBonus->accepter(&v1);
-
-
 }
 
 ////////////////////////////////////////////////////////////////////////

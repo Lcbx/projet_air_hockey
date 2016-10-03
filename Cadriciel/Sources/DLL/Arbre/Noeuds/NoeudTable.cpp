@@ -32,11 +32,7 @@
 ////////////////////////////////////////////////////////////////////////
 NoeudTable::NoeudTable(const std::string& typeNoeud)
 	: NoeudComposite{ typeNoeud }
-{
-	for (int i = 0; i < obtenirNombreEnfants(); i++)
-		chercher(i)->assignerPositionRelative( pointControle_[i] );
-
-}
+{}
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -436,6 +432,11 @@ bool NoeudTable::setPointControle(int numero, glm::vec3 pointControle)
 		return false;
 	else {
 		pointControle_[numero] = pointControle;
+		for (int i = 0; i < obtenirNombreEnfants(); i++) {
+			chercher(i)->assignerPositionRelative(pointControle_[i]);
+			std::cout << "enfant n" << i << "\n";
+		}
+			
 		return true;
 	}
 }
