@@ -76,16 +76,19 @@ public:
    // fonction de calcul valable pour les ligne et murs
    GLfloat calculerScale(glm::dvec3 pos, glm::dvec3 posf);
    double calculerAngle(glm::dvec3 pos, glm::dvec3 posf);
+   
+   //obtenir la position x d'un objet
    double getPosiX();
+   //obtenir la position y d'un objet
    double getPosiY();
-
-   void deplacerObjet(glm::dvec3 posDep, double angle);
-
-
+   //configurer un objet 
+   void deplacerObjet(glm::dvec3 posDep, double angle, double scale);
+   //retourner le nombre d'objets selectionnées sur la table 
    int obtenirNombreObjetSelctionnes();
-
-
+   //obtenir l'angle d'un objet selectionné
    double getAngleDataBinding();
+   //obtenir le scale d'un objet selectionne
+   double getScaleDataBinding();
 
 private :
 	NoeudTable* noeudTable_;

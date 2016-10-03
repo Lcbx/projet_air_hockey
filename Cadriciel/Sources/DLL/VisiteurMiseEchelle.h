@@ -23,6 +23,9 @@ class VisiteurMiseEchelle : public Visiteur
 {
 public:
 
+	VisiteurMiseEchelle();
+
+	void mettreEchelle(float facteur);
 
 	virtual void visiter(NoeudAbstrait* noeud);
 	virtual void visiter(NoeudComposite *noeud);
@@ -33,6 +36,9 @@ public:
 	virtual void visiter(NoeudBonus* noeud);
 	virtual void visiter(NoeudMaillet* noeud);
 	virtual void visiter(NoeudPortail* noeud);
+
+
+	float facteur_;
 
 };
 #endif

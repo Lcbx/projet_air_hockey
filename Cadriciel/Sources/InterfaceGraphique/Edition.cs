@@ -26,11 +26,18 @@ namespace InterfaceGraphique
 
         public Edition()
         {
+            this.KeyPreview = true;
             (this as Control).KeyDown += new KeyEventHandler(keyDownHandler);
             (this as Control).KeyUp += new KeyEventHandler(keyUpHandler);
             InitializeComponent();
             InitialiserAnimation();
             supprimerToolStripMenuItem.Enabled = false;
+
+            textBox1.Enabled = false;
+            textBox2.Enabled = false;
+            textBox3.Enabled = false;
+            textBox4.Enabled = false;
+            label6.Show();
 
         }
 
@@ -177,8 +184,8 @@ namespace InterfaceGraphique
                     case Etats.AJOUT_ACCELERATEUR: {    text = "ajout bonus";       break; }
                     case Etats.AJOUT_MUR: {             text = "ajout mur";         break; }
                     case Etats.AJOUT_PORTAIL: {         text = "ajout portail";     break; }
-                    case Etats.MISEAECHELLE:  {         text = "ajout portail";     break; }
-                    case Etats.POINTSDECONTROLE: {      text = "ajout portail";     break; }
+                    case Etats.MISEAECHELLE:  {         text = "mise a echelle";     break; }
+                    case Etats.POINTSDECONTROLE: {      text = "points de controle"; break; }
                     default: break;
                 }
                 System.Console.WriteLine(text);
@@ -214,7 +221,7 @@ namespace InterfaceGraphique
             Program.peutAfficher = true;
             mousePressed = false;
 
-            mettreAjourPos();
+          //  mettreAjourPos();
             if (EtatSouris == Etats.SELECTION)
             {
                 mettreAjourPos();
@@ -375,20 +382,7 @@ namespace InterfaceGraphique
         {
             return (valeur >= borneMin) && (valeur <= borneMax);
         }
-      
-       
-
-   
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
+     
 
         private void éditionToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -423,36 +417,42 @@ namespace InterfaceGraphique
         {
             if (FonctionsNatives.nombreObjetSelectionne() == 1)
             {
-                boiteProp.textBox1.Enabled = true;
-                boiteProp.textBox2.Enabled = true;
-                boiteProp.textBox3.Enabled = true;
-               // boiteProp.Show();
+                textBox1.Enabled = true;
+                textBox2.Enabled = true;
+                textBox3.Enabled = true;
+                textBox4.Enabled = true;
+                label6.Hide();
 
                 //Position en X
                 double posX = (FonctionsNatives.getPosX());
                 posX = Math.Round(posX, 2); //arrondi la position 
-                boiteProp.textBox1.Text = posX.ToString();
+                textBox1.Text = posX.ToString();
 
                 //Position Y
                 double posY = (FonctionsNatives.getPosY());
                 posY = Math.Round(posY, 2); //arrondi la position 
-                boiteProp.textBox2.Text = posY.ToString();
+                textBox2.Text = posY.ToString();
 
                 //Angle
                 double angle = (FonctionsNatives.getAngle());
                 angle = Math.Round(angle, 2);
-                boiteProp.textBox3.Text = angle.ToString();
+                textBox3.Text = angle.ToString();
+
+                //Scale
+                double scale = (FonctionsNatives.getScale());
+                scale = Math.Round(scale, 2);
+                textBox4.Text = scale.ToString();
+
             }
             else
             {
-                boiteProp.textBox1.Enabled = false;
-                boiteProp.textBox2.Enabled = false;
-                boiteProp.textBox3.Enabled = false;
+                textBox1.Enabled = false;
+                textBox2.Enabled = false;
+                textBox3.Enabled = false;
+                textBox4.Enabled = false;
 
-                // boiteProp.label7.Show();
-                //boiteProp.textBox1.Text = " ";
-                //boiteProp.textBox2.Text = " ";
-
+                label6.Show();
+                
             }
         }
 
@@ -520,6 +520,21 @@ namespace InterfaceGraphique
             this.changerMode(Etats.POINTSDECONTROLE);
         }
 
+        //button ok 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            double x = Convert.ToDouble(textBox1.Text);
+            double y = Convert.ToDouble(textBox2.Text);
+            double angle = Convert.ToDouble(textBox3.Text);
+            double scale = Convert.ToDouble(textBox4.Text);
+
+            //assigner les nouvelles valeurs
+            FonctionsNatives.configurerObjet(x, y, angle, scale);
+        }
+
+
+        
+      
         private void aideToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BoiteAide helpbox = new BoiteAide();
@@ -591,7 +606,7 @@ namespace InterfaceGraphique
 
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void deplacerObjet(double x, double y, double angle);
+        public static extern void configurerObjet(double x, double y, double angle, double scale);
 
         // Pour touche +
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -619,5 +634,9 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern double getAngle();
+
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern double getScale();
     }
 }

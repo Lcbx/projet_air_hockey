@@ -99,7 +99,7 @@ public:
 	void effacerObjet();
 
 	//deplacer un objet a partir des coordonnes de la boite de configuration
-	void deplacerObjet(double x, double y, double angle);
+	void deplacerObjet(double x, double y, double angle, double scale);
 
 
 	//retourner le nombre d'objet selectionne
@@ -109,7 +109,8 @@ public:
 	//obtenir l'angle d'un objet
 	double getAngle();
 
-
+	//obtenir le scale d'un objet 
+	double getScale();
 
 private:
 

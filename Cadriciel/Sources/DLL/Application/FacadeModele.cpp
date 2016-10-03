@@ -482,13 +482,16 @@ void FacadeModele::effacerObjet()
 /// @return rien.
 ///
 ////////////////////////////////////////////////////////////////////////
-void FacadeModele::deplacerObjet(double x, double y, double angle)
+void FacadeModele::deplacerObjet(double x, double y, double angle, double scale)
 {
-	glm::dvec3 NouvPos{x, y, 0.f};
-
-	arbre_->deplacerObjet(NouvPos, angle);
+	glm::dvec3 NouvPos{x, y, 0.f}; //la nouvelle position a assigner
+	double nvAngle= utilitaire::DEG_TO_RAD(angle); //conversion degre en rad 
+	arbre_->deplacerObjet(NouvPos, nvAngle, scale);
 
 }
+
+
+
 
 // fonction bidon test
 void FacadeModele::test() {
@@ -557,4 +560,21 @@ double FacadeModele::getAngle()
 	return arbre_->getAngleDataBinding();
 }
 
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn double FacadeModele::getScale()
+///
+/// Cette fonction permet de retourner le scale d'un objet
+/// 
+/// @param[in] rien
+///
+/// @return le scale d'un objet
+///
+////////////////////////////////////////////////////////////////////////
+double FacadeModele::getScale()
+{
+	return arbre_->getScaleDataBinding();
+
+}
 

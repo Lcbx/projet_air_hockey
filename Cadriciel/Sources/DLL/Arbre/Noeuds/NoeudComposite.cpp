@@ -13,6 +13,7 @@
 
 
 #include <../Visiteur.h>
+#include <../VisiteurMiseEchelle.h>
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -302,7 +303,9 @@ void NoeudComposite::effacerSelection()
 	for (NoeudAbstrait * enfant : enfants_) {
 		if (enfant->obtenirType() == "portail" && enfant->getFrere() != NULL)
 		{
-			enfant->getFrere()->assignerSelection(true);
+			if (enfant->estSelectionne() == true) {
+				enfant->getFrere()->assignerSelection(true);
+			}
 		}
 	}
 
@@ -506,4 +509,5 @@ void NoeudComposite::animer(float dt)
 void NoeudComposite::accepter(Visiteur* v)
 {
 		v->visiter(this);
+
 }

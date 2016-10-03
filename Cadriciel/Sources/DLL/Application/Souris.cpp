@@ -18,6 +18,7 @@
 #include "Rotation.h"
 #include "Loupe.h"
 #include "Deplacement.h"
+#include "../MiseEchelle.h"
 
 #include "FacadeModele.h"
 #include "../Arbre/ArbreRenduINF2990.h"
@@ -60,7 +61,8 @@ void Souris::creerStrategie(){
 	case AJOUT_ACCELERATEUR: {	notreStrategie_ = new AjoutAccelerateur; break; }
 	case AJOUT_MUR: {			notreStrategie_ = new AjoutMur; break; }
 	case AJOUT_PORTAIL: {		notreStrategie_ = new AjoutPortail; break; }
-	default: {	std::cout << "strategie non définie dans Souris.cpp"; notreStrategie_ = new Selection; break;  }
+	case MISEAECHELLE: {		notreStrategie_ = new MiseEchelle; break; }
+	default: {	throw("Souris::strategie inconnue demandee"); break;  }
 	}
 }
 
