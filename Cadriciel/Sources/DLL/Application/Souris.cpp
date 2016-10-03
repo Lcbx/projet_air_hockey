@@ -74,7 +74,7 @@ void Souris::startClick(int x, int y) {
 
 	//test du code de vérification de la table
 	glm::dvec3 nouvPoint (x, y, 0);  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, nouvPoint);
-	std::cout << "click " << nouvPoint.x << "\t" << nouvPoint.y << "\t" << nouvPoint.z << (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(nouvPoint) ? " dans La table\n" : " a l'exterieur de la table\n");
+	std::cout << "click " << nouvPoint.x << " " << nouvPoint.y << " " << nouvPoint.z << (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(nouvPoint) ? " dans La table\n" : " a l'exterieur de la table\n");
 	//FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->setPointControle(0,nouvPoint);
 
 
