@@ -71,15 +71,10 @@ void NoeudTable::afficherConcret(const glm::mat4& vueProjection) const
 	//	1.0,  // near
 	//	-1.0);  // far
 
-	glPushMatrix();
-	glEnable(GL_NORMALIZE);
-	// Affichage du modèle.
-	glMatrixMode(GL_MODELVIEW);
+
 	glLoadIdentity();
 	// deactiver les textures (la table ne prend plus la texture des autres noeuds)
 	glDisable(GL_TEXTURE_2D);
-	// deactiver les lumieres
-	glDisable(GL_LIGHTING);
 	// desactiver le test de profondeur
 	glDisable(GL_DEPTH_TEST);
 
@@ -173,7 +168,6 @@ void NoeudTable::afficherConcret(const glm::mat4& vueProjection) const
 	glEnable(GL_DEPTH_TEST);
 	// activer le test de profondeur
 	glEnable(GL_TEXTURE_2D);
-	glPopMatrix();
 
 	//pour afficher les noeuds composites
 	NoeudComposite::afficherConcret(vueProjection);
@@ -436,9 +430,10 @@ bool NoeudTable::setPointControle(int numero, glm::vec3 pointControle)
 		return false;
 	else {
 		pointControle_[numero] = pointControle;
+
 		for (int i = 0; i < obtenirNombreEnfants(); i++) {
 			chercher(i)->assignerPositionRelative(pointControle_[i]);
-			std::cout << "enfant n" << i << "\n";
+			std::cout << "enfant n" << i << p(i).x << " " << p(i).y  << " " << p(i).z << "\n";
 		}
 			
 		return true;

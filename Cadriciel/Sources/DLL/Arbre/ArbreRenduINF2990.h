@@ -90,7 +90,6 @@ public:
 
 private :
 	NoeudTable* noeudTable_;
-	NoeudPointControle* noeudPointControle_[8];
 };
 
 
