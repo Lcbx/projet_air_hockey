@@ -25,6 +25,7 @@ public:
 	void endClick(int x, int y);			//les coordonnees du mouse_up
 	void sourisPostition(int x, int y);		//position de la souris hors d'un click
 	void EtatdelaSouris(int etat);			//operation en cours
+	void clickRight(bool presse);			//change le type de clic (bouge la vue)
 	void setControl(bool presse);			//change l'etat de la touche control
 	bool getControl();						//donne l'etat de la touche control
 	void setAlt(bool presse);			    //change l'etat de la touche alt
@@ -37,7 +38,8 @@ private:
 	static Souris* instance_;				//singleton
 	StrategieSouris* notreStrategie_;		//strategie
 	Etats etatSouris = SELECTION;			//type d'operation en cours
-	void creerStrategie();					//actualise la strategie en cours
+	void creerStrategie();					//actualise la strategie en 
+	bool boutonDroit_ = false; 						//bouton droit enfonce
 	bool control_ = false;					//touche control enfoncee
 	bool alt_ = false;					    //touche alt enfoncee
 	glm::ivec4 position_;					//position de Click courante

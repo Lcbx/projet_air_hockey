@@ -20,7 +20,6 @@ extern "C" {
 	__declspec(dllexport) void zoomOut();
 	__declspec(dllexport) int obtenirAffichagesParSeconde();
 	__declspec(dllexport) bool executerTests();
-	__declspec(dllexport) void ajouterBonus(int x, int y);
 	
 	
 	
@@ -49,6 +48,7 @@ extern "C" {
 	__declspec(dllexport) void clickEnd(int x, int y);
 	__declspec(dllexport) void etatDelaSouris(int etat);
 	__declspec(dllexport) void positionSouris(int x, int y);
+	__declspec(dllexport) void rightClick(bool presse);
 	//touche control
 	__declspec(dllexport) void toucheControl(bool presse);
 	//touche alt

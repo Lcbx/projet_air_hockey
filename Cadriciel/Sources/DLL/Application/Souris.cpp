@@ -60,28 +60,60 @@ void Souris::creerStrategie(){
 	case AJOUT_ACCELERATEUR: {	notreStrategie_ = new AjoutAccelerateur; break; }
 	case AJOUT_MUR: {			notreStrategie_ = new AjoutMur; break; }
 	case AJOUT_PORTAIL: {		notreStrategie_ = new AjoutPortail; break; }
-	default: {	throw("Souris::strategie inconnue demandee"); break;  }
+	default: {	std::cout << "strategie non définie dans Souris.cpp"; notreStrategie_ = new Selection; break;  }
 	}
 }
 
 
 void Souris::startClick(int x, int y) {
+
+	//test du code de vérification de la table
 	glm::dvec3 nouvPoint (x, y, 0);  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, nouvPoint);
 	std::cout << "click " << (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(nouvPoint) ? "dans La table\n" : " a l'exterieur de la table\n");
 	//FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->setPointControle(0,nouvPoint);
-	notreStrategie_->start(x, y);
+
+
+	if (!boutonDroit_) notreStrategie_->start(x, y);
+	else {
+		//traitement du bouton droit
+		std::cout << "debut click droit\n";
+
+
+	}
 }
 
 void Souris::currentClick(int x, int y) {
-	notreStrategie_->current( x, y);
+	if(!boutonDroit_) notreStrategie_->current( x, y);
+	else {
+		//traitement du bouton droit
+		//std::cout << "pendant click droit\n";
+
+
+	}
 }
 
 void Souris::endClick(int x, int y) {
-	notreStrategie_->end(x, y);
+	if (!boutonDroit_) notreStrategie_->end(x, y);
+	else {
+		//traitement du bouton droit
+		std::cout << "fin click droit\n";
+
+
+	}
 }
 
 void Souris::sourisPostition(int x, int y) {
-	notreStrategie_->position(x, y);
+	if (!boutonDroit_) notreStrategie_->position(x, y);
+	else {
+		//traitement du bouton droit
+		//std::cout << "en dehors du click droit\n;
+
+		
+	}
+}
+
+void Souris::clickRight(bool presse) {
+	boutonDroit_ = presse;
 }
 
 void Souris::setControl(bool presse) {

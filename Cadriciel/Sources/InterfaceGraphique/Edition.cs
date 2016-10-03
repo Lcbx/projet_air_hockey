@@ -166,8 +166,6 @@ namespace InterfaceGraphique
         {
             if (EtatSouris != nouvelEtat)
             {
-                EtatSouris = nouvelEtat;
-                FonctionsNatives.etatDelaSouris((int)EtatSouris);
                 string text = "";
                 switch (EtatSouris)
                 {
@@ -176,32 +174,43 @@ namespace InterfaceGraphique
                     case Etats.DEPLACEMENT: {           text = "deplacement";       break; }
                     case Etats.ROTATION: {              text = "rotation";          break; }
                     case Etats.DUPLICATION: {           text = "duplication";       break; }
-                    case Etats.AJOUT_ACCELERATEUR: {    text = "ajout accelerateur"; break; }
+                    case Etats.AJOUT_ACCELERATEUR: {    text = "ajout bonus";       break; }
                     case Etats.AJOUT_MUR: {             text = "ajout mur";         break; }
                     case Etats.AJOUT_PORTAIL: {         text = "ajout portail";     break; }
+                    case Etats.MISEAECHELLE:  {         text = "ajout portail";     break; }
+                    case Etats.POINTSDECONTROLE: {      text = "ajout portail";     break; }
                     default: break;
                 }
                 System.Console.WriteLine(text);
+                EtatSouris = nouvelEtat;
+                FonctionsNatives.etatDelaSouris((int)EtatSouris);
             }
         }
 
         public void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             System.Console.WriteLine("Souris down : X = " + e.X + " et Y = " + e.Y);
-            FonctionsNatives.clickStart(e.X, e.Y);
-          
-            if (EtatSouris == Etats.SELECTION || EtatSouris == Etats.LOUPE)
+
+            if (e.Button == System.Windows.Forms.MouseButtons.Right) FonctionsNatives.rightClick(true);
+            else if (EtatSouris == Etats.SELECTION || EtatSouris == Etats.LOUPE)
             {
                 Program.peutAfficher = false;
-          
             }
+            FonctionsNatives.clickStart(e.X, e.Y);
+
+
 
             mousePressed = true;
         }
+
         public void panel1_MouseUp(object sender, MouseEventArgs e)
         {
             System.Console.WriteLine("Souris up : X = " + e.X + " et Y = " + e.Y);
+
             FonctionsNatives.clickEnd(e.X, e.Y);
+
+            if (e.Button == System.Windows.Forms.MouseButtons.Right) FonctionsNatives.rightClick(false);
+
             Program.peutAfficher = true;
             mousePressed = false;
 
@@ -210,14 +219,18 @@ namespace InterfaceGraphique
             {
                 mettreAjourPos();
             }
-
-
         }
+
         public void Edition_MouseMove(object sender, MouseEventArgs e)
         {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right) FonctionsNatives.rightClick(true);
+            else FonctionsNatives.rightClick(false);
+
             if (mousePressed) FonctionsNatives.clickCurrent(e.X, e.Y);
             else FonctionsNatives.positionSouris(e.X, e.Y);
+
             x = e.X; y = e.Y;
+
         }
 
 
@@ -547,6 +560,9 @@ namespace InterfaceGraphique
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void positionSouris(int x, int y);
 
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void rightClick(bool presse);
+
         //touche control
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void toucheControl(bool presse);
@@ -559,17 +575,6 @@ namespace InterfaceGraphique
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void escEnfonce();
 
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void ajouterPortail(int x1, int y1);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void ajouterPortailDeux(int x2, int y2);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void ajouterMuret(int x1, int y1, int x2, int y2);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void ajouterMuretFantome(int corXin, int corYin, int corX, int corY);
 
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
