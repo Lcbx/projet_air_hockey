@@ -7,6 +7,8 @@
 /// @addtogroup inf2990 INF2990
 /// @{
 ///////////////////////////////////////////////////////////////////////////////
+#pragma once
+
 #ifndef __ARBRE_NOEUDS_NOEUDABSTRAIT_H__
 #define __ARBRE_NOEUDS_NOEUDABSTRAIT_H__
 
@@ -176,8 +178,8 @@ public:
 
 
 	// set  du scale et angle
-	inline void setAngle(float angle);
-	inline void setScale(const glm::dvec3& scale);
+	virtual void setAngle(float angle);
+	virtual void setScale(const glm::dvec3& scale);
 	
 	//get du scale et angle
 	inline float getAngle()const;
@@ -485,13 +487,21 @@ inline void NoeudAbstrait::assignerObjetRendu(modele::Modele3D const* modele, op
 }
 
 
-// set  du scale et angle
-inline void NoeudAbstrait::setAngle(float angle)
-{
+////////////////////////////////////////////////////////////////////////
+/// @fn void NoeudAbstrait::setAngle(float angle)
+/// Permet de changer l'angle de rotation de l'objet
+/// @param[in] angle : Angle de rotation par rapport à l'axe des X
+////////////////////////////////////////////////////////////////////////
+inline void NoeudAbstrait::setAngle(float angle) {
 	angleRotation_ = angle;
 }
-inline void NoeudAbstrait::setScale(const glm::dvec3& scale)
-{
+
+////////////////////////////////////////////////////////////////////////
+/// @fn void NoeudAbstrait::setScale(const glm::dvec3& scale) 
+/// Permet de changer le redimensionnement de l'objet
+/// @param[in] scale : Vecteur contenant l'ensemble des redimensionnements en X, Y et Z
+////////////////////////////////////////////////////////////////////////
+inline void NoeudAbstrait::setScale(const glm::dvec3& scale) {
 	scale_ = scale;
 }
 

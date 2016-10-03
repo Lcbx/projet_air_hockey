@@ -46,6 +46,10 @@ public:
 	///Permet d'obtenir la droite directrice du muret
 	virtual math::Droite3D obtenirDroiteDirectrice();
 		
+	///Permet de changer le redimensionnement du muret
+	virtual void setScale(const glm::dvec3& scale) {
+		scale_ = { scale.x, 2.0, 2.0 };
+	};
 
 	///Permet d'obtenir le rayon minimal du modèle
 	virtual double obtenirRayonModele();
@@ -69,4 +73,3 @@ private:
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
 ///////////////////////////////////////////////////////////////////////////////
-
