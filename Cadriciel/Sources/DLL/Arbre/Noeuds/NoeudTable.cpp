@@ -62,8 +62,27 @@ NoeudTable::~NoeudTable()
 void NoeudTable::afficherConcret(const glm::mat4& vueProjection) const
 {
 
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
+	//glOrtho(0.0,// left
+	//	1.0,   // right
+	//	0.0,   // bottom
+	//	1.0,   // top
+	//	1.0,  // near
+	//	-1.0);  // far
+
+	glPushMatrix();
+	glEnable(GL_NORMALIZE);
+	// Affichage du modèle.
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	// deactiver les textures (la table ne prend plus la texture des autres noeuds)
+	glDisable(GL_TEXTURE_2D);
+	// deactiver les lumieres
+	glDisable(GL_LIGHTING);
 	// desactiver le test de profondeur
 	glDisable(GL_DEPTH_TEST);
+
 
 	//multiplication par la matrice de proj
 #define PROJ(arg) glm::value_ptr(glm::vec3(vueProjection * glm::vec4(p(arg), 0)))
@@ -153,6 +172,8 @@ void NoeudTable::afficherConcret(const glm::mat4& vueProjection) const
 	//Activer le test de profondeur
 	glEnable(GL_DEPTH_TEST);
 	// activer le test de profondeur
+	glEnable(GL_TEXTURE_2D);
+	glPopMatrix();
 
 	//pour afficher les noeuds composites
 	NoeudComposite::afficherConcret(vueProjection);
