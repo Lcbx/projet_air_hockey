@@ -433,7 +433,7 @@ bool NoeudTable::setPointControle(int numero, glm::vec3 pointControle)
 
 		for (int i = 0; i < obtenirNombreEnfants(); i++) {
 			chercher(i)->assignerPositionRelative(pointControle_[i]);
-			std::cout << "enfant n" << i << p(i).x << " " << p(i).y  << " " << p(i).z << "\n";
+			std::cout << "enfant n" << i << "\t" <<p(i).x << "\t" << p(i).y  << "\t" << p(i).z << "\n";
 		}
 			
 		return true;
@@ -597,7 +597,7 @@ bool NoeudTable::MdansTriangleABC(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C, glm:
 	// -> M est dans ABC si la somme des angles AMC+AMB+BMC == 360
 	if (M == A || M == B || M == C) return true;
 	double angleTot = calculerAngle2D(A, M, B) + calculerAngle2D(B, M, C) + calculerAngle2D(C, M, A);
-	bool reponse = glm::degrees(angleTot) == 360;
+	bool reponse = glm::round(glm::degrees(angleTot)) == 360;
 	return reponse;
 }
 
