@@ -382,7 +382,10 @@ void ArbreRenduINF2990::ajouterMuret(glm::dvec3 position1, glm::dvec3 position2)
 
 	Visiteur* v1 = new VisiteurAjout(glm::dvec3{ (position2.x + position1.x) / 2.0, (position2.y + position1.y) / 2.0, 0.0 });
 	
-	noeudMuret->setScale({ calculerScale(position1, position2), 2, 2 });
+	utilitaire::BoiteEnglobante boudingBox = utilitaire::calculerBoiteEnglobante(*noeudMuret->getModele());
+	int sizeModelX = std::abs(boudingBox.coinMax.x - boudingBox.coinMin.x) / 2;
+
+	noeudMuret->setScale({ calculerScale(position1, position2) / sizeModelX, 2, 2 });
 	
 	noeudMuret->setAngle(calculerAngle(position1, position2));
 	noeudMuret->accepter(v1);
@@ -430,20 +433,13 @@ double ArbreRenduINF2990::calculerAngle(glm::dvec3 pos, glm::dvec3 posf)
 
 	angle = glm::degrees(atan(sqrt(pow((double)((posf.y - pos.y) / (posf.x - pos.x)), 2.0))));
 
-	if (pos.x > posf.x && posf.y > pos.y)
-	{
+	if (pos.x > posf.x && posf.y > pos.y) {
 		angle = 180 - angle;
+	} else if (pos.x > posf.x && posf.y < pos.y) {
+		angle -= 180;
+	} else if (pos.x < posf.x && posf.y < pos.y) {
+		angle *= -1;
 	}
-	else
-		if (pos.x > posf.x && posf.y < pos.y)
-		{
-			angle -= 180;
-		}
-		else
-			if (pos.x < posf.x && posf.y < pos.y)
-			{
-				angle *= -1;
-			}
 	return angle;
 }
 

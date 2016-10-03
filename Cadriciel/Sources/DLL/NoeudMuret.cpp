@@ -93,9 +93,86 @@ void NoeudMuret::animer(float temps)
 }
 
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn BoiteCollision obtenirBoiteCollision()
+///
+/// Cette fonction permet d'obtenir la boîte de collision du muret
+///
+/// @param[in] temps : Intervalle de temps sur lequel faire l'animation.
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+/*BoiteCollision NoeudMuret::obtenirBoiteCollision() {
+	utilitaire::BoiteEnglobante boudingBox = utilitaire::calculerBoiteEnglobante(*modele_);
+
+	// Initialisation des différents points
+	glm::dvec3 scale = this->getScale();
+	glm::dvec3 topLeft { - boudingBox.coinMin.x * scale.x, boudingBox.coinMax.y * scale.y, 0 };
+	glm::dvec3 bottomLeft { - boudingBox.coinMin.x * scale.x, - boudingBox.coinMin.y * scale.y, 0 };
+	glm::dvec3 topRight { boudingBox.coinMax.x * scale.x, boudingBox.coinMax.y * scale.y, 0 };
+	glm::dvec3 bottomRight { boudingBox.coinMax.x * scale.x, - boudingBox.coinMin.y * scale.y, 0};
+
+	// Points tournés
+	double angle = this->getAngle();
+	topLeft = utilitaire::rotater(topLeft, angle);
+	bottomLeft = utilitaire::rotater(bottomLeft, angle);
+	topRight = utilitaire::rotater(topRight, angle);
+	bottomRight = utilitaire::rotater(bottomRight, angle);
+
+	// Repositionnement absolu
+	topLeft += this->obtenirPositionRelative() - glm::vec3(-10, 0, 0); // -10x pour la translation de correction
+	bottomLeft += this->obtenirPositionRelative() - glm::vec3(-10, 0, 0);
+	topRight += this->obtenirPositionRelative() - glm::vec3(-10, 0, 0);
+	bottomRight += this->obtenirPositionRelative() - glm::vec3(-10, 0, 0);
+
+	math::Droite3D left(bottomLeft, topLeft);
+	math::Droite3D top(topLeft, topRight);
+	math::Droite3D right(topRight, bottomRight);
+	math::Droite3D bottom(bottomRight, bottomLeft);
+	std::vector<math::Droite3D> segments({ left, top, right, bottom });
+	BoiteCollision collidingBox(segments);
+
+	return collidingBox;
+}*/
+
+////////////////////////////////////////////////////////////////////////
+/// @fn math::Droite3D obtenirDroiteDirectrice()
+/// Permet d'obtenir la droite directrice du muret
+/// @return La droite directrice du muret
+////////////////////////////////////////////////////////////////////////
+math::Droite3D NoeudMuret::obtenirDroiteDirectrice() {
+	utilitaire::BoiteEnglobante box = utilitaire::calculerBoiteEnglobante(*this->modele_);
+	double rayon = max(abs(box.coinMax.x - box.coinMin.x), abs(box.coinMin.y - box.coinMax.y)) / 2;
+
+	glm::dvec3 scale = this->getScale();
+	glm::dvec3 left { -(rayon + scale.x) + rayon, 0, 0 }; // + rayon pour corriger boite selection
+	glm::dvec3 right{ (rayon + scale.x) - rayon, 0, 0 };  // - rayon ... idem
+
+	double angle = this->getAngle();
+
+	glm::dvec3 pos = this->obtenirPositionRelative();
+	left = utilitaire::rotater(left, angle) + pos;
+	right = utilitaire::rotater(right, angle) + pos;
+
+	math::Droite3D droite{ left, right};
+	return droite;
+}
+
+
+////////////////////////////////////////////////////////////////////////
+/// @fn double obtenirRayonModele()
+/// Permet d'obtenir le rayon minimal du modèle
+/// @return Le rayon du modèle
+////////////////////////////////////////////////////////////////////////
+double NoeudMuret::obtenirRayonModele() {
+	utilitaire::BoiteEnglobante a = utilitaire::calculerBoiteEnglobante(*modele_);
+	return min(abs(a.coinMax.x - a.coinMin.x), abs(a.coinMax.y - a.coinMin.y)) / 2;
+}
+
 ////////////////////////////////////////////////
-/// @}
-/// @}VISITEUR
+/// @} VISITEUR
 ////////////////////////////////////////////////
 
 void NoeudMuret::accepter(Visiteur* v)

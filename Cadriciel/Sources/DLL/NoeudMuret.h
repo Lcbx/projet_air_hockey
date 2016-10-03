@@ -13,6 +13,8 @@
 
 #include "NoeudAbstrait.h"
 #include "GL/glew.h"
+#include "BoiteCollision.h"
+
 
 
 ///////////////////////////////////////////////////////////////////////////
@@ -38,6 +40,20 @@ public:
 	//Accepter le visiteur
 	virtual void accepter(Visiteur* v);
 
+	///Permet d'obtenir la boite de collision pour le muret donné
+	//virtual BoiteCollision obtenirBoiteCollision();
+
+	///Permet d'obtenir la droite directrice du muret
+	virtual math::Droite3D obtenirDroiteDirectrice();
+		
+	///Permet de changer le redimensionnement du muret
+	virtual void setScale(const glm::dvec3& scale) {
+		scale_ = { scale.x, 2.0, 2.0 };
+	};
+
+	///Permet d'obtenir le rayon minimal du modèle
+	virtual double obtenirRayonModele();
+
 private:
 	
 	
@@ -57,4 +73,3 @@ private:
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
 ///////////////////////////////////////////////////////////////////////////////
-
