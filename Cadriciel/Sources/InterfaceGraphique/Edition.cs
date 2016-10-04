@@ -36,6 +36,7 @@ namespace InterfaceGraphique
             textBox2.Enabled = false;
             textBox3.Enabled = false;
             textBox4.Enabled = false;
+            button1.Enabled = false;
             label6.Show();
 
             this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
@@ -428,6 +429,8 @@ namespace InterfaceGraphique
                 textBox2.Enabled = true;
                 textBox3.Enabled = true;
                 textBox4.Enabled = true;
+                button1.Enabled = true;
+
                 label6.Hide();
 
                 //Position en X
@@ -457,6 +460,7 @@ namespace InterfaceGraphique
                 textBox2.Enabled = false;
                 textBox3.Enabled = false;
                 textBox4.Enabled = false;
+                button1.Enabled = false;
 
                 label6.Show();
 
