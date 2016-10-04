@@ -147,9 +147,6 @@
     <ClCompile Include="Application\AjoutPortail.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
-    <ClCompile Include="Application\DebutAjoutPortail.cpp">
-      <Filter>Source Files\Application</Filter>
-    </ClCompile>
     <ClCompile Include="Application\Deplacement.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
@@ -285,9 +282,6 @@
       <Filter>Header Files\Application</Filter>
     </ClInclude>
     <ClInclude Include="Application\AjoutMur.h">
-      <Filter>Header Files\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\DebutAjoutPortail.h">
       <Filter>Header Files\Application</Filter>
     </ClInclude>
     <ClInclude Include="Application\AjoutPortail.h">

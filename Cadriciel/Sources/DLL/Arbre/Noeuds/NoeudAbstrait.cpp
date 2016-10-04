@@ -404,9 +404,8 @@ void NoeudAbstrait::afficher(const glm::mat4& vueProjection) const
 		modele = glm::rotate(modele, angleX_, glm::vec3(1, 0, 0));
 		// Rotation autour de l'axe des Y.
 		modele = glm::rotate(modele, angleY_, glm::vec3(0, 1, 0));
-	
 		//scale
-		modele = glm::scale(modele, glm::vec3(scale_.x+0.1, scale_.y+0.1 , scale_.z+0.1 ));
+		modele = glm::scale(modele, glm::vec3(scale_));
 
 
 		//change la couleur selon si est selectionne
