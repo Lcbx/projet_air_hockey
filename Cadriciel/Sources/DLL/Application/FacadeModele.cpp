@@ -225,7 +225,7 @@ void FacadeModele::enregistrerConfiguration() const
 	
 	// On enregistre les différentes configurations.
 	ConfigScene::obtenirInstance()->creerDOM(document);
-
+	
 	// Écrire dans le fichier
 	document.SaveFile(FacadeModele::FICHIER_CONFIGURATION.c_str());
 }

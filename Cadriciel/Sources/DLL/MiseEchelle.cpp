@@ -14,8 +14,6 @@
 void MiseEchelle::current(int x, int y) {
 	visiteur_.mettreEchelle(Y1() - y);
 	Y1() = y;
-	std::printf("DANs la mise echelle************ \n");
-
 }
 
 void MiseEchelle::operationShortClick() {

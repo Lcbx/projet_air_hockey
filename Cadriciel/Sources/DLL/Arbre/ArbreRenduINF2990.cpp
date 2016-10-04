@@ -438,7 +438,6 @@ int ArbreRenduINF2990::obtenirNombreObjetSelctionnes()
 			comp++;
 		}
 	}
-	std::cout << "Nombre objets selectionnes: " << comp << std::endl;
 	return comp;
 }
 
