@@ -146,7 +146,7 @@ void ArbreRenduINF2990::initialiser()
 	// On vide l'arbre
 	vider();
 	// afficher un message de test sur la console
-	std::cout << "Allo! je suis dans l'initialisation de l'arbre du rendu inf2990"<< std::endl;
+	//std::cout << "Allo! je suis dans l'initialisation de l'arbre du rendu inf2990"<< std::endl;
 	// afficher la table avec les points de controles
 	ajouterTable();
 }

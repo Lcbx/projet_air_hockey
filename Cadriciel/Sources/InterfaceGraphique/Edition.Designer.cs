@@ -394,9 +394,11 @@
             // 
             // toolStripButtonSelection
             // 
+            this.toolStripButtonSelection.Checked = true;
             this.toolStripButtonSelection.CheckOnClick = true;
+            this.toolStripButtonSelection.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripButtonSelection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonSelection.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonSelection.Image")));
+            this.toolStripButtonSelection.Image = global::InterfaceGraphique.Properties.Resources.Selection1;
             this.toolStripButtonSelection.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonSelection.Name = "toolStripButtonSelection";
             this.toolStripButtonSelection.Size = new System.Drawing.Size(53, 29);
