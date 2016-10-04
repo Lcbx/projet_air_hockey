@@ -25,7 +25,6 @@ void VisiteurPointMilieu::visiter(NoeudAbstrait* noeud)
 		posCentre_ *= nbrNoeudsVisites_++;
 		posCentre_ += posNoeud;
 		posCentre_ /= (float)nbrNoeudsVisites_;
-		cout << "noeud actuel X=" << posNoeud.x << " Y=" << posNoeud.y << " Z=" << posNoeud.z << "\n";
 	}
 }
 

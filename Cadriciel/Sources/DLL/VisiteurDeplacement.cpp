@@ -7,7 +7,11 @@
 
 VisiteurDeplacement::VisiteurDeplacement(glm::vec3 dep) {
 	dep_ = dep;
+	tester_ = true;
+	effectuer_ = true;
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
+	tester_ = false;
+	if(effectuer_) FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
 }
 
 void VisiteurDeplacement::setDep(glm::vec3 dep) {
@@ -17,7 +21,12 @@ void VisiteurDeplacement::setDep(glm::vec3 dep) {
 
 void VisiteurDeplacement::visiter(NoeudAbstrait* noeud)
 {
-	if(noeud->estSelectionne()) noeud->assignerPositionRelative(noeud->obtenirPositionRelative() + dep_);
+	if (noeud->estSelectionne()) {
+		if (!FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(noeud->obtenirPositionRelative() + dep_))
+			effectuer_ = false;
+		else if (!tester_ && effectuer_)
+			noeud->assignerPositionRelative(noeud->obtenirPositionRelative() + dep_);
+	}
 }
 
 void VisiteurDeplacement::visiter(NoeudComposite* noeud)
