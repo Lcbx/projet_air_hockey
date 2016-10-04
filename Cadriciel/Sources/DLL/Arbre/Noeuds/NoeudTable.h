@@ -39,6 +39,7 @@ public:
 
 	// fonctions d'affichage
 	void tracerTable(const glm::mat4& vueProjection)  const; // tracer la table
+	void tracerPointsControle(const glm::mat4& vueProjection)  const; // tracer les points de Controle
 	void tracerCercle(double cx, double cy, double r, int nb_segments) const; // tracer la table
 	void tracerMurs(const glm::mat4& vueProjection) const; //tracer les murs autour de la table
 	void tracerButs(const glm::mat4& vueProjection) const; //tracer les buts
@@ -68,6 +69,7 @@ public:
 	// couleur du contour autour de la zone du jeu
 	bool getCouleurContour(glm::vec4 & couleur);
 	bool setCouleurContour(glm::vec4 couleur);
+
 
 	//determiner si dans la table
 	/// angle

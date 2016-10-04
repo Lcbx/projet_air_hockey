@@ -9,6 +9,12 @@
 #ifndef __FACADE_INTERFACE_NATIVE_H__
 #define __FACADE_INTERFACE_NATIVE_H__
 
+#include <string.h>
+#include <iostream>
+
+
+using namespace std;
+
 extern "C" {
 
 	__declspec(dllexport) void initialiserOpenGL(int * handle);
@@ -48,6 +54,7 @@ extern "C" {
 	__declspec(dllexport) void clickEnd(int x, int y);
 	__declspec(dllexport) void etatDelaSouris(int etat);
 	__declspec(dllexport) void positionSouris(int x, int y);
+
 	__declspec(dllexport) void rightClick(bool presse);
 	//touche control
 	__declspec(dllexport) void toucheControl(bool presse);
@@ -77,5 +84,6 @@ extern "C" {
 
 	// Methode DeplacerXY de la camera, pour les touches de directions
 	__declspec(dllexport) void deplacerVueXY(double deplacementX, double deplacementY);
+
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__

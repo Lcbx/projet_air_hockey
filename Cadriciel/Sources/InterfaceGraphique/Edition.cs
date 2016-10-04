@@ -22,7 +22,6 @@ namespace InterfaceGraphique
         //private static double angleDeRotation_;
         //private static double facteurEchelle_;
 
- BoitePropriete boiteProp = new BoitePropriete();
 
         public Edition()
         {
@@ -39,6 +38,8 @@ namespace InterfaceGraphique
             textBox4.Enabled = false;
             label6.Show();
 
+            this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
+            FonctionsNatives.redimensionnerFenetre(panel1.Width, panel1.Height);
         }
 
         public void InitialiserAnimation()
@@ -76,7 +77,7 @@ namespace InterfaceGraphique
             if (e.KeyCode == Keys.Menu) FonctionsNatives.toucheAlt(true);
             if (e.KeyCode == Keys.Add) FonctionsNatives.zoomIn();
             if (e.KeyCode == Keys.Subtract) FonctionsNatives.zoomOut();
-            if (e.KeyCode == Keys.Up) FonctionsNatives.deplacerVueXY(0,-0.1);
+            if (e.KeyCode == Keys.Up) FonctionsNatives.deplacerVueXY(0, -0.1);
             if (e.KeyCode == Keys.Right) FonctionsNatives.deplacerVueXY(0.1, 0);
             if (e.KeyCode == Keys.Down) FonctionsNatives.deplacerVueXY(0, 0.1);
             if (e.KeyCode == Keys.Left) FonctionsNatives.deplacerVueXY(-0.1, 0);
@@ -84,12 +85,13 @@ namespace InterfaceGraphique
 
         private void keyUpHandler(object sender, KeyEventArgs e)
         {
-            switch (e.KeyCode) {
-                case Keys.ControlKey:        { FonctionsNatives.toucheControl(false); break; }
-                case Keys.Alt:               { FonctionsNatives.toucheAlt(false); break; }
+            switch (e.KeyCode)
+            {
+                case Keys.ControlKey: { FonctionsNatives.toucheControl(false); break; }
+                case Keys.Alt: { FonctionsNatives.toucheAlt(false); break; }
                 case Keys.Menu: { FonctionsNatives.toucheAlt(false); break; }
-                case Keys.Escape:            { FonctionsNatives.escEnfonce(); break; }
-                case Keys.Delete:            {FonctionsNatives.supprimerObjet(); break; }
+                case Keys.Escape: { FonctionsNatives.escEnfonce(); break; }
+                case Keys.Delete: { FonctionsNatives.supprimerObjet(); break; }
                 case Keys.D:
                     {
                         desactiverAutresBoutons();
@@ -106,52 +108,52 @@ namespace InterfaceGraphique
                     {
                         desactiverAutresBoutons();
                         toolStripButtonRotation.Checked = true;
-                        this.changerMode(Etats.ROTATION);break;
+                        this.changerMode(Etats.ROTATION); break;
                     }
                 case Keys.E:
                     {
                         desactiverAutresBoutons();
                         toolStripButtonMiseAEchelle.Checked = true;
-                        this.changerMode(Etats.MISEAECHELLE);break;
+                        this.changerMode(Etats.MISEAECHELLE); break;
                     }
                 case Keys.C:
                     {
                         desactiverAutresBoutons();
                         toolStripButtonDuplication.Checked = true;
-                        this.changerMode(Etats.DUPLICATION);break;
+                        this.changerMode(Etats.DUPLICATION); break;
                     }
                 case Keys.Z:
                     {
                         desactiverAutresBoutons();
                         toolStripButtonZoom.Checked = true;
-                        this.changerMode(Etats.LOUPE);break;
+                        this.changerMode(Etats.LOUPE); break;
                     }
                 case Keys.M:
                     {
                         desactiverAutresBoutons();
                         toolStripButtonMuret.Checked = true;
-                        this.changerMode(Etats.AJOUT_MUR);break;
+                        this.changerMode(Etats.AJOUT_MUR); break;
                     }
                 case Keys.P:
                     {
                         desactiverAutresBoutons();
                         toolStripButtonPortail.Checked = true;
-                        this.changerMode(Etats.AJOUT_PORTAIL);break;
+                        this.changerMode(Etats.AJOUT_PORTAIL); break;
                     }
                 case Keys.B:
                     {
                         desactiverAutresBoutons();
                         toolStripButtonAccelerateur.Checked = true;
-                        this.changerMode(Etats.AJOUT_ACCELERATEUR);break;
+                        this.changerMode(Etats.AJOUT_ACCELERATEUR); break;
                     }
                 case Keys.G:
                     {
                         desactiverAutresBoutons();
                         toolStripButton1.Checked = true;
-                        this.changerMode(Etats.POINTSDECONTROLE);break;
+                        this.changerMode(Etats.POINTSDECONTROLE); break;
                     }
 
-                case Keys.O:        { FonctionsNatives.deplacerPointHaut(2); break; }//A Verifier ou a enlever !!
+                case Keys.O: { FonctionsNatives.deplacerPointHaut(2); break; }//A Verifier ou a enlever !!
                 default: break;
             }
         }
@@ -176,16 +178,16 @@ namespace InterfaceGraphique
                 string text = "";
                 switch (EtatSouris)
                 {
-                    case Etats.SELECTION: {             text = "selection";         break; }
-                    case Etats.LOUPE: {                 text = "loupe";             break; }
-                    case Etats.DEPLACEMENT: {           text = "deplacement";       break; }
-                    case Etats.ROTATION: {              text = "rotation";          break; }
-                    case Etats.DUPLICATION: {           text = "duplication";       break; }
-                    case Etats.AJOUT_ACCELERATEUR: {    text = "ajout bonus";       break; }
-                    case Etats.AJOUT_MUR: {             text = "ajout mur";         break; }
-                    case Etats.AJOUT_PORTAIL: {         text = "ajout portail";     break; }
-                    case Etats.MISEAECHELLE:  {         text = "mise a echelle";     break; }
-                    case Etats.POINTSDECONTROLE: {      text = "points de controle"; break; }
+                    case Etats.SELECTION: { text = "selection"; break; }
+                    case Etats.LOUPE: { text = "loupe"; break; }
+                    case Etats.DEPLACEMENT: { text = "deplacement"; break; }
+                    case Etats.ROTATION: { text = "rotation"; break; }
+                    case Etats.DUPLICATION: { text = "duplication"; break; }
+                    case Etats.AJOUT_ACCELERATEUR: { text = "ajout bonus"; break; }
+                    case Etats.AJOUT_MUR: { text = "ajout mur"; break; }
+                    case Etats.AJOUT_PORTAIL: { text = "ajout portail"; break; }
+                    case Etats.MISEAECHELLE: { text = "mise a echelle"; break; }
+                    case Etats.POINTSDECONTROLE: { text = "points de controle"; break; }
                     default: break;
                 }
                 System.Console.WriteLine(text);
@@ -221,7 +223,7 @@ namespace InterfaceGraphique
             Program.peutAfficher = true;
             mousePressed = false;
 
-          //  mettreAjourPos();
+            mettreAjourPos();
             if (EtatSouris == Etats.SELECTION)
             {
                 mettreAjourPos();
@@ -263,7 +265,12 @@ namespace InterfaceGraphique
                 FonctionsNatives.libererOpenGL();
                 Program.peutAfficher = false;
             }
+
+            e.Cancel = true;
+            menuPrincipal_.Show();
+            this.Hide();
         }
+
         public void setMenuPrincipal(MenuPrincipal menuPrincipal)
         {
             menuPrincipal_ = menuPrincipal;
@@ -277,6 +284,7 @@ namespace InterfaceGraphique
         private void propriétésToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //afficher la boite de configuration
+            BoitePropriete boiteProp = new BoitePropriete();
             boiteProp.Show();
         }
 
@@ -382,12 +390,11 @@ namespace InterfaceGraphique
         {
             return (valeur >= borneMin) && (valeur <= borneMax);
         }
-     
 
         private void éditionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int nbreObSelectionnes= FonctionsNatives.nombreObjetSelectionne();
-            if(nbreObSelectionnes >= 1)
+            int nbreObSelectionnes = FonctionsNatives.nombreObjetSelectionne();
+            if (nbreObSelectionnes >= 1)
             {
                 supprimerToolStripMenuItem.Enabled = true;
             }
@@ -398,9 +405,9 @@ namespace InterfaceGraphique
         }
         public void Edition_MouseWheel(object sender, MouseEventArgs e)
         {
-            if(e.Delta >  0)
+            if (e.Delta > 0)
             { FonctionsNatives.zoomIn(); }
-            if(e.Delta < 0)
+            if (e.Delta < 0)
             { FonctionsNatives.zoomOut(); }
 
         }
@@ -452,7 +459,7 @@ namespace InterfaceGraphique
                 textBox4.Enabled = false;
 
                 label6.Show();
-                
+
             }
         }
 
@@ -523,118 +530,142 @@ namespace InterfaceGraphique
         //button ok 
         private void button1_Click(object sender, EventArgs e)
         {
-            double x = Convert.ToDouble(textBox1.Text);
-            double y = Convert.ToDouble(textBox2.Text);
-            double angle = Convert.ToDouble(textBox3.Text);
-            double scale = Convert.ToDouble(textBox4.Text);
 
-            //assigner les nouvelles valeurs
-            FonctionsNatives.configurerObjet(x, y, angle, scale);
+            double myX;
+            double myY;
+            double myAngle;
+            double myScale;
+
+            if (!double.TryParse(textBox1.Text, out myX) || !double.TryParse(textBox2.Text, out myY)
+                || !double.TryParse(textBox3.Text, out myAngle) || !double.TryParse(textBox4.Text, out myScale))
+            {
+                MessageBox.Show("Veuillez vérifier les valeurs entrées", "Barre de proprietés",
+                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else { FonctionsNatives.configurerObjet(myX, myY, myAngle, myScale); }
         }
 
-        
+        private void zoomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            desactiverAutresBoutons();
+            toolStripButtonZoom.Checked = true;
+            this.changerMode(Etats.LOUPE);
+        }
+
         private void aideToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BoiteAide helpbox = new BoiteAide();
             helpbox.ShowDialog();
         }
-    }
+
+        private void panel1_Resize(object sender, EventArgs e)
+        {
+            FonctionsNatives.redimensionnerFenetre(panel1.Width, panel1.Height);
+        }
 
 
-    static partial class FonctionsNatives
-    {
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void initialiserOpenGL(IntPtr handle);
+        static partial class FonctionsNatives
+        {
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void initialiserOpenGL(IntPtr handle);
 
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void libererOpenGL();
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void libererOpenGL();
 
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void dessinerOpenGL();
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void dessinerOpenGL();
 
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void animer(double temps);
-
-
-        //Click
-  
-         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-         public static extern void etatDelaSouris(int etat);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void clickStart(int x, int y);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void clickCurrent(int x, int y);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void clickEnd(int x, int y);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void positionSouris(int x, int y);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void rightClick(bool presse);
-
-        //touche control
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void toucheControl(bool presse);
-
-        //touche alt
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void toucheAlt(bool presse);
-
-        //touche escape
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void escEnfonce();
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void animer(double temps);
 
 
+            //Click
 
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern double getPosX();
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void etatDelaSouris(int etat);
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void clickStart(int x, int y);
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void clickCurrent(int x, int y);
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void clickEnd(int x, int y);
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void positionSouris(int x, int y);
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void rightClick(bool presse);
+
+            //touche control
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void toucheControl(bool presse);
+
+            //touche alt
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void toucheAlt(bool presse);
+
+            //touche escape
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void escEnfonce();
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern double getPosX();
 
 
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern double getPosY();
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern double getPosY();
 
 
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void supprimerObjet();
-
-
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void configurerObjet(double x, double y, double angle, double scale);
-
-        // Pour touche +
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void zoomIn();
-
-        // Pour touche -
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void zoomOut();
-
-        // Pour les touches de fleche
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void deplacerVueXY(double deplacementX, double deplacementY);
-
-        //foction test bidon
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void test();
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void deplacerPointHaut(int index);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int nombreObjetSelectionne();
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void supprimerObjet();
 
 
 
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern double getAngle();
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void configurerObjet(double x, double y, double angle, double scale);
+
+            // Pour touche +
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void zoomIn();
+
+            // Pour touche -
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void zoomOut();
+
+            // Pour les touches de fleche
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void deplacerVueXY(double deplacementX, double deplacementY);
+
+            //foction test bidon
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void test();
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void deplacerPointHaut(int index);
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern int nombreObjetSelectionne();
 
 
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern double getScale();
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern double getAngle();
+
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern double getScale();
+
+
+            // Redimensionnement de la fenêtre
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)] // pour utiliser une fonction qui se trouve dans le fichier Noyau.dll
+            public static extern void redimensionnerFenetre(int largeur, int hauteur);
+
+
+        }
     }
 }

@@ -108,12 +108,14 @@ void NoeudTable::accepter(Visiteur* v)
 ////////////////////////////////////////////////////////////////////////
 void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 {
+	glPushMatrix();
 	glLoadIdentity();
 	// deactiver les textures (la table ne prend plus la texture des autres noeuds)
 	glDisable(GL_TEXTURE_2D);
 	// desactiver le test de profondeur
 	glDisable(GL_DEPTH_TEST);
 	
+	glVertex3fv(glm::value_ptr(glm::vec3(0, 0, 0)));
 
 	//multiplication par la matrice de proj
 #define PROJvec(arg)	glm::value_ptr(	glm::vec3(vueProjection * glm::vec4(arg, 1)))
@@ -150,8 +152,6 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 	}
 	glEnd();
 	
-	// tracer les points de Controle 
-	tracerPointsControle(vueProjection);
 	// tracer les murs 
 	tracerMurs(vueProjection);
 	// tracer les buts 
@@ -164,44 +164,9 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 	// activer le test de profondeur
 	glEnable(GL_TEXTURE_2D);
 
-	//glPopMatrix();
+	glPopMatrix();
 
 }
-////////////////////////////////////////////////////////////////////////
-///
-/// @fn void tracerPointsControle(const glm::mat4& vueProjection) const
-///
-/// @param[in] : vueProjection
-/// Cette fonction trace les points de controle de la zone du jeu 
-///
-/// @return Aucune.
-///
-////////////////////////////////////////////////////////////////////////
-void NoeudTable::tracerPointsControle(const glm::mat4& vueProjection) const {
-	//affiche les points de controle, seul moyen que j'ai trouvé de bien les afficher
-	//désolé, Luc
-	for (int i = 0; i < obtenirNombreEnfants(); i++) {
-		//point de controle
-		auto pControl = (NoeudPointControle*)chercher(i);
-		double delta; pControl->getDelta(delta);
-		glm::vec4 couleur; pControl->getCouleur(couleur);
-		glm::vec3 p0{ p(i).x - delta / 2, p(i).y + delta / 2, p(i).z };
-		glm::vec3 p1{ p(i).x - delta / 2, p(i).y - delta / 2, p(i).z };
-		glm::vec3 p2{ p(i).x + delta / 2, p(i).y - delta / 2, p(i).z };
-		glm::vec3 p3{ p(i).x + delta / 2, p(i).y + delta / 2, p(i).z };
-
-		glColor4fv(glm::value_ptr(couleur));
-		glBegin(GL_QUADS);
-		{
-			glVertex3fv(PROJvec(p0));
-			glVertex3fv(PROJvec(p1));
-			glVertex3fv(PROJvec(p2));
-			glVertex3fv(PROJvec(p3));
-		}
-		glEnd();
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void tracerLignesDecoration(const glm::mat4& vueProjection) const
@@ -243,13 +208,47 @@ void NoeudTable::tracerLignesDecoration(const glm::mat4& vueProjection) const
 	glLineWidth(3.);
 	glColor4f(1., 1., 0., 1.);
 #undef min
-	double distance = std::min({ glm::distance(vecPROJ(2), vecPROJ8),
-								 glm::distance(vecPROJ(6), vecPROJ8),
-								 glm::distance(vecPROJ(0), vecPROJ8),
-								 glm::distance(vecPROJ(1), vecPROJ8) });
+	double distance = std::min({ glm::distance(vecPROJ(2), vecPROJ8), glm::distance(vecPROJ(6), vecPROJ8), glm::distance(vecPROJ(0), vecPROJ8), glm::distance(vecPROJ(1), vecPROJ8) });
 	double coeff = 0.4;
+<<<<<<< HEAD
 	double rayon = distance  * coeff;
+	tracerCercle((vecPROJ8).x, (vecPROJ8).y, rayon, 100);
+=======
+	rayon = distance / 2 * coeff;
+	//tracerCercle(double(pointControle_[8][0]),double(pointControle_[8][1]),rayon,100);
 	tracerCercle( (vecPROJ8).x, (vecPROJ8).y, rayon, 100);
+
+
+	//affiche les points de controle, seul moyen que j'ai trouvé de bien les afficher
+	//désolé, Luc
+	for (int i = 0; i < obtenirNombreEnfants(); i++) {
+		//point de controle
+		auto pControl = (NoeudPointControle*) chercher(i);
+		double delta; pControl->getDelta(delta);
+		glm::vec4 couleur; pControl->getCouleur(couleur);
+		glm::vec3 p0{ p(i).x - delta / 2, p(i).y + delta / 2, p(i).z };
+		glm::vec3 p1{ p(i).x - delta / 2, p(i).y - delta / 2, p(i).z };
+		glm::vec3 p2{ p(i).x + delta / 2, p(i).y - delta / 2, p(i).z };
+		glm::vec3 p3{ p(i).x + delta / 2, p(i).y + delta / 2, p(i).z };
+
+		glColor4fv(glm::value_ptr(couleur));
+		glBegin(GL_QUADS);
+		{
+			glVertex3fv(PROJvec(p0));
+			glVertex3fv(PROJvec(p1));
+			glVertex3fv(PROJvec(p2));
+			glVertex3fv(PROJvec(p3));
+		}
+		glEnd();
+	
+	}
+#undef PROJvec
+#undef PROJ
+#undef vecPROJ
+#undef PROJ8
+#undef vecPROJ8
+#undef vecPROJvec(arg)
+
 
 
 	//Activer le test de profondeur
@@ -257,9 +256,12 @@ void NoeudTable::tracerLignesDecoration(const glm::mat4& vueProjection) const
 	// activer le test de profondeur
 	glEnable(GL_TEXTURE_2D);
 
+	glPopMatrix();
 
 	//pour afficher les noeuds composites
-	NoeudComposite::afficherConcret(vueProjection);}
+	NoeudComposite::afficherConcret(vueProjection);
+>>>>>>> development
+}
 
 ////////////////////////////////////////////////////////////////////////
 ///
