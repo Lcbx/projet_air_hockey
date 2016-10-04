@@ -501,25 +501,18 @@ void FacadeModele::test() {
 // deplacer un point de controle
 void FacadeModele::deplacerPointHaut(int index) {
 #define delta 0.1
-	if (index == 1)
+	if (index == 0)
 	{
 		std::cout << "Noeud deplace'" << std::endl;
 		//// effacer la table puis l'afficher avec les nouvelle coordonnees
 		//const NoeudAbstrait* noeudTable = arbre_->chercher("table");
 		//arbre_->effacer(noeudTable);
 		NoeudTable* noeudTable = arbre_->getTable();
-
 		glm::vec3 point;
-		noeudTable->getPointControle(2, point);
+		noeudTable->getPointControle(0, point);
 		point.y += delta;
-		noeudTable->setPointControle(2, point);
-
-		// probleme la table n'est pas mis a jour
-
-		/*
-		glm::vec3 pointControle;
-		(NoeudTable *) noeudTable->getPointControle(1, & pointControle);
-		*/
+		noeudTable->setPointControle(0, point);
+		
 	}
 #undef delta
 }

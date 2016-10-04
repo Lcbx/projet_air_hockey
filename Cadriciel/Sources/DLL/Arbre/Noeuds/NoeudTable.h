@@ -38,16 +38,22 @@ public:
 	virtual void accepter(Visiteur* v);
 
 	// fonctions d'affichage
-	void tracerTable()  const; // tracer la table
+	void tracerTable(const glm::mat4& vueProjection)  const; // tracer la table
+	void tracerPointsControle(const glm::mat4& vueProjection)  const; // tracer les points de Controle
 	void tracerCercle(double cx, double cy, double r, int nb_segments) const; // tracer la table
-	void tracerMurs() const; //tracer les murs autour de la table
-	void tracerButs() const; //tracer les buts
+	void tracerMurs(const glm::mat4& vueProjection) const; //tracer les murs autour de la table
+	void tracerButs(const glm::mat4& vueProjection) const; //tracer les buts
+	void tracerLignesDecoration (const glm::mat4& vueProjection) const; //tracer les lignes de decoration
+
 	// Calcul la pente de la droite faite par 2 points 
-	double calculPente(glm::vec3 P0, glm::vec3 P1);
+	double calculPente(glm::vec3 P0, glm::vec3 P1) const;
+	double calculB(double pente, glm::vec3 P0) const;
+
 	// fonctions get et set pour les points de controle de la table
 	// coordonnees point de controle
 	bool getPointControle(int numero, glm::vec3 & pointControle);
 	bool setPointControle(int numero, glm::vec3 pointControle);
+	bool setPointControles();
 	// couleur de la table
 	bool getCouleurTable(glm::vec4 & couleur);
 	bool setCouleurTable(glm::vec4 couleur);
@@ -77,7 +83,7 @@ public:
 private:
 
 	//la largueur des murs 
-	double largeur_{ 10 };
+	double largeur_{ 7 };
 	// la hauteur des murs 
 	double hauteur_{ 0.0 };
 	// la couleur de la table 
@@ -85,7 +91,7 @@ private:
 	// la couleur des murs autour de la table
 	glm::vec4 couleurMurs_ = { 0.662745, 0.662745, 0.662745, 1. };
 	// la couleur des 2 buts 
-	glm::vec4 couleurButs_{ 0.,0.,1.,1. };
+	glm::vec4 couleurButs_{ 1.,1.,0.,1. };
 	// la couleur des lignes sur le terrain
 	glm::vec4 couleurLignes_{ 1.,0.,0.,1. };
 	// la couleur du contour
@@ -100,6 +106,7 @@ private:
 	|						 |
 	|						 |
 	p1----------p3----------p5
+
 	*/
 
 	//pour obtenir p0, p1, ... des points de controle

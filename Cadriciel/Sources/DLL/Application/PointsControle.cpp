@@ -36,11 +36,11 @@ void PointsControle::start(int x, int y) {
 		glm::dvec3 pos = p(i)->obtenirPositionRelative();
 		// si on est à la bonne distance, est selectionne
 		double distance = glm::distance(pointClick, pos);
-		if (distance < 1.2 * delta) {
+		if (distance < delta) {
 			noeud_ = i;
 		}
 	}
-	if (noeud_ != PASDENOEUD) p(noeud_)->setCouleur(glm::vec4(GRIS));
+	if (noeud_ != PASDENOEUD) p(noeud_)->setCouleur(glm::vec4(VERT));
 }
 
 void PointsControle::current(int x, int y) {
