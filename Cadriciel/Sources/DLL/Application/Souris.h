@@ -39,7 +39,7 @@ private:
 	StrategieSouris* notreStrategie_;		//strategie
 	Etats etatSouris = SELECTION;			//type d'operation en cours
 	void creerStrategie();					//actualise la strategie en 
-	bool boutonDroit_ = false; 						//bouton droit enfonce
+	bool boutonDroit_ = false; 				//click droit enfonce
 	bool control_ = false;					//touche control enfoncee
 	bool alt_ = false;					    //touche alt enfoncee
 	glm::ivec4 position_;					//position de Click courante

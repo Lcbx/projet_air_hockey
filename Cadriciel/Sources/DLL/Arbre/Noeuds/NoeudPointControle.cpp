@@ -61,21 +61,31 @@ NoeudPointControle::~NoeudPointControle()
 ////////////////////////////////////////////////////////////////////////
 void NoeudPointControle::afficherConcret(const glm::mat4& vueProjection) const
 {
-	// afficher le point de controle 
-	afficherPointControle();
+	glLoadIdentity();
+	glDisable(GL_TEXTURE_2D);
 
-	/// Révolution autour du centre.
-	//auto modele = glm::rotate(transformationRelative_, angleRotation_, glm::vec3(0, 0, 0));
-	//// Translation.
-	//modele = glm::translate(modele, glm::vec3(10, 0, 0));
-	//// Rotation autour de l'axe des X.
-	//modele = glm::rotate(modele, angleX_, glm::vec3(1, 0, 0));
-	//// Rotation autour de l'axe des Y.
-	//modele = glm::rotate(modele, angleY_, glm::vec3(0, 1, 0));
-	//// Recentrage du cube.
-	//modele = glm::translate(modele, glm::vec3(0, 0, -10));
-	// Affichage du modèle.
-	//vbo_->dessiner(vueProjection * modele);
+	//position du point de controle
+	glm::vec3 coord3 = obtenirPositionRelative();
+	
+	//multiplication
+#define PROJvec(arg)	glm::value_ptr(	glm::vec3(vueProjection * glm::vec4(arg, 0)))
+
+
+	glm::vec3 p0{ coord3.x - delta_ / 2, coord3.y + delta_ / 2, coord3.z };
+	glm::vec3 p1{ coord3.x - delta_ / 2, coord3.y - delta_ / 2, coord3.z };
+	glm::vec3 p2{ coord3.x + delta_ / 2, coord3.y - delta_ / 2, coord3.z };
+	glm::vec3 p3{ coord3.x + delta_ / 2, coord3.y + delta_ / 2, coord3.z };
+
+	glColor4fv(glm::value_ptr(couleur_));
+	glBegin(GL_QUADS);
+	{
+		glVertex3fv(PROJvec(p0));
+		glVertex3fv(PROJvec(p1));
+		glVertex3fv(PROJvec(p2));
+		glVertex3fv(PROJvec(p3));
+	}
+	glEnd();
+	glEnable(GL_TEXTURE_2D);
 }
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -101,77 +111,7 @@ void NoeudPointControle::accepter(Visiteur* v)
 {
 	v->visiter(this);
 }
-////////////////////////////////////////////////////////////////////////
-///
-/// @fn void NoeudPointControle::afficherPointControle() const
-///
-/// Cette fonction affiche le rendu openGL du point de controle
-///
-/// @param[in] aucun.
-///
-/// @return Aucune.
-///
-////////////////////////////////////////////////////////////////////////
-void NoeudPointControle::afficherPointControle() const
-{
-	glPushMatrix();
-	{
-		glEnable(GL_NORMALIZE);
-		// Affichage du modèle.
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		//glDisable(GL_TEXTURE_2D);
-		glDisable(GL_LIGHTING);
-		glm::vec3 p0{ coord_.x - delta_ / 2,coord_.y + delta_ / 2, coord_.z };
-		glm::vec3 p1{ coord_.x - delta_ / 2,coord_.y - delta_ / 2, coord_.z };
-		glm::vec3 p2{ coord_.x + delta_ / 2,coord_.y - delta_ / 2, coord_.z };
-		glm::vec3 p3{ coord_.x + delta_ / 2,coord_.y + delta_ / 2, coord_.z };
 
-		//afficher p0
-		//std::cout << "x = " << p0.x << " y = " << p0.y << std::endl;
-		glColor4f(couleur_[0], couleur_[1], couleur_[2], couleur_[3]);
-		glBegin(GL_QUADS);
-		{
-			glVertex3f(p0.x, p0.y, p0.z);
-			glVertex3f(p1.x, p1.y, p1.z);
-			glVertex3f(p2.x, p2.y, p2.z);
-			glVertex3f(p3.x, p3.y, p3.z);
-		}
-		glEnd();
-	}
-	glPopMatrix();
-	
-}
-////////////////////////////////////////////////////////////////////////
-///
-/// @fn bool NoeudPointControle::getCoord(glm::vec3 & point)
-///
-/// Cette fonction permet d'obtenir les coordonnees du point de controle 
-///  @param[in] 
-///		point : la valeur du point de controle a recuperer
-/// @return bool
-///
-////////////////////////////////////////////////////////////////////////
-bool NoeudPointControle::getCoord(glm::vec3 & point)
-{
-	point = coord_;
-	return true;
-}
-////////////////////////////////////////////////////////////////////////
-///
-/// @fn bool NoeudPointControle::setCoord(glm::vec3 point)
-///
-/// Cette fonction permet de modifier les coordonnees du point de controle 
-///  @param[in] 
-///		point : la valeur du point de controle a modifier
-/// @return bool
-///
-////////////////////////////////////////////////////////////////////////
-bool NoeudPointControle::setCoord(glm::vec3 point)
-{
-	coord_ = point;
-	return true;
-}
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn bool NoeudPointControle::setCouleur(glm::vec4 couleur)
@@ -202,33 +142,32 @@ bool NoeudPointControle::getCouleur(glm::vec4 & couleur)
 	couleur = couleur_;
 	return true;
 }
+
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn bool NoeudPointControle::getIndex(int & index)
+/// @fn bool NoeudPointControle::setDelta(glm::vec4 & couleur)
 ///
-/// Cette fonction permet d'obtenir la valeur de l'index (ID) du noeud
+/// Cette fonction permet de changer la taille du carré du point de controle
 ///  @param[in] 
-///		index : la valeur de l'index du  point de controle
+///		delta : la valeur de delta
 /// @return bool
 ///
 ////////////////////////////////////////////////////////////////////////
-bool NoeudPointControle::getIndex(int & index)
-{
-	index = index_;
+bool NoeudPointControle::setDelta(double delta) {
+	delta_ = delta;
 	return true;
 }
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn bool NoeudPointControle::setIndex(int & index)
+/// @fn bool NoeudPointControle::getCouleur(glm::vec4 & couleur)
 ///
-/// Cette fonction permet de modifier la valeur de l'index (ID) du noeud
+/// Cette fonction permet d'obtenir la taille du carré du point de controle
 ///  @param[in] 
-///		index : la nouvelle valeur de l'index du  point de controle
+///		delta : la valeur de delta
 /// @return bool
 ///
 ////////////////////////////////////////////////////////////////////////
-bool NoeudPointControle::setIndex(int index)
-{
-	index_ = index;
+bool NoeudPointControle::getDelta(double& delta) {
+	delta = delta_;
 	return true;
 }

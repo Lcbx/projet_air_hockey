@@ -19,6 +19,8 @@
 #include "Loupe.h"
 #include "Deplacement.h"
 #include "../MiseEchelle.h"
+#include "PointsControle.h"
+
 
 #include "FacadeModele.h"
 #include "../Arbre/ArbreRenduINF2990.h"
@@ -62,6 +64,7 @@ void Souris::creerStrategie(){
 	case AJOUT_MUR: {			notreStrategie_ = new AjoutMur; break; }
 	case AJOUT_PORTAIL: {		notreStrategie_ = new AjoutPortail; break; }
 	case MISEAECHELLE: {		notreStrategie_ = new MiseEchelle; break; }
+	case POINTSDECONTROLE: {	notreStrategie_ = new PointsControle; break; }
 	default: {	throw("Souris::strategie inconnue demandee"); break;  }
 	}
 }
@@ -71,7 +74,7 @@ void Souris::startClick(int x, int y) {
 
 	//test du code de vérification de la table
 	glm::dvec3 nouvPoint (x, y, 0);  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, nouvPoint);
-	std::cout << "click " << (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(nouvPoint) ? "dans La table\n" : " a l'exterieur de la table\n");
+	std::cout << "click " << nouvPoint.x << " " << nouvPoint.y << " " << nouvPoint.z << (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(nouvPoint) ? " dans La table\n" : " a l'exterieur de la table\n");
 	//FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->setPointControle(0,nouvPoint);
 
 
