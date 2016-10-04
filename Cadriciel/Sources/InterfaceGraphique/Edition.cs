@@ -31,6 +31,8 @@ namespace InterfaceGraphique
             InitializeComponent();
             InitialiserAnimation();
 
+            this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
+            FonctionsNatives.redimensionnerFenetre(panel1.Width, panel1.Height);
         }
 
         public void InitialiserAnimation()
@@ -39,7 +41,6 @@ namespace InterfaceGraphique
 
             FonctionsNatives.initialiserOpenGL(panel1.Handle);
             FonctionsNatives.dessinerOpenGL();
-            this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
         }
 
         public void MettreAJour(double tempsInterAffichage)
