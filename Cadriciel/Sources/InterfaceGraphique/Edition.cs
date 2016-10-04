@@ -143,12 +143,12 @@ namespace InterfaceGraphique
                         toolStripButtonAccelerateur.Checked = true;
                         this.changerMode(Etats.AJOUT_ACCELERATEUR);break;
                     }
-               /* case Keys.G:
+               case Keys.G:
                     {
                         desactiverAutresBoutons();
                         toolStripButton1.Checked = true;
                         this.changerMode(Etats.POINTSDECONTROLE);break;
-                    }*/
+                    }
 
                 case Keys.O:        { FonctionsNatives.deplacerPointHaut(2); break; }//A Verifier ou a enlever !!
                 default: break;
@@ -539,8 +539,12 @@ namespace InterfaceGraphique
             else { FonctionsNatives.configurerObjet(myX, myY, myAngle, myScale); }
         }
 
-
-
+        private void zoomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            desactiverAutresBoutons();
+            toolStripButtonZoom.Checked = true;
+            this.changerMode(Etats.LOUPE);
+        }
 
         private void aideToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -645,5 +649,7 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern double getScale();
+
+
     }
 }
