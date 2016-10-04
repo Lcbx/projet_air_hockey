@@ -532,9 +532,7 @@ namespace InterfaceGraphique
             FonctionsNatives.configurerObjet(x, y, angle, scale);
         }
 
-
         
-      
         private void aideToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BoiteAide helpbox = new BoiteAide();

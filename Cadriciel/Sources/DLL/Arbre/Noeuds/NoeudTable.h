@@ -52,6 +52,7 @@ public:
 	// coordonnees point de controle
 	bool getPointControle(int numero, glm::vec3 & pointControle);
 	bool setPointControle(int numero, glm::vec3 pointControle);
+	bool setPointControles();
 	// couleur de la table
 	bool getCouleurTable(glm::vec4 & couleur);
 	bool setCouleurTable(glm::vec4 couleur);

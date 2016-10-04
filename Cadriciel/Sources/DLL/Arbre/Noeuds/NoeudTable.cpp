@@ -339,11 +339,11 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
 	double b60 = calculB(a60, p(0));
 	double longueur = sqrt(pow((pointControle_[0].x - pointControle_[6].x),2)+pow(pointControle_[0].y - pointControle_[6].y,2));
 	
-	float dx = p(6).x - p(0).x;
-	float dy = p(6).y - p(0).y;
+	float dx = p(0).x - p(6).x;
+	float dy = p(0).y - p(6).y;
 	GLfloat angle = glm::atan(dx / dy);
-	std::cout << "dx = " << dx <<" dy = "<<dy<< std::endl;
-	std::cout << "angle = " << angle << std::endl;
+	//std::cout << "dx = " << dx <<" dy = "<<dy<< std::endl;
+	//std::cout << "angle = " << angle << std::endl;
 	//////////////////////////////////
 	//				|				//
 	// 2eme 		|   1er			//
@@ -355,12 +355,12 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
 	//	Quadrant	|	Quadrant	//
 	//				|				//
 	//////////////////////////////////
+	glm::mat4 Vp = vueProjection;
 	glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
 	if (dx > 0)
 	{
 		if (dy > 0)
 		{
-			glRotated(angle, p(0).x, p(0).y, p(0).z);
 			//1er quadrant
 			glBegin(GL_QUADS);
 			{
@@ -372,7 +372,7 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
 
 			}
 			glEnd();
-			//glRotated(-angle, p(0).x, p(0).y, p(0).z);
+			glm::rotate(vueProjection, angle, p(0));		
 		}
 		else
 		{
@@ -484,9 +484,8 @@ bool NoeudTable::getPointControle(int numero, glm::vec3 & pointControle)
 ///
 /// Cette fonction modifie les coordonnes d'un des 8 points de controle de la table
 ///
-/// @param[in] temps : 
-///			pointControle : le nouveau point de controle
-///			numero : le numero du point de controle auquel on doit modifier sa valeur
+/// @param[in] 	pointControle : le nouveau point de controle
+///				numero : le numero du point de controle auquel on doit modifier sa valeur
 ///
 /// @return bool.
 ///
@@ -495,16 +494,31 @@ bool NoeudTable::setPointControle(int numero, glm::vec3 pointControle)
 {
 	if (numero < 0 || numero >9)
 		return false;
-	else {
+	else
+	{
 		pointControle_[numero] = pointControle;
-
-		for (int i = 0; i < obtenirNombreEnfants(); i++) {
-			chercher(i)->assignerPositionRelative(pointControle_[i]);
-			std::cout << "enfant n" << i << "\t" <<p(i).x << "\t" << p(i).y  << "\t" << p(i).z << "\n";
-		}
-			
 		return true;
 	}
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::setPointControles()
+///
+/// Cette fonction modifie les coordonnes d'un des 8 points de controle de la table
+///
+/// @param[in] 
+///
+/// @return bool.
+///
+////////////////////////////////////////////////////////////////////////
+bool NoeudTable::setPointControles()
+{
+	for (int i = 0; i < obtenirNombreEnfants(); i++) 
+	{
+		chercher(i)->assignerPositionRelative(pointControle_[i]);
+		std::cout << "enfant n" << i << "\t" <<p(i).x << "\t" << p(i).y  << "\t" << p(i).z << "\n";
+	}
+	return true;
 }
 
 ////////////////////////////////////////////////////////////////////////

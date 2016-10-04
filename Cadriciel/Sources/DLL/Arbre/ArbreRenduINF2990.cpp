@@ -94,13 +94,9 @@ ArbreRenduINF2990::~ArbreRenduINF2990()
 ////////////////////////////////////////////////////////////////////////
 void ArbreRenduINF2990::ajouterTable()
 {
+	// On cree un objet Table et 8 points de controle
 	NoeudTable* noeudTable { (NoeudTable *)creerNoeud(NOM_TABLE) };
 	noeudTable_ = noeudTable;
-	//delete noeudTable;
-
-	
-	// On cree un objet Table et 8 points de controle
-	//NoeudTable* noeudTable{ (NoeudTable *)creerNoeud(NOM_TABLE) };
 	NoeudPointControle* noeudPointControle0{ (NoeudPointControle *)creerNoeud(NOM_POINTCONTROLE) };
 	NoeudPointControle* noeudPointControle1{ (NoeudPointControle *)creerNoeud(NOM_POINTCONTROLE) };
 	NoeudPointControle* noeudPointControle2{ (NoeudPointControle *)creerNoeud(NOM_POINTCONTROLE) };
@@ -109,12 +105,9 @@ void ArbreRenduINF2990::ajouterTable()
 	NoeudPointControle* noeudPointControle5{ (NoeudPointControle *)creerNoeud(NOM_POINTCONTROLE) };
 	NoeudPointControle* noeudPointControle6{ (NoeudPointControle *)creerNoeud(NOM_POINTCONTROLE) };
 	NoeudPointControle* noeudPointControle7{ (NoeudPointControle *)creerNoeud(NOM_POINTCONTROLE) };
-	
-
 	// ajouter le noeud table a l'arbre
 	ajouter(noeudTable_);
-
-	// ajouter les noeuds des points de controle a l'arbre du rendu
+	// ajouter les noeuds des points de controle a la table
 	noeudTable_->ajouter(noeudPointControle0);
 	noeudTable_->ajouter(noeudPointControle1);
 	noeudTable_->ajouter(noeudPointControle2);
@@ -125,9 +118,11 @@ void ArbreRenduINF2990::ajouterTable()
 	noeudTable_->ajouter(noeudPointControle7);
 	
 	//juste pour l'actualisation
-	glm::vec3 point;
+	/*glm::vec3 point;
 	noeudTable_->getPointControle(0, point);
-	noeudTable_->setPointControle(0, point);
+	noeudTable_->setPointControle(0, point);*/
+
+	noeudTable_->setPointControles();
 }
 
 ////////////////////////////////////////////////////////////////////////
