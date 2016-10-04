@@ -64,6 +64,7 @@ public:
 	bool getCouleurContour(glm::vec4 & couleur);
 	bool setCouleurContour(glm::vec4 couleur);
 
+
 	//determiner si dans la table
 	/// angle
 	double calculerAngle3D(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C);

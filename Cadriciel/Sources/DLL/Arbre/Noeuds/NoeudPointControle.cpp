@@ -61,6 +61,7 @@ NoeudPointControle::~NoeudPointControle()
 ////////////////////////////////////////////////////////////////////////
 void NoeudPointControle::afficherConcret(const glm::mat4& vueProjection) const
 {
+	/*
 	glLoadIdentity();
 	glDisable(GL_TEXTURE_2D);
 
@@ -68,7 +69,7 @@ void NoeudPointControle::afficherConcret(const glm::mat4& vueProjection) const
 	glm::vec3 coord3 = obtenirPositionRelative();
 	
 	//multiplication
-#define PROJvec(arg)	glm::value_ptr(	glm::vec3(vueProjection * glm::vec4(arg, 0)))
+#define PROJvec(arg)	glm::value_ptr(	glm::vec3(vueProjection * glm::vec4(arg, 1)))
 
 
 	glm::vec3 p0{ coord3.x - delta_ / 2, coord3.y + delta_ / 2, coord3.z };
@@ -86,6 +87,7 @@ void NoeudPointControle::afficherConcret(const glm::mat4& vueProjection) const
 	}
 	glEnd();
 	glEnable(GL_TEXTURE_2D);
+	*/
 }
 ////////////////////////////////////////////////////////////////////////
 ///

@@ -81,12 +81,12 @@ void NoeudTable::afficherConcret(const glm::mat4& vueProjection) const
 	glVertex3fv( glm::value_ptr(  glm::vec3(0,0,0) ) );
 
 	//multiplication par la matrice de proj
-#define PROJvec(arg)	glm::value_ptr(	glm::vec3(vueProjection * glm::vec4(arg, 0)))
-#define PROJ(arg)		glm::value_ptr(	glm::vec3(vueProjection * glm::vec4(p(arg), 0)))
-#define vecPROJ(arg)					glm::vec3(vueProjection * glm::vec4(p(arg), 0))
-#define PROJ8			glm::value_ptr(	glm::vec3(vueProjection * glm::vec4(obtenirPositionRelative(), 0) ) )
-#define vecPROJ8						glm::vec3(vueProjection * glm::vec4(obtenirPositionRelative(), 0) )
-#define vecPROJvec(arg)					glm::vec3(vueProjection * glm::vec4(arg, 0))
+#define PROJvec(arg)	glm::value_ptr(	glm::vec3(vueProjection * glm::vec4(arg, 1)))
+#define PROJ(arg)		glm::value_ptr(	glm::vec3(vueProjection * glm::vec4(p(arg), 1)))
+#define vecPROJ(arg)					glm::vec3(vueProjection * glm::vec4(p(arg), 1))
+#define PROJ8			glm::value_ptr(	glm::vec3(vueProjection * glm::vec4(obtenirPositionRelative(), 1) ) )
+#define vecPROJ8						glm::vec3(vueProjection * glm::vec4(obtenirPositionRelative(), 1) )
+#define vecPROJvec(arg)					glm::vec3(vueProjection * glm::vec4(arg, 1))
 
 
 	/*
@@ -212,6 +212,39 @@ void NoeudTable::afficherConcret(const glm::mat4& vueProjection) const
 	rayon = distance / 2 * coeff;
 	//tracerCercle(double(pointControle_[8][0]),double(pointControle_[8][1]),rayon,100);
 	tracerCercle( (vecPROJ8).x, (vecPROJ8).y, rayon, 100);
+
+
+	//affiche les points de controle, seul moyen que j'ai trouvé de bien les afficher
+	//désolé, Luc
+	for (int i = 0; i < obtenirNombreEnfants(); i++) {
+		//point de controle
+		auto pControl = (NoeudPointControle*) chercher(i);
+		double delta; pControl->getDelta(delta);
+		glm::vec4 couleur; pControl->getCouleur(couleur);
+		glm::vec3 p0{ p(i).x - delta / 2, p(i).y + delta / 2, p(i).z };
+		glm::vec3 p1{ p(i).x - delta / 2, p(i).y - delta / 2, p(i).z };
+		glm::vec3 p2{ p(i).x + delta / 2, p(i).y - delta / 2, p(i).z };
+		glm::vec3 p3{ p(i).x + delta / 2, p(i).y + delta / 2, p(i).z };
+
+		glColor4fv(glm::value_ptr(couleur));
+		glBegin(GL_QUADS);
+		{
+			glVertex3fv(PROJvec(p0));
+			glVertex3fv(PROJvec(p1));
+			glVertex3fv(PROJvec(p2));
+			glVertex3fv(PROJvec(p3));
+		}
+		glEnd();
+	
+	}
+#undef PROJvec
+#undef PROJ
+#undef vecPROJ
+#undef PROJ8
+#undef vecPROJ8
+#undef vecPROJvec(arg)
+
+
 
 	//Activer le test de profondeur
 	glEnable(GL_DEPTH_TEST);
@@ -614,18 +647,23 @@ bool NoeudTable::dansTable(glm::dvec3 M) {
 	/*
 		etapes du check :
 	p0----------p2----------p4
-	| 1  ______/ | \_____ 5	 |
-	|___/		 |		 \__ |
-	p6		3	p8	 4	  __ p7
-	| \____		 |	  ___/	 |
-	|	2  \__	 | __/	  6	 |
+	| \___  1	 | 2    ___/ |
+	|	8 \____  |  ___/  3  |
+	p6 ________\p8 /________ p7
+	|  7  _____/ |\____	  4  |
+	| ___/	6	 |  5  \____ |
 	p1----------p3----------p5
+
 	*/
 
-	return MdansTriangleABC(p(0), p(2), p(6), M)
-		|| MdansTriangleABC(p(1), p(3), p(6), M)
-		|| MdansTriangleABC(p(2), p(3), p(6), M)
-		|| MdansTriangleABC(p(2), p(3), p(7), M)
-		|| MdansTriangleABC(p(2), p(4), p(7), M)
-		|| MdansTriangleABC(p(3), p(5), p(7), M);
+	glm::vec3 p8(p(2).x, obtenirPositionRelative().y, obtenirPositionRelative().z);
+
+	return MdansTriangleABC(p8, p(0), p(2), M)
+		|| MdansTriangleABC(p8, p(2), p(4), M)
+		|| MdansTriangleABC(p8, p(4), p(7), M)
+		|| MdansTriangleABC(p8, p(7), p(5), M)
+		|| MdansTriangleABC(p8, p(5), p(3), M)
+		|| MdansTriangleABC(p8, p(3), p(1), M)
+		|| MdansTriangleABC(p8, p(1), p(6), M)
+		|| MdansTriangleABC(p8, p(6), p(0), M);
 }
