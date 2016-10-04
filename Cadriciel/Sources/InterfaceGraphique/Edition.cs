@@ -22,7 +22,6 @@ namespace InterfaceGraphique
         //private static double angleDeRotation_;
         //private static double facteurEchelle_;
 
- BoitePropriete boiteProp = new BoitePropriete();
 
         public Edition()
         {
@@ -144,7 +143,7 @@ namespace InterfaceGraphique
                         toolStripButtonAccelerateur.Checked = true;
                         this.changerMode(Etats.AJOUT_ACCELERATEUR);break;
                     }
-                case Keys.G:
+               case Keys.G:
                     {
                         desactiverAutresBoutons();
                         toolStripButton1.Checked = true;
@@ -221,7 +220,7 @@ namespace InterfaceGraphique
             Program.peutAfficher = true;
             mousePressed = false;
 
-          //  mettreAjourPos();
+            mettreAjourPos();
             if (EtatSouris == Etats.SELECTION)
             {
                 mettreAjourPos();
@@ -277,6 +276,7 @@ namespace InterfaceGraphique
         private void propriétésToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //afficher la boite de configuration
+            BoitePropriete boiteProp = new BoitePropriete();
             boiteProp.Show();
         }
 
@@ -523,18 +523,29 @@ namespace InterfaceGraphique
         //button ok 
         private void button1_Click(object sender, EventArgs e)
         {
-            double x = Convert.ToDouble(textBox1.Text);
-            double y = Convert.ToDouble(textBox2.Text);
-            double angle = Convert.ToDouble(textBox3.Text);
-            double scale = Convert.ToDouble(textBox4.Text);
+            
+            double myX;
+            double myY;
+            double myAngle;
+            double myScale;
 
-            //assigner les nouvelles valeurs
-            FonctionsNatives.configurerObjet(x, y, angle, scale);
+            if (!double.TryParse(textBox1.Text, out myX) || !double.TryParse(textBox2.Text, out myY)
+                || !double.TryParse(textBox3.Text, out myAngle) || !double.TryParse(textBox4.Text, out myScale))
+            {
+                MessageBox.Show("Veuillez vérifier les valeurs entrées", "Barre de proprietés",
+                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else { FonctionsNatives.configurerObjet(myX, myY, myAngle, myScale); }
         }
 
+        private void zoomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            desactiverAutresBoutons();
+            toolStripButtonZoom.Checked = true;
+            this.changerMode(Etats.LOUPE);
+        }
 
-        
-      
         private void aideToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BoiteAide helpbox = new BoiteAide();
@@ -638,5 +649,7 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern double getScale();
+
+
     }
 }

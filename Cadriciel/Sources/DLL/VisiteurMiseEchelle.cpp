@@ -29,23 +29,6 @@ void VisiteurMiseEchelle::mettreEchelle(float facteur)
 
 void VisiteurMiseEchelle::visiter(NoeudAbstrait* noeud)
 {
-	cout << "noeud bonus visiteur" << endl;
-	float fact;
-
-	fact = ((noeud->getScale()[0])) + facteur_ / 30;
-
-
-	if (fact < 0.5)
-	{
-		fact = 0.5;
-	}
-
-	if (noeud->estSelectionne()) {
-
-		noeud->setScale(glm::dvec3(fact, fact, 1.0));
-
-	}
-
 
 }
 
@@ -74,12 +57,16 @@ void VisiteurMiseEchelle::visiter(NoeudMuret* noeud)
 	{
 		fact = 0.5;
 	}
+	if (fact > 14)
+	{
+		fact = 14;
+	}
 
-	//if (noeud->estSelectionne()) {
+	if (noeud->estSelectionne()) {
 
 		noeud->setScale(glm::dvec3(fact, noeud->getScale().y, 1));
 
-	//}
+	}
 }
 
 void VisiteurMiseEchelle::visiter(NoeudBonus* noeud)
@@ -96,9 +83,9 @@ void VisiteurMiseEchelle::visiter(NoeudBonus* noeud)
 	{
 		fact = 0.5;
 	}
-	if (fact > 4)
+	if (fact > 6)
 	{
-		fact = 4;
+		fact = 6;
 	}
 	cout << "fact2= "<< fact << endl;
 
@@ -118,7 +105,12 @@ void VisiteurMiseEchelle::visiter(NoeudPortail* noeud)
 	float fact;
 
 	fact = ((noeud->getScale()[0])) + facteur_ / 30;
-
+	
+	//valeurs limites pour mise a echelle
+	if (fact > 6)
+	{
+		fact = 6;
+	}
 
 	if (fact < 0.5)
 	{
