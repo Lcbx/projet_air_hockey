@@ -44,7 +44,6 @@ void PointsControle::start(int x, int y) {
 }
 
 void PointsControle::current(int x, int y) {
-
 	/*
 	p0----------p2----------p4
 	|						 |
@@ -54,7 +53,6 @@ void PointsControle::current(int x, int y) {
 	|						 |
 	p1----------p3----------p5
 	*/
-
 	//point de la souris
 	glm::dvec3 pointClick(x, y, 0);  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, pointClick);
 	if(noeud_!= PASDENOEUD)	switch (noeud_) {
@@ -77,8 +75,8 @@ void PointsControle::current(int x, int y) {
 		break;
 	}
 	case 2: {
-		if (pointClick.y < 10) pointClick.y = 10;
-		pointClick.x = 0;
+		if (pointClick.y < pos(6).y) pointClick.y = pos(6).y;
+		pointClick.x = pos(2).x;
 		// TODO: tester si les objets peuvent être dans la table
 		p(2)->assignerPositionRelative(pointClick);
 		pointClick.y = -pointClick.y;
@@ -86,8 +84,8 @@ void PointsControle::current(int x, int y) {
 		break;
 	}
 	case 3: {
-		if (pointClick.y > -10) pointClick.y = -10;
-		pointClick.x = 0;
+		if (pointClick.y > pos(7).y ) pointClick.y = pos(7).y;
+		pointClick.x = pos(3).x;
 		// TODO: tester si les objets peuvent être dans la table
 		p(3)->assignerPositionRelative(pointClick);
 		pointClick.y = -pointClick.y;
@@ -115,8 +113,8 @@ void PointsControle::current(int x, int y) {
 	case 6: {
 		//if (pointClick.y > pos(0).y) pointClick.y = pos(0).y;
 		//if (pointClick.y < pos(1).y) pointClick.y = pos(1).y;
-		pointClick.y = 0;
-		if (pointClick.x > -10) pointClick.x = -10;
+		pointClick.y = pos(6).y;
+		if (pointClick.x > pos(3).x) pointClick.x = pos(3).x;
 		// TODO: tester si les objets peuvent être dans la table
 		p(6)->assignerPositionRelative(pointClick);
 		pointClick.x = -pointClick.x;
@@ -127,7 +125,7 @@ void PointsControle::current(int x, int y) {
 		//if (pointClick.y > pos(4).y) pointClick.y = pos(4).y;
 		//if (pointClick.y < pos(5).y) pointClick.y = pos(5).y;
 		pointClick.y =  0;
-		if (pointClick.x < 10) pointClick.x = 10;
+		if (pointClick.x < pos(2).x) pointClick.x = pos(2).x;
 		// TODO: tester si les objets peuvent être dans la table
 		p(7)->assignerPositionRelative(pointClick);
 		pointClick.x = -pointClick.x;
