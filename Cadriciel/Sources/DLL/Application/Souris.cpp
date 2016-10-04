@@ -70,11 +70,22 @@ void Souris::creerStrategie(){
 void Souris::startClick(int x, int y) {
 
 	//test du code de vérification de la table
-	glm::dvec3 nouvPoint (x, y, 0);  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, nouvPoint);
+	glm::dvec3 nouvPoint (x, y, 0);
+	glm::vec3 P8,P2;
+	FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, nouvPoint);
 	std::cout << "click " << nouvPoint.x << "\t" << nouvPoint.y << "\t" << nouvPoint.z << (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(nouvPoint) ? " dans La table\n" : " a l'exterieur de la table\n");
-	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->setPointControle(0,nouvPoint);
-	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->setPointControles();
-
+	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->getPointControle(8, P8);
+	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->getPointControle(2, P2);
+	if ((nouvPoint.y > P8.y) && (nouvPoint.x < P2.x))
+	{
+		FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->setPointControle(0, nouvPoint);
+		FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->setPointControle(4, { -nouvPoint.x,nouvPoint.y,nouvPoint.z });
+		FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->setPointControles();
+	}
+	else
+	{
+		std::cout << "impossible de modifier le point de controle vers ce point!" << std::endl;
+	}
 
 	if (!boutonDroit_) notreStrategie_->start(x, y);
 	else {
