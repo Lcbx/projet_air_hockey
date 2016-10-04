@@ -60,7 +60,7 @@ namespace vue {
 		/// Obtention de la matrice de projection.
 		virtual glm::mat4 obtenirMatrice() const;
 
-		/// Obtenir les nnées de la fenêtre virtuelle.
+		/// Obtenir les données de la fenêtre virtuelle.
 		inline glm::dvec2 obtenirDimensionFenetreVirtuelle() const;
 
 		// Obtenir le zoom actuel
@@ -75,6 +75,7 @@ namespace vue {
 		double largeurFenetre_;
 		/// Hauteur de la fenêtre virtuelle.
 		double hauteurFenetre_;
+    
 		/// Largeur initiale de la fenêtre virtuelle.
 		double largeurFenetreInit_;
 		/// Hauteur initiale de la fenêtre virtuelle.
@@ -83,6 +84,8 @@ namespace vue {
 		/// Facteur de zoom actuel
 		double zoomActuel_;
 
+		double aspect_;
+		
 	};
 
 

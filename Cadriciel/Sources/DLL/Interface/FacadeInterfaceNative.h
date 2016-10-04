@@ -54,6 +54,7 @@ extern "C" {
 	__declspec(dllexport) void clickEnd(int x, int y);
 	__declspec(dllexport) void etatDelaSouris(int etat);
 	__declspec(dllexport) void positionSouris(int x, int y);
+
 	__declspec(dllexport) void rightClick(bool presse);
 	//touche control
 	__declspec(dllexport) void toucheControl(bool presse);

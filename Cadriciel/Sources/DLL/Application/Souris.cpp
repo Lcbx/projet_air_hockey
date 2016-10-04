@@ -39,10 +39,14 @@ Souris* Souris::obtenirInstance() {
 }
 
 void Souris::libererInstance() {
-	delete instance_->notreStrategie_;
-	instance_->notreStrategie_ = nullptr;
-	delete instance_;
-	instance_ = nullptr;
+	if (instance_ != nullptr) {
+		if (instance_->notreStrategie_ != nullptr) {
+			delete instance_->notreStrategie_;
+			instance_->notreStrategie_ = nullptr;
+		}
+		delete instance_;
+		instance_ = nullptr;
+	}
 }
 
 void Souris::EtatdelaSouris(int etat) {
