@@ -130,7 +130,6 @@
             this.panel1.Size = new System.Drawing.Size(1039, 800);
             this.panel1.TabIndex = 0;
             this.panel1.TabStop = true;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Edition_MouseMove);
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
@@ -401,9 +400,11 @@
             // 
             // toolStripButtonSelection
             // 
+            this.toolStripButtonSelection.Checked = true;
             this.toolStripButtonSelection.CheckOnClick = true;
+            this.toolStripButtonSelection.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripButtonSelection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonSelection.Image = global::InterfaceGraphique.Properties.Resources.Selection;
+            this.toolStripButtonSelection.Image = global::InterfaceGraphique.Properties.Resources.Selection1;
             this.toolStripButtonSelection.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonSelection.Name = "toolStripButtonSelection";
             this.toolStripButtonSelection.Size = new System.Drawing.Size(107, 29);

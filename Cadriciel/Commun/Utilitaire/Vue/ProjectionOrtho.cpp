@@ -11,6 +11,8 @@
 #include "GL/glew.h"
 #include "ProjectionOrtho.h"
 #include <glm/gtc/matrix_transform.inl>
+#include<iostream>;
+
 
 
 namespace vue {
@@ -51,6 +53,7 @@ namespace vue {
 	{
 		ajusterRapportAspect();
 	}
+	
 
 
 	////////////////////////////////////////////////////////////////////////
@@ -104,6 +107,19 @@ namespace vue {
 	void ProjectionOrtho::redimensionnerFenetre(int largeur, int hauteur)
 	{
 		// À IMPLANTER.
+		if (largeur > 100 && hauteur > 100)
+		{
+			hauteurFenetre_ += (largeurFenetre_ / largeurCloture_)*hauteur - hauteurFenetre_;
+		    largeurFenetre_ += (largeurFenetre_ / largeurCloture_)*largeur - largeurFenetre_;
+
+			largeurCloture_ = largeur;
+			hauteurCloture_ = hauteur;
+
+
+		obtenirMatrice();
+		ajusterRapportAspect();
+		}
+	
 	}
 
 
@@ -139,6 +155,10 @@ namespace vue {
 	void ProjectionOrtho::ajusterRapportAspect()
 	{
 		// À IMPLANTER.
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glViewport(0, 0, (GLsizei)(largeurCloture_), (GLsizei)(hauteurCloture_));
+		glMatrixMode(GL_MODELVIEW);
 	}
 
 }; // Fin du namespace vue.

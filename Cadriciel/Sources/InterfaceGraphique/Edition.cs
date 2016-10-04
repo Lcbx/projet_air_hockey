@@ -39,6 +39,7 @@ namespace InterfaceGraphique
 
             FonctionsNatives.initialiserOpenGL(panel1.Handle);
             FonctionsNatives.dessinerOpenGL();
+            this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
         }
 
         public void MettreAJour(double tempsInterAffichage)
@@ -213,7 +214,7 @@ namespace InterfaceGraphique
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             if (Dans_Intervalle(Convert.ToDouble(numericUpDown1.Value), 0.0, 1.5))
-                friction_ = Convert.ToDouble(numericUpDown1.Value);               
+                friction_ = Convert.ToDouble(numericUpDown1.Value);
         }
 
         ///  //////////////////////////////////////////////////////////////////////
@@ -226,7 +227,7 @@ namespace InterfaceGraphique
         ///
         /// @return Vrai si la valeur est dans l'intervalle, faux autrement.
         /// ////////////////////////////////////////////////////////////////////
-        
+
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
             if (Dans_Intervalle(Convert.ToDouble(numericUpDown2.Value), -1.0, 1.0))
@@ -261,7 +262,7 @@ namespace InterfaceGraphique
         {
             if (Dans_Intervalle(Convert.ToDouble(numericUpDown7.Value), 0.0, 200))
                 facteurEchelle_ = Convert.ToDouble(numericUpDown7.Value);
-                System.Console.WriteLine("Facteur d' échelle:" + facteurEchelle_);
+            System.Console.WriteLine("Facteur d' échelle:" + facteurEchelle_);
         }
 
 
@@ -271,7 +272,7 @@ namespace InterfaceGraphique
         /////////////////////////////////////////////////////////////////////////
         //  gere la souris
         /////////////////////////////////////////////////////////////////////////
-        public enum Etats {SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, DEBUT_AJOUT_MUR, AJOUT_MUR, DEBUT_AJOUT_PORTAIL, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, NBETATS };
+        public enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, DEBUT_AJOUT_MUR, AJOUT_MUR, DEBUT_AJOUT_PORTAIL, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, NBETATS };
 
         private Etats EtatSouris = Etats.SELECTION;
 
@@ -299,7 +300,7 @@ namespace InterfaceGraphique
                     default: break;
                 }
                 System.Console.WriteLine(text);
-                
+
             }
         }
 
@@ -323,43 +324,50 @@ namespace InterfaceGraphique
             else FonctionsNatives.positionSouris(e.X, e.Y);
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void panel1_Resize(object sender, EventArgs e)
         {
+            FonctionsNatives.redimensionnerFenetre(panel1.Width, panel1.Height);
+        }
+
+
+        static partial class FonctionsNatives
+        {
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void initialiserOpenGL(IntPtr handle);
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void libererOpenGL();
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void dessinerOpenGL();
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void animer(double temps);
+
+
+            //Click
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void etatDelaSouris(int etat);
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void clickStart(int x, int y);
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void clickCurrent(int x, int y);
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void clickEnd(int x, int y);
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void positionSouris(int x, int y);
+
+            // Redimensionnement de la fenêtre
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)] // pour utiliser une fonction qui se trouve dans le fichier Noyau.dll
+            public static extern void redimensionnerFenetre(int largeur, int hauteur);
+
 
         }
-    }
-
-
-    static partial class FonctionsNatives
-    {
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void initialiserOpenGL(IntPtr handle);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void libererOpenGL();
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void dessinerOpenGL();
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void animer(double temps);
-
-
-        //Click
-  
-         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-         public static extern void etatDelaSouris(int etat);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void clickStart(int x, int y);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void clickCurrent(int x, int y);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void clickEnd(int x, int y);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void positionSouris(int x, int y);
     }
 }

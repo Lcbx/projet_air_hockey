@@ -99,10 +99,10 @@ void ArbreRenduINF2990::initialiser()
 
 	
 	// On ajoute un noeud bidon seulement pour que quelque chose s'affiche.
-	NoeudAbstrait* noeudAraignee{ creerNoeud(NOM_TABLE) };
-	noeudAraignee->assignerPositionRelative(glm::dvec3{ 0.0, 0.0, 0.0 });
+	//NoeudAbstrait* noeudAraignee{ creerNoeud(NOM_TABLE) };
+	//noeudAraignee->assignerPositionRelative(glm::dvec3{ 0.0, 0.0, 0.0 });
 	//noeudAraignee->ajouter(creerNoeud(NOM_CONECUBE));
-	ajouter(noeudAraignee);
+	//ajouter(noeudAraignee);
 	
 
 
