@@ -91,7 +91,8 @@ void NoeudTable::animer(float temps)
 
 void NoeudTable::accepter(Visiteur* v)
 {
-	v->visiter(this);
+	// on ne veut pas de traitment sur la table
+	//v->visiter(this);
 }
 
 

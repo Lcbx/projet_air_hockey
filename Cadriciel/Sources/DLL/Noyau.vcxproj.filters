@@ -180,6 +180,9 @@
     <ClCompile Include="Application\PointsControle.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
+    <ClCompile Include="VisiteurDansLaTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\FacadeModele.h">
@@ -313,6 +316,9 @@
     </ClInclude>
     <ClInclude Include="Application\PointsControle.h">
       <Filter>Header Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="VisiteurDansLaTable.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

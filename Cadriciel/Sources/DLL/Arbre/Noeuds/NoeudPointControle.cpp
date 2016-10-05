@@ -111,7 +111,8 @@ void NoeudPointControle::animer(float temps)
 ////////////////////////////////////////////////
 void NoeudPointControle::accepter(Visiteur* v)
 {
-	v->visiter(this);
+	//on ne veut pas faire de traitement sur les points de controle
+	//v->visiter(this);
 }
 
 ////////////////////////////////////////////////////////////////////////
