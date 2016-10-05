@@ -11,11 +11,18 @@
 #pragma once
 #include "StrategieSouris.h"
 
-
+///////////////////////////////////////////////////////////////////////////
+/// @class Deplacement
+/// @brief Cette classe contient des méthodes permettant de déplacer
+///        des objets avec la souris
+///
+/// @author Luc Courbariaux
+/// @date 2016-09-25
+///////////////////////////////////////////////////////////////////////////
 class Deplacement : public StrategieSouris {
 public:
 	//void start(int x, int y);				//les coordonnees du mouse_down
-	void current(int x, int y);			//les coordonnees du mouse_move
+	void current(int x, int y);				//les coordonnees du mouse_move
 	//void end(int x, int y);				//les coordonnees du mouse_up
 	//void position(int x, int y);			//position de la souris hors d'un click
 	void operationShortClick();				//lance l'opération adéquate selon le scénario du click

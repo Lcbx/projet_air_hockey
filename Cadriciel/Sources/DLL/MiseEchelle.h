@@ -12,6 +12,14 @@
 #include "StrategieSouris.h"
 #include "../VisiteurMiseEchelle.h"
 
+///////////////////////////////////////////////////////////////////////////
+/// @class MiseEchelle
+/// @brief Cette classe contient des méthodes permettant d'effectuer
+///        une mise a echelle d'objets avec la souris
+///
+/// @author Luc Courbariaux
+/// @date 2016-09-25
+///////////////////////////////////////////////////////////////////////////
 class MiseEchelle : public StrategieSouris {
 public:
 	//void start(int x, int y);				//les coordonnees du mouse_down
