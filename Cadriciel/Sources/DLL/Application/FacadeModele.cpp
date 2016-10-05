@@ -360,7 +360,7 @@ void FacadeModele::ajouterBonus(int x, int y)
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn FacadeModele::void FacadeModele::ajouterPortail(int x1, int y1, int x2, int y2)
+/// @fn FacadeModele::void FacadeModele::ajouterPortail(int x1, int y1)
 ///
 /// Cette fonction permet d'ajouter le portail a la scene
 ///
@@ -376,13 +376,35 @@ void FacadeModele::ajouterPortail(int x1, int y1)
 	arbre_->ajouterPortail(position1);
 }
 
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn FacadeModele::void FacadeModele::supprimerPortail()
+///
+/// Cette fonction permet de supprimer un portail suite a clic d'Echap
+///
+/// @param[in]bool escTouche: bool
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
 void FacadeModele::supprimerPortail(bool escTouche)
 {
 	arbre_->supprimerPortail(escTouche);
 }
 
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn FacadeModele::void FacadeModele::ajouterPortailDeux(int x2, int y2)
+///
+/// Cette fonction permet d'ajouter le deuxieme portail a la scene
+///
+/// @param[in] x2, y2 : position de clic de la souris .
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
 void FacadeModele::ajouterPortailDeux(int x2, int y2)
 {
 	glm::dvec3 position2;
@@ -401,24 +423,6 @@ void FacadeModele::ajouterMuret(int x1, int y1, int x2, int y2)
 }
 
 
-////////////////////////////////////////////////////////////////////////
-///
-/// @fn void FacadeModele::ajouterMurFantome(int corXin, int corYin, int corX, int corY)
-///
-/// Cette fonction effectue l'ajout des Murs.
-///
-/// @param[in] int corX : coordonnée dans l'axe des x
-///            int corY : coordonnée dans l'axe des y
-/// @return Aucune.
-///
-////////////////////////////////////////////////////////////////////////
-void FacadeModele::ajouterMurFantome(int corXin, int corYin, int corX, int corY)
-{
-	// bloc d'instruction
-	if (arbre_->chercher(arbre_->obtenirNombreEnfants() - 1)->obtenirType() == "mur")
-		arbre_->effacer(arbre_->chercher(arbre_->obtenirNombreEnfants() - 1));
-	//ajouterMur(corXin, corYin, corX, corY);
-}
 
 
 
@@ -570,4 +574,37 @@ double FacadeModele::getScale()
 	return arbre_->getScaleDataBinding();
 
 }
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::ajouterMuretFantome(int corXin, int corYin, int corX, int corY)
+///
+/// Cette fonction effectue l'ajout des Murs.
+///
+/// @param[in] int corX : coordonnée dans l'axe des x
+///            int corY : coordonnée dans l'axe des y
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::ajouterMuretFantome(int corXin, int corYin, int corX, int corY)
+{
+	// bloc d'instruction
+	if (arbre_->chercher(arbre_->obtenirNombreEnfants() - 1)->obtenirType() == "muret")
+		arbre_->effacer(arbre_->chercher(arbre_->obtenirNombreEnfants() - 1));
+	//ajouterMur(corXin, corYin, corX, corY);
+}
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn FacadeModele::void FacadeModele::supprimerMurat()
+///
+/// Cette fonction permet de supprimer un portail suite a clic d'Echap
+///
+/// @param[in]bool escTouche: bool
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::supprimerMuret(bool escTouche)
+{
+	arbre_->supprimerMuret(escTouche);
+}

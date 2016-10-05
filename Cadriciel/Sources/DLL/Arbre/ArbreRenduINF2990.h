@@ -88,6 +88,11 @@ public:
    //obtenir le scale d'un objet selectionne
    double getScaleDataBinding();
 
+   //supprimer un muret a l'appui d'echap
+   void supprimerMuret(bool escTouche);
+
+   int compteur ;
+
 private :
 	NoeudTable* noeudTable_;
 };
