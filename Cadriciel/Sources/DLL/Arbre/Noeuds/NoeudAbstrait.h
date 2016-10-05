@@ -163,7 +163,7 @@ public:
 	/// Permet d'obtenir le rayon de la forme en fonction du rayon du modèle
 	/// @return Le rayon de l'objet
 	////////////////////////////////////////////////////////////////////////
-	virtual double obtenirRayon() { return obtenirRayonModele(); };
+	virtual double obtenirRayon() { return obtenirRayonModele() * this->getScale().y; };
 
 
 	//Accepter le visiteur
@@ -489,10 +489,15 @@ inline void NoeudAbstrait::assignerObjetRendu(modele::Modele3D const* modele, op
 
 ////////////////////////////////////////////////////////////////////////
 /// @fn void NoeudAbstrait::setAngle(float angle)
-/// Permet de changer l'angle de rotation de l'objet
-/// @param[in] angle : Angle de rotation par rapport à l'axe des X
+/// Permet de changer l'angle de rotation de l'objet. Il est ensuite normalisé entre -pi et pi
+/// @param[in] angle : Angle de rotation par rapport à l'axe des X en radian
 ////////////////////////////////////////////////////////////////////////
 inline void NoeudAbstrait::setAngle(float angle) {
+	if (angle <= utilitaire::DEG_TO_RAD(-180))
+		angle += utilitaire::DEG_TO_RAD(360);
+	else if (angle > utilitaire::DEG_TO_RAD(180))
+		angle -= utilitaire::DEG_TO_RAD(360);
+
 	angleRotation_ = angle;
 }
 
@@ -506,15 +511,24 @@ inline void NoeudAbstrait::setScale(const glm::dvec3& scale) {
 }
 
 
-//get du scale et angle
-inline float NoeudAbstrait::getAngle()const
-{
+////////////////////////////////////////////////////////////////////////
+/// @fn float NoeudAbstrait::getAngle()
+/// Permet d'obtenir l'angle de rotation du noeud en radian
+/// @return L'angle de rotation par rapport à l'axe des X en radian
+////////////////////////////////////////////////////////////////////////
+inline float NoeudAbstrait::getAngle() const {
 	return angleRotation_;
 }
 
 
-inline const glm::dvec3& NoeudAbstrait::getScale()const
-{
+////////////////////////////////////////////////////////////////////////
+/// @fn glm::dvec3&  NoeudAbstrait::getScale()
+/// Permet d'obtenir la mise à l'échelle de l'objet en prennant en compte
+/// que le vecteur retourné est l'agrandissement en fonction des composants
+/// i.e: vec.x est le redimensonnement en X
+/// @return L'angle de rotation par rapport à l'axe des X en radian
+////////////////////////////////////////////////////////////////////////
+inline const glm::dvec3& NoeudAbstrait::getScale() const{
 	return scale_;
 }
 

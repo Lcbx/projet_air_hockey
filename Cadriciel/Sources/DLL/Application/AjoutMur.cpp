@@ -38,7 +38,12 @@ void AjoutMur::position(int x, int y) {
 }
 
 void AjoutMur::operationShortClick() {
-	glm::dvec3 pointClick;  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(X1(), Y1(), pointClick);
+	glm::dvec3 pointClick;  
+	if(!clickInitial)
+		FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(X1(), Y1(), pointClick);
+	else
+		FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(notrePosition_.x, notrePosition_.y, pointClick);
+
 	if (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(pointClick)) {
 		if (clickInitial) clickInitial = false;
 		else {
