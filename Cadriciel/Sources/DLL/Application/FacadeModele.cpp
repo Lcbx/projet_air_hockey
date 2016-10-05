@@ -46,6 +46,8 @@
 #include <iostream>
 #include "Noeuds/NoeudTypes.h"
 
+#include "../SauvegardeZoneDeJeu.h"
+
 
 
 /// Pointeur vers l'instance unique de la classe.
@@ -54,6 +56,9 @@ FacadeModele* FacadeModele::instance_{ nullptr };
 
 /// Chaîne indiquant le nom du fichier de configuration du projet.
 const std::string FacadeModele::FICHIER_CONFIGURATION{ "configuration.xml" };
+
+/// Chaîne indiquant le nom du fichier de la zone de jeu par défaut.
+const std::string FacadeModele::FICHIER_ZONEDEFAUT{ "ZoneDefaut.xml" };
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -232,7 +237,7 @@ void FacadeModele::enregistrerConfiguration() const
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn void FacadeModele::chargerZoneJeu() const
+/// @fn void FacadeModele::chargerZoneJeu(std::string FICHIER_ZONEJEU) const
 ///
 /// Cette fonction charge la zone de jeu à partir d'un fichier XML.
 ///
@@ -249,11 +254,13 @@ void FacadeModele::chargerZoneJeu(std::string FICHIER_ZONEJEU) const
 	document.LoadFile(FICHIER_ZONEJEU.c_str());
 
 	// On lit les différentes configurations.
-	//ConfigScene::obtenirInstance()->lireDOM(document);
+	SauvegardeZoneDeJeu::lireArbre(document);
 }
+
+
 ///////////////////////////////////////////////////////////////////////
 ///
-/// @fn void FacadeModele::enregistrerZoneJeu() const
+/// @fn void FacadeModele::enregistrerZoneJeu(std::string FICHIER_ZONEJEU) const
 ///
 /// Cette fonction genere un fichier XML contenant
 ///  la zone de jeu actuelle.
@@ -266,18 +273,19 @@ void FacadeModele::chargerZoneJeu(std::string FICHIER_ZONEJEU) const
 
 void FacadeModele::enregistrerZoneJeu(std::string FICHIER_ZONEJEU) const
 {
+	// TODO : Correctement implémenter l'erreur
+	if (FICHIER_ZONEJEU == FICHIER_ZONEDEFAUT)
+		std::cerr << "Erreur : Tentative de modification de la zone de jeu par défaut" << std::endl;
+
 	tinyxml2::XMLDocument document;
 
-	// Ecrire la declaration XML standard...
+	// Écrire la déclaration XML standard...
 	document.NewDeclaration(R"(?xml version="1.0" standalone="yes"?)");
 
-	// Noeud arbreDeRendu
-	tinyxml2::XMLElement* elementArbreDeRendu{ document.NewElement("arbreDeRendu") };
+	// On enregistre les différentes configurations.
+	SauvegardeZoneDeJeu::lireArbre(document);
 
-	// Creation de l'arbre DOM a partir de l'arbre de rendu
-	obtenirArbreRenduINF2990()->accepter(VisiteurSauvegarde);
-
-	// Ecrire dans le fichier
+	// Écrire dans le fichier
 	document.SaveFile(FICHIER_ZONEJEU.c_str());
 }
 

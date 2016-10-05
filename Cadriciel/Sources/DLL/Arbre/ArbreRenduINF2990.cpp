@@ -166,17 +166,34 @@ NoeudTable* ArbreRenduINF2990::getTable()
 ///
 /// @fn void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos) 
 ///
-/// Cette fonction permet d'ajouter un bonus accélarateur a la scene
+/// Cette fonction permet d'ajouter un bonus accélérateur a la scene
 ///
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-
 void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos) 
 {
 	NoeudAbstrait* noeudBonus{ creerNoeud(NOM_BONUS) };
 	VisiteurAjout v1(pos);
 	noeudBonus->setScale({ 1, 1, 1 });
+	noeudBonus->accepter(&v1);
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos, glm::dvec3 scale, float angleRotation)
+///
+/// Cette fonction permet d'ajouter un bonus accélérateur a la scene
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos, glm::dvec3 scale, float angleRotation)
+{
+	NoeudAbstrait* noeudBonus{ creerNoeud(NOM_BONUS) };
+	VisiteurAjout v1(pos);
+	noeudBonus->setScale(scale);
+	noeudBonus->setAngle(angleRotation);
 	noeudBonus->accepter(&v1);
 }
 
@@ -233,6 +250,26 @@ void ArbreRenduINF2990::ajouterPortailDeux(glm::dvec3 pos)
 
 ////////////////////////////////////////////////////////////////////////
 ///
+/// @fn void ArbreRenduINF2990::ajouterPortail(glm::dvec3 pos, glm::dvec3 scale, float angleRotation, NoeudAbstrait* frere)
+///
+/// Cette fonction permet d'ajouter un portail a la scene
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::ajouterPortail(glm::dvec3 pos, glm::dvec3 scale, float angleRotation, NoeudAbstrait* frere)
+{
+	NoeudAbstrait* noeudPortail{ creerNoeud(NOM_PORTAIL) };
+	VisiteurAjout v1(pos);
+	noeudPortail->setScale(scale);
+	noeudPortail->setAngle(angleRotation);
+	noeudPortail->setFrere(frere);
+	noeudPortail->accepter(&v1);
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
 /// @fn void ArbreRenduINF2990::supprimerPortail(bool escTouche)
 ///
 /// Cette fonction permet de supprimer portail de la scene
@@ -267,7 +304,6 @@ void ArbreRenduINF2990::supprimerPortail(bool escTouche)
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-
 void ArbreRenduINF2990::ajouterMuret(glm::dvec3 position1, glm::dvec3 position2)
 {
 	NoeudAbstrait* noeudMuret{ creerNoeud(NOM_MURET) };
@@ -289,6 +325,24 @@ void ArbreRenduINF2990::ajouterMuret(glm::dvec3 position1, glm::dvec3 position2)
 }
 
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void ArbreRenduINF2990::ajouterMuret(glm::dvec3 pos, glm::dvec3 scale, float angleRotation)
+///
+/// Cette fonction permet d'ajouter un muret de la scene
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::ajouterMuret(glm::dvec3 pos, glm::dvec3 scale, float angleRotation)
+{
+	NoeudAbstrait* noeudMuret{ creerNoeud(NOM_MURET) };
+	VisiteurAjout v1(pos);
+	noeudMuret->setScale(scale);
+	noeudMuret->setAngle(angleRotation);
+	noeudMuret->accepter(&v1);
+}
+
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -299,7 +353,6 @@ void ArbreRenduINF2990::ajouterMuret(glm::dvec3 position1, glm::dvec3 position2)
 /// @return scale.
 ///
 ////////////////////////////////////////////////////////////////////////
-
 GLfloat ArbreRenduINF2990::calculerScale(glm::dvec3 pos, glm::dvec3 posf)
 {
 	glm::dvec3 diff = posf - pos;

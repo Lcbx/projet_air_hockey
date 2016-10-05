@@ -130,6 +130,9 @@ private:
    /// Nom du fichier XML dans lequel doit se trouver la configuration.
    static const std::string FICHIER_CONFIGURATION;
 
+   /// Nom du fichier XML dans lequel doit se trouver la zone de jeu par défaut.
+   static const std::string FICHIER_ZONEDEFAUT;
+
    /// Pointeur vers l'instance unique de la classe.
    static FacadeModele* instance_;
 

@@ -183,6 +183,9 @@
     <ClCompile Include="VisiteurSauvegarde.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SauvegardeZoneDeJeu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\FacadeModele.h">
@@ -318,6 +321,9 @@
       <Filter>Header Files\Application</Filter>
     </ClInclude>
     <ClInclude Include="VisiteurSauvegarde.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SauvegardeZoneDeJeu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
