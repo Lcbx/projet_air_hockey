@@ -280,7 +280,7 @@ void ArbreRenduINF2990::ajouterMuret(glm::dvec3 position1, glm::dvec3 position2)
 
 	noeudMuret->setScale({ calculerScale(position1, position2) / sizeModelX, 2, 2 });
 	
-	noeudMuret->setAngle(calculerAngle(position1, position2));
+	noeudMuret->setAngle(utilitaire::DEG_TO_RAD(calculerAngle(position1, position2)));
 	noeudMuret->accepter(v1);
 	
 

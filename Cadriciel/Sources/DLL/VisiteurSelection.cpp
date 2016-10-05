@@ -113,7 +113,10 @@ void VisiteurSelection::visiter(NoeudMuret* noeud) {
 	else {
 		bool doesCollides = false;
 		for (int i = 0; i < pointsSize; i++) { //Est-ce que les deux droites s'intersectent
-			doesCollides |= droiteDirectrice.intersectionSegment(this->getPoint(i), this->getPoint(i + 1));
+			doesCollides |= aidecollision::calculerCollisionSegments(
+				droiteDirectrice.lirePoint(), droiteDirectrice.lirePoint() + droiteDirectrice.lireVecteur(),
+				this->getPoint(i), this->getPoint(i + 1)
+			).type != aidecollision::Collision::COLLISION_AUCUNE;			
 		}
 
 		this->setNodeSelectedState(noeud, doesCollides);
@@ -147,7 +150,10 @@ void VisiteurSelection::visiter(NoeudBonus* noeud) {
 	else {
 		bool doesCollides = false;
 		for (int i = 0; i < pointsSize; i++) { //Est-ce que les deux droites s'intersectent
-			doesCollides |= droiteDirectrice.intersectionSegment(this->getPoint(i), this->getPoint(i + 1));
+			doesCollides |= aidecollision::calculerCollisionSegments(
+				droiteDirectrice.lirePoint(), droiteDirectrice.lirePoint() + droiteDirectrice.lireVecteur(),
+				this->getPoint(i), this->getPoint(i + 1)
+			).type != aidecollision::Collision::COLLISION_AUCUNE;
 		}
 
 		this->setNodeSelectedState(noeud, doesCollides);

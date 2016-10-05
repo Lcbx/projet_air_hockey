@@ -17,6 +17,72 @@
 #include "glm\gtx\projection.hpp"
 
 namespace aidecollision {
+	
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn DetailsCollision calculerCollisionSegments(
+	/// const glm::dvec2& droite1p1,
+	/// 		const glm::dvec2& droite1p2,
+	/// const glm::dvec2& droite2p1,
+	/// const glm::dvec2& droite2p2,
+	/// bool collisionAvecPoints = true
+	/// );
+	///
+	/// Cette fonciton calcule l'intersection d'une deux droites, identifiées
+	/// par les coordonnées des deux points formant leurs extrémitées.
+	///
+	/// @param[in] droite1p1 : Premier point de la première droite
+	/// @param[in] droite1p2 : Second point de la première droite
+	/// @param[in] droite1p1 : Premier point de la seconde droite
+	/// @param[in] droite1p2 : Second point de la seconde droite
+	/// @param[in] collisionAvecPoints : Vrai si on veut les collisions avec
+	///                                  les extrémités.
+	///
+	/// @return Structure contenant de l'information sur la collision.
+	///
+	////////////////////////////////////////////////////////////////////////
+	DetailsCollision calculerCollisionSegments(
+		const glm::dvec3& droite1p1,
+		const glm::dvec3& droite1p2,
+		const glm::dvec3& droite2p1,
+		const glm::dvec3& droite2p2,
+		bool collisionAvecPoints //= true
+	) {
+		// Valeur de retour.
+		DetailsCollision detailsCollision;
+		detailsCollision.type = Collision::COLLISION_AUCUNE;
+
+		// Adaptation de l'algorithme donné à la réalité du code
+		// Source: http://stackoverflow.com/questions/2316490/the-algorithm-to-find-the-point-of-intersection-of-two-3d-line-segment
+		// Auteur: Bill
+		// Source alternative: http://mathworld.wolfram.com/Line-LineIntersection.html
+
+		// Vérification si les deux droites sont parallèles rendrait l'algorithme plus lourd
+		// et peu commune, donc elle est simplement non-présente.
+
+		glm::dvec3 vecteur1 = droite1p2 - droite1p1;
+		glm::dvec3 vecteur2 = droite2p2 - droite2p1;
+		glm::dvec3 vecteurPoints = droite2p1 - droite1p1; // Vecteur formé de deux points des deux droites
+		glm::dvec3 crossVecteur1Vecteur2 = glm::cross(vecteur1, vecteur2); // Produit croisé des deux vecteurs
+
+		// S'il existe une collision entre les deux droites
+		if (glm::dot(vecteurPoints, crossVecteur1Vecteur2) == 0.0) {
+			double normalizedDistance = glm::dot(glm::cross(vecteurPoints, vecteur2), crossVecteur1Vecteur2) / (glm::dot(crossVecteur1Vecteur2, crossVecteur1Vecteur2));
+
+			if (0.0 <= normalizedDistance && normalizedDistance <= 1.0) {
+				glm::dvec3 pointDeCollision = droite1p1 + normalizedDistance * vecteur1;
+
+				// On vérifie si le point est situé entre les deux points du segment 2.
+				// Autrement, le point ne serait que sur le segment 1.
+				if (glm::distance(droite2p1, droite2p2) == 
+					glm::distance(droite2p1, pointDeCollision) + glm::distance(droite2p2, pointDeCollision)) {
+					detailsCollision.type = Collision::COLLISION_SEGMENT;
+				}
+			}
+		}
+
+		return detailsCollision;
+	}
 
 
 	////////////////////////////////////////////////////////////////////////
