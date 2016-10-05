@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 /// @file NoeudTable.cpp
-/// @author Julien Gascon-Samson
-/// @date 2011-05-19
+/// @author equipe 10
+/// @date september 2016
 /// @version 1.0
 ///
 /// @addtogroup inf2990 INF2990
@@ -150,22 +150,20 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 	}
 	glEnd();
 	
-	// tracer les points de Controle 
-	tracerPointsControle(vueProjection);
+	
 	// tracer les murs 
 	tracerMurs(vueProjection);
 	// tracer les buts 
 	tracerButs(vueProjection);
 	// tracer les lignes de decoration 
 	tracerLignesDecoration(vueProjection);
+	// tracer les points de Controle 
+	tracerPointsControle(vueProjection);
 
 	//Activer le test de profondeur
 	glEnable(GL_DEPTH_TEST);
 	// activer le test de profondeur
 	glEnable(GL_TEXTURE_2D);
-
-	//glPopMatrix();
-
 }
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -198,7 +196,7 @@ void NoeudTable::tracerPointsControle(const glm::mat4& vueProjection) const {
 			glVertex3fv(PROJvec(p2));
 			glVertex3fv(PROJvec(p3));
 		}
-		glEnd();
+		glEnd();	
 	}
 }
 
@@ -249,17 +247,10 @@ void NoeudTable::tracerLignesDecoration(const glm::mat4& vueProjection) const
 								 glm::distance(vecPROJ(1), vecPROJ8) });
 	double coeff = 0.4;
 	double rayon = distance  * coeff;
-	tracerCercle( (vecPROJ8).x, (vecPROJ8).y, rayon, 100);
+	tracerCercle((vecPROJ8).x, (vecPROJ8).y, rayon, 100);
 
 
-	//Activer le test de profondeur
-	glEnable(GL_DEPTH_TEST);
-	// activer le test de profondeur
-	glEnable(GL_TEXTURE_2D);
-
-
-	//pour afficher les noeuds composites
-	NoeudComposite::afficherConcret(vueProjection);}
+}
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -380,96 +371,101 @@ double NoeudTable::calculB(double pente, glm::vec3 point) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
 {
-	// tracez le 1er but
-	//// pente de la droite p6p0
-	double a60 = calculPente(p(0),p(6));
-	double b60 = calculB(a60, p(0));
-	double longueur = sqrt(pow((pointControle_[0].x - pointControle_[6].x),2)+pow(pointControle_[0].y - pointControle_[6].y,2));
-	
-	float dx = p(0).x - p(6).x;
-	float dy = p(0).y - p(6).y;
-	GLfloat angle = glm::atan(dx / dy);
-	//std::cout << "dx = " << dx <<" dy = "<<dy<< std::endl;
-	//std::cout << "angle = " << angle << std::endl;
-	//////////////////////////////////
-	//				|				//
-	// 2eme 		|   1er			//
-	// Quadrant		|	Quadrant	//
-	//				|				//
-	//------------------------------//
-	//				|				//	
-	//	3eme		|	4eme		//
-	//	Quadrant	|	Quadrant	//
-	//				|				//
-	//////////////////////////////////
-	glm::mat4 Vp = vueProjection;
 	glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
-	if (dx > 0)
-	{
-		if (dy > 0)
-		{
-			//1er quadrant
-			glBegin(GL_QUADS);
-			{
-				// 1er morceau P0P6
-				glVertex3fv(PROJ(6));
-				glVertex3fv(PROJvec(glm::vec3(p(6).x, p(6).y + longueur / 4, p(6).z)));
-				glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y + longueur / 4, p(6).z)));
-				glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y, p(6).z)));
+	glBegin(GL_QUADS);
+	{	
+		//1er but
+		// 1er morceau P6P0
+		glm::vec3 point = { (p(6).x + (p(6).x + p(0).x) / 2) / 2, (p(6).y + (p(6).y + p(0).y) / 2) / 2, (p(6).z +(p(6).z + p(0).z) / 2) / 2 };
+		glVertex3fv(PROJ(6));
+		glVertex3fv(PROJvec(glm::vec3( point ) ) );
+		glVertex3fv(PROJvec(glm::vec3(point.x - largeur_,point.y, point.z)));
+		glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y, p(6).z)));
+		// 2eme morceau P1P6
+		point = { (p(6).x + (p(6).x + p(1).x) / 2) / 2, (p(6).y + (p(6).y + p(1).y) / 2) / 2, (p(6).z + (p(6).z + p(1).z) / 2) / 2 };
+		glVertex3fv(PROJ(6));
+		glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y, p(6).z)));
+		glVertex3fv(PROJvec(glm::vec3(point.x - largeur_, point.y, point.z)));
+		glVertex3fv(PROJvec(glm::vec3(point)));
+		
+		//2eme but
+		// 1ere morceau P7P4
+		point = { (p(7).x + (p(7).x + p(4).x) / 2) / 2, (p(7).y + (p(7).y + p(4).y) / 2) / 2, (p(7).z + (p(7).z + p(4).z) / 2) / 2 };
+		glVertex3fv(PROJ(7));
+		glVertex3fv(PROJvec(glm::vec3(p(7).x + largeur_, p(7).y, p(7).z)));
+		glVertex3fv(PROJvec(glm::vec3(point.x + largeur_, point.y, point.z)));
+		glVertex3fv(PROJvec(glm::vec3(point)));
+		//2eme morceau P7P5
+		point = { (p(7).x + (p(7).x + p(5).x) / 2) / 2, (p(7).y + (p(7).y + p(5).y) / 2) / 2, (p(7).z + (p(7).z + p(5).z) / 2) / 2 };
+		glVertex3fv(PROJ(7));
+		glVertex3fv(PROJvec(glm::vec3(point)));
+		glVertex3fv(PROJvec(glm::vec3(point.x + largeur_, point.y, point.z)));
+		glVertex3fv(PROJvec(glm::vec3(p(7).x + largeur_, p(7).y, p(7).z)));
+	}
+	glEnd();
 
-			}
-			glEnd();
-			glm::rotate(vueProjection, angle, p(0));		
-		}
-		else
-		{
-			//4eme quadrant
-		}
-	}
-	else
-	{
-		if (dy > 0)
-		{
-			//2eme quadrant
-		}
-		else
-		{
-			//3eme quadrant
-		}
-	}
-	
+
+
+	//// tracez le 1er but
+	////// pente de la droite p6p0
+	//double a60 = calculPente(p(0),p(6));
+	//double b60 = calculB(a60, p(0));
+	//double longueur = sqrt(pow((pointControle_[0].x - pointControle_[6].x),2)+pow(pointControle_[0].y - pointControle_[6].y,2));
+	//
+	//float dx = p(0).x - p(6).x;
+	//float dy = p(0).y - p(6).y;
+	//GLfloat angle = glm::atan(dx / dy);
+	////std::cout << "dx = " << dx <<" dy = "<<dy<< std::endl;
+	////std::cout << "angle = " << angle << std::endl;
+	////////////////////////////////////
+	////				|				//
+	//// 2eme 		|   1er			//
+	//// Quadrant		|	Quadrant	//
+	////				|				//
+	////------------------------------//
+	////				|				//	
+	////	3eme		|	4eme		//
+	////	Quadrant	|	Quadrant	//
+	////				|				//
+	////////////////////////////////////
+	//glm::mat4 Vp = vueProjection;
 	//glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
-	//glBegin(GL_QUADS);
-	//{	
-	//	//1er but
-	//	// 1er morceau P0P6
-	//	glVertex3fv(PROJ(6));
-	//	glVertex3fv(PROJvec(glm::vec3(p(6).x, p(6).y + longueur/4, p(6).z)));
-	//	glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y + longueur/4, p(6).z)));
-	//	glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y, p(6).z)));
-	//	// 2eme morceau P6P1
-	//	longueur = sqrt(pow((pointControle_[1].x - pointControle_[6].x), 2) + pow(pointControle_[1].y - pointControle_[6].y, 2));
-	//	glVertex3fv(PROJ(6));
-	//	glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y, p(6).z)));
-	//	glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y - longueur/4, p(6).z)));
-	//	glVertex3fv(PROJvec(glm::vec3(p(6).x, p(6).y - longueur/4, p(6).z)));
-	//	
-	//	//2eme but
-	//	// 1ere morceau
+	//if (dx > 0)
+	//{
+	//	if (dy > 0)
+	//	{
+	//		glm::rotate(Vp, angle, p(0));
+	//		//1er quadrant
+	//		glBegin(GL_QUADS);
+	//		{
+	//			// 1er morceau P0P6
+	//			glVertex3fv(PROJ(6));
+	//			glVertex3fv(PROJvec(glm::vec3(p(6).x, p(6).y + longueur / 4, p(6).z)));
+	//			glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y + longueur / 4, p(6).z)));
+	//			glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y, p(6).z)));
 
-	//	/*glVertex3f(pointControle_[7].x + largeur_, pointControle_[7].y, pointControle_[7].z);
-	//	glVertex3f(pointControle_[7].x + largeur_, pointControle_[7].y + longueurP6P0 / 4, pointControle_[7].z);
-	//	glVertex3f(pointControle_[7].x, pointControle_[7].y + longueurP6P0 / 4, pointControle_[7].z);
-	//	glVertex3f(pointControle_[7].x, pointControle_[7].y, pointControle_[7].z);*/
-	//			
-	//	// 2eme morceau
-	//	//glVertex3f(pointControle_[7].x + largeur_, pointControle_[7].y, pointControle_[7].z);
-	//	//glVertex3f(pointControle_[7].x, pointControle_[7].y, pointControle_[7].z);
-	//	//glVertex3f(pointControle_[7].x, pointControle_[7].y - longueurP6P0 / 4, pointControle_[7].z);
-	//	//glVertex3f(pointControle_[7].x + largeur_, pointControle_[7].y - longueurP6P0 / 4, pointControle_[7].z);
-	//	//						
+	//		}
+	//		glEnd();
+	//	
+
+	//	}
+	//	else
+	//	{
+	//		//4eme quadrant
+	//	}
 	//}
-	//glEnd();
+	//else
+	//{
+	//	if (dy > 0)
+	//	{
+	//		//2eme quadrant
+	//	}
+	//	else
+	//	{
+	//		//3eme quadrant
+	//	}
+	//}
+	//
 }
 ////////////////////////////////////////////////////////////////////////
 ///
