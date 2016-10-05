@@ -15,7 +15,14 @@
 #include "VisiteurDeplacement.h"
 
 
-
+///////////////////////////////////////////////////////////////////////////
+/// @class VisiteurDuplication
+/// @brief Cette classe contient des méthodes permettant de dupliquer
+///        des moeuds
+///
+/// @author Luc Courbariaux
+/// @date 2016-09-25
+//////////////////////////////////////////////////////////////////////////
 class VisiteurDuplication : public Visiteur
 {
 	glm::vec3 posCentre_ {0.f};
@@ -38,13 +45,10 @@ public:
 	void duplicate(glm::vec3 point);
 	void actualise(glm::vec3 point);
 	void finalise();
-
 	void supprimerClones();
 
 	virtual void visiter(NoeudAbstrait* noeud);
 	virtual void visiter(NoeudComposite *noeud);
-
-
 	virtual void visiter(NoeudRondelle* noeud);
 	virtual void visiter(NoeudMuret* noeud);
 	virtual void visiter(NoeudBonus* noeud);
