@@ -23,7 +23,8 @@ class VisiteurRotation : public Visiteur
 {
 	float angle_{0.f};
 	glm::vec3 posCentre_{0.f,0.f,0.f};
-
+	bool tester_ = true;	//s'il faut tester si la manipulation est viable
+	bool effectuer_ = true;	//s'il faut effectuer la manipulation
 public:
 	VisiteurRotation();
 	void rotate(float angle);

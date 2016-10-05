@@ -13,7 +13,8 @@
 class VisiteurDeplacement : public Visiteur
 {
 	glm::vec3 dep_{0.f};
-
+	bool tester_ = true;	//s'il faut tester si la manipulation est viable
+	bool effectuer_ = true;	//s'il faut tester si la manipulation est viable
 public:
 	
 	VisiteurDeplacement(glm::vec3 dep);
