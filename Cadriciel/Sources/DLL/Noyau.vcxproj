@@ -166,6 +166,7 @@
     <ClCompile Include="Tests\ConfigSceneTest.cpp" />
     <ClCompile Include="Tests\NoeudAbstraitTest.cpp" />
     <ClCompile Include="VisiteurAjout.cpp" />
+    <ClCompile Include="VisiteurDansLaTable.cpp" />
     <ClCompile Include="VisiteurDeplacement.cpp" />
     <ClCompile Include="VisiteurDuplication.cpp" />
     <ClCompile Include="VisiteurMiseEchelle.cpp" />
@@ -212,6 +213,7 @@
     <ClInclude Include="Tests\NoeudAbstraitTest.h" />
     <ClInclude Include="Visiteur.h" />
     <ClInclude Include="VisiteurAjout.h" />
+    <ClInclude Include="VisiteurDansLaTable.h" />
     <ClInclude Include="VisiteurDeplacement.h" />
     <ClInclude Include="VisiteurDuplication.h" />
     <ClInclude Include="VisiteurMiseEchelle.h" />

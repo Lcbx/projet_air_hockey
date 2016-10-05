@@ -26,7 +26,7 @@ VisiteurDeplacement::VisiteurDeplacement(glm::vec3 dep) {
 ///
 /// @fn VisiteurDeplacement::setDep(glm::vec3 dep)
 ///
-/// retoumodifie la valeur du deplacement
+/// modifie la valeur du deplacement
 /// 
 /// @return Aucune.
 ///

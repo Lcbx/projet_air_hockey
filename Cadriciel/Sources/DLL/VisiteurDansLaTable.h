@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// @file VisiteurPointMilieu.h
+/// @file VisiteurDansLaTable.h
 /// @author Luc Courbariaux
-/// @date 2016-09-30
+/// @date 2016-10-05
 /// @version 1.0
 ///
 /// @addtogroup inf2990 INF2990
@@ -9,32 +9,27 @@
 ///////////////////////////////////////////////////////////////////////////////
 #pragma once
 
-#include <list>
+
 #include "Visiteur.h"
 
-
 ///////////////////////////////////////////////////////////////////////////
-/// @class VisiteurPointMilieu
-/// @brief Cette classe permet de déterminer le point au milieu
-///		de la selection
+/// @class VisiteurDansLaTable
+/// @brief Cette classe permet de déterminer si touts les noeuds 
+///			sont bien dans la Table
 ///
 /// @author Luc Courbariaux
 /// @date 2016-09-25
 //////////////////////////////////////////////////////////////////////////
-class VisiteurPointMilieu : public Visiteur
+class VisiteurDansLaTable : public Visiteur
 {
-	int nbrNoeudsVisites_;
-	glm::vec3& posCentre_;
-	std::list<NoeudAbstrait*> selection_;
+	bool result = true;
 
 public:
-	VisiteurPointMilieu(glm::vec3& pointARendre);
 
-	std::list<NoeudAbstrait*> getSelection();
+	VisiteurDansLaTable::VisiteurDansLaTable();
 
 	virtual void visiter(NoeudAbstrait* noeud);
 	virtual void visiter(NoeudComposite *noeud);
-
 
 	virtual void visiter(NoeudRondelle* noeud);
 	virtual void visiter(NoeudMuret* noeud);
