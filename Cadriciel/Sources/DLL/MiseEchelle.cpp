@@ -10,7 +10,16 @@
 
 #include "MiseEchelle.h"
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn MiseEchelle::current(int x, int y)
+///
+/// utilise les données du click pour réaliser une mise a echelle
+/// sur les objets couramment selectionnés
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void MiseEchelle::current(int x, int y) {
 	visiteur_.mettreEchelle(Y1() - y);
 	Y1() = y;

@@ -21,20 +21,51 @@
 #include "../MiseEchelle.h"
 #include "PointsControle.h"
 
+#include "../Vue/Vue.h"
+#include "../Vue/Camera.h"
 
 
 
+//initialisation du patron singleton
 Souris* Souris::instance_{ nullptr };
 
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Souris::Souris()
+///
+/// crait la souris et la strategie utilisée (selection, deplacement , rotation, ...)
+///
+/// @return Aucune (Constructeur).
+///
+/////////////////////////////////////////////////////////////////////////
 Souris::Souris() {
 	creerStrategie();
 };
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Souris::obtenirInstance()
+///
+/// donne un pointeur vers l'instance de Souris (singleton)
+///
+/// @return Souris*
+///
+/////////////////////////////////////////////////////////////////////////
 Souris* Souris::obtenirInstance() {
 	if (instance_ == nullptr) instance_ = new Souris;
 	return instance_;
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Souris::libererInstance()
+///
+/// libere l'instance de Souris (singleton)
+///
+/// @return aucune
+///
+/////////////////////////////////////////////////////////////////////////
 void Souris::libererInstance() {
 	if (instance_ != nullptr) {
 		if (instance_->notreStrategie_ != nullptr) {
@@ -46,6 +77,15 @@ void Souris::libererInstance() {
 	}
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Souris::EtatdelaSouris(int etat)
+///
+/// change la strategie utilisée (selection, deplacement , rotation, ...)
+///
+/// @return Aucune (Constructeur).
+///
+/////////////////////////////////////////////////////////////////////////
 void Souris::EtatdelaSouris(int etat) {
 	escPresse(); //evite de garder un portail non fini
 	etatSouris = static_cast<Etats>(etat);
@@ -54,6 +94,15 @@ void Souris::EtatdelaSouris(int etat) {
 }
 
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Souris::creerStrategie()
+///
+/// crait la strategie utilisée (selection, deplacement , rotation, ...)
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void Souris::creerStrategie(){
 	switch (etatSouris) {
 	case SELECTION: {			notreStrategie_ = new Selection;  break; }
@@ -71,36 +120,72 @@ void Souris::creerStrategie(){
 }
 
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Souris::startClick(int x, int y)
+///
+/// appelle la fonction start de la strategie utilisée (selection, deplacement , rotation, ...)
+/// et gere le click droit
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void Souris::startClick(int x, int y) {
 	if (!boutonDroit_) notreStrategie_->start(x, y);
 	else {
 		//traitement du bouton droit
-		std::cout << "debut click droit\n";
+		FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, prevClicDroit_);
 
 
 	}
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Souris::currentClick(int x, int y)
+///
+/// appelle la fonction current de la strategie utilisée (selection, deplacement , rotation, ...)
+/// et gere le click droit
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void Souris::currentClick(int x, int y) {
 	if(!boutonDroit_) notreStrategie_->current( x, y);
 	else {
 		//traitement du bouton droit
-		//std::cout << "pendant click droit\n";
+		glm::dvec3 newClicDroit_{ 0,0,0 }; FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, newClicDroit_);
 
-
+		FacadeModele::obtenirInstance()->obtenirVue()->obtenirCamera().deplacerXY((prevClicDroit_ - newClicDroit_).x, (prevClicDroit_ - newClicDroit_).y, true);
+		FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, prevClicDroit_);
 	}
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Souris::endClick(int x, int y)
+///
+/// appelle la fonction end de la strategie utilisée (selection, deplacement , rotation, ...)
+/// et gere le click droit
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void Souris::endClick(int x, int y) {
 	if (!boutonDroit_) notreStrategie_->end(x, y);
-	else {
-		//traitement du bouton droit
-		std::cout << "fin click droit\n";
-
-
-	}
+	else { }
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Souris::sourisPostition(int x, int y)
+///
+/// appelle la fonction position de la strategie utilisée (selection, deplacement , rotation, ...)
+/// et gere le click droit
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void Souris::sourisPostition(int x, int y) {
 	if (!boutonDroit_) notreStrategie_->position(x, y);
 	else {
@@ -111,31 +196,94 @@ void Souris::sourisPostition(int x, int y) {
 	}
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Souris::clickRight(bool presse)
+///
+/// appelé par la couche C# pour signifier que le bouton droit est pressé
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void Souris::clickRight(bool presse) {
 	boutonDroit_ = presse;
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Souris::setControl(bool presse)
+///
+/// appelé par la couche C# pour signifier que la touche control est pressé
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void Souris::setControl(bool presse) {
 	control_ = presse;
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Souris::getControl()
+///
+/// permet de connaitre si la touche control est presse
+///
+/// @return bool
+///
+/////////////////////////////////////////////////////////////////////////
 bool Souris::getControl() {
 	return control_;
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Souris::setAlt(bool presse)
+///
+/// appelé par la couche C# pour signifier que la touche Alt est pressé
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void Souris::setAlt(bool presse) {
 	alt_ = presse;
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Souris::getControl()
+///
+/// permet de connaitre si la touche Alt est presse
+///
+/// @return bool
+///
+/////////////////////////////////////////////////////////////////////////
 bool Souris::getAlt() {
 	return alt_;
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Souris::escPresse(bool presse)
+///
+/// appelé par la couche C# pour signifier que la touche echap est pressé
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void Souris::escPresse() {
 	notreStrategie_->escEnfonce();
 }
 
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Souris::getPosition()
+///
+/// retourne la position de la souris
+///
+/// @return glm::ivec4&
+///
+/////////////////////////////////////////////////////////////////////////
 glm::ivec4& Souris::getPosition() {
 	return position_;
 }

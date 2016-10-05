@@ -42,6 +42,9 @@ public:
 	void tracerPointsControle(const glm::mat4& vueProjection)  const; // tracer les points de Controle
 	void tracerCercle(double cx, double cy, double r, int nb_segments) const; // tracer la table
 	void tracerMurs(const glm::mat4& vueProjection) const; //tracer les murs autour de la table
+	void tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 p1, glm::vec3 p2) const; //tracer un mur entre 2 points
+	double NoeudTable::Delta(double A, double B, double C) const;
+	void tracerMurs3Points(const glm::mat4& vueProjection,glm::vec3 p1, glm::vec3 p2, glm::vec3 p3) const; //tracer les murs entre 3 points
 	void tracerButs(const glm::mat4& vueProjection) const; //tracer les buts
 	void tracerLignesDecoration (const glm::mat4& vueProjection) const; //tracer les lignes de decoration
 

@@ -14,7 +14,14 @@
 #include <glm/glm.hpp>
 
 
-// Click
+///////////////////////////////////////////////////////////////////////////
+/// @class Souris
+/// @brief Cette classe est une facade pour toues les classes
+///         gérant l'utilisation de la souris
+///
+/// @author Luc Courbariaux
+/// @date 2016-09-25
+///////////////////////////////////////////////////////////////////////////
 class Souris {
 public:
 	enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, AJOUT_MUR, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, REDIMENSIONNEMENT, NBETATS };
@@ -43,4 +50,6 @@ private:
 	bool control_ = false;					//touche control enfoncee
 	bool alt_ = false;					    //touche alt enfoncee
 	glm::ivec4 position_;					//position de Click courante
+
+	glm::dvec3 prevClicDroit_;				//Position précédente du clic droit
 };

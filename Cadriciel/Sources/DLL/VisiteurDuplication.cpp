@@ -7,22 +7,55 @@
 
 
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurDuplication::VisiteurDuplication()
+///
+/// initialisation du visiteur de duplication
+/// determine le centre de la selection
+///
+/// @return Aucune (constructeur).
+///
+/////////////////////////////////////////////////////////////////////////
 VisiteurDuplication::VisiteurDuplication() : visDep_(glm::vec3(0.f)) {}
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurDuplication::duplicate(glm::vec3 point)
+///
+/// determine s'il est possible de dupliquer, crait les clones et les place
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::duplicate(glm::vec3 point) {
 	VisiteurPointMilieu v(posCentre_);
 	nosClones_ = v.getSelection();
 	posActuelle_ = point;
-	for (auto it = nosClones_.begin(); it != nosClones_.end() && (*it)->estSelectionne(); it++ )
+	tester_ = true;
+	effectuer_ = true;
+	for (auto it = nosClones_.begin(); it != nosClones_.end() && (*it)->estSelectionne(); it++)
 		(*it)->accepter(this);
+	tester_ = false;
+	if (effectuer_)
+		for (auto it = nosClones_.begin(); it != nosClones_.end() && (*it)->estSelectionne(); it++)
+			(*it)->accepter(this);
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurDuplication::actualise(glm::vec3 point)
+///
+/// deplace les clones selon la souris
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::actualise(glm::vec3 point) {
+	visDep_.setDep(point - posActuelle_);
 	for (auto it = nosClones_.begin(); it != nosClones_.end(); it++) {
 		if (!(*it)->estSelectionne()) {
 			(*it)->assignerSelection(true);
-			visDep_.setDep(point - posActuelle_);
 			visDep_.visiter(*it);
 			(*it)->assignerSelection(false);
 		}
@@ -30,6 +63,15 @@ void VisiteurDuplication::actualise(glm::vec3 point) {
 	posActuelle_ = point;
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurDuplication::finalise()
+///
+/// termine la duplication
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::finalise() {
 	for (auto it = nosClones_.begin(); it != nosClones_.end();) {
 		if (!(*it)->estSelectionne()) {
@@ -39,7 +81,15 @@ void VisiteurDuplication::finalise() {
 	}
 }
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurDuplication::supprimerClones()
+///
+/// supprime les clones
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::supprimerClones() {
 	for (auto it = nosClones_.begin(); it != nosClones_.end(); ) {
 		if (!(*it)->estSelectionne()) {
@@ -52,11 +102,17 @@ void VisiteurDuplication::supprimerClones() {
 
 
 void VisiteurDuplication::visiter(NoeudAbstrait* noeud)
-{
-	if (noeud->estSelectionne()) { 
-	}
-}
+{}
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurDuplication::visiter(NoeudComposite* noeud)
+///
+/// visite les noeuds inferieur du composite
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::visiter(NoeudComposite* noeud)
 {
 	for (int i = 0; i < noeud->obtenirNombreEnfants(); i++) {
@@ -70,25 +126,51 @@ void VisiteurDuplication::visiter(NoeudRondelle* noeud)
 	}
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurDuplication::visiter(NoeudMuret* noeud)
+///
+/// verififie si on peut dupliquer le muret, crait le clone
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::visiter(NoeudMuret* noeud)
 {
 	if (noeud->estSelectionne()) {
-		NoeudMuret* nouveau = new NoeudMuret(*noeud);
-		nouveau->assignerSelection(false);
-		nouveau->assignerPositionRelative(nouveau->obtenirPositionRelative() + posActuelle_ - posCentre_);
-		FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter((NoeudAbstrait*)nouveau);
-		nosClones_.push_back((NoeudAbstrait*)nouveau);
+		if (!FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(noeud->obtenirPositionRelative() + posActuelle_ - posCentre_))
+			effectuer_ = false;
+		else if (!tester_ && effectuer_) {
+			NoeudMuret* nouveau = new NoeudMuret(*noeud);
+			nouveau->assignerSelection(false);
+			nouveau->assignerPositionRelative(nouveau->obtenirPositionRelative() + posActuelle_ - posCentre_);
+			FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter((NoeudAbstrait*)nouveau);
+			nosClones_.push_back((NoeudAbstrait*)nouveau);
+		}
 	}
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurDuplication::visiter(NoeudBonus* noeud)
+///
+/// verififie si on peut dupliquer le bonus, crait le clone
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::visiter(NoeudBonus* noeud)
 {
 	if (noeud->estSelectionne()) {
-		NoeudBonus* nouveau = new NoeudBonus(*noeud);
-		nouveau->assignerSelection(false);
-		nouveau->assignerPositionRelative(nouveau->obtenirPositionRelative() + posActuelle_ - posCentre_ );
-		FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter((NoeudAbstrait*)nouveau);
-		nosClones_.push_back((NoeudAbstrait*)nouveau);
+		if (!FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(noeud->obtenirPositionRelative() + posActuelle_ - posCentre_))
+			effectuer_ = false;
+		else if (!tester_ && effectuer_) {
+			NoeudBonus* nouveau = new NoeudBonus(*noeud);
+			nouveau->assignerSelection(false);
+			nouveau->assignerPositionRelative(nouveau->obtenirPositionRelative() + posActuelle_ - posCentre_);
+			FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter((NoeudAbstrait*)nouveau);
+			nosClones_.push_back((NoeudAbstrait*)nouveau);
+		}
 	}
 }
 
@@ -99,13 +181,44 @@ void VisiteurDuplication::visiter(NoeudMaillet* noeud)
 	}
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurDuplication::visiter(NoeudPortail* noeud)
+///
+/// verififie si on peut dupliquer les portails, crait les clones
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::visiter(NoeudPortail* noeud)
 {
 	if (noeud->estSelectionne() && noeud->getFrere()->estSelectionne()) {
-		NoeudPortail* nouveau = new NoeudPortail(*noeud);
-		nouveau->assignerSelection(false);
-		nouveau->assignerPositionRelative(nouveau->obtenirPositionRelative() + posActuelle_ - posCentre_);
-		FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter((NoeudAbstrait*)nouveau);
-		nosClones_.push_back((NoeudAbstrait*)nouveau);
+		if (!FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(noeud->obtenirPositionRelative() + posActuelle_ - posCentre_)
+			&& !FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(noeud->getFrere()->obtenirPositionRelative() + posActuelle_ - posCentre_))
+			effectuer_ = false;
+		else if (!tester_ && effectuer_) {
+			//evite de faire des doubles supplementaires
+			auto frere = std::find(nosClones_.begin(), nosClones_.end(), noeud->getFrere());
+			nosClones_.erase(frere);
+			nosClones_.push_front(noeud->getFrere());
+			//on crait les noeuds freres en meme temps
+			NoeudPortail* nouveau1 = new NoeudPortail(*noeud);
+			NoeudPortail* nouveau2 = new NoeudPortail(*((NoeudPortail*)noeud->getFrere()));
+			//assigner les nouveaux freres entre eux
+			nouveau1->setFrere(nouveau2);
+			nouveau2->setFrere(nouveau1);
+			//les deselectionner
+			nouveau1->assignerSelection(false);
+			nouveau2->assignerSelection(false);
+			//les placer
+			nouveau1->assignerPositionRelative(nouveau1->obtenirPositionRelative() + posActuelle_ - posCentre_);
+			nouveau2->assignerPositionRelative(nouveau2->obtenirPositionRelative() + posActuelle_ - posCentre_);
+			//les ajouter
+			FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter((NoeudAbstrait*)nouveau1);
+			FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter((NoeudAbstrait*)nouveau2);
+			//les ajouter a notre liste
+			nosClones_.push_back((NoeudAbstrait*)nouveau1);
+			nosClones_.push_back((NoeudAbstrait*)nouveau2);
+		}
 	}
 }

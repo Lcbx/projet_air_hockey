@@ -267,9 +267,9 @@ namespace InterfaceGraphique
                 Program.peutAfficher = false;
             }
 
-            e.Cancel = true;
-            menuPrincipal_.Show();
-            this.Hide();
+            //e.Cancel = true;
+            //menuPrincipal_.Show();
+            //this.Hide();
         }
 
         public void setMenuPrincipal(MenuPrincipal menuPrincipal)
@@ -288,13 +288,40 @@ namespace InterfaceGraphique
             BoitePropriete boiteProp = new BoitePropriete();
             boiteProp.Show();
         }
-
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn private void toolStripButtonSelection_Click(object sender, EventArgs e) 
+        ///
+        ///  @brief Change le mode pour sélection
+        ///  
+        /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
+        /// et qui active l'état selection sont appelée.
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButtonSelection_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
             toolStripButtonSelection.Checked = true;
             this.changerMode(Etats.SELECTION);
         }
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn private void toolStripButtonDeplacement_Click(object sender, EventArgs e)
+        /// 
+        ///  @brief Change le mode pour Deplacement
+        /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
+        /// et qui active l'état déplacement sont appelée.
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
 
         private void toolStripButtonDeplacement_Click(object sender, EventArgs e)
         {
@@ -303,6 +330,20 @@ namespace InterfaceGraphique
             this.changerMode(Etats.DEPLACEMENT);
 
         }
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn private void toolStripButtonRotation_Click(object sender, EventArgs e)
+        /// 
+        ///  @brief Change le mode pour Rotation
+        /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
+        /// et qui active l'état de rotation sont appelée.
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
 
         private void toolStripButtonRotation_Click(object sender, EventArgs e)
         {
@@ -311,12 +352,42 @@ namespace InterfaceGraphique
             this.changerMode(Etats.ROTATION);
         }
 
+        /////////////////////////////////////////////////////////////////////////
+        ///  
+        ///  @fn  private void toolStripButtonMiseAEchelle_Click(object sender, EventArgs e)
+        ///  
+        ///  @brief Change le mode pour Mise à l'échelle
+        /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
+        /// et qui active l'état mise à l'échelle sont appelée.
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
+
         private void toolStripButtonMiseAEchelle_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
             toolStripButtonMiseAEchelle.Checked = true;
             this.changerMode(Etats.MISEAECHELLE);
         }
+
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn private void toolStripButtonDuplication_Click(object sender, EventArgs e)
+        ///  @brief Change le mode pour Duplication
+        /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
+        /// et qui active l'état duplication sont appelée.
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
 
         private void toolStripButtonDuplication_Click(object sender, EventArgs e)
         {
@@ -325,12 +396,40 @@ namespace InterfaceGraphique
             this.changerMode(Etats.DUPLICATION);
         }
 
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn private void toolStripButtonZoom_Click(object sender, EventArgs e)
+        /// 
+        ///  @brief Change le mode pour Zoom
+        /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
+        /// et qui active l'état Zoom sont appelée.
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
+
         private void toolStripButtonZoom_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
             toolStripButtonZoom.Checked = true;
             this.changerMode(Etats.LOUPE);
         }
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fnprivate void toolStripButtonPortail_Click(object sender, EventArgs e)
+        ///  @brief Change le mode pour l'ajout d'un portail
+        /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
+        /// et qui active l'état l'ajout d'un portail sont appelée.
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
 
         private void toolStripButtonAccelerateur_Click(object sender, EventArgs e)
         {
@@ -339,6 +438,21 @@ namespace InterfaceGraphique
             this.changerMode(Etats.AJOUT_ACCELERATEUR);
 
         }
+        /////////////////////////////////////////////////////////////////////////
+        /// 
+        ///  @fn private void toolStripButtonAccelerateur_Click(object sender, EventArgs e)
+        /// 
+        ///  @brief Change le mode pour ajouter un accelerateur
+        /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
+        /// et qui active l'état de l'ajout d'un accelerateur sont appelée.
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
 
         private void toolStripButtonPortail_Click(object sender, EventArgs e)
         {
@@ -346,6 +460,21 @@ namespace InterfaceGraphique
             toolStripButtonPortail.Checked = true;
             this.changerMode(Etats.AJOUT_PORTAIL);
         }
+        /////////////////////////////////////////////////////////////////////////
+        /// 
+        ///  @fn private void toolStripButtonMuret_Click(object sender, EventArgs e)
+        /// 
+        ///  @brief Change le mode pour l'ajout d'un muret 
+        /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
+        /// et qui active l'état de l'ajout d'un muret  sont appelée.
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
 
         private void toolStripButtonMuret_Click(object sender, EventArgs e)
         {
@@ -353,6 +482,21 @@ namespace InterfaceGraphique
             toolStripButtonMuret.Checked = true;
             this.changerMode(Etats.AJOUT_MUR);
         }
+        /////////////////////////////////////////////////////////////////////////
+        ///  
+        ///  @fn private void toolStripButton1_Click(object sender, EventArgs e)
+        /// 
+        ///  @brief Change le mode pour points de controle
+        /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
+        /// et qui active l'état points de controle sont appelée.
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
@@ -361,6 +505,19 @@ namespace InterfaceGraphique
             this.changerMode(Etats.POINTSDECONTROLE);
 
         }
+
+        /////////////////////////////////////////////////////////////////////////
+        //  private void desactiverAutresBoutons()
+        ///
+        /// ette fonction désactive tous les boutons de la barre d'outil dans la form edition
+        ///
+        /// @param[in] valeur   : La valeur à vérifier.
+        /// @param[in] borneMin : La borne inférieure de l'intervalle.
+        /// @param[in] borneMax : La borne supérieure de l'intervalle.
+        ///
+        /// @return Vrai si la valeur est dans l'intervalle, faux autrement.
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void desactiverAutresBoutons()
         {
             toolStripButtonSelection.Checked = false;

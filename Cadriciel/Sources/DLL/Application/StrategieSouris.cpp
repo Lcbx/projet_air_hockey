@@ -11,27 +11,107 @@
 #include "StrategieSouris.h"
 #include "Souris.h"
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn StrategieSouris::X1()
+///
+/// retourne la coordonnee en X de cloture du debut du click
+///
+/// @return int&
+///
+/////////////////////////////////////////////////////////////////////////
 int& StrategieSouris::X1() { return Souris::obtenirInstance()->getPosition()[0]; }
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn StrategieSouris::Y1()
+///
+/// retourne la coordonnee en Y de cloture du debut du click
+///
+/// @return int&
+///
+/////////////////////////////////////////////////////////////////////////
 int& StrategieSouris::Y1() { return Souris::obtenirInstance()->getPosition()[1]; }
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn StrategieSouris::X2()
+///
+/// retourne la coordonnee en X de cloture de la fin du click
+///
+/// @return int&
+///
+/////////////////////////////////////////////////////////////////////////
 int& StrategieSouris::X2() { return Souris::obtenirInstance()->getPosition()[2]; }
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn StrategieSouris::Y2()
+///
+/// retourne la coordonnee en y de cloture de la fin du click
+///
+/// @return int&
+///
+/////////////////////////////////////////////////////////////////////////
 int& StrategieSouris::Y2() { return Souris::obtenirInstance()->getPosition()[3]; }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn StrategieSouris::plusDe3px(glm::ivec4 pos)
+///
+/// retourne si les coordonnées fournies sont de plus de 3 pixels
+///
+/// @return bool
+///
+/////////////////////////////////////////////////////////////////////////
 bool StrategieSouris::plusDe3px(glm::ivec4 pos) {
-	return ((pos[0] - pos[2])*(pos[0] - pos[2]) + (pos[1] - pos[3])*(pos[1] - pos[3]) > 9);
+	return glm::length( glm::fvec2(pos[2], pos[3]) - glm::fvec2(pos[0], pos[1]) ) > 3;
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn  StrategieSouris::plusDe3px()
+///
+/// retourne si les coordonnées de Click actuelle sont de plus de 3 pixels
+///
+/// @return bool
+///
+/////////////////////////////////////////////////////////////////////////
 bool StrategieSouris::plusDe3px() {
 	return plusDe3px(Souris::obtenirInstance()->getPosition());
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn StrategieSouris::start(int x, int y)
+///
+/// comportement par défaut pour un début de click
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void StrategieSouris::start(int x, int y) {
 	//initialisation du clic
 	Souris::obtenirInstance()->getPosition() = {x,y,x,y};
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn StrategieSouris::current(int x, int y)
+///
+/// comportement par défaut en cours de click
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void StrategieSouris::current(int x, int y) {}
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn StrategieSouris::end(int x, int y)
+///
+/// comportement par défaut en fin de click
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void StrategieSouris::end(int x, int y) {
 	//fin du clic
 	X2() = x; Y2() = y;
@@ -39,6 +119,24 @@ void StrategieSouris::end(int x, int y) {
 	plusDe3px() ? operationDragClick() : operationShortClick();
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn StrategieSouris::position(int x, int y)
+///
+/// comportement par défaut en dehors d'un click
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void StrategieSouris::position(int x, int y) {}
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn StrategieSouris::escEnfonce()
+///
+/// comportement par defaut en cas d'enfoncement de touche echap
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void StrategieSouris::escEnfonce() {}

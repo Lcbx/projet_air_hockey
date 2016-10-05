@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// @file POintsControle.h
+/// @file PointsControle.h
 /// @author Luc Courbariaux
 /// @date 2016-09-21
 /// @version 1.0
@@ -14,6 +14,14 @@
 
 class NoeudPointControle;
 
+///////////////////////////////////////////////////////////////////////////
+/// @class PointsControle
+/// @brief Cette classe contient des méthodes permettant d'effectuer
+///        la modification des points de controle avec la souris
+///
+/// @author Luc Courbariaux
+/// @date 2016-09-25
+///////////////////////////////////////////////////////////////////////////
 class PointsControle : public StrategieSouris {
 public:
 	void start(int x, int y);				//les coordonnees du mouse_down

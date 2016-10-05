@@ -12,7 +12,14 @@
 #include "StrategieSouris.h"
 #include "../VisiteurDuplication.h"
 
-
+///////////////////////////////////////////////////////////////////////////
+/// @class Duplication
+/// @brief Cette classe contient des méthodes permettant de dupliquer
+///        des objets avec la souris
+///
+/// @author Luc Courbariaux
+/// @date 2016-09-25
+///////////////////////////////////////////////////////////////////////////
 class Duplication : public StrategieSouris {
 public:
 	Duplication(){}
