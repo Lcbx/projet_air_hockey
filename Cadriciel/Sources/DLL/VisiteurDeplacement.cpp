@@ -1,6 +1,12 @@
-#include <iostream>
-#include <string>
-
+///////////////////////////////////////////////////////////////////////////////
+/// @file VisiteurDeplacement.cpp
+/// @author Luc Courbariaux
+/// @date 2016-09-30
+/// @version 1.0
+///
+/// @addtogroup inf2990 INF2990
+/// @{
+///////////////////////////////////////////////////////////////////////////////
 #include "VisiteurDeplacement.h"
 #include "ArbreRenduINF2990.h"
 

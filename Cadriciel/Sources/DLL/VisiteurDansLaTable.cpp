@@ -14,15 +14,17 @@
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn VisiteurDansLaTable::VisiteurDansLaTable(glm::vec3 dep)
+/// @fn VisiteurDansLaTable::VisiteurDansLaTable(bool& result)
 ///
 /// initialisation du visiteur verifiant si les noeuds sont dans la table
-/// 
+/// met le resultat dans le booleen passé en argument 
+///
 /// @return Aucune (constructeur).
 ///
 /////////////////////////////////////////////////////////////////////////
-VisiteurDansLaTable::VisiteurDansLaTable() {
-
+VisiteurDansLaTable::VisiteurDansLaTable(bool& result) : result_(result) {
+	result_ = true;
+	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -36,8 +38,8 @@ VisiteurDansLaTable::VisiteurDansLaTable() {
 /////////////////////////////////////////////////////////////////////////
 void VisiteurDansLaTable::visiter(NoeudAbstrait* noeud)
 {
-	if (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(noeud->obtenirPositionRelative()))
-		result = false;
+	if (!FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(noeud->obtenirPositionRelative()))
+		result_ = false;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -61,9 +63,28 @@ void VisiteurDansLaTable::visiter(NoeudRondelle* noeud)
 	VisiteurDansLaTable::visiter((NoeudAbstrait*)noeud);
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurDansLaTable::visiter(NoeudMuret* noeud)
+///
+/// verifie le long de sa trajectoire du noeud muret
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurDansLaTable::visiter(NoeudMuret* noeud)
 {
-	VisiteurDansLaTable::visiter((NoeudAbstrait*)noeud);
+	//test le long du mur s'il est dans la table
+	glm::dvec3 debut = noeud->obtenirDroiteDirectrice().lirePoint();
+	glm::dvec3 fin = debut + noeud->obtenirDroiteDirectrice().lireVecteur() ;
+	//tout les 2 pixels
+	double length = 0.5 * glm::distance(debut, fin);
+	glm::dvec3 vec = (fin - debut) / length;
+	for (int i = 1; i < length; i++) {
+		debut += vec;
+		if (!FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(debut))
+			result_ = false;
+	}
 }
 
 void VisiteurDansLaTable::visiter(NoeudBonus* noeud)

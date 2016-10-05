@@ -1,6 +1,12 @@
-#include <iostream>
-#include <string>
-
+///////////////////////////////////////////////////////////////////////////////
+/// @file VisiteurDuplication.cpp
+/// @author Luc Courbariaux
+/// @date 2016-10-05
+/// @version 1.0
+///
+/// @addtogroup inf2990 INF2990
+/// @{
+///////////////////////////////////////////////////////////////////////////////
 #include "VisiteurDuplication.h"
 #include "VisiteurPointMilieu.h"
 #include "ArbreRenduINF2990.h"
