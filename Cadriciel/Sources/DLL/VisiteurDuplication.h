@@ -21,6 +21,9 @@ class VisiteurDuplication : public Visiteur
 	glm::vec3 posCentre_ {0.f};
 	glm::vec3 posActuelle_{ 0.f };
 	
+	bool tester_ = true;	//s'il faut tester si la manipulation est viable
+	bool effectuer_ = true;	//s'il faut tester si la manipulation est viable
+
 	//liste de noeuds
 	///contient les originaux(selectionnés)
 	///et les clones (non selectionnés)
