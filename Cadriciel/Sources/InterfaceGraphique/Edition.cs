@@ -268,9 +268,9 @@ namespace InterfaceGraphique
                 Program.peutAfficher = false;
             }
 
-            e.Cancel = true;
-            menuPrincipal_.Show();
-            this.Hide();
+            //e.Cancel = true;
+            //menuPrincipal_.Show();
+            //this.Hide();
         }
 
         public void setMenuPrincipal(MenuPrincipal menuPrincipal)

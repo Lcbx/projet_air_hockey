@@ -22,10 +22,7 @@
 #include "PointsControle.h"
 
 
-#include "FacadeModele.h"
-#include "../Arbre/ArbreRenduINF2990.h"
-#include "../Arbre/Noeuds/NoeudTable.h"
-#include "../Vue/Vue.h"
+
 
 Souris* Souris::instance_{ nullptr };
 
@@ -75,10 +72,6 @@ void Souris::creerStrategie(){
 
 
 void Souris::startClick(int x, int y) {
-	glm::dvec3 nouvPoint (x, y, 0);  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, nouvPoint);
-	std::cout << "click " << nouvPoint.x << " " << nouvPoint.y << " " << nouvPoint.z << 
-		(FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(nouvPoint) ? " dans La table\n" : " a l'exterieur de la table\n");
-
 	if (!boutonDroit_) notreStrategie_->start(x, y);
 	else {
 		//traitement du bouton droit

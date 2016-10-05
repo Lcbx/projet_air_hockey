@@ -11,6 +11,7 @@
 #include "StrategieSouris.h"
 #include "Souris.h"
 
+
 int& StrategieSouris::X1() { return Souris::obtenirInstance()->getPosition()[0]; }
 int& StrategieSouris::Y1() { return Souris::obtenirInstance()->getPosition()[1]; }
 int& StrategieSouris::X2() { return Souris::obtenirInstance()->getPosition()[2]; }

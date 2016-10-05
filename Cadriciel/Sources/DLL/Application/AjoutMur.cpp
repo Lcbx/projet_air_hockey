@@ -9,9 +9,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "AjoutMur.h"
-#include "FacadeModele.h"
 #include "Souris.h"
-
+#include "FacadeModele.h"
+#include "../ArbreRenduINF2990.h"
+#include "../../Commun/Utilitaire/Vue/Vue.h"
 #include <iostream>
 
 void AjoutMur::start(int x, int y) {
@@ -27,17 +28,28 @@ void AjoutMur::end(int x, int y) {
 }
 
 void AjoutMur::position(int x, int y) {
-	if (!clickInitial) {
-		X2() = x; Y2() = y;
-		FacadeModele::obtenirInstance()->ajouterMurFantome(notrePosition_[0], notrePosition_[1], x, y);
+	glm::dvec3 pointClick;  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(X1(), Y1(), pointClick);
+	if (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(pointClick)) {
+		if (!clickInitial) {
+			X2() = x; Y2() = y;
+			FacadeModele::obtenirInstance()->ajouterMurFantome(notrePosition_[0], notrePosition_[1], x, y);
+		}
 	}
 }
 
 void AjoutMur::operationShortClick() {
-	if (clickInitial) clickInitial = false;
-	else {
-		FacadeModele::obtenirInstance()->ajouterMuret(notrePosition_[0], notrePosition_[1], X2(), Y2());
-		clickInitial = true;
+	glm::dvec3 pointClick;  
+	if(!clickInitial)
+		FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(X1(), Y1(), pointClick);
+	else
+		FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(notrePosition_.x, notrePosition_.y, pointClick);
+
+	if (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(pointClick)) {
+		if (clickInitial) clickInitial = false;
+		else {
+			FacadeModele::obtenirInstance()->ajouterMuret(notrePosition_[0], notrePosition_[1], X2(), Y2());
+			clickInitial = true;
+		}
 	}
 }
 
