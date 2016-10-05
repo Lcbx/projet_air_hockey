@@ -30,15 +30,15 @@ VisiteurDuplication::VisiteurDuplication() : visDep_(glm::vec3(0.f)) {}
 /////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::duplicate(glm::vec3 point) {
 	VisiteurPointMilieu v(posCentre_);
-	nosClones_ = v.getSelection();
+	originaux_ = v.getSelection();
 	posActuelle_ = point;
 	tester_ = true;
 	effectuer_ = true;
-	for (auto it = nosClones_.begin(); it != nosClones_.end() && (*it)->estSelectionne(); it++)
+	for (auto it = originaux_.begin(); it != originaux_.end(); it++)
 		(*it)->accepter(this);
 	tester_ = false;
 	if (effectuer_)
-		for (auto it = nosClones_.begin(); it != nosClones_.end() && (*it)->estSelectionne(); it++)
+		for (auto it = originaux_.begin(); it != originaux_.end(); it++)
 			(*it)->accepter(this);
 }
 
@@ -52,14 +52,15 @@ void VisiteurDuplication::duplicate(glm::vec3 point) {
 ///
 /////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::actualise(glm::vec3 point) {
-	visDep_.setDep(point - posActuelle_);
-	for (auto it = nosClones_.begin(); it != nosClones_.end(); it++) {
-		if (!(*it)->estSelectionne()) {
-			(*it)->assignerSelection(true);
-			visDep_.visiter(*it);
-			(*it)->assignerSelection(false);
-		}
-	}
+	for (auto it = nosClones_.begin(); it != nosClones_.end(); it++)
+		(*it)->assignerSelection(true);
+	for (auto it = originaux_.begin(); it != originaux_.end(); it++)
+		(*it)->assignerSelection(false);
+	visDep_ = VisiteurDeplacement(point - posActuelle_);
+	for (auto it = nosClones_.begin(); it != nosClones_.end(); it++)
+		(*it)->assignerSelection(false);
+	for (auto it = originaux_.begin(); it != originaux_.end(); it++)
+		(*it)->assignerSelection(true);
 	posActuelle_ = point;
 }
 
@@ -74,10 +75,7 @@ void VisiteurDuplication::actualise(glm::vec3 point) {
 /////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::finalise() {
 	for (auto it = nosClones_.begin(); it != nosClones_.end();) {
-		if (!(*it)->estSelectionne()) {
-			it = nosClones_.erase(it);
-		}
-		else it++;
+		it = nosClones_.erase(it);
 	}
 }
 
@@ -92,11 +90,8 @@ void VisiteurDuplication::finalise() {
 /////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::supprimerClones() {
 	for (auto it = nosClones_.begin(); it != nosClones_.end(); ) {
-		if (!(*it)->estSelectionne()) {
-			(*it)->obtenirParent()->effacer(*it);
-			it = nosClones_.erase(it);
-		}
-		else it++;
+		(*it)->obtenirParent()->effacer(*it);
+		it = nosClones_.erase(it);
 	}
 }
 
@@ -122,8 +117,6 @@ void VisiteurDuplication::visiter(NoeudComposite* noeud)
 
 void VisiteurDuplication::visiter(NoeudRondelle* noeud)
 {
-	if (noeud->estSelectionne()) {
-	}
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -177,8 +170,6 @@ void VisiteurDuplication::visiter(NoeudBonus* noeud)
 
 void VisiteurDuplication::visiter(NoeudMaillet* noeud)
 {
-	if (noeud->estSelectionne()) {
-	}
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -194,13 +185,13 @@ void VisiteurDuplication::visiter(NoeudPortail* noeud)
 {
 	if (noeud->estSelectionne() && noeud->getFrere()->estSelectionne()) {
 		if (!FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(noeud->obtenirPositionRelative() + posActuelle_ - posCentre_)
-			&& !FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(noeud->getFrere()->obtenirPositionRelative() + posActuelle_ - posCentre_))
+			|| !FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(noeud->getFrere()->obtenirPositionRelative() + posActuelle_ - posCentre_))
 			effectuer_ = false;
 		else if (!tester_ && effectuer_) {
 			//evite de faire des doubles supplementaires
-			auto frere = std::find(nosClones_.begin(), nosClones_.end(), noeud->getFrere());
-			nosClones_.erase(frere);
-			nosClones_.push_front(noeud->getFrere());
+			auto frere = std::find(originaux_.begin(), originaux_.end(), noeud->getFrere());
+			originaux_.erase(frere);
+			originaux_.push_front(noeud->getFrere());
 			//on crait les noeuds freres en meme temps
 			NoeudPortail* nouveau1 = new NoeudPortail(*noeud);
 			NoeudPortail* nouveau2 = new NoeudPortail(*((NoeudPortail*)noeud->getFrere()));

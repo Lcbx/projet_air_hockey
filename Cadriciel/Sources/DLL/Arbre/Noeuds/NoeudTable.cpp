@@ -859,6 +859,7 @@ bool NoeudTable::MdansTriangleABC(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C, glm:
 	if (M == A || M == B || M == C) return true;
 	double angleTot = calculerAngle2D(A, M, B) + calculerAngle2D(B, M, C) + calculerAngle2D(C, M, A);
 	bool reponse = glm::round(glm::degrees(angleTot)) == 360;
+	//std::cout << glm::round(glm::degrees(angleTot)) << "|";
 	return reponse;
 }
 
@@ -877,8 +878,7 @@ bool NoeudTable::dansTable(glm::dvec3 M) {
 	*/
 
 	glm::vec3 p8(p(2).x, obtenirPositionRelative().y, obtenirPositionRelative().z);
-
-	return MdansTriangleABC(p8, p(0), p(2), M)
+	bool result =  MdansTriangleABC(p8, p(0), p(2), M)
 		|| MdansTriangleABC(p8, p(2), p(4), M)
 		|| MdansTriangleABC(p8, p(4), p(7), M)
 		|| MdansTriangleABC(p8, p(7), p(5), M)
@@ -886,4 +886,6 @@ bool NoeudTable::dansTable(glm::dvec3 M) {
 		|| MdansTriangleABC(p8, p(3), p(1), M)
 		|| MdansTriangleABC(p8, p(1), p(6), M)
 		|| MdansTriangleABC(p8, p(6), p(0), M);
+	//std::cout << "\nresult " << (result? "dans" : "hors") << "\n";
+	return result;
 }

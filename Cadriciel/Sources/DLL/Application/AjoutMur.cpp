@@ -58,11 +58,9 @@ void AjoutMur::end(int x, int y) {
 /////////////////////////////////////////////////////////////////////////
 void AjoutMur::position(int x, int y) {
 	glm::dvec3 pointClick;  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(X1(), Y1(), pointClick);
-	if (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(pointClick)) {
-		if (!clickInitial) {
-			X2() = x; Y2() = y;
-			FacadeModele::obtenirInstance()->ajouterMurFantome(notrePosition_[0], notrePosition_[1], x, y);
-		}
+	if (!clickInitial) {
+		X2() = x; Y2() = y;
+		FacadeModele::obtenirInstance()->ajouterMurFantome(notrePosition_[0], notrePosition_[1], x, y);
 	}
 }
 
@@ -85,7 +83,19 @@ void AjoutMur::operationShortClick() {
 	if (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(pointClick)) {
 		if (clickInitial) clickInitial = false;
 		else {
-			FacadeModele::obtenirInstance()->ajouterMuret(notrePosition_[0], notrePosition_[1], X2(), Y2());
+			//test le long du mur s'il est dans la table
+			bool ajouter = true;
+			glm::dvec3 debut; FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(notrePosition_[0], notrePosition_[1], debut);
+			glm::dvec3 fin; FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(X1(), Y1(), fin);
+			//tout les 2 pixels
+			double length = 0.5 * glm::distance(debut, fin);
+			glm::dvec3 vec = (fin - debut) / length;
+			for (int i = 1; i < length; i++) {
+				debut += vec;
+				if (!FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(debut)) 					
+					ajouter = false;
+			}
+			if(ajouter)	FacadeModele::obtenirInstance()->ajouterMuret(notrePosition_[0], notrePosition_[1], X2(), Y2());
 			clickInitial = true;
 		}
 	}
