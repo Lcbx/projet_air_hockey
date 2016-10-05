@@ -166,14 +166,14 @@ namespace vue {
 		// À IMPLANTER.
 		if (largeur > 100 && hauteur > 100)
 		{
-			hauteurFenetre_ += (largeurFenetre_ / largeurCloture_)*hauteur - hauteurFenetre_;
-		    largeurFenetre_ += (largeurFenetre_ / largeurCloture_)*largeur - largeurFenetre_;
+			hauteurFenetre_ += (largeurFenetre_ / largeurCloture_)*hauteur - hauteurFenetre_;//calculer l'ajout à ajouter à la hauteur ancienne de la  fenêtre
+		    largeurFenetre_ += (largeurFenetre_ / largeurCloture_)*largeur - largeurFenetre_;////calculer l'ajout à ajouter à la largeur ancienne de la  fenêtre
 
-			largeurCloture_ = largeur;
-			hauteurCloture_ = hauteur;
+			largeurCloture_ = largeur;// la cloture prend la nouvelle largeur 
+			hauteurCloture_ = hauteur;// la cloture prend la nouvelle hauteur
 
 
-		obtenirMatrice();
+		obtenirMatrice();//  redimensionner ma fenetre virtuelle avec les nouvelles valeurs (matrice de projection)
 		ajusterRapportAspect();
 		}
 	
@@ -212,9 +212,9 @@ namespace vue {
 	void ProjectionOrtho::ajusterRapportAspect()
 	{
 		// À IMPLANTER.
-		glMatrixMode(GL_PROJECTION);
+		glMatrixMode(GL_PROJECTION); // La matrice courante est la matrice de projection
 		glLoadIdentity();
-		glViewport(0, 0, (GLsizei)(largeurCloture_), (GLsizei)(hauteurCloture_));
+		glViewport(0, 0, (GLsizei)(largeurCloture_), (GLsizei)(hauteurCloture_)); // ajuster ma cloture aux nouvelles dimensions
 		glMatrixMode(GL_MODELVIEW);
 	}
 
