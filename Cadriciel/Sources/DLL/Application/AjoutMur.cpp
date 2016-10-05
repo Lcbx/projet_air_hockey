@@ -16,9 +16,12 @@
 #include <iostream>
 
 void AjoutMur::start(int x, int y) {
-	estEnfonce = false;
-	if (clickInitial) { notrePosition_ = { x,y,x,y }; }
-	else Souris::obtenirInstance()->getPosition() = { x,y,x,y };
+	//estEnfonce = false;
+	if (clickInitial) { notrePosition_ = { x,y,x,y }; std::cout << "1er if: " << std::endl; }
+	else {
+		Souris::obtenirInstance()->getPosition() = { x,y,x,y };
+		std::cout << "2eme if: " << std::endl;
+	}
 }
 
 void AjoutMur::current(int x, int y) {}
@@ -43,14 +46,14 @@ void AjoutMur::position(int x, int y) {
 void AjoutMur::operationShortClick() {
 	glm::dvec3 pointClick;  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(X1(), Y1(), pointClick);
 	if (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(pointClick)) {
-		if (clickInitial) { clickInitial = false; estEnfonce == false;
+		if (clickInitial) { clickInitial = false; //estEnfonce == false;
 		std::cout<<"premier: "<<estEnfonce<<std::endl;
 		}
-		else 
-			if(estEnfonce == false){
+		else {
+			//if(estEnfonce == false){
 			FacadeModele::obtenirInstance()->ajouterMuret(notrePosition_[0], notrePosition_[1], X2(), Y2());
 			clickInitial = true;
-			estEnfonce == false;
+			//estEnfonce == false;
 			std::cout << "deuxieme: " << estEnfonce << std::endl;
 
 		}
@@ -62,7 +65,8 @@ void AjoutMur::operationDragClick() {
 }
 
 void AjoutMur::escEnfonce() {
-	estEnfonce = true;
+	//estEnfonce = true;
 	FacadeModele::obtenirInstance()->supprimerMuret(true);
+	//this->operationShortClick();
 	clickInitial = true;
 }

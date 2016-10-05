@@ -425,13 +425,25 @@ void ArbreRenduINF2990::deplacerObjet(glm::dvec3 posDep, double angle, double sc
 int ArbreRenduINF2990::obtenirNombreObjetSelctionnes()
 {
 	int comp = 0;
+	int compMuret = 0;
+	
+	
 	for (NoeudAbstrait * enfant : enfants_)
 	{
 		if (enfant->estSelectionne())
 		{
-			comp++;
+			if (enfant->obtenirType() == "muret" ) {
+				compMuret++;
+			}
+			else 
+			{
+				comp++;
+			}
 		}
 	}
+	compMuret = compMuret / 2;
+	comp = comp + compMuret;
+	std::cout << comp << std::endl;
 	return comp;
 }
 
