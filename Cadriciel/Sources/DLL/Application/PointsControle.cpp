@@ -15,7 +15,7 @@
 #include "../Arbre/Noeuds/NoeudTable.h"
 #include "PointsControle.h"
 #include "../Vue/Vue.h"
-
+#include "../VisiteurDansLaTable.h"
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -91,86 +91,103 @@ void PointsControle::current(int x, int y) {
 	*/
 	//point de la souris
 	glm::dvec3 pointClick(x, y, 0);  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, pointClick);
-	if(noeud_!= PASDENOEUD)	switch (noeud_) {
-	case 0: {
-		if ( pos(6).y > pointClick.y ) pointClick.y = pos(6).y;
-		if ( pos(2).x < pointClick.x ) pointClick.x = pos(2).x;
-		// TODO: tester si les objets peuvent être dans la table
-		p(0)->assignerPositionRelative(pointClick);
-		pointClick.x = -pointClick.x;
-		p(4)->assignerPositionRelative(pointClick);
-		break;
-	}
-	case 1: {
-		if (pos(6).y < pointClick.y) pointClick.y = pos(6).y;
-		if (pos(3).x < pointClick.x) pointClick.x = pos(3).x;
-		// TODO: tester si les objets peuvent être dans la table
-		p(1)->assignerPositionRelative(pointClick);
-		pointClick.x = -pointClick.x;
-		p(5)->assignerPositionRelative(pointClick);
-		break;
-	}
-	case 2: {
-		if (pointClick.y < pos(6).y) pointClick.y = pos(6).y;
-		pointClick.x = pos(2).x;
-		// TODO: tester si les objets peuvent être dans la table
-		p(2)->assignerPositionRelative(pointClick);
-		pointClick.y = -pointClick.y;
-		p(3)->assignerPositionRelative(pointClick);
-		break;
-	}
-	case 3: {
-		if (pointClick.y > pos(7).y ) pointClick.y = pos(7).y;
-		pointClick.x = pos(3).x;
-		// TODO: tester si les objets peuvent être dans la table
-		p(3)->assignerPositionRelative(pointClick);
-		pointClick.y = -pointClick.y;
-		p(2)->assignerPositionRelative(pointClick);
-		break;
-	}
-	case 4: {
-		if (pos(7).y > pointClick.y) pointClick.y = pos(7).y;
-		if (pos(2).x > pointClick.x) pointClick.x = pos(2).x;
-		// TODO: tester si les objets peuvent être dans la table
-		p(4)->assignerPositionRelative(pointClick);
-		pointClick.x = -pointClick.x;
-		p(0)->assignerPositionRelative(pointClick);
-		break;
-	}
-	case 5: {
-		if (pos(7).y < pointClick.y) pointClick.y = pos(7).y;
-		if (pos(3).x > pointClick.x) pointClick.x = pos(3).x;
-		// TODO: tester si les objets peuvent être dans la table
-		p(5)->assignerPositionRelative(pointClick);
-		pointClick.x = -pointClick.x;
-		p(1)->assignerPositionRelative(pointClick);
-		break;
-	}
-	case 6: {
-		//if (pointClick.y > pos(0).y) pointClick.y = pos(0).y;
-		//if (pointClick.y < pos(1).y) pointClick.y = pos(1).y;
-		pointClick.y = pos(6).y;
-		if (pointClick.x > pos(3).x) pointClick.x = pos(3).x;
-		// TODO: tester si les objets peuvent être dans la table
-		p(6)->assignerPositionRelative(pointClick);
-		pointClick.x = -pointClick.x;
-		p(7)->assignerPositionRelative(pointClick);
-		break;
-	}
-	case 7: {
-		//if (pointClick.y > pos(4).y) pointClick.y = pos(4).y;
-		//if (pointClick.y < pos(5).y) pointClick.y = pos(5).y;
-		pointClick.y =  0;
-		if (pointClick.x < pos(2).x) pointClick.x = pos(2).x;
-		// TODO: tester si les objets peuvent être dans la table
-		p(7)->assignerPositionRelative(pointClick);
-		pointClick.x = -pointClick.x;
-		p(6)->assignerPositionRelative(pointClick);
-		break;
-	}
-	default : {
-		break;
-	}
+	//permet de revenir en arriere
+	glm::vec3 nosPoints[8];
+#define SAVE(arg) nosPoints[arg] = pos(arg)
+	SAVE(0);
+	SAVE(1);
+	SAVE(2);
+	SAVE(3);
+	SAVE(4);
+	SAVE(5);
+	SAVE(6);
+	SAVE(7);
+#undef SAVE
+
+	if(noeud_!= PASDENOEUD){
+		switch (noeud_) {
+		case 0: {
+			if (pos(6).y > pointClick.y) pointClick.y = pos(6).y;
+			if (pos(2).x < pointClick.x) pointClick.x = pos(2).x;
+			p(0)->assignerPositionRelative(pointClick);
+			pointClick.x = -pointClick.x;
+			p(4)->assignerPositionRelative(pointClick);
+			break;
+		}
+		case 1: {
+			if (pos(6).y < pointClick.y) pointClick.y = pos(6).y;
+			if (pos(3).x < pointClick.x) pointClick.x = pos(3).x;
+			p(1)->assignerPositionRelative(pointClick);
+			pointClick.x = -pointClick.x;
+			p(5)->assignerPositionRelative(pointClick);
+			break;
+		}
+		case 2: {
+			if (pointClick.y < pos(6).y) pointClick.y = pos(6).y;
+			pointClick.x = pos(2).x;
+			p(2)->assignerPositionRelative(pointClick);
+			pointClick.y = -pointClick.y;
+			p(3)->assignerPositionRelative(pointClick);
+			break;
+		}
+		case 3: {
+			if (pointClick.y > pos(7).y) pointClick.y = pos(7).y;
+			pointClick.x = pos(3).x;
+			p(3)->assignerPositionRelative(pointClick);
+			pointClick.y = -pointClick.y;
+			p(2)->assignerPositionRelative(pointClick);
+			break;
+		}
+		case 4: {
+			if (pos(7).y > pointClick.y) pointClick.y = pos(7).y;
+			if (pos(2).x > pointClick.x) pointClick.x = pos(2).x;
+			p(4)->assignerPositionRelative(pointClick);
+			pointClick.x = -pointClick.x;
+			p(0)->assignerPositionRelative(pointClick);
+			break;
+		}
+		case 5: {
+			if (pos(7).y < pointClick.y) pointClick.y = pos(7).y;
+			if (pos(3).x > pointClick.x) pointClick.x = pos(3).x;
+			p(5)->assignerPositionRelative(pointClick);
+			pointClick.x = -pointClick.x;
+			p(1)->assignerPositionRelative(pointClick);
+			break;
+		}
+		case 6: {
+			pointClick.y = pos(6).y;
+			if (pointClick.x > pos(3).x) pointClick.x = pos(3).x;
+			p(6)->assignerPositionRelative(pointClick);
+			pointClick.x = -pointClick.x;
+			p(7)->assignerPositionRelative(pointClick);
+			break;
+		}
+		case 7: {
+			pointClick.y = 0;
+			if (pointClick.x < pos(2).x) pointClick.x = pos(2).x;
+			p(7)->assignerPositionRelative(pointClick);
+			pointClick.x = -pointClick.x;
+			p(6)->assignerPositionRelative(pointClick);
+			break;
+		}
+		default: {
+			break;
+		}
+		}
+		bool legal = true;
+		VisiteurDansLaTable v(legal);
+		if (!legal) {
+#define LOAD(arg) p(arg)->assignerPositionRelative(nosPoints[arg])
+			LOAD(0);
+			LOAD(1);
+			LOAD(2);
+			LOAD(3);
+			LOAD(4);
+			LOAD(5);
+			LOAD(6);
+			LOAD(7);
+#undef LOAD
+		}
 	}
 }
 

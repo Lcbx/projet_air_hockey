@@ -163,11 +163,12 @@ namespace vue {
 	////////////////////////////////////////////////////////////////////////
 	void ProjectionOrtho::redimensionnerFenetre(int largeur, int hauteur)
 	{
-		// À IMPLANTER.
-		if (largeur > 100 && hauteur > 100)
+		//largeur = max(largeur, 100);
+		//hauteur = max(hauteur, 100);
+
 		{
 			hauteurFenetre_ += (largeurFenetre_ / largeurCloture_)*hauteur - hauteurFenetre_;//calculer l'ajout à ajouter à la hauteur ancienne de la  fenêtre
-		    largeurFenetre_ += (largeurFenetre_ / largeurCloture_)*largeur - largeurFenetre_;////calculer l'ajout à ajouter à la largeur ancienne de la  fenêtre
+		   largeurFenetre_ += (largeurFenetre_ / largeurCloture_)*largeur - largeurFenetre_;////calculer l'ajout à ajouter à la largeur ancienne de la  fenêtre
 
 			largeurCloture_ = largeur;// la cloture prend la nouvelle largeur 
 			hauteurCloture_ = hauteur;// la cloture prend la nouvelle hauteur

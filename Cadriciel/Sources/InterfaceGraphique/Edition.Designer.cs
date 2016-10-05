@@ -105,10 +105,10 @@
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Location = new System.Drawing.Point(120, 46);
-            this.panel1.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
+            this.panel1.Margin = new System.Windows.Forms.Padding(12);
             this.panel1.MinimumSize = new System.Drawing.Size(100, 100);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1016, 767);
+            this.panel1.Size = new System.Drawing.Size(1167, 879);
             this.panel1.TabIndex = 0;
             this.panel1.TabStop = true;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
@@ -126,7 +126,7 @@
             this.informationsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1420, 42);
+            this.menuStrip1.Size = new System.Drawing.Size(1571, 40);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -350,8 +350,7 @@
             this.aideToolStripMenuItem.Click += new System.EventHandler(this.aideToolStripMenuItem_Click);
             // 
             // toolStrip1
-            // 
-            this.toolStrip1.AutoSize = false;
+            //    
             this.toolStrip1.CanOverflow = false;
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Left;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(25, 25);
@@ -373,10 +372,10 @@
             this.toolStripSeparator4,
             this.toolStripTextBox3,
             this.toolStripButton1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 42);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 40);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.Size = new System.Drawing.Size(108, 775);
+            this.toolStrip1.Size = new System.Drawing.Size(107, 889);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -542,8 +541,8 @@
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Right;
             this.splitContainer1.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(1136, 42);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.splitContainer1.Location = new System.Drawing.Point(1287, 40);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(6);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -560,8 +559,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
             this.splitContainer1.Panel2.Controls.Add(this.textBox4);
             this.splitContainer1.Panel2.Controls.Add(this.textBox3);
-            this.splitContainer1.Size = new System.Drawing.Size(284, 775);
-            this.splitContainer1.SplitterDistance = 81;
+            this.splitContainer1.Size = new System.Drawing.Size(284, 889);
+            this.splitContainer1.SplitterDistance = 92;
             this.splitContainer1.SplitterWidth = 38;
             this.splitContainer1.TabIndex = 5;
             // 
@@ -580,7 +579,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(56, 450);
-            this.button1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button1.Margin = new System.Windows.Forms.Padding(6);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(152, 85);
             this.button1.TabIndex = 7;
@@ -626,9 +625,9 @@
             this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Location = new System.Drawing.Point(22, 67);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox1.Size = new System.Drawing.Size(234, 179);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
@@ -657,7 +656,7 @@
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(98, 115);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(6);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(110, 31);
             this.textBox2.TabIndex = 1;
@@ -665,7 +664,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(98, 29);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(6);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(110, 31);
             this.textBox1.TabIndex = 0;
@@ -673,7 +672,7 @@
             // textBox4
             // 
             this.textBox4.Location = new System.Drawing.Point(124, 383);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(6);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(110, 31);
             this.textBox4.TabIndex = 3;
@@ -681,23 +680,26 @@
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(124, 294);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(6);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(110, 31);
             this.textBox3.TabIndex = 2;
             // 
             // Edition
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(1420, 817);
+            this.ClientSize = new System.Drawing.Size(1571, 929);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(700, 1000);
             this.Name = "Edition";
             this.Text = "Edition";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Exemple_FormClosing);

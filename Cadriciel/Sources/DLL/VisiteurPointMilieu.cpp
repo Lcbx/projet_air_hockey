@@ -11,12 +11,30 @@
 #include "VisiteurPointMilieu.h"
 #include "ArbreRenduINF2990.h"
 
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurPointMilieu::VisiteurPointMilieu(glm::vec3 dep)
+///
+/// initialisation du visiteur de point milieu
+/// 
+/// @return Aucune (constructeur).
+///
+/////////////////////////////////////////////////////////////////////////
 VisiteurPointMilieu::VisiteurPointMilieu(glm::vec3& pointARendre) : posCentre_(pointARendre) {
 	nbrNoeudsVisites_ = 0;
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
 }
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurPointMilieu::visiter(NoeudAbstrait* noeud)
+///
+/// récupère les coordonnées du noeu en l'utilise pour calculer le point milieu
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurPointMilieu::visiter(NoeudAbstrait* noeud)
 {
 	if (noeud->estSelectionne()) {
@@ -28,10 +46,28 @@ void VisiteurPointMilieu::visiter(NoeudAbstrait* noeud)
 	}
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurPointMilieu::getSelection()
+///
+/// retourne tous les noeuds selctionnés
+/// 
+/// @return std::list<NoeudAbstrait*> 
+///
+/////////////////////////////////////////////////////////////////////////
 std::list<NoeudAbstrait*> VisiteurPointMilieu::getSelection() {
 	return selection_;
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurPointMilieu::visiter(NoeudComposite* noeud)
+///
+/// visite les noeuds inferieurs du composite
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurPointMilieu::visiter(NoeudComposite* noeud)
 {
 	for (int i = 0; i < noeud->obtenirNombreEnfants(); i++) {
