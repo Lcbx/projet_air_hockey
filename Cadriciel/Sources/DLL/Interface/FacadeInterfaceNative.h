@@ -50,10 +50,10 @@ extern "C" {
 
 	//Click
 	__declspec(dllexport) void clickStart(int x, int y);
-	__declspec(dllexport) void clickCurrent(int x, int y);
+	__declspec(dllexport) bool clickCurrent(int x, int y);
 	__declspec(dllexport) void clickEnd(int x, int y);
 	__declspec(dllexport) void etatDelaSouris(int etat);
-	__declspec(dllexport) void positionSouris(int x, int y);
+	__declspec(dllexport) bool positionSouris(int x, int y);
 
 	__declspec(dllexport) void rightClick(bool presse);
 	//touche control

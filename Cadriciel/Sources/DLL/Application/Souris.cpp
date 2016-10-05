@@ -21,9 +21,10 @@
 #include "../MiseEchelle.h"
 #include "PointsControle.h"
 
+#include "../Application/FacadeModele.h"
 #include "../Vue/Vue.h"
 #include "../Vue/Camera.h"
-
+#include "../ArbreRenduINF2990.h"
 
 
 //initialisation du patron singleton
@@ -135,8 +136,6 @@ void Souris::startClick(int x, int y) {
 	else {
 		//traitement du bouton droit
 		FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, prevClicDroit_);
-
-
 	}
 }
 
@@ -145,20 +144,21 @@ void Souris::startClick(int x, int y) {
 /// @fn Souris::currentClick(int x, int y)
 ///
 /// appelle la fonction current de la strategie utilisée (selection, deplacement , rotation, ...)
-/// et gere le click droit
+/// et gere le click droit, renvoie si le clic est dans la table
 ///
-/// @return Aucune.
+/// @return bool
 ///
 /////////////////////////////////////////////////////////////////////////
-void Souris::currentClick(int x, int y) {
+bool Souris::currentClick(int x, int y) {
+	glm::dvec3 click{ 0,0,0 }; FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, click);
 	if(!boutonDroit_) notreStrategie_->current( x, y);
 	else {
 		//traitement du bouton droit
-		glm::dvec3 newClicDroit_{ 0,0,0 }; FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, newClicDroit_);
-
-		FacadeModele::obtenirInstance()->obtenirVue()->obtenirCamera().deplacerXY((prevClicDroit_ - newClicDroit_).x, (prevClicDroit_ - newClicDroit_).y, true);
+		FacadeModele::obtenirInstance()->obtenirVue()->obtenirCamera().deplacerXY((prevClicDroit_ - click).x, (prevClicDroit_ - click).y, true);
 		FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, prevClicDroit_);
 	}
+	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(click);
+	return FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(click);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -181,19 +181,18 @@ void Souris::endClick(int x, int y) {
 /// @fn Souris::sourisPostition(int x, int y)
 ///
 /// appelle la fonction position de la strategie utilisée (selection, deplacement , rotation, ...)
-/// et gere le click droit
+/// et gere le click droit, renvoie si le clic est dans la table
 ///
-/// @return Aucune.
+/// @return bool
 ///
 /////////////////////////////////////////////////////////////////////////
-void Souris::sourisPostition(int x, int y) {
+bool Souris::sourisPostition(int x, int y) {
+	glm::dvec3 click{ 0,0,0 }; FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, click);
 	if (!boutonDroit_) notreStrategie_->position(x, y);
 	else {
 		//traitement du bouton droit
-		//std::cout << "en dehors du click droit\n;
-
-		
 	}
+	return FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(click);
 }
 
 ////////////////////////////////////////////////////////////////////////

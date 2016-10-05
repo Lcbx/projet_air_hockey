@@ -230,13 +230,18 @@ namespace InterfaceGraphique
             }
         }
 
+        bool signeInterdiction = false;
         public void Edition_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right) FonctionsNatives.rightClick(true);
             else FonctionsNatives.rightClick(false);
 
-            if (mousePressed) FonctionsNatives.clickCurrent(e.X, e.Y);
-            else FonctionsNatives.positionSouris(e.X, e.Y);
+            if (mousePressed) signeInterdiction =  !FonctionsNatives.clickCurrent(e.X, e.Y);
+            else signeInterdiction = !FonctionsNatives.positionSouris(e.X, e.Y);
+
+            if (signeInterdiction && (EtatSouris == Etats.AJOUT_ACCELERATEUR || EtatSouris == Etats.AJOUT_MUR || EtatSouris == Etats.AJOUT_PORTAIL))
+                Cursor = Cursors.No;
+            else Cursor = Cursors.Default;
 
             x = e.X; y = e.Y;
 
@@ -746,13 +751,13 @@ namespace InterfaceGraphique
             public static extern void clickStart(int x, int y);
 
             [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void clickCurrent(int x, int y);
+            public static extern bool clickCurrent(int x, int y);
 
             [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
             public static extern void clickEnd(int x, int y);
 
             [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void positionSouris(int x, int y);
+            public static extern bool positionSouris(int x, int y);
 
             [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
             public static extern void rightClick(bool presse);
