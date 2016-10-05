@@ -18,14 +18,31 @@
 #include "Projection.h"
 #include "ProjectionOrtho.h"
 #include "Souris.h"
-#include <iostream>
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Loupe::start(int x, int y)
+///
+/// prepare l'utilisation de la loupe
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void Loupe::start(int x, int y) {
 	StrategieSouris::start(x, y);
 	//initialise les graphiques du rectangle elastique
 	aidegl::initialiserRectangleElastique(glm::ivec2{ X1(), Y1() }, 0x5555, 10);
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Loupe::current(int x, int y)
+///
+/// affiche le rectangle elastique si besoin
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void Loupe::current(int x, int y) {
 	//determine s'il y a besoin d'afficher le rectangle
 	if (StrategieSouris::plusDe3px()) {
@@ -45,20 +62,36 @@ void Loupe::current(int x, int y) {
 	X2() = x; Y2() = y;
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Loupe::end(int x, int y)
+///
+/// finit le rectangle elastique et appelle le zoom si il y a lieu
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void Loupe::end(int x, int y) {
 	//fin de l'affichage des rectangles, efface le dernier rectangle
 	if (StrategieSouris::plusDe3px()) aidegl::terminerRectangleElastique(glm::ivec2{ X1(), Y1() }, glm::ivec2{ X2(), Y2() });
 	else aidegl::terminerRectangleElastique(glm::ivec2{ X1(), Y1() }, glm::ivec2{ X1(), Y1() });
 	StrategieSouris::end(x, y);
-
 }
 
 
 void Loupe::operationShortClick() {
 	// Ne rien faire
-	std::cout << "Position : (" << X1() << "," << Y1() << ")" << std::endl;
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Loupe::start(int x, int y)
+///
+/// utilise les données du click pour réaliser le zoom
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void Loupe::operationDragClick() {
 	glm::ivec2 point1 = glm::ivec2(X1(), Y1());
 	glm::ivec2 point2 = glm::ivec2(X2(), Y2());

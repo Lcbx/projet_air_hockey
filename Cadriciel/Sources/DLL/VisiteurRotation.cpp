@@ -1,16 +1,32 @@
-#include <iostream>
-#include <string>
-
 #include "VisiteurRotation.h"
 #include "FacadeModele.h"
 #include "../ArbreRenduINF2990.h"
 #include "../../Commun/Utilitaire/Vue/Vue.h"
 #include "VisiteurPointMilieu.h"
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurRotation::VisiteurRotation(glm::vec3 dep)
+///
+/// initialisation du visiteur de rotation
+/// determine le milieu de la selection
+/// 
+/// @return Aucune (constructeur).
+///
+/////////////////////////////////////////////////////////////////////////
 VisiteurRotation::VisiteurRotation(){
 	VisiteurPointMilieu v(posCentre_);
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurRotation::visiter(NoeudAbstrait* noeud)
+///
+/// verifie qu'on peut faire la rotation, puis rotate
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurRotation::rotate(float angle) {
 	angle_ = angle;
 	tester_ = true;	//s'il faut tester si la manipulation est viable
@@ -20,6 +36,15 @@ void VisiteurRotation::rotate(float angle) {
 	if(effectuer_) FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurRotation::visiter(NoeudAbstrait* noeud)
+///
+/// teste et rotate le noeud proprement dit
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurRotation::visiter(NoeudAbstrait* noeud)
 { 
 	if (noeud->estSelectionne()) {
@@ -33,7 +58,15 @@ void VisiteurRotation::visiter(NoeudAbstrait* noeud)
 		}
 	}
 }
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurRotation::visiter(NoeudComposite* noeud)
+///
+/// visite les noeuds inferieur du composite
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurRotation::visiter(NoeudComposite* noeud)
 {
 	for (int i = 0; i < noeud->obtenirNombreEnfants(); i++) {

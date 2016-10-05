@@ -17,13 +17,30 @@
 #include <iostream>
 #include "Souris.h"
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Selection::start(int x, int y)
+///
+/// d.bute la selection
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void Selection::start(int x, int y) {
 	StrategieSouris::start(x, y);
 	//initialise les graphiques du rectangle elastique
 	aidegl::initialiserRectangleElastique(glm::ivec2{ X1(), Y1() }, 0x5555, 10);
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Rotation::current(int x, int y)
+///
+/// affiche s'il y a lieu le rectangle de selection
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void Selection::current(int x, int y) {
 	//determine s'il y a besoin d'afficher le rectangle
 	if (StrategieSouris::plusDe3px()) {
@@ -43,6 +60,15 @@ void Selection::current(int x, int y) {
 	X2() = x; Y2() = y;
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Rotation::end(int x, int y)
+///
+/// termine s'il y a lieu le rectangle de selection
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void Selection::end(int x, int y) {
 	//fin de l'affichage des rectangles, efface le dernier rectangle
 	if (StrategieSouris::plusDe3px()) aidegl::terminerRectangleElastique(glm::ivec2{ X1(), Y1() }, glm::ivec2{ X2(), Y2() });
@@ -51,6 +77,15 @@ void Selection::end(int x, int y) {
 
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Selection::operationShortClick()
+///
+/// lance les opérations de selection correspocdant au click
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void Selection::operationShortClick() {
 	glm::ivec2 begin(X1(), Y1());
 	glm::ivec2   end(X2(), Y2());
@@ -62,6 +97,15 @@ void Selection::operationShortClick() {
 	SingletonSelection::instance()->selectionner(begin, end, mode);
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Selection::operationDragClick()
+///
+/// lance les opérations de selection correspocdant au click
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void Selection::operationDragClick() {
 	operationShortClick();
 }

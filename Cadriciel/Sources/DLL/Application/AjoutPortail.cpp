@@ -16,7 +16,15 @@
 
 
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn AjoutPortail::operationShortClick()
+///
+/// contient la logique d'ajout du portail (en fonction du premier et second click)
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void AjoutPortail::operationShortClick() {
 	glm::dvec3 pointClick;  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(X1(), Y1(), pointClick);
 	if (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(pointClick)) {
@@ -35,6 +43,15 @@ void AjoutPortail::operationDragClick() {
 	//DO something
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn AjoutPortail::escEnfonce()
+///
+/// permet d'annuler le premier Click
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void AjoutPortail::escEnfonce() {
 	FacadeModele::obtenirInstance()->supprimerPortail(true);
 	clickInitial = true;
