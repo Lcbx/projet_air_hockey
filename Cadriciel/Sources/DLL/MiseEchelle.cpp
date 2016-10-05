@@ -23,7 +23,6 @@
 void MiseEchelle::current(int x, int y) {
 	visiteur_.mettreEchelle(Y1() - y);
 	Y1() = y;
-
 }
 
 void MiseEchelle::operationShortClick() {
