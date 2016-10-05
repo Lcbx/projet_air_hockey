@@ -50,4 +50,6 @@ private:
 	bool control_ = false;					//touche control enfoncee
 	bool alt_ = false;					    //touche alt enfoncee
 	glm::ivec4 position_;					//position de Click courante
+
+	glm::dvec3 prevClicDroit_;				//Position précédente du clic droit
 };

@@ -21,6 +21,9 @@
 #include "../MiseEchelle.h"
 #include "PointsControle.h"
 
+#include "../Vue/Vue.h"
+#include "../Vue/Camera.h"
+
 
 
 //initialisation du patron singleton
@@ -131,7 +134,7 @@ void Souris::startClick(int x, int y) {
 	if (!boutonDroit_) notreStrategie_->start(x, y);
 	else {
 		//traitement du bouton droit
-		std::cout << "debut click droit\n";
+		FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, prevClicDroit_);
 
 
 	}
@@ -151,9 +154,10 @@ void Souris::currentClick(int x, int y) {
 	if(!boutonDroit_) notreStrategie_->current( x, y);
 	else {
 		//traitement du bouton droit
-		//std::cout << "pendant click droit\n";
+		glm::dvec3 newClicDroit_{ 0,0,0 }; FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, newClicDroit_);
 
-
+		FacadeModele::obtenirInstance()->obtenirVue()->obtenirCamera().deplacerXY((prevClicDroit_ - newClicDroit_).x, (prevClicDroit_ - newClicDroit_).y, true);
+		FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, prevClicDroit_);
 	}
 }
 
@@ -169,12 +173,7 @@ void Souris::currentClick(int x, int y) {
 /////////////////////////////////////////////////////////////////////////
 void Souris::endClick(int x, int y) {
 	if (!boutonDroit_) notreStrategie_->end(x, y);
-	else {
-		//traitement du bouton droit
-		std::cout << "fin click droit\n";
-
-
-	}
+	else { }
 }
 
 ////////////////////////////////////////////////////////////////////////
