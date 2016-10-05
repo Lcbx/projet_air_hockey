@@ -56,7 +56,6 @@ FacadeModele* FacadeModele::instance_{ nullptr };
 const std::string FacadeModele::FICHIER_CONFIGURATION{ "configuration.xml" };
 
 
-
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn FacadeModele* FacadeModele::obtenirInstance()
@@ -228,6 +227,58 @@ void FacadeModele::enregistrerConfiguration() const
 
 	// Écrire dans le fichier
 	document.SaveFile(FacadeModele::FICHIER_CONFIGURATION.c_str());
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::chargerZoneJeu() const
+///
+/// Cette fonction charge la zone de jeu à partir d'un fichier XML.
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::chargerZoneJeu(std::string FICHIER_ZONEJEU) const
+{
+
+	// si le fichier existe on le lit
+	tinyxml2::XMLDocument document;
+
+	// Lire à partir du fichier de configuration
+	document.LoadFile(FICHIER_ZONEJEU.c_str());
+
+	// On lit les différentes configurations.
+	//ConfigScene::obtenirInstance()->lireDOM(document);
+}
+///////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::enregistrerZoneJeu() const
+///
+/// Cette fonction genere un fichier XML contenant
+///  la zone de jeu actuelle.
+///
+///  !!! 
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+
+void FacadeModele::enregistrerZoneJeu(std::string FICHIER_ZONEJEU) const
+{
+	tinyxml2::XMLDocument document;
+
+	// Ecrire la declaration XML standard...
+	document.NewDeclaration(R"(?xml version="1.0" standalone="yes"?)");
+
+	// Noeud arbreDeRendu
+	tinyxml2::XMLElement* elementArbreDeRendu{ document.NewElement("arbreDeRendu") };
+
+	// Creation de l'arbre DOM a partir de l'arbre de rendu
+	obtenirArbreRenduINF2990()->accepter(VisiteurSauvegarde);
+
+	// Ecrire dans le fichier
+	document.SaveFile(FICHIER_ZONEJEU.c_str());
 }
 
 

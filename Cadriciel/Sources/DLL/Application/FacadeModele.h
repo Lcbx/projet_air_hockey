@@ -45,6 +45,10 @@ public:
 	void chargerConfiguration() const;
 	/// Enregistre la configuration courante dans un fichier XML.
 	void enregistrerConfiguration() const;
+	/// Charge la zone de jeu à partir d'un fichier XML.
+	void chargerZoneJeu(std::string FICHIER_ZONEJEU) const;
+	/// Enregistre la zone de jeu courante dans un fichier XML.
+	void enregistrerZoneJeu(std::string FICHIER_ZONEJEU) const;
 	/// Libère le contexte OpenGL.
 	void libererOpenGL();
 	/// Affiche le contenu du modèle.

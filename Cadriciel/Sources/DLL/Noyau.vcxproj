@@ -171,6 +171,7 @@
     <ClCompile Include="VisiteurMiseEchelle.cpp" />
     <ClCompile Include="VisiteurPointMilieu.cpp" />
     <ClCompile Include="VisiteurRotation.cpp" />
+    <ClCompile Include="VisiteurSauvegarde.cpp" />
     <ClCompile Include="VisiteurSelection.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +218,7 @@
     <ClInclude Include="VisiteurMiseEchelle.h" />
     <ClInclude Include="VisiteurPointMilieu.h" />
     <ClInclude Include="VisiteurRotation.h" />
+    <ClInclude Include="VisiteurSauvegarde.h" />
     <ClInclude Include="VisiteurSelection.h" />
   </ItemGroup>
   <ItemGroup>

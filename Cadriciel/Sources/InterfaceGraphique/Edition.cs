@@ -40,6 +40,8 @@ namespace InterfaceGraphique
 
             this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
             FonctionsNatives.redimensionnerFenetre(panel1.Width, panel1.Height);
+           // FonctionsNatives.passerLargeur(panel1.Width);
+
         }
 
         public void InitialiserAnimation()
@@ -665,7 +667,10 @@ namespace InterfaceGraphique
             [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)] // pour utiliser une fonction qui se trouve dans le fichier Noyau.dll
             public static extern void redimensionnerFenetre(int largeur, int hauteur);
 
-
+            /*
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)] // pour utiliser une fonction qui se trouve dans le fichier Noyau.dll
+            public static extern void passerLargeur( int largeur);
+            */
         }
     }
 }
