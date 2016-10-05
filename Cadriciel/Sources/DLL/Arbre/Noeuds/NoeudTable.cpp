@@ -242,17 +242,21 @@ void NoeudTable::tracerLignesDecoration(const glm::mat4& vueProjection) const
 		glVertex3fv(PROJ(3));
 	}
 	glEnd();
-	// tracer un cercle au milieu du terrain
-	glLineWidth(3.);
-	glColor4f(1., 1., 0., 1.);
-#undef min
-	double distance = std::min({ glm::distance(vecPROJ(2), vecPROJ8),
-								 glm::distance(vecPROJ(6), vecPROJ8),
-								 glm::distance(vecPROJ(0), vecPROJ8),
-								 glm::distance(vecPROJ(1), vecPROJ8) });
-	double coeff = 0.4;
-	double rayon = distance  * coeff;
-	tracerCercle((vecPROJ8).x, (vecPROJ8).y, rayon, 100);
+
+//	// tracer un cercle au milieu du terrain
+//	glLineWidth(3.);
+//	glColor4f(1., 1., 0., 1.);
+//#undef min
+//#define dist(arg1,arg2)	 (float) sqrt(pow((arg1.x-arg2.x),2)+pow((arg1.y-arg2.y),2))
+//
+//	double distance = std::min (dist(vecPROJ(2), vecPROJ8),dist(vecPROJ(6), vecPROJ8),dist(vecPROJ(0), vecPROJ8),dist(vecPROJ(1), vecPROJ8) );
+//	/*double distance = std::min({ glm::distance(vecPROJ(2), vecPROJ8),
+//								 glm::distance(vecPROJ(6), vecPROJ8),
+//								 glm::distance(),
+//								 glm::distance(vecPROJ(1), vecPROJ8) });*/
+//	double coeff = 0.4;
+//	double rayon = distance  * coeff;
+//	tracerCercle((vecPROJ8).x, (vecPROJ8).y, rayon, 100);
 
 
 }
