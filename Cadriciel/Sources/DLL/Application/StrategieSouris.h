@@ -11,6 +11,14 @@
 #pragma once
 #include "glm/glm.hpp"
 
+///////////////////////////////////////////////////////////////////////////
+/// @class Selection
+/// @brief Cette classe implémente un patron strategie
+///         et permet les diff.rents op.ration de la souris
+///
+/// @author Luc Courbariaux
+/// @date 2016-09-25
+///////////////////////////////////////////////////////////////////////////
 class StrategieSouris {
 public:
 	virtual void start(int x, int y);			//les coordonnees du mouse_down

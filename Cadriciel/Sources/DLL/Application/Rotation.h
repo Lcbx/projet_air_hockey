@@ -14,6 +14,14 @@
 #include "StrategieSouris.h"
 #include "../VisiteurRotation.h"
 
+///////////////////////////////////////////////////////////////////////////
+/// @class Rotation
+/// @brief Cette classe contient des méthodes permettant d'effectuer
+///        une rotations de la selection avec la souris
+///
+/// @author Luc Courbariaux
+/// @date 2016-09-25
+///////////////////////////////////////////////////////////////////////////
 class Rotation : public StrategieSouris {
 public:
 	//void start(int x, int y);				//les coordonnees du mouse_down

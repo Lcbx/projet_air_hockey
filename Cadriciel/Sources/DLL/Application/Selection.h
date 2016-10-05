@@ -11,7 +11,14 @@
 #pragma once
 #include "StrategieSouris.h"
 
-
+///////////////////////////////////////////////////////////////////////////
+/// @class Selection
+/// @brief Cette classe contient des méthodes permettant d'effectuer
+///        une selection d'objets avec la souris
+///
+/// @author Luc Courbariaux
+/// @date 2016-09-25
+///////////////////////////////////////////////////////////////////////////
 class Selection : public StrategieSouris {
 public:
 	void start(int x, int y);				//les coordonnees du mouse_down

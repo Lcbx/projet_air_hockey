@@ -11,7 +11,14 @@
 #pragma once
 #include "StrategieSouris.h"
 
-
+///////////////////////////////////////////////////////////////////////////
+/// @class Loupe
+/// @brief Cette classe contient des méthodes permettant d'utiliser
+///        une loupe avec la souris
+///
+/// @author Luc Courbariaux
+/// @date 2016-09-25
+///////////////////////////////////////////////////////////////////////////
 class Loupe : public StrategieSouris {
 public:
 	void start(int x, int y);				//les coordonnees du mouse_down
