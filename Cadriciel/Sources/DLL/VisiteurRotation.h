@@ -18,7 +18,14 @@
 
 
 
-
+///////////////////////////////////////////////////////////////////////////
+/// @class VisiteurRotation
+/// @brief Cette classe contient des méthodes permettant d'appliquer
+///        une rotation a un noeud
+///
+/// @author Luc Courbariaux
+/// @date 2016-09-25
+//////////////////////////////////////////////////////////////////////////
 class VisiteurRotation : public Visiteur
 {
 	float angle_{0.f};
@@ -30,8 +37,6 @@ public:
 	void rotate(float angle);
 	virtual void visiter(NoeudAbstrait* noeud);
 	virtual void visiter(NoeudComposite *noeud);
-	
-
 	virtual void visiter(NoeudRondelle* noeud);
 	virtual void visiter(NoeudMuret* noeud);
 	virtual void visiter(NoeudBonus* noeud);

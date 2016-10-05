@@ -13,8 +13,16 @@
 #include "../ArbreRenduINF2990.h"
 #include "../../Commun/Utilitaire/Vue/Vue.h"
 
-
-#include <iostream>
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn AjoutAccelerateur::operationShortClick()
+///
+/// ajoute un bonus accelerateur a la position du click simple,
+/// pourvu que ce soit dans la zone de jeu.
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void AjoutAccelerateur::operationShortClick() {
 	glm::dvec3 pointClick;  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(X1(), Y1(), pointClick);
 	if (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(pointClick))

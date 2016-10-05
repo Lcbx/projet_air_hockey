@@ -7,9 +7,27 @@
 
 
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurDuplication::VisiteurDuplication()
+///
+/// initialisation du visiteur de duplication
+/// determine le centre de la selection
+///
+/// @return Aucune (constructeur).
+///
+/////////////////////////////////////////////////////////////////////////
 VisiteurDuplication::VisiteurDuplication() : visDep_(glm::vec3(0.f)) {}
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurDuplication::duplicate(glm::vec3 point)
+///
+/// determine s'il est possible de dupliquer, crait les clones et les place
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::duplicate(glm::vec3 point) {
 	VisiteurPointMilieu v(posCentre_);
 	nosClones_ = v.getSelection();
@@ -24,11 +42,20 @@ void VisiteurDuplication::duplicate(glm::vec3 point) {
 			(*it)->accepter(this);
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurDuplication::actualise(glm::vec3 point)
+///
+/// deplace les clones selon la souris
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::actualise(glm::vec3 point) {
+	visDep_.setDep(point - posActuelle_);
 	for (auto it = nosClones_.begin(); it != nosClones_.end(); it++) {
 		if (!(*it)->estSelectionne()) {
 			(*it)->assignerSelection(true);
-			visDep_.setDep(point - posActuelle_);
 			visDep_.visiter(*it);
 			(*it)->assignerSelection(false);
 		}
@@ -36,6 +63,15 @@ void VisiteurDuplication::actualise(glm::vec3 point) {
 	posActuelle_ = point;
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurDuplication::finalise()
+///
+/// termine la duplication
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::finalise() {
 	for (auto it = nosClones_.begin(); it != nosClones_.end();) {
 		if (!(*it)->estSelectionne()) {
@@ -45,7 +81,15 @@ void VisiteurDuplication::finalise() {
 	}
 }
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurDuplication::supprimerClones()
+///
+/// supprime les clones
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::supprimerClones() {
 	for (auto it = nosClones_.begin(); it != nosClones_.end(); ) {
 		if (!(*it)->estSelectionne()) {
@@ -58,9 +102,17 @@ void VisiteurDuplication::supprimerClones() {
 
 
 void VisiteurDuplication::visiter(NoeudAbstrait* noeud)
-{
-}
+{}
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurDuplication::visiter(NoeudComposite* noeud)
+///
+/// visite les noeuds inferieur du composite
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::visiter(NoeudComposite* noeud)
 {
 	for (int i = 0; i < noeud->obtenirNombreEnfants(); i++) {
@@ -74,6 +126,15 @@ void VisiteurDuplication::visiter(NoeudRondelle* noeud)
 	}
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurDuplication::visiter(NoeudMuret* noeud)
+///
+/// verififie si on peut dupliquer le muret, crait le clone
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::visiter(NoeudMuret* noeud)
 {
 	if (noeud->estSelectionne()) {
@@ -89,6 +150,15 @@ void VisiteurDuplication::visiter(NoeudMuret* noeud)
 	}
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurDuplication::visiter(NoeudBonus* noeud)
+///
+/// verififie si on peut dupliquer le bonus, crait le clone
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::visiter(NoeudBonus* noeud)
 {
 	if (noeud->estSelectionne()) {
@@ -111,6 +181,15 @@ void VisiteurDuplication::visiter(NoeudMaillet* noeud)
 	}
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn VisiteurDuplication::visiter(NoeudPortail* noeud)
+///
+/// verififie si on peut dupliquer les portails, crait les clones
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void VisiteurDuplication::visiter(NoeudPortail* noeud)
 {
 	if (noeud->estSelectionne() && noeud->getFrere()->estSelectionne()) {

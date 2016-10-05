@@ -17,14 +17,41 @@
 #include "../Vue/Vue.h"
 
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn PointsControle::p(int i)
+///
+/// recupere le point de controle numeroté "i"
+///
+/// @return NoeudPointControle*
+///
+/////////////////////////////////////////////////////////////////////////
 NoeudPointControle* PointsControle::p(int i) {
 	return	static_cast<NoeudPointControle*>(FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->chercher(i));
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn PointsControle::pos(int i)
+///
+/// recupere la position du point de controle numeroté "i"
+///
+/// @return glm::vec3
+///
+/////////////////////////////////////////////////////////////////////////
 glm::vec3 PointsControle::pos(int i) {
 	return p(i)->obtenirPositionRelative();
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn PointsControle::start(int x, int y)
+///
+/// teste si un point de controle est selectionne par le click
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void PointsControle::start(int x, int y) {
 	//conversion en coordonnees comme utilisees
 	glm::dvec3 pointClick(x, y, 0);  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, pointClick);
@@ -43,6 +70,15 @@ void PointsControle::start(int x, int y) {
 	if (noeud_ != PASDENOEUD) p(noeud_)->setCouleur(glm::vec4(VERT));
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn PointsControle::current(int x, int y)
+///
+/// applique s'il y a lieu un déplacement sur le point selectionne
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void PointsControle::current(int x, int y) {
 	/*
 	p0----------p2----------p4
@@ -138,6 +174,15 @@ void PointsControle::current(int x, int y) {
 	}
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn PointsControle::end(int x, int y)
+///
+/// finit l'opération en déselectionnant le noeud
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void PointsControle::end(int x, int y) {
 	//la table
 	auto table = FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable();

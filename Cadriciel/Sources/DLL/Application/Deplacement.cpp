@@ -13,6 +13,15 @@
 #include "../Vue/Vue.h"
 #include "FacadeModele.h"
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Deplacement::current(int x, int y)
+///
+/// deplace la selection avec le visiteur de deplacement au cours d'un click
+///
+/// @return Aucune.
+///
+/////////////////////////////////////////////////////////////////////////
 void Deplacement::current(int x, int y) {
 	glm::dvec3 nouvPoint; FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, nouvPoint);
 	glm::dvec3 ancPoint; FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(X1(), Y1(), ancPoint);

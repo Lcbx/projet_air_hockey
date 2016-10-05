@@ -9,7 +9,14 @@
 
 
 
-
+///////////////////////////////////////////////////////////////////////////
+/// @class VisiteurDeplacement
+/// @brief Cette classe contient des méthodes permettant d'appliquer
+///        un deplacement a un noeud
+///
+/// @author Luc Courbariaux
+/// @date 2016-09-25
+//////////////////////////////////////////////////////////////////////////
 class VisiteurDeplacement : public Visiteur
 {
 	glm::vec3 dep_{0.f};
@@ -22,8 +29,6 @@ public:
 
 	virtual void visiter(NoeudAbstrait* noeud);
 	virtual void visiter(NoeudComposite *noeud);
-	
-
 	virtual void visiter(NoeudRondelle* noeud);
 	virtual void visiter(NoeudMuret* noeud);
 	virtual void visiter(NoeudBonus* noeud);
