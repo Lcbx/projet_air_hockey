@@ -33,6 +33,7 @@ class VisiteurDuplication : public Visiteur
 
 	//liste de noeuds
 	///contient les originaux(selectionnés)
+	std::list<NoeudAbstrait*> originaux_;
 	///et les clones (non selectionnés)
 	std::list<NoeudAbstrait*> nosClones_;
 
