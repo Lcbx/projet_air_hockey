@@ -62,7 +62,7 @@ int& StrategieSouris::Y2() { return Souris::obtenirInstance()->getPosition()[3];
 ///
 /////////////////////////////////////////////////////////////////////////
 bool StrategieSouris::plusDe3px(glm::ivec4 pos) {
-	return (glm::length(glm::fvec3(pos)) > 3);
+	return glm::length( glm::fvec2(pos[2], pos[3]) - glm::fvec2(pos[0], pos[1]) ) > 3;
 }
 
 ////////////////////////////////////////////////////////////////////////
