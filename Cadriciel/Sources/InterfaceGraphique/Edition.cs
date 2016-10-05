@@ -531,9 +531,9 @@ namespace InterfaceGraphique
             toolStripButton1.Checked = false;
         }
         ///////////////////////////////////////////////////////////////////////
-        //bool Dans_Intervalle( double valeur, double borneMin, double borneMax ) 
+        // @fn bool Dans_Intervalle( double valeur, double borneMin, double borneMax ) 
         ///
-        /// Cette fonction vérifie si une valeur est dans un intervalle.
+        /// @brief Cette fonction vérifie si une valeur est dans un intervalle.
         ///
         /// @param[in] valeur   : La valeur à vérifier.
         /// @param[in] borneMin : La borne inférieure de l'intervalle.
@@ -715,7 +715,17 @@ namespace InterfaceGraphique
             BoiteAide helpbox = new BoiteAide();
             helpbox.ShowDialog();
         }
-
+        ///////////////////////////////////////////////////////////////////////
+        // @fn private void panel1_Resize(object sender, EventArgs e)
+        ///
+        /// @brief Cette fonction appelle la méthode redimensionnement.
+        ///
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        /// @return aucun
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void panel1_Resize(object sender, EventArgs e)
         {
             FonctionsNatives.redimensionnerFenetre(panel1.Width, panel1.Height);
