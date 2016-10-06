@@ -7,9 +7,10 @@
 /// @addtogroup inf2990 INF2990
 /// @{
 ///////////////////////////////////////////////////////////////////////////////
-#include "VisiteurDansLaTable.h"
+
 #include "VisiteurDeplacement.h"
 #include "ArbreRenduINF2990.h"
+#include "VisiteurDansLaTable.h"
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -26,7 +27,7 @@ VisiteurDeplacement::VisiteurDeplacement(glm::vec3 dep) {
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
 	//verifie si le deplacement est legit
 	VisiteurDansLaTable v(effectuer_);
-	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
+	if(!effectuer_) FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
 }
 
 ////////////////////////////////////////////////////////////////////////

@@ -25,6 +25,7 @@
 VisiteurDansLaTable::VisiteurDansLaTable(bool& result) : result_(result) {
 	result_ = true;
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
+	cout << "DansLaTable : " << (result_ ? "true\n" : "false\n");
 }
 
 ////////////////////////////////////////////////////////////////////////

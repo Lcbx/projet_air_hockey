@@ -9,6 +9,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 #include "VisiteurDuplication.h"
 #include "VisiteurPointMilieu.h"
+#include "VisiteurDansLaTable.h"
 #include "ArbreRenduINF2990.h"
 
 
@@ -43,9 +44,11 @@ void VisiteurDuplication::duplicate(glm::vec3 point) {
 	for (auto it = originaux_.begin(); it != originaux_.end(); it++)
 		(*it)->accepter(this);
 	tester_ = false;
+	VisiteurDansLaTable t(effectuer_);
 	if (effectuer_)
 		for (auto it = originaux_.begin(); it != originaux_.end(); it++)
 			(*it)->accepter(this);
+	else supprimerClones();
 }
 
 ////////////////////////////////////////////////////////////////////////
