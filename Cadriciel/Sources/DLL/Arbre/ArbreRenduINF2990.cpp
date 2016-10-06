@@ -407,10 +407,13 @@ void ArbreRenduINF2990::deplacerObjet(glm::dvec3 posDep, double angle, double sc
 			if (this->getTable()->dansTable(posDep))
 			{
 				enfant->assignerPositionRelative(posDep);
+				this->estInterieur = true;
 			}
 			else
 			{
 				enfant->assignerPositionRelative(posTemp);
+				this->estInterieur = false ;
+
 			}
 
 			//setter l'angle
@@ -508,6 +511,23 @@ double ArbreRenduINF2990::getScaleDataBinding()
 		}
 	}
 }
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool objetEstDansLaTable()
+///
+/// Cette fonction de retourner faux si un objet a l'exterieur de la table
+///
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool ArbreRenduINF2990::objetEstDansLaTable()
+{
+	return estInterieur;
+}
+
+
+
 
 ////////////////////////////////////////////////////////////////////////
 ///

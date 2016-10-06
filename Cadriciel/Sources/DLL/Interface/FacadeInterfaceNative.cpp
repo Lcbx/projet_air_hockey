@@ -204,17 +204,17 @@ extern "C"
 	{
 		Souris::obtenirInstance()->startClick(x, y);
 	}
-	__declspec(dllexport) void __cdecl clickCurrent(int x, int y)
+	__declspec(dllexport) bool __cdecl clickCurrent(int x, int y)
 	{
-		Souris::obtenirInstance()->currentClick(x, y);
+		return Souris::obtenirInstance()->currentClick(x, y);
 	}
 	__declspec(dllexport) void __cdecl clickEnd(int x, int y)
 	{
 		Souris::obtenirInstance()->endClick(x, y);
 	}
-	__declspec(dllexport) void __cdecl positionSouris(int x, int y)
+	__declspec(dllexport) bool __cdecl positionSouris(int x, int y)
 	{
-		Souris::obtenirInstance()->sourisPostition(x, y);
+		return Souris::obtenirInstance()->sourisPostition(x, y);
 	}
 	__declspec(dllexport) void rightClick(bool presse)
 	{
@@ -416,7 +416,10 @@ extern "C"
 		return FacadeModele::obtenirInstance()->getScale();
 	}
 
-
+	__declspec(dllexport) bool __cdecl objetEstDansLaTable()
+	{
+		return FacadeModele::obtenirInstance()->objetEstDansLaTable();
+	}
 
 }
 

@@ -608,3 +608,18 @@ void FacadeModele::supprimerMuret(bool escTouche)
 {
 	arbre_->supprimerMuret(escTouche);
 }
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool objetEstDansLaTable()
+///
+/// Cette fonction de retourner faux si un objet a l'exterieur de la table
+///
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::objetEstDansLaTable()
+{
+	return arbre_->objetEstDansLaTable();
+}
