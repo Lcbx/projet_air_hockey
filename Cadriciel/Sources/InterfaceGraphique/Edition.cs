@@ -22,6 +22,9 @@ namespace InterfaceGraphique
         //private static double angleDeRotation_;
         //private static double facteurEchelle_;
 
+        private static Sauvegarde fenetreSauvegarde_ = new Sauvegarde();
+        private static Chargement fenetreChargement_ = new Chargement();
+
 
         public Edition()
         {
@@ -41,7 +44,10 @@ namespace InterfaceGraphique
 
             this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
             FonctionsNatives.redimensionnerFenetre(panel1.Width, panel1.Height);
-           // FonctionsNatives.passerLargeur(panel1.Width);
+
+
+            this.enregistrerToolStripMenuItem.Click += new System.EventHandler(this.enregistrerToolStripMenuItem_Click);
+            // FonctionsNatives.passerLargeur(panel1.Width);
 
         }
 
@@ -756,39 +762,21 @@ namespace InterfaceGraphique
 
         private void enregistrerSousToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-            saveFileDialog1.Filter = "XML files (*.xml)|*.xml";
-            saveFileDialog1.FilterIndex = 1;
-            saveFileDialog1.RestoreDirectory = true;
-            saveFileDialog1.AddExtension = false;
+            fenetreSauvegarde_.Show();
+        }
 
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                System.Console.WriteLine("Ceci est une sauvegarde");
-
-                FonctionsNatives.enregistrerZoneJeu((saveFileDialog1.FileName).ToCharArray());
-
-            }
+        private void enregistrerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (fenetreSauvegarde_.getLastSaveFile() == "")
+                fenetreSauvegarde_.Show();
+            else
+                fenetreSauvegarde_.saveLastFile();
         }
 
         private void ouvrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
-            openFileDialog1.Filter = "XML files (*.xml)|*.xml";
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.RestoreDirectory = true;
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                System.Console.WriteLine("Ceci est un chargement");
-
-                FonctionsNatives.chargerZoneJeu((openFileDialog1.FileName).ToCharArray());
-
-            }
+            fenetreChargement_.Show();
         }
 
     }
