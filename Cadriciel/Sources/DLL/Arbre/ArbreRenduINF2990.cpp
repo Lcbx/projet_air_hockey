@@ -398,13 +398,31 @@ void ArbreRenduINF2990::deplacerObjet(glm::dvec3 posDep, double angle, double sc
 
 	for (NoeudAbstrait * enfant : enfants_)
 	{
-		if (enfant->estSelectionne())// && enfant->obtenirType() == "bonus" && comp==1)
+		if (enfant->estSelectionne())
 		{
-			//TODO: reste a verifier si l'objet sort pas de la table 
-			//glm::dvec3 posTemp = enfant->obtenirPositionRelative();
-			
-			enfant->assignerPositionRelative(posDep);
+			//verifier si l'objet sort pas de la table 
+
+			glm::dvec3 posTemp = enfant->obtenirPositionRelative();
+
+			if (this->getTable()->dansTable(posDep))
+			{
+				enfant->assignerPositionRelative(posDep);
+			}
+			else
+			{
+				enfant->assignerPositionRelative(posTemp);
+			}
+
+			//setter l'angle
 			enfant->setAngle(angle);
+
+			//fixer des limites pour scale
+			if (scale > 8) {
+				scale = 8;
+			}
+			if (scale < 0.5) {
+				scale = 0.5;
+			}
 			enfant->setScale(glm::dvec3(scale, scale, 1.0));
 		}
 
