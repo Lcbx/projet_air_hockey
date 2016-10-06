@@ -89,7 +89,7 @@ void VisiteurDansLaTable::visiter(NoeudMuret* noeud)
 
 void VisiteurDansLaTable::visiter(NoeudBonus* noeud)
 {
-	//test le long du mur s'il est dans la table
+	//test le long du segment s'il est dans la table
 	glm::dvec3 debut = noeud->obtenirDroiteDirectrice().lirePoint();
 	glm::dvec3 fin = debut + noeud->obtenirDroiteDirectrice().lireVecteur();
 	//tout les 2 pixels
@@ -108,4 +108,18 @@ void VisiteurDansLaTable::visiter(NoeudMaillet* noeud)
 
 void VisiteurDansLaTable::visiter(NoeudPortail* noeud)
 {
+	//test le long du cercle
+	bool garder = true;
+	auto centre = noeud->obtenirPositionRelative();
+	double rayon = noeud->obtenirRayon();
+	int nbSegments = rayon;
+	for (int i = 0; i < nbSegments; i++)
+	{
+		double theta = 2.0f * 3.1415926f * double(i) / double(nbSegments); //l'angle courant
+		double cx = rayon * cosf(theta);
+		double cy = rayon * sinf(theta);
+		glm::vec3 point(centre.x + cx, centre.y + cy, 0);
+		if (!FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(point))
+			result_ = false;
+	}
 }
