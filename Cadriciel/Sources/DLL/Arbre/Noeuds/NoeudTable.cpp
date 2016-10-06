@@ -122,6 +122,8 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 #define vecPROJ(arg)					glm::vec3(vueProjection * glm::vec4(p(arg), 1))
 #define PROJ8			glm::value_ptr(	glm::vec3(vueProjection * glm::vec4(obtenirPositionRelative(), 1) ) )
 #define vecPROJ8						glm::vec3(vueProjection * glm::vec4(obtenirPositionRelative(), 1) )
+//#define PROJ8			glm::value_ptr(	glm::vec3(vueProjection * glm::vec4(p(6).x+p(7).x, p(6).y+p(7).y, p(6).z+p(7).z, 1) ) )
+//#define vecPROJ8						glm::vec3(vueProjection * glm::vec4(p(6).x+p(7).x, p(6).y+p(7).y, p(6).z+p(7).z, 1) )
 #define vecPROJvec(arg)					glm::vec3(vueProjection * glm::vec4(arg, 1))
 
 
@@ -162,7 +164,7 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 	tracerPointsControle(vueProjection);
 
 	// test 
-	//tracerMur2Points(vueProjection, { 0,0,0 }, { 20,20,0 });
+	tracerMur2Points(vueProjection, { 0,0,0 }, { 20,20,0 },largeur_,true);
 
 
 	//Activer le test de profondeur
@@ -243,66 +245,74 @@ void NoeudTable::tracerLignesDecoration(const glm::mat4& vueProjection) const
 	}
 	glEnd();
 
-//	// tracer un cercle au milieu du terrain
-//	glLineWidth(3.);
-//	glColor4f(1., 1., 0., 1.);
-//#undef min
-//#define dist(arg1,arg2)	 (float) sqrt(pow((arg1.x-arg2.x),2)+pow((arg1.y-arg2.y),2))
-//
-//	double distance = std::min (dist(vecPROJ(2), vecPROJ8),dist(vecPROJ(6), vecPROJ8),dist(vecPROJ(0), vecPROJ8),dist(vecPROJ(1), vecPROJ8) );
-//	/*double distance = std::min({ glm::distance(vecPROJ(2), vecPROJ8),
-//								 glm::distance(vecPROJ(6), vecPROJ8),
-//								 glm::distance(),
-//								 glm::distance(vecPROJ(1), vecPROJ8) });*/
-//	double coeff = 0.4;
-//	double rayon = distance  * coeff;
-//	tracerCercle((vecPROJ8).x, (vecPROJ8).y, rayon, 100);
-
-
+	// tracer un cercle au milieu du terrain
+	glLineWidth(3.);
+	glColor4f(1., 1., 0., 1.);
+#undef min
+	double distance = std::min({ glm::distance(p(2), vecPROJ8),
+								 glm::distance(p(6), vecPROJ8),
+								 glm::distance(p(0), vecPROJ8),
+								 glm::distance(p(1), vecPROJ8) });
+	double coeff = 0.4;
+	double rayon = distance  * coeff;
+	tracerCercle(vueProjection,vecPROJ8.x, vecPROJ8.y, rayon, 50);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///
-/// @fn void NoeudTable::tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 p1, glm::vec3 p2) const
+/// @fn void NoeudTable::tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 A, glm::vec3 B,
+///										  double largeur,bool direction) const
 ///
 /// @param[in] : vueProjection
-///					p1,p2
+///				A,B : les 2 points 
+///				largeur : la largeur du mur
+///				direction : true vers la droite, false vers la gauche
 /// Cette fonction trace un mur entre 2 points donnees 
 ///
 /// @return Aucune.
 ///
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-double NoeudTable::Delta(double A, double B, double C) const
-{
-	return (pow(B, 2) - 4 * A*C);
-}
-void NoeudTable::tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 A, glm::vec3 B) const
+void NoeudTable::tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 A, glm::vec3 B, double largeur, bool direction) const
 {
 	//					
 	//  A--------------B	
 	//	|			   | 
 	//  |			   |  
-	//	----------------	
-	// tracer un muret entre A et B revient a tracer un quad P1P2P3P4 telque P1P4 = AB et P1P2 = largeur_
-	glm::vec3 P1, P2, P3, P4;
-
-	glm::vec3 C, D;
-	// P1------------P4
-	// |			  |
-	// |			  |
-	// P2------------P3
+	//	D--------------C	
+	// tracer un muret entre A et B revient a tracer un quad ABCD telque CD = largeur
+	glm::vec3 P1,P2,P3,P4,C,D;
+	
 	if (A.x == B.x)
 	{
 		if (A.y > B.y)
 		{
-			P1 = A; P2 = B;
-			P3 = { B.x + largeur_,B.y,B.z };
-			P4 = { A.x + largeur_,A.y,A.z };
+			if (direction)
+			{
+				P1 = A; P2 = B;
+				P3 = { B.x + largeur_,B.y,B.z };
+				P4 = { A.x + largeur_,A.y,A.z };
+			}
+			else
+			{
+				P1 = A; P2 = B;
+				P3 = { B.x - largeur_,B.y,B.z };
+				P4 = { A.x - largeur_,A.y,A.z };
+			}
 		}
 		else
 		{
-			P1 = B; P2 = A;
-			P3 = { A.x + largeur_,A.y,A.z };
-			P4 = { B.x + largeur_,B.y,B.z };
+			if (direction)
+			{
+				P1 = B; P2 = A;
+				P3 = { A.x + largeur_,A.y,A.z };
+				P4 = { B.x + largeur_,B.y,B.z };
+			}
+			else
+			{
+				P1 = B; P2 = A;
+				P3 = { A.x - largeur_,A.y,A.z };
+				P4 = { B.x - largeur_,B.y,B.z };			
+			}
+			
 		}
 	}
 	else
@@ -321,7 +331,7 @@ void NoeudTable::tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 A, g
 				P3 = { B.x, B.y - largeur_, B.z };
 				P4 = { A.x, A.y - largeur_, A.z };
 			}
-		}
+		}		
 		else // cas general
 		{
 			// caluler la pente de la droite (AB)
@@ -329,25 +339,27 @@ void NoeudTable::tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 A, g
 			// pente de la droite perpendiculaire a (AB)
 			double pentePerp = ( (penteAB != 0 )? -1/penteAB : 1);
 			double b = calculB(pentePerp, A);
-//#define Delta(A,B,C) pow(B,2)-4*A*C
+#define Delta(A,B,C) pow(B,2)-4*A*C
 			double bx = (b - A.y) / pentePerp - A.x;
 			double cx = pow((b - A.y) / pentePerp, 2) - pow(largeur_, 2);
 			double delta = Delta(1,bx ,cx  );
+			std::cout << "delta=" << delta << std::endl;
 			double x1 = (-bx - sqrt(delta)) / 2;
 			double x2 = (-bx + sqrt(delta)) / 2;
 			double y1 = pentePerp*x1 +b;
 			double y2 = pentePerp*x2 + b;
-		//	C= { x1,y1,0. };
+			C= { x1,y1,0. };
 			std::cout << "A(" << A.x << "," << A.y << ") B(" << B.x << "," << B.y << ") C1(" << x1 << "," << y1 << ") C2(" << x2 << "," << y2 << ")" << std::endl;
-//#undef Delta
+#undef Delta
 		}
 	}
 
 	glColor4fv(glm::value_ptr(couleurMurs_));
-	glBegin(GL_LINE);
+	glBegin(GL_LINES);
 	{
 		glVertex3fv(PROJvec(A));
 		glVertex3fv(PROJvec(B));
+		glVertex3fv(PROJvec(A));
 		glVertex3fv(PROJvec(C));
 	}
 	glEnd();
@@ -611,7 +623,7 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
 }
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn void NoeudTable::tracerCercle(float cx, float cy, float r, int nb_segments)
+/// @fn void NoeudTable::tracerCercle(const glm::mat4& vueProjection,float cx, float cy, float r, int nb_segments)
 ///
 /// @param[in] 
 ///			 cx : x du centre du cercle
@@ -623,20 +635,16 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudTable::tracerCercle(double cx, double cy, double r, int nb_segments) const
+void NoeudTable::tracerCercle(const glm::mat4& vueProjection,double cx, double cy, double r, int nb_segments) const
 {
 	glBegin(GL_LINE_LOOP);
 	for (int ii = 0; ii < nb_segments; ii++)
 	{
-		double theta = 2.0f * 3.1415926f * double(ii) / double(nb_segments);//l'angle courant
-
+		double theta = 2.0f * 3.1415926f * double(ii) / double(nb_segments); //l'angle courant
 		double x = r * cosf(theta);
 		double y = r * sinf(theta);
-
-		glm::vec3 point(x+cx, y+cy, 0);
-
-		glVertex2f(point.x, point.y);
-
+		glm::vec3 point{ x + cx, y + cy, 0 };
+		glVertex2f(vecPROJvec(point).x, vecPROJvec(point).y);
 	}
 	glEnd();
 }
