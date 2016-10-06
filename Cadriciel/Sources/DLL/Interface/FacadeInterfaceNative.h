@@ -83,5 +83,9 @@ extern "C" {
 	// Methode DeplacerXY de la camera, pour les touches de directions
 	__declspec(dllexport) void deplacerVueXY(double deplacementX, double deplacementY);
 
+
+	__declspec(dllexport) bool objetEstDansLaTable();
+
+
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__
