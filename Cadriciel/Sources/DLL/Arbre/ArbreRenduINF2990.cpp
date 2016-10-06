@@ -283,7 +283,6 @@ void ArbreRenduINF2990::ajouterMuret(glm::dvec3 position1, glm::dvec3 position2)
 	noeudMuret->setAngle(utilitaire::DEG_TO_RAD(calculerAngle(position1, position2)));
 	noeudMuret->accepter(v1);
 	
-
 	// toujours toujours liberer la mémoire svp !!!!
 	delete v1;
 }
@@ -399,13 +398,31 @@ void ArbreRenduINF2990::deplacerObjet(glm::dvec3 posDep, double angle, double sc
 
 	for (NoeudAbstrait * enfant : enfants_)
 	{
-		if (enfant->estSelectionne())// && enfant->obtenirType() == "bonus" && comp==1)
+		if (enfant->estSelectionne())
 		{
-			//TODO: reste a verifier si l'objet sort pas de la table 
-			//glm::dvec3 posTemp = enfant->obtenirPositionRelative();
-			
-			enfant->assignerPositionRelative(posDep);
+			//verifier si l'objet sort pas de la table 
+
+			glm::dvec3 posTemp = enfant->obtenirPositionRelative();
+
+			if (this->getTable()->dansTable(posDep))
+			{
+				enfant->assignerPositionRelative(posDep);
+			}
+			else
+			{
+				enfant->assignerPositionRelative(posTemp);
+			}
+
+			//setter l'angle
 			enfant->setAngle(angle);
+
+			//fixer des limites pour scale
+			if (scale > 8) {
+				scale = 8;
+			}
+			if (scale < 0.5) {
+				scale = 0.5;
+			}
 			enfant->setScale(glm::dvec3(scale, scale, 1.0));
 		}
 
@@ -426,14 +443,25 @@ void ArbreRenduINF2990::deplacerObjet(glm::dvec3 posDep, double angle, double sc
 int ArbreRenduINF2990::obtenirNombreObjetSelctionnes()
 {
 	int comp = 0;
+	int compMuret = 0;
+	
+	
 	for (NoeudAbstrait * enfant : enfants_)
 	{
 		if (enfant->estSelectionne())
 		{
-			comp++;
+			if (enfant->obtenirType() == "muret" ) {
+				compMuret++;
+			}
+			else 
+			{
+				comp++;
+			}
 		}
 	}
-	std::cout << "Nombre objets selectionnes: " << comp << std::endl;
+	compMuret = compMuret / 2;
+	comp = comp + compMuret;
+	std::cout << comp << std::endl;
 	return comp;
 }
 
@@ -479,9 +507,38 @@ double ArbreRenduINF2990::getScaleDataBinding()
 			return myScale;
 		}
 	}
-
-
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void supprimerMuret()
+///
+/// Cette fonction permet de supprimer un muret suite clic echap
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::supprimerMuret(bool escTouche)
+{
+	int comp = 0;
+	for (NoeudAbstrait * enfant : enfants_)
+	{
+		if (enfant->obtenirType() == "muret") {
 
+			comp++;
+		}
+		
+	}
+	std::cout << comp << std::endl;
+
+	if (escTouche == true)
+	{
+		if (this->enfants_.size() != NULL && comp%2 != 0 )
+		{
+			//supprime le 1er portail			
+			this->effacer(this->enfants_.back());
+		}
+	}
+	
+}
 

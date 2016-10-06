@@ -79,7 +79,8 @@ public:
 
 	//murets
 	void ajouterMuret(int x1, int y1, int x2, int y2);
-	void ajouterMurFantome(int corXin, int corYin, int corX, int corY);
+	void ajouterMuretFantome(int corXin, int corYin, int corX, int corY);
+	void supprimerMuret(bool escTouche);
 
 
 	// fonction bidon de test

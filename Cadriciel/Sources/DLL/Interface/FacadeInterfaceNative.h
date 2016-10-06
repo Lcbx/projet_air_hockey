@@ -34,8 +34,6 @@ extern "C" {
 	__declspec(dllexport) void ajouterPortailDeux(int x2, int y2);
 
 
-	__declspec(dllexport) void ajouterMuret(int x1, int y1, int x2, int y2);
-	__declspec(dllexport) void ajouterMuretFantome(int corXin, int corYin, int corX, int corY);
 
 	//Afficher les positions d'un objet 
 	__declspec(dllexport) double getPosX();
