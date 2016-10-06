@@ -759,7 +759,7 @@ namespace InterfaceGraphique
             
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-            saveFileDialog1.Filter = "All files (*.*)|*.*";
+            saveFileDialog1.Filter = "XML files (*.xml)|*.xml";
             saveFileDialog1.FilterIndex = 1;
             saveFileDialog1.RestoreDirectory = true;
             saveFileDialog1.AddExtension = false;
@@ -778,7 +778,7 @@ namespace InterfaceGraphique
 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            openFileDialog1.Filter = "All files (*.*)|*.*";
+            openFileDialog1.Filter = "XML files (*.xml)|*.xml";
             openFileDialog1.FilterIndex = 1;
             openFileDialog1.RestoreDirectory = true;
 
