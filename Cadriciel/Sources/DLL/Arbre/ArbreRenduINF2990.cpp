@@ -446,25 +446,25 @@ void ArbreRenduINF2990::deplacerObjet(glm::dvec3 posDep, double angle, double sc
 int ArbreRenduINF2990::obtenirNombreObjetSelctionnes()
 {
 	int comp = 0;
-	int compMuret = 0;
+	//int compMuret = 0;
 	
 	
 	for (NoeudAbstrait * enfant : enfants_)
 	{
 		if (enfant->estSelectionne())
 		{
-			if (enfant->obtenirType() == "muret" ) {
-				compMuret++;
-			}
-			else 
-			{
+		//	if (enfant->obtenirType() == "muret" ) {
+		//		compMuret++;
+		//	}
+		//	else 
+		//	{
 				comp++;
-			}
+		//	}
 		}
 	}
-	compMuret = compMuret / 2;
-	comp = comp + compMuret;
-	std::cout << comp << std::endl;
+	//compMuret = compMuret / 2;
+	comp = comp; // +compMuret;
+	std::cout << "objets selectionnes : " << comp << std::endl;
 	return comp;
 }
 
@@ -549,7 +549,7 @@ void ArbreRenduINF2990::supprimerMuret(bool escTouche)
 		}
 		
 	}
-	std::cout << comp << std::endl;
+	//std::cout << comp << std::endl;
 
 	if (escTouche == true)
 	{

@@ -23,15 +23,26 @@
 ///////////////////////////////////////////////////////////////////////////
 class AjoutMur : public StrategieSouris {
 public:
-	void start(int x, int y);			//les coordonnees du mouse_down
-	void current(int x, int y);			//les coordonnees du mouse_move
-	void end(int x, int y);				//les coordonnees du mouse_up
-	void position(int x, int y);		//position de la souris hors d'un click
-	void operationShortClick();			//lance l'opération adéquate selon le scénario du click
-	void operationDragClick();			//lance l'opération adéquate selon le scénario du click
-	void escEnfonce();					//au cas ou si on doit arreter l'ajout
+	///les coorsonnées du mouse_down
+	void start(int x, int y);
+	///les coordonnees du mouse_move
+	void current(int x, int y);
+	///les coordonnees du mouse_up
+	void end(int x, int y);
+	///position de la souris hors d'un click
+	void position(int x, int y);
+	///lance l'opération adéquate selon le scénario du click
+	void operationShortClick();
+	///lance l'opération adéquate selon le scénario du click
+	void operationDragClick();
+	///au cas ou si on doit arreter l'ajout
+	void escEnfonce();					
 private:
-	//int X1, Y1, X2, Y2;				//pour garder l'information des points du Click
-	glm::ivec4 notrePosition_;			//pour garder la position du premier click
-	bool clickInitial = true;			//distinction entre les deux clicks
+	///int X1, Y1, X2, Y2; pour garder l'information des points du Click
+	///pour garder la position du premier click
+	glm::ivec4 notrePosition_;
+	///distinction entre les deux clicks 
+	bool clickInitial_ = true;
+	///premier affichage su muret fantome
+	bool premierAffichage_ = true;
 };
