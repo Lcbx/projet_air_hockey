@@ -67,7 +67,7 @@ void VisiteurDansLaTable::visiter(NoeudRondelle* noeud)
 ///
 /// @fn VisiteurDansLaTable::visiter(NoeudMuret* noeud)
 ///
-/// verifie le long de sa trajectoire du noeud muret
+/// verifie le long du noeud muret
 ///
 /// @return Aucune.
 ///
