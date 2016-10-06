@@ -7,12 +7,10 @@
 /// @addtogroup inf2990 INF2990
 /// @{
 ///////////////////////////////////////////////////////////////////////////////
-#include <iostream>
-#include <string>
 
 #include "VisiteurMiseEchelle.h"
 #include "ArbreRenduINF2990.h"
-
+#include "VisiteurDansLaTable.h"
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -39,7 +37,12 @@ VisiteurMiseEchelle::VisiteurMiseEchelle()
 void VisiteurMiseEchelle::mettreEchelle(float facteur)
 {
 	facteur_ = facteur;
+	bool effectuer = true;
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
+	VisiteurDansLaTable v(effectuer);
+	if (!effectuer)
+		for (auto it = facteursOriginaux_.begin(); it != facteursOriginaux_.end(); it++)
+			(*it).first->setScale((*it).second);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -112,9 +115,8 @@ void VisiteurMiseEchelle::visiter(NoeudMuret* noeud)
 	}
 
 	if (noeud->estSelectionne()) {
-
+		facteursOriginaux_[(NoeudAbstrait*)noeud] = noeud->getScale();
 		noeud->setScale(glm::dvec3(fact, noeud->getScale().y, 1));
-
 	}
 }
 ////////////////////////////////////////////////////////////////////////
@@ -142,7 +144,7 @@ void VisiteurMiseEchelle::visiter(NoeudBonus* noeud)
 	}
 
 	if (noeud->estSelectionne()) {
-
+		facteursOriginaux_[(NoeudAbstrait*)noeud] = noeud->getScale();
 		noeud->setScale(glm::dvec3(fact, fact, 1.0));
 	}
 
@@ -188,7 +190,7 @@ void VisiteurMiseEchelle::visiter(NoeudPortail* noeud)
 	}
 
 	if (noeud->estSelectionne()) {
-
+		facteursOriginaux_[(NoeudAbstrait*)noeud] = noeud->getScale();
 		noeud->setScale(glm::dvec3(fact, fact, 1.0));
 
 	}
