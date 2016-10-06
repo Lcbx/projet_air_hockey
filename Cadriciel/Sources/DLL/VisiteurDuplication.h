@@ -28,14 +28,14 @@ class VisiteurDuplication : public Visiteur
 	glm::vec3 posCentre_ {0.f};
 	glm::vec3 posActuelle_{ 0.f };
 	
-	bool effectuer_ = true;	// si la manipulation est viable
+	// si la manipulation est viable
+	bool effectuer_ = true;	
 
-	//liste de noeuds
 	///contient les originaux(selectionnés)
 	std::list<NoeudAbstrait*> originaux_;
 	///et les clones (non selectionnés)
 	std::list<NoeudAbstrait*> nosClones_;
-
+	///un visiteur deplacement
 	VisiteurDeplacement visDep_;
 
 public:
