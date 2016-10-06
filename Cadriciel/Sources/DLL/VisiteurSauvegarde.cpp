@@ -172,6 +172,7 @@ void VisiteurSauvegarde::visiter(NoeudTable* noeud)
 	elementTable->SetAttribute("P8Y", P8.y);
 	elementTable->SetAttribute("P8Z", P8.z);
 
+
 	// Visite les fils de ce noeud composite
 	for (unsigned int i = 0; i < noeud->obtenirNombreEnfants(); i++) {
 		if (noeud->chercher(i)->estEnregistrable()) {
