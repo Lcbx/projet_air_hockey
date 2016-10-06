@@ -83,6 +83,11 @@ extern "C" {
 	// Methode DeplacerXY de la camera, pour les touches de directions
 	__declspec(dllexport) void deplacerVueXY(double deplacementX, double deplacementY);
 
+	// Methode pour sauvegarder la zone de jeu
+	__declspec(dllexport) void enregistrerZoneJeu(char *fichierZoneJeu);
+
+	// Methode pour charger la zone de jeu
+	__declspec(dllexport) void chargerZoneJeu(char *fichierZoneJeu);
 
 	__declspec(dllexport) bool objetEstDansLaTable();
 

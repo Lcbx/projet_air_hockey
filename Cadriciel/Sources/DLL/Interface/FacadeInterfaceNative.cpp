@@ -421,6 +421,35 @@ extern "C"
 		return FacadeModele::obtenirInstance()->objetEstDansLaTable();
 	}
 
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void enregistrerZoneJeu(char *fichierZoneJeu)
+	///
+	/// Cette fonction permet de sauvegarder la zone de jeu dans un fichier 
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl enregistrerZoneJeu(char *fichierZoneJeu)
+	{
+		FacadeModele::obtenirInstance()->enregistrerZoneJeu(fichierZoneJeu);
+	}
+
+	
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void chargerZoneJeu(char *fichierZoneJeu)
+	///
+	/// Cette fonction permet de charger la zone de jeu contenue dans un fichier 
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl chargerZoneJeu(char *fichierZoneJeu)
+	{
+		FacadeModele::obtenirInstance()->chargerZoneJeu(fichierZoneJeu);
+	}
+
 }
 
 

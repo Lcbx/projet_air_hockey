@@ -73,6 +73,7 @@ public:
 
    ///ajouter le muret dans la table
    void ajouterMuret(glm::dvec3 position1, glm::dvec3 position2);
+
    bool premierEstajoute = false;
 
    /// fonction de calcul valable pour les ligne et murs

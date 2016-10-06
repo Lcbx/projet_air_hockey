@@ -46,6 +46,8 @@
 #include <iostream>
 #include "Noeuds/NoeudTypes.h"
 
+#include "../SauvegardeZoneDeJeu.h"
+
 
 
 /// Pointeur vers l'instance unique de la classe.
@@ -55,6 +57,8 @@ FacadeModele* FacadeModele::instance_{ nullptr };
 /// Chaîne indiquant le nom du fichier de configuration du projet.
 const std::string FacadeModele::FICHIER_CONFIGURATION{ "configuration.xml" };
 
+/// Chaîne indiquant le nom du fichier de la zone de jeu par défaut.
+const std::string FacadeModele::FICHIER_ZONEDEFAUT{ "ZoneDefaut.xml" };
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -228,6 +232,68 @@ void FacadeModele::enregistrerConfiguration() const
 	
 	// Écrire dans le fichier
 	document.SaveFile(FacadeModele::FICHIER_CONFIGURATION.c_str());
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::chargerZoneJeu(std::string fichierZoneJeu) const
+///
+/// Cette fonction charge la zone de jeu à partir d'un fichier XML.
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::chargerZoneJeu(char* fichierZoneJeu) const
+{
+
+	std::cout << "CHARGEMEEEEEEEEEEEEENT" << std::endl;
+
+	// si le fichier existe on le lit
+	tinyxml2::XMLDocument document;
+
+	// Lire à partir du fichier de configuration
+	document.LoadFile(fichierZoneJeu);
+
+	// On lit les différentes configurations.
+	SauvegardeZoneDeJeu::lireArbre(document);
+
+	std::cout << "CHARGEMEEEEEEEEEEEEENT LE RETOUR" << std::endl;
+
+}
+
+
+///////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::enregistrerZoneJeu(std::string fichierZoneJeu) const
+///
+/// Cette fonction genere un fichier XML contenant
+///  la zone de jeu actuelle.
+///
+///  !!! 
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+
+void FacadeModele::enregistrerZoneJeu(char* fichierZoneJeu) const
+{
+	// TODO : Correctement implémenter l'erreur
+	if (fichierZoneJeu == FICHIER_ZONEDEFAUT)
+		std::cerr << "Erreur : Tentative de modification de la zone de jeu par défaut" << std::endl;
+
+	std::cout << "Nom du fichier de sauvegarde: " << fichierZoneJeu << std::endl;
+
+	tinyxml2::XMLDocument document;
+
+	// Écrire la déclaration XML standard...
+	document.NewDeclaration(R"(?xml version="1.0" standalone="yes"?)");
+
+	// On enregistre les différentes configurations.
+	SauvegardeZoneDeJeu::creerArbre(document);
+
+	// Écrire dans le fichier
+	document.SaveFile(fichierZoneJeu);
 }
 
 
