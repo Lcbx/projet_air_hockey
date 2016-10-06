@@ -11,9 +11,7 @@
 #ifndef VISITEUR_MISEECHELLE_H
 #define VISITEUR_MISEECHELLE_H
 
-#include <iostream>
-#include <string>
-
+#include <map>
 #include "Visiteur.h"
 
 
@@ -39,6 +37,8 @@ public:
 
 
 	float facteur_;
+
+	map<NoeudAbstrait*, glm::vec3> facteursOriginaux_;
 
 };
 #endif

@@ -155,14 +155,14 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 	// tracer les murs 
 	tracerMurs(vueProjection);
 	// tracer les buts 
-	tracerButs(vueProjection);
+	tracerButs(vueProjection,15);
 	// tracer les lignes de decoration 
 	tracerLignesDecoration(vueProjection);
 	// tracer les points de Controle 
 	tracerPointsControle(vueProjection);
 
 	// test 
-	//tracerMur2Points(vueProjection, { 0,0,0 }, { 20,20,0 });
+	//tracerMur2Points(vueProjection, { 0,0,0 }, { 20,20,0 },largeur_,true);
 
 
 	//Activer le test de profondeur
@@ -242,63 +242,75 @@ void NoeudTable::tracerLignesDecoration(const glm::mat4& vueProjection) const
 		glVertex3fv(PROJ(3));
 	}
 	glEnd();
+
 	// tracer un cercle au milieu du terrain
 	glLineWidth(3.);
 	glColor4f(1., 1., 0., 1.);
 #undef min
-	double distance = std::min({ glm::distance(vecPROJ(2), vecPROJ8),
-								 glm::distance(vecPROJ(6), vecPROJ8),
-								 glm::distance(vecPROJ(0), vecPROJ8),
-								 glm::distance(vecPROJ(1), vecPROJ8) });
+	double distance = std::min({ glm::distance(p(2), vecPROJ8),
+								 glm::distance(p(6), vecPROJ8),
+								 glm::distance(p(0), vecPROJ8),
+								 glm::distance(p(1), vecPROJ8) });
 	double coeff = 0.4;
 	double rayon = distance  * coeff;
-	tracerCercle((vecPROJ8).x, (vecPROJ8).y, rayon, 100);
-
-
+	tracerCercle(vueProjection,vecPROJ8.x, vecPROJ8.y, rayon, 50);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///
-/// @fn void NoeudTable::tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 p1, glm::vec3 p2) const
+/// @fn void NoeudTable::tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 A, glm::vec3 B,
+///										  double largeur,bool direction) const
 ///
 /// @param[in] : vueProjection
-///					p1,p2
+///				A,B : les 2 points 
+///				largeur : la largeur du mur
+///				direction : true vers la droite, false vers la gauche
 /// Cette fonction trace un mur entre 2 points donnees 
 ///
 /// @return Aucune.
 ///
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-double NoeudTable::Delta(double A, double B, double C) const
-{
-	return (pow(B, 2) - 4 * A*C);
-}
-void NoeudTable::tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 A, glm::vec3 B) const
+void NoeudTable::tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 A, glm::vec3 B, double largeur, bool direction) const
 {
 	//					
 	//  A--------------B	
 	//	|			   | 
 	//  |			   |  
-	//	----------------	
-	// tracer un muret entre A et B revient a tracer un quad P1P2P3P4 telque P1P4 = AB et P1P2 = largeur_
-	glm::vec3 P1, P2, P3, P4;
-
-	glm::vec3 C, D;
-	// P1------------P4
-	// |			  |
-	// |			  |
-	// P2------------P3
+	//	D--------------C	
+	// tracer un muret entre A et B revient a tracer un quad ABCD telque CD = largeur
+	glm::vec3 P1,P2,P3,P4,C,D;
+	
 	if (A.x == B.x)
 	{
 		if (A.y > B.y)
 		{
-			P1 = A; P2 = B;
-			P3 = { B.x + largeur_,B.y,B.z };
-			P4 = { A.x + largeur_,A.y,A.z };
+			if (direction)
+			{
+				P1 = A; P2 = B;
+				P3 = { B.x + largeur_,B.y,B.z };
+				P4 = { A.x + largeur_,A.y,A.z };
+			}
+			else
+			{
+				P1 = A; P2 = B;
+				P3 = { B.x - largeur_,B.y,B.z };
+				P4 = { A.x - largeur_,A.y,A.z };
+			}
 		}
 		else
 		{
-			P1 = B; P2 = A;
-			P3 = { A.x + largeur_,A.y,A.z };
-			P4 = { B.x + largeur_,B.y,B.z };
+			if (direction)
+			{
+				P1 = B; P2 = A;
+				P3 = { A.x + largeur_,A.y,A.z };
+				P4 = { B.x + largeur_,B.y,B.z };
+			}
+			else
+			{
+				P1 = B; P2 = A;
+				P3 = { A.x - largeur_,A.y,A.z };
+				P4 = { B.x - largeur_,B.y,B.z };			
+			}
+			
 		}
 	}
 	else
@@ -325,7 +337,7 @@ void NoeudTable::tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 A, g
 			// pente de la droite perpendiculaire a (AB)
 			double pentePerp = ( (penteAB != 0 )? -1/penteAB : 1);
 			double b = calculB(pentePerp, A);
-//#define Delta(A,B,C) pow(B,2)-4*A*C
+#define Delta(A,B,C) pow(B,2)-4*A*C
 			double bx = (b - A.y) / pentePerp - A.x;
 			double cx = pow((b - A.y) / pentePerp, 2) - pow(largeur_, 2);
 			double delta = Delta(1,bx ,cx  );
@@ -333,17 +345,19 @@ void NoeudTable::tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 A, g
 			double x2 = (-bx + sqrt(delta)) / 2;
 			double y1 = pentePerp*x1 +b;
 			double y2 = pentePerp*x2 + b;
-		//	C= { x1,y1,0. };
-			std::cout << "A(" << A.x << "," << A.y << ") B(" << B.x << "," << B.y << ") C1(" << x1 << "," << y1 << ") C2(" << x2 << "," << y2 << ")" << std::endl;
-//#undef Delta
+			C= { x1,y1,0. };
+			D = {(B.x-A.x)+C.x,(B.y - A.y)+C.y ,0};
+			//std::cout << "A(" << A.x << "," << A.y << ") B(" << B.x << "," << B.y << ") C1(" << x1 << "," << y1 << ") C2(" << x2 << "," << y2 << ")" << std::endl;
+#undef Delta
 		}
 	}
 
 	glColor4fv(glm::value_ptr(couleurMurs_));
-	glBegin(GL_LINE);
+	glBegin(GL_QUADS);
 	{
 		glVertex3fv(PROJvec(A));
 		glVertex3fv(PROJvec(B));
+		glVertex3fv(PROJvec(D));
 		glVertex3fv(PROJvec(C));
 	}
 	glEnd();
@@ -486,12 +500,13 @@ double NoeudTable::calculB(double pente, glm::vec3 point) const
 ///
 /// @param[in]  vueProjection
 //
-/// Cette fonction trace les but avec une certaine longueur selon la projection
+/// Cette fonction trace les but avec une certaine longueur qui 
+/// varie en proportion de la longueur du mur
 ///
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
+void NoeudTable::tracerButs(const glm::mat4& vueProjection) const // version 0
 {
 #define delta 2
 	glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
@@ -499,20 +514,16 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
 	{	
 		//1er but
 		// 1er morceau P6P0
-		glm::vec3 point = { (p(6).x + (p(6).x + p(0).x) / 2) / 2, (p(6).y + (p(6).y + p(0).y) / 2) / 2, (p(6).z +(p(6).z + p(0).z) / 2) / 2 };
-		glVertex3fv(PROJvec(glm::vec3( p(6).x + delta, p(6).y, p(6).z)));
+		glm::vec3 point = { (p(6).x + (p(6).x + p(0).x) / 2) / 2, (p(6).y + (p(6).y + p(0).y) / 2) / 2, (p(6).z + (p(6).z + p(0).z) / 2) / 2 };
+		glVertex3fv(PROJvec(glm::vec3(p(6).x + delta, p(6).y, p(6).z)));
 		glVertex3fv(PROJvec(glm::vec3(point.x + delta, point.y, point.z)));
-		glVertex3fv(PROJvec(glm::vec3(point.x - largeur_-delta, point.y, point.z)));
-		glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_-delta, p(6).y, p(6).z)));
-		//glVertex3fv(PROJ(6));
-		//glVertex3fv(PROJvec(glm::vec3( point ) ) );
-		//glVertex3fv(PROJvec(glm::vec3(point.x - largeur_,point.y, point.z)));
-		//glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y, p(6).z)));
+		glVertex3fv(PROJvec(glm::vec3(point.x - largeur_ - delta, point.y, point.z)));
+		glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_ - delta, p(6).y, p(6).z)));
 		// 2eme morceau P1P6
 		point = { (p(6).x + (p(6).x + p(1).x) / 2) / 2, (p(6).y + (p(6).y + p(1).y) / 2) / 2, (p(6).z + (p(6).z + p(1).z) / 2) / 2 };
 		glVertex3fv(PROJvec(glm::vec3(p(6).x + delta, p(6).y, p(6).z)));
-		glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_-delta, p(6).y, p(6).z)));
-		glVertex3fv(PROJvec(glm::vec3(point.x - largeur_-delta, point.y, point.z)));
+		glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_ - delta, p(6).y, p(6).z)));
+		glVertex3fv(PROJvec(glm::vec3(point.x - largeur_ - delta, point.y, point.z)));
 		glVertex3fv(PROJvec(glm::vec3(point.x + delta, point.y, point.z)));
 		//glVertex3fv(PROJ(6));
 		//glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y, p(6).z)));
@@ -526,8 +537,8 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
 		//glVertex3fv(PROJvec(glm::vec3(point.x + largeur_, point.y, point.z)));
 		//glVertex3fv(PROJvec(glm::vec3(point)));
 		glVertex3fv(PROJvec(glm::vec3(p(7).x - delta, p(7).y, p(7).z)));
-		glVertex3fv(PROJvec(glm::vec3(p(7).x + largeur_+delta, p(7).y, p(7).z)));
-		glVertex3fv(PROJvec(glm::vec3(point.x + largeur_+delta, point.y, point.z)));
+		glVertex3fv(PROJvec(glm::vec3(p(7).x + largeur_ + delta, p(7).y, p(7).z)));
+		glVertex3fv(PROJvec(glm::vec3(point.x + largeur_ + delta, point.y, point.z)));
 		glVertex3fv(PROJvec(glm::vec3(point.x - delta, point.y, point.z)));
 		//2eme morceau P7P5
 		point = { (p(7).x + (p(7).x + p(5).x) / 2) / 2, (p(7).y + (p(7).y + p(5).y) / 2) / 2, (p(7).z + (p(7).z + p(5).z) / 2) / 2 };
@@ -542,72 +553,160 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
 	}
 	glEnd();
 
-#undef delta
-
-	//// tracez le 1er but
-	////// pente de la droite p6p0
-	//double a60 = calculPente(p(0),p(6));
-	//double b60 = calculB(a60, p(0));
-	//double longueur = sqrt(pow((pointControle_[0].x - pointControle_[6].x),2)+pow(pointControle_[0].y - pointControle_[6].y,2));
-	//
-	//float dx = p(0).x - p(6).x;
-	//float dy = p(0).y - p(6).y;
-	//GLfloat angle = glm::atan(dx / dy);
-	////std::cout << "dx = " << dx <<" dy = "<<dy<< std::endl;
-	////std::cout << "angle = " << angle << std::endl;
-	////////////////////////////////////
-	////				|				//
-	//// 2eme 		|   1er			//
-	//// Quadrant		|	Quadrant	//
-	////				|				//
-	////------------------------------//
-	////				|				//	
-	////	3eme		|	4eme		//
-	////	Quadrant	|	Quadrant	//
-	////				|				//
-	////////////////////////////////////
-	//glm::mat4 Vp = vueProjection;
-	//glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
-	//if (dx > 0)
-	//{
-	//	if (dy > 0)
-	//	{
-	//		glm::rotate(Vp, angle, p(0));
-	//		//1er quadrant
-	//		glBegin(GL_QUADS);
-	//		{
-	//			// 1er morceau P0P6
-	//			glVertex3fv(PROJ(6));
-	//			glVertex3fv(PROJvec(glm::vec3(p(6).x, p(6).y + longueur / 4, p(6).z)));
-	//			glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y + longueur / 4, p(6).z)));
-	//			glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y, p(6).z)));
-
-	//		}
-	//		glEnd();
-	//	
-
-	//	}
-	//	else
-	//	{
-	//		//4eme quadrant
-	//	}
-	//}
-	//else
-	//{
-	//	if (dy > 0)
-	//	{
-	//		//2eme quadrant
-	//	}
-	//	else
-	//	{
-	//		//3eme quadrant
-	//	}
-	//}
-	//
+#undef delta 
 }
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn void NoeudTable::tracerCercle(float cx, float cy, float r, int nb_segments)
+/// @fn void  NoeudTable::calculerPointDistance(glm::vec3 p0, glm::vec3 p1, 
+///		double longueur, double largeur, glm::vec3 & p2, glm::vec3 & p3, glm::vec3 & p4) const
+///
+/// @param[in]  veProjection
+///				longueur: la longueur du but
+//
+/// Cette fonction donne les quatres points du but selon une longueur et une largeur
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void  NoeudTable::calculerPointDistance(glm::vec3 p0, glm::vec3 p1, double longueur, double largeur, glm::vec3 & p2, glm::vec3 & p3, glm::vec3 & p4) const
+{
+#define delta 2	
+#define Delta(A,B,C) pow(B,2)-4*A*C
+	glm::vec3 P;
+	if (p0.x == p1.x) 
+	{
+		if (p0.y > p1.y)
+		{
+			p2.x = p1.x;
+			p2.y = p1.y + longueur;
+			p3.x = p2.x - largeur_;
+			p3.y = p2.y;
+			p4.x = p1.x - largeur_;
+			p4.y = p1.y;
+		}
+		else
+		{
+			p2.x = p1.x;
+			p2.y = p1.y - longueur;
+			p3.x = p2.x - largeur_;
+			p3.y = p2.y;
+			p4.x = p1.x - largeur_;
+			p4.y = p1.y;
+		}
+		
+	}
+	else
+	{
+		if (p0.y == p1.y)
+		{
+			//p2.x = p1.x - longueur;
+			//p2.y = p1.y;
+			//p3.x = p2.x ;
+			//p3.y = p2.y - largeur_;
+			//p4.x = p1.x ;
+			//p4.y = p1.y - largeur_;
+		}
+		else
+		{
+			double dx = p0.x - p1.x;
+			double dy = p0.y - p1.y;
+			if (dy>0) 
+			{
+				double norme = glm::distance(p0, p1);
+				glm::vec3 u = { (p0.x - p1.x) / norme ,(p0.y - p1.y) / norme,(p0.z - p1.z) / norme };
+				glm::vec3 p1p2 = { longueur*u.x, longueur*u.y, longueur*u.z };
+				p2 = p1p2 + p1;
+				p3.x = p2.x - largeur; p3.y = p2.y;
+				p4.x = p1.x - largeur; p4.y = p1.y;
+			}
+			else
+			{
+				double norme = glm::distance(p0, p1);
+				glm::vec3 u = { (p0.x - p1.x) / norme ,(p0.y - p1.y) / norme,(p0.z - p1.z) / norme };
+				glm::vec3 p1p2 = { longueur*u.x, longueur*u.y, longueur*u.z };
+				p2 = p1p2 + p1;
+				p3.x = p2.x - largeur; p3.y = p2.y;
+				p4.x = p1.x - largeur; p4.y = p1.y;
+
+			}
+			
+		}
+		
+	}
+
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void NoeudTable::tracerButs(const glm::mat4& vueProjection, double longueur) const
+///
+/// @param[in]  vueProjection
+///				longueur: la longueur du but
+//
+/// Cette fonction trace les but avec une  longueur fixe!
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void NoeudTable::tracerButs(const glm::mat4& vueProjection, double longueur) const
+{
+	glm::vec3 point1, point2, point3, point4, point5;
+	//glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
+	glBegin(GL_QUADS);
+	{
+		//1er but
+		point1 = p(6);
+		calculerPointDistance(p(0), p(6), longueur, largeur_, point2, point3, point4);
+		// 1er morceau P6P0
+		glColor4f(1., 0, 0, 1); // Rouge
+		glVertex3fv(PROJvec(glm::vec3(point1.x + delta, point1.y, point1.z)));
+		glColor4f(1., 1, 0, 1); //Jaune
+		glVertex3fv(PROJvec(glm::vec3(point2.x + delta, point2.y, point2.z)));
+		glColor4f(0., 1, 0, 1); //vert
+		glVertex3fv(PROJvec(glm::vec3(point3.x - delta, point3.y, point3.z)));
+		glColor4f(0., 0, 1, 1); //bleu
+		glVertex3fv(PROJvec(glm::vec3(point4.x - delta, point4.y, point4.z)));
+		// 2eme morceau P1P6
+		calculerPointDistance(p(1), p(6), longueur, largeur_, point2, point3, point4);
+		glColor4f(1., 0, 0, 1); // Rouge
+		glVertex3fv(PROJvec(glm::vec3(point1.x + delta, point1.y, point1.z)));
+		glColor4f(0., 0, 1, 1); //bleu
+		glVertex3fv(PROJvec(glm::vec3(point4.x - delta, point4.y, point4.z)));
+		glColor4f(0., 1, 0, 1); //vert
+		glVertex3fv(PROJvec(glm::vec3(point3.x - delta, point3.y, point3.z)));
+		glColor4f(1., 1, 0, 1); //Jaune
+		glVertex3fv(PROJvec(glm::vec3(point2.x + delta, point2.y, point2.z)));
+	
+		//2eme but
+		point1 = p(7);
+		// 1ere morceau P7P4
+		calculerPointDistance(p(4), p(7), longueur, largeur_, point2, point3, point4);
+		glColor4f(1., 0, 0, 1); // Rouge
+		glVertex3fv(PROJvec(glm::vec3(point1.x - delta, point1.y, point1.z)));
+		glColor4f(0., 0, 1, 1); //bleu
+		glVertex3fv(PROJvec(glm::vec3(point4.x + delta + 2 * largeur_, point4.y, point4.z)));
+		glColor4f(0., 1, 0, 1); //vert
+		glVertex3fv(PROJvec(glm::vec3(point3.x + delta + 2*largeur_, point3.y, point3.z)));
+		glColor4f(1., 1, 0, 1); //Jaune
+		glVertex3fv(PROJvec(glm::vec3(point2.x - delta, point2.y, point2.z)));
+		//2eme morceau 
+		calculerPointDistance(p(5), p(7), longueur, largeur_, point2, point3, point4);
+		glColor4f(1., 0, 0, 1); // Rouge
+		glVertex3fv(PROJvec(glm::vec3(point1.x - delta, point1.y, point1.z)));
+		glColor4f(1., 1, 0, 1); //Jaune
+		glVertex3fv(PROJvec(glm::vec3(point2.x - delta, point2.y, point2.z)));
+		glColor4f(0., 1, 0, 1); //vert
+		glVertex3fv(PROJvec(glm::vec3(point3.x + delta + 2 * largeur_, point3.y, point3.z)));
+		glColor4f(0., 0, 1, 1); //bleu
+		glVertex3fv(PROJvec(glm::vec3(point4.x + delta + 2 * largeur_, point4.y, point4.z)));
+	}
+	glEnd();
+#undef Delta
+#undef delta 
+
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void NoeudTable::tracerCercle(const glm::mat4& vueProjection,float cx, float cy, float r, int nb_segments)
 ///
 /// @param[in] 
 ///			 cx : x du centre du cercle
@@ -619,20 +718,16 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudTable::tracerCercle(double cx, double cy, double r, int nb_segments) const
+void NoeudTable::tracerCercle(const glm::mat4& vueProjection,double cx, double cy, double r, int nb_segments) const
 {
 	glBegin(GL_LINE_LOOP);
 	for (int ii = 0; ii < nb_segments; ii++)
 	{
-		double theta = 2.0f * 3.1415926f * double(ii) / double(nb_segments);//l'angle courant
-
+		double theta = 2.0f * 3.1415926f * double(ii) / double(nb_segments); //l'angle courant
 		double x = r * cosf(theta);
 		double y = r * sinf(theta);
-
-		glm::vec3 point(x+cx, y+cy, 0);
-
-		glVertex2f(point.x, point.y);
-
+		glm::vec3 point{ x + cx, y + cy, 0 };
+		glVertex2f(vecPROJvec(point).x, vecPROJvec(point).y);
 	}
 	glEnd();
 }
