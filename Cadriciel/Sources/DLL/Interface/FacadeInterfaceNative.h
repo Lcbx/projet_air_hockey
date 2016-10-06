@@ -91,7 +91,11 @@ extern "C" {
 	__declspec(dllexport) double getCoefficientRebond();
 	/// Permet d'obtenir le coefficient d'accélération
 	__declspec(dllexport) double getCoefficientAcceleration();
+	// Methode pour sauvegarder la zone de jeu
+	__declspec(dllexport) void enregistrerZoneJeu(char *fichierZoneJeu);
 
+	// Methode pour charger la zone de jeu
+	__declspec(dllexport) void chargerZoneJeu(char *fichierZoneJeu);
 
 	__declspec(dllexport) bool objetEstDansLaTable();
 

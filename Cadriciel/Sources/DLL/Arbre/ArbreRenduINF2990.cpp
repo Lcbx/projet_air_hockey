@@ -166,7 +166,7 @@ NoeudTable* ArbreRenduINF2990::getTable()
 ///
 /// @fn void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos) 
 ///
-/// Cette fonction permet d'ajouter un bonus accélarateur a la scene
+/// Cette fonction permet d'ajouter un bonus accélérateur a la scene
 ///
 /// @return Aucune.
 ///
@@ -178,6 +178,8 @@ void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos)
 	noeudBonus->setScale({ 1, 1, 1 });
 	noeudBonus->accepter(&v1);
 }
+
+
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -200,6 +202,7 @@ void ArbreRenduINF2990::ajouterPortail(glm::dvec3 pos)
 		// toujours liberer la mémoire !!!!
 		delete v1;
 }
+
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -228,6 +231,7 @@ void ArbreRenduINF2990::ajouterPortailDeux(glm::dvec3 pos)
 	// toujours liberer la mémoire !!!!
 	delete v1;
 }
+
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -283,6 +287,8 @@ void ArbreRenduINF2990::ajouterMuret(glm::dvec3 position1, glm::dvec3 position2)
 	// toujours toujours liberer la mémoire svp !!!!
 	delete v1;
 }
+
+
 
 
 

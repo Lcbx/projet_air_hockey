@@ -62,6 +62,10 @@ public:
 	void chargerConfiguration() const;
 	/// Enregistre la configuration courante dans un fichier XML.
 	void enregistrerConfiguration() const;
+	/// Charge la zone de jeu à partir d'un fichier XML.
+	void chargerZoneJeu(char* fichierZoneJeu) const;
+	/// Enregistre la zone de jeu courante dans un fichier XML.
+	void enregistrerZoneJeu(char* fichierZoneJeu) const;
 	/// Libère le contexte OpenGL.
 	void libererOpenGL();
 	/// Affiche le contenu du modèle.
@@ -151,6 +155,9 @@ private:
 
    /// Nom du fichier XML dans lequel doit se trouver la configuration.
    static const std::string FICHIER_CONFIGURATION;
+
+   /// Nom du fichier XML dans lequel doit se trouver la zone de jeu par défaut.
+   static const std::string FICHIER_ZONEDEFAUT;
 
    /// Pointeur vers l'instance unique de la classe.
    static FacadeModele* instance_;

@@ -170,6 +170,9 @@ namespace vue {
 			hauteurFenetre_ += (largeurFenetre_ / largeurCloture_)*hauteur - hauteurFenetre_;//calculer l'ajout à ajouter à la hauteur ancienne de la  fenêtre
 		   largeurFenetre_ += (largeurFenetre_ / largeurCloture_)*largeur - largeurFenetre_;////calculer l'ajout à ajouter à la largeur ancienne de la  fenêtre
 
+		   hauteurFenetreInit_ = hauteurFenetre_;
+		   largeurFenetreInit_ = hauteurFenetre_;
+
 			largeurCloture_ = largeur;// la cloture prend la nouvelle largeur 
 			hauteurCloture_ = hauteur;// la cloture prend la nouvelle hauteur
 

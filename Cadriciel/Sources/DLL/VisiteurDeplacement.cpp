@@ -7,8 +7,10 @@
 /// @addtogroup inf2990 INF2990
 /// @{
 ///////////////////////////////////////////////////////////////////////////////
+
 #include "VisiteurDeplacement.h"
 #include "ArbreRenduINF2990.h"
+#include "VisiteurDansLaTable.h"
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -21,11 +23,11 @@
 /////////////////////////////////////////////////////////////////////////
 VisiteurDeplacement::VisiteurDeplacement(glm::vec3 dep) {
 	dep_ = dep;
-	tester_ = true;
 	effectuer_ = true;
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
-	tester_ = false;
-	if(effectuer_) FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
+	//verifie si le deplacement est legit
+	VisiteurDansLaTable v(effectuer_);
+	if(!effectuer_) FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -53,10 +55,10 @@ void VisiteurDeplacement::setDep(glm::vec3 dep) {
 void VisiteurDeplacement::visiter(NoeudAbstrait* noeud)
 {
 	if (noeud->estSelectionne()) {
-		if (!FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(noeud->obtenirPositionRelative() + dep_))
-			effectuer_ = false;
-		else if (!tester_ && effectuer_)
+		if (effectuer_) //deplace le noeud
 			noeud->assignerPositionRelative(noeud->obtenirPositionRelative() + dep_);
+		else //le remet a sa place
+			noeud->assignerPositionRelative(noeud->obtenirPositionRelative() - dep_);
 	}
 }
 

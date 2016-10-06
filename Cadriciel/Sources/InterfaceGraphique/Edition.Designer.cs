@@ -158,6 +158,7 @@
             this.ouvrirToolStripMenuItem.Name = "ouvrirToolStripMenuItem";
             this.ouvrirToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.ouvrirToolStripMenuItem.Text = "Ouvrir";
+            this.ouvrirToolStripMenuItem.Click += new System.EventHandler(this.ouvrirToolStripMenuItem_Click);
             // 
             // enregistrerToolStripMenuItem
             // 
@@ -171,6 +172,7 @@
             this.enregistrerSousToolStripMenuItem.Name = "enregistrerSousToolStripMenuItem";
             this.enregistrerSousToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.enregistrerSousToolStripMenuItem.Text = "Enregistrer sous";
+            this.enregistrerSousToolStripMenuItem.Click += new System.EventHandler(this.enregistrerSousToolStripMenuItem_Click);
             // 
             // propriétésToolStripMenuItem
             // 
