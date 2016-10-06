@@ -83,5 +83,14 @@ extern "C" {
 	// Methode DeplacerXY de la camera, pour les touches de directions
 	__declspec(dllexport) void deplacerVueXY(double deplacementX, double deplacementY);
 
+	/// Permet de changer les coefficients de la table de jeu
+	__declspec(dllexport) void setCoefficient(double friction, double rebond, double acceleration);
+	/// Permet d'obtenir le coefficient de friction
+	__declspec(dllexport) double getCoefficientFriction();
+	/// Permet d'obtenir le coefficient de rebond
+	__declspec(dllexport) double getCoefficientRebond();
+	/// Permet d'obtenir le coefficient d'accélération
+	__declspec(dllexport) double getCoefficientAcceleration();
+
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__
