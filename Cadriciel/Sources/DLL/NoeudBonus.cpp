@@ -120,7 +120,7 @@ math::Droite3D NoeudBonus::obtenirDroiteDirectrice() {
 /// Permet d'obtenir le rayon minimal du modèle
 /// @return Le rayon du modèle
 ////////////////////////////////////////////////////////////////////////
-double NoeudBonus::obtenirRayonModele() {
+inline double NoeudBonus::obtenirRayonModele() const {
 	utilitaire::BoiteEnglobante a = utilitaire::calculerBoiteEnglobante(*modele_);
 	return min(abs(a.coinMax.x - a.coinMin.x), abs(a.coinMax.y - a.coinMin.y)) / 2;
 }

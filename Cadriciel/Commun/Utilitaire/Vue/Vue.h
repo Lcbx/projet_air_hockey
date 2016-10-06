@@ -59,7 +59,7 @@ namespace vue {
 		inline const Camera& obtenirCamera() const;
 
 
-		// Obtention de la projection
+		/// Permet d'obtenir la projection
 		virtual const Projection& obtenirProjection() const = 0;
 
 		/// Modification de la clotûre

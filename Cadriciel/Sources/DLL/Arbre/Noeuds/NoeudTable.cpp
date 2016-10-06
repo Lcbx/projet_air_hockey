@@ -542,7 +542,7 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
 	}
 	glEnd();
 
-#undef delta 2
+#undef delta
 
 	//// tracez le 1er but
 	////// pente de la droite p6p0

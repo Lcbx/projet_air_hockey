@@ -21,7 +21,24 @@ class ArbreRenduINF2990;
 namespace vue {
    class Vue;
 }
+///////////////////////////////////////////////////////////////////////////
+/// @struct CoefficientConfiguration
+/// @brief  Objet de transport des configurations
+///
+///	friction: Friction du sol (sans-unités)
+/// rebond: Rebond des murs (sans-unités)
+/// acceleration: Accélération des bonus vitesse (m/s)
+/// 
+///////////////////////////////////////////////////////////////////////////
+struct CoefficientConfiguration{
+	double friction;		//Friction du sol
+	double rebond;			//Rebond des murs
+	double acceleration;	//Accélération des bonus vitesse
+} typedef CoefficientConfiguration;
 
+const CoefficientConfiguration COEFFICIENTS_MINIMAUX = { 0.0, 0, 0 };
+const CoefficientConfiguration COEFFICIENTS_DEFAULT = { 1.2, 0.8, 5 };
+const CoefficientConfiguration COEFFICIENTS_MAXIMAUX = { 100, 1, 10 };
 
 ///////////////////////////////////////////////////////////////////////////
 /// @class FacadeModele
@@ -45,6 +62,10 @@ public:
 	void chargerConfiguration() const;
 	/// Enregistre la configuration courante dans un fichier XML.
 	void enregistrerConfiguration() const;
+	/// Charge la zone de jeu à partir d'un fichier XML.
+	void chargerZoneJeu(char* fichierZoneJeu) const;
+	/// Enregistre la zone de jeu courante dans un fichier XML.
+	void enregistrerZoneJeu(char* fichierZoneJeu) const;
 	/// Libère le contexte OpenGL.
 	void libererOpenGL();
 	/// Affiche le contenu du modèle.
@@ -114,6 +135,11 @@ public:
 	double getScale();
 
 
+	/// Permet d'obtenir les constantes de la zone de jeu (friction, rebond etc)
+	CoefficientConfiguration getCoefficient() const;
+	/// Permet de modifier les constantes de la zone de jeu (friction, rebond etc)
+	void setCoefficient(CoefficientConfiguration coeff);
+
 	bool objetEstDansLaTable();
 
 private:
@@ -130,6 +156,9 @@ private:
    /// Nom du fichier XML dans lequel doit se trouver la configuration.
    static const std::string FICHIER_CONFIGURATION;
 
+   /// Nom du fichier XML dans lequel doit se trouver la zone de jeu par défaut.
+   static const std::string FICHIER_ZONEDEFAUT;
+
    /// Pointeur vers l'instance unique de la classe.
    static FacadeModele* instance_;
 
@@ -145,6 +174,8 @@ private:
    /// Arbre de rendu contenant les différents objets de la scène.
    ArbreRenduINF2990* arbre_{ nullptr };
 
+   /// Coefficients de configuration
+   CoefficientConfiguration coeff_ = COEFFICIENTS_DEFAULT;
 };
 
 
