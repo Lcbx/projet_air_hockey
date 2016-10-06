@@ -127,6 +127,7 @@ Pour le mode "Édition", il suffit de choisir la commande à executer à partir 
 d'outils située à droite de la fenetre ou à partir de la barre des menus.
 Selon l'action choisi, il suffit de cliquer et/ou appuyer sur une touche pour voir le résultat.
   
+Pour la barre de proprietes, vous pouvez changez la position, l'angle(en degre) et le scale(entre 0.5 et 8) d'un objet
 </value>
   </data>
 </root>

@@ -35,7 +35,10 @@ namespace InterfaceGraphique
             textBox1.Enabled = false;
             textBox2.Enabled = false;
             textBox3.Enabled = false;
-            textBox4.Enabled = false;
+            //  textBox4.Enabled = false;
+            numericUpDown1.Enabled = false;
+            numericUpDown1.ResetText();
+
             button1.Enabled = false;
             label6.Show();
 
@@ -242,6 +245,7 @@ namespace InterfaceGraphique
 
             if (signeInterdiction && (EtatSouris == Etats.AJOUT_ACCELERATEUR || EtatSouris == Etats.AJOUT_MUR || EtatSouris == Etats.AJOUT_PORTAIL))
                 Cursor = Cursors.No;
+
             else Cursor = Cursors.Default;
 
             x = e.X; y = e.Y;
@@ -590,7 +594,9 @@ namespace InterfaceGraphique
                 textBox1.Enabled = true;
                 textBox2.Enabled = true;
                 textBox3.Enabled = true;
-                textBox4.Enabled = true;
+                //textBox4.Enabled = true;
+
+                numericUpDown1.Enabled = true;
                 button1.Enabled = true;
 
                 label6.Hide();
@@ -611,22 +617,24 @@ namespace InterfaceGraphique
                 textBox3.Text = angle.ToString();
 
                 //Scale
-                double scale = (FonctionsNatives.getScale());
-                scale = Math.Round(scale, 2);
-                textBox4.Text = scale.ToString();
-
+                float scale = (float)(FonctionsNatives.getScale());
+                //scale = Math.Round(scale, 2);
+                // textBox4.Text = scale.ToString();
+                numericUpDown1.Value = Convert.ToDecimal(scale);
             }
             else
             {
                 textBox1.Text = " ";
                 textBox2.Text = " ";
                 textBox3.Text = " ";
-                textBox4.Text = " ";
+                // textBox4.Text = " ";
+                numericUpDown1.ResetText();
 
                 textBox1.Enabled = false;
                 textBox2.Enabled = false;
                 textBox3.Enabled = false;
-                textBox4.Enabled = false;
+                // textBox4.Enabled = false;
+                numericUpDown1.Enabled = false;
                 button1.Enabled = false;
 
                 label6.Show();
@@ -705,10 +713,11 @@ namespace InterfaceGraphique
             double myX;
             double myY;
             double myAngle;
-            double myScale;
+            double myScale = Convert.ToDouble(numericUpDown1.Value);
+
 
             if (!double.TryParse(textBox1.Text, out myX) || !double.TryParse(textBox2.Text, out myY)
-                || !double.TryParse(textBox3.Text, out myAngle) || !double.TryParse(textBox4.Text, out myScale))
+                || !double.TryParse(textBox3.Text, out myAngle))// || !double.TryParse(textBox4.Text, out myScale))
             {
                 MessageBox.Show("Veuillez vérifier les valeurs entrées", "Barre de proprietés",
                  MessageBoxButtons.OK, MessageBoxIcon.Warning);
