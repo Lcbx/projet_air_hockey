@@ -44,7 +44,7 @@ public:
 	math::Droite3D obtenirDroiteDirectrice();
 
 	///Permet d'obtenir le rayon minimal du modèle
-	virtual double obtenirRayonModele();
+	inline virtual double obtenirRayonModele() const;
 };
 
 

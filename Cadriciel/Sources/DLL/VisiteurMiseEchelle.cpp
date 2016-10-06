@@ -106,8 +106,7 @@ void VisiteurMiseEchelle::visiter(NoeudMuret* noeud)
 	if (fact < 0.5)
 	{
 		fact = 0.5;
-	}
-	if (fact > 14)
+	} else if (fact > 14)
 	{
 		fact = 14;
 	}
@@ -137,8 +136,7 @@ void VisiteurMiseEchelle::visiter(NoeudBonus* noeud)
 	if (fact < 0.5)
 	{
 		fact = 0.5;
-	}
-	if (fact > 6)
+	} else if (fact > 6)
 	{
 		fact = 6;
 	}

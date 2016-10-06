@@ -150,42 +150,33 @@ public:
 	/// Anime le noeud.
 	virtual void animer(float dt);
 
+	/// Permet d'obtenir le rayon du modèle du noeud
+	inline virtual double obtenirRayonModele() const;
+	/// Permet d'obtenir le rayon du modèle du noeud avec la mise à l'échelle
+	inline virtual double obtenirRayon() const;
 
-	////////////////////////////////////////////////////////////////////////
-	/// @fn double NoeudAbstrait::obtenirRayonModele()
-	/// Permet d'obtenir lle rayon du modele
-	/// @return Le rayon du modèle
-	////////////////////////////////////////////////////////////////////////
-	virtual double obtenirRayonModele() { return utilitaire::calculerCylindreEnglobant(*modele_).rayon; };
-
-	////////////////////////////////////////////////////////////////////////
-	/// @fn double NoeudAbstrait::obtenirRayon()
-	/// Permet d'obtenir le rayon de la forme en fonction du rayon du modèle
-	/// @return Le rayon de l'objet
-	////////////////////////////////////////////////////////////////////////
-	virtual double obtenirRayon() { return obtenirRayonModele() * this->getScale().y; };
-
-
-	//Accepter le visiteur
+	/// Accepter le visiteur
 	virtual void accepter(Visiteur* v);
 
+	/// Permet d'obtenir le modèle du noeud
 	modele::Modele3D const* getModele() { return this->modele_; };
-	//set frere
+	
+	/// Permet de d'assigner un noeud frère (utile pour les portails)
 	virtual void setFrere(NoeudAbstrait* frere);
 
-	//get
+	/// Permet d'obtenir un noeud frère (utile pour les portails)
 	virtual NoeudAbstrait* getFrere();
 
 
-	// set  du scale et angle
+	/// Permet de changer l'angle directeur du noeud
 	virtual void setAngle(float angle);
+	/// Permet de changer l'échelle de redimensionnement
 	virtual void setScale(const glm::dvec3& scale);
 	
-	//get du scale et angle
-	inline float getAngle()const;
-	inline const glm::dvec3& getScale()const;
-
-
+	/// Permet d'obtenir l'angle directeur du noeud
+	inline float getAngle() const;
+	/// Permet d'obtenir la mise à l'échelle du noeud
+	inline const glm::dvec3& getScale() const; 
 
 protected:
 	/// Type du noeud.
@@ -422,6 +413,27 @@ inline void NoeudAbstrait::assignerEstSelectionnable(bool selectionnable)
 }
 
 
+
+
+////////////////////////////////////////////////////////////////////////
+/// @fn double NoeudAbstrait::obtenirRayonModele()
+/// Permet d'obtenir lle rayon du modele
+/// @return Le rayon du modèle
+////////////////////////////////////////////////////////////////////////
+inline double NoeudAbstrait::obtenirRayonModele() const {
+	return utilitaire::calculerCylindreEnglobant(*modele_).rayon;
+}
+
+////////////////////////////////////////////////////////////////////////
+/// @fn double NoeudAbstrait::obtenirRayon()
+/// Permet d'obtenir le rayon de la forme en fonction du rayon du modèle
+/// @return Le rayon de l'objet
+////////////////////////////////////////////////////////////////////////
+inline double NoeudAbstrait::obtenirRayon() const {
+	return obtenirRayonModele() * this->getScale().y;
+}
+
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn inline bool NoeudAbstrait::estSelectionnable() const
@@ -494,9 +506,9 @@ inline void NoeudAbstrait::assignerObjetRendu(modele::Modele3D const* modele, op
 ////////////////////////////////////////////////////////////////////////
 inline void NoeudAbstrait::setAngle(float angle) {
 	if (angle <= utilitaire::DEG_TO_RAD(-180))
-		angle += utilitaire::DEG_TO_RAD(360);
+		angle += (float) utilitaire::DEG_TO_RAD(360);
 	else if (angle > utilitaire::DEG_TO_RAD(180))
-		angle -= utilitaire::DEG_TO_RAD(360);
+		angle -= (float) utilitaire::DEG_TO_RAD(360);
 
 	angleRotation_ = angle;
 }
@@ -531,9 +543,6 @@ inline float NoeudAbstrait::getAngle() const {
 inline const glm::dvec3& NoeudAbstrait::getScale() const{
 	return scale_;
 }
-
-
-
 
 
 #endif // __ARBRE_NOEUDS_NOEUDABSTRAIT_H__

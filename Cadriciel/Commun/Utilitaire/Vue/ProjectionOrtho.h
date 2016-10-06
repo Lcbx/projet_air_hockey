@@ -63,7 +63,7 @@ namespace vue {
 		/// Obtenir les données de la fenêtre virtuelle.
 		inline glm::dvec2 obtenirDimensionFenetreVirtuelle() const;
 
-		// Obtenir le zoom actuel
+		/// Permety d'obtenir le zoom actuel
 		double obtenirZoomActuel();
 
 

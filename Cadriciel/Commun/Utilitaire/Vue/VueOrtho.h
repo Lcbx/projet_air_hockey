@@ -30,7 +30,7 @@ namespace vue {
 	class VueOrtho : public Vue
 	{
 	public:
-		// Constructeur.
+		/// Constructeur de la vue orthogonale
 		VueOrtho(Camera const& camera, ProjectionOrtho const& projection);
 
 		/// Obtention de la projection.
