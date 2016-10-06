@@ -92,5 +92,9 @@ extern "C" {
 	/// Permet d'obtenir le coefficient d'accélération
 	__declspec(dllexport) double getCoefficientAcceleration();
 
+
+	__declspec(dllexport) bool objetEstDansLaTable();
+
+
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__

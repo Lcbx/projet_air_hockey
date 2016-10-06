@@ -618,6 +618,11 @@ namespace InterfaceGraphique
             }
             else
             {
+                textBox1.Text = " ";
+                textBox2.Text = " ";
+                textBox3.Text = " ";
+                textBox4.Text = " ";
+
                 textBox1.Enabled = false;
                 textBox2.Enabled = false;
                 textBox3.Enabled = false;
@@ -709,7 +714,14 @@ namespace InterfaceGraphique
                  MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else { FonctionsNatives.configurerObjet(myX, myY, myAngle, myScale); }
+            else {
+                FonctionsNatives.configurerObjet(myX, myY, myAngle, myScale);
+                if(FonctionsNatives.objetEstDansLaTable()==false)
+                {
+                    MessageBox.Show("Les coordonnées saisies sont à l'éxterieur de la table ", "Position invalide!",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+             }
         }
 
         private void zoomToolStripMenuItem_Click(object sender, EventArgs e)
@@ -841,6 +853,9 @@ namespace InterfaceGraphique
             [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)] // pour utiliser une fonction qui se trouve dans le fichier Noyau.dll
             public static extern void redimensionnerFenetre(int largeur, int hauteur);
 
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)] // pour utiliser une fonction qui se trouve dans le fichier Noyau.dll
+            public static extern bool objetEstDansLaTable();
 
         }
     }

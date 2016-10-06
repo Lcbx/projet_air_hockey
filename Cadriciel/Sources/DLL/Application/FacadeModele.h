@@ -113,21 +113,21 @@ public:
 
 	//void deplacerObjet(int x1 , int y1, int x2, int y2 );
 
-	//effacer un objet selectionné de la table
+	///effacer un objet selectionné de la table
 	void effacerObjet();
 
-	//deplacer un objet a partir des coordonnes de la boite de configuration
+	///deplacer un objet a partir des coordonnes de la boite de configuration
 	void deplacerObjet(double x, double y, double angle, double scale);
 
 
-	//retourner le nombre d'objet selectionne
+	///retourner le nombre d'objet selectionne
 	int nombreObjetSelectionne();
 
 
-	//obtenir l'angle d'un objet
+	///obtenir l'angle d'un objet
 	double getAngle();
 
-	//obtenir le scale d'un objet 
+	///obtenir le scale d'un objet 
 	double getScale();
 
 
@@ -135,6 +135,9 @@ public:
 	CoefficientConfiguration getCoefficient() const;
 	/// Permet de modifier les constantes de la zone de jeu (friction, rebond etc)
 	void setCoefficient(CoefficientConfiguration coeff);
+
+	bool objetEstDansLaTable();
+
 private:
 
    /// Constructeur par défaut.

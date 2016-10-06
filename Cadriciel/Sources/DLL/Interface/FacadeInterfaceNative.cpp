@@ -416,6 +416,10 @@ extern "C"
 		return FacadeModele::obtenirInstance()->getScale();
 	}
 
+	__declspec(dllexport) bool __cdecl objetEstDansLaTable()
+	{
+		return FacadeModele::obtenirInstance()->objetEstDansLaTable();
+	}
 
 	////////////////////////////////////////////////////////////////////////
 	///

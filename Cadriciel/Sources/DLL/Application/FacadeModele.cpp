@@ -612,6 +612,21 @@ void FacadeModele::supprimerMuret(bool escTouche)
 
 ////////////////////////////////////////////////////////////////////////
 ///
+/// @fn bool objetEstDansLaTable()
+///
+/// Cette fonction de retourner faux si un objet a l'exterieur de la table
+///
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::objetEstDansLaTable()
+{
+	return arbre_->objetEstDansLaTable();
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
 /// @fn CoefficientConfiguration FacadeModele::getCoefficient()
 ///
 ///	Permet d'obtenir les coefficients de friction, de rebond et d'accélération
