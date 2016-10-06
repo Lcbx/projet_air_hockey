@@ -98,7 +98,7 @@ void AjoutMur::operationShortClick() {
 		glm::dvec3 debut; FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(notrePosition_[0], notrePosition_[1], debut);
 		glm::dvec3 fin; FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(X1(), Y1(), fin);
 		//environ tout les 2 pixels
-		double length =  glm::distance(debut, fin);
+		double length = 0.5 * glm::distance(debut, fin);
 		glm::dvec3 vec = (fin - debut) / length;
 		for (int i = 1; i < length; i++) {
 			debut += vec;

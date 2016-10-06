@@ -89,15 +89,23 @@ void VisiteurDansLaTable::visiter(NoeudMuret* noeud)
 
 void VisiteurDansLaTable::visiter(NoeudBonus* noeud)
 {
-	VisiteurDansLaTable::visiter((NoeudAbstrait*)noeud);
+	//test le long du mur s'il est dans la table
+	glm::dvec3 debut = noeud->obtenirDroiteDirectrice().lirePoint();
+	glm::dvec3 fin = debut + noeud->obtenirDroiteDirectrice().lireVecteur();
+	//tout les 2 pixels
+	double length = 0.5 * glm::distance(debut, fin);
+	glm::dvec3 vec = (fin - debut) / length;
+	for (int i = 1; i < length; i++) {
+		debut += vec;
+		if (!FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(debut))
+			result_ = false;
+	}
 }
 
 void VisiteurDansLaTable::visiter(NoeudMaillet* noeud)
 {
-	VisiteurDansLaTable::visiter((NoeudAbstrait*)noeud);
 }
 
 void VisiteurDansLaTable::visiter(NoeudPortail* noeud)
 {
-	VisiteurDansLaTable::visiter((NoeudAbstrait*)noeud);
 }
