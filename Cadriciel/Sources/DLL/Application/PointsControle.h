@@ -24,6 +24,7 @@ class NoeudPointControle;
 ///////////////////////////////////////////////////////////////////////////
 class PointsControle : public StrategieSouris {
 public:
+	PointsControle();						//initialisation
 	void start(int x, int y);				//les coordonnees du mouse_down
 	void current(int x, int y);				//les coordonnees du mouse_move
 	void end(int x, int y);					//les coordonnees du mouse_up

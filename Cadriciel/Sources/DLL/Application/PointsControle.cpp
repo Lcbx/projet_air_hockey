@@ -17,6 +17,22 @@
 #include "../Vue/Vue.h"
 #include "../VisiteurDansLaTable.h"
 
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn PointsControle::PointsControle()
+///
+/// initialise l'outil point de controle en deselectionnant tous les noeuds
+///
+/// @return Aucun (constructeur).
+///
+/////////////////////////////////////////////////////////////////////////
+PointsControle::PointsControle() {
+	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->deselectionnerTout();
+}
+
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn PointsControle::p(int i)

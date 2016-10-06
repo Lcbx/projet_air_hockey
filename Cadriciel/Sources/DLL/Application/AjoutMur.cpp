@@ -25,11 +25,11 @@
 ///
 /////////////////////////////////////////////////////////////////////////
 void AjoutMur::start(int x, int y) {
-	//estEnfonce = false;
-	if (clickInitial) { notrePosition_ = { x,y,x,y }; std::cout << "1er if: " << std::endl; }
+	if (clickInitial) {
+		notrePosition_ = { x,y,x,y };
+	}
 	else {
 		Souris::obtenirInstance()->getPosition() = { x,y,x,y };
-		std::cout << "2eme if: " << std::endl;
 	}
 }
 
@@ -62,13 +62,10 @@ void AjoutMur::end(int x, int y) {
 /////////////////////////////////////////////////////////////////////////
 void AjoutMur::position(int x, int y) {
 	glm::dvec3 pointClick;  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(X1(), Y1(), pointClick);
-	if (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(pointClick)) {
-		if (!clickInitial) {
-			X2() = x; Y2() = y;
-			FacadeModele::obtenirInstance()->ajouterMuretFantome(notrePosition_[0], notrePosition_[1], x, y);
-			FacadeModele::obtenirInstance()->ajouterMuret(notrePosition_[0], notrePosition_[1], x, y);
-
-		}
+	if (!clickInitial && FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(pointClick)) {
+		X2() = x; Y2() = y;
+		FacadeModele::obtenirInstance()->supprimerMuret(true);
+		FacadeModele::obtenirInstance()->ajouterMuret(notrePosition_[0], notrePosition_[1], x, y);
 	}
 }
 
@@ -89,10 +86,9 @@ void AjoutMur::operationShortClick() {
 		FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(notrePosition_.x, notrePosition_.y, pointClick);
 
 	if (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(pointClick)) {
-		if (clickInitial) { clickInitial = false; //estEnfonce == false;
-		std::cout<<"premier: "<<estEnfonce<<std::endl;
-		}
+		if (clickInitial) { clickInitial = false; }
 		else {
+			FacadeModele::obtenirInstance()->supprimerMuret(true);
 			//test le long du mur s'il est dans la table
 			bool ajouter = true;
 			glm::dvec3 debut; FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(notrePosition_[0], notrePosition_[1], debut);
@@ -105,11 +101,12 @@ void AjoutMur::operationShortClick() {
 				if (!FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(debut)) 					
 					ajouter = false;
 			}
-			if(ajouter)	FacadeModele::obtenirInstance()->ajouterMuret(notrePosition_[0], notrePosition_[1], X2(), Y2());
+			if (ajouter) {
+				FacadeModele::obtenirInstance()->ajouterMuret(notrePosition_[0], notrePosition_[1], X2(), Y2());
+				FacadeModele::obtenirInstance()->ajouterMuret(notrePosition_[0], notrePosition_[1], X2(), Y2());
+			}
+			else FacadeModele::obtenirInstance()->supprimerMuret(true);
 			clickInitial = true;
-			//estEnfonce == false;
-			std::cout << "deuxieme: " << estEnfonce << std::endl;
-
 		}
 	}
 }
@@ -128,8 +125,6 @@ void AjoutMur::operationDragClick() {
 ///
 /////////////////////////////////////////////////////////////////////////
 void AjoutMur::escEnfonce() {
-	//estEnfonce = true;
 	FacadeModele::obtenirInstance()->supprimerMuret(true);
-	//this->operationShortClick();
 	clickInitial = true;
 }
