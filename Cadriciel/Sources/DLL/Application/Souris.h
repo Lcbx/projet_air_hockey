@@ -28,9 +28,9 @@ public:
 	static Souris* obtenirInstance();		//singleton
 	static void libererInstance();			//singleton
 	void startClick(int x, int y);			//les coordonnees du mouse_down
-	void currentClick(int x, int y);		//les coordonnees du mouse_move
+	bool currentClick(int x, int y);		//les coordonnees du mouse_move
 	void endClick(int x, int y);			//les coordonnees du mouse_up
-	void sourisPostition(int x, int y);		//position de la souris hors d'un click
+	bool sourisPostition(int x, int y);		//position de la souris hors d'un click
 	void EtatdelaSouris(int etat);			//operation en cours
 	void clickRight(bool presse);			//change le type de clic (bouge la vue)
 	void setControl(bool presse);			//change l'etat de la touche control
