@@ -231,7 +231,6 @@ namespace vue {
 	/// @return l'attribut zoomActuel_
 	///
 	////////////////////////////////////////////////////////////////////////
-	// Obtenir le zoom actuel
 	double ProjectionOrtho::obtenirZoomActuel()
 	{
 		return zoomActuel_;

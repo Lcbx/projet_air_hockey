@@ -27,15 +27,32 @@
 /////////////////////////////////////////////////////////////////////////
 void AjoutPortail::operationShortClick() {
 	glm::dvec3 pointClick;  FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(X1(), Y1(), pointClick);
-	if (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(pointClick)) {
-		if (clickInitial) {
-			FacadeModele::obtenirInstance()->ajouterPortail(X1(), Y1());
-			clickInitial = false;
-		}
-		else {
-			FacadeModele::obtenirInstance()->ajouterPortailDeux(X1(), Y1());
-			clickInitial = true;
-		}
+	//ajoute un portail dummy et le recupere (dernier enfant ajouté)
+	FacadeModele::obtenirInstance()->ajouterPortail(X1(), Y1());
+	auto dummy = (NoeudPortail*)FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->chercher(FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->obtenirNombreEnfants() - 1);
+	//test le long du cercle
+	bool garder = true;
+	double rayon = dummy->obtenirRayon();
+	int nbSegments = rayon;
+	for (int i = 0; i < nbSegments; i++)
+	{
+		double theta = 2.0f * 3.1415926f * double(i) / double(nbSegments); //l'angle courant
+		double cx = rayon * cosf(theta);
+		double cy = rayon * sinf(theta);
+		glm::vec3 point(pointClick.x + cx, pointClick.y + cy, 0);
+		if (!FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(point))
+			garder = false;
+	}
+	//supprime le modele Dummy
+	FacadeModele::obtenirInstance()->supprimerPortail(true);
+	//ajoute le vrai portail
+	if (garder) if(clickInitial_) {
+		FacadeModele::obtenirInstance()->ajouterPortail(X1(), Y1());
+		clickInitial_ = false;
+	}
+	else {
+		FacadeModele::obtenirInstance()->ajouterPortailDeux(X1(), Y1());
+		clickInitial_ = true;
 	}
 }
 
@@ -54,5 +71,5 @@ void AjoutPortail::operationDragClick() {
 /////////////////////////////////////////////////////////////////////////
 void AjoutPortail::escEnfonce() {
 	FacadeModele::obtenirInstance()->supprimerPortail(true);
-	clickInitial = true;
+	clickInitial_ = true;
 }

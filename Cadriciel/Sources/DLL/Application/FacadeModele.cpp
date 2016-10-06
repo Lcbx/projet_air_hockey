@@ -689,3 +689,39 @@ bool FacadeModele::objetEstDansLaTable()
 {
 	return arbre_->objetEstDansLaTable();
 }
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn CoefficientConfiguration FacadeModele::getCoefficient()
+///
+///	Permet d'obtenir les coefficients de friction, de rebond et d'accélération
+///
+/// @return	friction	: Coefficient de friction,
+///			rebond		: Rebond des murs,
+///			acceleration: Accélération des bonus vitesse
+///
+////////////////////////////////////////////////////////////////////////
+CoefficientConfiguration FacadeModele::getCoefficient() const {
+	return this->coeff_;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setCoefficient()
+///
+///	Permet de modifier les coefficients de friction, de rebond et d'accélération
+///
+/// @param[in] coeff: Objet de transport de coefficients
+///			friction	: Coefficient de friction,
+///			rebond		: Rebond des murs,
+///			acceleration: Accélération des bonus vitesse
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setCoefficient(CoefficientConfiguration coeff) {
+	coeff.friction = std::min(std::max(coeff.friction, COEFFICIENTS_MINIMAUX.friction), COEFFICIENTS_MAXIMAUX.friction);
+	coeff.rebond = std::min(std::max(coeff.rebond, COEFFICIENTS_MINIMAUX.rebond), COEFFICIENTS_MAXIMAUX.rebond);
+	coeff.acceleration = std::min(std::max(coeff.acceleration, COEFFICIENTS_MINIMAUX.acceleration), COEFFICIENTS_MAXIMAUX.acceleration);
+
+	this->coeff_ = coeff;
+}

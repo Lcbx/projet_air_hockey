@@ -423,6 +423,69 @@ extern "C"
 
 	////////////////////////////////////////////////////////////////////////
 	///
+	/// @fn __declspec(dllexport) void setCoefficient(double friction, double rebond, double acceleration)
+	/// @brief Permet de changer les coefficients de la table de jeu
+	///
+	/// Permet de changer les coefficients de la table à travers l'objet de transport des coefficients
+	///
+	/// @param[in] friction : Coefficient de friction
+	/// @param[in] rebond : Coefficient de rebond
+	/// @param[in] acceleration : Coefficient d'acceleration
+	/// 
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void setCoefficient(double friction, double rebond, double acceleration) {
+		FacadeModele::obtenirInstance()->setCoefficient({friction, rebond, acceleration});
+	}
+	
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn	__declspec(dllexport) double getCoefficientFriction()
+	/// @brief Permet d'obtenir le coefficient de friction
+	///
+	/// Permet d'obtenir le coefficient de friction pour la table
+	///
+	/// @return Le coefficient de friction de la table
+	/// 
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) double getCoefficientFriction() {
+		return FacadeModele::obtenirInstance()->getCoefficient().friction;
+	}
+		
+
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn	__declspec(dllexport) double getCoefficientRebond()
+	/// @brief Permet d'obtenir le coefficient de friction
+	///
+	/// Permet d'obtenir le coefficient de rebond
+	///
+	/// @return Le coefficient de rebond de la table
+	/// 
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) double getCoefficientRebond() {
+		return FacadeModele::obtenirInstance()->getCoefficient().rebond;
+	}
+
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn	__declspec(dllexport) double getCoefficientAcceleration()
+	/// @brief Permet d'obtenir le coefficient de friction
+	///
+	/// Permet d'obtenir le coefficient d'accélération
+	///
+	/// @return Le coefficient d'accélération de la table
+	/// 
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) double getCoefficientAcceleration() {
+		return FacadeModele::obtenirInstance()->getCoefficient().acceleration;
+	}
+
+
+	////////////////////////////////////////////////////////////////////////
+	///
 	/// @fn __declspec(dllexport) void enregistrerZoneJeu(char *fichierZoneJeu)
 	///
 	/// Cette fonction permet de sauvegarder la zone de jeu dans un fichier 

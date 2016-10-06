@@ -166,7 +166,7 @@ math::Droite3D NoeudMuret::obtenirDroiteDirectrice() {
 /// Permet d'obtenir le rayon minimal du modèle
 /// @return Le rayon du modèle
 ////////////////////////////////////////////////////////////////////////
-double NoeudMuret::obtenirRayonModele() {
+inline double NoeudMuret::obtenirRayonModele() const {
 	utilitaire::BoiteEnglobante a = utilitaire::calculerBoiteEnglobante(*modele_);
 	return min(abs(a.coinMax.x - a.coinMin.x), abs(a.coinMax.y - a.coinMin.y)) / 2;
 }
