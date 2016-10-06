@@ -46,7 +46,9 @@ public:
 	void tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 p1, glm::vec3 p2, double largeur,bool direction) const;
 	//tracer les murs entre 3 points
 	void tracerMurs3Points(const glm::mat4& vueProjection,glm::vec3 p1, glm::vec3 p2, glm::vec3 p3) const; 
-	void tracerButs(const glm::mat4& vueProjection) const; //tracer les buts
+	//tracer les buts
+	void tracerButs(const glm::mat4& vueProjection) const;
+	void tracerButs(const glm::mat4& vueProjection, double longueur) const;
 	void tracerLignesDecoration (const glm::mat4& vueProjection) const; //tracer les lignes de decoration
 
 	// Calcul la pente de la droite faite par 2 points 
