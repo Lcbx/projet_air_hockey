@@ -157,7 +157,7 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 	// tracer les murs 
 	tracerMurs(vueProjection);
 	// tracer les buts 
-	tracerButs(vueProjection,10);
+	tracerButs(vueProjection,15);
 	// tracer les lignes de decoration 
 	tracerLignesDecoration(vueProjection);
 	// tracer les points de Controle 
@@ -509,7 +509,7 @@ double NoeudTable::calculB(double pente, glm::vec3 point) const
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
+void NoeudTable::tracerButs(const glm::mat4& vueProjection) const // version 0
 {
 #define delta 2
 	glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
@@ -548,6 +548,86 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
 }
 ////////////////////////////////////////////////////////////////////////
 ///
+/// @fn void  NoeudTable::calculerPointDistance(glm::vec3 p0, glm::vec3 p1, 
+///		double longueur, double largeur, glm::vec3 & p2, glm::vec3 & p3, glm::vec3 & p4) const
+///
+/// @param[in]  veProjection
+///				longueur: la longueur du but
+//
+/// Cette fonction donne les quatres points du but selon une longueur et une largeur
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void  NoeudTable::calculerPointDistance(glm::vec3 p0, glm::vec3 p1, double longueur, double largeur, glm::vec3 & p2, glm::vec3 & p3, glm::vec3 & p4) const
+{
+#define delta 2	
+#define Delta(A,B,C) pow(B,2)-4*A*C
+	glm::vec3 P;
+	if (p0.x == p1.x) 
+	{
+		if (p0.y > p1.y)
+		{
+			p2.x = p1.x;
+			p2.y = p1.y + longueur;
+			p3.x = p2.x - largeur_;
+			p3.y = p2.y;
+			p4.x = p1.x - largeur_;
+			p4.y = p1.y;
+		}
+		else
+		{
+			p2.x = p1.x;
+			p2.y = p1.y - longueur;
+			p3.x = p2.x - largeur_;
+			p3.y = p2.y;
+			p4.x = p1.x - largeur_;
+			p4.y = p1.y;
+		}
+		
+	}
+	else
+	{
+		if (p0.y == p1.y)
+		{
+			//p2.x = p1.x - longueur;
+			//p2.y = p1.y;
+			//p3.x = p2.x ;
+			//p3.y = p2.y - largeur_;
+			//p4.x = p1.x ;
+			//p4.y = p1.y - largeur_;
+		}
+		else
+		{
+			double dx = p0.x - p1.x;
+			double dy = p0.y - p1.y;
+			if (dy>0) 
+			{
+				double norme = glm::distance(p0, p1);
+				glm::vec3 u = { (p0.x - p1.x) / norme ,(p0.y - p1.y) / norme,(p0.z - p1.z) / norme };
+				glm::vec3 p1p2 = { longueur*u.x, longueur*u.y, longueur*u.z };
+				p2 = p1p2 + p1;
+				p3.x = p2.x - largeur; p3.y = p2.y;
+				p4.x = p1.x - largeur; p4.y = p1.y;
+			}
+			else
+			{
+				double norme = glm::distance(p0, p1);
+				glm::vec3 u = { (p0.x - p1.x) / norme ,(p0.y - p1.y) / norme,(p0.z - p1.z) / norme };
+				glm::vec3 p1p2 = { longueur*u.x, longueur*u.y, longueur*u.z };
+				p2 = p1p2 + p1;
+				p3.x = p2.x - largeur; p3.y = p2.y;
+				p4.x = p1.x - largeur; p4.y = p1.y;
+
+			}
+			
+		}
+		
+	}
+
+}
+////////////////////////////////////////////////////////////////////////
+///
 /// @fn void NoeudTable::tracerButs(const glm::mat4& vueProjection, double longueur) const
 ///
 /// @param[in]  vueProjection
@@ -560,77 +640,55 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudTable::tracerButs(const glm::mat4& vueProjection, double longueur) const
 {
-#define delta 2	
-#define Delta(A,B,C) pow(B,2)-4*A*C
-	glm::vec3 point0, point1, point4, point5;
-	if (p(0).x == p(6).x)
-	{ 
-		point0.x = p(6).x;
-		point0.y = p(6).y + longueur;
-	}
-	else
-	{
-		double distp6p0 = glm::distance(p(0), p(6));
-		glm::vec3 u = { (p(0).x - p(6).x) / distp6p0,(p(0).y - p(6).y) / distp6p0,(p(0).z - p(6).z) / distp6p0 };
-		glm::vec3 p6p = { longueur*u.x, longueur*u.y, longueur*u.z };
-		glm::vec3 P = p6p + p(6);
-		std::cout << "P6(" << p(6).x << "," << p(6).y << ") P0(" << p(0).x << "," << p(0).y << ") P(" << P.x << "," << P.y << ")" << std::endl;
-		point0 = P;
-		/*double pente = calculPente(p(6), p(0));
-		std::cout << "P6(" << p(6).x << "," << p(6).y << ") P0(" << p(0).x << "," << p(0).y << ")" << std::endl;
-		std::cout << "pente = " << pente << std::endl;
-		double b = calculB(pente, p(6));
-		std::cout << "b = " << b << std::endl;
-		double bx = 2*(b - p(6).y) / pente - p(6).x;
-		double cx = pow(bx/2, 2) + pow(p(6).x,2) - pow(longueur, 2);
-		double D = Delta(2, bx, cx);
-		std::cout << "C = " << pow(bx / 2, 2) << " + " << pow(p(6).x, 2) << " - " << pow(longueur, 2) << std::endl;
-		std::cout <<"A = 2, B = "<<bx<<", C = "<<cx<<", delta = " << D << std::endl;
-		double x1 = (-bx - sqrt(D)) / 2;
-		double x2 = (-bx + sqrt(D)) / 2;
-		double y1 = pente*x1 + b;
-		double y2 = pente*x2 + b;
-		std::cout << "point1(" << x1 << "," << y1 << ") point2(" << x2 << "," << y2 << ")" << std::endl;
-		double distance2 = sqrt(pow((p(6).x - x1), 2) + pow((p(6).y - y1), 2));
-		std::cout << "distance = " << distance2 << std::endl;
-		if (y1 > y2)
-		{
-			point0.x = x1;
-			point0.y = y1;
-		}
-		else
-		{
-			point0.x = x2;
-			point0.y = y2;
-		}*/
-	}
-	glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
+	glm::vec3 point1, point2, point3, point4, point5;
+	//glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
 	glBegin(GL_QUADS);
 	{
 		//1er but
+		point1 = p(6);
+		calculerPointDistance(p(0), p(6), longueur, largeur_, point2, point3, point4);
 		// 1er morceau P6P0
-		glVertex3fv(PROJvec(glm::vec3(p(6).x + delta, p(6).y, p(6).z)));
-		glVertex3fv(PROJvec(glm::vec3(point0.x + delta, point0.y, point0.z)));
-		glVertex3fv(PROJvec(glm::vec3(point0.x - largeur_ - delta, point0.y, point0.z)));
-		glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_ - delta, p(6).y, p(6).z)));
-		// 2eme morceau P1P6
-		
-		glVertex3fv(PROJvec(glm::vec3(p(6).x + delta, p(6).y, p(6).z)));
-		glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_ - delta, p(6).y, p(6).z)));
-		glVertex3fv(PROJvec(glm::vec3(point1.x - largeur_ - delta, point1.y, point1.z)));
+		glColor4f(1., 0, 0, 1); // Rouge
 		glVertex3fv(PROJvec(glm::vec3(point1.x + delta, point1.y, point1.z)));
-		//2eme but
-		// 1ere morceau P7P4
-		
-		glVertex3fv(PROJvec(glm::vec3(p(7).x - delta, p(7).y, p(7).z)));
-		glVertex3fv(PROJvec(glm::vec3(p(7).x + largeur_ + delta, p(7).y, p(7).z)));
-		glVertex3fv(PROJvec(glm::vec3(point4.x + largeur_ + delta, point4.y, point4.z)));
+		glColor4f(1., 1, 0, 1); //Jaune
+		glVertex3fv(PROJvec(glm::vec3(point2.x + delta, point2.y, point2.z)));
+		glColor4f(0., 1, 0, 1); //vert
+		glVertex3fv(PROJvec(glm::vec3(point3.x - delta, point3.y, point3.z)));
+		glColor4f(0., 0, 1, 1); //bleu
 		glVertex3fv(PROJvec(glm::vec3(point4.x - delta, point4.y, point4.z)));
-		//2eme morceau P7P5
-		glVertex3fv(PROJvec(glm::vec3(p(7).x - delta, p(7).y, p(7).z)));
-		glVertex3fv(PROJvec(glm::vec3(point5.x - delta, point5.y, point5.z)));
-		glVertex3fv(PROJvec(glm::vec3(point5.x + largeur_ + delta, point5.y, point5.z)));
-		glVertex3fv(PROJvec(glm::vec3(p(7).x + largeur_ + delta, p(7).y, p(7).z)));
+		// 2eme morceau P1P6
+		calculerPointDistance(p(1), p(6), longueur, largeur_, point2, point3, point4);
+		glColor4f(1., 0, 0, 1); // Rouge
+		glVertex3fv(PROJvec(glm::vec3(point1.x + delta, point1.y, point1.z)));
+		glColor4f(0., 0, 1, 1); //bleu
+		glVertex3fv(PROJvec(glm::vec3(point4.x - delta, point4.y, point4.z)));
+		glColor4f(0., 1, 0, 1); //vert
+		glVertex3fv(PROJvec(glm::vec3(point3.x - delta, point3.y, point3.z)));
+		glColor4f(1., 1, 0, 1); //Jaune
+		glVertex3fv(PROJvec(glm::vec3(point2.x + delta, point2.y, point2.z)));
+	
+		//2eme but
+		point1 = p(7);
+		// 1ere morceau P7P4
+		calculerPointDistance(p(4), p(7), longueur, largeur_, point2, point3, point4);
+		glColor4f(1., 0, 0, 1); // Rouge
+		glVertex3fv(PROJvec(glm::vec3(point1.x - delta, point1.y, point1.z)));
+		glColor4f(0., 0, 1, 1); //bleu
+		glVertex3fv(PROJvec(glm::vec3(point4.x + delta + 2 * largeur_, point4.y, point4.z)));
+		glColor4f(0., 1, 0, 1); //vert
+		glVertex3fv(PROJvec(glm::vec3(point3.x + delta + 2*largeur_, point3.y, point3.z)));
+		glColor4f(1., 1, 0, 1); //Jaune
+		glVertex3fv(PROJvec(glm::vec3(point2.x - delta, point2.y, point2.z)));
+		//2eme morceau 
+		calculerPointDistance(p(5), p(7), longueur, largeur_, point2, point3, point4);
+		glColor4f(1., 0, 0, 1); // Rouge
+		glVertex3fv(PROJvec(glm::vec3(point1.x - delta, point1.y, point1.z)));
+		glColor4f(1., 1, 0, 1); //Jaune
+		glVertex3fv(PROJvec(glm::vec3(point2.x - delta, point2.y, point2.z)));
+		glColor4f(0., 1, 0, 1); //vert
+		glVertex3fv(PROJvec(glm::vec3(point3.x + delta + 2 * largeur_, point3.y, point3.z)));
+		glColor4f(0., 0, 1, 1); //bleu
+		glVertex3fv(PROJvec(glm::vec3(point4.x + delta + 2 * largeur_, point4.y, point4.z)));
 	}
 	glEnd();
 #undef Delta
