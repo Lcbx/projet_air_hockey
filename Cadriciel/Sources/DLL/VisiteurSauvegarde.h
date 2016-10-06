@@ -27,6 +27,7 @@ public:
 	virtual void visiter(NoeudBonus* noeud);
 	virtual void visiter(NoeudMaillet* noeud);
 	virtual void visiter(NoeudPortail* noeud);
+	virtual void visiter(NoeudTable *noeud);
 
 private:
 	// Pointeur vers l'element XML du pere du noeud visit?
