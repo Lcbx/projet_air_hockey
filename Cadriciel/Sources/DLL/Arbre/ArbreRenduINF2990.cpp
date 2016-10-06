@@ -166,12 +166,11 @@ NoeudTable* ArbreRenduINF2990::getTable()
 ///
 /// @fn void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos) 
 ///
-/// Cette fonction permet d'ajouter un bonus accélarateur a la scene
+/// Cette fonction permet d'ajouter un bonus accélérateur a la scene
 ///
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-
 void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos) 
 {
 	NoeudAbstrait* noeudBonus{ creerNoeud(NOM_BONUS) };
@@ -179,6 +178,8 @@ void ArbreRenduINF2990::ajouterBonus(glm::dvec3 pos)
 	noeudBonus->setScale({ 1, 1, 1 });
 	noeudBonus->accepter(&v1);
 }
+
+
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -201,6 +202,7 @@ void ArbreRenduINF2990::ajouterPortail(glm::dvec3 pos)
 		// toujours liberer la mémoire !!!!
 		delete v1;
 }
+
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -231,6 +233,7 @@ void ArbreRenduINF2990::ajouterPortailDeux(glm::dvec3 pos)
 }
 
 
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void ArbreRenduINF2990::supprimerPortail(bool escTouche)
@@ -240,7 +243,6 @@ void ArbreRenduINF2990::ajouterPortailDeux(glm::dvec3 pos)
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-
 void ArbreRenduINF2990::supprimerPortail(bool escTouche) 
 {
 //	this->effacer(this->enfants_.back());
@@ -267,7 +269,6 @@ void ArbreRenduINF2990::supprimerPortail(bool escTouche)
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-
 void ArbreRenduINF2990::ajouterMuret(glm::dvec3 position1, glm::dvec3 position2)
 {
 	NoeudAbstrait* noeudMuret{ creerNoeud(NOM_MURET) };
@@ -289,6 +290,8 @@ void ArbreRenduINF2990::ajouterMuret(glm::dvec3 position1, glm::dvec3 position2)
 
 
 
+
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn GLfloat calculerScale(glm::dvec3 pos, glm::dvec3 posf)
@@ -298,7 +301,6 @@ void ArbreRenduINF2990::ajouterMuret(glm::dvec3 position1, glm::dvec3 position2)
 /// @return scale.
 ///
 ////////////////////////////////////////////////////////////////////////
-
 GLfloat ArbreRenduINF2990::calculerScale(glm::dvec3 pos, glm::dvec3 posf)
 {
 	glm::dvec3 diff = posf - pos;

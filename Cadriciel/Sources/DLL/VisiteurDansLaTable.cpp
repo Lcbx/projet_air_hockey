@@ -25,6 +25,7 @@
 VisiteurDansLaTable::VisiteurDansLaTable(bool& result) : result_(result) {
 	result_ = true;
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
+	cout << "DansLaTable : " << (result_ ? "true\n" : "false\n");
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -89,15 +90,37 @@ void VisiteurDansLaTable::visiter(NoeudMuret* noeud)
 
 void VisiteurDansLaTable::visiter(NoeudBonus* noeud)
 {
-	VisiteurDansLaTable::visiter((NoeudAbstrait*)noeud);
+	//test le long du segment s'il est dans la table
+	glm::dvec3 debut = noeud->obtenirDroiteDirectrice().lirePoint();
+	glm::dvec3 fin = debut + noeud->obtenirDroiteDirectrice().lireVecteur();
+	//tout les 2 pixels
+	double length = 0.5 * glm::distance(debut, fin);
+	glm::dvec3 vec = (fin - debut) / length;
+	for (int i = 1; i < length; i++) {
+		debut += vec;
+		if (!FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(debut))
+			result_ = false;
+	}
 }
 
 void VisiteurDansLaTable::visiter(NoeudMaillet* noeud)
 {
-	VisiteurDansLaTable::visiter((NoeudAbstrait*)noeud);
 }
 
 void VisiteurDansLaTable::visiter(NoeudPortail* noeud)
 {
-	VisiteurDansLaTable::visiter((NoeudAbstrait*)noeud);
+	//test le long du cercle
+	bool garder = true;
+	auto centre = noeud->obtenirPositionRelative();
+	double rayon = noeud->obtenirRayon();
+	int nbSegments = rayon;
+	for (int i = 0; i < nbSegments; i++)
+	{
+		double theta = 2.0f * 3.1415926f * double(i) / double(nbSegments); //l'angle courant
+		double cx = rayon * cosf(theta);
+		double cy = rayon * sinf(theta);
+		glm::vec3 point(centre.x + cx, centre.y + cy, 0);
+		if (!FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(point))
+			result_ = false;
+	}
 }

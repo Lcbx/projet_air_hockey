@@ -166,14 +166,14 @@ void VisiteurSelection::visiter(NoeudPortail* noeud) {
 	double rayon = noeud->obtenirRayon();
 
 	double minDist = INFINITY;
-	int pointsSize = this->getPoints().size();
+	size_t pointsSize = this->getPoints().size();
 
 	// TODO: Take into account transformations
 	glm::dvec3 centre = noeud->obtenirPositionRelative();
 	//centre = centre + glm::dvec3{ 10,0,0 };
 
 	// Distance minimale du point
-	for (int i = 0; i < pointsSize; i++) {
+	for (size_t i = 0; i < pointsSize; i++) {
 		double a = glm::distance(centre, this->getPoint(i));
 		minDist = min(minDist, a);
 	}

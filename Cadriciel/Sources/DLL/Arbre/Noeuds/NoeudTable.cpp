@@ -122,8 +122,6 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 #define vecPROJ(arg)					glm::vec3(vueProjection * glm::vec4(p(arg), 1))
 #define PROJ8			glm::value_ptr(	glm::vec3(vueProjection * glm::vec4(obtenirPositionRelative(), 1) ) )
 #define vecPROJ8						glm::vec3(vueProjection * glm::vec4(obtenirPositionRelative(), 1) )
-//#define PROJ8			glm::value_ptr(	glm::vec3(vueProjection * glm::vec4(p(6).x+p(7).x, p(6).y+p(7).y, p(6).z+p(7).z, 1) ) )
-//#define vecPROJ8						glm::vec3(vueProjection * glm::vec4(p(6).x+p(7).x, p(6).y+p(7).y, p(6).z+p(7).z, 1) )
 #define vecPROJvec(arg)					glm::vec3(vueProjection * glm::vec4(arg, 1))
 
 
@@ -331,7 +329,7 @@ void NoeudTable::tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 A, g
 				P3 = { B.x, B.y - largeur_, B.z };
 				P4 = { A.x, A.y - largeur_, A.z };
 			}
-		}		
+		}
 		else // cas general
 		{
 			// caluler la pente de la droite (AB)
@@ -343,7 +341,6 @@ void NoeudTable::tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 A, g
 			double bx = (b - A.y) / pentePerp - A.x;
 			double cx = pow((b - A.y) / pentePerp, 2) - pow(largeur_, 2);
 			double delta = Delta(1,bx ,cx  );
-			//std::cout << "delta=" << delta << std::endl;
 			double x1 = (-bx - sqrt(delta)) / 2;
 			double x2 = (-bx + sqrt(delta)) / 2;
 			double y1 = pentePerp*x1 +b;
@@ -514,7 +511,7 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection) const // version 0
 #define delta 2
 	glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
 	glBegin(GL_QUADS);
-	{
+	{	
 		//1er but
 		// 1er morceau P6P0
 		glm::vec3 point = { (p(6).x + (p(6).x + p(0).x) / 2) / 2, (p(6).y + (p(6).y + p(0).y) / 2) / 2, (p(6).z + (p(6).z + p(0).z) / 2) / 2 };
@@ -528,9 +525,17 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection) const // version 0
 		glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_ - delta, p(6).y, p(6).z)));
 		glVertex3fv(PROJvec(glm::vec3(point.x - largeur_ - delta, point.y, point.z)));
 		glVertex3fv(PROJvec(glm::vec3(point.x + delta, point.y, point.z)));
+		//glVertex3fv(PROJ(6));
+		//glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y, p(6).z)));
+		//glVertex3fv(PROJvec(glm::vec3(point.x - largeur_, point.y, point.z)));
+		//glVertex3fv(PROJvec(glm::vec3(point)));
 		//2eme but
 		// 1ere morceau P7P4
 		point = { (p(7).x + (p(7).x + p(4).x) / 2) / 2, (p(7).y + (p(7).y + p(4).y) / 2) / 2, (p(7).z + (p(7).z + p(4).z) / 2) / 2 };
+		//glVertex3fv(PROJ(7));
+		//glVertex3fv(PROJvec(glm::vec3(p(7).x + largeur_, p(7).y, p(7).z)));
+		//glVertex3fv(PROJvec(glm::vec3(point.x + largeur_, point.y, point.z)));
+		//glVertex3fv(PROJvec(glm::vec3(point)));
 		glVertex3fv(PROJvec(glm::vec3(p(7).x - delta, p(7).y, p(7).z)));
 		glVertex3fv(PROJvec(glm::vec3(p(7).x + largeur_ + delta, p(7).y, p(7).z)));
 		glVertex3fv(PROJvec(glm::vec3(point.x + largeur_ + delta, point.y, point.z)));
@@ -541,6 +546,10 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection) const // version 0
 		glVertex3fv(PROJvec(glm::vec3(point.x - delta, point.y, point.z)));
 		glVertex3fv(PROJvec(glm::vec3(point.x + largeur_ + delta, point.y, point.z)));
 		glVertex3fv(PROJvec(glm::vec3(p(7).x + largeur_ + delta, p(7).y, p(7).z)));
+		//glVertex3fv(PROJ(7));
+		//glVertex3fv(PROJvec(glm::vec3(point)));
+		//glVertex3fv(PROJvec(glm::vec3(point.x + largeur_, point.y, point.z)));
+		//glVertex3fv(PROJvec(glm::vec3(p(7).x + largeur_, p(7).y, p(7).z)));
 	}
 	glEnd();
 

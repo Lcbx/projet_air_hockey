@@ -104,25 +104,53 @@
             // 
             // numericUpDown3
             // 
+            this.numericUpDown3.DecimalPlaces = 1;
             this.numericUpDown3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.numericUpDown3.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.numericUpDown3.Location = new System.Drawing.Point(85, 80);
             this.numericUpDown3.Margin = new System.Windows.Forms.Padding(2);
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(60, 21);
             this.numericUpDown3.TabIndex = 2;
             // 
             // numericUpDown2
             // 
+            this.numericUpDown2.DecimalPlaces = 1;
             this.numericUpDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.numericUpDown2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.numericUpDown2.Location = new System.Drawing.Point(85, 53);
             this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(60, 21);
             this.numericUpDown2.TabIndex = 1;
             // 
             // numericUpDown1
             // 
+            this.numericUpDown1.DecimalPlaces = 1;
             this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.numericUpDown1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.numericUpDown1.Location = new System.Drawing.Point(85, 28);
             this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown1.Name = "numericUpDown1";
@@ -162,7 +190,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 12;
-            this.button3.Text = "OK!";
+            this.button3.Text = "Modifier";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -176,7 +204,9 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "BoitePropriete";
             this.Text = "boitePropriete";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BoitePropriete_FormClosing);
             this.Load += new System.EventHandler(this.BoitePropriete_Load);
+            this.Shown += new System.EventHandler(this.BoitePropriete_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
