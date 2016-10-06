@@ -563,32 +563,47 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection, double longueur) con
 #define delta 2	
 #define Delta(A,B,C) pow(B,2)-4*A*C
 	glm::vec3 point0, point1, point4, point5;
-	double pente = calculPente(p(6), p(0));
-	std::cout << "pente = " << pente << std::endl;
-	double b = calculB(pente, p(0));
-	std::cout << "b = " << b << std::endl;
-	double bx = (b - p(6).y) / pente - p(6).x;
-	double cx = pow((b - p(6).y) / pente, 2) - pow(longueur, 2);
-	double D = Delta(1, bx, cx);
-	std::cout << "delta = " << D << std::endl;
-	double x1 = (-bx - sqrt(D)) / 2;
-	double x2 = (-bx + sqrt(D)) / 2;
-	double y1 = pente*x1 + b;
-	double y2 = pente*x2 + b;
-	std::cout << "point1(" << x1 << "," << y1 << ") point2(" << x2 << "," << y2 << ")" << std::endl;
-	double P6p0 = sqrt(pow((p(6).x-x1),2)+pow((p(6).y-y1),2));
-	std::cout << "P6p0 = " << P6p0 << std::endl;
-	if (y1 > y2) 
+	if (p(0).x == p(6).x)
 	{ 
-		point0.x = x1;
-		point0.y = y1;
+		point0.x = p(6).x;
+		point0.y = p(6).y + longueur;
 	}
 	else
 	{
-		point0.x = x2;
-		point0.y = y2;
+		double distp6p0 = glm::distance(p(0), p(6));
+		glm::vec3 u = { (p(0).x - p(6).x) / distp6p0,(p(0).y - p(6).y) / distp6p0,(p(0).z - p(6).z) / distp6p0 };
+		glm::vec3 p6p = { longueur*u.x, longueur*u.y, longueur*u.z };
+		glm::vec3 P = p6p + p(6);
+		std::cout << "P6(" << p(6).x << "," << p(6).y << ") P0(" << p(0).x << "," << p(0).y << ") P(" << P.x << "," << P.y << ")" << std::endl;
+		point0 = P;
+		/*double pente = calculPente(p(6), p(0));
+		std::cout << "P6(" << p(6).x << "," << p(6).y << ") P0(" << p(0).x << "," << p(0).y << ")" << std::endl;
+		std::cout << "pente = " << pente << std::endl;
+		double b = calculB(pente, p(6));
+		std::cout << "b = " << b << std::endl;
+		double bx = 2*(b - p(6).y) / pente - p(6).x;
+		double cx = pow(bx/2, 2) + pow(p(6).x,2) - pow(longueur, 2);
+		double D = Delta(2, bx, cx);
+		std::cout << "C = " << pow(bx / 2, 2) << " + " << pow(p(6).x, 2) << " - " << pow(longueur, 2) << std::endl;
+		std::cout <<"A = 2, B = "<<bx<<", C = "<<cx<<", delta = " << D << std::endl;
+		double x1 = (-bx - sqrt(D)) / 2;
+		double x2 = (-bx + sqrt(D)) / 2;
+		double y1 = pente*x1 + b;
+		double y2 = pente*x2 + b;
+		std::cout << "point1(" << x1 << "," << y1 << ") point2(" << x2 << "," << y2 << ")" << std::endl;
+		double distance2 = sqrt(pow((p(6).x - x1), 2) + pow((p(6).y - y1), 2));
+		std::cout << "distance = " << distance2 << std::endl;
+		if (y1 > y2)
+		{
+			point0.x = x1;
+			point0.y = y1;
+		}
+		else
+		{
+			point0.x = x2;
+			point0.y = y2;
+		}*/
 	}
-	
 	glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
 	glBegin(GL_QUADS);
 	{
