@@ -343,23 +343,24 @@ void NoeudTable::tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 A, g
 			double bx = (b - A.y) / pentePerp - A.x;
 			double cx = pow((b - A.y) / pentePerp, 2) - pow(largeur_, 2);
 			double delta = Delta(1,bx ,cx  );
-			std::cout << "delta=" << delta << std::endl;
+			//std::cout << "delta=" << delta << std::endl;
 			double x1 = (-bx - sqrt(delta)) / 2;
 			double x2 = (-bx + sqrt(delta)) / 2;
 			double y1 = pentePerp*x1 +b;
 			double y2 = pentePerp*x2 + b;
 			C= { x1,y1,0. };
-			std::cout << "A(" << A.x << "," << A.y << ") B(" << B.x << "," << B.y << ") C1(" << x1 << "," << y1 << ") C2(" << x2 << "," << y2 << ")" << std::endl;
+			D = {(B.x-A.x)+C.x,(B.y - A.y)+C.y ,0};
+			//std::cout << "A(" << A.x << "," << A.y << ") B(" << B.x << "," << B.y << ") C1(" << x1 << "," << y1 << ") C2(" << x2 << "," << y2 << ")" << std::endl;
 #undef Delta
 		}
 	}
 
 	glColor4fv(glm::value_ptr(couleurMurs_));
-	glBegin(GL_LINES);
+	glBegin(GL_QUADS);
 	{
 		glVertex3fv(PROJvec(A));
 		glVertex3fv(PROJvec(B));
-		glVertex3fv(PROJvec(A));
+		glVertex3fv(PROJvec(D));
 		glVertex3fv(PROJvec(C));
 	}
 	glEnd();
