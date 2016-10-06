@@ -566,8 +566,46 @@ namespace InterfaceGraphique
             FonctionsNatives.redimensionnerFenetre(panel1.Width, panel1.Height);
         }
 
+        private void enregistrerSousToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-        static partial class FonctionsNatives
+            saveFileDialog1.Filter = "All files (*.*)|*.*";
+            saveFileDialog1.FilterIndex = 1;
+            saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.AddExtension = false;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                System.Console.WriteLine("Ceci est une sauvegarde");
+
+                FonctionsNatives.enregistrerZoneJeu((saveFileDialog1.FileName).ToCharArray());
+
+            }
+        }
+
+        private void ouvrirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.Filter = "All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                System.Console.WriteLine("Ceci est un chargement");
+
+                FonctionsNatives.chargerZoneJeu((openFileDialog1.FileName).ToCharArray());
+
+            }
+        }
+
+    }
+
+    static partial class FonctionsNatives
         {
             [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
             public static extern void initialiserOpenGL(IntPtr handle);
@@ -671,6 +709,15 @@ namespace InterfaceGraphique
             [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)] // pour utiliser une fonction qui se trouve dans le fichier Noyau.dll
             public static extern void passerLargeur( int largeur);
             */
+
+
+            // Sauvegarde et chargement de la zone de jeu
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void enregistrerZoneJeu(char[] fichierZoneJeu);
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void chargerZoneJeu(char[] fichierZoneJeu);
         }
-    }
+   
 }

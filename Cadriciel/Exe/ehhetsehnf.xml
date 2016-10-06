@@ -1,0 +1,20 @@
+<arbreDeRendu>
+    <NoeudComposite TYPE="composite">
+        <NoeudComposite TYPE="composite">
+            <noeudAbstrait/>
+            <noeudAbstrait/>
+            <noeudAbstrait/>
+            <noeudAbstrait/>
+            <noeudAbstrait/>
+            <noeudAbstrait/>
+            <noeudAbstrait/>
+            <noeudAbstrait/>
+        </NoeudComposite>
+        <noeudPortail TYPE="portail" POSITION1="-25.705328" POSITION2="2.0376174" POSITION3="0" SCALE1="1" SCALE2="1" SCALE3="1" ANGLE_ROTATION="0" FRERE_POSITION1="33.54232" FRERE_POSITION2="18.652037" FRERE_POSITION3="0" FRERE_SCALE1="1" FRERE_SCALE2="1" FRERE_SCALE3="1" FRERE_ANGLE_ROTATION="0"/>
+        <noeudPortail TYPE="portail" POSITION1="17.241379" POSITION2="-19.905956" POSITION3="0" SCALE1="1" SCALE2="1" SCALE3="1" ANGLE_ROTATION="0" FRERE_POSITION1="-15.98746" FRERE_POSITION2="-12.068965" FRERE_POSITION3="0" FRERE_SCALE1="1" FRERE_SCALE2="1" FRERE_SCALE3="1" FRERE_ANGLE_ROTATION="0"/>
+        <NoeudBonus TYPE="bonus" POSITION1="-32.601879" POSITION2="35.893417" POSITION3="0" SCALE1="1" SCALE2="1" SCALE3="1" ANGLE_ROTATION="0"/>
+        <NoeudBonus TYPE="bonus" POSITION1="17.241379" POSITION2="30.250782" POSITION3="0" SCALE1="1" SCALE2="1" SCALE3="1" ANGLE_ROTATION="0"/>
+        <NoeudBonus TYPE="bonus" POSITION1="4.0752349" POSITION2="5.7993727" POSITION3="0" SCALE1="1" SCALE2="1" SCALE3="1" ANGLE_ROTATION="0"/>
+        <NoeudBonus TYPE="bonus" POSITION1="-23.824451" POSITION2="27.742947" POSITION3="0" SCALE1="1" SCALE2="1" SCALE3="1" ANGLE_ROTATION="0"/>
+    </NoeudComposite>
+</arbreDeRendu>

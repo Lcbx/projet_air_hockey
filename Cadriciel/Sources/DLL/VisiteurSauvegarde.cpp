@@ -9,6 +9,8 @@
 void VisiteurSauvegarde::visiter(NoeudAbstrait* noeud)
 
 {
+	// Template de code à appliquer aux noeuds
+	/*
 	// Cree l'element XML correspondant a ce noeud
 	tinyxml2::XMLElement* elementAbstrait{ documentXML_->NewElement("noeudAbstrait") };
 
@@ -16,22 +18,25 @@ void VisiteurSauvegarde::visiter(NoeudAbstrait* noeud)
 
 	// Ajouter le noeud a l'arbre
 	elementXMLPere_->LinkEndChild(elementAbstrait);
+	*/
 }
 
 void VisiteurSauvegarde::visiter(NoeudComposite* noeud)
 {
 	// Cree l'element XML correspondant a ce noeud
-	tinyxml2::XMLElement* elementComposite{ documentXML_->NewElement("noeudComposite") };
+	tinyxml2::XMLElement* elementComposite{ documentXML_->NewElement("NoeudComposite") };
 
 	// TODO : Enregistrer dans elementComposite les attributs du noeud ?
+	elementComposite->SetAttribute("TYPE", "composite");
 
 	// Visite les fils de ce noeud composite
 	for (unsigned int i = 0; i < noeud->obtenirNombreEnfants(); i++) {
-		VisiteurSauvegarde* VS = new VisiteurSauvegarde(elementComposite, documentXML_);
-		noeud->chercher(i)->accepter(VS);
-		delete VS;
+		if (noeud->chercher(i)->estEnregistrable()) {
+			VisiteurSauvegarde* VS = new VisiteurSauvegarde(elementComposite, documentXML_);
+			noeud->chercher(i)->accepter(VS);
+			delete VS;
+		}
 	}
-
 	// Ajouter le noeud a l'arbre
 	elementXMLPere_->LinkEndChild(elementComposite);
 }
@@ -44,15 +49,16 @@ void VisiteurSauvegarde::visiter(NoeudRondelle* noeud)
 void VisiteurSauvegarde::visiter(NoeudMuret* noeud)
 {
 	// Cree l'element XML correspondant a ce noeud
-	tinyxml2::XMLElement* elementMuret{ documentXML_->NewElement("noeudMuret") };
+	tinyxml2::XMLElement* elementMuret{ documentXML_->NewElement("NoeudMuret") };
 
 	// TODO : Enregistrer dans elementMuret les attributs du noeud
-	elementMuret->SetAttribute("POSITION1", noeud->obtenirPositionRelative()[0]);
-	elementMuret->SetAttribute("POSITION2", noeud->obtenirPositionRelative()[1]);
-	elementMuret->SetAttribute("POSITION3", noeud->obtenirPositionRelative()[2]);
-	elementMuret->SetAttribute("SCALE1", noeud->getScale()[0]);
-	elementMuret->SetAttribute("SCALE2", noeud->getScale()[1]);
-	elementMuret->SetAttribute("SCALE3", noeud->getScale()[2]);
+	elementMuret->SetAttribute("TYPE", "muret");
+	elementMuret->SetAttribute("POSITION1", noeud->obtenirPositionRelative().x);
+	elementMuret->SetAttribute("POSITION2", noeud->obtenirPositionRelative().y);
+	elementMuret->SetAttribute("POSITION3", noeud->obtenirPositionRelative().z);
+	elementMuret->SetAttribute("SCALE1", noeud->getScale().x);
+	elementMuret->SetAttribute("SCALE2", noeud->getScale().y);
+	elementMuret->SetAttribute("SCALE3", noeud->getScale().z);
 	elementMuret->SetAttribute("ANGLE_ROTATION", noeud->getAngle());
 
 	// Ajouter le noeud a l'arbre
@@ -62,15 +68,16 @@ void VisiteurSauvegarde::visiter(NoeudMuret* noeud)
 void VisiteurSauvegarde::visiter(NoeudBonus* noeud)
 {
 	// Cree l'element XML correspondant a ce noeud
-	tinyxml2::XMLElement* elementBonus{ documentXML_->NewElement("noeudBonus") };
+	tinyxml2::XMLElement* elementBonus{ documentXML_->NewElement("NoeudBonus") };
 
 	// TODO : Enregistrer dans elementBonus les attributs du noeud
-	elementBonus->SetAttribute("POSITION1", noeud->obtenirPositionRelative()[0]);
-	elementBonus->SetAttribute("POSITION2", noeud->obtenirPositionRelative()[1]);
-	elementBonus->SetAttribute("POSITION3", noeud->obtenirPositionRelative()[2]);
-	elementBonus->SetAttribute("SCALE1", noeud->getScale()[0]);
-	elementBonus->SetAttribute("SCALE2", noeud->getScale()[1]);
-	elementBonus->SetAttribute("SCALE3", noeud->getScale()[2]);
+	elementBonus->SetAttribute("TYPE", "bonus");
+	elementBonus->SetAttribute("POSITION1", noeud->obtenirPositionRelative().x);
+	elementBonus->SetAttribute("POSITION2", noeud->obtenirPositionRelative().y);
+	elementBonus->SetAttribute("POSITION3", noeud->obtenirPositionRelative().z);
+	elementBonus->SetAttribute("SCALE1", noeud->getScale().x);
+	elementBonus->SetAttribute("SCALE2", noeud->getScale().y);
+	elementBonus->SetAttribute("SCALE3", noeud->getScale().z);
 	elementBonus->SetAttribute("ANGLE_ROTATION", noeud->getAngle());
 
 	// Ajouter le noeud a l'arbre
@@ -84,19 +91,36 @@ void VisiteurSauvegarde::visiter(NoeudMaillet* noeud)
 
 void VisiteurSauvegarde::visiter(NoeudPortail* noeud)
 {
+
+	std::cout << "Visite du portail" << std::endl;
+
 	// Cree l'element XML correspondant a ce noeud
 	tinyxml2::XMLElement* elementPortail{ documentXML_->NewElement("noeudPortail") };
 
 	// TODO : Enregistrer dans elementPortail les attributs du noeud
-	elementPortail->SetAttribute("POSITION1", noeud->obtenirPositionRelative()[0]);
-	elementPortail->SetAttribute("POSITION2", noeud->obtenirPositionRelative()[1]);
-	elementPortail->SetAttribute("POSITION3", noeud->obtenirPositionRelative()[2]);
-	elementPortail->SetAttribute("SCALE1", noeud->getScale()[0]);
-	elementPortail->SetAttribute("SCALE2", noeud->getScale()[1]);
-	elementPortail->SetAttribute("SCALE3", noeud->getScale()[2]);
+	elementPortail->SetAttribute("TYPE", "portail");
+	elementPortail->SetAttribute("POSITION1", noeud->obtenirPositionRelative().x);
+	elementPortail->SetAttribute("POSITION2", noeud->obtenirPositionRelative().y);
+	elementPortail->SetAttribute("POSITION3", noeud->obtenirPositionRelative().z);
+	elementPortail->SetAttribute("SCALE1", noeud->getScale().x);
+	elementPortail->SetAttribute("SCALE2", noeud->getScale().y);
+	elementPortail->SetAttribute("SCALE3", noeud->getScale().z);
 	elementPortail->SetAttribute("ANGLE_ROTATION", noeud->getAngle());
-	elementPortail->SetAttribute("FRERE", noeud->getFrere());
+
+	elementPortail->SetAttribute("FRERE_POSITION1", noeud->getFrere()->obtenirPositionRelative().x);
+	elementPortail->SetAttribute("FRERE_POSITION2", noeud->getFrere()->obtenirPositionRelative().y);
+	elementPortail->SetAttribute("FRERE_POSITION3", noeud->getFrere()->obtenirPositionRelative().z);
+	elementPortail->SetAttribute("FRERE_SCALE1", noeud->getFrere()->getScale().x);
+	elementPortail->SetAttribute("FRERE_SCALE2", noeud->getFrere()->getScale().y);
+	elementPortail->SetAttribute("FRERE_SCALE3", noeud->getFrere()->getScale().z);
+	elementPortail->SetAttribute("FRERE_ANGLE_ROTATION", noeud->getFrere()->getAngle());
+
+	noeud->getFrere()->assignerEstEnregistrable(false);
 
 	// Ajouter le noeud a l'arbre
 	elementXMLPere_->LinkEndChild(elementPortail);
+
+	std::cout << elementXMLPere_->Attribute("TYPE") << std::endl;
+
+	std::cout << "Visite du portail 2" << std::endl;
 }

@@ -1,0 +1,6 @@
+<arbreDeRendu>
+    <NoeudComposite TYPE="composite">
+        <NoeudComposite TYPE="composite"/>
+        <noeudPortail TYPE="portail" POSITION1="-39.498432" POSITION2="38.401253" POSITION3="0" SCALE1="1" SCALE2="1" SCALE3="1" ANGLE_ROTATION="0" FRERE_POSITION1="33.855797" FRERE_POSITION2="-34.952976" FRERE_POSITION3="0" FRERE_SCALE1="1" FRERE_SCALE2="1" FRERE_SCALE3="1" FRERE_ANGLE_ROTATION="0"/>
+    </NoeudComposite>
+</arbreDeRendu>

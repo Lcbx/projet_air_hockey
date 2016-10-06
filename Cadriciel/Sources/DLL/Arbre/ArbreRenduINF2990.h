@@ -66,10 +66,12 @@ public:
    void ajouterBonus(glm::dvec3 position, glm::dvec3 scale, float angleRotation);
 
    void ajouterPortail(glm::dvec3 position);
+   void ajouterPortail(glm::dvec3 position, glm::dvec3 scale, float angleRotation);
    //supprime le 1er portail
    void supprimerPortail(bool escTouche);
    void ajouterPortailDeux(glm::dvec3 position);
-   void ajouterPortail(glm::dvec3 position, glm::dvec3 scale, float angleRotation, NoeudAbstrait* frere);
+   void ajouterPortailDeux(glm::dvec3 position, glm::dvec3 scale, float angleRotation);
+
 
    void ajouterMuret(glm::dvec3 position1, glm::dvec3 position2);
    void ajouterMuret(glm::dvec3 position, glm::dvec3 scale, float angleRotation);

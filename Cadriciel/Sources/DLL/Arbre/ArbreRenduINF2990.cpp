@@ -219,6 +219,32 @@ void ArbreRenduINF2990::ajouterPortail(glm::dvec3 pos)
 		delete v1;
 }
 
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void ArbreRenduINF2990::ajouterPortail(glm::dvec3 pos, glm::dvec3 scale, float angleRotation) 
+///
+/// Cette fonction permet d'ajouter le premier portail a la scene
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::ajouterPortail(glm::dvec3 pos, glm::dvec3 scale, float angleRotation)
+{
+
+	NoeudAbstrait* noeudPortail{ creerNoeud(NOM_PORTAIL) };
+	Visiteur* v1 = new VisiteurAjout(pos);
+	
+	noeudPortail->setScale(scale);
+	noeudPortail->setAngle(angleRotation);
+
+	noeudPortail->accepter(v1);
+
+	premierEstajoute = true;
+	// toujours liberer la mémoire !!!!
+	delete v1;
+}
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void ArbreRenduINF2990::ajouterPortailDeux(glm::dvec3 pos) 
@@ -250,21 +276,32 @@ void ArbreRenduINF2990::ajouterPortailDeux(glm::dvec3 pos)
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn void ArbreRenduINF2990::ajouterPortail(glm::dvec3 pos, glm::dvec3 scale, float angleRotation, NoeudAbstrait* frere)
+/// @fn void ArbreRenduINF2990::ajouterPortailDeux(glm::dvec3 pos, glm::dvec3 scale, float angleRotation) 
 ///
-/// Cette fonction permet d'ajouter un portail a la scene
+/// Cette fonction permet d'ajouter le 2 partie de portail a la scene
 ///
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void ArbreRenduINF2990::ajouterPortail(glm::dvec3 pos, glm::dvec3 scale, float angleRotation, NoeudAbstrait* frere)
+void ArbreRenduINF2990::ajouterPortailDeux(glm::dvec3 pos, glm::dvec3 scale, float angleRotation)
 {
+	NoeudAbstrait* premierPortail = this->enfants_.back();
+
 	NoeudAbstrait* noeudPortail{ creerNoeud(NOM_PORTAIL) };
-	VisiteurAjout v1(pos);
+	Visiteur* v1 = new VisiteurAjout(pos);
+
+	//etablir les liens entre les 2 portails
+	noeudPortail->setFrere(premierPortail);
+	premierPortail->setFrere(noeudPortail);
+
 	noeudPortail->setScale(scale);
 	noeudPortail->setAngle(angleRotation);
-	noeudPortail->setFrere(frere);
-	noeudPortail->accepter(&v1);
+
+	noeudPortail->accepter(v1);
+
+	premierEstajoute = false;
+	// toujours liberer la mémoire !!!!
+	delete v1;
 }
 
 

@@ -237,30 +237,35 @@ void FacadeModele::enregistrerConfiguration() const
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn void FacadeModele::chargerZoneJeu(std::string FICHIER_ZONEJEU) const
+/// @fn void FacadeModele::chargerZoneJeu(std::string fichierZoneJeu) const
 ///
 /// Cette fonction charge la zone de jeu à partir d'un fichier XML.
 ///
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void FacadeModele::chargerZoneJeu(std::string FICHIER_ZONEJEU) const
+void FacadeModele::chargerZoneJeu(char* fichierZoneJeu) const
 {
+
+	std::cout << "CHARGEMEEEEEEEEEEEEENT" << std::endl;
 
 	// si le fichier existe on le lit
 	tinyxml2::XMLDocument document;
 
 	// Lire à partir du fichier de configuration
-	document.LoadFile(FICHIER_ZONEJEU.c_str());
+	document.LoadFile(fichierZoneJeu);
 
 	// On lit les différentes configurations.
 	SauvegardeZoneDeJeu::lireArbre(document);
+
+	std::cout << "CHARGEMEEEEEEEEEEEEENT LE RETOUR" << std::endl;
+
 }
 
 
 ///////////////////////////////////////////////////////////////////////
 ///
-/// @fn void FacadeModele::enregistrerZoneJeu(std::string FICHIER_ZONEJEU) const
+/// @fn void FacadeModele::enregistrerZoneJeu(std::string fichierZoneJeu) const
 ///
 /// Cette fonction genere un fichier XML contenant
 ///  la zone de jeu actuelle.
@@ -271,11 +276,13 @@ void FacadeModele::chargerZoneJeu(std::string FICHIER_ZONEJEU) const
 ///
 ////////////////////////////////////////////////////////////////////////
 
-void FacadeModele::enregistrerZoneJeu(std::string FICHIER_ZONEJEU) const
+void FacadeModele::enregistrerZoneJeu(char* fichierZoneJeu) const
 {
 	// TODO : Correctement implémenter l'erreur
-	if (FICHIER_ZONEJEU == FICHIER_ZONEDEFAUT)
+	if (fichierZoneJeu == FICHIER_ZONEDEFAUT)
 		std::cerr << "Erreur : Tentative de modification de la zone de jeu par défaut" << std::endl;
+
+	std::cout << "Nom du fichier de sauvegarde: " << fichierZoneJeu << std::endl;
 
 	tinyxml2::XMLDocument document;
 
@@ -283,10 +290,10 @@ void FacadeModele::enregistrerZoneJeu(std::string FICHIER_ZONEJEU) const
 	document.NewDeclaration(R"(?xml version="1.0" standalone="yes"?)");
 
 	// On enregistre les différentes configurations.
-	SauvegardeZoneDeJeu::lireArbre(document);
+	SauvegardeZoneDeJeu::creerArbre(document);
 
 	// Écrire dans le fichier
-	document.SaveFile(FICHIER_ZONEJEU.c_str());
+	document.SaveFile(fichierZoneJeu);
 }
 
 
