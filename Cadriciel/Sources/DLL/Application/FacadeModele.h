@@ -21,7 +21,18 @@ class ArbreRenduINF2990;
 namespace vue {
    class Vue;
 }
+///////////////////////////////////////////////////////////////////////////
+/// @struct CoefficientConfiguration
+/// @brief  Objet de transport des configurations
+///////////////////////////////////////////////////////////////////////////
+struct CoefficientConfiguration{
+	double friction;		//Friction du sol
+	double rebond;			//Rebond des murs
+	double acceleration;	//Accélération des 
+} typedef CoefficientConfiguration;
 
+const CoefficientConfiguration COEFFICIENTS_MINIMAUX = { 0, 0, 0 };
+const CoefficientConfiguration COEFFICIENTS_MAXIMAUX = { 100, 1, 10 };
 
 ///////////////////////////////////////////////////////////////////////////
 /// @class FacadeModele
@@ -113,6 +124,9 @@ public:
 	//obtenir le scale d'un objet 
 	double getScale();
 
+
+	// Permet d'obtenir les constantes de la zone de jeu (friction, rebond etc)
+	
 private:
 
    /// Constructeur par défaut.
@@ -142,6 +156,8 @@ private:
    /// Arbre de rendu contenant les différents objets de la scène.
    ArbreRenduINF2990* arbre_{ nullptr };
 
+   /// Coefficients de configuration
+   CoefficientConfiguration coeff = COEFFICIENTS_MINIMAUX;
 };
 
 

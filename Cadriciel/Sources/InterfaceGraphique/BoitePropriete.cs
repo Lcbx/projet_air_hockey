@@ -41,18 +41,22 @@ namespace InterfaceGraphique
             this.Hide();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
+        private void button3_Click(object sender, EventArgs e) {
+            this.Hide();
         }
 
-        private void label7_Click(object sender, EventArgs e)
-        {
+        private void label7_Click(object sender, EventArgs e) {
            
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
+        /// <summary>
+        /// Événement au clic du bouton annuler. Permet de remettre les 
+        /// valeurs à la valeur précédente
+        /// </summary>
+        /// <param name="sender">Objet d'envois</param>
+        /// <param name="e">Arguments d'événement</param>
+        private void button2_Click(object sender, EventArgs e) {
+            this.Hide();
         }
     }
 }
