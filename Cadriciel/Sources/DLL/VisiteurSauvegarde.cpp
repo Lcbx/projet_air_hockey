@@ -122,4 +122,68 @@ void VisiteurSauvegarde::visiter(NoeudPortail* noeud)
 
 	// Ajouter le noeud a l'arbre
 	elementXMLPere_->LinkEndChild(elementPortail);
+
+	std::cout << "Visite du portail 2" << std::endl;
+}
+
+void VisiteurSauvegarde::visiter(NoeudTable* noeud)
+{
+	// Cree l'element XML correspondant a ce noeud
+	tinyxml2::XMLElement* elementTable{ documentXML_->NewElement("noeudTable") };
+
+	// TODO : Enregistrer dans elementTable les attributs du noeud
+	elementTable->SetAttribute("TYPE", (ArbreRenduINF2990::NOM_TABLE).c_str());
+
+	// Enregistre les coordonées des points de contrôle (Oui, très répétitif)
+	glm::vec3 P0, P1, P2, P3, P4, P5, P6, P7, P8;
+	noeud->getPointControle(0, P0);
+	noeud->getPointControle(1, P1);
+	noeud->getPointControle(2, P2);
+	noeud->getPointControle(3, P3);
+	noeud->getPointControle(4, P4);
+	noeud->getPointControle(5, P5);
+	noeud->getPointControle(6, P6);
+	noeud->getPointControle(7, P7);
+	noeud->getPointControle(8, P8);
+	elementTable->SetAttribute("P0X", P0.x);
+	elementTable->SetAttribute("P0Y", P0.y);
+	elementTable->SetAttribute("P0Z", P0.z);
+	elementTable->SetAttribute("P1X", P1.x);
+	elementTable->SetAttribute("P1Y", P1.y);
+	elementTable->SetAttribute("P1Z", P1.z);
+	elementTable->SetAttribute("P2X", P2.x);
+	elementTable->SetAttribute("P2Y", P2.y);
+	elementTable->SetAttribute("P2Z", P2.z);
+	elementTable->SetAttribute("P3X", P3.x);
+	elementTable->SetAttribute("P3Y", P3.y);
+	elementTable->SetAttribute("P3Z", P3.z);
+	elementTable->SetAttribute("P4X", P4.x);
+	elementTable->SetAttribute("P4Y", P4.y);
+	elementTable->SetAttribute("P4Z", P4.z);
+	elementTable->SetAttribute("P5X", P5.x);
+	elementTable->SetAttribute("P5Y", P5.y);
+	elementTable->SetAttribute("P5Z", P5.z);
+	elementTable->SetAttribute("P6X", P6.x);
+	elementTable->SetAttribute("P6Y", P6.y);
+	elementTable->SetAttribute("P6Z", P6.z);
+	elementTable->SetAttribute("P7X", P7.x);
+	elementTable->SetAttribute("P7Y", P7.y);
+	elementTable->SetAttribute("P7Z", P7.z);
+	elementTable->SetAttribute("P8X", P8.x);
+	elementTable->SetAttribute("P8Y", P8.y);
+	elementTable->SetAttribute("P8Z", P8.z);
+
+
+	// Visite les fils de ce noeud composite
+	for (unsigned int i = 0; i < noeud->obtenirNombreEnfants(); i++) {
+		if (noeud->chercher(i)->estEnregistrable()) {
+			VisiteurSauvegarde* VS = new VisiteurSauvegarde(elementTable, documentXML_);
+			noeud->chercher(i)->accepter(VS);
+			delete VS;
+		}
+	}
+
+
+	// Ajouter le noeud a l'arbre
+	elementXMLPere_->LinkEndChild(elementTable);
 }

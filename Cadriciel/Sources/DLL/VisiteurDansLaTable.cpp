@@ -25,6 +25,7 @@
 VisiteurDansLaTable::VisiteurDansLaTable(bool& result) : result_(result) {
 	result_ = true;
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
+	cout << "DansLaTable : " << (result_ ? "true\n" : "false\n");
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -76,7 +77,7 @@ void VisiteurDansLaTable::visiter(NoeudMuret* noeud)
 {
 	//test le long du mur s'il est dans la table
 	glm::dvec3 debut = noeud->obtenirDroiteDirectrice().lirePoint();
-	glm::dvec3 fin = debut + noeud->obtenirDroiteDirectrice().lireVecteur() ;
+	glm::dvec3 fin = debut + noeud->obtenirDroiteDirectrice().lireVecteur();
 	//tout les 2 pixels
 	double length = 0.5 * glm::distance(debut, fin);
 	glm::dvec3 vec = (fin - debut) / length;
@@ -92,6 +93,11 @@ void VisiteurDansLaTable::visiter(NoeudBonus* noeud)
 	//test le long du segment s'il est dans la table
 	glm::dvec3 debut = noeud->obtenirDroiteDirectrice().lirePoint();
 	glm::dvec3 fin = debut + noeud->obtenirDroiteDirectrice().lireVecteur();
+	//double rayon = noeud->obtenirRayonModele();
+	//glm::dvec3 pos = noeud->obtenirPositionRelative();
+	//glm::dvec3 dir = rayon*noeud->obtenirDroiteDirectrice().lireVecteur()/ glm::length(noeud->obtenirDroiteDirectrice().lireVecteur());
+	//glm::dvec3 debut(pos - dir);
+	//glm::dvec3 fin(pos + dir);
 	//tout les 2 pixels
 	double length = 0.5 * glm::distance(debut, fin);
 	glm::dvec3 vec = (fin - debut) / length;

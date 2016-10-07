@@ -22,6 +22,9 @@ namespace InterfaceGraphique
         //private static double angleDeRotation_;
         //private static double facteurEchelle_;
 
+        private static Sauvegarde fenetreSauvegarde_ = new Sauvegarde();
+        private static Chargement fenetreChargement_ = new Chargement();
+
 
         public Edition()
         {
@@ -35,13 +38,19 @@ namespace InterfaceGraphique
             textBox1.Enabled = false;
             textBox2.Enabled = false;
             textBox3.Enabled = false;
-            textBox4.Enabled = false;
+            //  textBox4.Enabled = false;
+            numericUpDown1.Enabled = false;
+            numericUpDown1.ResetText();
+
             button1.Enabled = false;
             label6.Show();
 
             this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
             FonctionsNatives.redimensionnerFenetre(panel1.Width, panel1.Height);
-           // FonctionsNatives.passerLargeur(panel1.Width);
+
+
+            this.enregistrerToolStripMenuItem.Click += new System.EventHandler(this.enregistrerToolStripMenuItem_Click);
+            // FonctionsNatives.passerLargeur(panel1.Width);
 
         }
 
@@ -244,6 +253,7 @@ namespace InterfaceGraphique
 
             if (signeInterdiction && (EtatSouris == Etats.AJOUT_ACCELERATEUR || EtatSouris == Etats.AJOUT_MUR || EtatSouris == Etats.AJOUT_PORTAIL))
                 Cursor = Cursors.No;
+
             else Cursor = Cursors.Default;
 
             x = e.X; y = e.Y;
@@ -592,7 +602,9 @@ namespace InterfaceGraphique
                 textBox1.Enabled = true;
                 textBox2.Enabled = true;
                 textBox3.Enabled = true;
-                textBox4.Enabled = true;
+                //textBox4.Enabled = true;
+
+                numericUpDown1.Enabled = true;
                 button1.Enabled = true;
 
                 label6.Hide();
@@ -613,22 +625,24 @@ namespace InterfaceGraphique
                 textBox3.Text = angle.ToString();
 
                 //Scale
-                double scale = (FonctionsNatives.getScale());
-                scale = Math.Round(scale, 2);
-                textBox4.Text = scale.ToString();
-
+                float scale = (float)(FonctionsNatives.getScale());
+                //scale = Math.Round(scale, 2);
+                // textBox4.Text = scale.ToString();
+                numericUpDown1.Value = Convert.ToDecimal(scale);
             }
             else
             {
                 textBox1.Text = " ";
                 textBox2.Text = " ";
                 textBox3.Text = " ";
-                textBox4.Text = " ";
+                // textBox4.Text = " ";
+                numericUpDown1.ResetText();
 
                 textBox1.Enabled = false;
                 textBox2.Enabled = false;
                 textBox3.Enabled = false;
-                textBox4.Enabled = false;
+                // textBox4.Enabled = false;
+                numericUpDown1.Enabled = false;
                 button1.Enabled = false;
 
                 label6.Show();
@@ -707,10 +721,11 @@ namespace InterfaceGraphique
             double myX;
             double myY;
             double myAngle;
-            double myScale;
+            double myScale = Convert.ToDouble(numericUpDown1.Value);
+
 
             if (!double.TryParse(textBox1.Text, out myX) || !double.TryParse(textBox2.Text, out myY)
-                || !double.TryParse(textBox3.Text, out myAngle) || !double.TryParse(textBox4.Text, out myScale))
+                || !double.TryParse(textBox3.Text, out myAngle))// || !double.TryParse(textBox4.Text, out myScale))
             {
                 MessageBox.Show("Veuillez vérifier les valeurs entrées", "Barre de proprietés",
                  MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -756,40 +771,28 @@ namespace InterfaceGraphique
 
         private void enregistrerSousToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-            saveFileDialog1.Filter = "XML files (*.xml)|*.xml";
-            saveFileDialog1.FilterIndex = 1;
-            saveFileDialog1.InitialDirectory = "zones/";
+            fenetreSauvegarde_.Show();
+        }
 
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                System.Console.WriteLine("Ceci est une sauvegarde");
+        private void enregistrerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (fenetreSauvegarde_.getLastSaveFile() == "")
+                fenetreSauvegarde_.Show();
+            else
+                fenetreSauvegarde_.saveLastFile();
+        }
                 System.Console.WriteLine(saveFileDialog1.FileName);
 
 
                 FonctionsNatives.enregistrerZoneJeu((saveFileDialog1.FileName).ToCharArray());
-
-            }
-        }
-
-        private void ouvrirToolStripMenuItem_Click(object sender, EventArgs e)
+        private void nouveauToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
 
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
-            openFileDialog1.Filter = "XML files (*.xml)|*.xml";
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.InitialDirectory = "zones/";
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                System.Console.WriteLine("Ceci est un chargement");
-
-                FonctionsNatives.chargerZoneJeu((openFileDialog1.FileName).ToCharArray());
-
-            }
+        }
+        private void ouvrirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fenetreChargement_.Show();
         }
 
     }

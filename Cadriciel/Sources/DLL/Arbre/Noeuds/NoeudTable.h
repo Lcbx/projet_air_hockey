@@ -40,12 +40,16 @@ public:
 	// fonctions d'affichage
 	void tracerTable(const glm::mat4& vueProjection)  const; // tracer la table
 	void tracerPointsControle(const glm::mat4& vueProjection)  const; // tracer les points de Controle
-	void tracerCercle(double cx, double cy, double r, int nb_segments) const; // tracer la table
+	void tracerCercle(const glm::mat4& vueProjection,double cx, double cy, double r, int nb_segments) const; // tracer la table
 	void tracerMurs(const glm::mat4& vueProjection) const; //tracer les murs autour de la table
-	void tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 p1, glm::vec3 p2) const; //tracer un mur entre 2 points
-	double NoeudTable::Delta(double A, double B, double C) const;
-	void tracerMurs3Points(const glm::mat4& vueProjection,glm::vec3 p1, glm::vec3 p2, glm::vec3 p3) const; //tracer les murs entre 3 points
-	void tracerButs(const glm::mat4& vueProjection) const; //tracer les buts
+	//tracer un mur entre 2 points
+	void tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 p1, glm::vec3 p2, double largeur,bool direction) const;
+	//tracer les murs entre 3 points
+	void tracerMurs3Points(const glm::mat4& vueProjection,glm::vec3 p1, glm::vec3 p2, glm::vec3 p3) const; 
+	//tracer les buts
+	void tracerButs(const glm::mat4& vueProjection) const;
+	void tracerButs(const glm::mat4& vueProjection, double longueur) const;
+	void calculerPointDistance(glm::vec3 p0, glm::vec3 p1, double longueur, double largeur, glm::vec3 & p2, glm::vec3 & p3, glm::vec3 & p4) const;
 	void tracerLignesDecoration (const glm::mat4& vueProjection) const; //tracer les lignes de decoration
 
 	// Calcul la pente de la droite faite par 2 points 

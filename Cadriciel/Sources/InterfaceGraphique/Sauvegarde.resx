@@ -117,17 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Bienvenue dans notre application "Hockey sur coussin d’air", qui est produite dans 
-le cadre du cours INF2990.
-Cette application est dévéloppée par l'équipe 10 en suivant le SRS fourni.
-
-L'utilisation est simple et accessible à tout le monde.
-Pour le mode "Édition", il suffit de choisir la commande à executer à partir de la boite 
-d'outils située à droite de la fenetre ou à partir de la barre des menus.
-Selon l'action choisi, il suffit de cliquer et/ou appuyer sur une touche pour voir le résultat.
-  
-Pour la barre de proprietes, vous pouvez changez la position, l'angle(en degre) et le scale(entre 0.5 et 8) d'un objet
-</value>
-  </data>
 </root>

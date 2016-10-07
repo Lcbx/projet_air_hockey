@@ -25,6 +25,12 @@ void SauvegardeZoneDeJeu::creerArbre(tinyxml2::XMLDocument& document)
 	elementArbreDeRendu->LinkEndChild(sauvegarderTable(document));
 
 
+	// Constantes de la zone de jeux
+	CoefficientConfiguration coefs = FacadeModele::obtenirInstance()->getCoefficient();
+	elementArbreDeRendu->SetAttribute("REBOND", coefs.rebond);
+	elementArbreDeRendu->SetAttribute("ACCELERATION", coefs.acceleration);
+	elementArbreDeRendu->SetAttribute("FRICTION", coefs.friction);
+
 	// Creation de l'arbre DOM a partir de l'arbre de rendu
 	VisiteurSauvegarde* VS = new VisiteurSauvegarde(elementArbreDeRendu, &document);
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(VS);
@@ -109,6 +115,8 @@ void SauvegardeZoneDeJeu::lireArbre(const tinyxml2::XMLDocument& document)
 
 	// Cherche l'élément arbreDeRendu
 	const tinyxml2::XMLElement* elementArbreDeRendu{ document.FirstChildElement("arbreDeRendu") };
+	if (elementArbreDeRendu != nullptr) {
+		CoefficientConfiguration coefs = COEFFICIENTS_DEFAULT;
 	if (elementArbreDeRendu != nullptr && elementArbreDeRendu->FirstChild() != nullptr) {	
 
 		// Récupere les informations de la configuration de la table
@@ -119,7 +127,19 @@ void SauvegardeZoneDeJeu::lireArbre(const tinyxml2::XMLDocument& document)
 		// Parcours le reste des noeuds
 		SauvegardeZoneDeJeu::lireNoeudXML(*(elementArbreDeRendu->FirstChild()->ToElement()));
 
+		double variableDeTransport;
+		if(elementArbreDeRendu->QueryDoubleAttribute("FRICTION", &variableDeTransport) == tinyxml2::XMLError::XML_SUCCESS)
+			coefs.friction = variableDeTransport;
+		if (elementArbreDeRendu->QueryDoubleAttribute("REBOND", &variableDeTransport) == tinyxml2::XMLError::XML_SUCCESS)
+			coefs.rebond = variableDeTransport;
+		if (elementArbreDeRendu->QueryDoubleAttribute("ACCELERATION", &variableDeTransport) == tinyxml2::XMLError::XML_SUCCESS)
+			coefs.acceleration = variableDeTransport;
 
+		FacadeModele::obtenirInstance()->setCoefficient(coefs);
+		
+		if(elementArbreDeRendu->FirstChild() != nullptr) {
+			SauvegardeZoneDeJeu::lireNoeudXML(*(elementArbreDeRendu->FirstChild()->ToElement()));
+		}
 	}
 }
 
