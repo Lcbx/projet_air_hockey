@@ -129,14 +129,13 @@ namespace vue {
 	//////////////////////////////////////////////////////////////////////// 
 	void ProjectionOrtho::zoomerTo(double zoomFacteur)
 	{
+		// Si le facteur de zoom est en dehors de l'intervalle possible, le mettre au point de l'intervalle le plus proche
 		if (zoomFacteur > zoomInMax_) zoomFacteur = zoomInMax_;
 		else if (zoomFacteur < zoomOutMax_) zoomFacteur = zoomOutMax_;
 
-		std::cout << "zoomFacteur :" << std::endl;
-		std::cout << zoomActuel_ << std::endl;
 		zoomActuel_ = zoomFacteur;
-		std::cout << zoomActuel_ << std::endl;
 
+		// Modifier la fenetre virtuelle pour produire l'effet de zoom
 		largeurFenetre_ = largeurFenetreInit_ * (1/zoomFacteur);
 		hauteurFenetre_ = hauteurFenetreInit_ * (1/zoomFacteur);
 
@@ -171,7 +170,7 @@ namespace vue {
 		   largeurFenetre_ += (largeurFenetre_ / largeurCloture_)*largeur - largeurFenetre_;////calculer l'ajout à ajouter à la largeur ancienne de la  fenêtre
 
 		   hauteurFenetreInit_ = hauteurFenetre_;
-		   largeurFenetreInit_ = hauteurFenetre_;
+		   largeurFenetreInit_ = largeurFenetre_;
 
 			largeurCloture_ = largeur;// la cloture prend la nouvelle largeur 
 			hauteurCloture_ = hauteur;// la cloture prend la nouvelle hauteur
