@@ -12,11 +12,12 @@ namespace InterfaceGraphique
 {
     public partial class Nouveau : Form
     {
-        private static Sauvegarde fenetreSauvegarde_ = new Sauvegarde();
+        private static Sauvegarde fenetreSauvegarde_;
 
-        public Nouveau()
+        public Nouveau(Sauvegarde fenetreSauvegarde)
         {
             InitializeComponent();
+            fenetreSauvegarde_ = fenetreSauvegarde;
 
         }
         //nouveau
