@@ -94,6 +94,8 @@ namespace vue {
 	///
 	/// Permet de faire un zoom in avec un incrément spécifié.
 	/// 
+	/// @param[in] facteur	: incrément du zoom
+	/// 
 	/// @return Aucune.
 	///
 	////////////////////////////////////////////////////////////////////////
@@ -109,6 +111,8 @@ namespace vue {
 	///
 	/// Permet de faire un zoom out avec un décrément spécifié.
 	///
+	/// @param[in] facteur	: décrément du zoom
+	///
 	/// @return Aucune.
 	///
 	//////////////////////////////////////////////////////////////////////// 
@@ -123,6 +127,8 @@ namespace vue {
 	/// @fn void ProjectionOrtho::zoomerTo(double zoomFacteur)
 	///
 	/// Permet de zoomer jusqu'a un facteur donné.
+	///
+	/// @param[in] zoomFacteur	: facteur auquel zoomer
 	///
 	/// @return Aucune.
 	///

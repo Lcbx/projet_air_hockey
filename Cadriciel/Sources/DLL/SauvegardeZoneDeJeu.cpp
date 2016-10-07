@@ -13,6 +13,8 @@
 ///
 /// Créé un arbre DOM a partir de l'arbre de rendu
 ///
+/// @param[in] document : document dans lequel créer l'arbre
+///
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////

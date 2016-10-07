@@ -34,14 +34,7 @@ public:
 	/// Traduit un noeud XML d'un type spécifique en noeud de l'arbre de rendu.
 	static void ajouterNoeudXML(const tinyxml2::XMLElement& element);
 
-
-	//static void ajouterNoeudXML(const tinyxml2::XMLElement& element, NoeudComposite *noeud);
-	//static void ajouterNoeudXML(const tinyxml2::XMLElement& element, NoeudBonus *noeud);
-	//static void ajouterNoeudXML(const tinyxml2::XMLElement& element, NoeudPortail *noeud);
-	//static void ajouterNoeudXML(const tinyxml2::XMLElement& element, NoeudMuret *noeud);
-
 };
 
 #endif
 
-void restituerTable(const tinyxml2::XMLElement & element);
