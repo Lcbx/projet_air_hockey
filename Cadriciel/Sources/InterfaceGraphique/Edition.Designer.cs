@@ -109,7 +109,7 @@
             this.panel1.Margin = new System.Windows.Forms.Padding(6);
             this.panel1.MinimumSize = new System.Drawing.Size(52, 54);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(586, 459);
+            this.panel1.Size = new System.Drawing.Size(606, 437);
             this.panel1.TabIndex = 0;
             this.panel1.TabStop = true;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
@@ -128,7 +128,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(681, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(807, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -385,7 +385,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip1.Size = new System.Drawing.Size(53, 361);
+            this.toolStrip1.Size = new System.Drawing.Size(53, 437);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -551,7 +551,7 @@
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Right;
             this.splitContainer1.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(539, 24);
+            this.splitContainer1.Location = new System.Drawing.Point(665, 24);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -568,8 +568,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.label4);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
             this.splitContainer1.Panel2.Controls.Add(this.textBox3);
-            this.splitContainer1.Size = new System.Drawing.Size(142, 361);
-            this.splitContainer1.SplitterDistance = 37;
+            this.splitContainer1.Size = new System.Drawing.Size(142, 437);
+            this.splitContainer1.SplitterDistance = 44;
             this.splitContainer1.SplitterWidth = 20;
             this.splitContainer1.TabIndex = 5;
             // 
@@ -708,14 +708,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(681, 385);
+            this.ClientSize = new System.Drawing.Size(807, 461);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(358, 396);
+            this.MinimumSize = new System.Drawing.Size(400, 500);
             this.Name = "Edition";
             this.Text = "Edition";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Exemple_FormClosing);
