@@ -251,9 +251,9 @@ namespace InterfaceGraphique
             else signeInterdiction = !FonctionsNatives.positionSouris(e.X, e.Y);
 
             if (signeInterdiction && (EtatSouris == Etats.AJOUT_ACCELERATEUR || EtatSouris == Etats.AJOUT_MUR || EtatSouris == Etats.AJOUT_PORTAIL))
-                Cursor = Cursors.No;
+                Cursor.Current = Cursors.No;
 
-            else Cursor = Cursors.Default;
+            else Cursor.Current = Cursors.Default;
 
             x = e.X; y = e.Y;
 
