@@ -78,14 +78,12 @@ public:
    virtual void changerModePolygones( bool estForce );
    /// Assigne le mode d'affichage des polygones.
    virtual void assignerModePolygones( GLenum modePolygones );
-   // Affiche le noeud: on prend la version de la classe de base.
-   // virtual void afficher() const;
    /// Affiche le noeud de manière concrète.
    virtual void afficherConcret(const glm::mat4& vueProjection) const;
    /// Anime le noeud.
    virtual void animer( float dt );
 
-   //Accepter le visiteur
+   ///Accepter le visiteur
    virtual void accepter(Visiteur* v);
 
 

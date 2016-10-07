@@ -36,19 +36,22 @@ public:
 	/// Effectue l'animation du cube.
 	virtual void animer(float temps);
 	
-	//Accepter le visiteur
+	///Accepter le visiteur
 	virtual void accepter(Visiteur* v);
 
-	// fonctions get et set de la couleur du point et de sa taille
+	/// change la couleur du point
 	bool setCouleur(glm::vec4 couleur);
+	/// retourne la couleur du point
 	bool getCouleur(glm::vec4 & couleur);
+	/// change la taille des points
 	bool setDelta(double delta);
+	/// retourne la taille des points
 	bool getDelta(double& delta);
 
 private:
-	// la couleur du point de controle
+	/// la couleur du point de controle
 	glm::vec4 couleur_{ 0.,0.,1.,0. }; // couleur bleu par default
-	// la longueur du cote' du carre' du point de controle
+	/// la longueur du cote' du carre' du point de controle
 	double delta_{ 5 };
 };
 

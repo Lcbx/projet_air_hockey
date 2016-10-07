@@ -172,9 +172,14 @@ inline double NoeudMuret::obtenirRayonModele() const {
 }
 
 ////////////////////////////////////////////////
-/// @} VISITEUR
+/// 
+/// @fn NoeudMuret::accepter(Visiteur* v)
+///
+/// permet de visiter le noeud
+///
+/// @return Aucune.
+///
 ////////////////////////////////////////////////
-
 void NoeudMuret::accepter(Visiteur* v)
 {
 	v->visiter(this);

@@ -94,10 +94,14 @@ void NoeudMaillet::animer(float temps)
 
 
 ////////////////////////////////////////////////
-/// @}
-/// @}VISITEUR
+/// 
+/// NoeudMaillet::accepter(Visiteur* v)
+///
+/// permet de visiter le noeud
+///
+/// @return Aucune.
+///
 ////////////////////////////////////////////////
-
 void NoeudMaillet::accepter(Visiteur* v)
 {
 	v->visiter(this);

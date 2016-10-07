@@ -93,9 +93,10 @@ public:
    ///obtenir le scale d'un objet selectionne
    double getScaleDataBinding();
 
-   //supprimer un muret a l'appui d'echap
+   ///supprimer un muret a l'appui d'echap
    void supprimerMuret(bool escTouche);
 
+   ///un compteur d'objets
    int compteur ;
 
    ///determiner si un objet dans la table

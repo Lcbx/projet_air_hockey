@@ -256,7 +256,6 @@ namespace InterfaceGraphique
 
             if (signeInterdiction && (EtatSouris == Etats.AJOUT_ACCELERATEUR || EtatSouris == Etats.AJOUT_MUR || EtatSouris == Etats.AJOUT_PORTAIL))
                 Cursor = Cursors.No;
-
             else Cursor = Cursors.Default;
 
             x = e.X; y = e.Y;
