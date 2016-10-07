@@ -14,23 +14,23 @@ namespace InterfaceGraphique
     public partial class Chargement : Form
     {
         string[] files;
-        string path;
 
-        public Chargement()
-        {
+        Edition edition_;
 
+        public Chargement(Edition edition)        {
             InitializeComponent();
             this.MinimizeBox = false;
             this.MaximizeBox = false;
+
+            this.edition_ = edition;
         }
 
         private void Sauvegarde_Load(object sender, EventArgs e)
         {
-            path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "inf2990-10", "saves");
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
+            if (!Directory.Exists(Edition.SAVE_FILEPATH))
+                Directory.CreateDirectory(Edition.SAVE_FILEPATH);
 
-            string[] loadFiles = Directory.GetFiles(path, "*.xml");
+            string[] loadFiles = Directory.GetFiles(Edition.SAVE_FILEPATH, "*.xml");
 
             files = loadFiles.Select(filepath => Path.GetFileNameWithoutExtension(filepath)).ToArray();
 
@@ -44,16 +44,10 @@ namespace InterfaceGraphique
 
         private void button1_Click(object sender, EventArgs e) {
             if (filename.Text != "") {
-                FonctionsNatives.chargerZoneJeu(Path.Combine(path, filename.Text + ".xml").ToCharArray());
+                edition_.setCurrentFile(filename.Text);
+                FonctionsNatives.chargerZoneJeu(Path.Combine(Edition.SAVE_FILEPATH, filename.Text + ".xml").ToCharArray());
                 this.Hide();
-            } else {
-
             }
-        }
-        
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -65,11 +59,6 @@ namespace InterfaceGraphique
         {
             e.Cancel = true;
             this.Hide();
-        }
-
-        private void filename_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -22,8 +22,9 @@ namespace InterfaceGraphique
         //private static double angleDeRotation_;
         //private static double facteurEchelle_;
 
-        private static Sauvegarde fenetreSauvegarde_ = new Sauvegarde();
-        private static Chargement fenetreChargement_ = new Chargement();
+        private static Sauvegarde fenetreSauvegarde_;
+        private static Chargement fenetreChargement_;
+        private static Nouveau boiteNouv;
 
 
         public Edition()
@@ -52,6 +53,9 @@ namespace InterfaceGraphique
             this.enregistrerToolStripMenuItem.Click += new System.EventHandler(this.enregistrerToolStripMenuItem_Click);
             // FonctionsNatives.passerLargeur(panel1.Width);
 
+            fenetreSauvegarde_ = new Sauvegarde(this);
+            fenetreChargement_ = new Chargement(this);
+            boiteNouv = new Nouveau(fenetreSauvegarde_);
         }
 
         public void InitialiserAnimation()
@@ -776,7 +780,7 @@ namespace InterfaceGraphique
 
         private void enregistrerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (fenetreSauvegarde_.getLastSaveFile() == "")
+            if (getCurrentFile() == "")
                 fenetreSauvegarde_.Show();
             else
                 fenetreSauvegarde_.saveLastFile();
@@ -784,7 +788,6 @@ namespace InterfaceGraphique
 
         private void nouveauToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            Nouveau boiteNouv = new Nouveau();
             boiteNouv.ShowDialog();
             //FonctionsNatives.initialiserScene();
         }
@@ -794,11 +797,32 @@ namespace InterfaceGraphique
 
         }
 
+        private void panel1_MouseOut(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
         private void ouvrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fenetreChargement_.Show();
         }
 
+        private string currentFile_;
+        public static string SAVE_FILEPATH = "zones";
+        public static string DEFAULT_FILENAME = "defaut";
+        public string getCurrentFile()
+        {
+            return currentFile_;
+        }
+
+        public void setCurrentFile(string value)
+        {
+            if (value != DEFAULT_FILENAME)
+                currentFile_ = value;
+            else
+                currentFile_ = "";
+        }
+        
     }
 
     static partial class FonctionsNatives
