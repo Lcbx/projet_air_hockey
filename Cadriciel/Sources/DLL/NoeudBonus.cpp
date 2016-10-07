@@ -126,10 +126,14 @@ inline double NoeudBonus::obtenirRayonModele() const {
 }
 
 ////////////////////////////////////////////////
-/// @}
-/// @}VISITEUR
+/// 
+/// @fn NoeudBonus::accepter(Visiteur* v)
+///
+/// permet de visiter le noeud
+///
+/// @return Aucune.
+///
 ////////////////////////////////////////////////
-
 void NoeudBonus::accepter(Visiteur* v)
 {
 	v->visiter(this);

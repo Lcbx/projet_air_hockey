@@ -502,10 +502,14 @@ void NoeudComposite::animer(float dt)
 
 
 ////////////////////////////////////////////////
-/// @}
-/// @}VISITEUR
+/// 
+/// @fn NoeudComposite::accepter(Visiteur* v)
+///
+/// permet de visiter le noeud
+///
+/// @return Aucune.
+///
 ////////////////////////////////////////////////
-
 void NoeudComposite::accepter(Visiteur* v)
 {
 		v->visiter(this);

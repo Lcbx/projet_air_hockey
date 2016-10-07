@@ -64,7 +64,7 @@ void VisiteurDuplication::actualise(glm::vec3 point) {
 		(*it)->assignerSelection(false);
 	for (auto it = originaux_.begin(); it != originaux_.end(); it++)
 		(*it)->assignerSelection(true);
-	posActuelle_ = point;
+	if(visDep_.reussi()) posActuelle_ = point;
 }
 
 ////////////////////////////////////////////////////////////////////////

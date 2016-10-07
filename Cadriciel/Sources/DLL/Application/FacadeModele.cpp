@@ -172,7 +172,7 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 			glm::dvec3(0, 0, 200), glm::dvec3(0, 0, 0),
 			glm::dvec3(0, 1, 0),   glm::dvec3(0, 1, 0)},
 		vue::ProjectionOrtho{ 
-				638, 398,
+				606, 437,
 				1, 1000, 5, 0.5, 0.25,
 				200, 200}
 	};
@@ -241,24 +241,19 @@ void FacadeModele::enregistrerConfiguration() const
 ///
 /// Cette fonction charge la zone de jeu à partir d'un fichier XML.
 ///
+/// @param[in] fichierZoneJeu : Nom du fichier à charger.
+///
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
 void FacadeModele::chargerZoneJeu(char* fichierZoneJeu) const
 {
-
-	std::cout << "CHARGEMEEEEEEEEEEEEENT" << std::endl;
-
-	// si le fichier existe on le lit
+	// Créé le document XML à partir du fichier spécifié
 	tinyxml2::XMLDocument document;
-
-	// Lire à partir du fichier de configuration
 	document.LoadFile(fichierZoneJeu);
 
-	// On lit les différentes configurations.
+	// Créé l'arbre de rendu à partir du document XML
 	SauvegardeZoneDeJeu::lireArbre(document);
-
-	std::cout << "CHARGEMEEEEEEEEEEEEENT LE RETOUR" << std::endl;
 
 }
 
@@ -267,10 +262,9 @@ void FacadeModele::chargerZoneJeu(char* fichierZoneJeu) const
 ///
 /// @fn void FacadeModele::enregistrerZoneJeu(std::string fichierZoneJeu) const
 ///
-/// Cette fonction genere un fichier XML contenant
-///  la zone de jeu actuelle.
+/// Cette fonction genere un fichier XML contenant la zone de jeu actuelle.
 ///
-///  !!! 
+/// @param[in] fichierZoneJeu : Nom du fichier àdans lequel sauvegarder.
 ///
 /// @return Aucune.
 ///
@@ -278,21 +272,18 @@ void FacadeModele::chargerZoneJeu(char* fichierZoneJeu) const
 
 void FacadeModele::enregistrerZoneJeu(char* fichierZoneJeu) const
 {
-	// TODO : Correctement implémenter l'erreur
+	// Génère une erreur si le nom du fichier correspond au fichier de zone par défaut
 	if (fichierZoneJeu == FICHIER_ZONEDEFAUT)
 		std::cerr << "Erreur : Tentative de modification de la zone de jeu par défaut" << std::endl;
 
-	std::cout << "Nom du fichier de sauvegarde: " << fichierZoneJeu << std::endl;
-
+	// Créé un document XML avec la déclaration XML standard
 	tinyxml2::XMLDocument document;
-
-	// Écrire la déclaration XML standard...
 	document.NewDeclaration(R"(?xml version="1.0" standalone="yes"?)");
 
-	// On enregistre les différentes configurations.
+	// Créé le document XML à partir de l'arbre de rendu
 	SauvegardeZoneDeJeu::creerArbre(document);
 
-	// Écrire dans le fichier
+	// Enregistrer le document XML dans le fichier
 	document.SaveFile(fichierZoneJeu);
 }
 

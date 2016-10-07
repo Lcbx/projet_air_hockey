@@ -35,10 +35,9 @@ public:
 	/// Effectue l'animation du cube.
 	virtual void animer(float temps);
 
-	
-
-	//Accepter le visiteur
+	///Accepter le visiteur
 	virtual void accepter(Visiteur* v);
+
 private:
 
 

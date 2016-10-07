@@ -471,22 +471,42 @@ void NoeudAbstrait::animer(float dt)
 
 
 ////////////////////////////////////////////////
-/// @}
+/// 
+/// @fn NoeudAbstrait::accepter(Visiteur* v)
+///
+/// permet de visiter le noeud
+///
+/// @return Aucune.
+///
 ////////////////////////////////////////////////
-
 void NoeudAbstrait::accepter(Visiteur *v)
 {
 	v->visiter(this);
 }
-
-
+////////////////////////////////////////////////
+/// 
+/// @fn void NoeudAbstrait::setFrere(NoeudAbstrait* frere)
+///
+/// assigne le frere du noeud
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////
 void NoeudAbstrait::setFrere(NoeudAbstrait* frere)
 {
 	cout << "Dans le set " << endl;
 	this->frere_ = frere;
 }
 
-
+////////////////////////////////////////////////
+/// 
+/// @fn NoeudAbstrait* NoeudAbstrait::getFrere()
+///
+/// renvoie le noeud frere
+///
+/// @return NoeudAbstrait*
+///
+////////////////////////////////////////////////
 NoeudAbstrait* NoeudAbstrait::getFrere()
 {
 	return this->frere_;

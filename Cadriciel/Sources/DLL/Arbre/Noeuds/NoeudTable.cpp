@@ -378,7 +378,7 @@ void NoeudTable::tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 A, g
 ///
 /// @param[in] : vueProjection
 ///					p1,p2,p3
-/// Cette fonction trace les murs autour des trois points donnees 
+/// Cette fonction trace les murs autour des trois points donnees -- gestion des jonctions
 ///
 /// @return Aucune.
 ///
@@ -394,7 +394,7 @@ void NoeudTable::tracerMurs3Points(const glm::mat4& vueProjection, glm::vec3 p1,
 ///
 /// @param[in] : vueProjection
 /// Cette fonction trace les murs autour de la table
-///
+/// version 0 
 /// @return Aucune.
 ///
 ///////////////////////////////////////////////////////////////////////////
@@ -499,14 +499,14 @@ double NoeudTable::calculB(double pente, glm::vec3 point) const
 /// @fn void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
 ///
 /// @param[in]  vueProjection
-//
+/// version 0
 /// Cette fonction trace les but avec une certaine longueur qui 
 /// varie en proportion de la longueur du mur
 ///
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudTable::tracerButs(const glm::mat4& vueProjection) const // version 0
+void NoeudTable::tracerButs(const glm::mat4& vueProjection) const 
 {
 #define delta 2
 	glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
@@ -642,8 +642,9 @@ void  NoeudTable::calculerPointDistance(glm::vec3 p0, glm::vec3 p1, double longu
 /// @param[in]  vueProjection
 ///				longueur: la longueur du but
 //
-/// Cette fonction trace les but avec une  longueur fixe!
+/// Cette fonction trace les but avec une  longueur fixe! 
 ///
+/// version1
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
@@ -926,8 +927,16 @@ bool NoeudTable::getCouleurLignes(glm::vec4 & couleur)
 }
 
 
-//determiner si dans la table
-/// angle
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::calculerAngle3D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C)
+///
+/// Cette fonction calcule l'angle entre 3 points en 3d
+///  @param[in] 
+///		point M
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
 double NoeudTable::calculerAngle3D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C) {
 	// theta = arcos( u.v/(|u|.|v|) )
 	double angle;
@@ -937,6 +946,16 @@ double NoeudTable::calculerAngle3D(const glm::dvec3 A, const glm::dvec3 B, const
 	return angle;
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::calculerAngle2D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C)
+///
+/// Cette fonction calcule l'angle entre 3 points en 2d
+///  @param[in] 
+///		point M
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
 double NoeudTable::calculerAngle2D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C) {
 	//on ignore la composante en z
 	glm::dvec3 D(A.x, A.y, 0);
@@ -945,7 +964,16 @@ double NoeudTable::calculerAngle2D(const glm::dvec3 A, const glm::dvec3 B, const
 	return calculerAngle3D(D, E, F);
 }
 
-/// dansTriangle
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::MdansTriangleABC(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C, glm::dvec3 M)
+///
+/// Cette fonction permet de savoir si un point M est dans un triangle ABC
+///  @param[in] 
+///		point M
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
 bool NoeudTable::MdansTriangleABC(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C, glm::dvec3 M) {
 	//			B.							B.
 	//		   / \		. M     ou 		   /  \	
@@ -959,7 +987,16 @@ bool NoeudTable::MdansTriangleABC(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C, glm:
 	return reponse;
 }
 
-/// dansTable
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::dansTable(glm::dvec3 M
+///
+/// Cette fonction permet de savoir si un point est dans la table
+///  @param[in] 
+///		point M
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
 bool NoeudTable::dansTable(glm::dvec3 M) {
 	/*
 		etapes du check :

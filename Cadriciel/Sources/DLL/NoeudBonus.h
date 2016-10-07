@@ -37,7 +37,7 @@ public:
 	virtual void animer(float temps);
 
 
-	//Accepter le visiteur
+	///Accepter le visiteur
 	virtual void accepter(Visiteur* v);
 
 	/// Permet d'obtenir la droite directrice du noeud bonus

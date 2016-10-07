@@ -94,10 +94,14 @@ void NoeudPortail::animer(float temps)
 }
 
 ////////////////////////////////////////////////
-/// @}
-/// @}VISITEUR
+/// 
+/// @fn NoeudPortail::accepter(Visiteur* v)
+///
+/// permet de visiter le noeud
+///
+/// @return Aucune.
+///
 ////////////////////////////////////////////////
-
 void NoeudPortail::accepter(Visiteur* v)
 {
 	v->visiter(this);

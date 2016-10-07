@@ -25,6 +25,7 @@ public:
 	
 	VisiteurDeplacement(glm::vec3 dep);
 	void setDep(glm::vec3 dep);
+	bool reussi();
 
 	virtual void visiter(NoeudAbstrait* noeud);
 	virtual void visiter(NoeudComposite *noeud);

@@ -37,11 +37,9 @@ public:
 	/// Effectue l'animation du cube.
 	virtual void animer(float temps);
 
-	//Accepter le visiteur
+	///Accepter le visiteur
 	virtual void accepter(Visiteur* v);
 
-	///Permet d'obtenir la boite de collision pour le muret donné
-	//virtual BoiteCollision obtenirBoiteCollision();
 
 	///Permet d'obtenir la droite directrice du muret
 	virtual math::Droite3D obtenirDroiteDirectrice();
@@ -54,16 +52,6 @@ public:
 	///Permet d'obtenir le rayon minimal du modèle
 	inline virtual double obtenirRayonModele() const;
 
-private:
-	
-	/*
-	/// Angle selon l'axe des X.
-	float angleX_{ 0.f };
-	/// Angle selon l'axe des Y.
-	float angleY_{ 0.f };
-	/// Angle de rotation.
-	float angleRotation_{ 0.f };
-	*/
 };
 
 
