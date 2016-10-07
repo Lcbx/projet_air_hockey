@@ -725,3 +725,17 @@ void FacadeModele::setCoefficient(CoefficientConfiguration coeff) {
 
 	this->coeff_ = coeff;
 }
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void  initialiserScene()
+///
+/// Cette fonction permet d'initialiser la scene 
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::initialiserScene()
+{
+	arbre_->initialiser();
+}
