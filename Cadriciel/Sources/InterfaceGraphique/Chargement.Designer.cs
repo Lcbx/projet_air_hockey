@@ -52,7 +52,6 @@
             this.filename.ReadOnly = true;
             this.filename.Size = new System.Drawing.Size(112, 20);
             this.filename.TabIndex = 1;
-            this.filename.TextChanged += new System.EventHandler(this.filename_TextChanged);
             // 
             // label1
             // 
@@ -62,7 +61,6 @@
             this.label1.Size = new System.Drawing.Size(78, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Nom du fichier:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // listBox1
             // 
