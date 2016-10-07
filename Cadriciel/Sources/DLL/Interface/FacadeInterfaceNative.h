@@ -99,6 +99,8 @@ extern "C" {
 
 	__declspec(dllexport) bool objetEstDansLaTable();
 
+	///permet d'initialiser la scene lorsqu'on clic sur nouveau
+	__declspec(dllexport) void initialiserScene();
 
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__

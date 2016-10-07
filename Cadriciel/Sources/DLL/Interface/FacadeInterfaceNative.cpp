@@ -513,6 +513,22 @@ extern "C"
 		FacadeModele::obtenirInstance()->chargerZoneJeu(fichierZoneJeu);
 	}
 
+
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn 	__declspec(dllexport) void __cdecl initialiserScene()
+	///
+	/// Cette fonction permet d'initialiser la scene 
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl initialiserScene()
+	{
+		FacadeModele::obtenirInstance()->initialiserScene();
+	}
+
 }
 
 

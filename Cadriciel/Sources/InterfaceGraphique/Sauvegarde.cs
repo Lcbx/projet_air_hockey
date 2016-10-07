@@ -14,31 +14,26 @@ namespace InterfaceGraphique
     public partial class Sauvegarde : Form
     {
         string[] files;
-        string path;
-        string lastSaveFile = "";
-        static string DEFAULT_FILENAME = "defaut";
 
-        public string getLastSaveFile() {
-            return lastSaveFile;
-        }
+        Edition edition_;
 
-        public Sauvegarde()
+        public Sauvegarde(Edition edition)
         {
-
             InitializeComponent();
             this.MinimizeBox = false;
             this.MaximizeBox = false;
+
+            edition_ = edition;
         }
 
         private void Sauvegarde_Load(object sender, EventArgs e)
         {
-            path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "inf2990-10", "saves");
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
+            if (!Directory.Exists(Edition.SAVE_FILEPATH))
+                Directory.CreateDirectory(Edition.SAVE_FILEPATH);
 
-            string[] saveFiles = Directory.GetFiles(path, "*.xml");
+            string[] saveFiles = Directory.GetFiles(Edition.SAVE_FILEPATH, "*.xml");
 
-            files = saveFiles.Select(filepath => Path.GetFileNameWithoutExtension(filepath)).Where(x => x != DEFAULT_FILENAME).ToArray();
+            files = saveFiles.Select(filepath => Path.GetFileNameWithoutExtension(filepath)).Where(x => x != Edition.DEFAULT_FILENAME).ToArray();
 
             listBox1.BeginUpdate();
             listBox1.Items.Clear();
@@ -47,23 +42,18 @@ namespace InterfaceGraphique
             }
             listBox1.EndUpdate();
 
-            filename.Text = lastSaveFile;
+            filename.Text = edition_.getCurrentFile();
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            lastSaveFile = filename.Text;
+            edition_.setCurrentFile(filename.Text);
             this.saveLastFile();
             this.Hide();
         }
 
         public void saveLastFile() {
-            if(lastSaveFile != "" && lastSaveFile != DEFAULT_FILENAME)
-                FonctionsNatives.enregistrerZoneJeu(Path.Combine(path, lastSaveFile + ".xml").ToCharArray());
-        }
-        
-        private void label1_Click(object sender, EventArgs e)
-        {
-
+            if(edition_.getCurrentFile() != "")
+                FonctionsNatives.enregistrerZoneJeu(Path.Combine(Edition.SAVE_FILEPATH, edition_.getCurrentFile() + ".xml").ToCharArray());
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -78,9 +68,12 @@ namespace InterfaceGraphique
         }
 
         private void filename_TextChanged(object sender, EventArgs e) {
-            if(filename.Text == DEFAULT_FILENAME) {
+            if(filename.Text == Edition.DEFAULT_FILENAME) {
                 filename.ForeColor = Color.Red;
-            } else {
+                bouttonSauvegarder.Enabled = false;
+            } else
+            {
+                bouttonSauvegarder.Enabled = true;
                 filename.ForeColor = Color.Black;
             }
 
