@@ -165,7 +165,6 @@ namespace InterfaceGraphique
                         this.changerMode(Etats.POINTSDECONTROLE); break;
                     }
 
-                case Keys.O: { FonctionsNatives.deplacerPointHaut(2); break; }//A Verifier ou a enlever !!
                 default: break;
             }
         }
@@ -785,8 +784,16 @@ namespace InterfaceGraphique
 
         private void nouveauToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
+            Nouveau boiteNouv = new Nouveau();
+            boiteNouv.ShowDialog();
+            //FonctionsNatives.initialiserScene();
+        }
+
+        private void fichierToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
         }
+
         private void ouvrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fenetreChargement_.Show();
@@ -910,6 +917,10 @@ namespace InterfaceGraphique
             [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)] // pour utiliser une fonction qui se trouve dans le fichier Noyau.dll
             public static extern bool objetEstDansLaTable();
 
-        }
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void initialiserScene();
+
+
+    }
    
 }
