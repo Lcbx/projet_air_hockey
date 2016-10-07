@@ -783,6 +783,10 @@ namespace InterfaceGraphique
                 fenetreSauvegarde_.saveLastFile();
         }
 
+        private void nouveauToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+
+        }
         private void ouvrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fenetreChargement_.Show();

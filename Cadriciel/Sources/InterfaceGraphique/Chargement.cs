@@ -66,5 +66,10 @@ namespace InterfaceGraphique
             e.Cancel = true;
             this.Hide();
         }
+
+        private void filename_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
