@@ -25,6 +25,9 @@ public:
 	/// Lit un noeud XML.
 	static void lireNoeudXML(const tinyxml2::XMLElement& element);
 
+	/// Sauvegarde le noeudTable dans un élément XML
+	static tinyxml2::XMLElement* sauvegarderTable(tinyxml2::XMLDocument& document);
+
 	/// Restitue le noeudTable enregistré dans un élément XML
 	static void restituerTable(const tinyxml2::XMLElement& element);
 

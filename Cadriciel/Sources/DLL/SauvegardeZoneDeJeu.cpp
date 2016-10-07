@@ -21,6 +21,10 @@ void SauvegardeZoneDeJeu::creerArbre(tinyxml2::XMLDocument& document)
 	// Noeud arbreDeRendu
 	tinyxml2::XMLElement* elementArbreDeRendu{ document.NewElement("arbreDeRendu") };
 
+	// Ajoute le noeud table, contenant les informations de la zone de jeu
+	elementArbreDeRendu->LinkEndChild(sauvegarderTable(document));
+
+
 	// Creation de l'arbre DOM a partir de l'arbre de rendu
 	VisiteurSauvegarde* VS = new VisiteurSauvegarde(elementArbreDeRendu, &document);
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(VS);
@@ -28,6 +32,67 @@ void SauvegardeZoneDeJeu::creerArbre(tinyxml2::XMLDocument& document)
 
 	document.LinkEndChild(elementArbreDeRendu);
 }
+
+
+////////////////////////////////////////////////////////////////////////
+/// @fn void SauvegardeZoneDeJeu::sauvegarderTable(tinyxml2::XMLDocument& document)
+///
+/// Retourne un élément XML contenant les propriétés de la table
+///
+/// @return Aucune.
+////////////////////////////////////////////////////////////////////////
+tinyxml2::XMLElement* SauvegardeZoneDeJeu::sauvegarderTable(tinyxml2::XMLDocument& document)
+{
+	// Cree l'element XML correspondant a ce noeud
+	tinyxml2::XMLElement* elementTable{ document.NewElement("noeudTable") };
+
+	// Enregistrer dans elementTable les attributs du noeud
+	elementTable->SetAttribute("TYPE", (ArbreRenduINF2990::NOM_TABLE).c_str());
+
+	NoeudTable* table = FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable();
+
+	// Enregistre les coordonées des points de contrôle (Oui, très répétitif)
+	glm::vec3 P0, P1, P2, P3, P4, P5, P6, P7;
+	table->getPointControle(0, P0);
+	table->getPointControle(1, P1);
+	table->getPointControle(2, P2);
+	table->getPointControle(3, P3);
+	table->getPointControle(4, P4);
+	table->getPointControle(5, P5);
+	table->getPointControle(6, P6);
+	table->getPointControle(7, P7);
+	elementTable->SetAttribute("P0X", P0.x);
+	elementTable->SetAttribute("P0Y", P0.y);
+	elementTable->SetAttribute("P0Z", P0.z);
+	elementTable->SetAttribute("P1X", P1.x);
+	elementTable->SetAttribute("P1Y", P1.y);
+	elementTable->SetAttribute("P1Z", P1.z);
+	elementTable->SetAttribute("P2X", P2.x);
+	elementTable->SetAttribute("P2Y", P2.y);
+	elementTable->SetAttribute("P2Z", P2.z);
+	elementTable->SetAttribute("P3X", P3.x);
+	elementTable->SetAttribute("P3Y", P3.y);
+	elementTable->SetAttribute("P3Z", P3.z);
+	elementTable->SetAttribute("P4X", P4.x);
+	elementTable->SetAttribute("P4Y", P4.y);
+	elementTable->SetAttribute("P4Z", P4.z);
+	elementTable->SetAttribute("P5X", P5.x);
+	elementTable->SetAttribute("P5Y", P5.y);
+	elementTable->SetAttribute("P5Z", P5.z);
+	elementTable->SetAttribute("P6X", P6.x);
+	elementTable->SetAttribute("P6Y", P6.y);
+	elementTable->SetAttribute("P6Z", P6.z);
+	elementTable->SetAttribute("P7X", P7.x);
+	elementTable->SetAttribute("P7Y", P7.y);
+	elementTable->SetAttribute("P7Z", P7.z);
+
+	// Visite les fils de ce noeud composite
+
+	// retourne l'élément pour qu'il soit ajouté
+	return(elementTable);
+
+}
+
 
 ////////////////////////////////////////////////////////////////////////
 /// @fn void SauvegardeZoneDeJeu::lireArbre(tinyxml2::XMLDocument& document)
@@ -39,12 +104,19 @@ void SauvegardeZoneDeJeu::creerArbre(tinyxml2::XMLDocument& document)
 ////////////////////////////////////////////////////////////////////////
 void SauvegardeZoneDeJeu::lireArbre(const tinyxml2::XMLDocument& document)
 {
-	// Initialise l'arbre
+	// Réinitialise l'arbre
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->initialiser();
 
-	//
+	// Cherche l'élément arbreDeRendu
 	const tinyxml2::XMLElement* elementArbreDeRendu{ document.FirstChildElement("arbreDeRendu") };
-	if (elementArbreDeRendu != nullptr && elementArbreDeRendu->FirstChild() != nullptr) {
+	if (elementArbreDeRendu != nullptr && elementArbreDeRendu->FirstChild() != nullptr) {	
+
+		// Récupere les informations de la configuration de la table
+		const tinyxml2::XMLElement* elementTable{ elementArbreDeRendu->FirstChildElement("noeudTable") };
+		if (elementTable != nullptr)
+			SauvegardeZoneDeJeu::restituerTable(*elementTable);
+
+		// Parcours le reste des noeuds
 		SauvegardeZoneDeJeu::lireNoeudXML(*(elementArbreDeRendu->FirstChild()->ToElement()));
 
 
@@ -70,7 +142,6 @@ void SauvegardeZoneDeJeu::restituerTable(const tinyxml2::XMLElement& element)
 	t->setPointControle(5, { element.FloatAttribute("P5X"), element.FloatAttribute("P5Y"), element.FloatAttribute("P5Z") });
 	t->setPointControle(6, { element.FloatAttribute("P6X"), element.FloatAttribute("P6Y"), element.FloatAttribute("P6Z") });
 	t->setPointControle(7, { element.FloatAttribute("P7X"), element.FloatAttribute("P7Y"), element.FloatAttribute("P7Z") });
-	t->setPointControle(8, { element.FloatAttribute("P8X"), element.FloatAttribute("P8Y"), element.FloatAttribute("P8Z") });
 }
 
 
@@ -118,6 +189,8 @@ void SauvegardeZoneDeJeu::lireNoeudXML(const tinyxml2::XMLElement& element)
 ////////////////////////////////////////////////////////////////////////
 void SauvegardeZoneDeJeu::ajouterNoeudXML(const tinyxml2::XMLElement& element)
 {
+	if (element.Attribute("TYPE") == ArbreRenduINF2990::NOM_TABLE)
+		return;
 
 	NoeudAbstrait* nouveauNoeud{ FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->creerNoeud(element.Attribute("TYPE")) };
 	
@@ -151,51 +224,4 @@ void SauvegardeZoneDeJeu::ajouterNoeudXML(const tinyxml2::XMLElement& element)
 		//delete v2;
 	}
 
-	
 }
-
-/*
-void SauvegardeZoneDeJeu::ajouterNoeudXML(const tinyxml2::XMLElement& element, NoeudComposite *noeud)
-{
-	std::cout << "Coucou toi" << std::endl;
-}
-
-
-void SauvegardeZoneDeJeu::ajouterNoeudXML(const tinyxml2::XMLElement& element, NoeudBonus *noeud)
-{
-	glm::dvec3 position(element.FloatAttribute("POSITION1"), element.FloatAttribute("POSITION2"), element.FloatAttribute("POSITION3"));
-	glm::dvec3 scale(element.FloatAttribute("SCALE1"), element.FloatAttribute("SCALE2"), element.FloatAttribute("SCALE3"));
-	float angleRotation(element.FloatAttribute("ANGLE_ROTATION"));
-
-	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouterBonus(position, scale, angleRotation);
-}
-
-
-void SauvegardeZoneDeJeu::ajouterNoeudXML(const tinyxml2::XMLElement& element, NoeudPortail *noeud)
-{
-	std::cout << "Portail ici !" << std::endl;
-	glm::dvec3 positionPremier(element.FloatAttribute("POSITION1"), element.FloatAttribute("POSITION2"), element.FloatAttribute("POSITION3"));
-	glm::dvec3 scalePremier(element.FloatAttribute("SCALE1"), element.FloatAttribute("SCALE2"), element.FloatAttribute("SCALE3"));
-	float angleRotationPremier(element.FloatAttribute("ANGLE_ROTATION"));
-
-	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouterPortail(positionPremier, scalePremier, angleRotationPremier);
-
-	glm::dvec3 positionDeuxieme(element.FloatAttribute("POSITION1"), element.FloatAttribute("POSITION2"), element.FloatAttribute("POSITION3"));
-	glm::dvec3 scaleDeuxieme(element.FloatAttribute("SCALE1"), element.FloatAttribute("SCALE2"), element.FloatAttribute("SCALE3"));
-	float angleRotationDeuxieme(element.FloatAttribute("ANGLE_ROTATION"));
-
-	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouterPortailDeux(positionDeuxieme, scaleDeuxieme, angleRotationDeuxieme);
-
-	
-}
-
-
-void SauvegardeZoneDeJeu::ajouterNoeudXML(const tinyxml2::XMLElement& element, NoeudMuret *noeud)
-{
-	glm::dvec3 position(element.FloatAttribute("POSITION1"), element.FloatAttribute("POSITION2"), element.FloatAttribute("POSITION3"));
-	glm::dvec3 scale(element.FloatAttribute("SCALE1"), element.FloatAttribute("SCALE2"), element.FloatAttribute("SCALE3"));
-	float angleRotation(element.FloatAttribute("ANGLE_ROTATION"));
-
-	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouterMuret(position, scale, angleRotation);
-}
-*/

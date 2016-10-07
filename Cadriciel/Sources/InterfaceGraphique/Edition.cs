@@ -761,12 +761,13 @@ namespace InterfaceGraphique
 
             saveFileDialog1.Filter = "XML files (*.xml)|*.xml";
             saveFileDialog1.FilterIndex = 1;
-            saveFileDialog1.RestoreDirectory = true;
-            saveFileDialog1.AddExtension = false;
+            saveFileDialog1.InitialDirectory = "zones/";
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 System.Console.WriteLine("Ceci est une sauvegarde");
+                System.Console.WriteLine(saveFileDialog1.FileName);
+
 
                 FonctionsNatives.enregistrerZoneJeu((saveFileDialog1.FileName).ToCharArray());
 
@@ -780,7 +781,7 @@ namespace InterfaceGraphique
 
             openFileDialog1.Filter = "XML files (*.xml)|*.xml";
             openFileDialog1.FilterIndex = 1;
-            openFileDialog1.RestoreDirectory = true;
+            openFileDialog1.InitialDirectory = "zones/";
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
