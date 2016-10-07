@@ -784,7 +784,7 @@ namespace InterfaceGraphique
             else
                 fenetreSauvegarde_.saveLastFile();
         }
-
+                
         private void nouveauToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             boiteNouv.ShowDialog();

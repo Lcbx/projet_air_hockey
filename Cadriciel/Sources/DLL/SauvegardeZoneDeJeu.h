@@ -25,20 +25,16 @@ public:
 	/// Lit un noeud XML.
 	static void lireNoeudXML(const tinyxml2::XMLElement& element);
 
+	/// Sauvegarde le noeudTable dans un élément XML
+	static tinyxml2::XMLElement* sauvegarderTable(tinyxml2::XMLDocument& document);
+
 	/// Restitue le noeudTable enregistré dans un élément XML
 	static void restituerTable(const tinyxml2::XMLElement& element);
 
 	/// Traduit un noeud XML d'un type spécifique en noeud de l'arbre de rendu.
 	static void ajouterNoeudXML(const tinyxml2::XMLElement& element);
 
-
-	//static void ajouterNoeudXML(const tinyxml2::XMLElement& element, NoeudComposite *noeud);
-	//static void ajouterNoeudXML(const tinyxml2::XMLElement& element, NoeudBonus *noeud);
-	//static void ajouterNoeudXML(const tinyxml2::XMLElement& element, NoeudPortail *noeud);
-	//static void ajouterNoeudXML(const tinyxml2::XMLElement& element, NoeudMuret *noeud);
-
 };
 
 #endif
 
-void restituerTable(const tinyxml2::XMLElement & element);
