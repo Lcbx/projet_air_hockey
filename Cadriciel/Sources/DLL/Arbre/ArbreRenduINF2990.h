@@ -104,6 +104,8 @@ public:
 	///determiner si la position est dans la table
    bool estInterieur = false;
 
+
+
 private :
 	NoeudTable* noeudTable_;
 };

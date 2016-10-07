@@ -142,6 +142,9 @@ public:
 
 	bool objetEstDansLaTable();
 
+
+	//initialiser la zone de jeu
+	void initialiserScene();
 private:
 
    /// Constructeur par défaut.
