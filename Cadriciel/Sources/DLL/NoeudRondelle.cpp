@@ -88,8 +88,13 @@ void NoeudRondelle::animer(float temps)
 
 
 ////////////////////////////////////////////////
-/// @}
-/// @}VISITEUR
+/// 
+/// @fn NoeudRondelle::accepter(Visiteur* v)
+///
+/// permet de visiter le noeud
+///
+/// @return Aucune.
+///
 ////////////////////////////////////////////////
 
 void NoeudRondelle::accepter(Visiteur* v)

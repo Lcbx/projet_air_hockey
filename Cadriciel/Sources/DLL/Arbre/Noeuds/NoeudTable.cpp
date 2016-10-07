@@ -499,7 +499,7 @@ double NoeudTable::calculB(double pente, glm::vec3 point) const
 /// @fn void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
 ///
 /// @param[in]  vueProjection
-//// version 0
+/// version 0
 /// Cette fonction trace les but avec une certaine longueur qui 
 /// varie en proportion de la longueur du mur
 ///
@@ -927,8 +927,16 @@ bool NoeudTable::getCouleurLignes(glm::vec4 & couleur)
 }
 
 
-//determiner si dans la table
-/// angle
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::calculerAngle3D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C)
+///
+/// Cette fonction calcule l'angle entre 3 points en 3d
+///  @param[in] 
+///		point M
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
 double NoeudTable::calculerAngle3D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C) {
 	// theta = arcos( u.v/(|u|.|v|) )
 	double angle;
@@ -938,6 +946,16 @@ double NoeudTable::calculerAngle3D(const glm::dvec3 A, const glm::dvec3 B, const
 	return angle;
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::calculerAngle2D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C)
+///
+/// Cette fonction calcule l'angle entre 3 points en 2d
+///  @param[in] 
+///		point M
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
 double NoeudTable::calculerAngle2D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C) {
 	//on ignore la composante en z
 	glm::dvec3 D(A.x, A.y, 0);
@@ -946,7 +964,16 @@ double NoeudTable::calculerAngle2D(const glm::dvec3 A, const glm::dvec3 B, const
 	return calculerAngle3D(D, E, F);
 }
 
-/// dansTriangle
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::MdansTriangleABC(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C, glm::dvec3 M)
+///
+/// Cette fonction permet de savoir si un point M est dans un triangle ABC
+///  @param[in] 
+///		point M
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
 bool NoeudTable::MdansTriangleABC(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C, glm::dvec3 M) {
 	//			B.							B.
 	//		   / \		. M     ou 		   /  \	
@@ -960,7 +987,16 @@ bool NoeudTable::MdansTriangleABC(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C, glm:
 	return reponse;
 }
 
-/// dansTable
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::dansTable(glm::dvec3 M
+///
+/// Cette fonction permet de savoir si un point est dans la table
+///  @param[in] 
+///		point M
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
 bool NoeudTable::dansTable(glm::dvec3 M) {
 	/*
 		etapes du check :

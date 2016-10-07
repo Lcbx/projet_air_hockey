@@ -106,8 +106,13 @@ void NoeudPointControle::animer(float temps)
 
 }
 ////////////////////////////////////////////////
-/// @}
-/// @}VISITEUR
+/// 
+/// @fn NoeudPointControle::accepter(Visiteur* v)
+///
+/// permet de visiter le noeud
+///
+/// @return Aucune.
+///
 ////////////////////////////////////////////////
 void NoeudPointControle::accepter(Visiteur* v)
 {

@@ -28,20 +28,17 @@ using namespace std;
 const std::string ArbreRenduINF2990::NOM_ARAIGNEE{ "araignee" };
 /// La chaîne représentant le type des cones-cubes.
 const std::string ArbreRenduINF2990::NOM_CONECUBE{ "conecube" };
-
-//Bonus
+///La chaîne représentant le type des Bonus
 const std::string ArbreRenduINF2990::NOM_BONUS{ "bonus" };
-
-
-//Portail
+///La chaîne représentant le type des Portails
 const std::string ArbreRenduINF2990::NOM_PORTAIL{ "portail" };
-//La chaîne représentant le type des murets
+///La chaîne représentant le type des murets
 const std::string ArbreRenduINF2990::NOM_MURET{ "muret" };
-//La chaîne représentant le type des tables
+///La chaîne représentant le type des tables
 const std::string ArbreRenduINF2990::NOM_TABLE{ "table" };
-//La chaîne représentant le type des rondelles
+///La chaîne représentant le type des rondelles
 const std::string ArbreRenduINF2990::NOM_RONDELLE{ "rondelle" };
-//La chaîne représentant le type des points de controles de la table
+///La chaîne représentant le type des points de controles de la table
 const std::string ArbreRenduINF2990::NOM_POINTCONTROLE{ "pointcontrole" };
 
 ////////////////////////////////////////////////////////////////////////
@@ -117,10 +114,6 @@ void ArbreRenduINF2990::ajouterTable()
 	noeudTable_->ajouter(noeudPointControle6);
 	noeudTable_->ajouter(noeudPointControle7);
 	
-	//juste pour l'actualisation
-	/*glm::vec3 point;
-	noeudTable_->getPointControle(0, point);
-	noeudTable_->setPointControle(0, point);*/
 
 	noeudTable_->setPointControles();
 }
@@ -140,9 +133,6 @@ void ArbreRenduINF2990::initialiser()
 {
 	// On vide l'arbre
 	vider();
-	// afficher un message de test sur la console
-	//std::cout << "Allo! je suis dans l'initialisation de l'arbre du rendu inf2990"<< std::endl;
-	// afficher la table avec les points de controles
 	ajouterTable();
 }
 ////////////////////////////////////////////////////////////////////////

@@ -29,7 +29,8 @@ namespace opengl{
 	class VBO;
 }
 
-//TODO: AJOUTEZ TOUS Classes Visiteurs 
+
+/// Déclarations avancées pour le patron visiteur
 class Visiteur;
 class VisiteurPointMilieu;
 class VisiteurDeplacement;
@@ -103,8 +104,6 @@ public:
 
 	/// Assigne le modèle3D et la liste d'affichage du noeud courant
 	inline void assignerObjetRendu(modele::Modele3D const* modele, opengl::VBO const* liste);
-
-	// Interface d'un noeud
 
 	/// Calcule la profondeur de l'arbre sous le noeud courant.
 	virtual unsigned int calculerProfondeur() const;

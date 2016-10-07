@@ -34,46 +34,54 @@ public:
 	virtual void afficherConcret(const glm::mat4& vueProjection) const;
 	/// Effectue l'animation du cube.
 	virtual void animer(float temps);
-	//Accepter le visiteur
+	///Accepter le visiteur
 	virtual void accepter(Visiteur* v);
 
 	// fonctions d'affichage
-	void tracerTable(const glm::mat4& vueProjection)  const; // tracer la table
-	void tracerPointsControle(const glm::mat4& vueProjection)  const; // tracer les points de Controle
-	void tracerCercle(const glm::mat4& vueProjection,double cx, double cy, double r, int nb_segments) const; // tracer la table
-	void tracerMurs(const glm::mat4& vueProjection) const; //tracer les murs autour de la table
-	//tracer un mur entre 2 points
+	/// tracer la table
+	void tracerTable(const glm::mat4& vueProjection)  const; 
+	/// tracer les points de controle
+	void tracerPointsControle(const glm::mat4& vueProjection)  const;
+	/// tracer un cercle
+	void tracerCercle(const glm::mat4& vueProjection,double cx, double cy, double r, int nb_segments) const;
+	/// tracer les murs
+	void tracerMurs(const glm::mat4& vueProjection) const;
+	///tracer un mur entre 2 points
 	void tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 p1, glm::vec3 p2, double largeur,bool direction) const;
-	//tracer les murs entre 3 points
+	///tracer les murs entre 3 points
 	void tracerMurs3Points(const glm::mat4& vueProjection,glm::vec3 p1, glm::vec3 p2, glm::vec3 p3) const; 
-	//tracer les buts
+	///tracer les buts
 	void tracerButs(const glm::mat4& vueProjection) const;
+	///tracer les buts en fonction de la longueur
 	void tracerButs(const glm::mat4& vueProjection, double longueur) const;
+	///calcule la distance entre des points
 	void calculerPointDistance(glm::vec3 p0, glm::vec3 p1, double longueur, double largeur, glm::vec3 & p2, glm::vec3 & p3, glm::vec3 & p4) const;
-	void tracerLignesDecoration (const glm::mat4& vueProjection) const; //tracer les lignes de decoration
+	///tracer les lignes decoratives
+	void tracerLignesDecoration (const glm::mat4& vueProjection) const;
 
-	// Calcul la pente de la droite faite par 2 points 
+	/// Calcul la pente de la droite faite par 2 points 
 	double calculPente(glm::vec3 P0, glm::vec3 P1) const;
+	///calcul de point a partir de la pente
 	double calculB(double pente, glm::vec3 P0) const;
 
 	// fonctions get et set pour les points de controle de la table
-	// coordonnees point de controle
+	/// coordonnees point de controle
 	bool getPointControle(int numero, glm::vec3 & pointControle);
 	bool setPointControle(int numero, glm::vec3 pointControle);
 	bool setPointControles();
-	// couleur de la table
+	///couleur de la table
 	bool getCouleurTable(glm::vec4 & couleur);
 	bool setCouleurTable(glm::vec4 couleur);
-	// couleur des murs
+	/// couleur des murs
 	bool getCouleurMurs(glm::vec4 & couleur);
 	bool setCouleurMurs(glm::vec4 couleur);
-	// couleur des buts
+	/// couleur des buts
 	bool getCouleurButs(glm::vec4 & couleur);
 	bool setCouleurButs(glm::vec4 couleur);
-	// couleur des lignes dans la zone du jeu
+	/// couleur des lignes dans la zone du jeu
 	bool getCouleurLignes(glm::vec4 & couleur);
 	bool setCouleurLignes(glm::vec4 couleur);
-	// couleur du contour autour de la zone du jeu
+	/// couleur du contour autour de la zone du jeu
 	bool getCouleurContour(glm::vec4 & couleur);
 	bool setCouleurContour(glm::vec4 couleur);
 
@@ -89,19 +97,19 @@ public:
 
 private:
 
-	//la largueur des murs 
+	///la largueur des murs 
 	double largeur_{ 7 };
-	// la hauteur des murs 
+	/// la hauteur des murs 
 	double hauteur_{ 0.0 };
-	// la couleur de la table 
+	/// la couleur de la table 
 	glm::vec4 couleurTable_ = { 1., 1., 1., 1. };
-	// la couleur des murs autour de la table
+	/// la couleur des murs autour de la table
 	glm::vec4 couleurMurs_ = { 0.662745, 0.662745, 0.662745, 1. };
-	// la couleur des 2 buts 
+	/// la couleur des 2 buts 
 	glm::vec4 couleurButs_{ 1.,1.,0.,1. };
-	// la couleur des lignes sur le terrain
+	/// la couleur des lignes sur le terrain
 	glm::vec4 couleurLignes_{ 1.,0.,0.,1. };
-	// la couleur du contour
+	/// la couleur du contour
 	glm::vec4 couleurContour_{ 1.,0.,0.,1. };
 
 	// les 8 points de controle de la table
@@ -116,9 +124,10 @@ private:
 
 	*/
 
-	//pour obtenir p0, p1, ... des points de controle
+	///pour obtenir p0, p1, ... des points de controle
 	glm::vec3 p(int i) const { return chercher(i)->obtenirPositionRelative(); }
 
+	///table d'initialisation des points de controle
 	glm::vec3 pointControle_[8] = { 
 		{  -50,   50,  -0 },	//P0
 		{  -50,  -50,  -0 },	//P1
