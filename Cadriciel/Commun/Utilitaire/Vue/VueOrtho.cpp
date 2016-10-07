@@ -10,6 +10,7 @@
 
 #include "Utilitaire.h"
 #include "VueOrtho.h"
+#include <iostream>
 
 
 namespace vue {
@@ -132,7 +133,36 @@ namespace vue {
 	void VueOrtho::zoomerInElastique(const glm::ivec2& coin1,
 		const glm::ivec2& coin2)
 	{
-		/// À Faire: Redimensionner la projection et déplacer la caméra
+
+		// Déplacement afin que le centre du rectangle elastique devienne le centre de la nouvelle cloture
+		
+		std::cout << "Nouveau centre : (" << (coin1[0] + coin2[0]) / 2 << "," << (coin1[1] + coin2[1]) / 2 << ")" << std::endl;
+
+		glm::ivec2 deplacementXY;
+
+		deplacementXY[0] = (coin1[0] + coin2[0]) / 2 - projection_.obtenirDimensionCloture()[0] / 2;
+		deplacementXY[1] = (coin1[1] + coin2[1]) / 2 - projection_.obtenirDimensionCloture()[1] / 2;
+
+
+		deplacerXY(deplacementXY);
+		
+		// Zoom in
+		
+		double ratioElastique = glm::abs( double(coin2[0] - coin1[0]) / double(coin2[1] - coin1[1]) );
+		double ratioCloture = double(projection_.obtenirDimensionCloture()[0]) / double(projection_.obtenirDimensionCloture()[1]);
+
+		std::cout << "Ratio Elastique : " << ratioElastique << " Ratio cloture : " << ratioCloture << std::endl;
+
+		std::cout << "";
+
+		if (ratioElastique < ratioCloture) {
+			projection_.zoomerTo(projection_.obtenirZoomActuel() * (double(projection_.obtenirDimensionCloture()[1]) / glm::abs(coin2[1] - coin1[1])));
+		}
+		else {
+			projection_.zoomerTo(projection_.obtenirZoomActuel() * (double(projection_.obtenirDimensionCloture()[0]) / glm::abs(coin2[0] - coin1[0])));
+		}
+		
+		
 	}
 
 
@@ -153,7 +183,33 @@ namespace vue {
 	void VueOrtho::zoomerOutElastique(const glm::ivec2& coin1,
 		const glm::ivec2& coin2)
 	{
-		/// À Faire: Redimensionner la projection et déplacer la caméra
+
+
+		// Zoom out
+
+		double ratioElastique = glm::abs(double(coin2[0] - coin1[0]) / double(coin2[1] - coin1[1]));
+		double ratioCloture = double(projection_.obtenirDimensionCloture()[0]) / double(projection_.obtenirDimensionCloture()[1]);
+
+		std::cout << "Ratio Elastique : " << ratioElastique << " Ratio cloture : " << ratioCloture << std::endl;
+
+
+		if (ratioElastique > ratioCloture) {
+			projection_.zoomerTo(projection_.obtenirZoomActuel() / (double(projection_.obtenirDimensionCloture()[1]) / glm::abs(coin2[1] - coin1[1])));
+		}
+		else {
+			projection_.zoomerTo(projection_.obtenirZoomActuel() / (double(projection_.obtenirDimensionCloture()[0]) / glm::abs(coin2[0] - coin1[0])));
+		}
+
+
+		// Deplacement
+
+		glm::ivec2 deplacementXY;
+
+		deplacementXY[0] = projection_.obtenirDimensionCloture()[0] / 2 - (coin1[0] + coin2[0]) / 2;
+		deplacementXY[1] = projection_.obtenirDimensionCloture()[1] / 2 - (coin1[1] + coin2[1]) / 2;
+
+
+		deplacerXY(deplacementXY);
 	}
 
 
@@ -171,8 +227,12 @@ namespace vue {
 	////////////////////////////////////////////////////////////////////////
 	void VueOrtho::deplacerXY(double deplacementX, double deplacementY)
 	{
-		camera_.deplacerXY(deplacementX * projection_.obtenirDimensionCloture()[0], 
-			deplacementY * projection_.obtenirDimensionCloture()[1]);
+		// Calcul le déplacement en pixel à partir du pourcentage
+		glm::ivec2 deplacementPixel;
+		deplacementPixel[0] = deplacementX * projection_.obtenirDimensionCloture()[0];
+		deplacementPixel[1] = deplacementY * projection_.obtenirDimensionCloture()[1];
+
+		deplacerXY(deplacementPixel);
 	}
 
 
@@ -191,7 +251,22 @@ namespace vue {
 	////////////////////////////////////////////////////////////////////////
 	void VueOrtho::deplacerXY(const glm::ivec2& deplacement)
 	{
-		camera_.deplacerXY(deplacement[0], deplacement[1]);
+		// Calcul du nouveau centre en coordonées de clôture
+		glm::ivec2 nouveauCentre;
+		nouveauCentre[0] = (projection_.obtenirDimensionCloture()[0] / 2) + deplacement[0];
+		nouveauCentre[1] = (projection_.obtenirDimensionCloture()[1] / 2) + deplacement[1];
+
+		// Calcul du centre actuel et nouveau en coordonées virtuelles
+		glm::dvec3 vCentreActuel, vNouveauCentre;
+		convertirClotureAVirtuelle(projection_.obtenirDimensionCloture()[0] / 2, projection_.obtenirDimensionCloture()[1] / 2, vCentreActuel);
+		convertirClotureAVirtuelle(nouveauCentre[0], nouveauCentre[1], vNouveauCentre);
+
+		// Deplacement en coordonées virtuelles
+		glm::dvec2 vDeplacement;
+		vDeplacement[0] = vNouveauCentre[0] - vCentreActuel[0];
+		vDeplacement[1] = vNouveauCentre[1] - vCentreActuel[1];
+
+		camera_.deplacerXY(vDeplacement[0], vDeplacement[1], true);
 	}
 
 

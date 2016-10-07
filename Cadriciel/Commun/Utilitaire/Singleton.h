@@ -50,7 +50,6 @@ private:
 
 };
 
-
 /// Cette macro doit être incluse dans les classes dérivées de Singleton.  Elle
 /// déclare les constructeurs et destructeurs privés.
 #define SINGLETON_DECLARATION_CLASSE(Classe) \

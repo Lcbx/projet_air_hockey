@@ -250,4 +250,6 @@ namespace opengl{
 		materiau.afficherDeuxCotes_ ? glEnable(GL_CULL_FACE) : glDisable(GL_CULL_FACE);
 
 	}
+
+	
 }
