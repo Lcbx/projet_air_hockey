@@ -73,7 +73,7 @@ namespace aidecollision {
 				glm::dvec3 pointDeCollision = droite1p1 + normalizedDistance * vecteur1;
 
 				// On vérifie si le point est situé entre les deux points du segment 2.
-				// Autrement, le point ne serait que sur le segment 1.
+				// Autrement, le point ne serait que sur le segment 1. (Collision avec la droite, mais pas le segment)
 				if (glm::distance(droite2p1, droite2p2) == 
 					glm::distance(droite2p1, pointDeCollision) + glm::distance(droite2p2, pointDeCollision)) {
 					detailsCollision.type = Collision::COLLISION_SEGMENT;
