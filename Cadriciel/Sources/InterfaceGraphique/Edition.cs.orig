@@ -772,6 +772,17 @@ namespace InterfaceGraphique
         private void enregistrerSousToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+<<<<<<< HEAD
+            saveFileDialog1.Filter = "XML files (*.xml)|*.xml";
+            saveFileDialog1.FilterIndex = 1;
+            saveFileDialog1.InitialDirectory = "zones/";
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                System.Console.WriteLine("Ceci est une sauvegarde");
+                System.Console.WriteLine(saveFileDialog1.FileName);
+
+=======
             fenetreSauvegarde_.Show();
         }
 
@@ -782,14 +793,32 @@ namespace InterfaceGraphique
             else
                 fenetreSauvegarde_.saveLastFile();
         }
-                
+>>>>>>> 57c5b21bf2a4cc72a93f94eb3e3614e9116d3c4f
+
         private void nouveauToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
 
         }
         private void ouvrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
+
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.Filter = "XML files (*.xml)|*.xml";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.InitialDirectory = "zones/";
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                System.Console.WriteLine("Ceci est un chargement");
+
+                FonctionsNatives.chargerZoneJeu((openFileDialog1.FileName).ToCharArray());
+
+            }
+=======
             fenetreChargement_.Show();
+>>>>>>> 57c5b21bf2a4cc72a93f94eb3e3614e9116d3c4f
         }
 
     }

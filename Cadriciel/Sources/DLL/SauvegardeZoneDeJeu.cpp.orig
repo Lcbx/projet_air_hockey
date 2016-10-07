@@ -21,15 +21,17 @@ void SauvegardeZoneDeJeu::creerArbre(tinyxml2::XMLDocument& document)
 	// Noeud arbreDeRendu
 	tinyxml2::XMLElement* elementArbreDeRendu{ document.NewElement("arbreDeRendu") };
 
+<<<<<<< HEAD
 	// Ajoute le noeud table, contenant les informations de la zone de jeu
 	elementArbreDeRendu->LinkEndChild(sauvegarderTable(document));
 
-
+=======
 	// Constantes de la zone de jeux
 	CoefficientConfiguration coefs = FacadeModele::obtenirInstance()->getCoefficient();
 	elementArbreDeRendu->SetAttribute("REBOND", coefs.rebond);
 	elementArbreDeRendu->SetAttribute("ACCELERATION", coefs.acceleration);
 	elementArbreDeRendu->SetAttribute("FRICTION", coefs.friction);
+>>>>>>> 57c5b21bf2a4cc72a93f94eb3e3614e9116d3c4f
 
 	// Creation de l'arbre DOM a partir de l'arbre de rendu
 	VisiteurSauvegarde* VS = new VisiteurSauvegarde(elementArbreDeRendu, &document);
@@ -59,14 +61,14 @@ tinyxml2::XMLElement* SauvegardeZoneDeJeu::sauvegarderTable(tinyxml2::XMLDocumen
 
 	// Enregistre les coordonées des points de contrôle (Oui, très répétitif)
 	glm::vec3 P0, P1, P2, P3, P4, P5, P6, P7;
-	P0 = table->chercher(0)->obtenirPositionRelative();
-	P1 = table->chercher(1)->obtenirPositionRelative();
-	P2 = table->chercher(2)->obtenirPositionRelative();
-	P3 = table->chercher(3)->obtenirPositionRelative();
-	P4 = table->chercher(4)->obtenirPositionRelative();
-	P5 = table->chercher(5)->obtenirPositionRelative();
-	P6 = table->chercher(6)->obtenirPositionRelative();
-	P7 = table->chercher(7)->obtenirPositionRelative();
+	table->getPointControle(0, P0);
+	table->getPointControle(1, P1);
+	table->getPointControle(2, P2);
+	table->getPointControle(3, P3);
+	table->getPointControle(4, P4);
+	table->getPointControle(5, P5);
+	table->getPointControle(6, P6);
+	table->getPointControle(7, P7);
 	elementTable->SetAttribute("P0X", P0.x);
 	elementTable->SetAttribute("P0Y", P0.y);
 	elementTable->SetAttribute("P0Z", P0.z);
@@ -115,12 +117,24 @@ void SauvegardeZoneDeJeu::lireArbre(const tinyxml2::XMLDocument& document)
 
 	// Cherche l'élément arbreDeRendu
 	const tinyxml2::XMLElement* elementArbreDeRendu{ document.FirstChildElement("arbreDeRendu") };
+<<<<<<< HEAD
+	if (elementArbreDeRendu != nullptr && elementArbreDeRendu->FirstChild() != nullptr) {	
 
-	// Enregistre la configuration
+		// Récupere les informations de la configuration de la table
+		const tinyxml2::XMLElement* elementTable{ elementArbreDeRendu->FirstChildElement("noeudTable") };
+		if (elementTable != nullptr)
+			SauvegardeZoneDeJeu::restituerTable(*elementTable);
+
+		// Parcours le reste des noeuds
+		SauvegardeZoneDeJeu::lireNoeudXML(*(elementArbreDeRendu->FirstChild()->ToElement()));
+
+
+=======
 	if (elementArbreDeRendu != nullptr) {
 		CoefficientConfiguration coefs = COEFFICIENTS_DEFAULT;
+
 		double variableDeTransport;
-		if (elementArbreDeRendu->QueryDoubleAttribute("FRICTION", &variableDeTransport) == tinyxml2::XMLError::XML_SUCCESS)
+		if(elementArbreDeRendu->QueryDoubleAttribute("FRICTION", &variableDeTransport) == tinyxml2::XMLError::XML_SUCCESS)
 			coefs.friction = variableDeTransport;
 		if (elementArbreDeRendu->QueryDoubleAttribute("REBOND", &variableDeTransport) == tinyxml2::XMLError::XML_SUCCESS)
 			coefs.rebond = variableDeTransport;
@@ -128,24 +142,12 @@ void SauvegardeZoneDeJeu::lireArbre(const tinyxml2::XMLDocument& document)
 			coefs.acceleration = variableDeTransport;
 
 		FacadeModele::obtenirInstance()->setCoefficient(coefs);
-	}
-
-
-	// Récupere les informations de la table
-	if (elementArbreDeRendu != nullptr && elementArbreDeRendu->FirstChild() != nullptr) {
-		const tinyxml2::XMLElement* elementTable{ elementArbreDeRendu->FirstChildElement("noeudTable") };
-		if (elementTable != nullptr)
-			SauvegardeZoneDeJeu::restituerTable(*elementTable);
-	}
-
-	
-		// Parcours le reste des noeuds
-		SauvegardeZoneDeJeu::lireNoeudXML(*(elementArbreDeRendu->FirstChild()->ToElement()));
 		
 		if(elementArbreDeRendu->FirstChild() != nullptr) {
 			SauvegardeZoneDeJeu::lireNoeudXML(*(elementArbreDeRendu->FirstChild()->ToElement()));
 		}
-	
+>>>>>>> 57c5b21bf2a4cc72a93f94eb3e3614e9116d3c4f
+	}
 }
 
 
@@ -159,14 +161,14 @@ void SauvegardeZoneDeJeu::lireArbre(const tinyxml2::XMLDocument& document)
 void SauvegardeZoneDeJeu::restituerTable(const tinyxml2::XMLElement& element)
 {
 	NoeudTable* t = FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable();
-	t->chercher(0)->assignerPositionRelative({ element.FloatAttribute("P0X"), element.FloatAttribute("P0Y"), element.FloatAttribute("P0Z") });
-	t->chercher(1)->assignerPositionRelative({ element.FloatAttribute("P1X"), element.FloatAttribute("P1Y"), element.FloatAttribute("P1Z") });
-	t->chercher(2)->assignerPositionRelative({ element.FloatAttribute("P2X"), element.FloatAttribute("P2Y"), element.FloatAttribute("P2Z") });
-	t->chercher(3)->assignerPositionRelative({ element.FloatAttribute("P3X"), element.FloatAttribute("P3Y"), element.FloatAttribute("P3Z") });
-	t->chercher(4)->assignerPositionRelative({ element.FloatAttribute("P4X"), element.FloatAttribute("P4Y"), element.FloatAttribute("P4Z") });
-	t->chercher(5)->assignerPositionRelative({ element.FloatAttribute("P5X"), element.FloatAttribute("P5Y"), element.FloatAttribute("P5Z") });
-	t->chercher(6)->assignerPositionRelative({ element.FloatAttribute("P6X"), element.FloatAttribute("P6Y"), element.FloatAttribute("P6Z") });
-	t->chercher(7)->assignerPositionRelative({ element.FloatAttribute("P7X"), element.FloatAttribute("P7Y"), element.FloatAttribute("P7Z") });
+	t->setPointControle(0, { element.FloatAttribute("P0X"), element.FloatAttribute("P0Y"), element.FloatAttribute("P0Z") });
+	t->setPointControle(1, { element.FloatAttribute("P1X"), element.FloatAttribute("P1Y"), element.FloatAttribute("P1Z") });
+	t->setPointControle(2, { element.FloatAttribute("P2X"), element.FloatAttribute("P2Y"), element.FloatAttribute("P2Z") });
+	t->setPointControle(3, { element.FloatAttribute("P3X"), element.FloatAttribute("P3Y"), element.FloatAttribute("P3Z") });
+	t->setPointControle(4, { element.FloatAttribute("P4X"), element.FloatAttribute("P4Y"), element.FloatAttribute("P4Z") });
+	t->setPointControle(5, { element.FloatAttribute("P5X"), element.FloatAttribute("P5Y"), element.FloatAttribute("P5Z") });
+	t->setPointControle(6, { element.FloatAttribute("P6X"), element.FloatAttribute("P6Y"), element.FloatAttribute("P6Z") });
+	t->setPointControle(7, { element.FloatAttribute("P7X"), element.FloatAttribute("P7Y"), element.FloatAttribute("P7Z") });
 }
 
 
