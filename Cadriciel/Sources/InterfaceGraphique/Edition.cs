@@ -24,6 +24,7 @@ namespace InterfaceGraphique
 
         private static Sauvegarde fenetreSauvegarde_;
         private static Chargement fenetreChargement_;
+        private static Nouveau boiteNouv;
 
 
         public Edition()
@@ -54,6 +55,7 @@ namespace InterfaceGraphique
 
             fenetreSauvegarde_ = new Sauvegarde(this);
             fenetreChargement_ = new Chargement(this);
+            boiteNouv = new Nouveau(fenetreSauvegarde_);
         }
 
         public void InitialiserAnimation()
@@ -786,7 +788,6 @@ namespace InterfaceGraphique
 
         private void nouveauToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            Nouveau boiteNouv = new Nouveau();
             boiteNouv.ShowDialog();
             //FonctionsNatives.initialiserScene();
         }
