@@ -41,7 +41,7 @@ void VisiteurMiseEchelle::mettreEchelle(float facteur)
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
 	VisiteurDansLaTable v(effectuer);
 	if (!effectuer)
-		for (auto it = facteursOriginaux_.begin(); it != facteursOriginaux_.end(); it++)
+		for (auto it = facteursOriginaux_.begin(); it != facteursOriginaux_.end(); it = facteursOriginaux_.erase(it))
 			(*it).first->setScale((*it).second);
 }
 
@@ -138,9 +138,9 @@ void VisiteurMiseEchelle::visiter(NoeudBonus* noeud)
 	if (fact < 0.5)
 	{
 		fact = 0.5;
-	} else if (fact > 6)
+	} else if (fact > 2)
 	{
-		fact = 6;
+		fact = 2;
 	}
 
 	if (noeud->estSelectionne()) {

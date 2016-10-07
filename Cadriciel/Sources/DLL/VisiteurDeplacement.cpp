@@ -45,6 +45,19 @@ void VisiteurDeplacement::setDep(glm::vec3 dep) {
 
 ////////////////////////////////////////////////////////////////////////
 ///
+/// @fn VisiteurDeplacement::reussi()
+///
+/// retourne si l'operation s'est bien passée
+/// 
+/// @return bool
+///
+/////////////////////////////////////////////////////////////////////////
+bool VisiteurDeplacement::reussi() {
+	return effectuer_;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
 /// @fn VisiteurDeplacement::visiter(NoeudAbstrait* noeud)
 ///
 /// verifie qu'on peut faire le déplacement, puis l'effectue

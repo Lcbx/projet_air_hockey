@@ -153,7 +153,7 @@
             // 
             this.nouveauToolStripMenuItem.Name = "nouveauToolStripMenuItem";
             this.nouveauToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+            this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.nouveauToolStripMenuItem.Text = "Nouveau";
             this.nouveauToolStripMenuItem.Click += new System.EventHandler(this.nouveauToolStripMenuItem_Click_1);
             // 
@@ -161,7 +161,7 @@
             // 
             this.ouvrirToolStripMenuItem.Name = "ouvrirToolStripMenuItem";
             this.ouvrirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.ouvrirToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+            this.ouvrirToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.ouvrirToolStripMenuItem.Text = "Ouvrir";
             this.ouvrirToolStripMenuItem.Click += new System.EventHandler(this.ouvrirToolStripMenuItem_Click);
             // 
@@ -170,34 +170,34 @@
             this.enregistrerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("enregistrerToolStripMenuItem.Image")));
             this.enregistrerToolStripMenuItem.Name = "enregistrerToolStripMenuItem";
             this.enregistrerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.enregistrerToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+            this.enregistrerToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.enregistrerToolStripMenuItem.Text = "Enregistrer";
             // 
             // enregistrerSousToolStripMenuItem
             // 
             this.enregistrerSousToolStripMenuItem.Name = "enregistrerSousToolStripMenuItem";
-            this.enregistrerSousToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+            this.enregistrerSousToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.enregistrerSousToolStripMenuItem.Text = "Enregistrer sous";
             this.enregistrerSousToolStripMenuItem.Click += new System.EventHandler(this.enregistrerSousToolStripMenuItem_Click);
             // 
             // propriétésToolStripMenuItem
             // 
             this.propriétésToolStripMenuItem.Name = "propriétésToolStripMenuItem";
-            this.propriétésToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+            this.propriétésToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.propriétésToolStripMenuItem.Text = "Propriétés";
             this.propriétésToolStripMenuItem.Click += new System.EventHandler(this.propriétésToolStripMenuItem_Click);
             // 
             // modeTestToolStripMenuItem
             // 
             this.modeTestToolStripMenuItem.Name = "modeTestToolStripMenuItem";
-            this.modeTestToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+            this.modeTestToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.modeTestToolStripMenuItem.Text = "Mode test";
             // 
             // menuPrincipalToolStripMenuItem
             // 
             this.menuPrincipalToolStripMenuItem.Name = "menuPrincipalToolStripMenuItem";
             this.menuPrincipalToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.menuPrincipalToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+            this.menuPrincipalToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.menuPrincipalToolStripMenuItem.Text = "Menu principal";
             this.menuPrincipalToolStripMenuItem.Click += new System.EventHandler(this.menuPrincipalToolStripMenuItem_Click);
             // 
@@ -280,8 +280,9 @@
             this.ToolStripMenuItemAccelerateur,
             this.portailToolStripMenuItem,
             this.muretToolStripMenuItem});
+            this.créationDobjetsToolStripMenuItem.Image = global::InterfaceGraphique.Properties.Resources.Éditeur;
             this.créationDobjetsToolStripMenuItem.Name = "créationDobjetsToolStripMenuItem";
-            this.créationDobjetsToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.créationDobjetsToolStripMenuItem.Size = new System.Drawing.Size(250, 38);
             this.créationDobjetsToolStripMenuItem.Text = "Création d\'objets";
             // 
             // ToolStripMenuItemAccelerateur
@@ -296,15 +297,17 @@
             // 
             // portailToolStripMenuItem
             // 
+            this.portailToolStripMenuItem.Image = global::InterfaceGraphique.Properties.Resources.Portail;
             this.portailToolStripMenuItem.Name = "portailToolStripMenuItem";
-            this.portailToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.portailToolStripMenuItem.Size = new System.Drawing.Size(190, 38);
             this.portailToolStripMenuItem.Text = "Portail";
             this.portailToolStripMenuItem.Click += new System.EventHandler(this.portailToolStripMenuItem_Click);
             // 
             // muretToolStripMenuItem
             // 
+            this.muretToolStripMenuItem.Image = global::InterfaceGraphique.Properties.Resources.Muret;
             this.muretToolStripMenuItem.Name = "muretToolStripMenuItem";
-            this.muretToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.muretToolStripMenuItem.Size = new System.Drawing.Size(190, 38);
             this.muretToolStripMenuItem.Text = "Muret";
             this.muretToolStripMenuItem.Click += new System.EventHandler(this.muretToolStripMenuItem_Click);
             // 
@@ -318,8 +321,9 @@
             // 
             // gestionDesPointsDeContrôleToolStripMenuItem
             // 
+            this.gestionDesPointsDeContrôleToolStripMenuItem.Image = global::InterfaceGraphique.Properties.Resources.GestionDePoints;
             this.gestionDesPointsDeContrôleToolStripMenuItem.Name = "gestionDesPointsDeContrôleToolStripMenuItem";
-            this.gestionDesPointsDeContrôleToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.gestionDesPointsDeContrôleToolStripMenuItem.Size = new System.Drawing.Size(250, 38);
             this.gestionDesPointsDeContrôleToolStripMenuItem.Text = "Gestion des points de contrôle";
             this.gestionDesPointsDeContrôleToolStripMenuItem.Click += new System.EventHandler(this.gestionDesPointsDeContrôleToolStripMenuItem_Click);
             // 
@@ -714,7 +718,6 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(400, 500);
             this.Name = "Edition";
             this.Text = "Edition";
