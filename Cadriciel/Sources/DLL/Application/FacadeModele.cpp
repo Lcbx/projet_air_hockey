@@ -42,12 +42,23 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
+#include "EtatOpenGL.h"
+#include <iostream>
+#include "Noeuds/NoeudTypes.h"
+
+#include "../SauvegardeZoneDeJeu.h"
+
+
+
 /// Pointeur vers l'instance unique de la classe.
 FacadeModele* FacadeModele::instance_{ nullptr };
+
 
 /// Chaîne indiquant le nom du fichier de configuration du projet.
 const std::string FacadeModele::FICHIER_CONFIGURATION{ "configuration.xml" };
 
+/// Chaîne indiquant le nom du fichier de la zone de jeu par défaut.
+const std::string FacadeModele::FICHIER_ZONEDEFAUT{ "ZoneDefaut.xml" };
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -161,8 +172,8 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 			glm::dvec3(0, 0, 200), glm::dvec3(0, 0, 0),
 			glm::dvec3(0, 1, 0),   glm::dvec3(0, 1, 0)},
 		vue::ProjectionOrtho{ 
-				500, 500,
-				1, 1000, 1, 10000, 1.25,
+				606, 437,
+				1, 1000, 5, 0.5, 0.25,
 				200, 200}
 	};
 }
@@ -218,9 +229,62 @@ void FacadeModele::enregistrerConfiguration() const
 	
 	// On enregistre les différentes configurations.
 	ConfigScene::obtenirInstance()->creerDOM(document);
-
+	
 	// Écrire dans le fichier
 	document.SaveFile(FacadeModele::FICHIER_CONFIGURATION.c_str());
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::chargerZoneJeu(std::string fichierZoneJeu) const
+///
+/// Cette fonction charge la zone de jeu à partir d'un fichier XML.
+///
+/// @param[in] fichierZoneJeu : Nom du fichier à charger.
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::chargerZoneJeu(char* fichierZoneJeu) const
+{
+	// Créé le document XML à partir du fichier spécifié
+	tinyxml2::XMLDocument document;
+	document.LoadFile(fichierZoneJeu);
+
+	// Créé l'arbre de rendu à partir du document XML
+	SauvegardeZoneDeJeu::lireArbre(document);
+
+}
+
+
+///////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::enregistrerZoneJeu(std::string fichierZoneJeu) const
+///
+/// Cette fonction genere un fichier XML contenant la zone de jeu actuelle.
+///
+/// @param[in] fichierZoneJeu : Nom du fichier àdans lequel sauvegarder.
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+
+void FacadeModele::enregistrerZoneJeu(char* fichierZoneJeu) const
+{
+	// Génère une erreur si le nom du fichier correspond au fichier de zone par défaut
+	if (fichierZoneJeu == FICHIER_ZONEDEFAUT)
+		std::cerr << "Erreur : Tentative de modification de la zone de jeu par défaut" << std::endl;
+
+	// Créé un document XML avec la déclaration XML standard
+	tinyxml2::XMLDocument document;
+	document.NewDeclaration(R"(?xml version="1.0" standalone="yes"?)");
+
+	// Créé le document XML à partir de l'arbre de rendu
+	SauvegardeZoneDeJeu::creerArbre(document);
+
+	// Enregistrer le document XML dans le fichier
+	document.SaveFile(fichierZoneJeu);
 }
 
 
@@ -332,6 +396,337 @@ void FacadeModele::animer(float temps)
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-/// @}
-///////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn FacadeModele::ajouterBonus(int x, int y)
+///
+/// Cette fonction permet d'ajouter le bonus accélerateur a la scene
+///
+/// @param[in] x, y : position de clic de la souris .
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+
+void FacadeModele::ajouterBonus(int x, int y)
+{
+	glm::dvec3 position;
+	vue_->convertirClotureAVirtuelle(x, y, position);
+	arbre_->ajouterBonus(position);
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn FacadeModele::void FacadeModele::ajouterPortail(int x1, int y1)
+///
+/// Cette fonction permet d'ajouter le portail a la scene
+///
+/// @param[in] x1, y1, x2, y2 : position de clic de la souris .
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::ajouterPortail(int x1, int y1)
+{
+	glm::dvec3 position1;
+	vue_->convertirClotureAVirtuelle(x1, y1, position1);
+	arbre_->ajouterPortail(position1);
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn FacadeModele::void FacadeModele::supprimerPortail()
+///
+/// Cette fonction permet de supprimer un portail suite a clic d'Echap
+///
+/// @param[in]bool escTouche: bool
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::supprimerPortail(bool escTouche)
+{
+	arbre_->supprimerPortail(escTouche);
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn FacadeModele::void FacadeModele::ajouterPortailDeux(int x2, int y2)
+///
+/// Cette fonction permet d'ajouter le deuxieme portail a la scene
+///
+/// @param[in] x2, y2 : position de clic de la souris .
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::ajouterPortailDeux(int x2, int y2)
+{
+	glm::dvec3 position2;
+	vue_->convertirClotureAVirtuelle(x2, y2, position2);
+	arbre_->ajouterPortailDeux(position2);
+}
+
+
+void FacadeModele::ajouterMuret(int x1, int y1, int x2, int y2)
+{
+	glm::dvec3 position1;
+	vue_->convertirClotureAVirtuelle(x1, y1, position1);
+	glm::dvec3 position2;
+	vue_->convertirClotureAVirtuelle(x2, y2, position2);
+	arbre_->ajouterMuret(position1, position2);
+}
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn double FacadeModele::getPosDataBidingX()
+///
+/// cette fonction retourne la position X d'un objet
+///
+/// @param[in] rien
+/// @return position X.
+///
+////////////////////////////////////////////////////////////////////////
+double FacadeModele::getPosDataBidingX()
+{
+	return arbre_->getPosiX();
+	
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn double FacadeModele::getPosDataBidingY()
+///
+/// cette fonction retourne la position Y d'un objet
+///
+/// @param[in] rien
+/// @return position Y.
+///
+////////////////////////////////////////////////////////////////////////
+double FacadeModele::getPosDataBidingY()
+{
+	return arbre_->getPosiY();
+
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::effacerObjet()
+///
+/// cette fonction enleve un objet de la scene
+///
+/// @param[in] rien
+/// @return rien.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::effacerObjet()
+{
+	arbre_->effacerSelection();
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::deplacerObjet(double x, double y)
+///
+/// cette deplace un objet selon les coordonnées en param
+///
+/// @param[in] double x: position en x
+///	    		double y : position en y			
+/// @return rien.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::deplacerObjet(double x, double y, double angle, double scale)
+{
+	glm::dvec3 NouvPos{x, y, 0.f}; //la nouvelle position a assigner
+	double nvAngle= utilitaire::DEG_TO_RAD(angle); //conversion degre en rad 
+	arbre_->deplacerObjet(NouvPos, nvAngle, scale);
+
+}
+
+
+
+
+// fonction bidon test
+void FacadeModele::test() {
+
+	std::printf("alooooooooooo test \n");
+}
+// deplacer un point de controle
+void FacadeModele::deplacerPointHaut(int index) {
+#define delta 0.1
+	if (index == 0)
+	{
+		std::cout << "Noeud deplace'" << std::endl;
+		//// effacer la table puis l'afficher avec les nouvelle coordonnees
+		//const NoeudAbstrait* noeudTable = arbre_->chercher("table");
+		//arbre_->effacer(noeudTable);
+		NoeudTable* noeudTable = arbre_->getTable();
+		glm::vec3 point;
+		noeudTable->getPointControle(0, point);
+		point.y += delta;
+		noeudTable->setPointControle(0, point);
+		
+	}
+#undef delta
+}
+
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn int FacadeModele::nombreObjetSelectionne()
+///
+/// cette fonction permet de retourner le nombre des objets selectionnes sur la scene
+///
+/// @param[in] rien
+///	    		
+/// @return nombre des objets selectionnées .
+///
+////////////////////////////////////////////////////////////////////////
+int FacadeModele::nombreObjetSelectionne()
+{
+	return arbre_->obtenirNombreObjetSelctionnes();
+
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn double FacadeModele::getAngle()
+///
+/// Cette fonction permet de retourner l'angle d'un objet
+/// 
+/// @param[in] rien
+///
+/// @return l'angle d'un objet
+///
+////////////////////////////////////////////////////////////////////////
+double FacadeModele::getAngle()
+{
+	return arbre_->getAngleDataBinding();
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn double FacadeModele::getScale()
+///
+/// Cette fonction permet de retourner le scale d'un objet
+/// 
+/// @param[in] rien
+///
+/// @return le scale d'un objet
+///
+////////////////////////////////////////////////////////////////////////
+double FacadeModele::getScale()
+{
+	return arbre_->getScaleDataBinding();
+
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::ajouterMuretFantome(int corXin, int corYin, int corX, int corY)
+///
+/// Cette fonction effectue l'ajout des Murs.
+///
+/// @param[in] int corX : coordonnée dans l'axe des x
+///            int corY : coordonnée dans l'axe des y
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::ajouterMuretFantome(int corXin, int corYin, int corX, int corY)
+{
+	// bloc d'instruction
+	if (arbre_->chercher(arbre_->obtenirNombreEnfants() - 1)->obtenirType() == "muret")
+		arbre_->effacer(arbre_->chercher(arbre_->obtenirNombreEnfants() - 1));
+	//ajouterMur(corXin, corYin, corX, corY);
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn FacadeModele::void FacadeModele::supprimerMurat()
+///
+/// Cette fonction permet de supprimer un portail suite a clic d'Echap
+///
+/// @param[in]bool escTouche: bool
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::supprimerMuret(bool escTouche)
+{
+	arbre_->supprimerMuret(escTouche);
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool objetEstDansLaTable()
+///
+/// Cette fonction de retourner faux si un objet a l'exterieur de la table
+///
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::objetEstDansLaTable()
+{
+	return arbre_->objetEstDansLaTable();
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn CoefficientConfiguration FacadeModele::getCoefficient()
+///
+///	Permet d'obtenir les coefficients de friction, de rebond et d'accélération
+///
+/// @return	friction	: Coefficient de friction,
+///			rebond		: Rebond des murs,
+///			acceleration: Accélération des bonus vitesse
+///
+////////////////////////////////////////////////////////////////////////
+CoefficientConfiguration FacadeModele::getCoefficient() const {
+	return this->coeff_;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setCoefficient()
+///
+///	Permet de modifier les coefficients de friction, de rebond et d'accélération
+///
+/// @param[in] coeff: Objet de transport de coefficients
+///			friction	: Coefficient de friction,
+///			rebond		: Rebond des murs,
+///			acceleration: Accélération des bonus vitesse
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setCoefficient(CoefficientConfiguration coeff) {
+	coeff.friction = std::min(std::max(coeff.friction, COEFFICIENTS_MINIMAUX.friction), COEFFICIENTS_MAXIMAUX.friction);
+	coeff.rebond = std::min(std::max(coeff.rebond, COEFFICIENTS_MINIMAUX.rebond), COEFFICIENTS_MAXIMAUX.rebond);
+	coeff.acceleration = std::min(std::max(coeff.acceleration, COEFFICIENTS_MINIMAUX.acceleration), COEFFICIENTS_MAXIMAUX.acceleration);
+
+	this->coeff_ = coeff;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void  initialiserScene()
+///
+/// Cette fonction permet d'initialiser la scene 
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::initialiserScene()
+{
+	arbre_->initialiser();
+}

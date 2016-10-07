@@ -10,6 +10,11 @@
 #ifndef __UTILITAIRE_PROJECTIONORTHO_H__
 #define __UTILITAIRE_PROJECTIONORTHO_H__
 
+#define LARGEUR_FENETREV_DEFAUT 200
+#define HAUTEUR_FENETREV_DEFAUT 200
+
+#define LARGEUR_CLOTURE_DEFAUT 200
+#define HAUTEUR_CLOTURE_DEFAUT 200
 
 #include "Projection.h"
 
@@ -44,13 +49,22 @@ namespace vue {
 		virtual void zoomerIn();
 		/// Zoom out, c'est-à-dire un rapetissement.
 		virtual void zoomerOut();
+		/// Zoom in, c'est-à-dire un agrandissement.
+		virtual void zoomerIn(double facteur);
+		/// Zoom out, c'est-à-dire un rapetissement.
+		virtual void zoomerOut(double facteur);
+		/// Zoom à un facteur spécifié
+		virtual void zoomerTo(double zoomFacteur);
 		/// Modification de la clôture.
 		virtual void redimensionnerFenetre(int largeur, int hauteur);
 		/// Obtention de la matrice de projection.
 		virtual glm::mat4 obtenirMatrice() const;
 
-		/// Obtenir les coordonnées de la fenêtre virtuelle.
+		/// Obtenir les données de la fenêtre virtuelle.
 		inline glm::dvec2 obtenirDimensionFenetreVirtuelle() const;
+
+		/// Permety d'obtenir le zoom actuel
+		double obtenirZoomActuel();
 
 
 	private:
@@ -61,7 +75,17 @@ namespace vue {
 		double largeurFenetre_;
 		/// Hauteur de la fenêtre virtuelle.
 		double hauteurFenetre_;
+    
+		/// Largeur initiale de la fenêtre virtuelle.
+		double largeurFenetreInit_;
+		/// Hauteur initiale de la fenêtre virtuelle.
+		double hauteurFenetreInit_;
 
+		/// Facteur de zoom actuel
+		double zoomActuel_;
+
+		double aspect_;
+		
 	};
 
 

@@ -43,6 +43,15 @@ namespace aidecollision {
       double    enfoncement;
    };
 
+   /// Calcule la collision entre deux segments de droite
+   DetailsCollision calculerCollisionSegments(
+	   const glm::dvec3& droite1p1,
+	   const glm::dvec3& droite1p2,
+	   const glm::dvec3& droite2p1,
+	   const glm::dvec3& droite2p2,
+	   bool collisionAvecPoints = true
+   );
+
    /// Calcule la collision d'un objet circulaire avec un segment de droite.
    DetailsCollision calculerCollisionSegment(
       const glm::dvec2& point1,

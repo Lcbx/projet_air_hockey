@@ -7,6 +7,8 @@
 /// @addtogroup inf2990 INF2990
 /// @{
 ///////////////////////////////////////////////////////////////////////////////
+#pragma once
+
 #ifndef __ARBRE_NOEUDS_NOEUDABSTRAIT_H__
 #define __ARBRE_NOEUDS_NOEUDABSTRAIT_H__
 
@@ -17,6 +19,8 @@
 #include "glm\glm.hpp"
 #include "glm\gtc\matrix_transform.hpp"
 
+#include "Utilitaire.h"
+
 /// Déclarations avancées pour contenir un pointeur vers un modèle3D et son storage
 namespace modele{
 	class Modele3D;
@@ -24,6 +28,21 @@ namespace modele{
 namespace opengl{
 	class VBO;
 }
+
+
+/// Déclarations avancées pour le patron visiteur
+class Visiteur;
+class VisiteurPointMilieu;
+class VisiteurDeplacement;
+class VisiteurDuplication;
+class VisiteurSelection;
+class VisiteurRotation;
+class VisiteurMiseEchelle;
+class VisiteurAjout;
+
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////
 /// @class NoeudAbstrait
@@ -86,8 +105,6 @@ public:
 	/// Assigne le modèle3D et la liste d'affichage du noeud courant
 	inline void assignerObjetRendu(modele::Modele3D const* modele, opengl::VBO const* liste);
 
-	// Interface d'un noeud
-
 	/// Calcule la profondeur de l'arbre sous le noeud courant.
 	virtual unsigned int calculerProfondeur() const;
 
@@ -132,6 +149,34 @@ public:
 	/// Anime le noeud.
 	virtual void animer(float dt);
 
+	/// Permet d'obtenir le rayon du modèle du noeud
+	inline virtual double obtenirRayonModele() const;
+	/// Permet d'obtenir le rayon du modèle du noeud avec la mise à l'échelle
+	inline virtual double obtenirRayon() const;
+
+	/// Accepter le visiteur
+	virtual void accepter(Visiteur* v);
+
+	/// Permet d'obtenir le modèle du noeud
+	modele::Modele3D const* getModele() { return this->modele_; };
+	
+	/// Permet de d'assigner un noeud frère (utile pour les portails)
+	virtual void setFrere(NoeudAbstrait* frere);
+
+	/// Permet d'obtenir un noeud frère (utile pour les portails)
+	virtual NoeudAbstrait* getFrere();
+
+
+	/// Permet de changer l'angle directeur du noeud
+	virtual void setAngle(float angle);
+	/// Permet de changer l'échelle de redimensionnement
+	virtual void setScale(const glm::dvec3& scale);
+	
+	/// Permet d'obtenir l'angle directeur du noeud
+	inline float getAngle() const;
+	/// Permet d'obtenir la mise à l'échelle du noeud
+	inline const glm::dvec3& getScale() const; 
+
 protected:
 	/// Type du noeud.
 	std::string      type_;
@@ -161,6 +206,20 @@ protected:
 	modele::Modele3D const* modele_;
 	/// Storage pour le dessin du modèle
 	opengl::VBO const* vbo_;
+
+
+	// scale
+	glm::dvec3 scale_ = { 1.0, 1.0, 1.0 };
+	
+	// angle de rotation
+	/// Angle selon l'axe des X.
+	float angleX_{ 0.f };
+	/// Angle selon l'axe des Y.
+	float angleY_{ 0.f };
+	/// Angle de rotation.
+	float angleRotation_{ 0.f };
+
+	NoeudAbstrait* frere_;
 };
 
 
@@ -353,6 +412,27 @@ inline void NoeudAbstrait::assignerEstSelectionnable(bool selectionnable)
 }
 
 
+
+
+////////////////////////////////////////////////////////////////////////
+/// @fn double NoeudAbstrait::obtenirRayonModele()
+/// Permet d'obtenir lle rayon du modele
+/// @return Le rayon du modèle
+////////////////////////////////////////////////////////////////////////
+inline double NoeudAbstrait::obtenirRayonModele() const {
+	return utilitaire::calculerCylindreEnglobant(*modele_).rayon;
+}
+
+////////////////////////////////////////////////////////////////////////
+/// @fn double NoeudAbstrait::obtenirRayon()
+/// Permet d'obtenir le rayon de la forme en fonction du rayon du modèle
+/// @return Le rayon de l'objet
+////////////////////////////////////////////////////////////////////////
+inline double NoeudAbstrait::obtenirRayon() const {
+	return obtenirRayonModele() * this->getScale().y;
+}
+
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn inline bool NoeudAbstrait::estSelectionnable() const
@@ -416,6 +496,54 @@ inline void NoeudAbstrait::assignerObjetRendu(modele::Modele3D const* modele, op
 	modele_ = modele;
 	vbo_ = liste;
 }
+
+
+////////////////////////////////////////////////////////////////////////
+/// @fn void NoeudAbstrait::setAngle(float angle)
+/// Permet de changer l'angle de rotation de l'objet. Il est ensuite normalisé entre -pi et pi
+/// @param[in] angle : Angle de rotation par rapport à l'axe des X en radian
+////////////////////////////////////////////////////////////////////////
+inline void NoeudAbstrait::setAngle(float angle) {
+	if (angle <= utilitaire::DEG_TO_RAD(-180))
+		angle += (float) utilitaire::DEG_TO_RAD(360);
+	else if (angle > utilitaire::DEG_TO_RAD(180))
+		angle -= (float) utilitaire::DEG_TO_RAD(360);
+
+	angleRotation_ = angle;
+}
+
+////////////////////////////////////////////////////////////////////////
+/// @fn void NoeudAbstrait::setScale(const glm::dvec3& scale) 
+/// Permet de changer le redimensionnement de l'objet
+/// @param[in] scale : Vecteur contenant l'ensemble des redimensionnements en X, Y et Z
+////////////////////////////////////////////////////////////////////////
+inline void NoeudAbstrait::setScale(const glm::dvec3& scale) {
+	scale_ = scale;
+}
+
+
+////////////////////////////////////////////////////////////////////////
+/// @fn float NoeudAbstrait::getAngle()
+/// Permet d'obtenir l'angle de rotation du noeud en radian
+/// @return L'angle de rotation par rapport à l'axe des X en radian
+////////////////////////////////////////////////////////////////////////
+inline float NoeudAbstrait::getAngle() const {
+	return angleRotation_;
+}
+
+
+////////////////////////////////////////////////////////////////////////
+/// @fn glm::dvec3&  NoeudAbstrait::getScale()
+/// Permet d'obtenir la mise à l'échelle de l'objet en prennant en compte
+/// que le vecteur retourné est l'agrandissement en fonction des composants
+/// i.e: vec.x est le redimensonnement en X
+/// @return L'angle de rotation par rapport à l'axe des X en radian
+////////////////////////////////////////////////////////////////////////
+inline const glm::dvec3& NoeudAbstrait::getScale() const{
+	return scale_;
+}
+
+
 #endif // __ARBRE_NOEUDS_NOEUDABSTRAIT_H__
 
 

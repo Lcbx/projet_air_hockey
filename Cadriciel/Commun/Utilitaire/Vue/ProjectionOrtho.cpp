@@ -11,6 +11,8 @@
 #include "GL/glew.h"
 #include "ProjectionOrtho.h"
 #include <glm/gtc/matrix_transform.inl>
+#include <iostream>
+#include "../../Sources/DLL/Application/FacadeModele.h"
 
 
 namespace vue {
@@ -29,7 +31,7 @@ namespace vue {
 	/// @param[in] zArriere			: distance du plan arrière (en @a z).
 	/// @param[in] zoomInMax		: facteur de zoom in maximal.
 	/// @param[in] zoomOutMax		: facteur de zoom out maximal.
-	/// @param[in] incrementZoom	: distance du plan arrière (en @a z).
+	/// @param[in] incrementZoom	: increment du facteur de zoom.
 	/// @param[in] largeurFenetre	: dimension en @a X de la fenêtre
 	///								  virtuelle.
 	/// @param[in] hauteurFenetre	: dimension en @a Y de la fenêtre
@@ -50,7 +52,11 @@ namespace vue {
 		hauteurFenetre_{ hauteurFenetre }
 	{
 		ajusterRapportAspect();
+		zoomActuel_ = 1;
+		largeurFenetreInit_ = largeurFenetre;
+		hauteurFenetreInit_ = hauteurFenetre;
 	}
+	
 
 
 	////////////////////////////////////////////////////////////////////////
@@ -64,7 +70,7 @@ namespace vue {
 	////////////////////////////////////////////////////////////////////////
 	void ProjectionOrtho::zoomerIn()
 	{
-		// À IMPLANTER.
+		zoomerIn(incrementZoom_);
 	}
 
 
@@ -79,7 +85,67 @@ namespace vue {
 	//////////////////////////////////////////////////////////////////////// 
 	void ProjectionOrtho::zoomerOut()
 	{
-		// À IMPLANTER.
+		zoomerOut(incrementZoom_);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn void ProjectionOrtho::zoomerIn(double facteur)
+	///
+	/// Permet de faire un zoom in avec un incrément spécifié.
+	/// 
+	/// @param[in] facteur	: incrément du zoom
+	/// 
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
+	void ProjectionOrtho::zoomerIn(double facteur)
+	{
+		zoomerTo(zoomActuel_ + facteur);
+	}
+
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn void ProjectionOrtho::zoomerOut(double facteur)
+	///
+	/// Permet de faire un zoom out avec un décrément spécifié.
+	///
+	/// @param[in] facteur	: décrément du zoom
+	///
+	/// @return Aucune.
+	///
+	//////////////////////////////////////////////////////////////////////// 
+	void ProjectionOrtho::zoomerOut(double facteur)
+	{
+		zoomerTo(zoomActuel_ - facteur);
+	}
+
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn void ProjectionOrtho::zoomerTo(double zoomFacteur)
+	///
+	/// Permet de zoomer jusqu'a un facteur donné.
+	///
+	/// @param[in] zoomFacteur	: facteur auquel zoomer
+	///
+	/// @return Aucune.
+	///
+	//////////////////////////////////////////////////////////////////////// 
+	void ProjectionOrtho::zoomerTo(double zoomFacteur)
+	{
+		// Si le facteur de zoom est en dehors de l'intervalle possible, le mettre au point de l'intervalle le plus proche
+		if (zoomFacteur > zoomInMax_) zoomFacteur = zoomInMax_;
+		else if (zoomFacteur < zoomOutMax_) zoomFacteur = zoomOutMax_;
+
+		zoomActuel_ = zoomFacteur;
+
+		// Modifier la fenetre virtuelle pour produire l'effet de zoom
+		largeurFenetre_ = largeurFenetreInit_ * (1/zoomFacteur);
+		hauteurFenetre_ = hauteurFenetreInit_ * (1/zoomFacteur);
+
+
 	}
 
 
@@ -102,7 +168,24 @@ namespace vue {
 	////////////////////////////////////////////////////////////////////////
 	void ProjectionOrtho::redimensionnerFenetre(int largeur, int hauteur)
 	{
-		// À IMPLANTER.
+		//largeur = max(largeur, 100);
+		//hauteur = max(hauteur, 100);
+
+		{
+			hauteurFenetre_ += (largeurFenetre_ / largeurCloture_)*hauteur - hauteurFenetre_;//calculer l'ajout à ajouter à la hauteur ancienne de la  fenêtre
+		   largeurFenetre_ += (largeurFenetre_ / largeurCloture_)*largeur - largeurFenetre_;////calculer l'ajout à ajouter à la largeur ancienne de la  fenêtre
+
+		   hauteurFenetreInit_ = hauteurFenetre_;
+		   largeurFenetreInit_ = largeurFenetre_;
+
+			largeurCloture_ = largeur;// la cloture prend la nouvelle largeur 
+			hauteurCloture_ = hauteur;// la cloture prend la nouvelle hauteur
+
+
+		obtenirMatrice();//  redimensionner ma fenetre virtuelle avec les nouvelles valeurs (matrice de projection)
+		ajusterRapportAspect();
+		}
+	
 	}
 
 
@@ -138,6 +221,24 @@ namespace vue {
 	void ProjectionOrtho::ajusterRapportAspect()
 	{
 		// À IMPLANTER.
+		glMatrixMode(GL_PROJECTION); // La matrice courante est la matrice de projection
+		glLoadIdentity();
+		glViewport(0, 0, (GLsizei)(largeurCloture_), (GLsizei)(hauteurCloture_)); // ajuster ma cloture aux nouvelles dimensions
+		glMatrixMode(GL_MODELVIEW);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn double obtenirZoomActuel()
+	///
+	/// Cette fonction retourne le facteur de zoom actuel
+	///
+	/// @return l'attribut zoomActuel_
+	///
+	////////////////////////////////////////////////////////////////////////
+	double ProjectionOrtho::obtenirZoomActuel()
+	{
+		return zoomActuel_;
 	}
 
 }; // Fin du namespace vue.

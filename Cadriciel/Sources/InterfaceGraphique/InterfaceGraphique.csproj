@@ -54,16 +54,64 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exemple.cs">
+    <Compile Include="BoiteAide.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Exemple.Designer.cs">
-      <DependentUpon>Exemple.cs</DependentUpon>
+    <Compile Include="BoiteAide.Designer.cs">
+      <DependentUpon>BoiteAide.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BoitePropriete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BoitePropriete.Designer.cs">
+      <DependentUpon>BoitePropriete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Edition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Edition.Designer.cs">
+      <DependentUpon>Edition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuPrincipal.Designer.cs">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Nouveau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Nouveau.Designer.cs">
+      <DependentUpon>Nouveau.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Exemple.resx">
-      <DependentUpon>Exemple.cs</DependentUpon>
+    <Compile Include="Chargement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Chargement.Designer.cs">
+      <DependentUpon>Chargement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sauvegarde.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sauvegarde.Designer.cs">
+      <DependentUpon>Sauvegarde.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="BoiteAide.resx">
+      <DependentUpon>BoiteAide.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BoitePropriete.resx">
+      <DependentUpon>BoitePropriete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Edition.resx">
+      <DependentUpon>Edition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuPrincipal.resx">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Nouveau.resx">
+      <DependentUpon>Nouveau.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -75,6 +123,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Chargement.resx">
+      <DependentUpon>Chargement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sauvegarde.resx">
+      <DependentUpon>Sauvegarde.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -87,6 +141,69 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Partie_rapide.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tournoi1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Éditeur.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Enregistrer.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Supprimer.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Selection1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deplacement-des-fleches-.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rotation.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mise_a_Echelle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Duplication.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sans-titre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images44VJOJLN.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Portail.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Muret.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Selection.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deplacement-des-fleches-1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rotation1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GestionDePoints.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Etat\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
