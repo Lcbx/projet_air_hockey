@@ -44,7 +44,7 @@ void AjoutPortail::operationShortClick() {
 			garder = false;
 	}
 	//supprime le modele Dummy
-	FacadeModele::obtenirInstance()->supprimerPortail(true);
+	FacadeModele::obtenirInstance()->supprimerDernierObjet();
 	//ajoute le vrai portail
 	if (garder) if(clickInitial_) {
 		FacadeModele::obtenirInstance()->ajouterPortail(X1(), Y1());
@@ -70,6 +70,6 @@ void AjoutPortail::operationDragClick() {
 ///
 /////////////////////////////////////////////////////////////////////////
 void AjoutPortail::escEnfonce() {
-	FacadeModele::obtenirInstance()->supprimerPortail(true);
+	if(clickInitial_ == false)FacadeModele::obtenirInstance()->supprimerDernierObjet();
 	clickInitial_ = true;
 }

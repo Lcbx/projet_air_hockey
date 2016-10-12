@@ -67,7 +67,7 @@ public:
    ///ajouter le premier portail
    void ajouterPortail(glm::dvec3 position);
    ///supprime le 1er portail suite a clic echapp
-   void supprimerPortail(bool escTouche);
+   //void supprimerPortail(bool escTouche);
    ///ajoute 2eme portail
    void ajouterPortailDeux(glm::dvec3 position);
 
@@ -94,7 +94,7 @@ public:
    double getScaleDataBinding();
 
    ///supprimer un muret a l'appui d'echap
-   void supprimerMuret(bool escTouche);
+   //void supprimerMuret(bool escTouche);
 
    ///un compteur d'objets
    int compteur ;

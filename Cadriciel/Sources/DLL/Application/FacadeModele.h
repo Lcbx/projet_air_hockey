@@ -87,32 +87,37 @@ public:
 	void animer(float temps);
 
 
-   //ajouter Bonus
+   ///ajouter Bonus
 	void ajouterBonus(int x, int y);
 
-	//ajouter Portail
+	///ajouter Portail
 	void ajouterPortail(int x1, int y1);
-	//supprime le 1er Portail apres clic echap
- 	void supprimerPortail(bool escTouche);
-	//ajouter second Portail
+
+
+	///ajouter second Portail
 	void ajouterPortailDeux(int x2, int y2);
 	
 
-	//murets
+	///ajouter murets
 	void ajouterMuret(int x1, int y1, int x2, int y2);
-	void ajouterMuretFantome(int corXin, int corYin, int corX, int corY);
-	void supprimerMuret(bool escTouche);
+	
+	///supprime le 1er Portail apres clic echap
+	void supprimerDernierObjet();
+
+	//void ajouterMuretFantome(int corXin, int corYin, int corX, int corY);
+	//void supprimerMuret(bool escTouche);
 
 
 	// fonction bidon de test
-	void test();
-	// test deplacement du point de controle
-	void deplacerPointHaut(int index);
+	//void test();
 
-	//retourner la pos X pour l'afficher dans la boite de configuration
+	/// test deplacement du point de controle
+	//void deplacerPointHaut(int index);
+
+	///retourner la pos X pour l'afficher dans la boite de configuration
 	double getPosDataBidingX();
 
-	//retourner la pos X pour l'afficher dans la boite de configuration
+	///retourner la pos X pour l'afficher dans la boite de configuration
 	double getPosDataBidingY();
 
 	//void deplacerObjet(int x1 , int y1, int x2, int y2 );
@@ -137,14 +142,17 @@ public:
 
 	/// Permet d'obtenir les constantes de la zone de jeu (friction, rebond etc)
 	CoefficientConfiguration getCoefficient() const;
+
 	/// Permet de modifier les constantes de la zone de jeu (friction, rebond etc)
 	void setCoefficient(CoefficientConfiguration coeff);
 
+	///retourne si tous les objets sont dans la table
 	bool objetEstDansLaTable();
 
 
-	//initialiser la zone de jeu
+	///initialiser la zone de jeu
 	void initialiserScene();
+
 private:
 
    /// Constructeur par défaut.

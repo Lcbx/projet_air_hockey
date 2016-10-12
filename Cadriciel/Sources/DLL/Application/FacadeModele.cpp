@@ -433,7 +433,7 @@ void FacadeModele::ajouterPortail(int x1, int y1)
 	arbre_->ajouterPortail(position1);
 }
 
-
+/*
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn FacadeModele::void FacadeModele::supprimerPortail()
@@ -449,7 +449,7 @@ void FacadeModele::supprimerPortail(bool escTouche)
 {
 	arbre_->supprimerPortail(escTouche);
 }
-
+*/
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -553,12 +553,13 @@ void FacadeModele::deplacerObjet(double x, double y, double angle, double scale)
 
 
 
-
+/*
 // fonction bidon test
 void FacadeModele::test() {
 
 	std::printf("alooooooooooo test \n");
 }
+
 // deplacer un point de controle
 void FacadeModele::deplacerPointHaut(int index) {
 #define delta 0.1
@@ -577,7 +578,7 @@ void FacadeModele::deplacerPointHaut(int index) {
 	}
 #undef delta
 }
-
+*/
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -631,6 +632,7 @@ double FacadeModele::getScale()
 	return arbre_->getScaleDataBinding();
 
 }
+/*
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void FacadeModele::ajouterMuretFantome(int corXin, int corYin, int corX, int corY)
@@ -649,21 +651,20 @@ void FacadeModele::ajouterMuretFantome(int corXin, int corYin, int corX, int cor
 		arbre_->effacer(arbre_->chercher(arbre_->obtenirNombreEnfants() - 1));
 	//ajouterMur(corXin, corYin, corX, corY);
 }
+*/
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn FacadeModele::void FacadeModele::supprimerMurat()
+/// @fn FacadeModele::void FacadeModele::supprimerDernierObjet()
 ///
-/// Cette fonction permet de supprimer un portail suite a clic d'Echap
-///
-/// @param[in]bool escTouche: bool
+/// Cette fonction permet de supprimer le dernier objet ajouté
 ///
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void FacadeModele::supprimerMuret(bool escTouche)
+void FacadeModele::supprimerDernierObjet()
 {
-	arbre_->supprimerMuret(escTouche);
+	arbre_->effacer(arbre_->chercher(arbre_->obtenirNombreEnfants()-1));
 }
 
 

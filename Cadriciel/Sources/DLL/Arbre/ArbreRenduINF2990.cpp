@@ -223,7 +223,7 @@ void ArbreRenduINF2990::ajouterPortailDeux(glm::dvec3 pos)
 }
 
 
-
+/*
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void ArbreRenduINF2990::supprimerPortail(bool escTouche)
@@ -248,7 +248,7 @@ void ArbreRenduINF2990::supprimerPortail(bool escTouche)
 	}
 }
 
-
+*/
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -520,7 +520,7 @@ bool ArbreRenduINF2990::objetEstDansLaTable()
 
 
 
-
+/*
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void supprimerMuret()
@@ -553,4 +553,5 @@ void ArbreRenduINF2990::supprimerMuret(bool escTouche)
 	}
 	
 }
+*/
 

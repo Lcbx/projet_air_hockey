@@ -343,7 +343,7 @@ extern "C"
 	}
 
 
-
+	/*
 // fonction bidon test
 	__declspec(dllexport) void __cdecl test()
 	{
@@ -354,6 +354,7 @@ extern "C"
 	{
 		FacadeModele::obtenirInstance()->deplacerPointHaut(index);
 	}
+	*/
 
 	////////////////////////////////////////////////////////////////////////
 	///
