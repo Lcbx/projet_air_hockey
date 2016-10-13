@@ -420,6 +420,7 @@ inline void NoeudAbstrait::assignerEstSelectionnable(bool selectionnable)
 /// @return Le rayon du modèle
 ////////////////////////////////////////////////////////////////////////
 inline double NoeudAbstrait::obtenirRayonModele() const {
+	//obtenir le rayon via le calcul du cylindre englobant
 	return utilitaire::calculerCylindreEnglobant(*modele_).rayon;
 }
 
