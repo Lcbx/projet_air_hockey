@@ -104,23 +104,12 @@ public:
 	///supprime le 1er Portail apres clic echap
 	void supprimerDernierObjet();
 
-	//void ajouterMuretFantome(int corXin, int corYin, int corX, int corY);
-	//void supprimerMuret(bool escTouche);
-
-
-	// fonction bidon de test
-	//void test();
-
-	/// test deplacement du point de controle
-	//void deplacerPointHaut(int index);
-
 	///retourner la pos X pour l'afficher dans la boite de configuration
 	double getPosDataBidingX();
 
 	///retourner la pos X pour l'afficher dans la boite de configuration
 	double getPosDataBidingY();
 
-	//void deplacerObjet(int x1 , int y1, int x2, int y2 );
 
 	///effacer un objet selectionné de la table
 	void effacerObjet();

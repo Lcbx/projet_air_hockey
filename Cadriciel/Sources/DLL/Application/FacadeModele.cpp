@@ -433,24 +433,6 @@ void FacadeModele::ajouterPortail(int x1, int y1)
 	arbre_->ajouterPortail(position1);
 }
 
-/*
-////////////////////////////////////////////////////////////////////////
-///
-/// @fn FacadeModele::void FacadeModele::supprimerPortail()
-///
-/// Cette fonction permet de supprimer un portail suite a clic d'Echap
-///
-/// @param[in]bool escTouche: bool
-///
-/// @return Aucune.
-///
-////////////////////////////////////////////////////////////////////////
-void FacadeModele::supprimerPortail(bool escTouche)
-{
-	arbre_->supprimerPortail(escTouche);
-}
-*/
-
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn FacadeModele::void FacadeModele::ajouterPortailDeux(int x2, int y2)
@@ -551,36 +533,6 @@ void FacadeModele::deplacerObjet(double x, double y, double angle, double scale)
 
 }
 
-
-
-/*
-// fonction bidon test
-void FacadeModele::test() {
-
-	std::printf("alooooooooooo test \n");
-}
-
-// deplacer un point de controle
-void FacadeModele::deplacerPointHaut(int index) {
-#define delta 0.1
-	if (index == 0)
-	{
-		std::cout << "Noeud deplace'" << std::endl;
-		//// effacer la table puis l'afficher avec les nouvelle coordonnees
-		//const NoeudAbstrait* noeudTable = arbre_->chercher("table");
-		//arbre_->effacer(noeudTable);
-		NoeudTable* noeudTable = arbre_->getTable();
-		glm::vec3 point;
-		noeudTable->getPointControle(0, point);
-		point.y += delta;
-		noeudTable->setPointControle(0, point);
-		
-	}
-#undef delta
-}
-*/
-
-
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn int FacadeModele::nombreObjetSelectionne()
@@ -632,26 +584,7 @@ double FacadeModele::getScale()
 	return arbre_->getScaleDataBinding();
 
 }
-/*
-////////////////////////////////////////////////////////////////////////
-///
-/// @fn void FacadeModele::ajouterMuretFantome(int corXin, int corYin, int corX, int corY)
-///
-/// Cette fonction effectue l'ajout des Murs.
-///
-/// @param[in] int corX : coordonnée dans l'axe des x
-///            int corY : coordonnée dans l'axe des y
-/// @return Aucune.
-///
-////////////////////////////////////////////////////////////////////////
-void FacadeModele::ajouterMuretFantome(int corXin, int corYin, int corX, int corY)
-{
-	// bloc d'instruction
-	if (arbre_->chercher(arbre_->obtenirNombreEnfants() - 1)->obtenirType() == "muret")
-		arbre_->effacer(arbre_->chercher(arbre_->obtenirNombreEnfants() - 1));
-	//ajouterMur(corXin, corYin, corX, corY);
-}
-*/
+
 
 ////////////////////////////////////////////////////////////////////////
 ///

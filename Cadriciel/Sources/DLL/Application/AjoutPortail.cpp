@@ -70,6 +70,7 @@ void AjoutPortail::operationDragClick() {
 ///
 /////////////////////////////////////////////////////////////////////////
 void AjoutPortail::escEnfonce() {
-	if(clickInitial_ == false)FacadeModele::obtenirInstance()->supprimerDernierObjet();
+	if(clickInitial_ == false)
+		FacadeModele::obtenirInstance()->supprimerDernierObjet();
 	clickInitial_ = true;
 }
