@@ -223,33 +223,6 @@ void ArbreRenduINF2990::ajouterPortailDeux(glm::dvec3 pos)
 }
 
 
-
-////////////////////////////////////////////////////////////////////////
-///
-/// @fn void ArbreRenduINF2990::supprimerPortail(bool escTouche)
-///
-/// Cette fonction permet de supprimer portail de la scene
-///
-/// @return Aucune.
-///
-////////////////////////////////////////////////////////////////////////
-void ArbreRenduINF2990::supprimerPortail(bool escTouche) 
-{
-//	this->effacer(this->enfants_.back());
-
-	if (escTouche == true)
-	{
-		if (this->enfants_.size() != NULL && premierEstajoute == true) 
-		{
-			//supprime le 1er portail			
-			this->effacer(this->enfants_.back());
-			premierEstajoute = false;
-		}
-	}
-}
-
-
-
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void ArbreRenduINF2990::ajouterMuret(glm::dvec3 position1, glm::dvec3 position2)
@@ -518,39 +491,4 @@ bool ArbreRenduINF2990::objetEstDansLaTable()
 	return estInterieur;
 }
 
-
-
-
-////////////////////////////////////////////////////////////////////////
-///
-/// @fn void supprimerMuret()
-///
-/// Cette fonction permet de supprimer un muret suite clic echap
-///
-/// @return rien
-///
-////////////////////////////////////////////////////////////////////////
-void ArbreRenduINF2990::supprimerMuret(bool escTouche)
-{
-	int comp = 0;
-	for (NoeudAbstrait * enfant : enfants_)
-	{
-		if (enfant->obtenirType() == "muret") {
-
-			comp++;
-		}
-		
-	}
-	//std::cout << comp << std::endl;
-
-	if (escTouche == true)
-	{
-		if (this->enfants_.size() != NULL && comp%2 != 0 )
-		{
-			//supprime le 1er portail			
-			this->effacer(this->enfants_.back());
-		}
-	}
-	
-}
 
