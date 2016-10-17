@@ -517,6 +517,19 @@ extern "C"
 		FacadeModele::obtenirInstance()->initialiserScene();
 	}
 
+
+	__declspec(dllexport) void __cdecl ajouterMailletEtRondelle()
+	{
+		FacadeModele::obtenirInstance()->ajouterMailletEtRondelle();
+
+	}
+
+	__declspec(dllexport) void __cdecl retirerMailletEtRondelle()
+	{
+		FacadeModele::obtenirInstance()->retirerMailletEtRondelle();
+	}
+
+
 }
 
 

@@ -17,6 +17,7 @@ namespace InterfaceGraphique
 
         private static Edition edition;
         private static MenuPrincipal menuPrincipal;
+
         private static TimeSpan dernierTemps;
         private static TimeSpan tempsAccumule;
         private static Stopwatch chrono = Stopwatch.StartNew();
@@ -45,12 +46,15 @@ namespace InterfaceGraphique
             Application.SetCompatibleTextRenderingDefault(false);
 
             edition = new Edition();
-            
 
             //Application.Run(edition);
             menuPrincipal = new MenuPrincipal();
+
             menuPrincipal.setMenuEdition(edition);
             edition.setMenuPrincipal(menuPrincipal);
+
+           
+
             Application.Run(menuPrincipal);
         }
 
@@ -72,6 +76,8 @@ namespace InterfaceGraphique
                     {
                         if (edition != null && peutAfficher)
                             edition.MettreAJour((double)tempsAccumule.Ticks / TimeSpan.TicksPerSecond);
+
+                    
                     }
                     tempsAccumule = TimeSpan.Zero;
                 }

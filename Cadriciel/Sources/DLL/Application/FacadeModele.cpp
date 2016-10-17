@@ -664,3 +664,21 @@ void FacadeModele::initialiserScene()
 {
 	arbre_->initialiser();
 }
+
+
+void FacadeModele::ajouterMailletEtRondelle()
+{
+	//ajout de la rondelle et les maillets
+	arbre_->ajouterMailletEtRondelle();
+}
+
+void FacadeModele::retirerMailletEtRondelle()
+{
+	//effacer les maillets et la rondelle
+	arbre_->effacer(arbre_->chercher("rondelle"));
+
+	while (arbre_->chercher("maillet")) {
+		arbre_->effacer(arbre_->chercher("maillet"));
+	}
+
+}

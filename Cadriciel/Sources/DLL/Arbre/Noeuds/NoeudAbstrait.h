@@ -177,6 +177,10 @@ public:
 	/// Permet d'obtenir la mise à l'échelle du noeud
 	inline const glm::dvec3& getScale() const; 
 
+	///definir le deuxieme joueur
+	bool estDeuxiemeJoueur = false;
+
+
 protected:
 	/// Type du noeud.
 	std::string      type_;
