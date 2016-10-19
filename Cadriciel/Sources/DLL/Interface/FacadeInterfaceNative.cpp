@@ -343,18 +343,6 @@ extern "C"
 	}
 
 
-
-// fonction bidon test
-	__declspec(dllexport) void __cdecl test()
-	{
-		FacadeModele::obtenirInstance()->test();
-	}
-	// deplacer noeud de controle
-	__declspec(dllexport) void __cdecl deplacerPointHaut(int index)
-	{
-		FacadeModele::obtenirInstance()->deplacerPointHaut(index);
-	}
-
 	////////////////////////////////////////////////////////////////////////
 	///
 	/// @fn __declspec(dllexport) int __cdecl nombreObjetSelectionne()

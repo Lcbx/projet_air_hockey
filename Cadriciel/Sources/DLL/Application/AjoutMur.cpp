@@ -69,7 +69,7 @@ void AjoutMur::position(int x, int y) {
 			if (premierAffichage_)
 				premierAffichage_ = false;
 			else //muret fantome suppime le dernier muret ajoute
-				FacadeModele::obtenirInstance()->ajouterMuretFantome(0,0,0,0);
+				FacadeModele::obtenirInstance()->supprimerDernierObjet();
 			FacadeModele::obtenirInstance()->ajouterMuret(notrePosition_[0], notrePosition_[1], x, y);
 		}
 	}
@@ -105,7 +105,7 @@ void AjoutMur::operationShortClick() {
 			if (!FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(debut)) 					
 				ajouter = false;
 		}
-		if (!ajouter) FacadeModele::obtenirInstance()->ajouterMuretFantome(0,0,0,0);
+		if (!ajouter) FacadeModele::obtenirInstance()->supprimerDernierObjet();
 		clickInitial_ = true;
 		premierAffichage_ = true;
 	}
@@ -126,7 +126,7 @@ void AjoutMur::operationDragClick() {
 /////////////////////////////////////////////////////////////////////////
 void AjoutMur::escEnfonce() {
 	if(!premierAffichage_)
-		FacadeModele::obtenirInstance()->ajouterMuretFantome(0,0,0,0);
+		FacadeModele::obtenirInstance()->supprimerDernierObjet();
 	clickInitial_ = true;
 	premierAffichage_ = true;
 }
