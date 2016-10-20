@@ -682,3 +682,9 @@ void FacadeModele::retirerMailletEtRondelle()
 	}
 
 }
+
+void FacadeModele::deplacerMailletAvecClavier(double x, double y)
+{
+	arbre_->deplacerMailletAvecClavier(x, y);
+
+}

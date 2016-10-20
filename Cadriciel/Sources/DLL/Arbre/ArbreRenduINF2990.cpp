@@ -499,19 +499,6 @@ bool ArbreRenduINF2990::objetEstDansLaTable()
 
 void  ArbreRenduINF2990::ajouterMailletEtRondelle()
 {
-	//AJOUT MAILLET1
-	NoeudAbstrait* noeudMaillet{ creerNoeud(NOM_MAILLET) };
-	noeudMaillet->assignerPositionRelative({-40,0,0 });
-	noeudMaillet->setScale({ 1, 1, 1 });
-	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet);
-	noeudMaillet->estDeuxiemeJoueur = false;
-	
-	//AJOUT MAILLET2
-	NoeudAbstrait* noeudMaillet2{ creerNoeud(NOM_MAILLET) };
-	noeudMaillet2->assignerPositionRelative({ 40,0,0 });
-	noeudMaillet2->setScale({ 1, 1, 1 });
-	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet2);
-	noeudMaillet2->estDeuxiemeJoueur = true;
 
 	//AJOUT RONDELLE
 	NoeudAbstrait* noeudRondelle{ creerNoeud(NOM_RONDELLE) };
@@ -519,8 +506,41 @@ void  ArbreRenduINF2990::ajouterMailletEtRondelle()
 	noeudRondelle->setScale({ 1, 1, 1 });
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudRondelle);
 
+	//AJOUT MAILLET1
+	NoeudAbstrait* noeudMaillet{ creerNoeud(NOM_MAILLET) };
+	noeudMaillet->assignerPositionRelative({40,0,0 });
+	noeudMaillet->setScale({ 1, 1, 1 });
+	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet);
+	noeudMaillet->estDeuxiemeJoueur = false;
+	
+	//AJOUT MAILLET2
+	NoeudAbstrait* noeudMaillet2{ creerNoeud(NOM_MAILLET) };
+	noeudMaillet2->assignerPositionRelative({ -40,0,0 });
+	noeudMaillet2->setScale({ 1, 1, 1 });
+	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet2);
+	noeudMaillet2->estDeuxiemeJoueur = true;
 
-	/*NoeudAbstrait* dernier = this->enfants_.back();
-	glm::dvec3 pos = dernier->obtenirPositionRelative();
-	dernier->assignerPositionRelative({ pos.x + 5, pos.y, 0 });*/
+}
+void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
+{
+	//NoeudAbstrait* dernier;
+
+	/*for (NoeudAbstrait * enfant : this->enfants_)
+	{
+		if (enfant->obtenirType() == "maillet")
+		{
+			dernier = enfant;
+		}
+	}
+	*/
+
+		NoeudAbstrait* dernier = this->enfants_.back();//pour obtenir le maillet du 2eme joueur
+		glm::dvec3 pos = dernier->obtenirPositionRelative();
+
+		if (x > 0) { dernier->assignerPositionRelative({ pos.x + 5, pos.y, 0 }); } //bouger vers droite
+		if (x < 0) { dernier->assignerPositionRelative({ pos.x - 5, pos.y, 0 }); }//bouger vers gauche
+
+		if (y > 0) { dernier->assignerPositionRelative({ pos.x , pos.y + 5, 0 }); } //bouger vers haut
+		if (y < 0) { dernier->assignerPositionRelative({ pos.x, pos.y - 5 , 0 }); } //bouger vers droite
+	
 }

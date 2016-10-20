@@ -103,11 +103,21 @@ namespace InterfaceGraphique
             if (e.KeyCode == Keys.Right) FonctionsNatives.deplacerVueXY(0.1, 0);
             if (e.KeyCode == Keys.Down) FonctionsNatives.deplacerVueXY(0, 0.1);
             if (e.KeyCode == Keys.Left) FonctionsNatives.deplacerVueXY(-0.1, 0);
+
+            //deplacer le maillet de 2eme joueur
+            if (estEnModeTest == true)
+            {
+                if (e.KeyCode == Keys.D) FonctionsNatives.deplacerMailletAvecClavier(1, 0);//avant
+                if (e.KeyCode == Keys.A) FonctionsNatives.deplacerMailletAvecClavier(-1, 0);//arriere
+                if (e.KeyCode == Keys.W) FonctionsNatives.deplacerMailletAvecClavier(0, 1); ;//haut
+                if (e.KeyCode == Keys.S) FonctionsNatives.deplacerMailletAvecClavier(0, -1); ;//bas
+            }
+
         }
 
         private void keyUpHandler(object sender, KeyEventArgs e)
         {
-            //wajdi
+            //Dans le mode edition
             if (estEnModeTest == false)
             {
                 switch (e.KeyCode)
@@ -176,16 +186,62 @@ namespace InterfaceGraphique
                             toolStripButton1.Checked = true;
                             this.changerMode(Etats.POINTSDECONTROLE); break;
                         }
+                    case Keys.T:
+                        {
+                            //afficher fenetre test 
+                            passerModeJeu(true);
+                            //Permet d'ajouter les maillets et la rondelle dans la table
+                            FonctionsNatives.ajouterMailletEtRondelle(); break;
+                        }
+                    case Keys.Escape:
+                        {
+                            FonctionsNatives.escEnfonce();
+                            break;
+                        }
+
 
                     default: break;
                 }
             }
-            if (e.KeyCode == Keys.Escape)
+            //dans le mode test
+            else
             {
-                afficherBarreMenu();
-                FonctionsNatives.escEnfonce(); 
-            }
+                switch (e.KeyCode)
+                {
+                    case Keys.Escape:
+                        {
+                            afficherBarreMenu(); break;
+                        }
+                    case Keys.T:
+                        {
+                            //afficher fenetre edition
+                            passerModeJeu(false);
+                            //Permet de retirer les maillets et la rondelle dans la table
+                            FonctionsNatives.retirerMailletEtRondelle();break;
+                        }
+                    case Keys.W:
+                        {
+                            break;
 
+                        }
+                    case Keys.S:
+                        {
+                            break;
+                        }
+                    case Keys.A:
+                        {
+                            break;
+                        }
+                    case Keys.D:
+                        {
+                            break;
+                        }
+
+                    default: break;
+
+                }
+           
+            }
         }
 
 
@@ -924,7 +980,7 @@ namespace InterfaceGraphique
         //Bouton mode edition
         private void modeEditionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //afficher fenetre test 
+            //afficher fenetre edition
             passerModeJeu(false);
             //Permet de retirer les maillets et la rondelle dans la table
             FonctionsNatives.retirerMailletEtRondelle();
@@ -1072,7 +1128,8 @@ namespace InterfaceGraphique
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void retirerMailletEtRondelle();
 
-
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void deplacerMailletAvecClavier(double x, double y);
     }
    
 }

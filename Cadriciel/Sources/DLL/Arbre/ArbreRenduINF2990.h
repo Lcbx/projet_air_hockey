@@ -102,7 +102,12 @@ public:
 	///determiner si la position est dans la table
    bool estInterieur = false;
 
+   ///mettre les maillets et la rondelle sur la table
    void  ajouterMailletEtRondelle();
+
+   ///permert de deplacer le maillet avec les touches de clavier
+   void deplacerMailletAvecClavier(double x, double y);
+
 
 private :
 	NoeudTable* noeudTable_;

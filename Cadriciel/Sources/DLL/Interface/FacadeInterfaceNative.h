@@ -108,5 +108,8 @@ extern "C" {
 
 	///ajouter maillets et rondelle a la scene edition
 	__declspec(dllexport) void retirerMailletEtRondelle();
+
+	///permert de deplacer le maillet avec les touches de clavier
+	__declspec(dllexport) void deplacerMailletAvecClavier(double x, double y);
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__

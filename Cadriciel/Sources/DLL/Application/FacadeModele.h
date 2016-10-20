@@ -148,6 +148,11 @@ public:
 	///enlever les maillets et la rondelle de la zone
 	void retirerMailletEtRondelle();
 
+
+	///permert de deplacer le maillet avec les touches de clavier
+    void deplacerMailletAvecClavier(double x, double y);
+
+
 private:
 
    /// Constructeur par défaut.
