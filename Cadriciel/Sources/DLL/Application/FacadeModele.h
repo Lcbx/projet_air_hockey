@@ -153,6 +153,9 @@ public:
     void deplacerMailletAvecClavier(double x, double y);
 
 
+	///Re initialiser la partie 
+	void reinitialiserPartieCourante();
+
 private:
 
    /// Constructeur par défaut.

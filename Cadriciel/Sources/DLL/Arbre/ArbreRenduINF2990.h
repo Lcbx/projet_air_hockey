@@ -109,6 +109,9 @@ public:
    void deplacerMailletAvecClavier(double x, double y);
 
 
+   ///Re initialiser la partie courante 
+  void reinitialiserPartieCourante();
+
 private :
 	NoeudTable* noeudTable_;
 };

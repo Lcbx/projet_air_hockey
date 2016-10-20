@@ -62,6 +62,9 @@ namespace InterfaceGraphique
             //masquer bouton mode edition quand on est dans le mode edition
             modeEditionToolStripMenuItem.Visible = false;
 
+            //panel score
+            splitContainer1.Panel1.Hide();
+
         }
 
         public void InitialiserAnimation()
@@ -208,34 +211,23 @@ namespace InterfaceGraphique
             {
                 switch (e.KeyCode)
                 {
-                    case Keys.Escape:
+                    case Keys.Escape:// pause
                         {
                             afficherBarreMenu(); break;
                         }
-                    case Keys.T:
+                    case Keys.T://revenir au menu principal
                         {
                             //afficher fenetre edition
                             passerModeJeu(false);
                             //Permet de retirer les maillets et la rondelle dans la table
                             FonctionsNatives.retirerMailletEtRondelle();break;
                         }
-                    case Keys.W:
+                    case Keys.Space: //reinitialiser la partie
                         {
-                            break;
-
-                        }
-                    case Keys.S:
-                        {
+                            FonctionsNatives.reinitialiserPartieCourante();
                             break;
                         }
-                    case Keys.A:
-                        {
-                            break;
-                        }
-                    case Keys.D:
-                        {
-                            break;
-                        }
+                    
 
                     default: break;
 
@@ -906,7 +898,6 @@ namespace InterfaceGraphique
                 estEnModeTest = true;
 
                 toolStrip1.Hide();
-                splitContainer1.Hide();
                 menuStrip1.Hide();
 
                 //masquer les boutons
@@ -927,8 +918,10 @@ namespace InterfaceGraphique
                 modeEditionToolStripMenuItem.Visible = true;
                 menuPrincipalToolStripMenuItem.Visible = true;
                 vuesToolStripMenuItem.Visible = true;
-               
 
+                //panel score
+                splitContainer1.Panel1.Show();
+                splitContainer1.Panel2.Hide();
 
             }
             //si mode edition , afficher les menus a cotés + barre des menus
@@ -939,7 +932,6 @@ namespace InterfaceGraphique
                 estEnModeTest = false;
 
                 toolStrip1.Show();
-                splitContainer1.Show();
                 menuStrip1.Show();
                 //afficher les boutons
                 fichierToolStripMenuItem.Visible = true;
@@ -959,7 +951,9 @@ namespace InterfaceGraphique
                 //masquer le bouton mode edition
                 modeEditionToolStripMenuItem.Visible = false;
 
-
+                //panel score
+                splitContainer1.Panel1.Hide();
+                splitContainer1.Panel2.Show();
 
 
             }
@@ -1130,6 +1124,10 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void deplacerMailletAvecClavier(double x, double y);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void reinitialiserPartieCourante();
+
     }
-   
+
 }

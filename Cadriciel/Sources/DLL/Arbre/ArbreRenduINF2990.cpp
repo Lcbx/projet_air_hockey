@@ -544,3 +544,25 @@ void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 		if (y < 0) { dernier->assignerPositionRelative({ pos.x, pos.y - 5 , 0 }); } //bouger vers droite
 	
 }
+
+void ArbreRenduINF2990::reinitialiserPartieCourante()
+{
+	for (NoeudAbstrait * enfant : this->enfants_)
+	{
+		if (enfant->obtenirType() == "maillet") {
+			if (enfant->estDeuxiemeJoueur == true) {
+				enfant->assignerPositionRelative({ -40,0,0 });
+			}
+			else {
+				enfant->assignerPositionRelative({ 40,0,0 });
+			}
+		}
+		else if (enfant->obtenirType() == "rondelle") {
+			enfant->assignerPositionRelative({ 0,0,0 });
+		}
+	}
+}
+	
+
+
+

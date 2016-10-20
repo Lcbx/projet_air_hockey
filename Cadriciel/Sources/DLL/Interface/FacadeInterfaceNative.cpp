@@ -555,9 +555,26 @@ extern "C"
 	/// @return rien
 	///
 	////////////////////////////////////////////////////////////////////////
-	__declspec(dllexport) void deplacerMailletAvecClavier(double x, double y)
+	__declspec(dllexport) void __cdecl deplacerMailletAvecClavier(double x, double y)
 	{
 		FacadeModele::obtenirInstance()->deplacerMailletAvecClavier(x, y);
+	}
+
+
+	
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void reinitialiserPartieCourante();
+	///
+	/// Cette fonction permet de deplacerRe-initialiser la partie
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl reinitialiserPartieCourante()
+	{
+		FacadeModele::obtenirInstance()->reinitialiserPartieCourante();
+
 	}
 
 }

@@ -111,5 +111,9 @@ extern "C" {
 
 	///permert de deplacer le maillet avec les touches de clavier
 	__declspec(dllexport) void deplacerMailletAvecClavier(double x, double y);
+
+	///Re-initialiser la partie
+	__declspec(dllexport) void reinitialiserPartieCourante();
+
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__

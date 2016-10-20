@@ -688,3 +688,9 @@ void FacadeModele::deplacerMailletAvecClavier(double x, double y)
 	arbre_->deplacerMailletAvecClavier(x, y);
 
 }
+
+void FacadeModele::reinitialiserPartieCourante()
+{
+	arbre_->reinitialiserPartieCourante();
+
+}
