@@ -35,6 +35,7 @@ public:
 	/// Effectue l'animation du cube.
 	virtual void animer(float temps);
 
+	void tracerCercle(const glm::mat4& vueProjection, double cx, double cy, double r, int nb_segments) const;
 
 	//Accepter le visiteur
 	virtual void accepter(Visiteur* v);
@@ -44,7 +45,7 @@ public:
 	/// Permet d'obtenir le rayon de la forme en fonction du rayon du modèle
 	/// @return Le rayon de l'objet
 	////////////////////////////////////////////////////////////////////////
-	virtual double obtenirRayon() { return obtenirRayonModele() * getScale().x; };
+	virtual double obtenirRayon() const { return obtenirRayonModele() * getScale().x; };
 
 private:
 
@@ -55,9 +56,8 @@ private:
 	float angleY_{ 0.f };
 	/// Angle de rotation.
 	float angleRotation_{ 0.f };
-	
-
-
+	// boolean pour afficher ou non le rayon d'attraction du portail
+	bool affiche_{ true };
 	
 };
 

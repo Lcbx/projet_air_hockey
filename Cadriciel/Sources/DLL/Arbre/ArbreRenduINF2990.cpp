@@ -42,7 +42,7 @@ const std::string ArbreRenduINF2990::NOM_RONDELLE{ "rondelle" };
 const std::string ArbreRenduINF2990::NOM_POINTCONTROLE{ "pointcontrole" };
 ///La chaîne représentant le type des points de controles de la table
 const std::string ArbreRenduINF2990::NOM_MAILLET{ "maillet" };
-
+const std::string ArbreRenduINF2990::NOM_MAILLET2{ "maillet2" };
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -68,6 +68,7 @@ ArbreRenduINF2990::ArbreRenduINF2990()
 	ajouterUsine(NOM_TABLE, new UsineNoeud<NoeudTable>{ NOM_TABLE, std::string{ "" } });
 	ajouterUsine(NOM_POINTCONTROLE, new UsineNoeud<NoeudPointControle>{ NOM_POINTCONTROLE, std::string{ "" } });
 	ajouterUsine(NOM_MAILLET, new UsineNoeud<NoeudMaillet>{ NOM_MAILLET, std::string{ "media/maillet.obj" } });
+	ajouterUsine(NOM_MAILLET2, new UsineNoeud<NoeudMaillet>{ NOM_MAILLET2, std::string{ "media/maillet2.obj" } });
 
 }
 
