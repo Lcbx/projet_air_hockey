@@ -61,6 +61,12 @@
     <Filter Include="Source Files\Collision">
       <UniqueIdentifier>{13bbe7ea-a117-4ff4-950d-08bd958cc530}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Application\Souris_edition">
+      <UniqueIdentifier>{0c18c6e7-c9a3-4804-a81c-120b67e96994}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Application\Souris_edition">
+      <UniqueIdentifier>{2de87a4d-ec79-4739-bb17-254ef9fb237d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\FacadeModele.cpp">
@@ -129,36 +135,6 @@
     <ClCompile Include="Arbre\Noeuds\NoeudAbstrait.cpp">
       <Filter>Source Files\Arbre\Noeuds</Filter>
     </ClCompile>
-    <ClCompile Include="Application\Souris.cpp">
-      <Filter>Source Files\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Selection.cpp">
-      <Filter>Source Files\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\StrategieSouris.cpp">
-      <Filter>Source Files\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\AjoutAccelerateur.cpp">
-      <Filter>Source Files\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\AjoutMur.cpp">
-      <Filter>Source Files\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\AjoutPortail.cpp">
-      <Filter>Source Files\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Deplacement.cpp">
-      <Filter>Source Files\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Duplication.cpp">
-      <Filter>Source Files\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Loupe.cpp">
-      <Filter>Source Files\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Rotation.cpp">
-      <Filter>Source Files\Application</Filter>
-    </ClCompile>
     <ClCompile Include="Arbre\Noeuds\NoeudTable.cpp">
       <Filter>Source Files\Arbre\Noeuds</Filter>
     </ClCompile>
@@ -174,12 +150,6 @@
     <ClCompile Include="BoiteCollision.cpp">
       <Filter>Source Files\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="MiseEchelle.cpp">
-      <Filter>Source Files\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\PointsControle.cpp">
-      <Filter>Source Files\Application</Filter>
-    </ClCompile>
     <ClCompile Include="VisiteurSauvegarde.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -188,6 +158,42 @@
     </ClCompile>
     <ClCompile Include="VisiteurDansLaTable.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\AjoutAccelerateur.cpp">
+      <Filter>Source Files\Application\Souris_edition</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\AjoutMur.cpp">
+      <Filter>Source Files\Application\Souris_edition</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\AjoutPortail.cpp">
+      <Filter>Source Files\Application\Souris_edition</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Deplacement.cpp">
+      <Filter>Source Files\Application\Souris_edition</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Duplication.cpp">
+      <Filter>Source Files\Application\Souris_edition</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Loupe.cpp">
+      <Filter>Source Files\Application\Souris_edition</Filter>
+    </ClCompile>
+    <ClCompile Include="MiseEchelle.cpp">
+      <Filter>Source Files\Application\Souris_edition</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\PointsControle.cpp">
+      <Filter>Source Files\Application\Souris_edition</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Rotation.cpp">
+      <Filter>Source Files\Application\Souris_edition</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Selection.cpp">
+      <Filter>Source Files\Application\Souris_edition</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Souris.cpp">
+      <Filter>Source Files\Application\Souris_edition</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\StrategieSouris.cpp">
+      <Filter>Source Files\Application\Souris_edition</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -266,36 +272,6 @@
     <ClInclude Include="VisiteurAjout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Application\Souris.h">
-      <Filter>Header Files\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Selection.h">
-      <Filter>Header Files\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\StrategieSouris.h">
-      <Filter>Header Files\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\AjoutAccelerateur.h">
-      <Filter>Header Files\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Loupe.h">
-      <Filter>Header Files\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Deplacement.h">
-      <Filter>Header Files\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Rotation.h">
-      <Filter>Header Files\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Duplication.h">
-      <Filter>Header Files\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\AjoutMur.h">
-      <Filter>Header Files\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\AjoutPortail.h">
-      <Filter>Header Files\Application</Filter>
-    </ClInclude>
     <ClInclude Include="Arbre\Noeuds\NoeudTable.h">
       <Filter>Header Files\Arbre\Noeuds</Filter>
     </ClInclude>
@@ -317,12 +293,6 @@
     <ClInclude Include="VisiteurPointMilieu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MiseEchelle.h">
-      <Filter>Header Files\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\PointsControle.h">
-      <Filter>Header Files\Application</Filter>
-    </ClInclude>
     <ClInclude Include="VisiteurSauvegarde.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -331,6 +301,45 @@
     </ClInclude>
     <ClInclude Include="VisiteurDansLaTable.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\AjoutAccelerateur.h">
+      <Filter>Header Files\Application\Souris_edition</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\AjoutMur.h">
+      <Filter>Header Files\Application\Souris_edition</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\AjoutPortail.h">
+      <Filter>Header Files\Application\Souris_edition</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Deplacement.h">
+      <Filter>Header Files\Application\Souris_edition</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Duplication.h">
+      <Filter>Header Files\Application\Souris_edition</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Loupe.h">
+      <Filter>Header Files\Application\Souris_edition</Filter>
+    </ClInclude>
+    <ClInclude Include="MiseEchelle.h">
+      <Filter>Header Files\Application\Souris_edition</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\PointsControle.h">
+      <Filter>Header Files\Application\Souris_edition</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Rotation.h">
+      <Filter>Header Files\Application\Souris_edition</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Selection.h">
+      <Filter>Header Files\Application\Souris_edition</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Souris.h">
+      <Filter>Header Files\Application\Souris_edition</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\StrategieSouris.h">
+      <Filter>Header Files\Application\Souris_edition</Filter>
+    </ClInclude>
+    <ClInclude Include="Affichage_debuggage.h">
+      <Filter>Header Files\Application</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
