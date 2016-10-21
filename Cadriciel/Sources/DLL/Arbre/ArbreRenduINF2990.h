@@ -58,7 +58,6 @@ public:
    static const std::string NOM_POINTCONTROLE;
    /// La chaîne représentant le type des MAILLET.
    static const std::string NOM_MAILLET;
-   static const std::string NOM_MAILLET2;
 
    ///ajouter la table
    void ArbreRenduINF2990::ajouterTable();

@@ -42,7 +42,6 @@ const std::string ArbreRenduINF2990::NOM_RONDELLE{ "rondelle" };
 const std::string ArbreRenduINF2990::NOM_POINTCONTROLE{ "pointcontrole" };
 ///La chaîne représentant le type des points de controles de la table
 const std::string ArbreRenduINF2990::NOM_MAILLET{ "maillet" };
-const std::string ArbreRenduINF2990::NOM_MAILLET2{ "maillet2" };
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -68,7 +67,6 @@ ArbreRenduINF2990::ArbreRenduINF2990()
 	ajouterUsine(NOM_TABLE, new UsineNoeud<NoeudTable>{ NOM_TABLE, std::string{ "" } });
 	ajouterUsine(NOM_POINTCONTROLE, new UsineNoeud<NoeudPointControle>{ NOM_POINTCONTROLE, std::string{ "" } });
 	ajouterUsine(NOM_MAILLET, new UsineNoeud<NoeudMaillet>{ NOM_MAILLET, std::string{ "media/maillet.obj" } });
-	ajouterUsine(NOM_MAILLET2, new UsineNoeud<NoeudMaillet>{ NOM_MAILLET2, std::string{ "media/maillet2.obj" } });
 
 }
 
@@ -509,14 +507,14 @@ void  ArbreRenduINF2990::ajouterMailletEtRondelle()
 
 	//AJOUT MAILLET1
 	NoeudAbstrait* noeudMaillet{ creerNoeud(NOM_MAILLET) };
-	noeudMaillet->assignerPositionRelative({40,0,0 });
+	noeudMaillet->assignerPositionRelative({70,0,0 });
 	noeudMaillet->setScale({ 1, 1, 1 });
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet);
 	noeudMaillet->estDeuxiemeJoueur = false;
 	
 	//AJOUT MAILLET2
 	NoeudAbstrait* noeudMaillet2{ creerNoeud(NOM_MAILLET) };
-	noeudMaillet2->assignerPositionRelative({ -40,0,0 });
+	noeudMaillet2->assignerPositionRelative({ -70,0,0 });
 	noeudMaillet2->setScale({ 1, 1, 1 });
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet2);
 	noeudMaillet2->estDeuxiemeJoueur = true;
