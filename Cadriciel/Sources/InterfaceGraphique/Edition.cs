@@ -823,6 +823,8 @@ namespace InterfaceGraphique
             return currentFile_;
         }
 
+      
+
         public void setCurrentFile(string value)
         {
             if (value != DEFAULT_FILENAME)
