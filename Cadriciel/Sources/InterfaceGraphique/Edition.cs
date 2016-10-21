@@ -34,6 +34,8 @@ namespace InterfaceGraphique
         private static Chargement fenetreChargement_;
         private static Nouveau boiteNouv;
 
+        public bool estEnModeTest = false;
+
 
         public Edition()
         {
@@ -64,6 +66,13 @@ namespace InterfaceGraphique
             fenetreSauvegarde_ = new Sauvegarde(this);
             fenetreChargement_ = new Chargement(this);
             boiteNouv = new Nouveau(fenetreSauvegarde_);
+
+            //masquer bouton mode edition quand on est dans le mode edition
+            modeEditionToolStripMenuItem.Visible = false;
+
+            //panel score
+            splitContainer1.Panel1.Hide();
+
         }
 
         public void InitialiserAnimation()
@@ -105,79 +114,133 @@ namespace InterfaceGraphique
             if (e.KeyCode == Keys.Right) FonctionsNatives.deplacerVueXY(0.1, 0);
             if (e.KeyCode == Keys.Down) FonctionsNatives.deplacerVueXY(0, 0.1);
             if (e.KeyCode == Keys.Left) FonctionsNatives.deplacerVueXY(-0.1, 0);
+
+            //deplacer le maillet de 2eme joueur
+            if (estEnModeTest == true)
+            {
+                if (e.KeyCode == Keys.D) FonctionsNatives.deplacerMailletAvecClavier(1, 0);//avant
+                if (e.KeyCode == Keys.A) FonctionsNatives.deplacerMailletAvecClavier(-1, 0);//arriere
+                if (e.KeyCode == Keys.W) FonctionsNatives.deplacerMailletAvecClavier(0, 1); ;//haut
+                if (e.KeyCode == Keys.S) FonctionsNatives.deplacerMailletAvecClavier(0, -1); ;//bas
+            }
+
         }
 
         private void keyUpHandler(object sender, KeyEventArgs e)
         {
-            switch (e.KeyCode)
+            //Dans le mode edition
+            if (estEnModeTest == false)
             {
-                case Keys.ControlKey: { FonctionsNatives.toucheControl(false); break; }
-                case Keys.Alt: { FonctionsNatives.toucheAlt(false); break; }
-                case Keys.Menu: { FonctionsNatives.toucheAlt(false); break; }
-                case Keys.Escape: { FonctionsNatives.escEnfonce(); break; }
-                case Keys.Delete: { FonctionsNatives.supprimerObjet(); break; }
-                case Keys.D:
-                    {
-                        desactiverAutresBoutons();
-                        toolStripButtonDeplacement.Checked = true;
-                        this.changerMode(Etats.DEPLACEMENT); break;
-                    }
-                case Keys.S:
-                    {
-                        desactiverAutresBoutons();
-                        toolStripButtonSelection.Checked = true;
-                        this.changerMode(Etats.SELECTION); break;
-                    }
-                case Keys.R:
-                    {
-                        desactiverAutresBoutons();
-                        toolStripButtonRotation.Checked = true;
-                        this.changerMode(Etats.ROTATION); break;
-                    }
-                case Keys.E:
-                    {
-                        desactiverAutresBoutons();
-                        toolStripButtonMiseAEchelle.Checked = true;
-                        this.changerMode(Etats.MISEAECHELLE); break;
-                    }
-                case Keys.C:
-                    {
-                        desactiverAutresBoutons();
-                        toolStripButtonDuplication.Checked = true;
-                        this.changerMode(Etats.DUPLICATION); break;
-                    }
-                case Keys.Z:
-                    {
-                        desactiverAutresBoutons();
-                        toolStripButtonZoom.Checked = true;
-                        this.changerMode(Etats.LOUPE); break;
-                    }
-                case Keys.M:
-                    {
-                        desactiverAutresBoutons();
-                        toolStripButtonMuret.Checked = true;
-                        this.changerMode(Etats.AJOUT_MUR); break;
-                    }
-                case Keys.P:
-                    {
-                        desactiverAutresBoutons();
-                        toolStripButtonPortail.Checked = true;
-                        this.changerMode(Etats.AJOUT_PORTAIL); break;
-                    }
-                case Keys.B:
-                    {
-                        desactiverAutresBoutons();
-                        toolStripButtonAccelerateur.Checked = true;
-                        this.changerMode(Etats.AJOUT_ACCELERATEUR); break;
-                    }
-                case Keys.G:
-                    {
-                        desactiverAutresBoutons();
-                        toolStripButton1.Checked = true;
-                        this.changerMode(Etats.POINTSDECONTROLE); break;
-                    }
+                switch (e.KeyCode)
+                {
+                    case Keys.ControlKey: { FonctionsNatives.toucheControl(false); break; }
+                    case Keys.Alt: { FonctionsNatives.toucheAlt(false); break; }
+                    case Keys.Menu: { FonctionsNatives.toucheAlt(false); break; }
+                    case Keys.Delete: { FonctionsNatives.supprimerObjet(); break; }
+                    case Keys.D:
+                        {
+                            desactiverAutresBoutons();
+                            toolStripButtonDeplacement.Checked = true;
+                            this.changerMode(Etats.DEPLACEMENT); break;
+                        }
+                    case Keys.S:
+                        {
+                            desactiverAutresBoutons();
+                            toolStripButtonSelection.Checked = true;
+                            this.changerMode(Etats.SELECTION); break;
+                        }
+                    case Keys.R:
+                        {
+                            desactiverAutresBoutons();
+                            toolStripButtonRotation.Checked = true;
+                            this.changerMode(Etats.ROTATION); break;
+                        }
+                    case Keys.E:
+                        {
+                            desactiverAutresBoutons();
+                            toolStripButtonMiseAEchelle.Checked = true;
+                            this.changerMode(Etats.MISEAECHELLE); break;
+                        }
+                    case Keys.C:
+                        {
+                            desactiverAutresBoutons();
+                            toolStripButtonDuplication.Checked = true;
+                            this.changerMode(Etats.DUPLICATION); break;
+                        }
+                    case Keys.Z:
+                        {
+                            desactiverAutresBoutons();
+                            toolStripButtonZoom.Checked = true;
+                            this.changerMode(Etats.LOUPE); break;
+                        }
+                    case Keys.M:
+                        {
+                            desactiverAutresBoutons();
+                            toolStripButtonMuret.Checked = true;
+                            this.changerMode(Etats.AJOUT_MUR); break;
+                        }
+                    case Keys.P:
+                        {
+                            desactiverAutresBoutons();
+                            toolStripButtonPortail.Checked = true;
+                            this.changerMode(Etats.AJOUT_PORTAIL); break;
+                        }
+                    case Keys.B:
+                        {
+                            desactiverAutresBoutons();
+                            toolStripButtonAccelerateur.Checked = true;
+                            this.changerMode(Etats.AJOUT_ACCELERATEUR); break;
+                        }
+                    case Keys.G:
+                        {
+                            desactiverAutresBoutons();
+                            toolStripButton1.Checked = true;
+                            this.changerMode(Etats.POINTSDECONTROLE); break;
+                        }
+                    case Keys.T:
+                        {
+                            //afficher fenetre test 
+                            passerModeJeu(true);
+                            //Permet d'ajouter les maillets et la rondelle dans la table
+                            FonctionsNatives.ajouterMailletEtRondelle(); break;
+                        }
+                    case Keys.Escape:
+                        {
+                            FonctionsNatives.escEnfonce();
+                            break;
+                        }
 
-                default: break;
+
+                    default: break;
+                }
+            }
+            //dans le mode test
+            else
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Escape:// pause
+                        {
+                            afficherBarreMenu(); break;
+                        }
+                    case Keys.T://revenir au menu principal
+                        {
+                            //afficher fenetre edition
+                            passerModeJeu(false);
+                            //Permet de retirer les maillets et la rondelle dans la table
+                            FonctionsNatives.retirerMailletEtRondelle();break;
+                        }
+                    case Keys.Space: //reinitialiser la partie
+                        {
+                            FonctionsNatives.reinitialiserPartieCourante();
+                            break;
+                        }
+                    
+
+                    default: break;
+
+                }
+           
             }
         }
 
@@ -832,7 +895,115 @@ namespace InterfaceGraphique
             else
                 currentFile_ = "";
         }
-        
+
+
+        //wajdi
+        //Passage du mode edition au mode Test 
+        public void passerModeJeu(bool mode)
+        {
+            //si mode jeu ou test , masquer les menus a cotés + barre des menus
+            if (mode == true)
+            {
+                this.Text = "Mode Test";
+                estEnModeTest = true;
+
+                toolStrip1.Hide();
+                menuStrip1.Hide();
+
+                //masquer les boutons
+                éditionToolStripMenuItem.Visible = false;
+                outilsToolStripMenuItemPoints.Visible = false;
+                informationsToolStripMenuItem.Visible = false;
+                ouvrirToolStripMenuItem.Visible = false;
+                nouveauToolStripMenuItem.Visible = false;
+                enregistrerToolStripMenuItem.Visible = false;
+                enregistrerSousToolStripMenuItem.Visible = false;
+                modeTestToolStripMenuItem.Visible = false;
+                propriétésToolStripMenuItem.Visible = false;
+
+
+
+                //afficher mode editon , menu principal et vues
+                fichierToolStripMenuItem.Visible = true;
+                modeEditionToolStripMenuItem.Visible = true;
+                menuPrincipalToolStripMenuItem.Visible = true;
+                vuesToolStripMenuItem.Visible = true;
+
+                //panel score
+                splitContainer1.Panel1.Show();
+                splitContainer1.Panel2.Hide();
+
+            }
+            //si mode edition , afficher les menus a cotés + barre des menus
+            else
+            {
+                this.Text = "Mode Edition";
+
+                estEnModeTest = false;
+
+                toolStrip1.Show();
+                menuStrip1.Show();
+                //afficher les boutons
+                fichierToolStripMenuItem.Visible = true;
+                éditionToolStripMenuItem.Visible = true;
+                outilsToolStripMenuItemPoints.Visible = true;
+                informationsToolStripMenuItem.Visible = true;
+                vuesToolStripMenuItem.Visible = true;
+
+                ouvrirToolStripMenuItem.Visible = true;
+                nouveauToolStripMenuItem.Visible = true;
+                enregistrerToolStripMenuItem.Visible = true;
+                enregistrerSousToolStripMenuItem.Visible = true;
+                modeTestToolStripMenuItem.Visible = true;
+                propriétésToolStripMenuItem.Visible = true;
+
+
+                //masquer le bouton mode edition
+                modeEditionToolStripMenuItem.Visible = false;
+
+                //panel score
+                splitContainer1.Panel1.Hide();
+                splitContainer1.Panel2.Show();
+
+
+            }
+        }
+
+      
+        //wajdi
+        public void afficherBarreMenu()
+        {
+            if (this.estEnModeTest == true)
+            {
+                if (menuStrip1.Visible == false) menuStrip1.Show();
+                else menuStrip1.Hide();
+            }
+        }
+
+
+        //Bouton mode edition
+        private void modeEditionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //afficher fenetre edition
+            passerModeJeu(false);
+            //Permet de retirer les maillets et la rondelle dans la table
+            FonctionsNatives.retirerMailletEtRondelle();
+        }
+
+
+        //Bouton mode Test
+        private void modeTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //afficher fenetre test 
+            passerModeJeu(true);
+            //Permet d'ajouter les maillets et la rondelle dans la table
+            FonctionsNatives.ajouterMailletEtRondelle();
+        }
+
+
+     	
+				
+           
     }
 
     static partial class FonctionsNatives
@@ -954,7 +1125,19 @@ namespace InterfaceGraphique
             [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
             public static extern void initialiserScene();
 
+        //wajdi
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ajouterMailletEtRondelle();
+        //wajdi
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void retirerMailletEtRondelle();
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void deplacerMailletAvecClavier(double x, double y);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void reinitialiserPartieCourante();
 
     }
-   
+
 }

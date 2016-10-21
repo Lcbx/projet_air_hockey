@@ -102,5 +102,18 @@ extern "C" {
 	///permet d'initialiser la scene lorsqu'on clic sur nouveau
 	__declspec(dllexport) void initialiserScene();
 
+
+	///ajouter maillets et rondelle a la scene edition
+	__declspec(dllexport) void ajouterMailletEtRondelle();
+
+	///ajouter maillets et rondelle a la scene edition
+	__declspec(dllexport) void retirerMailletEtRondelle();
+
+	///permert de deplacer le maillet avec les touches de clavier
+	__declspec(dllexport) void deplacerMailletAvecClavier(double x, double y);
+
+	///Re-initialiser la partie
+	__declspec(dllexport) void reinitialiserPartieCourante();
+
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__

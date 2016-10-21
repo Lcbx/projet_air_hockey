@@ -56,6 +56,9 @@ public:
    static const std::string NOM_RONDELLE;
     /// La chaîne représentant le type des point de control de la table
    static const std::string NOM_POINTCONTROLE;
+   /// La chaîne représentant le type des MAILLET.
+   static const std::string NOM_MAILLET;
+   static const std::string NOM_MAILLET2;
 
    ///ajouter la table
    void ArbreRenduINF2990::ajouterTable();
@@ -100,7 +103,15 @@ public:
 	///determiner si la position est dans la table
    bool estInterieur = false;
 
+   ///mettre les maillets et la rondelle sur la table
+   void  ajouterMailletEtRondelle();
 
+   ///permert de deplacer le maillet avec les touches de clavier
+   void deplacerMailletAvecClavier(double x, double y);
+
+
+   ///Re initialiser la partie courante 
+  void reinitialiserPartieCourante();
 
 private :
 	NoeudTable* noeudTable_;

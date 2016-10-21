@@ -40,6 +40,9 @@ const std::string ArbreRenduINF2990::NOM_TABLE{ "table" };
 const std::string ArbreRenduINF2990::NOM_RONDELLE{ "rondelle" };
 ///La chaîne représentant le type des points de controles de la table
 const std::string ArbreRenduINF2990::NOM_POINTCONTROLE{ "pointcontrole" };
+///La chaîne représentant le type des points de controles de la table
+const std::string ArbreRenduINF2990::NOM_MAILLET{ "maillet" };
+const std::string ArbreRenduINF2990::NOM_MAILLET2{ "maillet2" };
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -64,6 +67,9 @@ ArbreRenduINF2990::ArbreRenduINF2990()
 	ajouterUsine(NOM_RONDELLE, new UsineNoeud<NoeudRondelle>{ NOM_RONDELLE, std::string{ "media/rondelle.obj" } });
 	ajouterUsine(NOM_TABLE, new UsineNoeud<NoeudTable>{ NOM_TABLE, std::string{ "" } });
 	ajouterUsine(NOM_POINTCONTROLE, new UsineNoeud<NoeudPointControle>{ NOM_POINTCONTROLE, std::string{ "" } });
+	ajouterUsine(NOM_MAILLET, new UsineNoeud<NoeudMaillet>{ NOM_MAILLET, std::string{ "media/maillet.obj" } });
+	ajouterUsine(NOM_MAILLET2, new UsineNoeud<NoeudMaillet>{ NOM_MAILLET2, std::string{ "media/maillet2.obj" } });
+
 }
 
 
@@ -490,5 +496,74 @@ bool ArbreRenduINF2990::objetEstDansLaTable()
 {
 	return estInterieur;
 }
+
+
+void  ArbreRenduINF2990::ajouterMailletEtRondelle()
+{
+
+	//AJOUT RONDELLE
+	NoeudAbstrait* noeudRondelle{ creerNoeud(NOM_RONDELLE) };
+	noeudRondelle->assignerPositionRelative({ 0,0,0 });
+	noeudRondelle->setScale({ 1, 1, 1 });
+	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudRondelle);
+
+	//AJOUT MAILLET1
+	NoeudAbstrait* noeudMaillet{ creerNoeud(NOM_MAILLET) };
+	noeudMaillet->assignerPositionRelative({40,0,0 });
+	noeudMaillet->setScale({ 1, 1, 1 });
+	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet);
+	noeudMaillet->estDeuxiemeJoueur = false;
+	
+	//AJOUT MAILLET2
+	NoeudAbstrait* noeudMaillet2{ creerNoeud(NOM_MAILLET) };
+	noeudMaillet2->assignerPositionRelative({ -40,0,0 });
+	noeudMaillet2->setScale({ 1, 1, 1 });
+	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet2);
+	noeudMaillet2->estDeuxiemeJoueur = true;
+
+}
+void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
+{
+	//NoeudAbstrait* dernier;
+
+	/*for (NoeudAbstrait * enfant : this->enfants_)
+	{
+		if (enfant->obtenirType() == "maillet")
+		{
+			dernier = enfant;
+		}
+	}
+	*/
+
+		NoeudAbstrait* dernier = this->enfants_.back();//pour obtenir le maillet du 2eme joueur
+		glm::dvec3 pos = dernier->obtenirPositionRelative();
+
+		if (x > 0) { dernier->assignerPositionRelative({ pos.x + 5, pos.y, 0 }); } //bouger vers droite
+		if (x < 0) { dernier->assignerPositionRelative({ pos.x - 5, pos.y, 0 }); }//bouger vers gauche
+
+		if (y > 0) { dernier->assignerPositionRelative({ pos.x , pos.y + 5, 0 }); } //bouger vers haut
+		if (y < 0) { dernier->assignerPositionRelative({ pos.x, pos.y - 5 , 0 }); } //bouger vers droite
+	
+}
+
+void ArbreRenduINF2990::reinitialiserPartieCourante()
+{
+	for (NoeudAbstrait * enfant : this->enfants_)
+	{
+		if (enfant->obtenirType() == "maillet") {
+			if (enfant->estDeuxiemeJoueur == true) {
+				enfant->assignerPositionRelative({ -40,0,0 });
+			}
+			else {
+				enfant->assignerPositionRelative({ 40,0,0 });
+			}
+		}
+		else if (enfant->obtenirType() == "rondelle") {
+			enfant->assignerPositionRelative({ 0,0,0 });
+		}
+	}
+}
+	
+
 
 

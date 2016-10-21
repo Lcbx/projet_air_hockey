@@ -160,7 +160,8 @@ void VisiteurSelection::visiter(NoeudBonus* noeud) {
 	}
 }
 
-void VisiteurSelection::visiter(NoeudMaillet* noeud) { }
+void VisiteurSelection::visiter(NoeudMaillet* noeud) { 
+}
 
 void VisiteurSelection::visiter(NoeudPortail* noeud) {
 	double rayon = noeud->obtenirRayon();

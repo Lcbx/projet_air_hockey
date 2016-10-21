@@ -76,6 +76,8 @@ namespace InterfaceGraphique
                     {
                         if (edition != null && peutAfficher)
                             edition.MettreAJour((double)tempsAccumule.Ticks / TimeSpan.TicksPerSecond);
+
+                    
                     }
                     tempsAccumule = TimeSpan.Zero;
                 }

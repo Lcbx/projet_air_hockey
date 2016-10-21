@@ -142,6 +142,20 @@ public:
 	///initialiser la zone de jeu
 	void initialiserScene();
 
+	///ajouter les maillets et la rondelle a la zone
+	void ajouterMailletEtRondelle();
+	
+	///enlever les maillets et la rondelle de la zone
+	void retirerMailletEtRondelle();
+
+
+	///permert de deplacer le maillet avec les touches de clavier
+    void deplacerMailletAvecClavier(double x, double y);
+
+
+	///Re initialiser la partie 
+	void reinitialiserPartieCourante();
+
 private:
 
    /// Constructeur par défaut.

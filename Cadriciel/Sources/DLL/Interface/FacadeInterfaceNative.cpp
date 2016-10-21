@@ -517,6 +517,66 @@ extern "C"
 		FacadeModele::obtenirInstance()->initialiserScene();
 	}
 
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn 	__declspec(dllexport) void __cdecl ajouterMailletEtRondelle()
+	///
+	/// Cette fonction permet d'ajouter les maillets et la rondelle
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl ajouterMailletEtRondelle()
+	{
+		FacadeModele::obtenirInstance()->ajouterMailletEtRondelle();
+
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn  __declspec(dllexport) void __cdecl retirerMailletEtRondelle()
+	///
+	/// Cette fonction permet de retirer les maillets et la rondelle pour le mode edition
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl retirerMailletEtRondelle()
+	{
+		FacadeModele::obtenirInstance()->retirerMailletEtRondelle();
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn 		__declspec(dllexport) void deplacerMailletAvecClavier()
+	///
+	/// Cette fonction permet de deplacer le maillet avec les touches de clavier
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl deplacerMailletAvecClavier(double x, double y)
+	{
+		FacadeModele::obtenirInstance()->deplacerMailletAvecClavier(x, y);
+	}
+
+
+	
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void reinitialiserPartieCourante();
+	///
+	/// Cette fonction permet de deplacerRe-initialiser la partie
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl reinitialiserPartieCourante()
+	{
+		FacadeModele::obtenirInstance()->reinitialiserPartieCourante();
+
+	}
+
 }
 
 
