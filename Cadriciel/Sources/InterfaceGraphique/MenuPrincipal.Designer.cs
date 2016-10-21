@@ -86,6 +86,7 @@
             this.configuration.Text = "Configuration";
             this.configuration.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.configuration.UseVisualStyleBackColor = true;
+            this.configuration.Click += new System.EventHandler(this.configuration_Click);
             // 
             // editeur
             // 
@@ -147,13 +148,7 @@
 
         #endregion
 
-       //public MenuPrincipal(Edition exemple2)
-       //{
-          //exemple = exemple2;
-       //}
-
-
-      //private static Edition exemple;
+      
 
 
         private System.Windows.Forms.Button partieRapide;

@@ -66,6 +66,12 @@
     <Compile Include="BoitePropriete.Designer.cs">
       <DependentUpon>BoitePropriete.cs</DependentUpon>
     </Compile>
+    <Compile Include="Configuration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuration.Designer.cs">
+      <DependentUpon>Configuration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Edition.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BoitePropriete.resx">
       <DependentUpon>BoitePropriete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Configuration.resx">
+      <DependentUpon>Configuration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Edition.resx">
       <DependentUpon>Edition.cs</DependentUpon>

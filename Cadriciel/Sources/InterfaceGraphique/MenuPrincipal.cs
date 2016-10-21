@@ -1,4 +1,11 @@
-﻿using System;
+﻿////////////////////////////////////////////////////////////////////////////////////
+/// @file MenuPrincipal.cs
+/// @author Medaoud Ikram
+/// @date 2016-10-10
+/// @version 1.0 
+///
+////////////////////////////////////////////////////////////////////////////////////
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +20,7 @@ namespace InterfaceGraphique
     public partial class MenuPrincipal : Form
     {
         private Edition edition_;
+        private Configuration configuration_;
 
 
         public MenuPrincipal()
@@ -20,9 +28,10 @@ namespace InterfaceGraphique
             InitializeComponent();
         }
 
-        public void setMenuEdition(Edition edition)
+        public void setMenu(Edition edition, Configuration configuration)
         {
             edition_=edition;
+            configuration_ = configuration;
         }
 
 
@@ -33,8 +42,7 @@ namespace InterfaceGraphique
 
         private void editeur_Click(object sender, EventArgs e)
         {
-            
-           //Edition edition_ = new Edition();  // crée un objet de type Edition
+          
             edition_.Show();                   //  l'afficher
             this.Hide();                      // fermer la fenêtre Menu principal
 
@@ -42,6 +50,13 @@ namespace InterfaceGraphique
 
         private void partieRapide_Click(object sender, EventArgs e)
         {
+        }
+
+       
+        private void configuration_Click(object sender, EventArgs e)
+        {
+           configuration_.Show();  //  afficher la boite de configuration quand on clique sur  
+           this.Hide();
         }
     }
 }

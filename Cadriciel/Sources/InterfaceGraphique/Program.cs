@@ -15,9 +15,10 @@ namespace InterfaceGraphique
         public static Object unLock = new Object();
         public static bool peutAfficher = true;
 
-        private static Edition edition;
+        
         private static MenuPrincipal menuPrincipal;
-
+        private static Edition edition;
+        private static Configuration configuration;
         private static TimeSpan dernierTemps;
         private static TimeSpan tempsAccumule;
         private static Stopwatch chrono = Stopwatch.StartNew();
@@ -46,15 +47,14 @@ namespace InterfaceGraphique
             Application.SetCompatibleTextRenderingDefault(false);
 
             edition = new Edition();
+            configuration = new Configuration();
+            
 
             //Application.Run(edition);
             menuPrincipal = new MenuPrincipal();
-
-            menuPrincipal.setMenuEdition(edition);
+            menuPrincipal.setMenu(edition, configuration);
             edition.setMenuPrincipal(menuPrincipal);
-
-           
-
+            configuration.setMenuPrincipalConfig(menuPrincipal);
             Application.Run(menuPrincipal);
         }
 
