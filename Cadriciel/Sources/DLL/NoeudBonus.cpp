@@ -84,7 +84,10 @@ void NoeudBonus::afficherConcret(const glm::mat4& vueProjection) const
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudBonus::animer(float temps) { }
+void NoeudBonus::animer(float temps) { 
+	//test
+	//std::cout << "dt " << temps << "\n";
+}
 
 ////////////////////////////////////////////////////////////////////////
 ///
