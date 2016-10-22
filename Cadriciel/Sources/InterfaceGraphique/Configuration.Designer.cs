@@ -32,12 +32,13 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.haut = new System.Windows.Forms.Button();
+            this.bas = new System.Windows.Forms.Button();
+            this.droite = new System.Windows.Forms.Button();
+            this.gauche = new System.Windows.Forms.Button();
             this.réintialisation = new System.Windows.Forms.Button();
             this.appliquer = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -71,12 +72,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.haut);
+            this.groupBox1.Controls.Add(this.bas);
+            this.groupBox1.Controls.Add(this.droite);
+            this.groupBox1.Controls.Add(this.gauche);
             this.groupBox1.Controls.Add(this.réintialisation);
             this.groupBox1.Controls.Add(this.appliquer);
-            this.groupBox1.Controls.Add(this.textBox4);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
@@ -85,6 +87,39 @@
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // haut
+            // 
+            resources.ApplyResources(this.haut, "haut");
+            this.haut.Name = "haut";
+            this.haut.UseVisualStyleBackColor = true;
+            this.haut.KeyDown += new System.Windows.Forms.KeyEventHandler(this.haut_KeyDown);
+            // 
+            // bas
+            // 
+            resources.ApplyResources(this.bas, "bas");
+            this.bas.Name = "bas";
+            this.bas.UseVisualStyleBackColor = true;
+            this.bas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.bas_KeyDown);
+            // 
+            // droite
+            // 
+            resources.ApplyResources(this.droite, "droite");
+            this.droite.Name = "droite";
+            this.droite.UseVisualStyleBackColor = true;
+            this.droite.KeyDown += new System.Windows.Forms.KeyEventHandler(this.droite_KeyDown);
+            // 
+            // gauche
+            // 
+            resources.ApplyResources(this.gauche, "gauche");
+            this.gauche.Name = "gauche";
+            this.gauche.UseVisualStyleBackColor = true;
+            this.gauche.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gauche_KeyDown);
             // 
             // réintialisation
             // 
@@ -99,30 +134,6 @@
             this.appliquer.Name = "appliquer";
             this.appliquer.UseVisualStyleBackColor = true;
             this.appliquer.Click += new System.EventHandler(this.appliquer_Click);
-            // 
-            // textBox4
-            // 
-            resources.ApplyResources(this.textBox4, "textBox4");
-            this.textBox4.Name = "textBox4";
-            this.textBox4.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox4_KeyDown);
-            // 
-            // textBox3
-            // 
-            resources.ApplyResources(this.textBox3, "textBox3");
-            this.textBox3.Name = "textBox3";
-            this.textBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox3_KeyDown);
-            // 
-            // textBox2
-            // 
-            resources.ApplyResources(this.textBox2, "textBox2");
-            this.textBox2.Name = "textBox2";
-            this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyDown);
-            // 
-            // textBox1
-            // 
-            resources.ApplyResources(this.textBox1, "textBox1");
-            this.textBox1.Name = "textBox1";
-            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
             // label5
             // 
@@ -194,11 +205,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button réintialisation;
         private System.Windows.Forms.Button appliquer;
+        private System.Windows.Forms.Button haut;
+        private System.Windows.Forms.Button bas;
+        private System.Windows.Forms.Button droite;
+        private System.Windows.Forms.Button gauche;
+        private System.Windows.Forms.Label label6;
     }
 }

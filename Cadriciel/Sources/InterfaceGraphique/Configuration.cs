@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
+
 
 namespace InterfaceGraphique
 {
@@ -31,45 +33,17 @@ namespace InterfaceGraphique
         {
             menuPrincipal_ = menuPrincipal;
         }
-
-        private void textBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-          
-                if (toucheDeplaceADroite_ != e.KeyValue && toucheDeplaceEnBas_ != e.KeyValue && toucheDeplaceEnHaut_ != e.KeyValue)
-                {
-                   toucheDeplaceAGauche_ = e.KeyValue;
-                  // KeysConverter kc = new KeysConverter();
-                  //string keyChar = kc.ConvertToString(e.KeyData);
-                  // this.textBox1.Text=keyChar;
-                }
-                }
-                     
-
-        private void textBox2_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (toucheDeplaceAGauche_ != e.KeyValue && toucheDeplaceEnBas_ != e.KeyValue && toucheDeplaceEnHaut_ != e.KeyValue)
-                toucheDeplaceADroite_ = e.KeyValue;
-        }
-
-        private void textBox3_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (toucheDeplaceADroite_ != e.KeyValue && toucheDeplaceAGauche_ != e.KeyValue && toucheDeplaceEnHaut_ != e.KeyValue )
-                toucheDeplaceEnBas_ = e.KeyValue;
-        }
-
-        private void textBox4_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (toucheDeplaceADroite_ != e.KeyValue && toucheDeplaceEnBas_ != e.KeyValue && toucheDeplaceEnHaut_ != e.KeyValue)
-                toucheDeplaceEnHaut_ = e.KeyValue;
-        }
-
-
+                    
         private void renitialisation_Click(object sender, EventArgs e)
         {
             toucheDeplaceAGauche_ = (int)Keys.A;
             toucheDeplaceEnBas_ = (int)Keys.S;
             toucheDeplaceADroite_ = (int)Keys.D;
             toucheDeplaceEnHaut_ = (int)Keys.W;
+            this.gauche.Text = "a";
+            this.droite.Text = "d";
+            this.bas.Text = "s";
+            this.haut.Text = "w";
         }
 
         private void appliquer_Click(object sender, EventArgs e)
@@ -77,5 +51,63 @@ namespace InterfaceGraphique
             this.Hide();
             menuPrincipal_.Show();
         }
+
+      private string changerTouche(KeyEventArgs ke)
+            {
+                KeysConverter kc = new KeysConverter();
+                string keyChar = kc.ConvertToString(ke.KeyData);
+                return keyChar;
+            }
+        private void gauche_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (toucheDeplaceADroite_ != e.KeyValue && toucheDeplaceEnBas_ != e.KeyValue && toucheDeplaceEnHaut_ != e.KeyValue)
+            {
+                toucheDeplaceAGauche_ = e.KeyValue;
+                this.gauche.Text=changerTouche(e);
+            }         
+        }
+
+        private void droite_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (toucheDeplaceAGauche_ != e.KeyValue && toucheDeplaceEnBas_ != e.KeyValue && toucheDeplaceEnHaut_ != e.KeyValue)
+            {
+                toucheDeplaceADroite_ = e.KeyValue;
+                this.droite.Text = changerTouche(e);
+            }
+        }
+
+        private void bas_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (toucheDeplaceADroite_ != e.KeyValue && toucheDeplaceAGauche_ != e.KeyValue && toucheDeplaceEnHaut_ != e.KeyValue)
+            {
+                    toucheDeplaceEnBas_ = e.KeyValue;
+                    this.bas.Text = changerTouche(e);
+            }
+        }
+
+        private void haut_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (toucheDeplaceADroite_ != e.KeyValue && toucheDeplaceEnBas_ != e.KeyValue && toucheDeplaceAGauche_ != e.KeyValue)
+            {
+                toucheDeplaceEnHaut_ = e.KeyValue;
+                this.haut.Text = changerTouche(e);
+            }
+                
+        }
+
     }
-}
+    static partial class FonctionsNatives
+    {
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void deplacerVersLaGauche(int toucheDeplacementAGauche_);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void deplacertVersLaDroite(int toucheDeplacementADroite_);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void deplacerVersLeHaut(int toucheDeplacementEnHaut_);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void deplacerVersLeBas(int toucheDeplacementEnBas_);
+    }
+    }
