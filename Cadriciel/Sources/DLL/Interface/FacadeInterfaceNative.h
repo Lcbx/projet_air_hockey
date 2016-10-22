@@ -115,5 +115,8 @@ extern "C" {
 	///Re-initialiser la partie
 	__declspec(dllexport) void reinitialiserPartieCourante();
 
+	///Re-initialiser la partie
+	__declspec(dllexport) void deplacerMailletAvecSouris();
+
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__

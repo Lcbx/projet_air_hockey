@@ -35,7 +35,7 @@ namespace InterfaceGraphique
         private static Nouveau boiteNouv;
 
         public bool estEnModeTest = false;
-
+        public bool estEnPause = false;
 
         public Edition()
         {
@@ -72,6 +72,7 @@ namespace InterfaceGraphique
 
             //panel score
             splitContainer1.Panel1.Hide();
+
 
         }
 
@@ -118,10 +119,13 @@ namespace InterfaceGraphique
             //deplacer le maillet de 2eme joueur
             if (estEnModeTest == true)
             {
-                if (e.KeyCode == Keys.D) FonctionsNatives.deplacerMailletAvecClavier(1, 0);//avant
-                if (e.KeyCode == Keys.A) FonctionsNatives.deplacerMailletAvecClavier(-1, 0);//arriere
-                if (e.KeyCode == Keys.W) FonctionsNatives.deplacerMailletAvecClavier(0, 1); ;//haut
-                if (e.KeyCode == Keys.S) FonctionsNatives.deplacerMailletAvecClavier(0, -1); ;//bas
+                if (estEnPause == false)
+                {
+                    if (e.KeyCode == Keys.D) FonctionsNatives.deplacerMailletAvecClavier(1, 0);//avant
+                    if (e.KeyCode == Keys.A) FonctionsNatives.deplacerMailletAvecClavier(-1, 0);//arriere
+                    if (e.KeyCode == Keys.W) FonctionsNatives.deplacerMailletAvecClavier(0, 1);//haut
+                    if (e.KeyCode == Keys.S) FonctionsNatives.deplacerMailletAvecClavier(0, -1); //bas
+                }
             }
 
         }
@@ -331,6 +335,13 @@ namespace InterfaceGraphique
             else Cursor.Current = Cursors.Default;
 
             x = e.X; y = e.Y;
+
+            System.Console.WriteLine("En mouvement: " + e.X + " y: " + e.Y);
+
+            if (estEnModeTest)
+            {
+            //    FonctionsNatives.deplacerMailletAvecSouris();
+            }
 
         }
 
@@ -970,11 +981,17 @@ namespace InterfaceGraphique
       
         //wajdi
         public void afficherBarreMenu()
-        {
+        { //En mode Test, si on clique sur Echapp
             if (this.estEnModeTest == true)
             {
-                if (menuStrip1.Visible == false) menuStrip1.Show();
-                else menuStrip1.Hide();
+                if (menuStrip1.Visible == false){    //si le menu est masqué, on l'Affiche + pause
+                    estEnPause = true;
+                    menuStrip1.Show();
+                }
+                else {     //si non le masque et on retourne dans le jeu
+                    estEnPause = false;
+                    menuStrip1.Hide();
+                }
             }
         }
 
@@ -1136,6 +1153,11 @@ namespace InterfaceGraphique
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void reinitialiserPartieCourante();
 
-    }
+
+        //[DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+       // public static extern void deplacerMailletAvecSouris();
+
+
+}
 
 }
