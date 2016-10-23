@@ -21,6 +21,8 @@
 
 #include "Couleurs.h"
 
+#include "Deplacement.h"
+
 using namespace std;
 
 
@@ -601,7 +603,25 @@ void ArbreRenduINF2990::reinitialiserPartieCourante()
 		}
 	}
 }
-	
+
+void ArbreRenduINF2990::deplacerMailletAvecSouris(glm::dvec3 pos)
+{
+	for (NoeudAbstrait * enfant : this->enfants_)
+	{
+		if (enfant->obtenirType() == "maillet") {
+			if (enfant->estDeuxiemeJoueur == false) {
+				if (this->getTable()->dansTable(pos))
+				{
+					if(pos.x>0)
+					enfant->assignerPositionRelative(pos);
+					else
+						enfant->assignerPositionRelative({0,pos.y,0});
+				}
+			}
+		}
+	}
+}
+
 
 
 

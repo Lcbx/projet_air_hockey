@@ -24,7 +24,7 @@
 ///////////////////////////////////////////////////////////////////////////
 class Souris {
 public:
-	enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, AJOUT_MUR, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, REDIMENSIONNEMENT, NBETATS };
+	enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, AJOUT_MUR, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, REDIMENSIONNEMENT, NBETATS, TEST};
 	static Souris* obtenirInstance();		//singleton
 	static void libererInstance();			//singleton
 	void startClick(int x, int y);			//les coordonnees du mouse_down

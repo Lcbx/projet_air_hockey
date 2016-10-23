@@ -156,6 +156,9 @@ public:
 	///Re initialiser la partie 
 	void reinitialiserPartieCourante();
 
+	///permert de deplacer le maillet avec la souris
+	void deplacerMailletAvecSouris(double x, double y);
+
 private:
 
    /// Constructeur par défaut.

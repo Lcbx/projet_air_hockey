@@ -115,8 +115,8 @@ extern "C" {
 	///Re-initialiser la partie
 	__declspec(dllexport) void reinitialiserPartieCourante();
 
-	///Re-initialiser la partie
-	__declspec(dllexport) void deplacerMailletAvecSouris();
+	///deplacer le maillet du joueur 1 avec souris
+	__declspec(dllexport) void deplacerMailletAvecSouris(double x, double y);
 
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__

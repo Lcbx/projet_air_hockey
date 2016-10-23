@@ -694,3 +694,12 @@ void FacadeModele::reinitialiserPartieCourante()
 	arbre_->reinitialiserPartieCourante();
 
 }
+
+void FacadeModele::deplacerMailletAvecSouris(double x, double y)
+{
+	glm::dvec3 posDeplacement;
+	vue_->convertirClotureAVirtuelle(x, y, posDeplacement);
+	arbre_->deplacerMailletAvecSouris(posDeplacement);
+
+}
+

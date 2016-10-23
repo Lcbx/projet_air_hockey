@@ -577,6 +577,22 @@ extern "C"
 
 	}
 
+
+
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn 		__declspec(dllexport) void deplacerMailletAvecClavier()
+	///
+	/// Cette fonction permet de deplacer le maillet avec les touches de clavier
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl deplacerMailletAvecSouris(double x, double y)
+	{
+		FacadeModele::obtenirInstance()->deplacerMailletAvecSouris(x, y);
+	}
 }
 
 

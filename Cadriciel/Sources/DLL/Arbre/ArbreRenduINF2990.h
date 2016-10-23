@@ -112,6 +112,10 @@ public:
    ///Re initialiser la partie courante 
   void reinitialiserPartieCourante();
 
+  ///deplacer avec souris
+  void deplacerMailletAvecSouris(glm::dvec3 pos);
+
+
 private :
 	NoeudTable* noeudTable_;
 };

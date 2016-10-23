@@ -119,9 +119,9 @@ namespace InterfaceGraphique
             //deplacer le maillet de 2eme joueur
             if (estEnModeTest == true)
             {
-                if (estEnPause == false)
+                if (estEnPause == false) // si on est pause, on ne peut pas deplacer le maillet
                 {
-                    if (e.KeyCode == Keys.D) FonctionsNatives.deplacerMailletAvecClavier(1, 0);//avant
+                    if (e.KeyCode == Keys.D) FonctionsNatives.deplacerMailletAvecClavier(1, 0); //avant
                     if (e.KeyCode == Keys.A) FonctionsNatives.deplacerMailletAvecClavier(-1, 0);//arriere
                     if (e.KeyCode == Keys.W) FonctionsNatives.deplacerMailletAvecClavier(0, 1);//haut
                     if (e.KeyCode == Keys.S) FonctionsNatives.deplacerMailletAvecClavier(0, -1); //bas
@@ -206,7 +206,8 @@ namespace InterfaceGraphique
                             //afficher fenetre test 
                             passerModeJeu(true);
                             //Permet d'ajouter les maillets et la rondelle dans la table
-                            FonctionsNatives.ajouterMailletEtRondelle(); break;
+                            FonctionsNatives.ajouterMailletEtRondelle();
+                            break;
                         }
                     case Keys.Escape:
                         {
@@ -253,7 +254,7 @@ namespace InterfaceGraphique
         /////////////////////////////////////////////////////////////////////////
         //  gere la souris
         /////////////////////////////////////////////////////////////////////////
-        public enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, AJOUT_MUR, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, REDIMENSIONNEMENT, NBETATS };
+        public enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, AJOUT_MUR, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, REDIMENSIONNEMENT, NBETATS, TEST };
 
         private Etats EtatSouris = Etats.SELECTION;
 
@@ -336,19 +337,18 @@ namespace InterfaceGraphique
 
             x = e.X; y = e.Y;
 
-            System.Console.WriteLine("En mouvement: " + e.X + " y: " + e.Y);
 
             if (estEnModeTest)
             {
-            //    FonctionsNatives.deplacerMailletAvecSouris();
+                if (estEnPause == false)
+                {
+                    FonctionsNatives.deplacerMailletAvecSouris(e.X, e.Y);
+                }
             }
 
         }
 
 
-        /////////////////////////////////////////////////////////////////////////
-        //  ...
-        /////////////////////////////////////////////////////////////////////////
 
 
         private void nouveauToolStripMenuItem_Click(object sender, EventArgs e)
@@ -424,7 +424,6 @@ namespace InterfaceGraphique
         /// @return aucune
         //
         ////////////////////////////////////////////////////////////////////////////////////////// 
-
         private void toolStripButtonDeplacement_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
@@ -446,7 +445,6 @@ namespace InterfaceGraphique
         /// @return aucune
         //
         ////////////////////////////////////////////////////////////////////////////////////////// 
-
         private void toolStripButtonRotation_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
@@ -469,7 +467,6 @@ namespace InterfaceGraphique
         /// @return aucune
         //
         ////////////////////////////////////////////////////////////////////////////////////////// 
-
         private void toolStripButtonMiseAEchelle_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
@@ -490,7 +487,6 @@ namespace InterfaceGraphique
         /// @return aucune
         //
         ////////////////////////////////////////////////////////////////////////////////////////// 
-
         private void toolStripButtonDuplication_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
@@ -512,13 +508,13 @@ namespace InterfaceGraphique
         /// @return aucune
         //
         ////////////////////////////////////////////////////////////////////////////////////////// 
-
         private void toolStripButtonZoom_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
             toolStripButtonZoom.Checked = true;
             this.changerMode(Etats.LOUPE);
         }
+
         /////////////////////////////////////////////////////////////////////////
         ///  @fnprivate void toolStripButtonPortail_Click(object sender, EventArgs e)
         ///  @brief Change le mode pour l'ajout d'un portail
@@ -532,7 +528,6 @@ namespace InterfaceGraphique
         /// @return aucune
         //
         ////////////////////////////////////////////////////////////////////////////////////////// 
-
         private void toolStripButtonAccelerateur_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
@@ -555,7 +550,6 @@ namespace InterfaceGraphique
         /// @return aucune
         //
         ////////////////////////////////////////////////////////////////////////////////////////// 
-
         private void toolStripButtonPortail_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
@@ -915,6 +909,8 @@ namespace InterfaceGraphique
             {
                 this.Text = "Mode Test";
                 estEnModeTest = true;
+                this.changerMode(Etats.TEST);
+
 
                 toolStrip1.Hide();
                 menuStrip1.Hide();
@@ -947,8 +943,9 @@ namespace InterfaceGraphique
             else
             {
                 this.Text = "Mode Edition";
-
                 estEnModeTest = false;
+                this.changerMode(Etats.SELECTION);
+
 
                 toolStrip1.Show();
                 menuStrip1.Show();
@@ -1154,8 +1151,8 @@ namespace InterfaceGraphique
         public static extern void reinitialiserPartieCourante();
 
 
-        //[DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-       // public static extern void deplacerMailletAvecSouris();
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void deplacerMailletAvecSouris(double x , double y);
 
 
 }
