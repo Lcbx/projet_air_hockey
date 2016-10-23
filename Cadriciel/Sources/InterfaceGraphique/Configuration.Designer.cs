@@ -31,10 +31,25 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Configuration));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.haut = new System.Windows.Forms.Button();
+            this.bas = new System.Windows.Forms.Button();
+            this.droite = new System.Windows.Forms.Button();
+            this.gauche = new System.Windows.Forms.Button();
+            this.réintialisation = new System.Windows.Forms.Button();
+            this.appliquer = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -50,9 +65,100 @@
             // tabPage1
             // 
             this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage1.Controls.Add(this.groupBox1);
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.haut);
+            this.groupBox1.Controls.Add(this.bas);
+            this.groupBox1.Controls.Add(this.droite);
+            this.groupBox1.Controls.Add(this.gauche);
+            this.groupBox1.Controls.Add(this.réintialisation);
+            this.groupBox1.Controls.Add(this.appliquer);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // haut
+            // 
+            resources.ApplyResources(this.haut, "haut");
+            this.haut.Name = "haut";
+            this.haut.UseVisualStyleBackColor = true;
+            this.haut.KeyDown += new System.Windows.Forms.KeyEventHandler(this.haut_KeyDown);
+            // 
+            // bas
+            // 
+            resources.ApplyResources(this.bas, "bas");
+            this.bas.Name = "bas";
+            this.bas.UseVisualStyleBackColor = true;
+            this.bas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.bas_KeyDown);
+            // 
+            // droite
+            // 
+            resources.ApplyResources(this.droite, "droite");
+            this.droite.Name = "droite";
+            this.droite.UseVisualStyleBackColor = true;
+            this.droite.KeyDown += new System.Windows.Forms.KeyEventHandler(this.droite_KeyDown);
+            // 
+            // gauche
+            // 
+            resources.ApplyResources(this.gauche, "gauche");
+            this.gauche.Name = "gauche";
+            this.gauche.UseVisualStyleBackColor = true;
+            this.gauche.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gauche_KeyDown);
+            // 
+            // réintialisation
+            // 
+            resources.ApplyResources(this.réintialisation, "réintialisation");
+            this.réintialisation.Name = "réintialisation";
+            this.réintialisation.UseVisualStyleBackColor = true;
+            this.réintialisation.Click += new System.EventHandler(this.renitialisation_Click);
+            // 
+            // appliquer
+            // 
+            resources.ApplyResources(this.appliquer, "appliquer");
+            this.appliquer.Name = "appliquer";
+            this.appliquer.UseVisualStyleBackColor = true;
+            this.appliquer.Click += new System.EventHandler(this.appliquer_Click);
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
             // 
             // tabPage2
             // 
@@ -79,6 +185,9 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "Configuration";
             this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -90,5 +199,18 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button réintialisation;
+        private System.Windows.Forms.Button appliquer;
+        private System.Windows.Forms.Button haut;
+        private System.Windows.Forms.Button bas;
+        private System.Windows.Forms.Button droite;
+        private System.Windows.Forms.Button gauche;
+        private System.Windows.Forms.Label label6;
     }
 }

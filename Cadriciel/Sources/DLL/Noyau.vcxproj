@@ -178,6 +178,7 @@
     <ClCompile Include="VisiteurSelection.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Affichage_debuggage.h" />
     <ClInclude Include="Application\AjoutAccelerateur.h" />
     <ClInclude Include="Application\AjoutMur.h" />
     <ClInclude Include="Application\AjoutPortail.h" />

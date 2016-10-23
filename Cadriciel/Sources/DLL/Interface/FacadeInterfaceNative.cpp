@@ -576,6 +576,61 @@ extern "C"
 		FacadeModele::obtenirInstance()->reinitialiserPartieCourante();
 
 	}
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void  deplacerVersLaGauche(int toucheDeplacementAGauche);
+	///
+	/// Cette fonction permet de deplacer l'objet vers la gauche
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void  deplacerVersLaGauche(int toucheDeplacementAGauche);
+	//{
+		//FacadeModele:: obtenirInstance()
+	//}
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void deplacertVersLaDroite(int toucheDeplacementADroite_);
+	///
+	/// Cette fonction permet de deplacer l'objet vers la droite
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void deplacertVersLaDroite(int toucheDeplacementADroite_);
+	//{
+		//FacadeModele::obtenirInstance
+
+	//}
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void deplacerVersLeHaut(int toucheDeplacementEnHaut_);
+	///
+	/// Cette fonction permet de deplacer l'objet vers le haut
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void deplacerVersLeHaut(int toucheDeplacementEnHaut_);
+	//{
+		//FacadeModele::obtenirInstance()
+
+	//}
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn ___declspec(dllexport)  void deplacerVersLeBas(int toucheDeplacementEnBas_);
+	///
+	/// Cette fonction permet de deplacer l'objet vers le bas 
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport)  void deplacerVersLeBas(int toucheDeplacementEnBas_);
+	//{
+		//FacadeModele::obtenirInstance()->
+
+	//}
 
 
 

@@ -321,10 +321,13 @@ void FacadeModele::libererOpenGL()
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void FacadeModele::afficher() const
+void FacadeModele::afficher()
 {
 	// Efface l'ancien rendu
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+	//animer la scene
+	animer(dt());
 
 	// Afficher la scène
 	afficherBase();

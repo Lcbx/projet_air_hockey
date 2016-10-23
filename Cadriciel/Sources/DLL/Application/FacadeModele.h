@@ -12,6 +12,7 @@
 
 
 #include <windows.h>
+#include <ctime>
 #include <string>
 #include "EtatOpenGL.h"
 
@@ -69,7 +70,7 @@ public:
 	/// Libère le contexte OpenGL.
 	void libererOpenGL();
 	/// Affiche le contenu du modèle.
-	void afficher() const;
+	void afficher();
 	/// Affiche la base du contenu du modèle.
 	void afficherBase() const;
 
@@ -193,6 +194,15 @@ private:
 
    /// Coefficients de configuration
    CoefficientConfiguration coeff_ = COEFFICIENTS_DEFAULT;
+
+
+   //animation
+   ///temps ecoule pour l'animation
+   long currentTime_;
+   ///remet le temps ecoule a 0
+   void dtReset() { currentTime_ = clock(); }
+   ///retourne le temps ecoule
+   long dt() { long temp = currentTime_; currentTime_ = clock(); return currentTime_ - temp; }
 };
 
 
