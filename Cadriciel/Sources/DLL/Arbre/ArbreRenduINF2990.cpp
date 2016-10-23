@@ -496,7 +496,15 @@ bool ArbreRenduINF2990::objetEstDansLaTable()
 	return estInterieur;
 }
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void ajouterMailletEtRondelle()
+///
+/// Cette fonction permet d'Ajouter les maillets et la rondelle
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
 void  ArbreRenduINF2990::ajouterMailletEtRondelle()
 {
 
@@ -537,12 +545,43 @@ void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 		NoeudAbstrait* dernier = this->enfants_.back();//pour obtenir le maillet du 2eme joueur
 		glm::dvec3 pos = dernier->obtenirPositionRelative();
 
-		if (x > 0) { dernier->assignerPositionRelative({ pos.x + 5, pos.y, 0 }); } //bouger vers droite
-		if (x < 0) { dernier->assignerPositionRelative({ pos.x - 5, pos.y, 0 }); }//bouger vers gauche
+		if (x > 0) {
+			if (pos.x + 5 <= 0) { // pour ne pas depasser le centre 
+				dernier->assignerPositionRelative({ pos.x + 5, pos.y, 0 });//bouger vers droite
+				cout << "interieur: " << this->getTable()->dansTable(pos) << endl;
+			}
+			else { dernier->assignerPositionRelative({ 0, pos.y, 0 });//ne pas depasser le centre
+		}
 
-		if (y > 0) { dernier->assignerPositionRelative({ pos.x , pos.y + 5, 0 }); } //bouger vers haut
-		if (y < 0) { dernier->assignerPositionRelative({ pos.x, pos.y - 5 , 0 }); } //bouger vers droite
-	
+		} 
+		if (x < 0) {  //bouger vers gauche
+			if (this->getTable()->dansTable({ pos.x - 5, pos.y, 0 }))//checker si a l'interieur 
+			{
+				dernier->assignerPositionRelative({ pos.x - 5, pos.y, 0 });
+			}
+			else {
+				dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
+			}
+		}
+
+		if (y > 0) { //bouger vers haut
+			if (this->getTable()->dansTable({ pos.x , pos.y + 5 , 0 }))
+			{
+				dernier->assignerPositionRelative({ pos.x , pos.y + 5, 0 });
+			}
+			else {
+				dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
+			}
+		}
+		if (y < 0) {//bouger vers bas
+			if (this->getTable()->dansTable({ pos.x , pos.y - 5 , 0 }))
+			{
+				dernier->assignerPositionRelative({ pos.x, pos.y - 5 , 0 });
+			} 
+			else {
+				dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
+			}
+		}
 }
 
 void ArbreRenduINF2990::reinitialiserPartieCourante()
