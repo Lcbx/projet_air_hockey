@@ -148,7 +148,6 @@
             this.fichierToolStripMenuItem.Name = "fichierToolStripMenuItem";
             this.fichierToolStripMenuItem.Size = new System.Drawing.Size(54, 22);
             this.fichierToolStripMenuItem.Text = "Fichier";
-            this.fichierToolStripMenuItem.Click += new System.EventHandler(this.fichierToolStripMenuItem_Click);
             // 
             // nouveauToolStripMenuItem
             // 

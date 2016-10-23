@@ -37,6 +37,16 @@ namespace InterfaceGraphique
         public bool estEnModeTest = false;
         public bool estEnPause = false;
 
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn public Edition()
+        /// 
+        ///  @brief Constructeur de la classe Edition
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         public Edition()
         {
             this.KeyPreview = true;
@@ -76,6 +86,16 @@ namespace InterfaceGraphique
 
         }
 
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn         public void InitialiserAnimation()
+        /// 
+        ///  @brief Permet d'initialiser le contexte OpenGL
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         public void InitialiserAnimation()
         {
             this.DoubleBuffered = false;
@@ -84,6 +104,18 @@ namespace InterfaceGraphique
             FonctionsNatives.dessinerOpenGL();
         }
 
+
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn   public void MettreAJour(double tempsInterAffichage)
+        /// 
+        ///  @brief mettre a jour le contexte openGl, cette methode est appelé a chaque Delta(temps) 
+        ///  pour refraichir la scene
+        /// 
+        /// @param[in] double tempsInterAffichage
+        ///
+        /// @return aucune
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         public void MettreAJour(double tempsInterAffichage)
         {
             try
@@ -100,10 +132,17 @@ namespace InterfaceGraphique
 
         }
 
-        /////////////////////////////////////////////////////////////////////////
-        //  gere le clavier
-        /////////////////////////////////////////////////////////////////////////
 
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn   private void keyDownHandler(object sender, KeyEventArgs e)
+        /// 
+        ///  @brief gere les clics du clavier en mode down (juste appuyer sur la touche) 
+        ///  
+        /// @param[in] sender , e
+        ///
+        /// @return aucune
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void keyDownHandler(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.ControlKey) FonctionsNatives.toucheControl(true);
@@ -130,6 +169,16 @@ namespace InterfaceGraphique
 
         }
 
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn   private void keyUpHandler(object sender, KeyEventArgs e)
+        /// 
+        ///  @brief gere les clics du clavier en mode up (appuyer et relacher sur la touche) 
+        ///  
+        /// @param[in] sender , e
+        ///
+        /// @return aucune
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void keyUpHandler(object sender, KeyEventArgs e)
         {
             //Dans le mode edition
@@ -250,10 +299,6 @@ namespace InterfaceGraphique
         }
 
 
-
-        /////////////////////////////////////////////////////////////////////////
-        //  gere la souris
-        /////////////////////////////////////////////////////////////////////////
         public enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, AJOUT_MUR, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, REDIMENSIONNEMENT, NBETATS, TEST };
 
         private Etats EtatSouris = Etats.SELECTION;
@@ -262,6 +307,16 @@ namespace InterfaceGraphique
 
         private int x, y;
 
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn  public void changerMode(Etats nouvelEtat)
+        /// 
+        ///  @brief Machine a etat pour gerer les differents scenarios d'edtions 
+        ///  
+        /// @param[in] Etats nouvelEtat
+        ///
+        /// @return aucune
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         public void changerMode(Etats nouvelEtat)
         {
             if (EtatSouris != nouvelEtat)
@@ -287,26 +342,40 @@ namespace InterfaceGraphique
             }
         }
 
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn   public void panel1_MouseDown(object sender, MouseEventArgs e)
+        /// 
+        ///  @brief gerer les modes de clics sur la souris (DOWN)
+        ///  
+        /// @param[in] object sender, MouseEventArgs e)
+        ///
+        /// @return aucune
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         public void panel1_MouseDown(object sender, MouseEventArgs e)
         {
-            System.Console.WriteLine("Souris down : X = " + e.X + " et Y = " + e.Y);
-
             if (e.Button == System.Windows.Forms.MouseButtons.Right) FonctionsNatives.rightClick(true);
             else if (EtatSouris == Etats.SELECTION || EtatSouris == Etats.LOUPE)
             {
                 Program.peutAfficher = false;
             }
             FonctionsNatives.clickStart(e.X, e.Y);
-
-
-
+            
             mousePressed = true;
         }
 
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn   public void panel1_MouseUp(object sender, MouseEventArgs e)
+        /// 
+        ///  @brief gerer les modes de clics sur la souris (UP)
+        ///  
+        /// @param[in] object sender, MouseEventArgs e)
+        ///
+        /// @return aucune
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         public void panel1_MouseUp(object sender, MouseEventArgs e)
         {
-            System.Console.WriteLine("Souris up : X = " + e.X + " et Y = " + e.Y);
-
             FonctionsNatives.clickEnd(e.X, e.Y);
 
             if (e.Button == System.Windows.Forms.MouseButtons.Right) FonctionsNatives.rightClick(false);
@@ -322,6 +391,16 @@ namespace InterfaceGraphique
         }
 
         bool signeInterdiction = false;
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn  Edition_MouseMove(object sender, MouseEventArgs e)
+        /// 
+        ///  @brief gerer les mouvements de la souris
+        ///  
+        /// @param[in] object sender, MouseEventArgs e
+        ///
+        /// @return aucune
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         public void Edition_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right) FonctionsNatives.rightClick(true);
@@ -350,17 +429,16 @@ namespace InterfaceGraphique
 
 
 
-
-        private void nouveauToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            System.Console.WriteLine("Nouveau");
-        }
-
-        private void quitterToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            System.Console.WriteLine("Quitter");
-        }
-
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn  private void Exemple_FormClosing(object sender, FormClosingEventArgs e)
+        /// 
+        ///  @brief liberer l'openGl  a la fermeture de l'application
+        ///  
+        /// @param[in] object sender, FormClosingEventArgs e
+        ///
+        /// @return aucune
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void Exemple_FormClosing(object sender, FormClosingEventArgs e)
         {
             lock (Program.unLock)
@@ -374,16 +452,47 @@ namespace InterfaceGraphique
             //this.Hide();
         }
 
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn  public void setMenuPrincipal(MenuPrincipal menuPrincipal)
+        /// 
+        ///  @brief associer le menu principal a cette fenetre
+        ///  
+        /// @param[in] object sender, FormClosingEventArgs e
+        ///
+        /// @return aucune
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         public void setMenuPrincipal(MenuPrincipal menuPrincipal)
         {
             menuPrincipal_ = menuPrincipal;
         }
+
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn  private void menuPrincipalToolStripMenuItem_Click(object sender, EventArgs e)
+        /// 
+        ///  @brief retourner au menu principal
+        ///  
+        /// @param[in] object sender, EventArgs e
+        ///
+        /// @return aucune
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void menuPrincipalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             menuPrincipal_.Show();
             this.Hide();
         }
 
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn  private void propriétésToolStripMenuItem_Click(object sender, EventArgs e)
+        /// 
+        ///  @brief afficher la boite de proprietes
+        ///  
+        /// @param[in] object sender, EventArgs e
+        ///
+        /// @return aucune
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void propriétésToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //afficher la boite de configuration
@@ -516,7 +625,7 @@ namespace InterfaceGraphique
         }
 
         /////////////////////////////////////////////////////////////////////////
-        ///  @fnprivate void toolStripButtonPortail_Click(object sender, EventArgs e)
+        ///  @fnprivate void toolStripButtonAccelerateur_Click(object sender, EventArgs e)
         ///  @brief Change le mode pour l'ajout d'un portail
         /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
         /// et qui active l'état l'ajout d'un portail sont appelée.
@@ -537,7 +646,7 @@ namespace InterfaceGraphique
         }
         /////////////////////////////////////////////////////////////////////////
         /// 
-        ///  @fn private void toolStripButtonAccelerateur_Click(object sender, EventArgs e)
+        ///  @fn private void toolStripButtonPortail_Click(object sender, EventArgs e)
         /// 
         ///  @brief Change le mode pour ajouter un accelerateur
         /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
@@ -571,7 +680,6 @@ namespace InterfaceGraphique
         /// @return aucune
         //
         ////////////////////////////////////////////////////////////////////////////////////////// 
-
         private void toolStripButtonMuret_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
@@ -582,9 +690,7 @@ namespace InterfaceGraphique
         ///  
         ///  @fn private void toolStripButton1_Click(object sender, EventArgs e)
         /// 
-        ///  @brief Change le mode pour points de controle
-        /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
-        /// et qui active l'état points de controle sont appelée.
+        ///  @brief Changer a l'etat Point de Controle
         /// 
         /// @param[in] sender : Le bouton
         /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
@@ -593,7 +699,6 @@ namespace InterfaceGraphique
         /// @return aucune
         //
         ////////////////////////////////////////////////////////////////////////////////////////// 
-
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
@@ -628,7 +733,7 @@ namespace InterfaceGraphique
             toolStripButton1.Checked = false;
         }
         ///////////////////////////////////////////////////////////////////////
-        // @fn bool Dans_Intervalle( double valeur, double borneMin, double borneMax ) 
+        /// @fn bool Dans_Intervalle( double valeur, double borneMin, double borneMax ) 
         ///
         /// @brief Cette fonction vérifie si une valeur est dans un intervalle.
         ///
@@ -639,12 +744,25 @@ namespace InterfaceGraphique
         /// @return Vrai si la valeur est dans l'intervalle, faux autrement.
         //
         //////////////////////////////////////////////////////////////////////////////////////////
-
         bool Dans_Intervalle(double valeur, double borneMin, double borneMax)
         {
             return (valeur >= borneMin) && (valeur <= borneMax);
         }
 
+
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn  private void éditionToolStripMenuItem_Click(object sender, EventArgs e)
+        ///
+        /// @brief afficher le menu Edition, verifie aussi si un objet est selectionné
+        /// pour activer ou desactiver le boutton "supprimer"
+        ///
+        /// @param[in] Sender   
+        /// @param[in] e : l'evenement
+        ///
+        ///
+        /// @return rien
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void éditionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int nbreObSelectionnes = FonctionsNatives.nombreObjetSelectionne();
@@ -657,6 +775,20 @@ namespace InterfaceGraphique
                 supprimerToolStripMenuItem.Enabled = false;
             }
         }
+
+
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn   public void Edition_MouseWheel(object sender, MouseEventArgs e)
+        ///
+        /// @brief permet d'appeller les methodes zoomIn() ou zoomOut() selon la valeur de delta
+        ///
+        /// @param[in] Sender   
+        /// @param[in] e : l'evenement
+        ///
+        ///
+        /// @return rien
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         public void Edition_MouseWheel(object sender, MouseEventArgs e)
         {
             if (e.Delta > 0)
@@ -666,14 +798,37 @@ namespace InterfaceGraphique
 
         }
 
-
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn   private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
+        ///
+        /// @brief permet d'appeller la methode supprimerObjet() afin d'enlever les objets selectionnés 
+        ///
+        /// @param[in] Sender   
+        /// @param[in] e : l'evenement
+        ///
+        ///
+        /// @return Vrai si la valeur est dans l'intervalle, faux autrement.
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void supprimerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FonctionsNatives.supprimerObjet();
         }
 
 
-        //data Biding
+
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn    private void mettreAjourPos()
+        ///
+        /// @brief Data biding , permet d'afficher les informations d'un objet 
+        /// dans la barre de configuration 
+        ///
+        /// @param[in] rien
+        ///
+        ///
+        /// @return rien
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void mettreAjourPos()
         {
             if (FonctionsNatives.nombreObjetSelectionne() == 1)
@@ -729,6 +884,20 @@ namespace InterfaceGraphique
             }
         }
 
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn private void sélectionToolStripMenuItem_Click(object sender, EventArgs e) 
+        ///
+        ///  @brief Change le mode pour sélection
+        ///  
+        /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
+        /// et qui active l'état selection sont appelée.
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void sélectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
@@ -736,6 +905,20 @@ namespace InterfaceGraphique
             this.changerMode(Etats.SELECTION);
         }
 
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn private void déplacementToolStripMenuItem_Click(object sender, EventArgs e)
+        /// 
+        ///  @brief Change le mode pour Deplacement
+        /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
+        /// et qui active l'état déplacement sont appelée.
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void déplacementToolStripMenuItem_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
@@ -743,6 +926,20 @@ namespace InterfaceGraphique
             this.changerMode(Etats.DEPLACEMENT);
         }
 
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn private void rotationToolStripMenuItem_Click(object sender, EventArgs e)
+        /// 
+        ///  @brief Change le mode pour Rotation
+        /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
+        /// et qui active l'état de rotation sont appelée.
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void rotationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
@@ -750,6 +947,21 @@ namespace InterfaceGraphique
             this.changerMode(Etats.ROTATION);
         }
 
+        /////////////////////////////////////////////////////////////////////////
+        ///  
+        ///  @fn  private void miseÀLéchelleToolStripMenuItem_Click(object sender, EventArgs e)
+        ///  
+        ///  @brief Change le mode pour Mise à l'échelle
+        /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
+        /// et qui active l'état mise à l'échelle sont appelée.
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void miseÀLéchelleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
@@ -757,6 +969,19 @@ namespace InterfaceGraphique
             this.changerMode(Etats.MISEAECHELLE);
         }
 
+        /////////////////////////////////////////////////////////////////////////
+        ///  @fn private void duplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        ///  @brief Change le mode pour Duplication
+        /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
+        /// et qui active l'état duplication sont appelée.
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void duplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
@@ -764,6 +989,21 @@ namespace InterfaceGraphique
             this.changerMode(Etats.DUPLICATION);
         }
 
+        /////////////////////////////////////////////////////////////////////////
+        /// 
+        ///  @fn private void ToolStripMenuItemAccelerateur_Click(object sender, EventArgs e)
+        /// 
+        ///  @brief Change le mode pour ajouter un accelerateur
+        /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
+        /// et qui active l'état de l'ajout d'un accelerateur sont appelée.
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void ToolStripMenuItemAccelerateur_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
@@ -772,6 +1012,21 @@ namespace InterfaceGraphique
 
         }
 
+        /////////////////////////////////////////////////////////////////////////
+        /// 
+        ///  @fn private void portailToolStripMenuItem_Click(object sender, EventArgs e)
+        /// 
+        ///  @brief Change le mode pour ajouter un accelerateur
+        /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
+        /// et qui active l'état de l'ajout d'un accelerateur sont appelée.
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void portailToolStripMenuItem_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
@@ -779,6 +1034,21 @@ namespace InterfaceGraphique
             this.changerMode(Etats.AJOUT_PORTAIL);
         }
 
+        /////////////////////////////////////////////////////////////////////////
+        /// 
+        ///  @fn private void muretToolStripMenuItem_Click(object sender, EventArgs e)
+        /// 
+        ///  @brief Change le mode pour l'ajout d'un muret 
+        /// Quand on clique sur ce bouton, la méthode qui désactive tous les boutons,desactiverAutresBoutons(), 
+        /// et qui active l'état de l'ajout d'un muret  sont appelée.
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void muretToolStripMenuItem_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
@@ -786,6 +1056,19 @@ namespace InterfaceGraphique
             this.changerMode(Etats.AJOUT_MUR);
         }
 
+        /////////////////////////////////////////////////////////////////////////
+        ///  
+        ///  @fn private void gestionDesPointsDeContrôleToolStripMenuItem_Click(object sender, EventArgs e)
+        /// 
+        ///  @brief Changer a l'etat Point de Controle
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void gestionDesPointsDeContrôleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
@@ -793,7 +1076,20 @@ namespace InterfaceGraphique
             this.changerMode(Etats.POINTSDECONTROLE);
         }
 
-        //button ok 
+        /////////////////////////////////////////////////////////////////////////
+        ///  
+        ///  @fn private void  button1_Click(object sender, EventArgs e)
+        /// 
+        ///  @brief gere l'evenement du clic sur le  bouton ok de la barre de configuration 
+        ///  et appliquer les changement sur l'objet
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -820,6 +1116,20 @@ namespace InterfaceGraphique
              }
         }
 
+
+        /////////////////////////////////////////////////////////////////////////
+        ///  
+        ///  @fn private void  zoomToolStripMenuItem_Click(object sender, EventArgs e)
+        /// 
+        ///  @brief permet de passer a l'état de zoom
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void zoomToolStripMenuItem_Click(object sender, EventArgs e)
         {
             desactiverAutresBoutons();
@@ -827,13 +1137,27 @@ namespace InterfaceGraphique
             this.changerMode(Etats.LOUPE);
         }
 
+        /////////////////////////////////////////////////////////////////////////
+        ///  
+        ///  @fn private void  aideToolStripMenuItem_Click(object sender, EventArgs e)
+        /// 
+        ///  @brief afficher le help box
+        /// 
+        /// @param[in] sender : Le bouton
+        /// @param[in]  e  :Contenant les informations sur l' évènement 
+        ///
+        ///
+        /// @return aucune
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void aideToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BoiteAide helpbox = new BoiteAide();
             helpbox.ShowDialog();
         }
+
         ///////////////////////////////////////////////////////////////////////
-        // @fn private void panel1_Resize(object sender, EventArgs e)
+        /// @fn private void panel1_Resize(object sender, EventArgs e)
         ///
         /// @brief Cette fonction appelle la méthode redimensionnement.
         ///
@@ -848,12 +1172,35 @@ namespace InterfaceGraphique
             FonctionsNatives.redimensionnerFenetre(panel1.Width, panel1.Height);
         }
 
+
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn private  void enregistrerSousToolStripMenuItem_Click(object sender, EventArgs e)
+        ///
+        /// @brief afficher la fenetre de sauvegarde
+        ///
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        /// @return aucun
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void enregistrerSousToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
             fenetreSauvegarde_.Show();
         }
 
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn private  void enregistrerToolStripMenuItem_Click(object sender, EventArgs e)
+        ///
+        /// @brief sauvegarder directement si le fichier existe deja sinon afficher la fenetre de sauvegarde
+        ///
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        /// @return aucun
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void enregistrerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (getCurrentFile() == "")
@@ -862,22 +1209,53 @@ namespace InterfaceGraphique
                 fenetreSauvegarde_.saveLastFile();
         }
 
+
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn private void nouveauToolStripMenuItem_Click_1
+        ///
+        /// @brief afficher la fenetre nouveau 
+        ///
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        /// @return aucun
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void nouveauToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             boiteNouv.ShowDialog();
             //FonctionsNatives.initialiserScene();
         }
 
-        private void fichierToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
-        }
 
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn private void panel1_MouseOut(object sender, EventArgs e)
+        ///
+        /// @brief permet de changer la forme du cursor
+        ///
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        /// @return aucun
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void panel1_MouseOut(object sender, EventArgs e)
         {
             Cursor = Cursors.Default;
         }
 
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn private void ouvrirToolStripMenuItem_Click(object sender, EventArgs e)
+        ///
+        /// @brief permet d'ouvrir la fenetre de chargement d'un fichier
+        ///
+        /// @param[in] sender : Le bouton
+        /// @param[in et out ]  e  :Contenant les informations sur l' évènement 
+        ///
+        /// @return aucun
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void ouvrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fenetreChargement_.Show();
@@ -886,13 +1264,35 @@ namespace InterfaceGraphique
         private string currentFile_;
         public static string SAVE_FILEPATH = "zones";
         public static string DEFAULT_FILENAME = "defaut";
+
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn string getCurrentFile()
+        ///
+        /// @brief permet d'obtenir le nom du fichier 
+        ///
+        /// @param[in] rien
+        ///
+        ///
+        /// @return le nom du fichier
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         public string getCurrentFile()
         {
             return currentFile_;
         }
 
-      
 
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn public void setCurrentFile()
+        ///
+        /// @brief permet d'assigner un nom du fichier 
+        ///
+        /// @param[in] value: le nom du fichier
+        ///
+        ///
+        /// @return rien
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         public void setCurrentFile(string value)
         {
             if (value != DEFAULT_FILENAME)
@@ -902,8 +1302,19 @@ namespace InterfaceGraphique
         }
 
 
-        //wajdi
-        //Passage du mode edition au mode Test 
+
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn public void passerModeJeu(bool mode)
+        ///
+        /// @brief permet de faire le passage du mode edition au mode Test et vice versa 
+        /// selon la valeur du booleen
+        ///
+        /// @param[in] mode: bool qui determine le mode 
+        ///
+        ///
+        /// @return rien
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         public void passerModeJeu(bool mode)
         {
             //si mode jeu ou test , masquer les menus a cotés + barre des menus
@@ -977,8 +1388,18 @@ namespace InterfaceGraphique
             }
         }
 
-      
-        //wajdi
+
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn public void afficherBarreMenu()
+        ///
+        /// @brief permet d'afficher/ masquer la barre de menu selon le mode edition/test  
+        ///
+        /// @param[in] rien
+        ///
+        ///
+        /// @return rien
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         public void afficherBarreMenu()
         { //En mode Test, si on clique sur Echapp
             if (this.estEnModeTest == true)
@@ -995,7 +1416,18 @@ namespace InterfaceGraphique
         }
 
 
-        //Bouton mode edition
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn public void modeEditionToolStripMenuItem_Click(object sender, EventArgs e)
+        ///
+        /// @brief afficher la fenetre d'edition
+        ///
+        /// @param[in] sender: bouton
+        /// @param[in] e: evenement
+        ///
+        ///
+        /// @return rien
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void modeEditionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //afficher fenetre edition
@@ -1005,7 +1437,18 @@ namespace InterfaceGraphique
         }
 
 
-        //Bouton mode Test
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn public void modeTestToolStripMenuItem_Click(object sender, EventArgs e)
+        ///
+        /// @brief afficher la fenetre de Test
+        ///
+        /// @param[in] sender: bouton
+        /// @param[in] e: evenement
+        ///
+        ///
+        /// @return rien
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         private void modeTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //afficher fenetre test 

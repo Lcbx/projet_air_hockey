@@ -637,9 +637,9 @@ extern "C"
 
 	////////////////////////////////////////////////////////////////////////
 	///
-	/// @fn 		__declspec(dllexport) void deplacerMailletAvecClavier()
+	/// @fn 		__declspec(dllexport) void deplacerMailletAvecSouris()
 	///
-	/// Cette fonction permet de deplacer le maillet avec les touches de clavier
+	/// Cette fonction permet de deplacer le maillet avec la souris
 	///
 	/// @return rien
 	///

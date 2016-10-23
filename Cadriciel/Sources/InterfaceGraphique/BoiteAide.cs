@@ -12,15 +12,22 @@ namespace InterfaceGraphique
 {
     public partial class BoiteAide : Form
     {
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn public boiteAide()
+        ///
+        /// @brief constructeur par defaut
+        ///
+        /// @param[in] rien
+        ///
+        /// @return rien
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         public BoiteAide()
         {
             InitializeComponent();
             richTextBox1.ReadOnly = true;
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }

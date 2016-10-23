@@ -530,6 +530,16 @@ void  ArbreRenduINF2990::ajouterMailletEtRondelle()
 	noeudMaillet2->estDeuxiemeJoueur = true;
 
 }
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn deplacerMailletAvecClavier(double x, double y)
+///
+/// Cette fonction permet de deplacer le maillet avedc les touches de clavier
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
 void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 {
 	//NoeudAbstrait* dernier;
@@ -549,7 +559,6 @@ void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 		if (x > 0) {
 			if (pos.x + 5 <= 0) { // pour ne pas depasser le centre 
 				dernier->assignerPositionRelative({ pos.x + 5, pos.y, 0 });//bouger vers droite
-				cout << "interieur: " << this->getTable()->dansTable(pos) << endl;
 			}
 			else { dernier->assignerPositionRelative({ 0, pos.y, 0 });//ne pas depasser le centre
 		}
@@ -585,6 +594,16 @@ void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 		}
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void reinitialiserPartieCourante()
+///
+/// Cette fonction permet de re-initialiser la scene, donc mettre les maillets et la rondelle
+/// a la position de depart
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
 void ArbreRenduINF2990::reinitialiserPartieCourante()
 {
 	for (NoeudAbstrait * enfant : this->enfants_)
@@ -603,6 +622,15 @@ void ArbreRenduINF2990::reinitialiserPartieCourante()
 	}
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void deplacerMailletAvecSouris(glm::dvec3 pos)
+///
+/// Cette fonction permet de deplacer le maillet avec la souris
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
 void ArbreRenduINF2990::deplacerMailletAvecSouris(glm::dvec3 pos)
 {
 	for (NoeudAbstrait * enfant : this->enfants_)
