@@ -12,7 +12,7 @@
 #include "ArbreRenduINF2990.h"
 #include "AideCollision.h"
 
-namespace aidecollision {
+namespace collision {
 
 
 	///initialisation
@@ -29,18 +29,18 @@ namespace aidecollision {
 	}
 
 	///donne la collision la plus pertinente avec une suite segments
-	DetailsCollision VisiteurCollision::collisionSegments(glm::vec3 ensemble[], int nombre) {
+	aidecollision::DetailsCollision VisiteurCollision::collisionSegments(glm::vec3 ensemble[], int nombre) {
 		//determine la collision pour chacun des segments
-		DetailsCollision detail = { COLLISION_AUCUNE, glm::vec3(0), 0 };
+		aidecollision::DetailsCollision detail = { aidecollision::COLLISION_AUCUNE, glm::vec3(0), 0 };
 		for (int i = 0; i<nombre; i++) {
-			DetailsCollision temp = calculerCollisionSegment(ensemble[i%nombre], ensemble[(i + 1) % nombre], position_, rayon_);
-			if (temp.type != COLLISION_AUCUNE && temp.enfoncement > detail.enfoncement) detail = temp;
+			aidecollision::DetailsCollision temp = aidecollision::calculerCollisionSegment(ensemble[i%nombre], ensemble[(i + 1) % nombre], position_, rayon_);
+			if (temp.type != aidecollision::COLLISION_AUCUNE && temp.enfoncement > detail.enfoncement) detail = temp;
 		}
 		return detail;
 	}
 
 	///calcul de collision avec un objet circulaire
-	DetailsCollision VisiteurCollision::visiterNoeudCercle(NoeudAbstrait* noeud) {
+	aidecollision::DetailsCollision VisiteurCollision::visiterNoeudCercle(NoeudAbstrait* noeud) {
 		//calcul de la collision entre les deux cercles 
 		//celui externe en premier
 		double rayon = noeud->obtenirRayon();
@@ -52,7 +52,7 @@ namespace aidecollision {
 
 
 	///cacul de collission avec un objet rectangulaire
-	DetailsCollision VisiteurCollision::visiterNoeudQuadrilatere(NoeudAbstrait* noeud) {
+	aidecollision::DetailsCollision VisiteurCollision::visiterNoeudQuadrilatere(NoeudAbstrait* noeud) {
 
 		//trouve la boite englobante du muret
 		utilitaire::BoiteEnglobante boite = utilitaire::calculerBoiteEnglobante(*noeud->getModele());
@@ -88,21 +88,32 @@ namespace aidecollision {
 	}
 
 	void VisiteurCollision::visiter(NoeudRondelle* noeud) {
-
+		auto detail = visiterNoeudCercle(noeud);
+		if (detail.type != aidecollision::COLLISION_AUCUNE)
+			result_ = { RONDELLE, noeud, detail };
 	}
 
 	void VisiteurCollision::visiter(NoeudMuret* noeud) {
+		auto detail = visiterNoeudQuadrilatere(noeud);
+		if (detail.type != aidecollision::COLLISION_AUCUNE)
+			result_ = { MUR, noeud, detail };
 	}
 
 	void VisiteurCollision::visiter(NoeudBonus* noeud) {
-
+		auto detail = visiterNoeudQuadrilatere(noeud);
+		if (detail.type != aidecollision::COLLISION_AUCUNE)
+			result_ = { BONUS, noeud, detail };
 	}
 
 	void VisiteurCollision::visiter(NoeudMaillet* noeud) {
-
+		auto detail = visiterNoeudCercle(noeud);
+		if (detail.type != aidecollision::COLLISION_AUCUNE)
+			result_ = { MAILLET, noeud, detail };
 	}
 
 	void VisiteurCollision::visiter(NoeudPortail* noeud) {
-
+		auto detail = visiterNoeudCercle(noeud);
+		if (detail.type != aidecollision::COLLISION_AUCUNE)
+			result_ = { PORTAIL, noeud, detail };
 	}
 }

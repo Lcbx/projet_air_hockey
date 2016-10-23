@@ -22,12 +22,13 @@
 /// @date 2016-09-25
 //////////////////////////////////////////////////////////////////////////
 
-namespace aidecollision {
+namespace collision {
 
 	///le type d'obstacle rencontré
-	enum typeObstacle { MUR, BONUS, PORTAIL, MAILLET };
+	enum typeObstacle { MUR, BONUS, PORTAIL, MAILLET, RONDELLE };
 
 	class InfoCollision {
+	public:
 		///type d'objet de l'obstacle
 		typeObstacle type;
 		///le pointeur a l'objet
@@ -50,11 +51,11 @@ namespace aidecollision {
 		glm::vec3 position_;
 
 		///donne la collision la plus pertinente avec une suite segments
-		DetailsCollision collisionSegments(glm::vec3 ensemble[], int nombre);
+		aidecollision::DetailsCollision collisionSegments(glm::vec3 ensemble[], int nombre);
 		///collision avec un objet de forme ronde
-		DetailsCollision visiterNoeudCercle(NoeudAbstrait* noeud);
+		aidecollision::DetailsCollision visiterNoeudCercle(NoeudAbstrait* noeud);
 		///collision avec un objet de forme rectangulaire
-		DetailsCollision visiterNoeudQuadrilatere(NoeudAbstrait* noeud);
+		aidecollision::DetailsCollision visiterNoeudQuadrilatere(NoeudAbstrait* noeud);
 
 	public:
 
