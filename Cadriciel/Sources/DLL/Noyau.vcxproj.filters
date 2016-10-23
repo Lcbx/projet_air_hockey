@@ -195,6 +195,9 @@
     <ClCompile Include="Application\StrategieSouris.cpp">
       <Filter>Source Files\Application\Souris_edition</Filter>
     </ClCompile>
+    <ClCompile Include="VisiteurCollision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\FacadeModele.h">
@@ -340,6 +343,9 @@
     </ClInclude>
     <ClInclude Include="Affichage_debuggage.h">
       <Filter>Header Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="VisiteurCollision.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
