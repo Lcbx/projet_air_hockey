@@ -48,6 +48,7 @@ InfoCollision& VisiteurCollision::calculerCollision() {
 	};
 	auto temp = collisionSegments( haut.data(), haut.size() );
 	if (temp.type != aidecollision::COLLISION_AUCUNE) {
+		result_.type = InfoCollision::MUR;
 		result_.details = temp;
 		return result_;
 	}
@@ -60,6 +61,7 @@ InfoCollision& VisiteurCollision::calculerCollision() {
 	};
 	temp = collisionSegments(bas.data(), bas.size());
 	if (temp.type != aidecollision::COLLISION_AUCUNE) {
+		result_.type = InfoCollision::MUR;
 		result_.details = temp;
 		return result_;
 	}
@@ -93,7 +95,7 @@ aidecollision::DetailsCollision VisiteurCollision::visiterNoeudCercle(NoeudAbstr
 	auto detail = aidecollision::calculerCollisionCercle(
 		glm::vec2(position.x, position.y), rayon,
 		glm::vec2(position_.x, position_.y), rayon_);
-	std::cout << "collision " << detail.type << "\n";
+	if(detail.type != aidecollision::COLLISION_AUCUNE) std::cout << "collision " << detail.type << " enfoncement " << detail.enfoncement << "\n";
 	return detail;
 }
 
@@ -123,6 +125,7 @@ void VisiteurCollision::visiter(NoeudRondelle* noeud) {
 	if(objet_->obtenirType() != "rondelle"){
 		auto detail = visiterNoeudCercle(noeud);
 		if (detail.type != aidecollision::COLLISION_AUCUNE) {
+			result_.type = InfoCollision::RONDELLE;
 			result_.objet = noeud;
 			result_.details = detail;
 		}
@@ -133,6 +136,7 @@ void VisiteurCollision::visiter(NoeudRondelle* noeud) {
 void VisiteurCollision::visiter(NoeudMuret* noeud) {
 	auto detail = visiterNoeudQuadrilatere(noeud);
 	if (detail.type != aidecollision::COLLISION_AUCUNE) {
+		result_.type = InfoCollision::MUR;
 		result_.objet = noeud;
 		result_.details = detail;
 	}
@@ -141,6 +145,7 @@ void VisiteurCollision::visiter(NoeudMuret* noeud) {
 void VisiteurCollision::visiter(NoeudBonus* noeud) {
 	auto detail = visiterNoeudQuadrilatere(noeud);
 	if (detail.type != aidecollision::COLLISION_AUCUNE) {
+		result_.type = InfoCollision::BONUS;
 		result_.objet = noeud;
 		result_.details = detail;
 	}
@@ -150,6 +155,7 @@ void VisiteurCollision::visiter(NoeudMaillet* noeud) {
 	if (objet_->obtenirType() != "maillet") {
 		auto detail = visiterNoeudCercle(noeud);
 		if (detail.type != aidecollision::COLLISION_AUCUNE) {
+			result_.type = InfoCollision::MAILLET;
 			result_.objet = noeud;
 			result_.details = detail;
 		}
@@ -159,6 +165,7 @@ void VisiteurCollision::visiter(NoeudMaillet* noeud) {
 void VisiteurCollision::visiter(NoeudPortail* noeud) {
 	auto detail = visiterNoeudCercle(noeud);
 	if (detail.type != aidecollision::COLLISION_AUCUNE) {
+		result_.type = InfoCollision::PORTAIL;
 		result_.objet = noeud;
 		result_.details = detail;
 	}

@@ -87,11 +87,6 @@ public:
 
 
 	//determiner si dans la table
-	/// angle
-	double calculerAngle3D(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C);
-	double calculerAngle2D(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C);
-	/// dansTriangle
-	bool MdansTriangleABC(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C, glm::dvec3 M);
 	/// dansTable
 	bool dansTable(glm::dvec3 M);
 

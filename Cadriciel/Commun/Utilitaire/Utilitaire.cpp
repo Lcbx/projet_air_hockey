@@ -45,6 +45,65 @@ namespace utilitaire {
 #endif
 	}
 
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn double calculerAngle3D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C)
+	///
+	/// Cette fonction calcule l'angle entre 3 points en 3d
+	///  @param[in] 
+	///		point M
+	/// @return bool
+	///
+	////////////////////////////////////////////////////////////////////////
+	double calculerAngle3D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C) {
+		// theta = arcos( u.v/(|u|.|v|) )
+		double angle;
+		glm::dvec3 u(A - B);
+		glm::dvec3 v(C - B);
+		angle = glm::acos(glm::dot(u, v) / (glm::length(u)*glm::length(v)));
+		return angle;
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn double calculerAngle2D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C)
+	///
+	/// Cette fonction calcule l'angle entre 3 points en 2d
+	///  @param[in] 
+	///		point M
+	/// @return bool
+	///
+	////////////////////////////////////////////////////////////////////////
+	double calculerAngle2D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C) {
+		//on ignore la composante en z
+		glm::dvec3 D(A.x, A.y, 0);
+		glm::dvec3 E(B.x, B.y, 0);
+		glm::dvec3 F(C.x, C.y, 0);
+		return calculerAngle3D(D, E, F);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn bool MdansTriangleABC(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C, glm::dvec3 M)
+	///
+	/// Cette fonction permet de savoir si un point M est dans un triangle ABC
+	///  @param[in] 
+	///		point M
+	/// @return bool
+	///
+	////////////////////////////////////////////////////////////////////////
+	bool MdansTriangleABC(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C, glm::dvec3 M) {
+		//			B.							B.
+		//		   / \		. M     ou 		   /  \	
+		//		  /   \						  / .M \
+		//      A.______.C			         A.______.C
+		// -> M est dans ABC si la somme des angles AMC+AMB+BMC == 360
+		if (M == A || M == B || M == C) return true;
+		double angleTot = calculerAngle2D(A, M, B) + calculerAngle2D(B, M, C) + calculerAngle2D(C, M, A);
+		bool reponse = glm::round(glm::degrees(angleTot)) == 360;
+		//std::cout << glm::round(glm::degrees(angleTot)) << "|";
+		return reponse;
+	}
 
 	////////////////////////////////////////////////////////////////////////
 	///

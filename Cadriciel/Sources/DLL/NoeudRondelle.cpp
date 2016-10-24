@@ -104,10 +104,8 @@ void NoeudRondelle::animer(float temps)
 		assignerPositionRelative(obtenirPositionRelative() + vitesse_* temps);
 
 		//application de la friction
-		//vitesse_ -= glm::normalize(vitesse_) * (float)coeff.friction * temps;
-
-		//remet la vitessse a 0 si elle en est proshe (evite des oscillations)
-		if (glm::round(vitesse_.x) == 0 && glm::round(vitesse_.y) == 0) vitesse_ = glm::vec3(0, 0, 0);
+		double vit = glm::length(vitesse_);
+		//vitesse_ *= glm::clamp(vit - coeff.friction * temps, 0., vit)/vit;
 
 		///debug
 		///std::cout << "vitesse " << vitesse_.x << " " << vitesse_.y << "\n";
@@ -115,10 +113,24 @@ void NoeudRondelle::animer(float temps)
 		//verificateur de collision
 		VisiteurCollision v(this);
 		auto resultat = v.calculerCollision();
-		// si il y a collision on s'arrete
-		if (resultat.details.type != aidecollision::COLLISION_AUCUNE) {
-			vitesse_ = glm::vec3(0, 0, 0);
-			std::cout << "collision " << resultat.details.type  << "\n";
+
+		//gerer la collision
+		switch (resultat.type) {
+		case InfoCollision::MUR: {
+			assignerPositionRelative(obtenirPositionRelative() + glm::vec3(resultat.details.direction * resultat.details.enfoncement));
+			vitesse_ = utilitaire::rotater(vitesse_, 2* utilitaire::calculerAngle2D(vitesse_, glm::vec3(0), resultat.details.direction));
+			break;
+		}
+		case InfoCollision::BONUS: {
+			glm::vec3 direction = ((NoeudBonus*)resultat.objet)->obtenirDroiteDirectrice().lireVecteur();
+			vitesse_ = direction * (float) coeff.acceleration;
+		}
+		case InfoCollision::PORTAIL: {
+			auto noeud = (NoeudPortail*)resultat.objet;
+			glm::vec3 position = noeud->getFrere()->obtenirPositionRelative();
+			assignerPositionRelative( position + noeud->obtenirPositionRelative() - obtenirPositionRelative());
+		}
+		default: break;
 		}
 		
 	}
