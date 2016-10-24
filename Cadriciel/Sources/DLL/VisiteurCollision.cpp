@@ -22,6 +22,8 @@ VisiteurCollision::VisiteurCollision(NoeudAbstrait* objet) {
 
 ///fonction apppellee generalement
 InfoCollision& VisiteurCollision::calculerCollision() {
+	result_.objet = nullptr;
+	result_.details = { aidecollision::COLLISION_AUCUNE, glm::vec3(0,0,0), 0 };
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
 	return result_;
 }
@@ -32,9 +34,12 @@ aidecollision::DetailsCollision VisiteurCollision::collisionSegments(glm::vec3 e
 	aidecollision::DetailsCollision detail = { aidecollision::COLLISION_AUCUNE, glm::vec3(0,0,0), 0 };
 	for (int i = 0; i<nombre; i++) {
 		aidecollision::DetailsCollision temp = aidecollision::calculerCollisionSegment( ensemble[ i%nombre ], ensemble[ (i+1)%nombre ], position_, rayon_ );
-		if (temp.type != aidecollision::COLLISION_AUCUNE && temp.enfoncement > detail.enfoncement) detail = temp;
+		if (temp.type != aidecollision::COLLISION_AUCUNE && temp.enfoncement > detail.enfoncement) {
+			detail = temp;
+			std::cout << "collision " << detail.type << " segment n " << i << " enfoncement " << detail.enfoncement << "\n";
+		}
 	}
-	std::cout << "collision " << detail.type << "\n";
+	
 	return detail;
 }
 
@@ -55,25 +60,29 @@ aidecollision::DetailsCollision VisiteurCollision::visiterNoeudCercle(NoeudAbstr
 ///cacul de collission avec un objet rectangulaire
 aidecollision::DetailsCollision VisiteurCollision::visiterNoeudQuadrilatere(NoeudAbstrait* noeud) {
 
-	//trouve la boite englobante du muret
+	//trouve la boite englobante de l'objet
 	utilitaire::BoiteEnglobante boite = utilitaire::calculerBoiteEnglobante(*noeud->getModele());
 
-	//reoriente les coorodonnnées de la boite dans notre repere
-	double rayon = max(abs(boite.coinMax.x - boite.coinMin.x), abs(boite.coinMin.y - boite.coinMax.y)) / 2;
+	//recupere les coordonnees de la boite
+	double longueur = max(abs(boite.coinMax.x - boite.coinMin.x), abs(boite.coinMin.y - boite.coinMax.y)) / 2;
+	double largeur = min(abs(boite.coinMax.x - boite.coinMin.x), abs(boite.coinMin.y - boite.coinMax.y)) / 2;
 	glm::dvec3 scale = noeud->getScale();
-	glm::dvec3 left{ -(rayon * scale.x), 0, 0 };
-	glm::dvec3 right{ (rayon * scale.x), 0, 0 };
+	glm::dvec3 left{ -(longueur * scale.x), (largeur * scale.y), 0 };
+	glm::dvec3 right{ (longueur * scale.x), -(largeur * scale.y), 0 };
+
+	//les coins de la boite
+	glm::vec3 coins[4] =
+	{ left,
+	{ right.x, left.y, 0 },
+	{ left.x, right.y, 0 },
+	  right };
+
 	//ajuste l'angle
 	double angle = noeud->getAngle();
 	glm::dvec3 pos = noeud->obtenirPositionRelative();
-	left = utilitaire::rotater(left, angle) + pos;
-	right = utilitaire::rotater(right, angle) + pos;
-
-	//les coins de la boite
-	glm::vec3 coins[4] = {	left,
-							{ left.x, right.y, 0 },
-							{ right.x, left.y, 0 },
-							right };
+	for (int i = 0; i < 4; i++) {
+		coins[i] = utilitaire::rotater(coins[i], angle) + pos;
+	}
 
 	//retourne la collision la plus pertinente
 	return collisionSegments(coins, 4);
