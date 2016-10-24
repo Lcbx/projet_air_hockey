@@ -793,7 +793,7 @@ bool NoeudTable::setPointControles()
 	for (int i = 0; i < obtenirNombreEnfants(); i++) 
 	{
 		chercher(i)->assignerPositionRelative(pointControle_[i]);
-		std::cout << "enfant n" << i << "\t" <<p(i).x << "\t" << p(i).y  << "\t" << p(i).z << "\n";
+		//std::cout << "enfant n" << i << "\t" <<p(i).x << "\t" << p(i).y  << "\t" << p(i).z << "\n";
 	}
 	return true;
 }

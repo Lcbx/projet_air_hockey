@@ -55,10 +55,7 @@ private:
 	/// Angle selon l'axe des Y.
 	float angleY_{ 0.f };
 	/// Angle de rotation.
-	float angleRotation_{ 0.f };
-	// boolean pour afficher ou non le rayon d'attraction du portail
-	bool affiche_{ true };
-	
+	float angleRotation_{ 0.f };	
 };
 
 
