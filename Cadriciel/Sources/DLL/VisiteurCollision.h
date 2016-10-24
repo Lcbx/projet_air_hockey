@@ -54,7 +54,7 @@ class VisiteurCollision : public Visiteur
 public:
 
 	VisiteurCollision(NoeudAbstrait* objet);
-	InfoCollision calculerCollision();
+	InfoCollision& calculerCollision();
 
 
 	virtual void visiter(NoeudAbstrait* noeud);

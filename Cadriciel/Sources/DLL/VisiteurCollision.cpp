@@ -21,7 +21,7 @@ VisiteurCollision::VisiteurCollision(NoeudAbstrait* objet) {
 }
 
 ///fonction apppellee generalement
-InfoCollision VisiteurCollision::calculerCollision() {
+InfoCollision& VisiteurCollision::calculerCollision() {
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
 	return result_;
 }
@@ -92,25 +92,26 @@ void VisiteurCollision::visiter(NoeudRondelle* noeud) {
 	if(objet_->obtenirType() != "rondelle"){
 		auto detail = visiterNoeudCercle(noeud);
 		if (detail.type != aidecollision::COLLISION_AUCUNE) {
-			result_ = { noeud, detail };
-			std::cout << "objet de type " << noeud->obtenirType() << "\n";
+			result_.objet = noeud;
+			result_.details = detail;
 		}
 	}
 }
 
+
 void VisiteurCollision::visiter(NoeudMuret* noeud) {
 	auto detail = visiterNoeudQuadrilatere(noeud);
 	if (detail.type != aidecollision::COLLISION_AUCUNE) {
-		result_ = { noeud, detail };
-		std::cout << "objet de type " << noeud->obtenirType() << "\n";
+		result_.objet = noeud;
+		result_.details = detail;
 	}
 }
 
 void VisiteurCollision::visiter(NoeudBonus* noeud) {
 	auto detail = visiterNoeudQuadrilatere(noeud);
 	if (detail.type != aidecollision::COLLISION_AUCUNE) {
-		result_ = { noeud, detail };
-		std::cout << "objet de type " << noeud->obtenirType() << "\n";
+		result_.objet = noeud;
+		result_.details = detail;
 	}
 }
 
@@ -118,8 +119,8 @@ void VisiteurCollision::visiter(NoeudMaillet* noeud) {
 	if (objet_->obtenirType() != "maillet") {
 		auto detail = visiterNoeudCercle(noeud);
 		if (detail.type != aidecollision::COLLISION_AUCUNE) {
-			result_ = { noeud, detail };
-			std::cout << "objet de type " << noeud->obtenirType() << "\n";
+			result_.objet = noeud;
+			result_.details = detail;
 		}
 	}
 }
@@ -127,7 +128,7 @@ void VisiteurCollision::visiter(NoeudMaillet* noeud) {
 void VisiteurCollision::visiter(NoeudPortail* noeud) {
 	auto detail = visiterNoeudCercle(noeud);
 	if (detail.type != aidecollision::COLLISION_AUCUNE) {
-		result_ = { noeud, detail };
-		std::cout << "objet de type " << noeud->obtenirType() << "\n";
+		result_.objet = noeud;
+		result_.details = detail;
 	}
 }

@@ -88,18 +88,35 @@ void NoeudRondelle::afficherConcret(const glm::mat4& vueProjection) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudRondelle::animer(float temps)
 {
-	//std::cout << "temps animation " << temps << "\n";
+	//debug
+	///connaitre le temps d'animation
+	///std::cout << "temps animation " << temps << "\n";
+	///obtient la facade
+	///auto facade = FacadeModele::obtenirInstance();
+
+	//on a besoin d'annimer que si la vitesse est non nulle
 	if (glm::length(vitesse_) != 0) {
-		auto facade = FacadeModele::obtenirInstance();
-		auto coeff = facade->getCoefficient();
+
+		//obtient les coefficients
+		auto coeff = FacadeModele::obtenirInstance()->getCoefficient();
+
+		//actualisation de la position par rapport a la vitesse
 		assignerPositionRelative(obtenirPositionRelative() + vitesse_* temps);
+
+		//application de la friction
 		vitesse_ -= glm::normalize(vitesse_) * (float)coeff.friction * temps;
+
+		//remet la vitessse a 0 si elle en est proshe (evite des oscillations)
 		if (glm::round(vitesse_.x) == 0 && glm::round(vitesse_.y) == 0) vitesse_ = glm::vec3(0, 0, 0);
-		//std::cout << "vitesse " << vitesse_.x << " " << vitesse_.y << "\n";
+
+		///std::cout << "vitesse " << vitesse_.x << " " << vitesse_.y << "\n";
+
+		//verificateur de collision
 		VisiteurCollision v(this);
 		auto resultat = v.calculerCollision();
-		
+		// si il y a collision on s'arrete
 		if (resultat.details.type != aidecollision::COLLISION_AUCUNE) {
+			vitesse_ = glm::vec3(0, 0, 0);
 			std::cout << "collision " << resultat.details.type  << "\n";
 		}
 		
