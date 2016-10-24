@@ -752,4 +752,21 @@ void FacadeModele::deplacerMailletAvecSouris(double x, double y)
 	arbre_->deplacerMailletAvecSouris(posDeplacement);
 
 }
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void virtuelDefensif()
+///
+/// Cette fonction permet de deplacer le maillet du joueur virtuel
+/// selon le scenario defensif
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::virtuelDefensif()
+{
+	glm::vec3 positionRondelle = arbre_->chercher("rondelle")->obtenirPositionRelative();
+	
+
+
+}
 

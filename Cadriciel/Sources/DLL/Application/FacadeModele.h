@@ -160,6 +160,9 @@ public:
 	///permert de deplacer le maillet avec la souris
 	void deplacerMailletAvecSouris(double x, double y);
 
+	///deplacer le maillet du jouer virtuel selon le scenario defensif
+	void virtuelDefensif();
+
 private:
 
    /// Constructeur par défaut.

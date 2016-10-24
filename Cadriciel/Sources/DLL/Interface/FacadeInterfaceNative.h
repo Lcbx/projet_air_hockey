@@ -123,5 +123,8 @@ extern "C" {
 	///deplacer le maillet du joueur 1 avec souris
 	__declspec(dllexport) void deplacerMailletAvecSouris(double x, double y);
 
+	///deplacer le maillet du jouer virtuel selon le scenario defensif
+	__declspec(dllexport) void virtuelDefensif();
+	
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__

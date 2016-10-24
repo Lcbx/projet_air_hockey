@@ -40,10 +40,10 @@ namespace InterfaceGraphique
             toucheDeplaceEnBas_ = (int)Keys.S;
             toucheDeplaceADroite_ = (int)Keys.D;
             toucheDeplaceEnHaut_ = (int)Keys.W;
-            this.gauche.Text = "a";
-            this.droite.Text = "d";
-            this.bas.Text = "s";
-            this.haut.Text = "w";
+            this.gauche.Text = "A";
+            this.droite.Text = "D";
+            this.bas.Text = "S";
+            this.haut.Text = "W";
         }
 
         private void appliquer_Click(object sender, EventArgs e)
@@ -60,6 +60,28 @@ namespace InterfaceGraphique
             }
         private void gauche_KeyDown(object sender, KeyEventArgs e)
         {
+            if (toucheDeplaceADroite_ == e.KeyValue)
+            {
+                toucheDeplaceADroite_ = toucheDeplaceAGauche_;
+                this.droite.Text =this.gauche.Text;
+                toucheDeplaceAGauche_ = e.KeyValue;
+                this.gauche.Text = changerTouche(e);
+            }
+            if (toucheDeplaceEnHaut_ == e.KeyValue)
+            {
+                toucheDeplaceEnHaut_ = toucheDeplaceAGauche_;
+                this.haut.Text = this.gauche.Text;
+                toucheDeplaceAGauche_ = e.KeyValue;
+                this.gauche.Text = changerTouche(e);
+            }
+            if (toucheDeplaceEnBas_ == e.KeyValue)
+            {
+                toucheDeplaceEnBas_ = toucheDeplaceAGauche_;
+                this.bas.Text = this.gauche.Text;
+                toucheDeplaceAGauche_ = e.KeyValue;
+                this.gauche.Text = changerTouche(e);
+            }
+
             if (toucheDeplaceADroite_ != e.KeyValue && toucheDeplaceEnBas_ != e.KeyValue && toucheDeplaceEnHaut_ != e.KeyValue)
             {
                 toucheDeplaceAGauche_ = e.KeyValue;

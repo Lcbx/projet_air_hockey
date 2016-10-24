@@ -648,6 +648,23 @@ extern "C"
 	{
 		FacadeModele::obtenirInstance()->deplacerMailletAvecSouris(x, y);
 	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// Author : Ali
+	/// @fn 		__declspec(dllexport) void virtuelDefensif();
+	///
+	/// Cette fonction permet de deplacer le maillet du joueur virtuel
+	/// selon un scenario defensif
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl virtuelDefensif()
+	{
+		FacadeModele::obtenirInstance()->virtuelDefensif();
+	}
+
+
 }
 
 
