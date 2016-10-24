@@ -18,6 +18,9 @@
 #include "Utilitaire.h"
 
 #include <../Visiteur.h>
+#include "VisiteurCollision.h"
+
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn NoeudRondelle::NoeudRondelle(const std::string& typeNoeud)
@@ -85,6 +88,23 @@ void NoeudRondelle::afficherConcret(const glm::mat4& vueProjection) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudRondelle::animer(float temps)
 {
+	//std::cout << "temps animation " << temps << "\n";
+	if (glm::length(vitesse_) != 0) {
+		auto facade = FacadeModele::obtenirInstance();
+		auto coeff = facade->getCoefficient();
+		assignerPositionRelative(obtenirPositionRelative() + vitesse_* temps);
+		vitesse_ -= glm::normalize(vitesse_) * (float)coeff.friction * temps;
+		if (glm::round(vitesse_.x) == 0 && glm::round(vitesse_.y) == 0) vitesse_ = glm::vec3(0, 0, 0);
+		//std::cout << "vitesse " << vitesse_.x << " " << vitesse_.y << "\n";
+		VisiteurCollision v(this);
+		auto resultat = v.calculerCollision();
+		
+		if (resultat.details.type != aidecollision::COLLISION_AUCUNE) {
+			std::cout << "collision " << resultat.details.type  << "\n";
+		}
+		
+	}
+	
 	
 }
 
@@ -98,7 +118,6 @@ void NoeudRondelle::animer(float temps)
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////
-
 void NoeudRondelle::accepter(Visiteur* v)
 {
 	v->visiter(this);
