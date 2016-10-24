@@ -43,6 +43,9 @@ public:
 	/// Permet d'obtenir la droite directrice du noeud bonus
 	math::Droite3D obtenirDroiteDirectrice();
 
+	///permet d'obtenir la boite de collision du bonus
+	virtual std::array<glm::vec3, 4> obtenirBoiteCollision();
+
 	///Permet d'obtenir le rayon minimal du modèle
 	inline virtual double obtenirRayonModele() const;
 };

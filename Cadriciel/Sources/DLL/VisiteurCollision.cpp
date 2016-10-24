@@ -11,7 +11,7 @@
 #include "VisiteurCollision.h"
 #include "ArbreRenduINF2990.h"
 #include "AideCollision.h"
-
+#include <array>
 
 ///initialisation
 VisiteurCollision::VisiteurCollision(NoeudAbstrait* objet) {
@@ -60,32 +60,13 @@ aidecollision::DetailsCollision VisiteurCollision::visiterNoeudCercle(NoeudAbstr
 ///cacul de collission avec un objet rectangulaire
 aidecollision::DetailsCollision VisiteurCollision::visiterNoeudQuadrilatere(NoeudAbstrait* noeud) {
 
-	//trouve la boite englobante de l'objet
-	utilitaire::BoiteEnglobante boite = utilitaire::calculerBoiteEnglobante(*noeud->getModele());
-
-	//recupere les coordonnees de la boite
-	double longueur = max(abs(boite.coinMax.x - boite.coinMin.x), abs(boite.coinMin.y - boite.coinMax.y)) / 2;
-	double largeur = min(abs(boite.coinMax.x - boite.coinMin.x), abs(boite.coinMin.y - boite.coinMax.y)) / 2;
-	glm::dvec3 scale = noeud->getScale();
-	glm::dvec3 left{ -(longueur * scale.x), (largeur * scale.y), 0 };
-	glm::dvec3 right{ (longueur * scale.x), -(largeur * scale.y), 0 };
-
-	//les coins de la boite
-	glm::vec3 coins[4] =
-	{ left,
-	{ right.x, left.y, 0 },
-	{ left.x, right.y, 0 },
-	  right };
-
-	//ajuste l'angle
-	double angle = noeud->getAngle();
-	glm::dvec3 pos = noeud->obtenirPositionRelative();
-	for (int i = 0; i < 4; i++) {
-		coins[i] = utilitaire::rotater(coins[i], angle) + pos;
-	}
-
+	//recupere la boite de collision
+	std::array<glm::vec3, 4> coinsBoiteCollision;
+	if (noeud->obtenirType() == "muret") coinsBoiteCollision = ((NoeudMuret*)noeud)->obtenirBoiteCollision();
+	if (noeud->obtenirType() == "bonus") coinsBoiteCollision = ((NoeudBonus*)noeud)->obtenirBoiteCollision();
+	
 	//retourne la collision la plus pertinente
-	return collisionSegments(coins, 4);
+	return collisionSegments(coinsBoiteCollision.data(), 4);
 }
 
 void VisiteurCollision::visiter(NoeudAbstrait* noeud) {}

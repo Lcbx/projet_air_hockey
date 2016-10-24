@@ -11,6 +11,7 @@
 
 #include "GL/glew.h"
 #include <cmath>
+#include <array>
 
 #include "Modele3D.h"
 #include "OpenGL_VBO.h"
@@ -18,6 +19,9 @@
 #include "Utilitaire.h"
 
 #include <../Visiteur.h>
+
+
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn NoeudMuret::NoeudMuret(const std::string& typeNoeud)
@@ -97,47 +101,43 @@ void NoeudMuret::animer(float temps)
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn BoiteCollision obtenirBoiteCollision()
+/// @fn std::array<glm::vec3, 4> obtenirBoiteCollision()
 ///
 /// Cette fonction permet d'obtenir la boîte de collision du muret
 ///
-/// @param[in] temps : Intervalle de temps sur lequel faire l'animation.
 ///
-/// @return Aucune.
+/// @return la boite de collision.
 ///
 ////////////////////////////////////////////////////////////////////////
-/*BoiteCollision NoeudMuret::obtenirBoiteCollision() {
+std::array<glm::vec3, 4> NoeudMuret::obtenirBoiteCollision() {
 	utilitaire::BoiteEnglobante boudingBox = utilitaire::calculerBoiteEnglobante(*modele_);
 
-	// Initialisation des différents points
-	glm::dvec3 scale = this->getScale();
-	glm::dvec3 topLeft { - boudingBox.coinMin.x * scale.x, boudingBox.coinMax.y * scale.y, 0 };
-	glm::dvec3 bottomLeft { - boudingBox.coinMin.x * scale.x, - boudingBox.coinMin.y * scale.y, 0 };
-	glm::dvec3 topRight { boudingBox.coinMax.x * scale.x, boudingBox.coinMax.y * scale.y, 0 };
-	glm::dvec3 bottomRight { boudingBox.coinMax.x * scale.x, - boudingBox.coinMin.y * scale.y, 0};
+	//trouve la boite englobante de l'objet
+	utilitaire::BoiteEnglobante boite = utilitaire::calculerBoiteEnglobante(*getModele());
 
-	// Points tournés
-	double angle = this->getAngle();
-	topLeft = utilitaire::rotater(topLeft, angle);
-	bottomLeft = utilitaire::rotater(bottomLeft, angle);
-	topRight = utilitaire::rotater(topRight, angle);
-	bottomRight = utilitaire::rotater(bottomRight, angle);
+	//recupere les coordonnees de la boite
+	double longueur = max(abs(boite.coinMax.x - boite.coinMin.x), abs(boite.coinMin.y - boite.coinMax.y)) / 2;
+	double largeur = min(abs(boite.coinMax.x - boite.coinMin.x), abs(boite.coinMin.y - boite.coinMax.y)) / 2;
+	glm::dvec3 scale = getScale();
+	glm::dvec3 left{ -(longueur * scale.x), (largeur * scale.y), 0 };
+	glm::dvec3 right{ (longueur * scale.x), -(largeur * scale.y), 0 };
 
-	// Repositionnement absolu
-	topLeft += this->obtenirPositionRelative() - glm::vec3(-10, 0, 0); // -10x pour la translation de correction
-	bottomLeft += this->obtenirPositionRelative() - glm::vec3(-10, 0, 0);
-	topRight += this->obtenirPositionRelative() - glm::vec3(-10, 0, 0);
-	bottomRight += this->obtenirPositionRelative() - glm::vec3(-10, 0, 0);
+	//les coins de la boite
+	std::array<glm::vec3, 4> coins = {
+		left,
+		{ right.x, left.y, 0 },
+		{ left.x, right.y, 0 },
+		right };
 
-	math::Droite3D left(bottomLeft, topLeft);
-	math::Droite3D top(topLeft, topRight);
-	math::Droite3D right(topRight, bottomRight);
-	math::Droite3D bottom(bottomRight, bottomLeft);
-	std::vector<math::Droite3D> segments({ left, top, right, bottom });
-	BoiteCollision collidingBox(segments);
+	//ajuste l'angle
+	double angle = getAngle();
+	glm::dvec3 pos = obtenirPositionRelative();
+	for (int i = 0; i < 4; i++) {
+		coins[i] = utilitaire::rotater(coins[i], angle) + pos;
+	}
 
-	return collidingBox;
-}*/
+	return coins;
+}
 
 ////////////////////////////////////////////////////////////////////////
 /// @fn math::Droite3D obtenirDroiteDirectrice()

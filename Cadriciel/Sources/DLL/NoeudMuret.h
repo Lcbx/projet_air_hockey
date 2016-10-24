@@ -43,6 +43,9 @@ public:
 
 	///Permet d'obtenir la droite directrice du muret
 	virtual math::Droite3D obtenirDroiteDirectrice();
+
+	///permet d'obtenir la boite de collision du muret
+	virtual std::array<glm::vec3, 4> obtenirBoiteCollision();
 		
 	///Permet de changer le redimensionnement du muret
 	virtual void setScale(const glm::dvec3& scale) {
