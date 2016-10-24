@@ -50,6 +50,8 @@ namespace InterfaceGraphique
 
         private void partieRapide_Click(object sender, EventArgs e)
         {
+            edition_.Show();
+            this.Hide();    
         }
 
        

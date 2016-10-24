@@ -321,10 +321,13 @@ void FacadeModele::libererOpenGL()
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void FacadeModele::afficher() const
+void FacadeModele::afficher()
 {
 	// Efface l'ancien rendu
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+	//animer la scene
+	animer(dt());
 
 	// Afficher la scène
 	afficherBase();
@@ -665,13 +668,31 @@ void FacadeModele::initialiserScene()
 	arbre_->initialiser();
 }
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void ajouterMailletEtRondelle()
+///
+/// Cette fonction permet d'Ajouter les maillets et la rondelle
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
 void FacadeModele::ajouterMailletEtRondelle()
 {
 	//ajout de la rondelle et les maillets
 	arbre_->ajouterMailletEtRondelle();
 }
 
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void retirerMailletEtRondelle()
+///
+/// Cette fonction permet de retirer les maillets et la rondelle
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
 void FacadeModele::retirerMailletEtRondelle()
 {
 	//effacer les maillets et la rondelle
@@ -683,14 +704,52 @@ void FacadeModele::retirerMailletEtRondelle()
 
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn deplacerMailletAvecClavier(double x, double y)
+///
+/// Cette fonction permet de deplacer le maillet avedc les touches de clavier
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
 void FacadeModele::deplacerMailletAvecClavier(double x, double y)
 {
 	arbre_->deplacerMailletAvecClavier(x, y);
 
 }
 
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void reinitialiserPartieCourante()
+///
+/// Cette fonction permet de re-initialiser la scene, donc mettre les maillets et la rondelle
+/// a la position de depart
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
 void FacadeModele::reinitialiserPartieCourante()
 {
 	arbre_->reinitialiserPartieCourante();
 
 }
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void deplacerMailletAvecSouris(glm::dvec3 pos)
+///
+/// Cette fonction permet de deplacer le maillet avec la souris
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::deplacerMailletAvecSouris(double x, double y)
+{
+	glm::dvec3 posDeplacement;
+	vue_->convertirClotureAVirtuelle(x, y, posDeplacement);
+	arbre_->deplacerMailletAvecSouris(posDeplacement);
+
+}
+
