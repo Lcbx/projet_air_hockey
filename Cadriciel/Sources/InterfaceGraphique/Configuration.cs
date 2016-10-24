@@ -91,6 +91,27 @@ namespace InterfaceGraphique
 
         private void droite_KeyDown(object sender, KeyEventArgs e)
         {
+            if (toucheDeplaceAGauche_ == e.KeyValue)
+            {
+                toucheDeplaceAGauche_ = toucheDeplaceADroite_;
+                this.gauche.Text = this.droite.Text;
+                toucheDeplaceADroite_ = e.KeyValue;
+                this.droite.Text = changerTouche(e);
+            }
+            if (toucheDeplaceEnHaut_ == e.KeyValue)
+            {
+                toucheDeplaceEnHaut_ = toucheDeplaceADroite_;
+                this.haut.Text = this.droite.Text;
+                toucheDeplaceADroite_ = e.KeyValue;
+                this.droite.Text = changerTouche(e);
+            }
+            if (toucheDeplaceEnBas_ == e.KeyValue)
+            {
+                toucheDeplaceEnBas_ = toucheDeplaceADroite_;
+                this.bas.Text = this.droite.Text;
+                toucheDeplaceADroite_ = e.KeyValue;
+                this.droite.Text = changerTouche(e);
+            }
             if (toucheDeplaceAGauche_ != e.KeyValue && toucheDeplaceEnBas_ != e.KeyValue && toucheDeplaceEnHaut_ != e.KeyValue)
             {
                 toucheDeplaceADroite_ = e.KeyValue;
@@ -100,6 +121,27 @@ namespace InterfaceGraphique
 
         private void bas_KeyDown(object sender, KeyEventArgs e)
         {
+            if (toucheDeplaceAGauche_ == e.KeyValue)
+            {
+                toucheDeplaceAGauche_ = toucheDeplaceEnBas_;
+                this.gauche.Text = this.bas.Text;
+                toucheDeplaceEnBas_ = e.KeyValue;
+                this.bas.Text = changerTouche(e);
+            }
+            if (toucheDeplaceEnHaut_ == e.KeyValue)
+            {
+                toucheDeplaceEnHaut_ = toucheDeplaceEnBas_;
+                this.haut.Text = this.bas.Text;
+                toucheDeplaceEnBas_ = e.KeyValue;
+                this.bas.Text = changerTouche(e);
+            }
+            if (toucheDeplaceADroite_ == e.KeyValue)
+            {
+                toucheDeplaceADroite_ = toucheDeplaceEnBas_;
+                this.droite.Text = this.bas.Text;
+                toucheDeplaceEnBas_ = e.KeyValue;
+                this.bas.Text = changerTouche(e);
+            }
             if (toucheDeplaceADroite_ != e.KeyValue && toucheDeplaceAGauche_ != e.KeyValue && toucheDeplaceEnHaut_ != e.KeyValue)
             {
                     toucheDeplaceEnBas_ = e.KeyValue;
@@ -109,6 +151,27 @@ namespace InterfaceGraphique
 
         private void haut_KeyDown(object sender, KeyEventArgs e)
         {
+            if (toucheDeplaceAGauche_ == e.KeyValue)
+            {
+                toucheDeplaceAGauche_ = toucheDeplaceEnHaut_;
+                this.gauche.Text = this.haut.Text;
+                toucheDeplaceEnHaut_ = e.KeyValue;
+                this.haut.Text = changerTouche(e);
+            }
+            if (toucheDeplaceADroite_ == e.KeyValue)
+            {
+                toucheDeplaceADroite_ = toucheDeplaceEnHaut_;
+                this.droite.Text = this.haut.Text;
+                toucheDeplaceEnHaut_ = e.KeyValue;
+                this.haut.Text = changerTouche(e);
+            }
+            if (toucheDeplaceEnBas_ == e.KeyValue)
+            {
+                toucheDeplaceEnBas_ = toucheDeplaceEnHaut_;
+                this.bas.Text = this.haut.Text;
+                toucheDeplaceEnHaut_ = e.KeyValue;
+                this.haut.Text = changerTouche(e);
+            }
             if (toucheDeplaceADroite_ != e.KeyValue && toucheDeplaceEnBas_ != e.KeyValue && toucheDeplaceAGauche_ != e.KeyValue)
             {
                 toucheDeplaceEnHaut_ = e.KeyValue;

@@ -169,7 +169,7 @@
     <value>15</value>
   </data>
   <data name="haut.Text" xml:space="preserve">
-    <value>w</value>
+    <value>W</value>
   </data>
   <data name="&gt;&gt;haut.Name" xml:space="preserve">
     <value>haut</value>
@@ -196,7 +196,7 @@
     <value>14</value>
   </data>
   <data name="bas.Text" xml:space="preserve">
-    <value>s</value>
+    <value>S</value>
   </data>
   <data name="&gt;&gt;bas.Name" xml:space="preserve">
     <value>bas</value>
@@ -223,7 +223,7 @@
     <value>13</value>
   </data>
   <data name="droite.Text" xml:space="preserve">
-    <value>d</value>
+    <value>D</value>
   </data>
   <data name="&gt;&gt;droite.Name" xml:space="preserve">
     <value>droite</value>
@@ -250,7 +250,7 @@
     <value>12</value>
   </data>
   <data name="gauche.Text" xml:space="preserve">
-    <value>a</value>
+    <value>A</value>
   </data>
   <data name="&gt;&gt;gauche.Name" xml:space="preserve">
     <value>gauche</value>
