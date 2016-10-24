@@ -167,6 +167,7 @@
     <ClCompile Include="Tests\BancTests.cpp" />
     <ClCompile Include="Tests\ConfigSceneTest.cpp" />
     <ClCompile Include="Tests\NoeudAbstraitTest.cpp" />
+    <ClCompile Include="Tournoi.cpp" />
     <ClCompile Include="VisiteurAjout.cpp" />
     <ClCompile Include="VisiteurDansLaTable.cpp" />
     <ClCompile Include="VisiteurDeplacement.cpp" />
@@ -217,6 +218,7 @@
     <ClInclude Include="Tests\BancTests.h" />
     <ClInclude Include="Tests\ConfigSceneTest.h" />
     <ClInclude Include="Tests\NoeudAbstraitTest.h" />
+    <ClInclude Include="Tournoi.h" />
     <ClInclude Include="Visiteur.h" />
     <ClInclude Include="VisiteurAjout.h" />
     <ClInclude Include="VisiteurDansLaTable.h" />
