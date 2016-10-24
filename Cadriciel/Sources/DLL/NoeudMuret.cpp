@@ -89,13 +89,6 @@ void NoeudMuret::afficherConcret(const glm::mat4& vueProjection) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudMuret::animer(float temps)
 {
-	/*// Le cube effectue un tour à toutes les 7 secondes sur l'axe des X.
-	angleX_ = fmod(angleX_ + temps / 7.0f * 2 * (float)utilitaire::PI, 2 * (float)utilitaire::PI);
-	// Le cube effectue un tour à toutes les 3 secondes sur l'axe des Y.
-	angleY_ = fmod(angleY_ + temps / 3.0f * 2 * (float)utilitaire::PI, 2 * (float)utilitaire::PI);
-	// Le cube effectue une révolution à toutes les 15 secondes.
-	angleRotation_ = fmod(angleRotation_ + temps / 15.0f * 2 * (float)utilitaire::PI, 2 * (float)utilitaire::PI);
-	*/
 }
 
 
@@ -123,6 +116,9 @@ std::array<glm::vec3, 5> NoeudMuret::obtenirBoiteCollision() {
 	glm::dvec3 right{ (longueur * scale.x), -(largeur * scale.y), 0 };
 
 	//les coins de la boite
+	//  left .__________. rx,ly
+	//		 |			|
+	// lx/ry .__________. right
 	std::array<glm::vec3, 5> coins = {
 		left,
 		{ right.x, left.y, 0 },

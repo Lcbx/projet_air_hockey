@@ -145,6 +145,9 @@ std::array<glm::vec3, 5> NoeudBonus::obtenirBoiteCollision() {
 	glm::dvec3 right{ (longueur * scale.x), -(largeur * scale.y), 0 };
 
 	//les coins de la boite
+	//  left .__________. rx,ly
+	//		 |			|
+	// lx/ry .__________. right
 	std::array<glm::vec3, 5> coins = {
 		left,
 		{ right.x, left.y, 0 },

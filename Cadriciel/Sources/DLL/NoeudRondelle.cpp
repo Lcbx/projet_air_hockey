@@ -88,7 +88,7 @@ void NoeudRondelle::afficherConcret(const glm::mat4& vueProjection) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudRondelle::animer(float temps)
 {
-	//debug
+	///debug
 	///connaitre le temps d'animation
 	///std::cout << "temps animation " << temps << "\n";
 	///obtient la facade
@@ -104,11 +104,12 @@ void NoeudRondelle::animer(float temps)
 		assignerPositionRelative(obtenirPositionRelative() + vitesse_* temps);
 
 		//application de la friction
-		vitesse_ -= glm::normalize(vitesse_) * (float)coeff.friction * temps;
+		//vitesse_ -= glm::normalize(vitesse_) * (float)coeff.friction * temps;
 
 		//remet la vitessse a 0 si elle en est proshe (evite des oscillations)
 		if (glm::round(vitesse_.x) == 0 && glm::round(vitesse_.y) == 0) vitesse_ = glm::vec3(0, 0, 0);
 
+		///debug
 		///std::cout << "vitesse " << vitesse_.x << " " << vitesse_.y << "\n";
 
 		//verificateur de collision

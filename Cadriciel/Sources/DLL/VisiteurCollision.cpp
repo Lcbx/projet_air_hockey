@@ -24,6 +24,47 @@ VisiteurCollision::VisiteurCollision(NoeudAbstrait* objet) {
 InfoCollision& VisiteurCollision::calculerCollision() {
 	result_.objet = nullptr;
 	result_.details = { aidecollision::COLLISION_AUCUNE, glm::vec3(0,0,0), 0 };
+
+	//test des murs (table)
+	auto table = FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable();
+	// les 8 points de controle de la table
+	/*
+	p0----------p2----------p4
+	|						 |
+	|						 |
+	p6			p8			p7
+	|						 |
+	|						 |
+	p1----------p3----------p5
+
+	*/
+#define p(arg) table->chercher(arg)->obtenirPositionRelative()
+	std::array<glm::vec3, 5> haut = {
+		p(6),
+		p(0),
+		p(2),
+		p(4),
+		p(7)
+	};
+	auto temp = collisionSegments( haut.data(), haut.size() );
+	if (temp.type != aidecollision::COLLISION_AUCUNE) {
+		result_.details = temp;
+		return result_;
+	}
+	std::array<glm::vec3, 5> bas = {
+		p(7),
+		p(5),
+		p(3),
+		p(1),
+		p(6)
+	};
+	temp = collisionSegments(bas.data(), bas.size());
+	if (temp.type != aidecollision::COLLISION_AUCUNE) {
+		result_.details = temp;
+		return result_;
+	}
+#undef p
+
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
 	return result_;
 }
@@ -32,7 +73,7 @@ InfoCollision& VisiteurCollision::calculerCollision() {
 aidecollision::DetailsCollision VisiteurCollision::collisionSegments(glm::vec3 ensemble[], int nombre) {
 	//determine la collision pour chacun des segments
 	aidecollision::DetailsCollision detail = { aidecollision::COLLISION_AUCUNE, glm::vec3(0,0,0), 0 };
-	for (int i = 0; i<nombre; i++) {
+	for (int i = 0; i<nombre-1; i++) {
 		aidecollision::DetailsCollision temp = aidecollision::calculerCollisionSegment( ensemble[ i ], ensemble[ i+1 ], position_, rayon_ );
 		if (temp.type != aidecollision::COLLISION_AUCUNE && temp.enfoncement > detail.enfoncement) {
 			detail = temp;
