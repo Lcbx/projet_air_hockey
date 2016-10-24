@@ -44,7 +44,7 @@ public:
 	math::Droite3D obtenirDroiteDirectrice();
 
 	///permet d'obtenir la boite de collision du bonus
-	virtual std::array<glm::vec3, 4> obtenirBoiteCollision();
+	virtual std::array<glm::vec3, 5> obtenirBoiteCollision();
 
 	///Permet d'obtenir le rayon minimal du modèle
 	inline virtual double obtenirRayonModele() const;

@@ -700,7 +700,7 @@ namespace InterfaceGraphique
 
                 //Scale
                 float scale = (float)(FonctionsNatives.getScale());
-                //scale = Math.Round(scale, 2);
+                scale = (float) Math.Round(scale, 3);
                 // textBox4.Text = scale.ToString();
                 numericUpDown1.Value = Convert.ToDecimal(scale);
             }

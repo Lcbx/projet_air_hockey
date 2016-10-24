@@ -33,7 +33,7 @@ aidecollision::DetailsCollision VisiteurCollision::collisionSegments(glm::vec3 e
 	//determine la collision pour chacun des segments
 	aidecollision::DetailsCollision detail = { aidecollision::COLLISION_AUCUNE, glm::vec3(0,0,0), 0 };
 	for (int i = 0; i<nombre; i++) {
-		aidecollision::DetailsCollision temp = aidecollision::calculerCollisionSegment( ensemble[ i%nombre ], ensemble[ (i+1)%nombre ], position_, rayon_ );
+		aidecollision::DetailsCollision temp = aidecollision::calculerCollisionSegment( ensemble[ i ], ensemble[ i+1 ], position_, rayon_ );
 		if (temp.type != aidecollision::COLLISION_AUCUNE && temp.enfoncement > detail.enfoncement) {
 			detail = temp;
 			std::cout << "collision " << detail.type << " segment n " << i << " enfoncement " << detail.enfoncement << "\n";
@@ -61,12 +61,12 @@ aidecollision::DetailsCollision VisiteurCollision::visiterNoeudCercle(NoeudAbstr
 aidecollision::DetailsCollision VisiteurCollision::visiterNoeudQuadrilatere(NoeudAbstrait* noeud) {
 
 	//recupere la boite de collision
-	std::array<glm::vec3, 4> coinsBoiteCollision;
+	std::array<glm::vec3, 5> coinsBoiteCollision;
 	if (noeud->obtenirType() == "muret") coinsBoiteCollision = ((NoeudMuret*)noeud)->obtenirBoiteCollision();
 	if (noeud->obtenirType() == "bonus") coinsBoiteCollision = ((NoeudBonus*)noeud)->obtenirBoiteCollision();
 	
 	//retourne la collision la plus pertinente
-	return collisionSegments(coinsBoiteCollision.data(), 4);
+	return collisionSegments(coinsBoiteCollision.data(), coinsBoiteCollision.size());
 }
 
 void VisiteurCollision::visiter(NoeudAbstrait* noeud) {}

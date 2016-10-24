@@ -122,7 +122,7 @@ math::Droite3D NoeudBonus::obtenirDroiteDirectrice() {
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn std::array<glm::vec3, 4> obtenirBoiteCollision()
+/// @fn std::array<glm::vec3, 5> obtenirBoiteCollision()
 ///
 /// Cette fonction permet d'obtenir la boîte de collision du bonus
 ///
@@ -130,7 +130,7 @@ math::Droite3D NoeudBonus::obtenirDroiteDirectrice() {
 /// @return la boite de collision.
 ///
 ////////////////////////////////////////////////////////////////////////
-std::array<glm::vec3, 4> NoeudBonus::obtenirBoiteCollision() {
+std::array<glm::vec3, 5> NoeudBonus::obtenirBoiteCollision() {
 	utilitaire::BoiteEnglobante boudingBox = utilitaire::calculerBoiteEnglobante(*modele_);
 
 	//trouve la boite englobante de l'objet
@@ -145,16 +145,18 @@ std::array<glm::vec3, 4> NoeudBonus::obtenirBoiteCollision() {
 	glm::dvec3 right{ (longueur * scale.x), -(largeur * scale.y), 0 };
 
 	//les coins de la boite
-	std::array<glm::vec3, 4> coins = {
+	std::array<glm::vec3, 5> coins = {
 		left,
 		{ right.x, left.y, 0 },
+		right,
 		{ left.x, right.y, 0 },
-		right };
+		left
+	};
 
 	//ajuste l'angle
 	double angle = getAngle();
 	glm::dvec3 pos = obtenirPositionRelative();
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < coins.size(); i++) {
 		coins[i] = utilitaire::rotater(coins[i], angle) + pos;
 	}
 
