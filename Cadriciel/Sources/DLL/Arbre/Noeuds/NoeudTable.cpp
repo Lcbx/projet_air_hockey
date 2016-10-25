@@ -159,7 +159,8 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 	// tracer les lignes de decoration 
 	tracerLignesDecoration(vueProjection);
 	// tracer les points de Controle 
-	tracerPointsControle(vueProjection);
+	if (pointControleAffiche_)
+		tracerPointsControle(vueProjection);
 
 	// test 
 	//tracerMur2Points(vueProjection, { 0,0,0 }, { 20,20,0 },largeur_,true);
@@ -653,15 +654,17 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection, double longueur) con
 	glm::vec3 point1, point2, point3, point4, point5;
 	//glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
 	glBegin(GL_QUADS);
+	//glPointSize(5);
+	//glBegin(GL_POINTS);
 	{
 		//1er but
 		point1 = p(6);
 		calculerPointDistance(p(0), p(6), longueur, largeur_, point2, point3, point4);
 		// 1er morceau P6P0
 		glColor4f(1., 0, 0, 1); // Rouge
-		glVertex3fv(PROJvec(glm::vec3(point1.x + delta, point1.y, point1.z)));
+		glVertex3fv(PROJvec(glm::vec3(point1.x + delta , point1.y, point1.z)));
 		glColor4f(1., 1, 0, 1); //Jaune
-		glVertex3fv(PROJvec(glm::vec3(point2.x + delta, point2.y, point2.z)));
+		glVertex3fv(PROJvec(glm::vec3(point2.x + delta , point2.y, point2.z)));
 		glColor4f(0., 1, 0, 1); //vert
 		glVertex3fv(PROJvec(glm::vec3(point3.x - delta, point3.y, point3.z)));
 		glColor4f(0., 0, 1, 1); //bleu
@@ -961,4 +964,89 @@ bool NoeudTable::dansTable(glm::dvec3 M) {
 		|| utilitaire::MdansTriangleABC(p8, p(6), p(0), M);
 	//std::cout << "\nresult " << (result? "dans" : "hors") << "\n";
 	return result;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::dansZone1(glm::dvec3 M
+///
+/// Cette fonction permet de savoir si un point est dans la zone1
+/// (zone gauche de la table)
+///  @param[in] 
+///		point M
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool NoeudTable::dansZone1(glm::dvec3 M) {
+	/*
+	etapes du check :
+	p0----------p2----------p4
+	| \___  1	 |			 |
+	|	2 \____  |			 |
+	p6 ________\p8			 p7
+	|  3  _____/ |			 |
+	| ___/	4	 |			 |
+	p1----------p3----------p5
+
+	*/
+
+	glm::vec3 p8(p(2).x, obtenirPositionRelative().y, obtenirPositionRelative().z);
+	bool result = MdansTriangleABC(p8, p(0), p(2), M)
+		|| MdansTriangleABC(p8, p(6), p(0), M)
+		|| MdansTriangleABC(p8, p(1), p(6), M)
+		|| MdansTriangleABC(p8, p(3), p(1), M);
+		
+	return result;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::dansZone2(glm::dvec3 M
+///
+/// Cette fonction permet de savoir si un point est dans la zone2
+/// (zone droite)
+///  @param[in] 
+///		point M
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool NoeudTable::dansZone2(glm::dvec3 M) {
+	/*
+	etapes du check :
+	p0----------p2----------p4
+	|			 | 1    ___/ |
+	|			 |  ___/  2  |
+	p6			p8 /________ p7
+	|			 |\____	  3  |
+	|			 |  4  \____ |
+	p1----------p3----------p5
+
+	*/
+
+	glm::vec3 p8(p(2).x, obtenirPositionRelative().y, obtenirPositionRelative().z);
+	bool result = MdansTriangleABC(p8, p(2), p(4), M)
+		|| MdansTriangleABC(p8, p(4), p(7), M)
+		|| MdansTriangleABC(p8, p(7), p(5), M)
+		|| MdansTriangleABC(p8, p(5), p(3), M);
+	return result;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool getbuts(bool index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas)
+///
+/// Cette fonction permet de recuperer les coordonnes des buts
+///  @param[in] 
+///		bool index : true pour le but de droite, false pour celui du gauche
+///	 @param[out]
+///		pointHaut : le point haut de la ligne du but
+///		pointMilieu : le point milieu du but
+///		pointBas : point bas de la ligne du but
+/// @return bool
+///
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool getbuts(bool index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas)
+{
+	return true;
 }

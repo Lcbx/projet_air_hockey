@@ -636,19 +636,102 @@ void ArbreRenduINF2990::deplacerMailletAvecSouris(glm::dvec3 pos)
 	for (NoeudAbstrait * enfant : this->enfants_)
 	{
 		if (enfant->obtenirType() == "maillet") {
-			if (enfant->estDeuxiemeJoueur == false) {
+			if (enfant->estDeuxiemeJoueur == false)
+			{
+				glm::vec3 P2, P3, P7;
+				this->getTable()->getPointControle(2, P2);
+				this->getTable()->getPointControle(3, P3);
+				this->getTable()->getPointControle(7, P7);
 				if (this->getTable()->dansTable(pos))
-				{
-					if(pos.x>0)
+				{	
+					// si depasse la gauche de la zone
+					if (pos.x < enfant->obtenirRayon())
+						pos.x = enfant->obtenirRayon();
+					// si depasse la droite de la zone
+					if ( (pos.x + enfant->obtenirRayon()) > P7.x)
+						pos.x = P7.x - enfant->obtenirRayon();
+					// si depasse le haut de la zone
+					if ((pos.y + enfant->obtenirRayon()) > P2.y)
+						pos.y = P2.y - enfant->obtenirRayon();
+					// si depasse le bas de la zone
+					if ((pos.y - enfant->obtenirRayon()) < P3.y)
+						pos.y = P3.y + enfant->obtenirRayon();
+
 					enfant->assignerPositionRelative(pos);
-					else
-						enfant->assignerPositionRelative({0,pos.y,0});
-				}
+				}			
 			}
 		}
 	}
 }
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void activerRayonPortail()
+///
+///Author : Ali
+/// Cette fonction permet d'activer le rayon d'attraction d'un portail
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::activerRayonPortail()
+{
+	for (NoeudAbstrait * enfant : this->enfants_)
+		if (enfant->obtenirType() == "portail")
+			enfant->rayonAffiche_ = true;
+	std::cout << "+++ Rayon d'attraction des portails est active' +++" <<std::endl;			
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void deactiverRayonPortail()
+///
+///Author : Ali
+/// Cette fonction permet de deactiver le rayon d'attraction d'un portail
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::deactiverRayonPortail()
+{
+	for (NoeudAbstrait * enfant : this->enfants_)
+		if (enfant->obtenirType() == "portail")
+			enfant->rayonAffiche_ = false;
+	std::cout << "--- Rayon d'attraction des portails est deactive' ---" << std::endl;
 
+}
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void effacerPointControle()
+///
+///Author : Ali
+/// Cette fonction permet d'effacer l'affichage les points de controles
+/// de la table
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::effacerPointControle()
+{
+	for (NoeudAbstrait * enfant : this->enfants_)
+		if (enfant->obtenirType() == "table")
+			enfant->pointControleAffiche_ = false;
+	std::cout << "--- points de controle efface's ---" << std::endl;
 
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void effacerPointControle()
+///
+///Author : Ali
+/// Cette fonction permet d'effacer l'affichage les points de controles
+/// de la table
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::afficherPointControle()
+{
+	for (NoeudAbstrait * enfant : this->enfants_)
+		if (enfant->obtenirType() == "table")
+			enfant->pointControleAffiche_ = true;
+	std::cout << "+++ points de controle affiche's +++" << std::endl;
 
+}

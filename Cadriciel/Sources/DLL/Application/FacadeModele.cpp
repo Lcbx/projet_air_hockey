@@ -751,8 +751,67 @@ void FacadeModele::deplacerMailletAvecSouris(double x, double y)
 }
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn void virtuelDefensif()
+/// @fn void activerRayonAttraction()
+/// Author : Ali
+/// Cette fonction permet d'activer l'affichage du rayon d'attraction
+/// des portails 
 ///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::activerRayonAttraction()
+{
+	arbre_->activerRayonPortail();
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void deactiverRayonAttraction()
+/// Author : Ali
+/// Cette fonction permet de desactiver l'affichage du rayon d'attraction
+/// des portails
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::deactiverRayonAttraction()
+{
+	arbre_->deactiverRayonPortail();
+
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void effacerPointControle()
+/// Author : Ali
+/// Cette fonction permet d'effacer les points de controle de la table
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::effacerPointControle()
+{
+	arbre_->effacerPointControle();
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void afficherPointControle()
+/// Author : Ali
+/// Cette fonction permet d'afficher les points de controle de la table
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::afficherPointControle()
+{
+	arbre_->afficherPointControle();
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void virtuelDefensif()
+/// Author : Ali
 /// Cette fonction permet de deplacer le maillet du joueur virtuel
 /// selon le scenario defensif
 ///
@@ -762,8 +821,5 @@ void FacadeModele::deplacerMailletAvecSouris(double x, double y)
 void FacadeModele::virtuelDefensif()
 {
 	glm::vec3 positionRondelle = arbre_->chercher("rondelle")->obtenirPositionRelative();
-	
-
-
 }
 

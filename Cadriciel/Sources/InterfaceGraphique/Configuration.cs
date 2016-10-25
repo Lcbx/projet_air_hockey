@@ -179,7 +179,30 @@ namespace InterfaceGraphique
             }
                 
         }
+        
+        private void Configuration_Load(object sender, EventArgs e)
+        {
+            
+        }
 
+        private void Quit_Click(object sender, EventArgs e)
+        {
+            menuPrincipal_.Show();
+            this.Hide();
+        }
+
+        // activer le rayon d'attraction
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FonctionsNatives.afficherRayonAttraction();
+            MessageBox.Show("Rayon Attraction Active'");
+        }
+        // deactiver le rayon d'attraction
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FonctionsNatives.enleverRayonAttraction();
+            MessageBox.Show("Rayon Attraction Deactive'");
+        }
     }
     static partial class FonctionsNatives
     {
@@ -194,5 +217,12 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void deplacerVersLeBas(int toucheDeplacementEnBas_);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void afficherRayonAttraction();
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void enleverRayonAttraction();
+
     }
-    }
+}

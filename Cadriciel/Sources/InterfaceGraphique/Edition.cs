@@ -254,6 +254,8 @@ namespace InterfaceGraphique
                         {
                             //afficher fenetre test 
                             passerModeJeu(true);
+                            //effacer les points de controle
+                            FonctionsNatives.effacerPointControle();
                             //Permet d'ajouter les maillets et la rondelle dans la table
                             FonctionsNatives.ajouterMailletEtRondelle();
                             break;
@@ -281,6 +283,8 @@ namespace InterfaceGraphique
                         {
                             //afficher fenetre edition
                             passerModeJeu(false);
+                            //afficher les points de controle
+                            FonctionsNatives.afficherPointControle();
                             //Permet de retirer les maillets et la rondelle dans la table
                             FonctionsNatives.retirerMailletEtRondelle();break;
                         }
@@ -1598,11 +1602,15 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void deplacerMailletAvecSouris(double x , double y);
-
+        // afficher ou effacer les points de controle
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void afficherPointControle();
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void effacerPointControle();
         // Joueur virtuel - Scenario defensif
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void virtuelDefensif();
-
+        
 
 
     }
