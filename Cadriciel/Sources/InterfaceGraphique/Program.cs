@@ -58,6 +58,18 @@ namespace InterfaceGraphique
             Application.Run(menuPrincipal);
         }
 
+
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn    static void ExecuterQuandInactif(object sender, EventArgs e)
+        ///
+        /// @brief refraichir le contexte OpenGl
+        ///
+        /// @param[in] sender: bouton
+        /// @param[in] e: gere l'evenement
+        ///
+        /// @return rien
+        //
+        /////////////////////////////////////////////////////////////////////////////////////////
         static void ExecuterQuandInactif(object sender, EventArgs e)
         {
             FonctionsNatives.Message message;
