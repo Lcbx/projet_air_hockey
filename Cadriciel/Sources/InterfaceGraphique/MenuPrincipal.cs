@@ -42,14 +42,15 @@ namespace InterfaceGraphique
 
         private void editeur_Click(object sender, EventArgs e)
         {
-          
+         
             edition_.Show();                   //  l'afficher
             this.Hide();                      // fermer la fenêtre Menu principal
-
+            edition_.passerModeJeu(false);
         }
 
         private void partieRapide_Click(object sender, EventArgs e)
         {
+           
             edition_.Show();
             this.Hide();    
         }
