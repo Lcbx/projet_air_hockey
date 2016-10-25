@@ -13,6 +13,7 @@
 
 #include "NoeudAbstrait.h"
 #include "GL/glew.h"
+#include <list>
 
 ///////////////////////////////////////////////////////////////////////////
 /// @class NoeudRondelle
@@ -39,6 +40,10 @@ public:
 	virtual void accepter(Visiteur* v);
 
 private:
+
+	///dernieres positions valides
+	std::list<glm::vec3> dernieresPositions_;
+
 	///vecteur vitesse
 	glm::vec3 vitesse_ = { -50,30,0 };
 	

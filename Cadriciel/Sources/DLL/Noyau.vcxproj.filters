@@ -195,6 +195,9 @@
     <ClCompile Include="VisiteurCollision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Affichage_debuggage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\FacadeModele.h">
@@ -342,6 +345,9 @@
       <Filter>Header Files\Application</Filter>
     </ClInclude>
     <ClInclude Include="VisiteurCollision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Affichage_debuggage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

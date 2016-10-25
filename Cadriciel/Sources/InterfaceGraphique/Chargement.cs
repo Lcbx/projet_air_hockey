@@ -98,7 +98,14 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            filename.Text = files[listBox1.SelectedIndex];
+            try
+            {
+                filename.Text = files[listBox1.SelectedIndex];
+            }
+            catch (Exception)
+            {
+                filename.Text = "";
+            }
         }
 
         ///////////////////////////////////////////////////////////////////////

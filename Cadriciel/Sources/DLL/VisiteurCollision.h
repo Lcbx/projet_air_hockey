@@ -51,7 +51,7 @@ class VisiteurCollision : public Visiteur
 	///donne la collision la plus pertinente avec une suite segments
 	aidecollision::DetailsCollision collisionSegments(glm::vec3 ensemble[], int nombre);
 	///collision avec un objet de forme ronde
-	aidecollision::DetailsCollision visiterNoeudCercle(NoeudAbstrait* noeud);
+	aidecollision::DetailsCollision visiterNoeudCercle(NoeudAbstrait* noeud, float rayon);
 	///collision avec un objet de forme rectangulaire
 	aidecollision::DetailsCollision visiterNoeudQuadrilatere(NoeudAbstrait* noeud);
 

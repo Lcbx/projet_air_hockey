@@ -129,6 +129,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Affichage_debuggage.cpp" />
     <ClCompile Include="Application\AjoutAccelerateur.cpp" />
     <ClCompile Include="Application\AjoutMur.cpp" />
     <ClCompile Include="Application\AjoutPortail.cpp" />

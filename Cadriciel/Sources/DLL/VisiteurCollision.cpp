@@ -79,7 +79,7 @@ aidecollision::DetailsCollision VisiteurCollision::collisionSegments(glm::vec3 e
 		aidecollision::DetailsCollision temp = aidecollision::calculerCollisionSegment( ensemble[ i ], ensemble[ i+1 ], position_, rayon_ );
 		if (temp.type != aidecollision::COLLISION_AUCUNE && temp.enfoncement > detail.enfoncement) {
 			detail = temp;
-			std::cout << "collision " << detail.type << " segment n " << i << " enfoncement " << detail.enfoncement << "\n";
+			//std::cout << "collision " << detail.type << " segment n " << i << " enfoncement " << detail.enfoncement << "\n";
 		}
 	}
 	
@@ -87,15 +87,13 @@ aidecollision::DetailsCollision VisiteurCollision::collisionSegments(glm::vec3 e
 }
 
 ///calcul de collision avec un objet circulaire
-aidecollision::DetailsCollision VisiteurCollision::visiterNoeudCercle(NoeudAbstrait* noeud) {
+aidecollision::DetailsCollision VisiteurCollision::visiterNoeudCercle(NoeudAbstrait* noeud, float rayon) {
 	//calcul de la collision entre les deux cercles 
-	//celui externe en premier
-	double rayon = noeud->obtenirRayon();
 	glm::vec3 position = noeud->obtenirPositionRelative();
 	auto detail = aidecollision::calculerCollisionCercle(
 		glm::vec2(position.x, position.y), rayon,
 		glm::vec2(position_.x, position_.y), rayon_);
-	if(detail.type != aidecollision::COLLISION_AUCUNE) std::cout << "collision " << detail.type << " enfoncement " << detail.enfoncement << "\n";
+	//if(detail.type != aidecollision::COLLISION_AUCUNE) std::cout << "collision " << detail.type << " enfoncement " << detail.enfoncement << "\n";
 	return detail;
 }
 
@@ -123,7 +121,7 @@ void VisiteurCollision::visiter(NoeudComposite *noeud) {
 
 void VisiteurCollision::visiter(NoeudRondelle* noeud) {
 	if(objet_->obtenirType() != "rondelle"){
-		auto detail = visiterNoeudCercle(noeud);
+		auto detail = visiterNoeudCercle(noeud, noeud->obtenirRayon());
 		if (detail.type != aidecollision::COLLISION_AUCUNE) {
 			result_.type = InfoCollision::RONDELLE;
 			result_.objet = noeud;
@@ -153,7 +151,7 @@ void VisiteurCollision::visiter(NoeudBonus* noeud) {
 
 void VisiteurCollision::visiter(NoeudMaillet* noeud) {
 	if (objet_->obtenirType() != "maillet") {
-		auto detail = visiterNoeudCercle(noeud);
+		auto detail = visiterNoeudCercle(noeud, noeud->obtenirRayon());
 		if (detail.type != aidecollision::COLLISION_AUCUNE) {
 			result_.type = InfoCollision::MAILLET;
 			result_.objet = noeud;
@@ -163,7 +161,8 @@ void VisiteurCollision::visiter(NoeudMaillet* noeud) {
 }
 
 void VisiteurCollision::visiter(NoeudPortail* noeud) {
-	auto detail = visiterNoeudCercle(noeud);
+	//on reduit la taille de la zone de collision pour eviter la sortie de jeu de rondelle
+	auto detail = visiterNoeudCercle(noeud, noeud->obtenirRayon() *0.6);
 	if (detail.type != aidecollision::COLLISION_AUCUNE) {
 		result_.type = InfoCollision::PORTAIL;
 		result_.objet = noeud;
