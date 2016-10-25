@@ -56,6 +56,10 @@ namespace utilitaire {
 	///
 	////////////////////////////////////////////////////////////////////////
 	double calculerAngle3D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C) {
+		// A.	 .c
+		// u^	^v
+		//	 \  /
+		//	  B.
 		// theta = arcos( u.v/(|u|.|v|) )
 		double angle;
 		glm::dvec3 u(A - B);

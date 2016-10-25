@@ -38,7 +38,7 @@ struct CoefficientConfiguration{
 } typedef CoefficientConfiguration;
 
 const CoefficientConfiguration COEFFICIENTS_MINIMAUX = { 0, 0, 0 };
-const CoefficientConfiguration COEFFICIENTS_DEFAULT = { 30, 0.8, 5 };
+const CoefficientConfiguration COEFFICIENTS_DEFAULT = { 10, 0.8, 5 };
 const CoefficientConfiguration COEFFICIENTS_MAXIMAUX = { 100, 1, 10 };
 
 ///////////////////////////////////////////////////////////////////////////

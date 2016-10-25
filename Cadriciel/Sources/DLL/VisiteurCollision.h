@@ -26,9 +26,9 @@
 class InfoCollision {
 public:
 	///types d'objets rencontres
-	enum TYPE { AUCUN, MUR, BONUS, PORTAIL, MAILLET, RONDELLE };
+	enum TYPE { AUCUNE, MUR, BONUS, PORTAIL, MAILLET, RONDELLE };
 	///type de l'objet en collision
-	TYPE type = AUCUN;
+	TYPE type = AUCUNE;
 	///le pointeur a l'objet de la collision
 	NoeudAbstrait* objet = nullptr;
 	///détails de la collision

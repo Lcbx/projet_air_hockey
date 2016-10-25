@@ -41,6 +41,10 @@ public:
 private:
 	///vecteur vitesse
 	glm::vec3 vitesse_ = { -50,30,0 };
+	
+	///vecteur vitesse induit par les portails
+	glm::vec3 aspiration_ = { 0,0,0 };
+
 	/// Angle selon l'axe des X.
 	float angleX_{ 0.f };
 	/// Angle selon l'axe des Y.
