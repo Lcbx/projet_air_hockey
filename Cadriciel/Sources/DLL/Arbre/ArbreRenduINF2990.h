@@ -118,6 +118,9 @@ public:
   ///activer ou deactiver le rayon d'attraction d'un portail
   void activerRayonPortail();
   void deactiverRayonPortail();
+  /// afficher ou effacer les points de controle
+  void afficherPointControle();
+  void effacerPointControle();
 
 private :
 	NoeudTable* noeudTable_;

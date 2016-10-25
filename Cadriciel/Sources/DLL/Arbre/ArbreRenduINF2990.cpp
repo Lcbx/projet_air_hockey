@@ -699,3 +699,39 @@ void ArbreRenduINF2990::deactiverRayonPortail()
 
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void effacerPointControle()
+///
+///Author : Ali
+/// Cette fonction permet d'effacer l'affichage les points de controles
+/// de la table
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::effacerPointControle()
+{
+	for (NoeudAbstrait * enfant : this->enfants_)
+		if (enfant->obtenirType() == "table")
+			enfant->pointControleAffiche_ = false;
+	std::cout << "--- points de controle efface's ---" << std::endl;
+
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void effacerPointControle()
+///
+///Author : Ali
+/// Cette fonction permet d'effacer l'affichage les points de controles
+/// de la table
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::afficherPointControle()
+{
+	for (NoeudAbstrait * enfant : this->enfants_)
+		if (enfant->obtenirType() == "table")
+			enfant->pointControleAffiche_ = true;
+	std::cout << "+++ points de controle affiche's +++" << std::endl;
+
+}

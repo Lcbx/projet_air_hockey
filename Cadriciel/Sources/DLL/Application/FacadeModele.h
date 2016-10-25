@@ -164,6 +164,9 @@ public:
 	/// activer ou deactiver le rayon d'attraction des portails
 	void activerRayonAttraction();
 	void deactiverRayonAttraction();
+	/// afficher ou effacer les points de controle
+	void afficherPointControle();
+	void effacerPointControle();
 	///deplacer le maillet du jouer virtuel selon le scenario defensif
 	void virtuelDefensif();
 	///

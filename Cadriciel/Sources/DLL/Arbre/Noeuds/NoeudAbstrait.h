@@ -181,6 +181,8 @@ public:
 	bool estDeuxiemeJoueur = false;
 	// boolean pour afficher ou non le rayon d'attraction du portail
 	bool rayonAffiche_{ false };
+	// boolean pour afficher les points de control ou non
+	bool pointControleAffiche_{ true };
 
 protected:
 	/// Type du noeud.

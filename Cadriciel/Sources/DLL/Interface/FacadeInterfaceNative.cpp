@@ -691,6 +691,34 @@ extern "C"
 		FacadeModele::obtenirInstance()->deactiverRayonAttraction();
 	}
 
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 		__declspec(dllexport) void afficherPointControle();
+	/// Author : Ali
+	/// Cette fonction permet d'afficher les points de controle de
+	/// la table
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl afficherPointControle()
+	{
+		FacadeModele::obtenirInstance()->afficherPointControle();
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 		__declspec(dllexport) void effacerPointControle();
+	/// Author : Ali
+	/// Cette fonction permet d'effacer l'affichage les points de controle
+	/// de la table
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl effacerPointControle()
+	{
+		FacadeModele::obtenirInstance()->effacerPointControle();
+	}
+
 
 
 }
