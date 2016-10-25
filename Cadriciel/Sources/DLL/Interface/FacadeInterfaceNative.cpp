@@ -650,9 +650,8 @@ extern "C"
 	}
 
 	////////////////////////////////////////////////////////////////////////
-	/// Author : Ali
 	/// @fn 		__declspec(dllexport) void virtuelDefensif();
-	///
+	/// Author : Ali
 	/// Cette fonction permet de deplacer le maillet du joueur virtuel
 	/// selon un scenario defensif
 	///
@@ -663,6 +662,35 @@ extern "C"
 	{
 		FacadeModele::obtenirInstance()->virtuelDefensif();
 	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 		__declspec(dllexport) void afficherRayonAttraction();
+	/// Author : Ali
+	/// Cette fonction permet d'afficher le rayon d'attraction
+	/// des portails
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl afficherRayonAttraction()
+	{
+		FacadeModele::obtenirInstance()->activerRayonAttraction();
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 		__declspec(dllexport) void enleverRayonAttraction();
+	/// Author : Ali
+	/// Cette fonction permet d'enlever le rayon d'attraction 
+	/// des portail
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl enleverRayonAttraction()
+	{
+		FacadeModele::obtenirInstance()->deactiverRayonAttraction();
+	}
+
 
 
 }

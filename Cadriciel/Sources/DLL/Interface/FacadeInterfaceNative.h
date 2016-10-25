@@ -125,6 +125,9 @@ extern "C" {
 
 	///deplacer le maillet du jouer virtuel selon le scenario defensif
 	__declspec(dllexport) void virtuelDefensif();
+	///activer ou deactiver le rayon d'attraction
+	__declspec(dllexport) void activerRayonAttraction();
+	__declspec(dllexport) void deactiverRayonAttraction();
 	
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__

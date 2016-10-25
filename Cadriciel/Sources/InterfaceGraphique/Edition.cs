@@ -1602,7 +1602,7 @@ namespace InterfaceGraphique
         // Joueur virtuel - Scenario defensif
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void virtuelDefensif();
-
+        
 
 
     }

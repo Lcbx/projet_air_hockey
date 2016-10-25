@@ -180,7 +180,7 @@ public:
 	///definir le deuxieme joueur
 	bool estDeuxiemeJoueur = false;
 	// boolean pour afficher ou non le rayon d'attraction du portail
-	bool rayonAffiche_{ true };
+	bool rayonAffiche_{ false };
 
 protected:
 	/// Type du noeud.

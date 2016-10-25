@@ -115,6 +115,9 @@ public:
   ///deplacer avec souris
   void deplacerMailletAvecSouris(glm::dvec3 pos);
 
+  ///activer ou deactiver le rayon d'attraction d'un portail
+  void activerRayonPortail();
+  void deactiverRayonPortail();
 
 private :
 	NoeudTable* noeudTable_;

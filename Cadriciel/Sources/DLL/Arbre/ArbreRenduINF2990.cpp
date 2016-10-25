@@ -648,7 +648,39 @@ void ArbreRenduINF2990::deplacerMailletAvecSouris(glm::dvec3 pos)
 		}
 	}
 }
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void activerRayonPortail()
+///
+///Author : Ali
+/// Cette fonction permet d'activer le rayon d'attraction d'un portail
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::activerRayonPortail()
+{
+	for (NoeudAbstrait * enfant : this->enfants_)
+		if (enfant->obtenirType() == "portail")
+			enfant->rayonAffiche_ = true;
+	std::cout << "+++ Rayon d'attraction des portails est active' +++" <<std::endl;			
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void deactiverRayonPortail()
+///
+///Author : Ali
+/// Cette fonction permet de deactiver le rayon d'attraction d'un portail
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::deactiverRayonPortail()
+{
+	for (NoeudAbstrait * enfant : this->enfants_)
+		if (enfant->obtenirType() == "portail")
+			enfant->rayonAffiche_ = false;
+	std::cout << "--- Rayon d'attraction des portails est deactive' ---" << std::endl;
 
-
-
+}
 
