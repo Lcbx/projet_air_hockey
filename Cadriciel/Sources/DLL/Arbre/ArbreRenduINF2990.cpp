@@ -23,6 +23,8 @@
 
 #include "Deplacement.h"
 
+#include "../Affichage_debuggage.h"
+
 using namespace std;
 
 
@@ -675,10 +677,7 @@ void ArbreRenduINF2990::deplacerMailletAvecSouris(glm::dvec3 pos)
 ////////////////////////////////////////////////////////////////////////
 void ArbreRenduINF2990::activerRayonPortail()
 {
-	for (NoeudAbstrait * enfant : this->enfants_)
-		if (enfant->obtenirType() == "portail")
-			enfant->rayonAffiche_ = true;
-	std::cout << "+++ Rayon d'attraction des portails est active' +++" <<std::endl;			
+	Debug::obtenirInstance().afficherAttraction = true;
 }
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -692,11 +691,7 @@ void ArbreRenduINF2990::activerRayonPortail()
 ////////////////////////////////////////////////////////////////////////
 void ArbreRenduINF2990::deactiverRayonPortail()
 {
-	for (NoeudAbstrait * enfant : this->enfants_)
-		if (enfant->obtenirType() == "portail")
-			enfant->rayonAffiche_ = false;
-	std::cout << "--- Rayon d'attraction des portails est deactive' ---" << std::endl;
-
+	Debug::obtenirInstance().afficherAttraction = false;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -711,11 +706,7 @@ void ArbreRenduINF2990::deactiverRayonPortail()
 ////////////////////////////////////////////////////////////////////////
 void ArbreRenduINF2990::effacerPointControle()
 {
-	for (NoeudAbstrait * enfant : this->enfants_)
-		if (enfant->obtenirType() == "table")
-			enfant->pointControleAffiche_ = false;
-	std::cout << "--- points de controle efface's ---" << std::endl;
-
+	noeudTable_->afficherPointsControles = false;
 }
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -729,9 +720,5 @@ void ArbreRenduINF2990::effacerPointControle()
 ////////////////////////////////////////////////////////////////////////
 void ArbreRenduINF2990::afficherPointControle()
 {
-	for (NoeudAbstrait * enfant : this->enfants_)
-		if (enfant->obtenirType() == "table")
-			enfant->pointControleAffiche_ = true;
-	std::cout << "+++ points de controle affiche's +++" << std::endl;
-
+	noeudTable_->afficherPointsControles = true;
 }

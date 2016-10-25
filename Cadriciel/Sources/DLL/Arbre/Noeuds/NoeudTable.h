@@ -39,7 +39,9 @@ public:
 
 	// fonctions d'affichage
 	/// tracer la table
-	void tracerTable(const glm::mat4& vueProjection)  const; 
+	void tracerTable(const glm::mat4& vueProjection)  const;
+	///si on doit tracer les points de controle
+	bool afficherPointsControles = true;
 	/// tracer les points de controle
 	void tracerPointsControle(const glm::mat4& vueProjection)  const;
 	/// tracer un cercle

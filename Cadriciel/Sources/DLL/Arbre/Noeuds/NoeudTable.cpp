@@ -159,7 +159,7 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 	// tracer les lignes de decoration 
 	tracerLignesDecoration(vueProjection);
 	// tracer les points de Controle 
-	if (pointControleAffiche_)
+	if (afficherPointsControles)
 		tracerPointsControle(vueProjection);
 
 	// test 
@@ -991,10 +991,10 @@ bool NoeudTable::dansZone1(glm::dvec3 M) {
 	*/
 
 	glm::vec3 p8(p(2).x, obtenirPositionRelative().y, obtenirPositionRelative().z);
-	bool result = MdansTriangleABC(p8, p(0), p(2), M)
-		|| MdansTriangleABC(p8, p(6), p(0), M)
-		|| MdansTriangleABC(p8, p(1), p(6), M)
-		|| MdansTriangleABC(p8, p(3), p(1), M);
+	bool result = utilitaire::MdansTriangleABC(p8, p(0), p(2), M)
+		|| utilitaire::MdansTriangleABC(p8, p(6), p(0), M)
+		|| utilitaire::MdansTriangleABC(p8, p(1), p(6), M)
+		|| utilitaire::MdansTriangleABC(p8, p(3), p(1), M);
 		
 	return result;
 }
@@ -1024,10 +1024,10 @@ bool NoeudTable::dansZone2(glm::dvec3 M) {
 	*/
 
 	glm::vec3 p8(p(2).x, obtenirPositionRelative().y, obtenirPositionRelative().z);
-	bool result = MdansTriangleABC(p8, p(2), p(4), M)
-		|| MdansTriangleABC(p8, p(4), p(7), M)
-		|| MdansTriangleABC(p8, p(7), p(5), M)
-		|| MdansTriangleABC(p8, p(5), p(3), M);
+	bool result = utilitaire::MdansTriangleABC(p8, p(2), p(4), M)
+		|| utilitaire::MdansTriangleABC(p8, p(4), p(7), M)
+		|| utilitaire::MdansTriangleABC(p8, p(7), p(5), M)
+		|| utilitaire::MdansTriangleABC(p8, p(5), p(3), M);
 	return result;
 }
 

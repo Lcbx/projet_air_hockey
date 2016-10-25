@@ -12,8 +12,10 @@
 
 
 #include "NoeudAbstrait.h"
+#include "NoeudPortail.h"
 #include "GL/glew.h"
 #include <list>
+#include <map>
 
 ///////////////////////////////////////////////////////////////////////////
 /// @class NoeudRondelle
@@ -43,12 +45,17 @@ private:
 
 	///dernieres positions valides
 	std::list<glm::vec3> dernieresPositions_;
+	///ajoute une nouvelle position
+	void push_position();
+	///charge une ancienne position
+	void pop_position();
+
 
 	///vecteur vitesse
 	glm::vec3 vitesse_ = { -50,30,0 };
 	
-	///vecteur vitesse induit par les portails
-	glm::vec3 aspiration_ = { 0,0,0 };
+	///les portails : pointeur et active ou non
+	std::map<NoeudPortail*, bool> portails_;
 
 	/// Angle selon l'axe des X.
 	float angleX_{ 0.f };
