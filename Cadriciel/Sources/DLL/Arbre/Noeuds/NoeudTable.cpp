@@ -1022,3 +1022,21 @@ bool NoeudTable::dansTable(glm::dvec3 M) {
 	//std::cout << "\nresult " << (result? "dans" : "hors") << "\n";
 	return result;
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool getbuts(bool index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas)
+///
+/// Cette fonction permet de recuperer les coordonnes des buts
+///  @param[in] 
+///		bool index : true pour le but de droite, false pour celui du gauche
+///	 @param[out]
+///		pointHaut : le point haut de la ligne du but
+///		pointMilieu : le point milieu du but
+///		pointBas : point bas de la ligne du but
+/// @return bool
+///
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool getbuts(bool index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas)
+{
+	return true;
+}

@@ -94,6 +94,8 @@ public:
 	bool MdansTriangleABC(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C, glm::dvec3 M);
 	/// dansTable
 	bool dansTable(glm::dvec3 M);
+	// get coordonnes des buts 
+	bool getbuts(bool index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas);
 
 private:
 
