@@ -39,6 +39,7 @@ class VisiteurSelection;
 class VisiteurRotation;
 class VisiteurMiseEchelle;
 class VisiteurAjout;
+class VisiteurCollision;
 
 
 

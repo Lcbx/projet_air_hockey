@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////
 /// @file NoeudRondelle.h
-/// @author Julien Gascon-Samson
-/// @date 2011-05-19
+/// @author Wajdi Gharsalli
+/// @date 2016-10-19
 /// @version 1.0
 ///
 /// @addtogroup inf2990 INF2990
@@ -14,13 +14,12 @@
 #include "NoeudAbstrait.h"
 #include "GL/glew.h"
 
-
 ///////////////////////////////////////////////////////////////////////////
 /// @class NoeudRondelle
 /// @brief Classe qui représente un le noeud muret de l'arbre de rendu.
 ///
-/// @author Julien Gascon-Samson
-/// @date 2011-05-19
+/// @author Wajdi Gharsalli
+/// @date 2016-10-19
 ///////////////////////////////////////////////////////////////////////////
 class NoeudRondelle : public NoeudAbstrait
 {
@@ -40,7 +39,11 @@ public:
 	virtual void accepter(Visiteur* v);
 
 private:
-
+	///vecteur vitesse
+	glm::vec3 vitesse_ = { -50,30,0 };
+	
+	///vecteur vitesse induit par les portails
+	glm::vec3 aspiration_ = { 0,0,0 };
 
 	/// Angle selon l'axe des X.
 	float angleX_{ 0.f };
@@ -48,7 +51,6 @@ private:
 	float angleY_{ 0.f };
 	/// Angle de rotation.
 	float angleRotation_{ 0.f };
-
 };
 
 

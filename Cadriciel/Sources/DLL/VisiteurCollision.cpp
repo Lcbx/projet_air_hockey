@@ -11,98 +11,162 @@
 #include "VisiteurCollision.h"
 #include "ArbreRenduINF2990.h"
 #include "AideCollision.h"
+#include <array>
 
-namespace aidecollision {
+///initialisation
+VisiteurCollision::VisiteurCollision(NoeudAbstrait* objet) {
+	this->objet_ = objet;
+	this->rayon_ = objet->obtenirRayon();
+	this->position_ = objet->obtenirPositionRelative();
+}
 
+///fonction apppellee generalement
+InfoCollision& VisiteurCollision::calculerCollision() {
+	result_.objet = nullptr;
+	result_.details = { aidecollision::COLLISION_AUCUNE, glm::vec3(0,0,0), 0 };
 
-	///initialisation
-	VisiteurCollision::VisiteurCollision(NoeudAbstrait* objet) {
-		objet_ = objet;
-		rayon_ = objet->obtenirRayon();
-		position_ = objet->obtenirPositionRelative();
-	}
+	//test des murs (table)
+	auto table = FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable();
+	// les 8 points de controle de la table
+	/*
+	p0----------p2----------p4
+	|						 |
+	|						 |
+	p6			p8			p7
+	|						 |
+	|						 |
+	p1----------p3----------p5
 
-	///fonction apppellee generalement
-	InfoCollision VisiteurCollision::calculerCollision() {
-		FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
+	*/
+#define p(arg) table->chercher(arg)->obtenirPositionRelative()
+	std::array<glm::vec3, 5> haut = {
+		p(6),
+		p(0),
+		p(2),
+		p(4),
+		p(7)
+	};
+	auto temp = collisionSegments( haut.data(), haut.size() );
+	if (temp.type != aidecollision::COLLISION_AUCUNE) {
+		result_.type = InfoCollision::MUR;
+		result_.details = temp;
 		return result_;
 	}
-
-	///donne la collision la plus pertinente avec une suite segments
-	DetailsCollision VisiteurCollision::collisionSegments(glm::vec3 ensemble[], int nombre) {
-		//determine la collision pour chacun des segments
-		DetailsCollision detail = { COLLISION_AUCUNE, glm::vec3(0), 0 };
-		for (int i = 0; i<nombre; i++) {
-			DetailsCollision temp = calculerCollisionSegment(ensemble[i%nombre], ensemble[(i + 1) % nombre], position_, rayon_);
-			if (temp.type != COLLISION_AUCUNE && temp.enfoncement > detail.enfoncement) detail = temp;
-		}
-		return detail;
+	std::array<glm::vec3, 5> bas = {
+		p(7),
+		p(5),
+		p(3),
+		p(1),
+		p(6)
+	};
+	temp = collisionSegments(bas.data(), bas.size());
+	if (temp.type != aidecollision::COLLISION_AUCUNE) {
+		result_.type = InfoCollision::MUR;
+		result_.details = temp;
+		return result_;
 	}
+#undef p
 
-	///calcul de collision avec un objet circulaire
-	DetailsCollision VisiteurCollision::visiterNoeudCercle(NoeudAbstrait* noeud) {
-		//calcul de la collision entre les deux cercles 
-		//celui externe en premier
-		double rayon = noeud->obtenirRayon();
-		glm::vec3 position = noeud->obtenirPositionRelative();
-		return aidecollision::calculerCollisionCercle(
-			glm::vec2(position.x, position.y), rayon,
-			glm::vec2(position_.x, position_.y), rayon_);
-	}
+	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
+	return result_;
+}
 
-
-	///cacul de collission avec un objet rectangulaire
-	DetailsCollision VisiteurCollision::visiterNoeudQuadrilatere(NoeudAbstrait* noeud) {
-
-		//trouve la boite englobante du muret
-		utilitaire::BoiteEnglobante boite = utilitaire::calculerBoiteEnglobante(*noeud->getModele());
-
-		//reoriente les coorodonnnées de la boite dans notre repere
-		double rayon = max(abs(boite.coinMax.x - boite.coinMin.x), abs(boite.coinMin.y - boite.coinMax.y)) / 2;
-		glm::dvec3 scale = noeud->getScale();
-		glm::dvec3 left{ -(rayon * scale.x), 0, 0 };
-		glm::dvec3 right{ (rayon * scale.x), 0, 0 };
-		//ajuste l'angle
-		double angle = noeud->getAngle();
-		glm::dvec3 pos = noeud->obtenirPositionRelative();
-		left = utilitaire::rotater(left, angle) + pos;
-		right = utilitaire::rotater(right, angle) + pos;
-
-		//les coins de la boite
-		glm::vec3 coins[4] = {	left,
-								{ left.x, right.y, 0 },
-								{ right.x, left.y, 0 },
-								right };
-
-		//retourne la collision la plus pertinente
-		return collisionSegments(coins, 4);
-	}
-
-	void VisiteurCollision::visiter(NoeudAbstrait* noeud) {}
-
-
-	void VisiteurCollision::visiter(NoeudComposite *noeud) {
-		for (unsigned int i = 0; i < noeud->obtenirNombreEnfants(); i++) {
-			noeud->chercher(i)->accepter(this);
+///donne la collision la plus pertinente avec une suite segments
+aidecollision::DetailsCollision VisiteurCollision::collisionSegments(glm::vec3 ensemble[], int nombre) {
+	//determine la collision pour chacun des segments
+	aidecollision::DetailsCollision detail = { aidecollision::COLLISION_AUCUNE, glm::vec3(0,0,0), 0 };
+	for (int i = 0; i<nombre-1; i++) {
+		aidecollision::DetailsCollision temp = aidecollision::calculerCollisionSegment( ensemble[ i ], ensemble[ i+1 ], position_, rayon_ );
+		if (temp.type != aidecollision::COLLISION_AUCUNE && temp.enfoncement > detail.enfoncement) {
+			detail = temp;
+			std::cout << "collision " << detail.type << " segment n " << i << " enfoncement " << detail.enfoncement << "\n";
 		}
 	}
+	
+	return detail;
+}
 
-	void VisiteurCollision::visiter(NoeudRondelle* noeud) {
+///calcul de collision avec un objet circulaire
+aidecollision::DetailsCollision VisiteurCollision::visiterNoeudCercle(NoeudAbstrait* noeud) {
+	//calcul de la collision entre les deux cercles 
+	//celui externe en premier
+	double rayon = noeud->obtenirRayon();
+	glm::vec3 position = noeud->obtenirPositionRelative();
+	auto detail = aidecollision::calculerCollisionCercle(
+		glm::vec2(position.x, position.y), rayon,
+		glm::vec2(position_.x, position_.y), rayon_);
+	if(detail.type != aidecollision::COLLISION_AUCUNE) std::cout << "collision " << detail.type << " enfoncement " << detail.enfoncement << "\n";
+	return detail;
+}
 
+
+///cacul de collission avec un objet rectangulaire
+aidecollision::DetailsCollision VisiteurCollision::visiterNoeudQuadrilatere(NoeudAbstrait* noeud) {
+
+	//recupere la boite de collision
+	std::array<glm::vec3, 5> coinsBoiteCollision;
+	if (noeud->obtenirType() == "muret") coinsBoiteCollision = ((NoeudMuret*)noeud)->obtenirBoiteCollision();
+	if (noeud->obtenirType() == "bonus") coinsBoiteCollision = ((NoeudBonus*)noeud)->obtenirBoiteCollision();
+	
+	//retourne la collision la plus pertinente
+	return collisionSegments(coinsBoiteCollision.data(), coinsBoiteCollision.size());
+}
+
+void VisiteurCollision::visiter(NoeudAbstrait* noeud) {}
+
+
+void VisiteurCollision::visiter(NoeudComposite *noeud) {
+	for (unsigned int i = 0; i < noeud->obtenirNombreEnfants(); i++) {
+		noeud->chercher(i)->accepter(this);
 	}
+}
 
-	void VisiteurCollision::visiter(NoeudMuret* noeud) {
+void VisiteurCollision::visiter(NoeudRondelle* noeud) {
+	if(objet_->obtenirType() != "rondelle"){
+		auto detail = visiterNoeudCercle(noeud);
+		if (detail.type != aidecollision::COLLISION_AUCUNE) {
+			result_.type = InfoCollision::RONDELLE;
+			result_.objet = noeud;
+			result_.details = detail;
+		}
 	}
+}
 
-	void VisiteurCollision::visiter(NoeudBonus* noeud) {
 
+void VisiteurCollision::visiter(NoeudMuret* noeud) {
+	auto detail = visiterNoeudQuadrilatere(noeud);
+	if (detail.type != aidecollision::COLLISION_AUCUNE) {
+		result_.type = InfoCollision::MUR;
+		result_.objet = noeud;
+		result_.details = detail;
 	}
+}
 
-	void VisiteurCollision::visiter(NoeudMaillet* noeud) {
-
+void VisiteurCollision::visiter(NoeudBonus* noeud) {
+	auto detail = visiterNoeudQuadrilatere(noeud);
+	if (detail.type != aidecollision::COLLISION_AUCUNE) {
+		result_.type = InfoCollision::BONUS;
+		result_.objet = noeud;
+		result_.details = detail;
 	}
+}
 
-	void VisiteurCollision::visiter(NoeudPortail* noeud) {
+void VisiteurCollision::visiter(NoeudMaillet* noeud) {
+	if (objet_->obtenirType() != "maillet") {
+		auto detail = visiterNoeudCercle(noeud);
+		if (detail.type != aidecollision::COLLISION_AUCUNE) {
+			result_.type = InfoCollision::MAILLET;
+			result_.objet = noeud;
+			result_.details = detail;
+		}
+	}
+}
 
+void VisiteurCollision::visiter(NoeudPortail* noeud) {
+	auto detail = visiterNoeudCercle(noeud);
+	if (detail.type != aidecollision::COLLISION_AUCUNE) {
+		result_.type = InfoCollision::PORTAIL;
+		result_.objet = noeud;
+		result_.details = detail;
 	}
 }

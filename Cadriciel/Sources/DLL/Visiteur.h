@@ -19,7 +19,7 @@
 
 #include "FacadeModele.h"
 
-/*INCLURE LES AUTRES NOUEDS !!*/
+/*INCLURE LES AUTRES NOEUDS !!*/
 
 using namespace std;
 

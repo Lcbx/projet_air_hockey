@@ -11,6 +11,7 @@
 
 #include "GL/glew.h"
 #include <cmath>
+#include <array>
 
 #include "Modele3D.h"
 #include "OpenGL_VBO.h"
@@ -117,6 +118,52 @@ math::Droite3D NoeudBonus::obtenirDroiteDirectrice() {
 
 	math::Droite3D droite{ left, right };
 	return droite;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn std::array<glm::vec3, 5> obtenirBoiteCollision()
+///
+/// Cette fonction permet d'obtenir la boîte de collision du bonus
+///
+///
+/// @return la boite de collision.
+///
+////////////////////////////////////////////////////////////////////////
+std::array<glm::vec3, 5> NoeudBonus::obtenirBoiteCollision() {
+	utilitaire::BoiteEnglobante boudingBox = utilitaire::calculerBoiteEnglobante(*modele_);
+
+	//trouve la boite englobante de l'objet
+	utilitaire::BoiteEnglobante boite = utilitaire::calculerBoiteEnglobante(*getModele());
+
+	//recupere les coordonnees de la boite
+	double longueur = max(abs(boite.coinMax.x - boite.coinMin.x), abs(boite.coinMin.y - boite.coinMax.y)) / 2;
+	//la largeur est mondre a cause de la tete de la fleche
+	double largeur = 0.6 * min(abs(boite.coinMax.x - boite.coinMin.x), abs(boite.coinMin.y - boite.coinMax.y)) / 2;
+	glm::dvec3 scale = getScale();
+	glm::dvec3 left{ -(longueur * scale.x), (largeur * scale.y), 0 };
+	glm::dvec3 right{ (longueur * scale.x), -(largeur * scale.y), 0 };
+
+	//les coins de la boite
+	//  left .__________. rx,ly
+	//		 |			|
+	// lx/ry .__________. right
+	std::array<glm::vec3, 5> coins = {
+		left,
+		{ right.x, left.y, 0 },
+		right,
+		{ left.x, right.y, 0 },
+		left
+	};
+
+	//ajuste l'angle
+	double angle = getAngle();
+	glm::dvec3 pos = obtenirPositionRelative();
+	for (int i = 0; i < coins.size(); i++) {
+		coins[i] = utilitaire::rotater(coins[i], angle) + pos;
+	}
+
+	return coins;
 }
 
 
