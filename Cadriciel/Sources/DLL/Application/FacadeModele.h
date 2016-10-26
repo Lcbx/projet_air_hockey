@@ -37,8 +37,8 @@ struct CoefficientConfiguration{
 	double acceleration;	//Accélération des bonus vitesse
 } typedef CoefficientConfiguration;
 
-const CoefficientConfiguration COEFFICIENTS_MINIMAUX = { 0.0, 0, 0 };
-const CoefficientConfiguration COEFFICIENTS_DEFAULT = { 1.2, 0.8, 5 };
+const CoefficientConfiguration COEFFICIENTS_MINIMAUX = { 0, 0, 0 };
+const CoefficientConfiguration COEFFICIENTS_DEFAULT = { 10, 0.8, 5 };
 const CoefficientConfiguration COEFFICIENTS_MAXIMAUX = { 100, 1, 10 };
 
 ///////////////////////////////////////////////////////////////////////////
@@ -70,7 +70,7 @@ public:
 	/// Libère le contexte OpenGL.
 	void libererOpenGL();
 	/// Affiche le contenu du modèle.
-	void afficher();
+	void afficher() const;
 	/// Affiche la base du contenu du modèle.
 	void afficherBase() const;
 
@@ -205,14 +205,6 @@ private:
    /// Coefficients de configuration
    CoefficientConfiguration coeff_ = COEFFICIENTS_DEFAULT;
 
-
-   //animation
-   ///temps ecoule pour l'animation
-   long currentTime_;
-   ///remet le temps ecoule a 0
-   void dtReset() { currentTime_ = clock(); }
-   ///retourne le temps ecoule
-   long dt() { long temp = currentTime_; currentTime_ = clock(); return currentTime_ - temp; }
 };
 
 

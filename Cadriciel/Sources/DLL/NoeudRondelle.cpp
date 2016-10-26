@@ -18,6 +18,11 @@
 #include "Utilitaire.h"
 
 #include <../Visiteur.h>
+#include "VisiteurCollision.h"
+#include "Affichage_debuggage.h"
+#include "ArbreRenduINF2990.h"
+#include "NoeudTable.h"
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn NoeudRondelle::NoeudRondelle(const std::string& typeNoeud)
@@ -33,6 +38,12 @@
 NoeudRondelle::NoeudRondelle(const std::string& typeNoeud)
 	: NoeudAbstrait{ typeNoeud }
 {
+	//ajoute tous les portails
+	auto arbre = FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990();
+	for (int i = 0; i < arbre->obtenirNombreEnfants(); i++) {
+		auto noeud = arbre->chercher(i);
+		if (noeud->obtenirType() == "portail") portails_[ (NoeudPortail*) noeud ] = true;
+	}
 }
 
 
@@ -85,9 +96,106 @@ void NoeudRondelle::afficherConcret(const glm::mat4& vueProjection) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudRondelle::animer(float temps)
 {
+
+	//on a besoin d'animer que si la vitesse est non nulle
+	double module_vitesse = glm::length(vitesse_);
+
+	//obtient les coefficients
+	auto coeff = FacadeModele::obtenirInstance()->getCoefficient();
+
+	//attraction des portails
+	for (auto it = portails_.begin(); it != portails_.end(); it++) {
+		double distance = glm::distance(it->first->obtenirPositionRelative(), obtenirPositionRelative());
+		double rayon_attraction = 3 * it->first->obtenirRayon();
+		if (it->second) {
+			if (distance < rayon_attraction){
+				vitesse_  = vitesse_ + (float) glm::pow(rayon_attraction - distance, 1) * glm::normalize(it->first->obtenirPositionRelative() - obtenirPositionRelative());
+			}
+		}
+		else if (distance > rayon_attraction) it->second = true;
+	}
+
+	//actualisation de la position par rapport a la vitesse
+	glm::vec3 deplacement = (vitesse_)* temps;
+	//verifie si le deplacement est dans la table
+	if (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(obtenirPositionRelative() + deplacement)) {
+		assignerPositionRelative(obtenirPositionRelative() + deplacement);
+		push_position();
+	}
+	else {
+		//TODO: verifier s'il s'agit d'un but
+
+		//recuperer des situations bizarres
+		pop_position();
+	}
+
+	//verificateur de collision
+	VisiteurCollision v(this);
+	InfoCollision resultat = v.calculerCollision();
+
+	//gerer la collision
+	if (resultat.type != InfoCollision::AUCUNE) {
+		//pour l'affichage de Debug
+		std::string typeObjetDebug;
+		//la normale rencontree
+		glm::vec3 normale = glm::normalize(resultat.details.direction);
+		//la position qui annulle la collision
+		glm::vec3 positionHorsCollision = obtenirPositionRelative() + normale * (float)resultat.details.enfoncement;
+		//en fonction du type de collision
+		switch (resultat.type) {
+		case InfoCollision::MUR: {
+			typeObjetDebug = "mur";
+			assignerPositionRelative(positionHorsCollision);
+			vitesse_ = glm::reflect(vitesse_, normale) * (float)coeff.rebond;
+			break;
+		}
+		case InfoCollision::BONUS: {
+			typeObjetDebug = "bonus";
+			glm::vec3 direction = glm::normalize( -((NoeudBonus*)resultat.objet)->obtenirDroiteDirectrice().lireVecteur() );
+			vitesse_ += direction * (float) glm::pow(coeff.acceleration, 1.5);
+			break;
+		}
+		case InfoCollision::PORTAIL: {
+			typeObjetDebug = "portail";
+			auto noeud = (NoeudPortail*)resultat.objet;
+			auto frere = (NoeudPortail*)noeud->getFrere();
+			assignerPositionRelative(	frere->obtenirPositionRelative()
+										- noeud->obtenirPositionRelative()
+										+ positionHorsCollision );
+			vitesse_ *= -1;
+			portails_[ frere ] = false;
+			break;
+		}
+		case InfoCollision::MAILLET: {
+			typeObjetDebug = "maillet";
+			assignerPositionRelative(positionHorsCollision);
+			vitesse_ = glm::reflect(vitesse_, normale);
+		}
+		default: break;
+		}
+		if (Debug::obtenirInstance().afficherCollision) Debug::obtenirInstance().afficher("Collision : " + typeObjetDebug);
+		if (Debug::obtenirInstance().afficherVitesse) Debug::obtenirInstance().afficher("Vitesse : " + std::to_string(glm::length(vitesse_)));
+	}
+
+
+	//application de la friction
+#define VITESSE_MAX 200.
+	vitesse_ *= glm::clamp(module_vitesse - coeff.friction * temps, 0., VITESSE_MAX) / module_vitesse;
 	
 }
 
+
+///ajoute une nouvelle position
+void NoeudRondelle::push_position() {
+	dernieresPositions_.push_front(obtenirPositionRelative());
+	if (dernieresPositions_.size() > 5) dernieresPositions_.pop_back();
+}
+///charge une ancienne position
+void NoeudRondelle::pop_position() {
+	glm::vec3 positionIntermediaire = (dernieresPositions_.front());
+	assignerPositionRelative(positionIntermediaire);
+	if (dernieresPositions_.size() > 1) dernieresPositions_.pop_front();
+}
 
 ////////////////////////////////////////////////
 /// 
@@ -98,7 +206,6 @@ void NoeudRondelle::animer(float temps)
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////
-
 void NoeudRondelle::accepter(Visiteur* v)
 {
 	v->visiter(this);

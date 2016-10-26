@@ -39,7 +39,9 @@ public:
 
 	// fonctions d'affichage
 	/// tracer la table
-	void tracerTable(const glm::mat4& vueProjection)  const; 
+	void tracerTable(const glm::mat4& vueProjection)  const;
+	///si on doit tracer les points de controle
+	bool afficherPointsControles = true;
 	/// tracer les points de controle
 	void tracerPointsControle(const glm::mat4& vueProjection)  const;
 	/// tracer un cercle
@@ -87,11 +89,6 @@ public:
 
 
 	//determiner si dans la table
-	/// angle
-	double calculerAngle3D(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C);
-	double calculerAngle2D(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C);
-	/// dansTriangle
-	bool MdansTriangleABC(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C, glm::dvec3 M);
 	/// dansTable
 	bool dansTable(glm::dvec3 M);
 	// dans la zone du jeu 
