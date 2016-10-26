@@ -99,20 +99,43 @@ void NoeudRondelle::animer(float temps)
 
 	//obtient les coefficients
 	auto coeff = FacadeModele::obtenirInstance()->getCoefficient();
+	glm::vec3 positionActuelle = obtenirPositionRelative();
 
 	//actualisation de la position par rapport a la vitesse
 	glm::vec3 deplacement = (vitesse_)* temps;
+	glm::vec3 nouvellePosition = positionActuelle + deplacement;
+
 
 	//verifie si le deplacement est dans la table
-	if (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(obtenirPositionRelative() + deplacement)) {
-		assignerPositionRelative(obtenirPositionRelative() + deplacement);
+	if (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(nouvellePosition)) {
+		assignerPositionRelative(nouvellePosition);
 		push_position();
 	}
 	else {
-		//TODO: verifier s'il s'agit d'un but
+		//verifie s'il s'agit d'un but
+		auto table = FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable();
 
-		//recuperer des situations bizarres
-		pop_position();
+		//recupere le but droit
+		glm::vec3 haut, bas, milieu;
+		table->getButs(1, haut, milieu, bas);
+		//est-ce qu'on est dans la fenetre
+		if( nouvellePosition.y > bas.y && nouvellePosition.y < haut.y) {
+			std::cout << "but droit \n";
+			//pour le fun
+			assignerPositionRelative(nouvellePosition);
+		}
+		else {
+			//recupere le but gauche
+			table->getButs(2, haut, milieu, bas);
+			if (nouvellePosition.y > bas.y && nouvellePosition.y < haut.y) {
+				std::cout << "but gauche \n";
+				//pour le fun
+				assignerPositionRelative(nouvellePosition);
+			}
+			else
+				//gere les situations bizarres
+				pop_position();
+		}
 	}
 
 	//verificateur de collision
@@ -156,7 +179,7 @@ void NoeudRondelle::animer(float temps)
 		case InfoCollision::MAILLET: {
 			typeObjetDebug = "maillet";
 			assignerPositionRelative(positionHorsCollision);
-			float facteurRebond = glm::clamp(max(glm::dot(-vitesse_, normale), glm::dot(vitesse_, normale)) / glm::length(vitesse_), (float) 0.5, (float) 1.);
+			float facteurRebond = glm::clamp(max(glm::dot(-vitesse_, normale), glm::dot(vitesse_, normale)) / glm::length(vitesse_), (float) 0.3, (float) 1.);
 			vitesse_ = glm::reflect(vitesse_, normale) * facteurRebond;
 			break;
 		}
