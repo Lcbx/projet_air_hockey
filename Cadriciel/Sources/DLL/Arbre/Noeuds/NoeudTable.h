@@ -98,12 +98,13 @@ public:
 	bool dansZone1(glm::dvec3 M);
 	bool dansZone2(glm::dvec3 M);
 	// get coordonnes des buts 
-	bool getbuts(bool index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas);
+	bool getButs(int index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas) ;
 
 private:
 
 	///la largueur des murs 
-	double largeur_{ 7};
+	double largeur_{ 7 };
+	double longueurButs_{ 15 };
 	/// la hauteur des murs 
 	double hauteur_{ 0.0 };
 	/// la couleur de la table 

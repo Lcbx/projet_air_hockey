@@ -719,8 +719,6 @@ extern "C"
 		FacadeModele::obtenirInstance()->effacerPointControle();
 	}
 
-
-
 }
 
 

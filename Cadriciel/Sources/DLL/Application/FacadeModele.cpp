@@ -824,5 +824,14 @@ void FacadeModele::afficherPointControle()
 void FacadeModele::virtuelDefensif()
 {
 	glm::vec3 positionRondelle = arbre_->chercher("rondelle")->obtenirPositionRelative();
+
+	//// afficher coord des buts
+	//glm::vec3 pointHaut, pointMilieu, pointBas;
+	//arbre_->getTable()->getButs(1, pointHaut, pointMilieu, pointBas);
+	//std::cout << "But 1 (Droite)" << std::endl;
+	//std::cout << "pointHaut(" << pointHaut.x << "," << pointHaut.y << ") pointMilieu (" << pointMilieu.x << "," << pointMilieu.y << ") pointBas(" << pointBas.x << "," << pointBas.y << ")" << std::endl;
+	//arbre_->getTable()->getButs(2, pointHaut, pointMilieu, pointBas);
+	//std::cout << "But 2 (Gauche)" << std::endl;
+	//std::cout << "pointHaut(" << pointHaut.x << "," << pointHaut.y << ") pointMilieu (" << pointMilieu.x << "," << pointMilieu.y << ") pointBas(" << pointBas.x << "," << pointBas.y << ")" << std::endl;
 }
 
