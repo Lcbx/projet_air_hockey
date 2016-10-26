@@ -80,8 +80,6 @@ namespace InterfaceGraphique
             //masquer bouton mode edition quand on est dans le mode edition
             modeEditionToolStripMenuItem.Visible = false;
 
-            //panel score
-            splitContainer1.Panel1.Hide();
 
 
         }
@@ -255,9 +253,9 @@ namespace InterfaceGraphique
                             //afficher fenetre test 
                             passerModeJeu(true);
                             //effacer les points de controle
-                            FonctionsNatives.effacerPointControle();
+                            //FonctionsNatives.effacerPointControle();
                             //Permet d'ajouter les maillets et la rondelle dans la table
-                            FonctionsNatives.ajouterMailletEtRondelle();
+                           // FonctionsNatives.ajouterMailletEtRondelle();
                             break;
                         }
                     case Keys.Escape:
@@ -279,14 +277,15 @@ namespace InterfaceGraphique
                         {
                             afficherBarreMenu(); break;
                         }
-                    case Keys.T://revenir au menu principal
+                    case Keys.T://revenir au menu edition
                         {
                             //afficher fenetre edition
                             passerModeJeu(false);
                             //afficher les points de controle
-                            FonctionsNatives.afficherPointControle();
+                           // FonctionsNatives.afficherPointControle();
                             //Permet de retirer les maillets et la rondelle dans la table
-                            FonctionsNatives.retirerMailletEtRondelle();break;
+                            // FonctionsNatives.retirerMailletEtRondelle();
+                            break;
                         }
                     case Keys.Space: //reinitialiser la partie
                         {
@@ -484,7 +483,9 @@ namespace InterfaceGraphique
         private void menuPrincipalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             menuPrincipal_.Show();
+            estEnModeTest = false;
             this.Hide();
+            //this.Close();
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -1327,6 +1328,10 @@ namespace InterfaceGraphique
                 this.Text = "Mode Test";
                 estEnModeTest = true;
                 this.changerMode(Etats.TEST);
+                //Permet d'ajouter les maillets et la rondelle dans la table
+                FonctionsNatives.ajouterMailletEtRondelle();
+                //effacer les points de controle
+                FonctionsNatives.effacerPointControle();
 
 
                 toolStrip1.Hide();
@@ -1355,6 +1360,7 @@ namespace InterfaceGraphique
                 splitContainer1.Panel1.Show();
                 splitContainer1.Panel2.Hide();
 
+               
             }
             //si mode edition , afficher les menus a cotés + barre des menus
             else
@@ -1362,7 +1368,11 @@ namespace InterfaceGraphique
                 this.Text = "Mode Edition";
                 estEnModeTest = false;
                 this.changerMode(Etats.SELECTION);
-
+                
+                //retirer les maillets
+                FonctionsNatives.retirerMailletEtRondelle();
+                //afficher les points de controle
+                FonctionsNatives.afficherPointControle();
 
                 toolStrip1.Show();
                 menuStrip1.Show();
@@ -1388,6 +1398,7 @@ namespace InterfaceGraphique
                 splitContainer1.Panel1.Hide();
                 splitContainer1.Panel2.Show();
 
+               
 
             }
         }
@@ -1437,7 +1448,7 @@ namespace InterfaceGraphique
             //afficher fenetre edition
             passerModeJeu(false);
             //Permet de retirer les maillets et la rondelle dans la table
-            FonctionsNatives.retirerMailletEtRondelle();
+            //FonctionsNatives.retirerMailletEtRondelle();
         }
 
 
@@ -1458,7 +1469,7 @@ namespace InterfaceGraphique
             //afficher fenetre test 
             passerModeJeu(true);
             //Permet d'ajouter les maillets et la rondelle dans la table
-            FonctionsNatives.ajouterMailletEtRondelle();
+            //FonctionsNatives.ajouterMailletEtRondelle();
         }
 
 
@@ -1610,6 +1621,7 @@ namespace InterfaceGraphique
         // Joueur virtuel - Scenario defensif
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void virtuelDefensif();
+        
         
 
 
