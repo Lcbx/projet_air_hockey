@@ -17,6 +17,7 @@ namespace InterfaceGraphique
 
         Edition edition_;
 
+       public bool estclique;
         ///////////////////////////////////////////////////////////////////////
         /// @fn public Chargement(Edition edition) 
         ///
@@ -34,6 +35,8 @@ namespace InterfaceGraphique
             this.MaximizeBox = false;
 
             this.edition_ = edition;
+
+            estclique = false;
         }
 
         ///////////////////////////////////////////////////////////////////////
@@ -77,6 +80,7 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         private void button1_Click(object sender, EventArgs e) {
             if (filename.Text != "") {
+                estclique = true;
                 edition_.setCurrentFile(filename.Text);
                 FonctionsNatives.chargerZoneJeu(Path.Combine(Edition.SAVE_FILEPATH, filename.Text + ".xml").ToCharArray());
                 this.Hide();

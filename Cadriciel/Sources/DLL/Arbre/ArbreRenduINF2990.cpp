@@ -437,7 +437,6 @@ int ArbreRenduINF2990::obtenirNombreObjetSelctionnes()
 	}
 	//compMuret = compMuret / 2;
 	comp = comp; // +compMuret;
-	std::cout << "objets selectionnes : " << comp << std::endl;
 	return comp;
 }
 
@@ -519,15 +518,36 @@ void  ArbreRenduINF2990::ajouterMailletEtRondelle()
 
 	//AJOUT MAILLET1
 	NoeudAbstrait* noeudMaillet{ creerNoeud(NOM_MAILLET) };
-	noeudMaillet->assignerPositionRelative({70,0,0 });
 	noeudMaillet->setScale({ 1, 1, 1 });
+	
+	noeudMaillet->assignerPositionRelative({70,0,0 });
+	//pour verifier l'ajout l'interieur, mais si on joue avec les points de controle 
+	if (!this->getTable()->dansZone2(noeudMaillet->obtenirPositionRelative()))
+	{
+		noeudMaillet->assignerPositionRelative({ 40,0,0 });
+		if (!this->getTable()->dansZone2(noeudMaillet->obtenirPositionRelative()))
+		{
+			noeudMaillet->assignerPositionRelative({ 20,0,0 });
+		}
+	}
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet);
 	noeudMaillet->estDeuxiemeJoueur = false;
 	
 	//AJOUT MAILLET2
 	NoeudAbstrait* noeudMaillet2{ creerNoeud(NOM_MAILLET) };
-	noeudMaillet2->assignerPositionRelative({ -70,0,0 });
 	noeudMaillet2->setScale({ 1, 1, 1 });
+
+
+	noeudMaillet2->assignerPositionRelative({ -70,0,0 });
+	//pour verifier l'ajout l'interieur, mais si on joue avec les points de controle 
+	if (!this->getTable()->dansZone1(noeudMaillet2->obtenirPositionRelative()))
+	{
+		noeudMaillet2->assignerPositionRelative({ -40,0,0 });
+		if (!this->getTable()->dansZone1(noeudMaillet2->obtenirPositionRelative()))
+		{
+			noeudMaillet2->assignerPositionRelative({ -20,0,0 });
+		}
+	}
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet2);
 	noeudMaillet2->estDeuxiemeJoueur = true;
 
@@ -544,32 +564,23 @@ void  ArbreRenduINF2990::ajouterMailletEtRondelle()
 ////////////////////////////////////////////////////////////////////////
 void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 {
-	//NoeudAbstrait* dernier;
-
-	/*for (NoeudAbstrait * enfant : this->enfants_)
-	{
-		if (enfant->obtenirType() == "maillet")
-		{
-			dernier = enfant;
-		}
-	}
-	*/
-
 		NoeudAbstrait* dernier = this->enfants_.back();//pour obtenir le maillet du 2eme joueur
 		glm::dvec3 pos = dernier->obtenirPositionRelative();
+		double rayon = dernier->obtenirRayon();
 
 		if (x > 0) {
-			if (pos.x + 5 <= 0) { // pour ne pas depasser le centre 
-				dernier->assignerPositionRelative({ pos.x + 5, pos.y, 0 });//bouger vers droite
+			if(this->getTable()->dansZone1({ pos.x + rayon , pos.y, 0 })){
+			//if (pos.x + rayon + 5 <= 0) { // pour ne pas depasser le centre 
+				dernier->assignerPositionRelative({ pos.x+ 4, pos.y, 0 });//bouger vers droite
 			}
-			else { dernier->assignerPositionRelative({ 0, pos.y, 0 });//ne pas depasser le centre
+			else { dernier->assignerPositionRelative({ -7, pos.y, 0 });//ne pas depasser le centre
 		}
 
 		} 
 		if (x < 0) {  //bouger vers gauche
-			if (this->getTable()->dansTable({ pos.x - 5, pos.y, 0 }))//checker si a l'interieur 
+			if (this->getTable()->dansZone1({ pos.x - rayon , pos.y, 0 }))//checker si a l'interieur 
 			{
-				dernier->assignerPositionRelative({ pos.x - 5, pos.y, 0 });
+				dernier->assignerPositionRelative({ pos.x - 4, pos.y, 0 });
 			}
 			else {
 				dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
@@ -577,18 +588,18 @@ void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 		}
 
 		if (y > 0) { //bouger vers haut
-			if (this->getTable()->dansTable({ pos.x , pos.y + 5 , 0 }))
+			if (this->getTable()->dansZone1({ pos.x , pos.y + rayon , 0 }))
 			{
-				dernier->assignerPositionRelative({ pos.x , pos.y + 5, 0 });
+				dernier->assignerPositionRelative({ pos.x , pos.y + 4, 0 });
 			}
 			else {
 				dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
 			}
 		}
 		if (y < 0) {//bouger vers bas
-			if (this->getTable()->dansTable({ pos.x , pos.y - 5 , 0 }))
+			if (this->getTable()->dansZone1({ pos.x , pos.y - rayon , 0 }))
 			{
-				dernier->assignerPositionRelative({ pos.x, pos.y - 5 , 0 });
+				dernier->assignerPositionRelative({ pos.x, pos.y - 4 , 0 });
 			} 
 			else {
 				dernier->assignerPositionRelative({ pos.x, pos.y, 0 });

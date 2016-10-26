@@ -37,6 +37,11 @@ namespace InterfaceGraphique
         public bool estEnModeTest = false;
         public bool estEnPause = false;
 
+        public bool avant = false;
+        public bool arriere = false;
+        public bool haut = false;
+        public bool bas = false;
+
         /////////////////////////////////////////////////////////////////////////
         ///  @fn public Edition()
         /// 
@@ -52,6 +57,9 @@ namespace InterfaceGraphique
             this.KeyPreview = true;
             (this as Control).KeyDown += new KeyEventHandler(keyDownHandler);
             (this as Control).KeyUp += new KeyEventHandler(keyUpHandler);
+            (this as Control).KeyDown += new KeyEventHandler(toucheManuel);
+            (this as Control).KeyUp += new KeyEventHandler(toucheManuel2);
+
             InitializeComponent();
             InitialiserAnimation();
             supprimerToolStripMenuItem.Enabled = false;
@@ -152,19 +160,67 @@ namespace InterfaceGraphique
             if (e.KeyCode == Keys.Right) FonctionsNatives.deplacerVueXY(0.1, 0);
             if (e.KeyCode == Keys.Down) FonctionsNatives.deplacerVueXY(0, 0.1);
             if (e.KeyCode == Keys.Left) FonctionsNatives.deplacerVueXY(-0.1, 0);
+        }
 
+      
+        private void toucheManuel(object sender, KeyEventArgs e)
+        {
+            //TO-DO: Changer les touches par les touches enregistres !!
+           
             //deplacer le maillet de 2eme joueur
             if (estEnModeTest == true)
             {
                 if (estEnPause == false) // si on est pause, on ne peut pas deplacer le maillet
                 {
-                    if (e.KeyCode == Keys.D) FonctionsNatives.deplacerMailletAvecClavier(1, 0); //avant
-                    if (e.KeyCode == Keys.A) FonctionsNatives.deplacerMailletAvecClavier(-1, 0);//arriere
-                    if (e.KeyCode == Keys.W) FonctionsNatives.deplacerMailletAvecClavier(0, 1);//haut
-                    if (e.KeyCode == Keys.S) FonctionsNatives.deplacerMailletAvecClavier(0, -1); //bas
+                    if (e.KeyCode == Keys.D)//avant
+                    {
+                        avant = true;
+                        if (arriere == true) { System.Console.WriteLine("D+ A"); }
+                        else if (haut == true){ System.Console.WriteLine("D+W");}
+                        else if (bas == true) { System.Console.WriteLine("D+S"); }
+                        else System.Console.WriteLine("wiiiiiiiiiiiwwww");
+                         //FonctionsNatives.deplacerMailletAvecClavier(1, 0);
+                    }
+
+
+                    if (e.KeyCode == Keys.A)//arriere
+                    {
+                        arriere = true;
+                        FonctionsNatives.deplacerMailletAvecClavier(-1, 0); }
+
+                    if (e.KeyCode == Keys.W)//haut
+                    {
+                        haut = true;
+                        if (arriere == true) { System.Console.WriteLine("w+a"); }
+                        else if (bas == true) { System.Console.WriteLine("w+s"); }
+                        else if (avant == true) { System.Console.WriteLine("w+d"); }
+                        else System.Console.WriteLine("w ");
+                        //FonctionsNatives.deplacerMailletAvecClavier(0, 1);
+
+                    }
+                    if (e.KeyCode == Keys.S)//bas
+                    {
+                        bas = true;
+                        FonctionsNatives.deplacerMailletAvecClavier(0, -1);
+                    } 
                 }
             }
+        }
 
+
+        private void toucheManuel2(object sender, KeyEventArgs e)
+        {
+            //deplacer le maillet de 2eme joueur
+            if (estEnModeTest == true)
+            {
+                if (estEnPause == false) // si on est pause, on ne peut pas deplacer le maillet
+                {
+                    if (e.KeyCode == Keys.D) avant = false;
+                    if (e.KeyCode == Keys.A) arriere = false;
+                    if (e.KeyCode == Keys.W) haut = false;
+                    if (e.KeyCode == Keys.S) bas = false; //bas
+                }
+            }
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -251,7 +307,7 @@ namespace InterfaceGraphique
                     case Keys.T:
                         {
                             //afficher fenetre test 
-                            passerModeJeu(true);
+                            passerModeTest(true);
                             //effacer les points de controle
                             //FonctionsNatives.effacerPointControle();
                             //Permet d'ajouter les maillets et la rondelle dans la table
@@ -280,7 +336,7 @@ namespace InterfaceGraphique
                     case Keys.T://revenir au menu edition
                         {
                             //afficher fenetre edition
-                            passerModeJeu(false);
+                            passerModeTest(false);
                             //afficher les points de controle
                            // FonctionsNatives.afficherPointControle();
                             //Permet de retirer les maillets et la rondelle dans la table
@@ -1309,7 +1365,7 @@ namespace InterfaceGraphique
 
 
         ///////////////////////////////////////////////////////////////////////
-        /// @fn public void passerModeJeu(bool mode)
+        /// @fn public void passerModeTest(bool mode)
         ///
         /// @brief permet de faire le passage du mode edition au mode Test et vice versa 
         /// selon la valeur du booleen
@@ -1320,7 +1376,7 @@ namespace InterfaceGraphique
         /// @return rien
         //
         //////////////////////////////////////////////////////////////////////////////////////////
-        public void passerModeJeu(bool mode)
+        public void passerModeTest(bool mode)
         {
             //si mode jeu ou test , masquer les menus a cotés + barre des menus
             if (mode == true)
@@ -1332,6 +1388,8 @@ namespace InterfaceGraphique
                 FonctionsNatives.ajouterMailletEtRondelle();
                 //effacer les points de controle
                 FonctionsNatives.effacerPointControle();
+
+                estEnPause = false;
 
 
                 toolStrip1.Hide();
@@ -1368,6 +1426,8 @@ namespace InterfaceGraphique
                 this.Text = "Mode Edition";
                 estEnModeTest = false;
                 this.changerMode(Etats.SELECTION);
+
+                estEnPause = false;
                 
                 //retirer les maillets
                 FonctionsNatives.retirerMailletEtRondelle();
@@ -1446,7 +1506,7 @@ namespace InterfaceGraphique
         private void modeEditionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //afficher fenetre edition
-            passerModeJeu(false);
+            passerModeTest(false);
             //Permet de retirer les maillets et la rondelle dans la table
             //FonctionsNatives.retirerMailletEtRondelle();
         }
@@ -1467,16 +1527,63 @@ namespace InterfaceGraphique
         private void modeTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //afficher fenetre test 
-            passerModeJeu(true);
+            passerModeTest(true);
             //Permet d'ajouter les maillets et la rondelle dans la table
             //FonctionsNatives.ajouterMailletEtRondelle();
         }
 
+        public void passerModePartie(bool mode)
+        {
+            //si mode jeu , masquer les menus a cotés + barre des menus
+            if (mode == true)
+            {
+                this.Text = "Partie Rapide";
 
-     	
-				
-           
-    }
+               
+                 estEnModeTest = true;
+                //this.changerMode(Etats.TEST);
+                
+                //Permet d'ajouter les maillets et la rondelle dans la table
+                FonctionsNatives.ajouterMailletEtRondelle();
+                //effacer les points de controle
+                FonctionsNatives.effacerPointControle();
+                
+                // estEnPause = false;
+
+
+                toolStrip1.Hide();
+                menuStrip1.Hide();
+
+                //masquer les boutons
+                éditionToolStripMenuItem.Visible = false;
+                outilsToolStripMenuItemPoints.Visible = false;
+                informationsToolStripMenuItem.Visible = false;
+                ouvrirToolStripMenuItem.Visible = false;
+                nouveauToolStripMenuItem.Visible = false;
+                enregistrerToolStripMenuItem.Visible = false;
+                enregistrerSousToolStripMenuItem.Visible = false;
+                modeTestToolStripMenuItem.Visible = false;
+                propriétésToolStripMenuItem.Visible = false;
+                modeEditionToolStripMenuItem.Visible = false;
+
+
+                //afficher mode editon , menu principal et vues
+                fichierToolStripMenuItem.Visible = true;
+               
+                menuPrincipalToolStripMenuItem.Visible = true;
+                vuesToolStripMenuItem.Visible = true;
+
+                //panel score
+                splitContainer1.Panel1.Show();
+                splitContainer1.Panel2.Hide();
+
+
+            }
+
+        }
+
+
+        }
 
     static partial class FonctionsNatives
         {
