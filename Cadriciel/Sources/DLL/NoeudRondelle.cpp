@@ -119,7 +119,7 @@ void NoeudRondelle::animer(float temps)
 		glm::vec3 haut, bas, milieu;
 		table->getButs(1, haut, milieu, bas);
 		//est-ce qu'on est dans la fenetre
-		if( nouvellePosition.y > bas.y && nouvellePosition.y < haut.y && nouvellePosition.x > milieu.x) {
+		if( nouvellePosition.y > bas.y && nouvellePosition.y < haut.y && nouvellePosition.x > haut.x) {
 			std::cout << "but droit \n";
 			//pour le fun
 			assignerPositionRelative(nouvellePosition);
@@ -127,7 +127,7 @@ void NoeudRondelle::animer(float temps)
 		else {
 			//recupere le but gauche
 			table->getButs(2, haut, milieu, bas);
-			if (nouvellePosition.y > bas.y && nouvellePosition.y < haut.y && nouvellePosition.x < milieu.x) {
+			if (nouvellePosition.y > bas.y && nouvellePosition.y < haut.y && nouvellePosition.x < haut.x) {
 				std::cout << "but gauche \n"; 
 				//pour le fun
 				assignerPositionRelative(nouvellePosition);
