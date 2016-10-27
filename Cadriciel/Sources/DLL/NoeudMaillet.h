@@ -38,8 +38,15 @@ public:
 	///Accepter le visiteur
 	virtual void accepter(Visiteur* v);
 
+	///obtient la vitesse du maillet
+	glm::vec3 getVitesse() const { return vitesse_; }
+
 private:
 
+	///la position au moment de la derniere animation
+	glm::vec3 dernierePoition_;
+	///la vitesse du meillet
+	glm::vec3 vitesse_;
 
 	/// Angle selon l'axe des X.
 	float angleX_{ 0.f };

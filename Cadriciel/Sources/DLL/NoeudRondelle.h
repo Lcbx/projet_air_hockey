@@ -54,7 +54,7 @@ private:
 	///vecteur vitesse
 	glm::vec3 vitesse_ = { 50,30,0 };
 	
-	///les portails : pointeur et active ou non
+	///les portails : numero de noeud et active ou non
 	std::map<NoeudPortail*, bool> portails_;
 
 	/// Angle selon l'axe des X.

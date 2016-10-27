@@ -42,7 +42,7 @@ NoeudRondelle::NoeudRondelle(const std::string& typeNoeud)
 	auto arbre = FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990();
 	for (int i = 0; i < arbre->obtenirNombreEnfants(); i++) {
 		auto noeud = arbre->chercher(i);
-		if (noeud->obtenirType() == "portail") portails_[ (NoeudPortail*) noeud ] = true;
+		if (noeud->obtenirType() == "portail") portails_[ (NoeudPortail*)arbre->chercher(i) ] = true;
 	}
 }
 
@@ -96,8 +96,12 @@ void NoeudRondelle::afficherConcret(const glm::mat4& vueProjection) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudRondelle::animer(float temps)
 {
+	auto facade = FacadeModele::obtenirInstance();
+	auto table = facade->obtenirArbreRenduINF2990()->getTable();
+
+
 	//obtient les coefficients
-	auto coeff = FacadeModele::obtenirInstance()->getCoefficient();
+	auto coeff = facade->getCoefficient();
 	glm::vec3 positionActuelle = obtenirPositionRelative();
 
 	//actualisation de la position par rapport a la vitesse
@@ -106,14 +110,11 @@ void NoeudRondelle::animer(float temps)
 
 
 	//verifie si le deplacement est dans la table
-	if (FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(nouvellePosition)) {
+	if (table->dansTable(nouvellePosition)) {
 		assignerPositionRelative(nouvellePosition);
 		push_position();
 	}
 	else {
-		//verifie s'il s'agit d'un but
-		auto table = FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable();
-
 		//recupere le but droit
 		glm::vec3 haut, bas, milieu;
 		table->getButs(1, haut, milieu, bas);
@@ -169,7 +170,7 @@ void NoeudRondelle::animer(float temps)
 			auto noeud = (NoeudPortail*)resultat.objet;
 			auto frere = (NoeudPortail*)noeud->getFrere();
 			assignerPositionRelative(	frere->obtenirPositionRelative()
-										+ (float) frere->obtenirRayon()
+										+ (float)frere->obtenirRayon()
 										* glm::normalize(positionHorsCollision - noeud->obtenirPositionRelative()) );
 			vitesse_ *= -1;
 			portails_[ frere ] = false;
@@ -179,8 +180,8 @@ void NoeudRondelle::animer(float temps)
 		case InfoCollision::MAILLET: {
 			typeObjetDebug = "maillet";
 			assignerPositionRelative(positionHorsCollision);
-			//float facteurRebond = glm::clamp(max(glm::dot(-vitesse_, normale), glm::dot(vitesse_, normale)) / glm::length(vitesse_), (float) 0.3, (float) 1.);
-			vitesse_ = glm::reflect(vitesse_, normale); // *facteurRebond;
+			///float facteurRebond = glm::clamp(max(glm::dot(-vitesse_, normale), glm::dot(vitesse_, normale)) / glm::length(vitesse_), (float) 0.3, (float) 1.);
+			vitesse_ = glm::reflect(vitesse_, normale) - ((NoeudMaillet*)resultat.objet)->getVitesse();
 			break;
 		}
 		default: break;
@@ -196,12 +197,13 @@ void NoeudRondelle::animer(float temps)
 		double rayon_attraction = 3 * portail->obtenirRayon();
 		if (it->second) {
 			if (distance < rayon_attraction) {
+				///std::cout << "portail " << portail->getScale().x << " attracte\n";
 				vitesse_ += CST_ASPIRATION * temps * vecteur_distance ;
 			}
 		}
 		else if (distance > rayon_attraction) {
 			it->second = true;
-			std::cout << "portail " << portail->getScale().x << " active  : rayon " << rayon_attraction << ", distance " << distance << "\n";
+			///std::cout << "portail " << portail->getScale().x << " active  : rayon " << rayon_attraction << ", distance " << distance << "\n";
 		}
 	}
 
