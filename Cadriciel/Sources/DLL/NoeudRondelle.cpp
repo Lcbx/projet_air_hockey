@@ -96,7 +96,6 @@ void NoeudRondelle::afficherConcret(const glm::mat4& vueProjection) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudRondelle::animer(float temps)
 {
-
 	//obtient les coefficients
 	auto coeff = FacadeModele::obtenirInstance()->getCoefficient();
 	glm::vec3 positionActuelle = obtenirPositionRelative();
@@ -170,17 +169,18 @@ void NoeudRondelle::animer(float temps)
 			auto noeud = (NoeudPortail*)resultat.objet;
 			auto frere = (NoeudPortail*)noeud->getFrere();
 			assignerPositionRelative(	frere->obtenirPositionRelative()
-										+ positionHorsCollision
-										- noeud->obtenirPositionRelative() );
+										+ (float) frere->obtenirRayon()
+										* glm::normalize(positionHorsCollision - noeud->obtenirPositionRelative()) );
 			vitesse_ *= -1;
 			portails_[ frere ] = false;
+			std::cout << "portail " << frere->getScale().x << " desactive\n";
 			break;
 		}
 		case InfoCollision::MAILLET: {
 			typeObjetDebug = "maillet";
 			assignerPositionRelative(positionHorsCollision);
-			float facteurRebond = glm::clamp(max(glm::dot(-vitesse_, normale), glm::dot(vitesse_, normale)) / glm::length(vitesse_), (float) 0.3, (float) 1.);
-			vitesse_ = glm::reflect(vitesse_, normale) * facteurRebond;
+			//float facteurRebond = glm::clamp(max(glm::dot(-vitesse_, normale), glm::dot(vitesse_, normale)) / glm::length(vitesse_), (float) 0.3, (float) 1.);
+			vitesse_ = glm::reflect(vitesse_, normale); // *facteurRebond;
 			break;
 		}
 		default: break;
@@ -188,15 +188,21 @@ void NoeudRondelle::animer(float temps)
 	}
 
 	//attraction des portails
+#define CST_ASPIRATION (float) 10.
 	for (auto it = portails_.begin(); it != portails_.end(); it++) {
-		double distance = glm::distance(it->first->obtenirPositionRelative(), obtenirPositionRelative());
-		double rayon_attraction = 3 * it->first->obtenirRayon();
+		auto portail = it->first;
+		glm::vec3 vecteur_distance = portail->obtenirPositionRelative() - obtenirPositionRelative();
+		double distance = glm::length(vecteur_distance);
+		double rayon_attraction = 3 * portail->obtenirRayon();
 		if (it->second) {
 			if (distance < rayon_attraction) {
-				vitesse_ = vitesse_ + (float)glm::pow(rayon_attraction - distance, 0.7) * glm::normalize(it->first->obtenirPositionRelative() - obtenirPositionRelative());
+				vitesse_ += CST_ASPIRATION * temps * vecteur_distance ;
 			}
 		}
-		else if (distance > rayon_attraction) it->second = true;
+		else if (distance > rayon_attraction) {
+			it->second = true;
+			std::cout << "portail " << portail->getScale().x << " active  : rayon " << rayon_attraction << ", distance " << distance << "\n";
+		}
 	}
 
 	//application de la friction
