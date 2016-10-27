@@ -17,11 +17,11 @@
 VisiteurCollision::VisiteurCollision(NoeudAbstrait* objet) {
 	this->objet_ = objet;
 	this->rayon_ = objet->obtenirRayon();
-	this->position_ = objet->obtenirPositionRelative();
 }
 
 ///fonction apppellee generalement
 InfoCollision& VisiteurCollision::calculerCollision() {
+	this->position_ = objet_->obtenirPositionRelative();
 	result_.objet = nullptr;
 	result_.details = { aidecollision::COLLISION_AUCUNE, glm::vec3(0,0,0), 0 };
 
