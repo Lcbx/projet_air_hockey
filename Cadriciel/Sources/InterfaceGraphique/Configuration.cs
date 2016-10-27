@@ -15,10 +15,19 @@ namespace InterfaceGraphique
     public partial class Configuration : Form
     {
         private static MenuPrincipal menuPrincipal_;
+
+        //intilailser les touches du clavier par defaut
         private int toucheDeplaceAGauche_ = (int)Keys.A;
         private int toucheDeplaceEnBas_ = (int)Keys.S;
         private int toucheDeplaceADroite_ = (int)Keys.D;
         private int toucheDeplaceEnHaut_ = (int)Keys.W;
+
+        //le nombre de buts nécessaires (entre 1 et 5) pour gagner une partie.
+        private int scorePourGangner = 2;
+
+        private bool estVirtuel = true;
+        Profil joueurVirtuelle_;
+        List<Profil> profils;
 
 
 
@@ -95,19 +104,30 @@ namespace InterfaceGraphique
                 
         }
 
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDown1.Value <= 2 || numericUpDown1.Value <= 5)
+                scorePourGangner = Convert.ToInt32(numericUpDown1.Value);
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (e.Equals("Joueur humain"))
+                estVirtuel = false;
+        }
+
+        private void fermer_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            menuPrincipal_.Show();
+        }
     }
     static partial class FonctionsNatives
     {
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void deplacerVersLaGauche(int toucheDeplacementAGauche_);
+        public static extern void deplacerMaillet(int toucheDeplacementAGauche_, int toucheDeplacementADroite_, int toucheDeplacementEnHaut_, int toucheDeplacementEnBas_);
 
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void deplacertVersLaDroite(int toucheDeplacementADroite_);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void deplacerVersLeHaut(int toucheDeplacementEnHaut_);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void deplacerVersLeBas(int toucheDeplacementEnBas_);
+        
     }
     }

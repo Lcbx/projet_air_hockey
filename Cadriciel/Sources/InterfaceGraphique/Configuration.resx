@@ -289,7 +289,7 @@
     <value>10</value>
   </data>
   <data name="appliquer.Text" xml:space="preserve">
-    <value>Appliquer</value>
+    <value>Fermer</value>
   </data>
   <data name="&gt;&gt;appliquer.Name" xml:space="preserve">
     <value>appliquer</value>
@@ -493,6 +493,250 @@ le maillet de gauche à droite et de haut en bas.</value>
   </data>
   <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="fermer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>552, 582</value>
+  </data>
+  <data name="fermer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 68</value>
+  </data>
+  <data name="fermer.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="fermer.Text" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="&gt;&gt;fermer.Name" xml:space="preserve">
+    <value>fermer</value>
+  </data>
+  <data name="&gt;&gt;fermer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fermer.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;fermer.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>103, 124</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 32</value>
+  </data>
+  <data name="label8.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="&gt;&gt;label8.Name" xml:space="preserve">
+    <value>label8</value>
+  </data>
+  <data name="&gt;&gt;label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
+    <value>typeJoueur</value>
+  </data>
+  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="type.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="type.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 8pt</value>
+  </data>
+  <data name="type.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="type.Location" type="System.Drawing.Point, System.Drawing">
+    <value>22, 48</value>
+  </data>
+  <data name="type.Size" type="System.Drawing.Size, System.Drawing">
+    <value>355, 25</value>
+  </data>
+  <data name="type.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="type.Text" xml:space="preserve">
+    <value>Choisir le type du joueur adversaire </value>
+  </data>
+  <data name="&gt;&gt;type.Name" xml:space="preserve">
+    <value>type</value>
+  </data>
+  <data name="&gt;&gt;type.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;type.Parent" xml:space="preserve">
+    <value>typeJoueur</value>
+  </data>
+  <data name="&gt;&gt;type.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="comboBox1.Items" xml:space="preserve">
+    <value>Joueur humain</value>
+  </data>
+  <data name="comboBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>313, 124</value>
+  </data>
+  <data name="comboBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 40</value>
+  </data>
+  <data name="comboBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="comboBox1.Text" xml:space="preserve">
+    <value>Joueur virtuel</value>
+  </data>
+  <data name="&gt;&gt;comboBox1.Name" xml:space="preserve">
+    <value>comboBox1</value>
+  </data>
+  <data name="&gt;&gt;comboBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBox1.Parent" xml:space="preserve">
+    <value>typeJoueur</value>
+  </data>
+  <data name="&gt;&gt;comboBox1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="typeJoueur.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 286</value>
+  </data>
+  <data name="typeJoueur.Size" type="System.Drawing.Size, System.Drawing">
+    <value>760, 227</value>
+  </data>
+  <data name="typeJoueur.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="typeJoueur.Text" xml:space="preserve">
+    <value>Type de joueur</value>
+  </data>
+  <data name="&gt;&gt;typeJoueur.Name" xml:space="preserve">
+    <value>typeJoueur</value>
+  </data>
+  <data name="&gt;&gt;typeJoueur.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;typeJoueur.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;typeJoueur.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="scorePourGagner.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="scorePourGagner.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="scorePourGagner.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 169</value>
+  </data>
+  <data name="scorePourGagner.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 32</value>
+  </data>
+  <data name="scorePourGagner.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="scorePourGagner.Text" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="&gt;&gt;scorePourGagner.Name" xml:space="preserve">
+    <value>scorePourGagner</value>
+  </data>
+  <data name="&gt;&gt;scorePourGagner.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;scorePourGagner.Parent" xml:space="preserve">
+    <value>scoreGangant</value>
+  </data>
+  <data name="&gt;&gt;scorePourGagner.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="numericUpDown1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>336, 169</value>
+  </data>
+  <data name="numericUpDown1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 38</value>
+  </data>
+  <data name="numericUpDown1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown1.Name" xml:space="preserve">
+    <value>numericUpDown1</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown1.Parent" xml:space="preserve">
+    <value>scoreGangant</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label7.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 7.875pt</value>
+  </data>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 53</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>634, 48</value>
+  </data>
+  <data name="label7.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Faire entrer le nombre de buts nécessaires pour gagner une partie.
+Le nombre est entre 1 et 5</value>
+  </data>
+  <data name="&gt;&gt;label7.Name" xml:space="preserve">
+    <value>label7</value>
+  </data>
+  <data name="&gt;&gt;label7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
+    <value>scoreGangant</value>
+  </data>
+  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="scoreGangant.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="scoreGangant.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="scoreGangant.Size" type="System.Drawing.Size, System.Drawing">
+    <value>760, 277</value>
+  </data>
+  <data name="scoreGangant.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="scoreGangant.Text" xml:space="preserve">
+    <value>Score</value>
+  </data>
+  <data name="&gt;&gt;scoreGangant.Name" xml:space="preserve">
+    <value>scoreGangant</value>
+  </data>
+  <data name="&gt;&gt;scoreGangant.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;scoreGangant.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;scoreGangant.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 44</value>

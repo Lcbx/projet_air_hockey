@@ -66,6 +66,7 @@
     <Compile Include="BoitePropriete.Designer.cs">
       <DependentUpon>BoitePropriete.cs</DependentUpon>
     </Compile>
+    <Compile Include="Profil.cs" />
     <Compile Include="Configuration.cs">
       <SubType>Form</SubType>
     </Compile>
