@@ -397,12 +397,6 @@ void NoeudAbstrait::afficher(const glm::mat4& vueProjection) const
 		// Assignation du mode d'affichage des polygones
 		glPolygonMode(GL_FRONT_AND_BACK, modePolygones_);
 
-		//anti-crenelage
-		glEnable(GL_POINT_SMOOTH);
-		glEnable(GL_LINE_SMOOTH);
-		glEnable(GL_POLYGON_SMOOTH);
-		glBlendFunc(GL_ONE, GL_ZERO);
-		glEnable(GL_BLEND);
 
 		// Révolution autour du centre.
 		auto modele = glm::rotate(transformationRelative_, angleRotation_, glm::vec3(0, 0, 1));
