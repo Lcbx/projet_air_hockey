@@ -50,14 +50,17 @@ namespace InterfaceGraphique
 
         private void partieRapide_Click(object sender, EventArgs e)
         {
-            Chargement zoneChar = new Chargement(edition_);
-            zoneChar.ShowDialog();
-            if (zoneChar.estclique == true)
-            {
-                edition_.Show();
-                edition_.passerModePartie(true);
-                this.Hide();
-            }
+            ChoixProfil choix = new ChoixProfil();
+            choix.setMenuPrincipal(this, edition_);
+            choix.Show();
+            //Chargement zoneChar = new Chargement(edition_);
+            //zoneChar.ShowDialog();
+            //if (zoneChar.estclique == true)
+            //{
+            //    edition_.Show();
+            //    edition_.passerModePartie(true);
+            //    this.Hide();
+            //}
         }
 
        

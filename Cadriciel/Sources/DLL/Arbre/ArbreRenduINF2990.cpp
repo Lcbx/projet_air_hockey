@@ -509,6 +509,9 @@ bool ArbreRenduINF2990::objetEstDansLaTable()
 ////////////////////////////////////////////////////////////////////////
 void  ArbreRenduINF2990::ajouterMailletEtRondelle()
 {
+	//initialiser le score
+	this->setScoreMoi(0);
+	this->setScoreAutre(0);
 
 	//AJOUT RONDELLE
 	NoeudAbstrait* noeudRondelle{ creerNoeud(NOM_RONDELLE) };
@@ -564,30 +567,33 @@ void  ArbreRenduINF2990::ajouterMailletEtRondelle()
 ////////////////////////////////////////////////////////////////////////
 void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 {
-		NoeudAbstrait* dernier = this->enfants_.back();//pour obtenir le maillet du 2eme joueur
-		glm::dvec3 pos = dernier->obtenirPositionRelative();
-		double rayon = dernier->obtenirRayon();
+	NoeudAbstrait* dernier = this->enfants_.back();//pour obtenir le maillet du 2eme joueur
+	glm::dvec3 pos = dernier->obtenirPositionRelative();
+	double rayon = dernier->obtenirRayon();
 
-		if (x > 0) {
-			if(this->getTable()->dansZone1({ pos.x + rayon , pos.y, 0 })){
-			//if (pos.x + rayon + 5 <= 0) { // pour ne pas depasser le centre 
-				dernier->assignerPositionRelative({ pos.x+ 4, pos.y, 0 });//bouger vers droite
-			}
-			else { dernier->assignerPositionRelative({ -7, pos.y, 0 });//ne pas depasser le centre
+	//bouger vers droite
+	if (x == 1) {
+		if (this->getTable()->dansZone1({ pos.x + rayon , pos.y + rayon, 0 }) || this->getTable()->dansZone1({ pos.x + rayon , pos.y - rayon, 0 })) {
+
+			if (y == 1) { dernier->assignerPositionRelative({ pos.x + 4, pos.y + 4, 0 }); }
+			else if (y == -1) { dernier->assignerPositionRelative({ pos.x + 4, pos.y - 4, 0 }); }
+			else dernier->assignerPositionRelative({ pos.x + 4, pos.y, 0 });
 		}
+		else dernier->assignerPositionRelative({ pos.x, pos.y, 0 });//ne pas depasser le centre
+	}
 
-		} 
-		if (x < 0) {  //bouger vers gauche
-			if (this->getTable()->dansZone1({ pos.x - rayon , pos.y, 0 }))//checker si a l'interieur 
-			{
-				dernier->assignerPositionRelative({ pos.x - 4, pos.y, 0 });
-			}
-			else {
-				dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
-			}
+	if (x == -1) {
+		if (this->getTable()->dansZone1({ pos.x - rayon , pos.y + rayon, 0 }) || this->getTable()->dansZone1({ pos.x - rayon , pos.y - rayon, 0 }))//checker si a l'interieur 
+		{
+			if (y == 1) { dernier->assignerPositionRelative({ pos.x - 4, pos.y + 4, 0 }); }
+			else if (y == -1) { dernier->assignerPositionRelative({ pos.x - 4, pos.y - 4, 0 }); }
+			else dernier->assignerPositionRelative({ pos.x - 4, pos.y, 0 });
 		}
+		else dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
+	}
 
-		if (y > 0) { //bouger vers haut
+	if (x == 0) {
+		if (y == 1) {
 			if (this->getTable()->dansZone1({ pos.x , pos.y + rayon , 0 }))
 			{
 				dernier->assignerPositionRelative({ pos.x , pos.y + 4, 0 });
@@ -596,15 +602,16 @@ void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 				dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
 			}
 		}
-		if (y < 0) {//bouger vers bas
-			if (this->getTable()->dansZone1({ pos.x , pos.y - rayon , 0 }))
-			{
-				dernier->assignerPositionRelative({ pos.x, pos.y - 4 , 0 });
-			} 
-			else {
-				dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
-			}
+			else if (y == -1) { 
+				if (this->getTable()->dansZone1({ pos.x , pos.y - rayon , 0 })) 
+				{
+				dernier->assignerPositionRelative({ pos.x , pos.y - 4, 0 }); 
+				}
+				else {
+					dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
+				}
 		}
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -619,14 +626,37 @@ void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 ////////////////////////////////////////////////////////////////////////
 void ArbreRenduINF2990::reinitialiserPartieCourante()
 {
+	//To-Do; 
+	//re-initilaser sscore
+	this->setScoreMoi(0);
+	this->setScoreAutre(0);
+
 	for (NoeudAbstrait * enfant : this->enfants_)
 	{
 		if (enfant->obtenirType() == "maillet") {
 			if (enfant->estDeuxiemeJoueur == true) {
-				enfant->assignerPositionRelative({ -40,0,0 });
+				enfant->assignerPositionRelative({ -70,0,0 });
+				//pour verifier l'ajout l'interieur, mais si on joue avec les points de controle 
+				if (!this->getTable()->dansZone1(enfant->obtenirPositionRelative()))
+				{
+					enfant->assignerPositionRelative({ -40,0,0 });
+					if (!this->getTable()->dansZone1(enfant->obtenirPositionRelative()))
+					{
+						enfant->assignerPositionRelative({ -20,0,0 });
+					}
+				}
 			}
 			else {
-				enfant->assignerPositionRelative({ 40,0,0 });
+				enfant->assignerPositionRelative({ 70,0,0 });
+				//pour verifier l'ajout l'interieur, mais si on joue avec les points de controle 
+				if (!this->getTable()->dansZone2(enfant->obtenirPositionRelative()))
+				{
+					enfant->assignerPositionRelative({ 40,0,0 });
+					if (!this->getTable()->dansZone2(enfant->obtenirPositionRelative()))
+					{
+						enfant->assignerPositionRelative({ 20,0,0 });
+					}
+				}
 			}
 		}
 		else if (enfant->obtenirType() == "rondelle") {

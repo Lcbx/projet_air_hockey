@@ -122,8 +122,16 @@ public:
   void afficherPointControle();
   void effacerPointControle();
 
+  int getScoreMoi() { return scoreMoi_; }
+  void setScoreMoi(int scoreMoi) { scoreMoi_ = scoreMoi; }
+
+  int getScoreAutre() { return scoreAutre_; }
+  void setScoreAutre(int scoreAutre) { scoreAutre_ = scoreAutre; }
+
 private :
 	NoeudTable* noeudTable_;
+	int scoreMoi_;
+	int scoreAutre_;
 };
 
 

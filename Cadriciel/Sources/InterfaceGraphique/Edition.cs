@@ -162,11 +162,11 @@ namespace InterfaceGraphique
             if (e.KeyCode == Keys.Left) FonctionsNatives.deplacerVueXY(-0.1, 0);
         }
 
-      
+
         private void toucheManuel(object sender, KeyEventArgs e)
         {
             //TO-DO: Changer les touches par les touches enregistres !!
-           
+
             //deplacer le maillet de 2eme joueur
             if (estEnModeTest == true)
             {
@@ -175,34 +175,68 @@ namespace InterfaceGraphique
                     if (e.KeyCode == Keys.D)//avant
                     {
                         avant = true;
-                        if (arriere == true) { System.Console.WriteLine("D+ A"); }
-                        else if (haut == true){ System.Console.WriteLine("D+W");}
-                        else if (bas == true) { System.Console.WriteLine("D+S"); }
-                        else System.Console.WriteLine("wiiiiiiiiiiiwwww");
-                         //FonctionsNatives.deplacerMailletAvecClavier(1, 0);
+                        if (haut)
+                        {
+                            Console.WriteLine("avant et haut");
+                            FonctionsNatives.deplacerMailletAvecClavier(1, 1);
+                        }
+                        else if (bas) {
+                            Console.WriteLine("avant et bas");
+                            FonctionsNatives.deplacerMailletAvecClavier(1, -1);
+                        }
+                        else FonctionsNatives.deplacerMailletAvecClavier(1, 0);
                     }
-
 
                     if (e.KeyCode == Keys.A)//arriere
                     {
                         arriere = true;
-                        FonctionsNatives.deplacerMailletAvecClavier(-1, 0); }
+                        if (haut)
+                        {
+                            Console.WriteLine("arriere et haut");
+                            FonctionsNatives.deplacerMailletAvecClavier(-1, 1);
+                        }
+                        else if (bas)
+                        {
+                            Console.WriteLine("arriere et bas");
+                            FonctionsNatives.deplacerMailletAvecClavier(-1, -1);
+                        }
+                        else FonctionsNatives.deplacerMailletAvecClavier(-1, 0);
+
+                    }
 
                     if (e.KeyCode == Keys.W)//haut
                     {
                         haut = true;
-                        if (arriere == true) { System.Console.WriteLine("w+a"); }
-                        else if (bas == true) { System.Console.WriteLine("w+s"); }
-                        else if (avant == true) { System.Console.WriteLine("w+d"); }
-                        else System.Console.WriteLine("w ");
-                        //FonctionsNatives.deplacerMailletAvecClavier(0, 1);
+                        if (avant)
+                        {
+                            Console.WriteLine("avant et haut 1");
+                           FonctionsNatives.deplacerMailletAvecClavier(1, 1);
+                        }
+                        else if (arriere)
+                        {
+                            Console.WriteLine("arriere et haut 1 ");
+                            FonctionsNatives.deplacerMailletAvecClavier(-1, 1);
+                        }
+
+                        else FonctionsNatives.deplacerMailletAvecClavier(0, 1);
 
                     }
                     if (e.KeyCode == Keys.S)//bas
                     {
                         bas = true;
-                        FonctionsNatives.deplacerMailletAvecClavier(0, -1);
-                    } 
+
+                        if (avant)
+                        {
+                            Console.WriteLine("avant et bas 1");
+                            FonctionsNatives.deplacerMailletAvecClavier(1, -1);
+                        }
+                        else if (arriere)
+                        {
+                            Console.WriteLine("arriere et bas 1");
+                            FonctionsNatives.deplacerMailletAvecClavier(-1, -1);
+                        }
+                        else FonctionsNatives.deplacerMailletAvecClavier(0, -1);
+                    }
                 }
             }
         }
@@ -1415,10 +1449,9 @@ namespace InterfaceGraphique
                 vuesToolStripMenuItem.Visible = true;
 
                 //panel score
-                splitContainer1.Panel1.Show();
+                splitContainer1.Panel1.Hide();
                 splitContainer1.Panel2.Hide();
 
-               
             }
             //si mode edition , afficher les menus a cotés + barre des menus
             else
@@ -1455,10 +1488,10 @@ namespace InterfaceGraphique
                 modeEditionToolStripMenuItem.Visible = false;
 
                 //panel score
-                splitContainer1.Panel1.Hide();
-                splitContainer1.Panel2.Show();
+                splitContainer1.Panel1.Show();
+                splitContainer1.Panel2.Hide();
 
-               
+
 
             }
         }
@@ -1532,6 +1565,16 @@ namespace InterfaceGraphique
             //FonctionsNatives.ajouterMailletEtRondelle();
         }
 
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         public void passerModePartie(bool mode)
         {
             //si mode jeu , masquer les menus a cotés + barre des menus
@@ -1574,9 +1617,9 @@ namespace InterfaceGraphique
                 vuesToolStripMenuItem.Visible = true;
 
                 //panel score
-                splitContainer1.Panel1.Show();
-                splitContainer1.Panel2.Hide();
-
+                splitContainer1.Panel2.Show();
+                splitContainer1.Panel1.Hide();
+           
 
             }
 
