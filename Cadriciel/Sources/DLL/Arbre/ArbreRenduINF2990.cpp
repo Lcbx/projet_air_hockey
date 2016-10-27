@@ -523,15 +523,19 @@ void  ArbreRenduINF2990::ajouterMailletEtRondelle()
 	glm::vec3 pointHaut, pointMilieu, pointBas;
 	this->getTable()->getButs(1, pointHaut, pointMilieu, pointBas);
 	//std::cout << "But 1 (Droite)" << std::endl;
+	
 	//AJOUT MAILLET1
 	NoeudAbstrait* noeudMaillet{ creerNoeud(NOM_MAILLET) };
 	noeudMaillet->assignerPositionRelative({pointMilieu.x - noeudMaillet->obtenirRayon() - 5,0,0 });
 	noeudMaillet->setScale({ 1, 1, 1 });
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet);
 	noeudMaillet->estDeuxiemeJoueur = false;
+	
+	
 	// get les coord du but gauche
 	this->getTable()->getButs(2, pointHaut, pointMilieu, pointBas);
 	//std::cout << "But 2 (Gauche)" << std::endl;
+	
 	//AJOUT MAILLET2
 	NoeudAbstrait* noeudMaillet2{ creerNoeud(NOM_MAILLET) };
 	noeudMaillet2->assignerPositionRelative({ pointMilieu.x + noeudMaillet2->obtenirRayon() +5,0,0 });
@@ -615,14 +619,20 @@ void ArbreRenduINF2990::reinitialiserPartieCourante()
 	this->setScoreMoi(0);
 	this->setScoreAutre(0);
 
+	glm::vec3 pointHaut, pointMilieu, pointBas;
+
 	for (NoeudAbstrait * enfant : this->enfants_)
 	{
 		if (enfant->obtenirType() == "maillet") {
 			if (enfant->estDeuxiemeJoueur == true) {
-				enfant->assignerPositionRelative({ -40,0,0 });
+				this->getTable()->getButs(2, pointHaut, pointMilieu, pointBas);
+				
+				enfant->assignerPositionRelative({ pointMilieu.x + enfant->obtenirRayon() + 5,0,0 });
 			}
 			else {
-				enfant->assignerPositionRelative({ 40,0,0 });
+				this->getTable()->getButs(1, pointHaut, pointMilieu, pointBas);
+
+				enfant->assignerPositionRelative({ pointMilieu.x - enfant->obtenirRayon() - 5,0,0 });
 			}
 		}
 		else if (enfant->obtenirType() == "rondelle") {
