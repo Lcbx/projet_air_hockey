@@ -155,17 +155,40 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 	// tracer les murs 
 	tracerMurs(vueProjection);
 	// tracer les buts 
-	tracerButs(vueProjection,15);
+	tracerButs(vueProjection,longueurButs_);
 	// tracer les lignes de decoration 
 	tracerLignesDecoration(vueProjection);
 	// tracer les points de Controle 
 	if (afficherPointsControles)
 		tracerPointsControle(vueProjection);
 
+	//// get point du but gauche
+	//glm::vec3  pointHaut, pointMilieu, pointBas;
+	//getbuts(2, pointHaut, pointMilieu, pointBas);
+	//glColor3f(1, 0, 1);
+	//glPointSize(10);
+	//glBegin(GL_POINTS);
+	//{
+	//	glVertex3fv(PROJvec(pointHaut));
+	//	glVertex3fv(PROJvec(pointMilieu));
+	//	glVertex3fv(PROJvec(pointBas));
+
+	//}
+	//glEnd();
+	//getbuts(1, pointHaut, pointMilieu, pointBas);
+	//glColor3f(0, 1, 1);
+	//glBegin(GL_POINTS);
+	//{
+	//	glVertex3fv(PROJvec(pointHaut));
+	//	glVertex3fv(PROJvec(pointMilieu));
+	//	glVertex3fv(PROJvec(pointBas));
+
+	//}
+	//glEnd();
+
 	// test 
 	//tracerMur2Points(vueProjection, { 0,0,0 }, { 20,20,0 },largeur_,true);
-
-
+	
 	//Activer le test de profondeur
 	glEnable(GL_DEPTH_TEST);
 	// activer le test de profondeur
@@ -564,7 +587,7 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
 /// @param[in]  veProjection
 ///				longueur: la longueur du but
 //
-/// Cette fonction donne les quatres points du but selon une longueur et une largeur
+/// Cette fonction donne les quatres points du quadrilateur de la moitie-but a tracer selon une longueur et une largeur
 ///
 /// @return Aucune.
 ///
@@ -600,12 +623,25 @@ void  NoeudTable::calculerPointDistance(glm::vec3 p0, glm::vec3 p1, double longu
 	{
 		if (p0.y == p1.y)
 		{
-			//p2.x = p1.x - longueur;
-			//p2.y = p1.y;
-			//p3.x = p2.x ;
-			//p3.y = p2.y - largeur_;
-			//p4.x = p1.x ;
-			//p4.y = p1.y - largeur_;
+			if (p0.x > p1.x)
+			{
+				p2.y = p1.y;
+				p2.x = p1.x + longueur;
+				p3.y = p2.y - largeur_;
+				p3.x = p2.x;
+				p4.y = p1.y - largeur_;
+				p4.x = p1.x;
+			}
+			else
+			{
+				p2.y = p1.y;
+				p2.x = p1.x - longueur;
+				p3.y = p2.y - largeur_;
+				p3.x = p2.x;
+				p4.y = p1.y - largeur_;
+				p4.x = p1.x;
+			}
+			
 		}
 		else
 		{
@@ -636,6 +672,50 @@ void  NoeudTable::calculerPointDistance(glm::vec3 p0, glm::vec3 p1, double longu
 	}
 
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool getbuts(int index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas)
+///
+/// Cette fonction permet de recuperer les coordonnes des buts
+///  @param[in] 
+///		int index : 1 pour le but de droite, 2 pour celui du gauche
+///	 @param[out]
+///		pointHaut : le point haut de la ligne du but
+///		pointMilieu : le point milieu du but
+///		pointBas : point bas de la ligne du but
+/// @return bool : true s'il a reussi a trouver les coordonnees , false sinon
+///
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool NoeudTable::getButs(int index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas) 
+{
+	glm::vec3 point1, point2, point3, point4;
+	if (index == 2) // but a gauche
+	{
+		calculerPointDistance(p(0), p(6), longueurButs_, largeur_, point2, point3, point4);
+		pointHaut = point2;
+		pointMilieu = p(6);
+		calculerPointDistance(p(1), p(6), longueurButs_, largeur_, point2, point3, point4);
+		pointBas = point2;
+
+		return true;
+	}
+	else 
+	{
+		if (index == 1) // but a droite
+		{	
+			calculerPointDistance(p(4), p(7), longueurButs_, largeur_, point2, point3, point4);
+			pointHaut = point2;
+			pointMilieu = p(7);
+			calculerPointDistance(p(5), p(7), longueurButs_, largeur_, point2, point3, point4);
+			pointBas = point2;
+			return true;
+		}
+		else
+			return false;
+	}	
+}
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void NoeudTable::tracerButs(const glm::mat4& vueProjection, double longueur) const
@@ -1029,24 +1109,4 @@ bool NoeudTable::dansZone2(glm::dvec3 M) {
 		|| utilitaire::MdansTriangleABC(p8, p(7), p(5), M)
 		|| utilitaire::MdansTriangleABC(p8, p(5), p(3), M);
 	return result;
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-///
-/// @fn bool getbuts(bool index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas)
-///
-/// Cette fonction permet de recuperer les coordonnes des buts
-///  @param[in] 
-///		bool index : true pour le but de droite, false pour celui du gauche
-///	 @param[out]
-///		pointHaut : le point haut de la ligne du but
-///		pointMilieu : le point milieu du but
-///		pointBas : point bas de la ligne du but
-/// @return bool
-///
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool getbuts(bool index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas)
-{
-	return true;
 }

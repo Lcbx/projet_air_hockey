@@ -38,8 +38,8 @@ struct CoefficientConfiguration{
 } typedef CoefficientConfiguration;
 
 const CoefficientConfiguration COEFFICIENTS_MINIMAUX = { 0, 0, 0 };
-const CoefficientConfiguration COEFFICIENTS_DEFAULT = { 10, 0.8, 5 };
-const CoefficientConfiguration COEFFICIENTS_MAXIMAUX = { 100, 1, 10 };
+const CoefficientConfiguration COEFFICIENTS_DEFAULT = { 10, 0.8, 10 };
+const CoefficientConfiguration COEFFICIENTS_MAXIMAUX = { 100, 1, 100 };
 
 ///////////////////////////////////////////////////////////////////////////
 /// @class FacadeModele

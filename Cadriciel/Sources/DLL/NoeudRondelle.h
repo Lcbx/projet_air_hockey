@@ -52,7 +52,7 @@ private:
 
 
 	///vecteur vitesse
-	glm::vec3 vitesse_ = { -50,30,0 };
+	glm::vec3 vitesse_ = { 50,30,0 };
 	
 	///les portails : pointeur et active ou non
 	std::map<NoeudPortail*, bool> portails_;
