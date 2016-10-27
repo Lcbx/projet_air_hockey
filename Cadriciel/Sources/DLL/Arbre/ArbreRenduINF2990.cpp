@@ -573,8 +573,7 @@ void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 
 	//bouger vers droite
 	if (x == 1) {
-		if (this->getTable()->dansZone1({ pos.x + rayon , pos.y + rayon, 0 }) || this->getTable()->dansZone1({ pos.x + rayon , pos.y - rayon, 0 })) {
-
+		if (this->getTable()->dansZone1({ pos.x + rayon , pos.y + rayon, 0 }) && this->getTable()->dansZone1({ pos.x + rayon , pos.y - rayon, 0 })) {
 			if (y == 1) { dernier->assignerPositionRelative({ pos.x + 4, pos.y + 4, 0 }); }
 			else if (y == -1) { dernier->assignerPositionRelative({ pos.x + 4, pos.y - 4, 0 }); }
 			else dernier->assignerPositionRelative({ pos.x + 4, pos.y, 0 });
@@ -583,7 +582,7 @@ void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 	}
 
 	if (x == -1) {
-		if (this->getTable()->dansZone1({ pos.x - rayon , pos.y + rayon, 0 }) || this->getTable()->dansZone1({ pos.x - rayon , pos.y - rayon, 0 }))//checker si a l'interieur 
+		if (this->getTable()->dansZone1({ pos.x - rayon , pos.y + rayon, 0 }) && this->getTable()->dansZone1({ pos.x - rayon , pos.y - rayon, 0 }))//checker si a l'interieur 
 		{
 			if (y == 1) { dernier->assignerPositionRelative({ pos.x - 4, pos.y + 4, 0 }); }
 			else if (y == -1) { dernier->assignerPositionRelative({ pos.x - 4, pos.y - 4, 0 }); }
