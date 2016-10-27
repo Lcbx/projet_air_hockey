@@ -516,17 +516,23 @@ void  ArbreRenduINF2990::ajouterMailletEtRondelle()
 	noeudRondelle->assignerPositionRelative({ 0,0,0 });
 	noeudRondelle->setScale({ 1, 1, 1 });
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudRondelle);
-
+	
+	// get les coord du but droit
+	glm::vec3 pointHaut, pointMilieu, pointBas;
+	this->getTable()->getButs(1, pointHaut, pointMilieu, pointBas);
+	//std::cout << "But 1 (Droite)" << std::endl;
 	//AJOUT MAILLET1
 	NoeudAbstrait* noeudMaillet{ creerNoeud(NOM_MAILLET) };
-	noeudMaillet->assignerPositionRelative({70,0,0 });
+	noeudMaillet->assignerPositionRelative({pointMilieu.x - noeudMaillet->obtenirRayon() - 5,0,0 });
 	noeudMaillet->setScale({ 1, 1, 1 });
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet);
 	noeudMaillet->estDeuxiemeJoueur = false;
-	
+	// get les coord du but gauche
+	this->getTable()->getButs(2, pointHaut, pointMilieu, pointBas);
+	//std::cout << "But 2 (Gauche)" << std::endl;
 	//AJOUT MAILLET2
 	NoeudAbstrait* noeudMaillet2{ creerNoeud(NOM_MAILLET) };
-	noeudMaillet2->assignerPositionRelative({ -70,0,0 });
+	noeudMaillet2->assignerPositionRelative({ pointMilieu.x + noeudMaillet2->obtenirRayon() +5,0,0 });
 	noeudMaillet2->setScale({ 1, 1, 1 });
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet2);
 	noeudMaillet2->estDeuxiemeJoueur = true;
