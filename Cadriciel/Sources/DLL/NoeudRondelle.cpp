@@ -174,7 +174,7 @@ void NoeudRondelle::animer(float temps)
 										* glm::normalize(positionHorsCollision - noeud->obtenirPositionRelative()) );
 			vitesse_ *= -1;
 			portails_[ frere ] = false;
-			std::cout << "portail " << frere->getScale().x << " desactive\n";
+			///std::cout << "portail " << frere->getScale().x << " desactive\n";
 			break;
 		}
 		case InfoCollision::MAILLET: {
