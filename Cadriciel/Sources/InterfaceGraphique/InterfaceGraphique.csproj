@@ -72,7 +72,9 @@
     <Compile Include="ChoixProfil.Designer.cs">
       <DependentUpon>ChoixProfil.cs</DependentUpon>
     </Compile>
-    <Compile Include="Profil.cs" />
+    <Compile Include="Profil.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Configuration.cs">
       <SubType>Form</SubType>
     </Compile>
