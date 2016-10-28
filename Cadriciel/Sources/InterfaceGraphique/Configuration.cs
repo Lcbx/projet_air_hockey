@@ -26,9 +26,15 @@ namespace InterfaceGraphique
         private int scorePourGangner = 2;
 
         private bool estVirtuel = true;
-        Profil joueurVirtuelle_;
+        Profil joueurVirtuelCourant_;
         List<Profil> profils;
 
+        // Volet débogage
+        private bool debogageActif = false;
+        private bool debogCollision_ = false;
+        private bool debogVitesse_ = false;
+        private bool eclairageActif_ = false;
+        private bool effetVisuelActif_ = true;
 
 
 
@@ -122,6 +128,45 @@ namespace InterfaceGraphique
             this.Hide();
             menuPrincipal_.Show();
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+                debogageActif = true;
+            else
+            {
+                console.Enabled = false;
+            
+                groupBox3.Enabled = false;
+            }
+
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked)
+                debogCollision_ = true;
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox3.Checked)
+                debogVitesse_ = true;
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox4.Checked)
+                eclairageActif_ = true;
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox5.Checked)
+                effetVisuelActif_ = true;
+        }
+
+       
     }
     static partial class FonctionsNatives
     {

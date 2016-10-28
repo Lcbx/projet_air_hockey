@@ -19,6 +19,7 @@ namespace InterfaceGraphique
         private static MenuPrincipal menuPrincipal;
         private static Edition edition;
         private static Configuration configuration;
+        private static Profil joueurVirtuel;
         private static TimeSpan dernierTemps;
         private static TimeSpan tempsAccumule;
         private static Stopwatch chrono = Stopwatch.StartNew();
@@ -46,15 +47,17 @@ namespace InterfaceGraphique
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            menuPrincipal = new MenuPrincipal();
             edition = new Edition();
             configuration = new Configuration();
-            
+            joueurVirtuel = new Profil();
 
             //Application.Run(edition);
-            menuPrincipal = new MenuPrincipal();
+           
             menuPrincipal.setMenu(edition, configuration);
             edition.setMenuPrincipal(menuPrincipal);
             configuration.setMenuPrincipalConfig(menuPrincipal);
+
             Application.Run(menuPrincipal);
         }
 
