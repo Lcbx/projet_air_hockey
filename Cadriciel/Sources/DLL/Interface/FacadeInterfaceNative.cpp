@@ -657,11 +657,15 @@ extern "C"
 	/// TODO: Retirer pour la remise
 	/// @return Nothing
 	__declspec(dllexport) void __cdecl testTournoi() {
-		int* arr = new int[5];
-		for (int i = 0; i < 5; i++)
+		const int len = 1;
+		int* arr = new int[len];
+		for (int i = 0; i < len; i++)
 			arr[i] = i + 1;
 
-		Tournoi<int> tournoi(5, arr);
+		Tournoi<int> tournoi(len, arr);
+		if(tournoi.prochainMatchupExiste())
+			tournoi.obtenirProchainMatchup();
+		
 	}
 }
 
