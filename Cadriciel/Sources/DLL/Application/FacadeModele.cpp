@@ -824,13 +824,37 @@ void FacadeModele::afficherPointControle()
 void FacadeModele::virtuelDefensif()
 {
 	glm::vec3 positionRondelle = arbre_->chercher("rondelle")->obtenirPositionRelative();
+	float rayonRondelle = arbre_->chercher("rondelle")->obtenirRayonModele();
+	
 	std::cout << "positionRondelle (" << positionRondelle.x << "," << positionRondelle.y << ")" << std::endl;
 	NoeudAbstrait * mailletDefensif = arbre_->obtenirMailletManuel();
 	glm::vec3 positionMaillet = mailletDefensif->obtenirPositionRelative();
-	if (positionRondelle.y > positionMaillet.y)
-		positionMaillet.y++;
-	else
-		positionMaillet.y--;
+	float rayonMaillet = mailletDefensif->obtenirRayonModele();
+	glm::vec3 positionMailletTable = positionMaillet - rayonMaillet;
+
+	glm::vec3 vecteurMailletRondelle = positionRondelle - positionMaillet;
+	glm::vec3 vecteurUnitaireMailletRondelle = vecteurMailletRondelle / glm::length(vecteurMailletRondelle);
+	
+	if (positionRondelle.x > 0) // rondelle dans la zone du joueur humain
+	{
+		if (positionRondelle.y > positionMaillet.y)
+			positionMaillet.y++;
+		else
+			positionMaillet.y--;
+		if (arbre_->getTable()->dansZone1(positionMailletTable ))
+			positionMaillet.x--;
+	}
+	else // rondelle dans la zone du joueur virtuelle
+	{	
+		//generalement tant il n'y a pas de collision il va deplacer vers le centre du maillet
+		// tant que la distance entre le centre du maillet et celui de la rondelle n'est pas egale a rayonMaillet + rayonRondelle
+
+		if (glm::distance(positionMaillet, positionRondelle) != (rayonMaillet + rayonRondelle))
+		{
+			positionMaillet.x += vecteurUnitaireMailletRondelle.x;
+			positionMaillet.y += vecteurUnitaireMailletRondelle.y;
+		}
+	}
 	mailletDefensif->assignerPositionRelative(positionMaillet);
 
 
