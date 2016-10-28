@@ -11,10 +11,10 @@
 
 
 /// Nombre de calculs par image.
-int ConfigTouches::HAUTDEF{ 1 };
-int ConfigTouches::DROITEDEF{ 2 };
-int ConfigTouches::BASDEF{ 3 };
-int ConfigTouches::GAUCHEDEF{ 4 };
+int ConfigTouches::HAUTDEF{ 87 };
+int ConfigTouches::DROITEDEF{ 68 };
+int ConfigTouches::BASDEF{ 83 };
+int ConfigTouches::GAUCHEDEF{ 65 };
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -27,7 +27,7 @@ int ConfigTouches::GAUCHEDEF{ 4 };
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void ConfigTouches::creerDOM(tinyxml2::XMLDocument& document) const
+void ConfigTouches::creerDOM(tinyxml2::XMLDocument& document)
 {
 	// Créer le noeud 'configuration'
 	tinyxml2::XMLElement* elementConfiguration{ document.NewElement("configuration") };

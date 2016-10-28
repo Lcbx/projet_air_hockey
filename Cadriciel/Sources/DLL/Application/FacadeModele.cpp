@@ -300,7 +300,7 @@ void FacadeModele::enregistrerZoneJeu(char* fichierZoneJeu) const
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void FacadeModele::chargerTouches()
+/*void FacadeModele::chargerTouches()
 {
 	// Vérification de l'existance du ficher
 
@@ -319,7 +319,7 @@ void FacadeModele::chargerTouches()
 		_configTouches.lireDOM(document);
 	}
 }
-
+*/
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -331,7 +331,7 @@ void FacadeModele::chargerTouches()
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void FacadeModele::enregistrerTouches()
+/*void FacadeModele::enregistrerTouches()
 {
 	tinyxml2::XMLDocument document;
 	// Écrire la déclaration XML standard...
@@ -343,7 +343,7 @@ void FacadeModele::enregistrerTouches()
 	// Écrire dans le fichier
 	document.SaveFile(FacadeModele::FICHIER_CONFIGURATION.c_str());
 }
-
+*/
 
 ////////////////////////////////////////////////////////////////////////
 ///

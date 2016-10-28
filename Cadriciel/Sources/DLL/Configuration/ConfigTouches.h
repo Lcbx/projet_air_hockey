@@ -9,7 +9,7 @@
 #define __CONFIGURATION_CONFIGTOUCHES_H__
 
 
-#include "tinyxml2.h"
+#include "../../../Commun/Externe/tinyxml2/include/tinyxml2.h"
 
 ///////////////////////////////////////////////////////////////////////////
 /// @class ConfigTouches
@@ -71,7 +71,6 @@ public:
 	static int DROITEDEF;
 	static int BASDEF;
 	static int GAUCHEDEF;
-	static 
 
 
 private:
