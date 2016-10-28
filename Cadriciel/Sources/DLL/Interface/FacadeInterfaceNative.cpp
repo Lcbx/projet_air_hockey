@@ -591,6 +591,93 @@ extern "C"
 	//}
 	
 
+
+
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn 		__declspec(dllexport) void deplacerMailletAvecSouris()
+	///
+	/// Cette fonction permet de deplacer le maillet avec la souris
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl deplacerMailletAvecSouris(double x, double y)
+	{
+		FacadeModele::obtenirInstance()->deplacerMailletAvecSouris(x, y);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 		__declspec(dllexport) void virtuelDefensif();
+	/// Author : Ali
+	/// Cette fonction permet de deplacer le maillet du joueur virtuel
+	/// selon un scenario defensif
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl virtuelDefensif()
+	{
+		FacadeModele::obtenirInstance()->virtuelDefensif();
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 		__declspec(dllexport) void afficherRayonAttraction();
+	/// Author : Ali
+	/// Cette fonction permet d'afficher le rayon d'attraction
+	/// des portails
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl afficherRayonAttraction()
+	{
+		FacadeModele::obtenirInstance()->activerRayonAttraction();
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 		__declspec(dllexport) void enleverRayonAttraction();
+	/// Author : Ali
+	/// Cette fonction permet d'enlever le rayon d'attraction 
+	/// des portail
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl enleverRayonAttraction()
+	{
+		FacadeModele::obtenirInstance()->deactiverRayonAttraction();
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 		__declspec(dllexport) void afficherPointControle();
+	/// Author : Ali
+	/// Cette fonction permet d'afficher les points de controle de
+	/// la table
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl afficherPointControle()
+	{
+		FacadeModele::obtenirInstance()->afficherPointControle();
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 		__declspec(dllexport) void effacerPointControle();
+	/// Author : Ali
+	/// Cette fonction permet d'effacer l'affichage les points de controle
+	/// de la table
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl effacerPointControle()
+	{
+		FacadeModele::obtenirInstance()->effacerPointControle();
+	}
+
 }
 
 

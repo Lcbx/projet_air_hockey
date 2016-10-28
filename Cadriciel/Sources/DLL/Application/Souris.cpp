@@ -20,6 +20,7 @@
 #include "Deplacement.h"
 #include "../MiseEchelle.h"
 #include "PointsControle.h"
+#include "../Test.h"
 
 #include "../Application/FacadeModele.h"
 #include "../Vue/Vue.h"
@@ -116,6 +117,8 @@ void Souris::creerStrategie(){
 	case AJOUT_PORTAIL: {		notreStrategie_ = new AjoutPortail; break; }
 	case MISEAECHELLE: {		notreStrategie_ = new MiseEchelle; break; }
 	case POINTSDECONTROLE: {	notreStrategie_ = new PointsControle; break; }
+	case TEST: {				notreStrategie_ = new Test; break; }
+
 	default: {	throw("Souris::strategie inconnue demandee"); break;  }
 	}
 }

@@ -16,7 +16,7 @@
 
 
 ///////////////////////////////////////////////////////////////////////////
-/// @class NoeudMaillet
+/// @class NoeudPortail
 /// @brief Classe qui représente un le noeud Portail de l'arbre de rendu.
 ///
 /// @author Julien Gascon-Samson
@@ -37,7 +37,7 @@ public:
 
 	void tracerCercle(const glm::mat4& vueProjection, double cx, double cy, double r, int nb_segments) const;
 
-	//Accepter le visiteur
+	///Accepter le visiteur
 	virtual void accepter(Visiteur* v);
 
 	////////////////////////////////////////////////////////////////////////
@@ -55,10 +55,7 @@ private:
 	/// Angle selon l'axe des Y.
 	float angleY_{ 0.f };
 	/// Angle de rotation.
-	float angleRotation_{ 0.f };
-	// boolean pour afficher ou non le rayon d'attraction du portail
-	bool affiche_{ true };
-	
+	float angleRotation_{ 0.f };	
 };
 
 

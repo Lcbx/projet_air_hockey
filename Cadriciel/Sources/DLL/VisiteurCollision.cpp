@@ -97,7 +97,7 @@ aidecollision::DetailsCollision VisiteurCollision::visiterNoeudCercle(NoeudAbstr
 	auto detail = aidecollision::calculerCollisionCercle(
 		glm::vec2(position.x, position.y), rayon,
 		glm::vec2(position_.x, position_.y), rayon_);
-	//if(detail.type != aidecollision::COLLISION_AUCUNE) std::cout << "collision " << detail.type << " enfoncement " << detail.enfoncement << "\n";
+	///if(detail.type != aidecollision::COLLISION_AUCUNE) std::cout << "collision " << detail.type << " enfoncement " << detail.enfoncement << "\n";
 	return detail;
 }
 

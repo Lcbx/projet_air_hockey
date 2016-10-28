@@ -39,6 +39,7 @@ class VisiteurSelection;
 class VisiteurRotation;
 class VisiteurMiseEchelle;
 class VisiteurAjout;
+class VisiteurCollision;
 
 
 
@@ -180,6 +181,8 @@ public:
 	///definir le deuxieme joueur
 	bool estDeuxiemeJoueur = false;
 
+	/// vitesse du maillet
+	double vitesse{ 10. };
 
 protected:
 	/// Type du noeud.

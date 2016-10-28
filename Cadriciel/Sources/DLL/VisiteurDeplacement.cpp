@@ -107,7 +107,7 @@ void VisiteurDeplacement::visiter(NoeudBonus* noeud)
 }
 void VisiteurDeplacement::visiter(NoeudMaillet* noeud)
 {
-	VisiteurDeplacement::visiter((NoeudAbstrait*)noeud);
+	//VisiteurDeplacement::visiter((NoeudAbstrait*)noeud);
 }
 void VisiteurDeplacement::visiter(NoeudPortail* noeud)
 {

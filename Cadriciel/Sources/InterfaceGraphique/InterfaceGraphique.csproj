@@ -66,6 +66,12 @@
     <Compile Include="BoitePropriete.Designer.cs">
       <DependentUpon>BoitePropriete.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChoixProfil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChoixProfil.Designer.cs">
+      <DependentUpon>ChoixProfil.cs</DependentUpon>
+    </Compile>
     <Compile Include="Profil.cs" />
     <Compile Include="Configuration.cs">
       <SubType>Form</SubType>
@@ -110,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BoitePropriete.resx">
       <DependentUpon>BoitePropriete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChoixProfil.resx">
+      <DependentUpon>ChoixProfil.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Configuration.resx">
       <DependentUpon>Configuration.cs</DependentUpon>
