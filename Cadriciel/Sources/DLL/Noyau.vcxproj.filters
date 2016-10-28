@@ -192,9 +192,6 @@
     <ClCompile Include="Test.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
-    <ClCompile Include="Tournoi.cpp">
-      <Filter>Source Files\Application</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\FacadeModele.h">
