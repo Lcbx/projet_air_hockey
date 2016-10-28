@@ -1422,7 +1422,7 @@ namespace InterfaceGraphique
                 FonctionsNatives.ajouterMailletEtRondelle();
                 //effacer les points de controle
                 FonctionsNatives.effacerPointControle();
-
+                
                 estEnPause = false;
 
 

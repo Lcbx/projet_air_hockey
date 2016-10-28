@@ -749,7 +749,8 @@ void FacadeModele::deplacerMailletAvecSouris(double x, double y)
 	glm::dvec3 posDeplacement;
 	vue_->convertirClotureAVirtuelle(x, y, posDeplacement);
 	arbre_->deplacerMailletAvecSouris(posDeplacement);
-
+	if (arbre_->joueurVirtuelDefensif)
+		this->virtuelDefensif();
 }
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -823,6 +824,15 @@ void FacadeModele::afficherPointControle()
 void FacadeModele::virtuelDefensif()
 {
 	glm::vec3 positionRondelle = arbre_->chercher("rondelle")->obtenirPositionRelative();
+	std::cout << "positionRondelle (" << positionRondelle.x << "," << positionRondelle.y << ")" << std::endl;
+	NoeudAbstrait * mailletDefensif = arbre_->obtenirMailletManuel();
+	glm::vec3 positionMaillet = mailletDefensif->obtenirPositionRelative();
+	if (positionRondelle.y > positionMaillet.y)
+		positionMaillet.y++;
+	else
+		positionMaillet.y--;
+	mailletDefensif->assignerPositionRelative(positionMaillet);
+
 
 	//// afficher coord des buts
 	//glm::vec3 pointHaut, pointMilieu, pointBas;
