@@ -206,12 +206,12 @@ void NoeudRondelle::animer(float temps)
 	for (auto it = portails_.begin(); it != portails_.end(); it++) {
 		auto portail = it->first;
 		glm::vec3 vecteur_distance = portail->obtenirPositionRelative() - obtenirPositionRelative();
-		double distance = glm::length(vecteur_distance);
-		double rayon_attraction = 3.f * portail->obtenirRayon();
+		float distance = glm::length(vecteur_distance);
+		float rayon_attraction = 3.f * portail->obtenirRayon();
 		if (it->second) {
 			if (distance < rayon_attraction) {
-				std::cout << "portail " << portail->getScale().x << " attracte\n";
-				vitesse_ += CST_ASPIRATION * temps * vecteur_distance ;
+				///std::cout << "portail " << portail->getScale().x << " attracte\n";
+				vitesse_ += CST_ASPIRATION * rayon_attraction/distance  * glm::normalize(vecteur_distance);
 			}
 		}
 		else if (distance > rayon_attraction) {
