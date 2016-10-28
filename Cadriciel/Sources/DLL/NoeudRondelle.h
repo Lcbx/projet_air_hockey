@@ -43,12 +43,14 @@ public:
 
 private:
 
+	/*
 	///dernieres positions valides
 	std::list<glm::vec3> dernieresPositions_;
 	///ajoute une nouvelle position
 	void push_position();
 	///charge une ancienne position
 	void pop_position();
+	*/
 
 
 	///vecteur vitesse
