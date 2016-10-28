@@ -21,6 +21,10 @@
 
 #include "Couleurs.h"
 
+#include "Deplacement.h"
+
+#include "../Affichage_debuggage.h"
+
 using namespace std;
 
 
@@ -42,7 +46,6 @@ const std::string ArbreRenduINF2990::NOM_RONDELLE{ "rondelle" };
 const std::string ArbreRenduINF2990::NOM_POINTCONTROLE{ "pointcontrole" };
 ///La chaîne représentant le type des points de controles de la table
 const std::string ArbreRenduINF2990::NOM_MAILLET{ "maillet" };
-
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -434,7 +437,6 @@ int ArbreRenduINF2990::obtenirNombreObjetSelctionnes()
 	}
 	//compMuret = compMuret / 2;
 	comp = comp; // +compMuret;
-	std::cout << "objets selectionnes : " << comp << std::endl;
 	return comp;
 }
 
@@ -496,65 +498,141 @@ bool ArbreRenduINF2990::objetEstDansLaTable()
 	return estInterieur;
 }
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void ajouterMailletEtRondelle()
+///
+/// Cette fonction permet d'Ajouter les maillets et la rondelle
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
 void  ArbreRenduINF2990::ajouterMailletEtRondelle()
 {
+	//initialiser le score
+	this->setScoreMoi(0);
+	this->setScoreAutre(0);
 
 	//AJOUT RONDELLE
 	NoeudAbstrait* noeudRondelle{ creerNoeud(NOM_RONDELLE) };
 	noeudRondelle->assignerPositionRelative({ 0,0,0 });
 	noeudRondelle->setScale({ 1, 1, 1 });
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudRondelle);
-
+	
+	// get les coord du but droit
+	glm::vec3 pointHaut, pointMilieu, pointBas;
+	this->getTable()->getButs(1, pointHaut, pointMilieu, pointBas);
+	//std::cout << "But 1 (Droite)" << std::endl;
+	
 	//AJOUT MAILLET1
 	NoeudAbstrait* noeudMaillet{ creerNoeud(NOM_MAILLET) };
-	noeudMaillet->assignerPositionRelative({40,0,0 });
+	noeudMaillet->assignerPositionRelative({pointMilieu.x - noeudMaillet->obtenirRayon() - 5,0,0 });
 	noeudMaillet->setScale({ 1, 1, 1 });
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet);
 	noeudMaillet->estDeuxiemeJoueur = false;
 	
+	
+	// get les coord du but gauche
+	this->getTable()->getButs(2, pointHaut, pointMilieu, pointBas);
+	//std::cout << "But 2 (Gauche)" << std::endl;
+	
 	//AJOUT MAILLET2
 	NoeudAbstrait* noeudMaillet2{ creerNoeud(NOM_MAILLET) };
-	noeudMaillet2->assignerPositionRelative({ -40,0,0 });
+	noeudMaillet2->assignerPositionRelative({ pointMilieu.x + noeudMaillet2->obtenirRayon() +5,0,0 });
 	noeudMaillet2->setScale({ 1, 1, 1 });
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet2);
 	noeudMaillet2->estDeuxiemeJoueur = true;
 
 }
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn deplacerMailletAvecClavier(double x, double y)
+///
+/// Cette fonction permet de deplacer le maillet avedc les touches de clavier
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
 void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 {
-	//NoeudAbstrait* dernier;
+	NoeudAbstrait* dernier = this->enfants_.back();//pour obtenir le maillet du 2eme joueur
+	glm::dvec3 pos = dernier->obtenirPositionRelative();
+	double rayon = dernier->obtenirRayon();
 
-	/*for (NoeudAbstrait * enfant : this->enfants_)
-	{
-		if (enfant->obtenirType() == "maillet")
+	//bouger vers droite
+	if (x == 1) {
+		if (this->getTable()->dansZone1({ pos.x + rayon , pos.y + rayon, 0 }) && this->getTable()->dansZone1({ pos.x + rayon , pos.y - rayon, 0 })) {
+			if (y == 1) { dernier->assignerPositionRelative({ pos.x + 4, pos.y + 4, 0 }); }
+			else if (y == -1) { dernier->assignerPositionRelative({ pos.x + 4, pos.y - 4, 0 }); }
+			else dernier->assignerPositionRelative({ pos.x + 4, pos.y, 0 });
+		}
+		else dernier->assignerPositionRelative({ pos.x, pos.y, 0 });//ne pas depasser le centre
+	}
+
+	if (x == -1) {
+		if (this->getTable()->dansZone1({ pos.x - rayon , pos.y + rayon, 0 }) && this->getTable()->dansZone1({ pos.x - rayon , pos.y - rayon, 0 }))//checker si a l'interieur 
 		{
-			dernier = enfant;
+			if (y == 1) { dernier->assignerPositionRelative({ pos.x - 4, pos.y + 4, 0 }); }
+			else if (y == -1) { dernier->assignerPositionRelative({ pos.x - 4, pos.y - 4, 0 }); }
+			else dernier->assignerPositionRelative({ pos.x - 4, pos.y, 0 });
+		}
+		else dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
+	}
+
+	if (x == 0) {
+		if (y == 1) {
+			if (this->getTable()->dansZone1({ pos.x , pos.y + rayon , 0 }))
+			{
+				dernier->assignerPositionRelative({ pos.x , pos.y + 4, 0 });
+			}
+			else {
+				dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
+			}
+		}
+			else if (y == -1) { 
+				if (this->getTable()->dansZone1({ pos.x , pos.y - rayon , 0 })) 
+				{
+				dernier->assignerPositionRelative({ pos.x , pos.y - 4, 0 }); 
+				}
+				else {
+					dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
+				}
 		}
 	}
-	*/
-
-		NoeudAbstrait* dernier = this->enfants_.back();//pour obtenir le maillet du 2eme joueur
-		glm::dvec3 pos = dernier->obtenirPositionRelative();
-
-		if (x > 0) { dernier->assignerPositionRelative({ pos.x + 5, pos.y, 0 }); } //bouger vers droite
-		if (x < 0) { dernier->assignerPositionRelative({ pos.x - 5, pos.y, 0 }); }//bouger vers gauche
-
-		if (y > 0) { dernier->assignerPositionRelative({ pos.x , pos.y + 5, 0 }); } //bouger vers haut
-		if (y < 0) { dernier->assignerPositionRelative({ pos.x, pos.y - 5 , 0 }); } //bouger vers droite
-	
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void reinitialiserPartieCourante()
+///
+/// Cette fonction permet de re-initialiser la scene, donc mettre les maillets et la rondelle
+/// a la position de depart
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
 void ArbreRenduINF2990::reinitialiserPartieCourante()
 {
+	//To-Do; 
+	//re-initilaser sscore
+	this->setScoreMoi(0);
+	this->setScoreAutre(0);
+
+	glm::vec3 pointHaut, pointMilieu, pointBas;
+
 	for (NoeudAbstrait * enfant : this->enfants_)
 	{
 		if (enfant->obtenirType() == "maillet") {
 			if (enfant->estDeuxiemeJoueur == true) {
-				enfant->assignerPositionRelative({ -40,0,0 });
+				this->getTable()->getButs(2, pointHaut, pointMilieu, pointBas);
+				
+				enfant->assignerPositionRelative({ pointMilieu.x + enfant->obtenirRayon() + 5,0,0 });
 			}
 			else {
-				enfant->assignerPositionRelative({ 40,0,0 });
+				this->getTable()->getButs(1, pointHaut, pointMilieu, pointBas);
+
+				enfant->assignerPositionRelative({ pointMilieu.x - enfant->obtenirRayon() - 5,0,0 });
 			}
 		}
 		else if (enfant->obtenirType() == "rondelle") {
@@ -562,7 +640,102 @@ void ArbreRenduINF2990::reinitialiserPartieCourante()
 		}
 	}
 }
-	
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void deplacerMailletAvecSouris(glm::dvec3 pos)
+///
+/// Cette fonction permet de deplacer le maillet avec la souris
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::deplacerMailletAvecSouris(glm::dvec3 pos)
+{
+	for (NoeudAbstrait * enfant : this->enfants_)
+	{
+		if (enfant->obtenirType() == "maillet") {
+			if (enfant->estDeuxiemeJoueur == false)
+			{
+				glm::vec3 P2, P3, P7;
+				this->getTable()->getPointControle(2, P2);
+				this->getTable()->getPointControle(3, P3);
+				this->getTable()->getPointControle(7, P7);
+				if (this->getTable()->dansTable(pos))
+				{	
+					// si depasse la gauche de la zone
+					if (pos.x < enfant->obtenirRayon())
+						pos.x = enfant->obtenirRayon();
+					// si depasse la droite de la zone
+					if ( (pos.x + enfant->obtenirRayon()) > P7.x)
+						pos.x = P7.x - enfant->obtenirRayon();
+					// si depasse le haut de la zone
+					if ((pos.y + enfant->obtenirRayon()) > P2.y)
+						pos.y = P2.y - enfant->obtenirRayon();
+					// si depasse le bas de la zone
+					if ((pos.y - enfant->obtenirRayon()) < P3.y)
+						pos.y = P3.y + enfant->obtenirRayon();
 
+					enfant->assignerPositionRelative(pos);
+				}			
+			}
+		}
+	}
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void activerRayonPortail()
+///
+///Author : Ali
+/// Cette fonction permet d'activer le rayon d'attraction d'un portail
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::activerRayonPortail()
+{
+	Debug::obtenirInstance().afficherAttraction = true;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void deactiverRayonPortail()
+///
+///Author : Ali
+/// Cette fonction permet de deactiver le rayon d'attraction d'un portail
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::deactiverRayonPortail()
+{
+	Debug::obtenirInstance().afficherAttraction = false;
+}
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void effacerPointControle()
+///
+///Author : Ali
+/// Cette fonction permet d'effacer l'affichage les points de controles
+/// de la table
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::effacerPointControle()
+{
+	noeudTable_->afficherPointsControles = false;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void effacerPointControle()
+///
+///Author : Ali
+/// Cette fonction permet d'effacer l'affichage les points de controles
+/// de la table
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void ArbreRenduINF2990::afficherPointControle()
+{
+	noeudTable_->afficherPointsControles = true;
+}

@@ -189,6 +189,10 @@
     <ClCompile Include="VisiteurDansLaTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="Configuration\ConfigTouches.cpp">
+      <Filter>Source Files\Configuration</Filter>
+=======
     <ClCompile Include="Test.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
@@ -197,9 +201,7 @@
     </ClCompile>
     <ClCompile Include="Affichage_debuggage.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Configuration\ConfigTouches.cpp">
-      <Filter>Source Files\Configuration</Filter>
+>>>>>>> ab0c5bc7f27bcc57a6212e86e67c5c4c38bd991d
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -344,6 +346,10 @@
     <ClInclude Include="VisiteurDansLaTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="Configuration\ConfigTouches.h">
+      <Filter>Header Files\Configuration</Filter>
+=======
     <ClInclude Include="Test.h">
       <Filter>Header Files\Application</Filter>
     </ClInclude>
@@ -352,9 +358,7 @@
     </ClInclude>
     <ClInclude Include="Affichage_debuggage.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Configuration\ConfigTouches.h">
-      <Filter>Header Files\Configuration</Filter>
+>>>>>>> ab0c5bc7f27bcc57a6212e86e67c5c4c38bd991d
     </ClInclude>
   </ItemGroup>
 </Project>

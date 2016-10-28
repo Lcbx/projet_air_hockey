@@ -129,6 +129,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Affichage_debuggage.cpp" />
     <ClCompile Include="Application\AjoutAccelerateur.cpp" />
     <ClCompile Include="Application\AjoutMur.cpp" />
     <ClCompile Include="Application\AjoutPortail.cpp" />
@@ -164,10 +165,12 @@
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="SauvegardeZoneDeJeu.cpp" />
+    <ClCompile Include="Test.cpp" />
     <ClCompile Include="Tests\BancTests.cpp" />
     <ClCompile Include="Tests\ConfigSceneTest.cpp" />
     <ClCompile Include="Tests\NoeudAbstraitTest.cpp" />
     <ClCompile Include="VisiteurAjout.cpp" />
+    <ClCompile Include="VisiteurCollision.cpp" />
     <ClCompile Include="VisiteurDansLaTable.cpp" />
     <ClCompile Include="VisiteurDeplacement.cpp" />
     <ClCompile Include="VisiteurDuplication.cpp" />
@@ -178,6 +181,7 @@
     <ClCompile Include="VisiteurSelection.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Affichage_debuggage.h" />
     <ClInclude Include="Application\AjoutAccelerateur.h" />
     <ClInclude Include="Application\AjoutMur.h" />
     <ClInclude Include="Application\AjoutPortail.h" />
@@ -213,11 +217,13 @@
     <ClInclude Include="NoeudRondelle.h" />
     <ClInclude Include="Application\Souris.h" />
     <ClInclude Include="SauvegardeZoneDeJeu.h" />
+    <ClInclude Include="Test.h" />
     <ClInclude Include="Tests\BancTests.h" />
     <ClInclude Include="Tests\ConfigSceneTest.h" />
     <ClInclude Include="Tests\NoeudAbstraitTest.h" />
     <ClInclude Include="Visiteur.h" />
     <ClInclude Include="VisiteurAjout.h" />
+    <ClInclude Include="VisiteurCollision.h" />
     <ClInclude Include="VisiteurDansLaTable.h" />
     <ClInclude Include="VisiteurDeplacement.h" />
     <ClInclude Include="VisiteurDuplication.h" />

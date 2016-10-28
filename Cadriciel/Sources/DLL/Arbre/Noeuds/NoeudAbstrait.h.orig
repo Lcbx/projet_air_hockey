@@ -180,9 +180,13 @@ public:
 
 	///definir le deuxieme joueur
 	bool estDeuxiemeJoueur = false;
-
-	/// vitesse du maillet
-	double vitesse{ 10. };
+<<<<<<< HEAD
+=======
+	// boolean pour afficher ou non le rayon d'attraction du portail
+	bool rayonAffiche_{ false };
+	// boolean pour afficher les points de control ou non
+	bool pointControleAffiche_{ true };
+>>>>>>> 2bfbb9ab1467be8d9274265c2ee1e6b69ebd3684
 
 protected:
 	/// Type du noeud.

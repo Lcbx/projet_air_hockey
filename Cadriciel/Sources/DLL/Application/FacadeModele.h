@@ -12,6 +12,7 @@
 
 
 #include <windows.h>
+#include <ctime>
 #include <string>
 #include "EtatOpenGL.h"
 
@@ -36,9 +37,9 @@ struct CoefficientConfiguration{
 	double acceleration;	//Accélération des bonus vitesse
 } typedef CoefficientConfiguration;
 
-const CoefficientConfiguration COEFFICIENTS_MINIMAUX = { 0.0, 0, 0 };
-const CoefficientConfiguration COEFFICIENTS_DEFAULT = { 1.2, 0.8, 5 };
-const CoefficientConfiguration COEFFICIENTS_MAXIMAUX = { 100, 1, 10 };
+const CoefficientConfiguration COEFFICIENTS_MINIMAUX = { 0, 0, 0 };
+const CoefficientConfiguration COEFFICIENTS_DEFAULT = { 10, 0.8, 10 };
+const CoefficientConfiguration COEFFICIENTS_MAXIMAUX = { 100, 1, 100 };
 
 ///////////////////////////////////////////////////////////////////////////
 /// @class FacadeModele
@@ -156,6 +157,19 @@ public:
 	///Re initialiser la partie 
 	void reinitialiserPartieCourante();
 
+	///permert de deplacer le maillet avec la souris
+	void deplacerMailletAvecSouris(double x, double y);
+
+	/// Ali
+	/// activer ou deactiver le rayon d'attraction des portails
+	void activerRayonAttraction();
+	void deactiverRayonAttraction();
+	/// afficher ou effacer les points de controle
+	void afficherPointControle();
+	void effacerPointControle();
+	///deplacer le maillet du jouer virtuel selon le scenario defensif
+	void virtuelDefensif();
+	///
 private:
 
    /// Constructeur par défaut.
@@ -190,6 +204,7 @@ private:
 
    /// Coefficients de configuration
    CoefficientConfiguration coeff_ = COEFFICIENTS_DEFAULT;
+
 };
 
 

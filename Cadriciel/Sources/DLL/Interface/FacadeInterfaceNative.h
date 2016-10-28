@@ -27,6 +27,11 @@ extern "C" {
 	__declspec(dllexport) int obtenirAffichagesParSeconde();
 	__declspec(dllexport) bool executerTests();
 	
+	// Les fonction qui déplace l'objet vers la gauche, vers la droite, vers le bas et vers le haut
+	__declspec(dllexport) void  deplacerVersLaGauche(int toucheDeplacementAGauche);
+	__declspec(dllexport) void deplacertVersLaDroite(int toucheDeplacementADroite_);
+	__declspec(dllexport) void deplacerVersLeHaut(int toucheDeplacementEnHaut_);
+	__declspec(dllexport)  void deplacerVersLeBas(int toucheDeplacementEnBas_);
 	
 	
 	__declspec(dllexport) void ajouterPortail(int x1, int y1);
@@ -115,5 +120,17 @@ extern "C" {
 	///Re-initialiser la partie
 	__declspec(dllexport) void reinitialiserPartieCourante();
 
+	///deplacer le maillet du joueur 1 avec souris
+	__declspec(dllexport) void deplacerMailletAvecSouris(double x, double y);
+
+	///deplacer le maillet du jouer virtuel selon le scenario defensif
+	__declspec(dllexport) void virtuelDefensif();
+	///activer ou deactiver le rayon d'attraction
+	__declspec(dllexport) void activerRayonAttraction();
+	__declspec(dllexport) void deactiverRayonAttraction();
+	///afficher ou effacer les points de controle
+	__declspec(dllexport) void afficherPointControle();
+	__declspec(dllexport) void effacerPointControle();
+		
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__

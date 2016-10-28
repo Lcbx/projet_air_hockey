@@ -66,6 +66,8 @@ void NoeudMaillet::afficherConcret(const glm::mat4& vueProjection) const
 {
 	// Affichage du modèle.
 	vbo_->dessiner(vueProjection);
+	// on retrace pour que le rayon d'attraction soit correctement affiche'
+	vbo_->dessiner(vueProjection);
 }
 
 
@@ -83,13 +85,9 @@ void NoeudMaillet::afficherConcret(const glm::mat4& vueProjection) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudMaillet::animer(float temps)
 {
-	// Le cube effectue un tour à toutes les 7 secondes sur l'axe des X.
-	angleX_ = fmod(angleX_ + temps / 7.0f * 2 * (float)utilitaire::PI, 2 * (float)utilitaire::PI);
-	// Le cube effectue un tour à toutes les 3 secondes sur l'axe des Y.
-	angleY_ = fmod(angleY_ + temps / 3.0f * 2 * (float)utilitaire::PI, 2 * (float)utilitaire::PI);
-	// Le cube effectue une révolution à toutes les 15 secondes.
-	angleRotation_ = fmod(angleRotation_ + temps / 15.0f * 2 * (float)utilitaire::PI, 2 * (float)utilitaire::PI);
-
+	vitesse_ = (dernierePoition_ - obtenirPositionRelative())/temps;
+	///std::cout << "vitesse maillet " << glm::length(vitesse_) << "\n";
+	dernierePoition_ = obtenirPositionRelative();
 }
 
 

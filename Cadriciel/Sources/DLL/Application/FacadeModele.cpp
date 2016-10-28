@@ -667,13 +667,31 @@ void FacadeModele::initialiserScene()
 	arbre_->initialiser();
 }
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void ajouterMailletEtRondelle()
+///
+/// Cette fonction permet d'Ajouter les maillets et la rondelle
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
 void FacadeModele::ajouterMailletEtRondelle()
 {
 	//ajout de la rondelle et les maillets
 	arbre_->ajouterMailletEtRondelle();
 }
 
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void retirerMailletEtRondelle()
+///
+/// Cette fonction permet de retirer les maillets et la rondelle
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
 void FacadeModele::retirerMailletEtRondelle()
 {
 	//effacer les maillets et la rondelle
@@ -685,14 +703,134 @@ void FacadeModele::retirerMailletEtRondelle()
 
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn deplacerMailletAvecClavier(double x, double y)
+///
+/// Cette fonction permet de deplacer le maillet avedc les touches de clavier
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
 void FacadeModele::deplacerMailletAvecClavier(double x, double y)
 {
 	arbre_->deplacerMailletAvecClavier(x, y);
 
 }
 
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void reinitialiserPartieCourante()
+///
+/// Cette fonction permet de re-initialiser la scene, donc mettre les maillets et la rondelle
+/// a la position de depart
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
 void FacadeModele::reinitialiserPartieCourante()
 {
 	arbre_->reinitialiserPartieCourante();
 
 }
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void deplacerMailletAvecSouris(glm::dvec3 pos)
+///
+/// Cette fonction permet de deplacer le maillet avec la souris
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::deplacerMailletAvecSouris(double x, double y)
+{
+	glm::dvec3 posDeplacement;
+	vue_->convertirClotureAVirtuelle(x, y, posDeplacement);
+	arbre_->deplacerMailletAvecSouris(posDeplacement);
+
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void activerRayonAttraction()
+/// Author : Ali
+/// Cette fonction permet d'activer l'affichage du rayon d'attraction
+/// des portails 
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::activerRayonAttraction()
+{
+	arbre_->activerRayonPortail();
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void deactiverRayonAttraction()
+/// Author : Ali
+/// Cette fonction permet de desactiver l'affichage du rayon d'attraction
+/// des portails
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::deactiverRayonAttraction()
+{
+	arbre_->deactiverRayonPortail();
+
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void effacerPointControle()
+/// Author : Ali
+/// Cette fonction permet d'effacer les points de controle de la table
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::effacerPointControle()
+{
+	arbre_->effacerPointControle();
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void afficherPointControle()
+/// Author : Ali
+/// Cette fonction permet d'afficher les points de controle de la table
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::afficherPointControle()
+{
+	arbre_->afficherPointControle();
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void virtuelDefensif()
+/// Author : Ali
+/// Cette fonction permet de deplacer le maillet du joueur virtuel
+/// selon le scenario defensif
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::virtuelDefensif()
+{
+	glm::vec3 positionRondelle = arbre_->chercher("rondelle")->obtenirPositionRelative();
+
+	//// afficher coord des buts
+	//glm::vec3 pointHaut, pointMilieu, pointBas;
+	//arbre_->getTable()->getButs(1, pointHaut, pointMilieu, pointBas);
+	//std::cout << "But 1 (Droite)" << std::endl;
+	//std::cout << "pointHaut(" << pointHaut.x << "," << pointHaut.y << ") pointMilieu (" << pointMilieu.x << "," << pointMilieu.y << ") pointBas(" << pointBas.x << "," << pointBas.y << ")" << std::endl;
+	//arbre_->getTable()->getButs(2, pointHaut, pointMilieu, pointBas);
+	//std::cout << "But 2 (Gauche)" << std::endl;
+	//std::cout << "pointHaut(" << pointHaut.x << "," << pointHaut.y << ") pointMilieu (" << pointMilieu.x << "," << pointMilieu.y << ") pointBas(" << pointBas.x << "," << pointBas.y << ")" << std::endl;
+}
+
