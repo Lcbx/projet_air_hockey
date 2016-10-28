@@ -1,30 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace InterfaceGraphique
+﻿namespace InterfaceGraphique
 {
-   public class Profil
-
+    public class Profil : System.ComponentModel.Component
     {
         private string nom_;
-        private float vitesse_;
-        private bool probaDAgirPassivemnt_;
+        private double vitesse_;
+        private double probaDAgirPassivemnt_;
 
         public Profil()
         {
             nom_ = "joueur virtuelle";
             vitesse_ = 10;
-            probaDAgirPassivemnt_ = true;
+            probaDAgirPassivemnt_ = 2;
         }
 
-        public Profil(string nom, float vitesse, bool facileABattre)
+        public Profil(string nom, double vitesse, double facileABattre)
         {
             nom_ = nom;
             vitesse_ = vitesse;
             probaDAgirPassivemnt_ = facileABattre;
+        }
+
+        public override string ToString()
+        {
+            return nom_;
         }
     }
 }

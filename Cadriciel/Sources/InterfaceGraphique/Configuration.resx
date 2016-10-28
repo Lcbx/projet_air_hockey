@@ -1220,6 +1220,9 @@ passivement</value>
   <data name="listDeProfils.ItemHeight" type="System.Int32, mscorlib">
     <value>32</value>
   </data>
+  <data name="listDeProfils.Items" xml:space="preserve">
+    <value>Defaut</value>
+  </data>
   <data name="listDeProfils.Location" type="System.Drawing.Point, System.Drawing">
     <value>22, 60</value>
   </data>

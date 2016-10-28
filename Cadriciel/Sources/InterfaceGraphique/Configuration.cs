@@ -25,12 +25,17 @@ namespace InterfaceGraphique
         //le nombre de buts nécessaires (entre 1 et 5) pour gagner une partie.
         private int scorePourGangner = 2;
 
+        //les attributs de Profil
+        //private float vitesse = 0;
+        private string nom = "";
+        private float probaDAgirPassivemnt = 0;
+
         private bool estVirtuel = true;
-        Profil joueurVirtuelCourant_;
+        Profil joueurVirtuelCourant_=new Profil();
         List<Profil> profils;
 
         // Volet débogage
-        private bool debogageActif = false;
+        private bool debogageActif_ = false;
         private bool debogCollision_ = false;
         private bool debogVitesse_ = false;
         private bool eclairageActif_ = false;
@@ -132,7 +137,7 @@ namespace InterfaceGraphique
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked)
-                debogageActif = true;
+                debogageActif_ = true;
             else
             {
                 console.Enabled = false;
@@ -166,7 +171,23 @@ namespace InterfaceGraphique
                 effetVisuelActif_ = true;
         }
 
-       
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            double v = Convert.ToDouble(textBox2.Text);
+            Profil joueur = new Profil(textBox1.Text, v, 0);
+            
+            listDeProfils.Container.Add(joueur);
+        }
+
+        private void listDeProfils_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
     }
     static partial class FonctionsNatives
     {

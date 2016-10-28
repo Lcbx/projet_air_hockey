@@ -101,7 +101,6 @@
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-           
             // 
             // tabPage1
             // 
@@ -404,6 +403,7 @@
             // 
             resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.Name = "textBox1";
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // nomProfil
             // 
@@ -423,7 +423,10 @@
             // 
             this.listDeProfils.FormattingEnabled = true;
             resources.ApplyResources(this.listDeProfils, "listDeProfils");
+            this.listDeProfils.Items.AddRange(new object[] {
+            resources.GetString("listDeProfils.Items")});
             this.listDeProfils.Name = "listDeProfils";
+            this.listDeProfils.SelectedIndexChanged += new System.EventHandler(this.listDeProfils_SelectedIndexChanged);
             // 
             // button2
             // 
@@ -436,6 +439,7 @@
             resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Configuration
             // 
@@ -510,12 +514,12 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListBox listDeProfils;
         private System.Windows.Forms.GroupBox creationProfil;
         private System.Windows.Forms.GroupBox listDeProfil;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label vitesse;
         private System.Windows.Forms.Label Proba;
+        public System.Windows.Forms.ListBox listDeProfils;
     }
 }
