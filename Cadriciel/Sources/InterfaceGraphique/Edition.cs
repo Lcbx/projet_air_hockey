@@ -1768,11 +1768,7 @@ namespace InterfaceGraphique
         public static extern void afficherPointControle();
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void effacerPointControle();
-        // Joueur virtuel - Scenario defensif
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void virtuelDefensif();
-        
-        
+            
 
 
     }

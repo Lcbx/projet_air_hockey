@@ -749,8 +749,9 @@ void FacadeModele::deplacerMailletAvecSouris(double x, double y)
 	glm::dvec3 posDeplacement;
 	vue_->convertirClotureAVirtuelle(x, y, posDeplacement);
 	arbre_->deplacerMailletAvecSouris(posDeplacement);
-	if (arbre_->joueurVirtuelDefensif)
-		this->virtuelDefensif();
+
+	/*if (arbre_->joueurVirtuelDefensif)
+		this->virtuelDefensif(10.,1);*/
 }
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -821,7 +822,7 @@ void FacadeModele::afficherPointControle()
 /// @return rien
 ///
 ////////////////////////////////////////////////////////////////////////
-void FacadeModele::virtuelDefensif()
+void FacadeModele::virtuelDefensif(float vitesse, int probabilite )
 {
 	glm::vec3 positionRondelle = arbre_->chercher("rondelle")->obtenirPositionRelative();
 	float rayonRondelle = arbre_->chercher("rondelle")->obtenirRayonModele();
@@ -856,15 +857,5 @@ void FacadeModele::virtuelDefensif()
 		}
 	}
 	mailletDefensif->assignerPositionRelative(positionMaillet);
-
-
-	//// afficher coord des buts
-	//glm::vec3 pointHaut, pointMilieu, pointBas;
-	//arbre_->getTable()->getButs(1, pointHaut, pointMilieu, pointBas);
-	//std::cout << "But 1 (Droite)" << std::endl;
-	//std::cout << "pointHaut(" << pointHaut.x << "," << pointHaut.y << ") pointMilieu (" << pointMilieu.x << "," << pointMilieu.y << ") pointBas(" << pointBas.x << "," << pointBas.y << ")" << std::endl;
-	//arbre_->getTable()->getButs(2, pointHaut, pointMilieu, pointBas);
-	//std::cout << "But 2 (Gauche)" << std::endl;
-	//std::cout << "pointHaut(" << pointHaut.x << "," << pointHaut.y << ") pointMilieu (" << pointMilieu.x << "," << pointMilieu.y << ") pointBas(" << pointBas.x << "," << pointBas.y << ")" << std::endl;
 }
 

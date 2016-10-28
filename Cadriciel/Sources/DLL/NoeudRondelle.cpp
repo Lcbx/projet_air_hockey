@@ -96,10 +96,16 @@ void NoeudRondelle::afficherConcret(const glm::mat4& vueProjection) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudRondelle::animer(float temps)
 {
+
 	//pour la lisibilite
 	auto facade = FacadeModele::obtenirInstance();
 	auto table = facade->obtenirArbreRenduINF2990()->getTable();
 
+	/*if (facade->joueurVirtuelActive()) // si le joueur virtuel est active'
+		if (facade->joueurVirtuelDefensif()) //si le scenariodefensif est active'
+		*/
+
+	facade->virtuelDefensif(10, 1);
 
 	//obtient les coefficients
 	auto coeff = facade->getCoefficient();
