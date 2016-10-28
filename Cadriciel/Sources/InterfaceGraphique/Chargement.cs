@@ -45,7 +45,16 @@ namespace InterfaceGraphique
         private void button1_Click(object sender, EventArgs e) {
             if (filename.Text != "") {
                 edition_.setCurrentFile(filename.Text);
-                FonctionsNatives.chargerZoneJeu(Path.Combine(Edition.SAVE_FILEPATH, filename.Text + ".xml").ToCharArray());
+                // Tentatives #1 et #2 de résoudre le crash 
+                //byte[] bytes = System.Text.Encoding.Unicode.GetBytes(Path.Combine(Edition.SAVE_FILEPATH, filename.Text + ".xml") + '\0');
+                //char[] file = System.Text.Encoding.Unicode.GetString(bytes).ToCharArray();
+
+                char[] f = Path.Combine(Edition.SAVE_FILEPATH, filename.Text + ".xml").ToCharArray();
+                char[] file = new char[f.Length + 1];
+                for (int i = 0; i < f.Length; i++)
+                    file[i] = f[i];
+                file[f.Length] = '\0';
+                FonctionsNatives.chargerZoneJeu(file);
                 this.Hide();
             }
         }

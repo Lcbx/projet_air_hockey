@@ -248,6 +248,8 @@ void FacadeModele::enregistrerConfiguration() const
 ////////////////////////////////////////////////////////////////////////
 void FacadeModele::chargerZoneJeu(char* fichierZoneJeu) const
 {
+	std::cout << "Nom du fichier : " << fichierZoneJeu << std::endl;
+
 	// Créé le document XML à partir du fichier spécifié
 	tinyxml2::XMLDocument document;
 	document.LoadFile(fichierZoneJeu);
