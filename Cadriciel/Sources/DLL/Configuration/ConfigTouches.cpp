@@ -137,6 +137,24 @@ int ConfigTouches::getToucheGauche()
 	return _gauche;
 }
 
+////////////////////////////////////////////////////////////////////////
+/// @fn void ConfigTouches::accederTouches()
+/// Cette methode permet d'obtenir les touches correspondants aux
+/// 4 direction
+/// @param[out] haut : Touche haut
+/// @param[out] droite : Touche droite
+/// @param[out] bas : Touche bas
+/// @param[out] gauche : Touche gauche
+/// @return void
+////////////////////////////////////////////////////////////////////////
+void ConfigTouches::accederTouches(int &haut, int &droite, int &bas, int &gauche)
+{
+	haut = _haut;
+	droite = _droite;
+	bas = _bas;
+	gauche = _gauche;
+}
+
 
 ////////////////////////////////////////////////////////////////////////
 /// @fn void ConfigTouches::setToucheHaut()
@@ -184,6 +202,24 @@ void ConfigTouches::setToucheBas(int touche)
 void ConfigTouches::setToucheGauche(int touche)
 {
 	_gauche = touche;
+}
+
+////////////////////////////////////////////////////////////////////////
+/// @fn void ConfigTouches::setTouches()
+/// Cette methode permet de modifier les touches correspondants aux
+/// différentes directions.
+/// @param[in] haut : nouvelle touche haut
+/// @param[in] droite : nouvelle touche droite
+/// @param[in] bas : nouvelle touche bas
+/// @param[in] gauche : nouvelle touche gauche
+/// @return void
+////////////////////////////////////////////////////////////////////////
+void ConfigTouches::setTouches(int haut, int droite, int bas, int gauche)
+{
+	_haut = haut;
+	_droite = droite;
+	_bas = bas;
+	_gauche = gauche;
 }
 
 

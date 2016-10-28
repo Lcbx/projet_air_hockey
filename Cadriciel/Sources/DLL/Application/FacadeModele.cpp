@@ -248,7 +248,6 @@ void FacadeModele::enregistrerConfiguration() const
 ////////////////////////////////////////////////////////////////////////
 void FacadeModele::chargerZoneJeu(char* fichierZoneJeu) const
 {
-	std::cout << "Nom du fichier : " << fichierZoneJeu << std::endl;
 
 	// Créé le document XML à partir du fichier spécifié
 	tinyxml2::XMLDocument document;
@@ -287,6 +286,62 @@ void FacadeModele::enregistrerZoneJeu(char* fichierZoneJeu) const
 
 	// Enregistrer le document XML dans le fichier
 	document.SaveFile(fichierZoneJeu);
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::chargerTouches() const
+///
+/// Cette fonction charge les touches du joueur 2 à partir du fichier
+///  XML de configuration si ce dernier existe.  Sinon, le fichier de
+///  configuration est généré à partir de valeurs par défaut directement
+///  dans le code.
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::chargerTouches()
+{
+	// Vérification de l'existance du ficher
+
+	// Si le fichier n'existe pas, on le crée.
+	if (!utilitaire::fichierExiste(FICHIER_CONFIGURATION)) {
+		enregistrerTouches();
+	}
+	// si le fichier existe on le lit
+	else {
+		tinyxml2::XMLDocument document;
+
+		// Lire à partir du fichier de configuration
+		document.LoadFile(FacadeModele::FICHIER_CONFIGURATION.c_str());
+
+		// On lit les différentes configurations.
+		_configTouches.lireDOM(document);
+	}
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::enregistrerTouches() const
+///
+/// Cette fonction enregistre dans le fichier XML de cnfiguration les
+/// touches du joueur 2.
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::enregistrerTouches()
+{
+	tinyxml2::XMLDocument document;
+	// Écrire la déclaration XML standard...
+	document.NewDeclaration(R"(?xml version="1.0" standalone="yes"?)");
+
+	// On enregistre les différentes configurations.
+	_configTouches.creerDOM(document);
+
+	// Écrire dans le fichier
+	document.SaveFile(FacadeModele::FICHIER_CONFIGURATION.c_str());
 }
 
 

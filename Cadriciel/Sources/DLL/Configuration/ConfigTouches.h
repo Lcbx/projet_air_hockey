@@ -25,7 +25,7 @@ public:
 
 
 	/// Créer le DOM avec les valeurs (sauvegarde).
-	void creerDOM(tinyxml2::XMLDocument& document) const;
+	void creerDOM(tinyxml2::XMLDocument& document);
 
 	/// Lire les valeurs du DOM (chargement).
 	void lireDOM(tinyxml2::XMLDocument const& document);
@@ -47,6 +47,9 @@ public:
 	/// Accesseur de la touche gauche
 	int getToucheGauche();
 
+	/// Accesseurs de toutes les touches
+	void accederTouches(int &haut, int &droite, int &bas, int &gauche);
+
 	/// Mutateur de la touche haut
 	void setToucheHaut(int touche);
 
@@ -59,12 +62,16 @@ public:
 	/// Mutateur de la touche gauche
 	void setToucheGauche(int touche);
 
+	/// Mutateur de toutes les touches
+	void setTouches(int haut, int droite, int bas, int gauche);
+
 
 	// Touches de déplacement pour le joueur 2 par défaut
 	static int HAUTDEF;
 	static int DROITEDEF;
 	static int BASDEF;
 	static int GAUCHEDEF;
+	static 
 
 
 private:

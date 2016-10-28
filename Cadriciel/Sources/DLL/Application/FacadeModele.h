@@ -15,6 +15,7 @@
 #include <ctime>
 #include <string>
 #include "EtatOpenGL.h"
+#include "ConfigTouches.h"
 
 class NoeudAbstrait;
 class ArbreRenduINF2990;
@@ -59,14 +60,22 @@ public:
 
 	/// Crée un contexte OpenGL et initialise celui-ci.
 	void initialiserOpenGL(HWND hWnd);
+
 	/// Charge la configuration à partir d'un fichier XML.
 	void chargerConfiguration() const;
 	/// Enregistre la configuration courante dans un fichier XML.
 	void enregistrerConfiguration() const;
+
 	/// Charge la zone de jeu à partir d'un fichier XML.
 	void chargerZoneJeu(char* fichierZoneJeu) const;
 	/// Enregistre la zone de jeu courante dans un fichier XML.
 	void enregistrerZoneJeu(char* fichierZoneJeu) const;
+
+	/// Charge les touches du joueur 2 à partir d'un fichier XML.
+	void chargerTouches();
+	/// Enregistre les touches du joueur 2 dans un fichier XML.
+	void enregistrerTouches();
+
 	/// Libère le contexte OpenGL.
 	void libererOpenGL();
 	/// Affiche le contenu du modèle.
@@ -201,6 +210,9 @@ private:
    vue::Vue* vue_{ nullptr };
    /// Arbre de rendu contenant les différents objets de la scène.
    ArbreRenduINF2990* arbre_{ nullptr };
+
+   /// Configuration des touches
+   ConfigTouches _configTouches;
 
    /// Coefficients de configuration
    CoefficientConfiguration coeff_ = COEFFICIENTS_DEFAULT;
