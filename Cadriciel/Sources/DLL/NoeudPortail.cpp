@@ -73,7 +73,7 @@ void NoeudPortail::afficherConcret(const glm::mat4& vueProjection) const
 	if (Debug::obtenirInstance().afficherAttraction)
 	{
 		//tracerCercle(vueProjection, position.x, position.y,  2*obtenirRayon(), 50);
-		tracerCercle(vueProjection, position.x, position.y, 3 * obtenirRayon(), 50);
+		tracerCercle(vueProjection, position.x, position.y, 3 * obtenirRayonModele(), 50);
 	}
 
 	vbo_->dessiner(vueProjection);
