@@ -27,12 +27,16 @@ namespace InterfaceGraphique
 
         //les attributs de Profil
         //private float vitesse = 0;
-        private string nom = "";
-        private float probaDAgirPassivemnt = 0;
+        //private string nom = "";
+        //private float probaDAgirPassivemnt = 0;
 
         private bool estVirtuel = true;
-        Profil joueurVirtuelCourant_=new Profil();
-        List<Profil> profils;
+        Profil joueurVirtuelDefault_ = new Profil();
+        Profil joueurVirtuelCourant_;
+        List<Profil> profils =new List<Profil>();
+        
+        
+
 
         // Volet débogage
         private bool debogageActif_ = false;
@@ -40,13 +44,19 @@ namespace InterfaceGraphique
         private bool debogVitesse_ = false;
         private bool eclairageActif_ = false;
         private bool effetVisuelActif_ = true;
-
-
-
+        private bool modifierActif = false;
+        private bool ajouterActif = false;
         public Configuration()
 
         {
             InitializeComponent();
+            profils.Add(joueurVirtuelDefault_);
+            joueurVirtuelCourant_ = joueurVirtuelDefault_;
+            textBox1.Text=(joueurVirtuelCourant_.getNomProfil());
+            textBox2.Text=(Convert.ToString(joueurVirtuelCourant_.getVitesseProfil()));
+            textBox3.Text=(Convert.ToString(joueurVirtuelCourant_.getProbProfil()));
+            listDeProfils.Items.Add(joueurVirtuelCourant_.getNomProfil());
+
         }
 
         public void setMenuPrincipalConfig(MenuPrincipal menuPrincipal)
@@ -222,14 +232,12 @@ namespace InterfaceGraphique
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked)
-                debogageActif_ = true;
-            else
             {
-                console.Enabled = false;
-            
-                groupBox3.Enabled = false;
+                debogageActif_ = true;
+                console.Enabled = true;
+                groupBox3.Enabled = true;
             }
-
+            
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -256,40 +264,90 @@ namespace InterfaceGraphique
                 effetVisuelActif_ = true;
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+       
+        private void ajouter_Click(object sender, EventArgs e)
         {
+            creationProfil.Enabled = true;
+            ajouterActif = true;
             
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            double v = Convert.ToDouble(textBox2.Text);
-            Profil joueur = new Profil(textBox1.Text, v, 0);
-            
-            listDeProfils.Container.Add(joueur);
+           
         }
 
         private void listDeProfils_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            for (int i = 0; i < Convert.ToInt32(profils.LongCount()); i++)
+
+                if (profils[i]==listDeProfils.SelectedItem)
+                {
+                    joueurVirtuelCourant_ = profils[i];
+                    textBox1.Text = (joueurVirtuelCourant_.getNomProfil());
+                    textBox2.Text = (Convert.ToString(joueurVirtuelCourant_.getVitesseProfil()));
+                    textBox3.Text = (Convert.ToString(joueurVirtuelCourant_.getProbProfil()));
+                }
+                    
         }
+
+        private void modifierProfil_Click(object sender, EventArgs e)
+        {
+            creationProfil.Enabled = true;
+            modifierActif = true;
+          
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < profils.LongCount(); i++)
+
+                if (profils[i] == listDeProfils.SelectedItem)
+                {
+                    profils.Remove(profils[i]);
+                }
+             listDeProfils.Items.Remove(textBox1.Text);
+        }
+
+        private void appliquer2_Click(object sender, EventArgs e)
+        {
+            double v = Convert.ToDouble(textBox2.Text);
+            double p = Convert.ToDouble(textBox3.Text);
+            Profil joueur = new Profil(textBox1.Text, v, p);
+
+
+            if (ajouterActif)
+            {
+                
+                if (!(listDeProfils.Items.Contains(textBox1.Text)))
+                {
+                    profils.Add(joueur);
+                    listDeProfils.Items.Add(textBox1.Text);
+                    ajouterActif = false;
+                }
+            }
+
+            if (modifierActif)
+            {
+                for (int i = 0; i < profils.LongCount(); i++)
+
+                    if (listDeProfils.Items.Equals(profils[i].getNomProfil()))
+                    {
+                        profils[i].setNomProfil(textBox1.Text);
+                        profils[i].setVitesseProfil(Convert.ToDouble(textBox2.Text));
+                        profils[i].setProbProfil(Convert.ToDouble(textBox3.Text));
+                        modifierActif = false;
+                        listDeProfils.Items.Remove(textBox1.Text);
+                        listDeProfils.Items.Add(textBox1.Text);
+                    }
+               
+            }
+
+            }
+            
     }
     static partial class FonctionsNatives
     {
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void deplacerMaillet(int toucheDeplacementAGauche_, int toucheDeplacementADroite_, int toucheDeplacementEnHaut_, int toucheDeplacementEnBas_);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void deplacerVersLeHaut(int toucheDeplacementEnHaut_);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void deplacerVersLeBas(int toucheDeplacementEnBas_);
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void afficherRayonAttraction();
-
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void enleverRayonAttraction();
+        public static extern void touches(int toucheDeplacementAGauche_, int toucheDeplacementADroite_, int toucheDeplacementEnHaut_, int toucheDeplacementEnBas_);
 
     }
 }

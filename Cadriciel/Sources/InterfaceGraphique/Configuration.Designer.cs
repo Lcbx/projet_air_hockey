@@ -37,13 +37,13 @@
             this.bas = new System.Windows.Forms.Button();
             this.droite = new System.Windows.Forms.Button();
             this.gauche = new System.Windows.Forms.Button();
-            this.réintialisation = new System.Windows.Forms.Button();
-            this.appliquer = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.réintialisation = new System.Windows.Forms.Button();
+            this.appliquer = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.fermer = new System.Windows.Forms.Button();
             this.typeJoueur = new System.Windows.Forms.GroupBox();
@@ -65,7 +65,9 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.appliquer2 = new System.Windows.Forms.Button();
             this.creationProfil = new System.Windows.Forms.GroupBox();
+            this.ajoutProfil = new System.Windows.Forms.Label();
             this.Proba = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -73,9 +75,10 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.nomProfil = new System.Windows.Forms.Label();
             this.listDeProfil = new System.Windows.Forms.GroupBox();
+            this.modifierProfil = new System.Windows.Forms.Button();
             this.listDeProfils = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ajouter = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -106,6 +109,8 @@
             // 
             this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.réintialisation);
+            this.tabPage1.Controls.Add(this.appliquer);
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -117,8 +122,6 @@
             this.groupBox1.Controls.Add(this.bas);
             this.groupBox1.Controls.Add(this.droite);
             this.groupBox1.Controls.Add(this.gauche);
-            this.groupBox1.Controls.Add(this.réintialisation);
-            this.groupBox1.Controls.Add(this.appliquer);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
@@ -161,20 +164,6 @@
             this.gauche.UseVisualStyleBackColor = true;
             this.gauche.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gauche_KeyDown);
             // 
-            // réintialisation
-            // 
-            resources.ApplyResources(this.réintialisation, "réintialisation");
-            this.réintialisation.Name = "réintialisation";
-            this.réintialisation.UseVisualStyleBackColor = true;
-            this.réintialisation.Click += new System.EventHandler(this.renitialisation_Click);
-            // 
-            // appliquer
-            // 
-            resources.ApplyResources(this.appliquer, "appliquer");
-            this.appliquer.Name = "appliquer";
-            this.appliquer.UseVisualStyleBackColor = true;
-            this.appliquer.Click += new System.EventHandler(this.appliquer_Click);
-            // 
             // label5
             // 
             resources.ApplyResources(this.label5, "label5");
@@ -199,6 +188,20 @@
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            // 
+            // réintialisation
+            // 
+            resources.ApplyResources(this.réintialisation, "réintialisation");
+            this.réintialisation.Name = "réintialisation";
+            this.réintialisation.UseVisualStyleBackColor = true;
+            this.réintialisation.Click += new System.EventHandler(this.renitialisation_Click);
+            // 
+            // appliquer
+            // 
+            resources.ApplyResources(this.appliquer, "appliquer");
+            this.appliquer.Name = "appliquer";
+            this.appliquer.UseVisualStyleBackColor = true;
+            this.appliquer.Click += new System.EventHandler(this.appliquer_Click);
             // 
             // tabPage2
             // 
@@ -367,8 +370,17 @@
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // appliquer2
+            // 
+            resources.ApplyResources(this.appliquer2, "appliquer2");
+            this.appliquer2.Name = "appliquer2";
+            this.appliquer2.UseVisualStyleBackColor = true;
+            this.appliquer2.Click += new System.EventHandler(this.appliquer2_Click);
+            // 
             // creationProfil
             // 
+            this.creationProfil.Controls.Add(this.appliquer2);
+            this.creationProfil.Controls.Add(this.ajoutProfil);
             this.creationProfil.Controls.Add(this.Proba);
             this.creationProfil.Controls.Add(this.textBox3);
             this.creationProfil.Controls.Add(this.textBox2);
@@ -378,6 +390,11 @@
             resources.ApplyResources(this.creationProfil, "creationProfil");
             this.creationProfil.Name = "creationProfil";
             this.creationProfil.TabStop = false;
+            // 
+            // ajoutProfil
+            // 
+            resources.ApplyResources(this.ajoutProfil, "ajoutProfil");
+            this.ajoutProfil.Name = "ajoutProfil";
             // 
             // Proba
             // 
@@ -403,7 +420,6 @@
             // 
             resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.Name = "textBox1";
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // nomProfil
             // 
@@ -412,19 +428,25 @@
             // 
             // listDeProfil
             // 
+            this.listDeProfil.Controls.Add(this.modifierProfil);
             this.listDeProfil.Controls.Add(this.listDeProfils);
             this.listDeProfil.Controls.Add(this.button2);
-            this.listDeProfil.Controls.Add(this.button1);
+            this.listDeProfil.Controls.Add(this.ajouter);
             resources.ApplyResources(this.listDeProfil, "listDeProfil");
             this.listDeProfil.Name = "listDeProfil";
             this.listDeProfil.TabStop = false;
+            // 
+            // modifierProfil
+            // 
+            resources.ApplyResources(this.modifierProfil, "modifierProfil");
+            this.modifierProfil.Name = "modifierProfil";
+            this.modifierProfil.UseVisualStyleBackColor = true;
+            this.modifierProfil.Click += new System.EventHandler(this.modifierProfil_Click);
             // 
             // listDeProfils
             // 
             this.listDeProfils.FormattingEnabled = true;
             resources.ApplyResources(this.listDeProfils, "listDeProfils");
-            this.listDeProfils.Items.AddRange(new object[] {
-            resources.GetString("listDeProfils.Items")});
             this.listDeProfils.Name = "listDeProfils";
             this.listDeProfils.SelectedIndexChanged += new System.EventHandler(this.listDeProfils_SelectedIndexChanged);
             // 
@@ -433,13 +455,14 @@
             resources.ApplyResources(this.button2, "button2");
             this.button2.Name = "button2";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button1
+            // ajouter
             // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            resources.ApplyResources(this.ajouter, "ajouter");
+            this.ajouter.Name = "ajouter";
+            this.ajouter.UseVisualStyleBackColor = true;
+            this.ajouter.Click += new System.EventHandler(this.ajouter_Click);
             // 
             // Configuration
             // 
@@ -447,7 +470,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
             this.Name = "Configuration";
-            //this.Load += new System.EventHandler(this.Configuration_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -493,7 +515,6 @@
         private System.Windows.Forms.Button droite;
         private System.Windows.Forms.Button gauche;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.GroupBox scoreGangant;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label scorePourGagner;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
@@ -514,7 +535,7 @@
         private System.Windows.Forms.Label nomProfil;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ajouter;
         private System.Windows.Forms.GroupBox creationProfil;
         private System.Windows.Forms.GroupBox listDeProfil;
         private System.Windows.Forms.TextBox textBox3;
@@ -522,5 +543,9 @@
         private System.Windows.Forms.Label vitesse;
         private System.Windows.Forms.Label Proba;
         public System.Windows.Forms.ListBox listDeProfils;
+        private System.Windows.Forms.GroupBox scoreGangant;
+        private System.Windows.Forms.Button appliquer2;
+        private System.Windows.Forms.Label ajoutProfil;
+        private System.Windows.Forms.Button modifierProfil;
     }
 }
