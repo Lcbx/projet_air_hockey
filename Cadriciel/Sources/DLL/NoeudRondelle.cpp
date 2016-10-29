@@ -144,7 +144,9 @@ void NoeudRondelle::animer(float temps)
 		//recupere le but droit
 		glm::vec3 haut, bas, milieu;
 		table->getButs(1, haut, milieu, bas);
-		//est-ce qu'on est dans la fenetre
+		//est-ce qu'on est dans la fenetre 
+		// a corriger -- parfois ne detecte pas quand la table est deforme -- test si depasse chacun des 2 segments des buts a part
+
 		if(positionActuelle.y > bas.y && positionActuelle.y < haut.y && positionActuelle.x > haut.x) {
 			std::cout << "but droit \n";
 			//pour le fun
