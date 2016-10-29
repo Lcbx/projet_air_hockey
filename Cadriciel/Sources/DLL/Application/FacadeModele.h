@@ -168,7 +168,8 @@ public:
 	void afficherPointControle();
 	void effacerPointControle();
 	///deplacer le maillet du jouer virtuel selon le scenario defensif
-	void virtuelDefensif();
+	void virtuelDefensif(float vitesse, int probabilite);
+	
 	///
 private:
 

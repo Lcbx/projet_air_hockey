@@ -547,6 +547,22 @@ void  ArbreRenduINF2990::ajouterMailletEtRondelle()
 
 ////////////////////////////////////////////////////////////////////////
 ///
+/// @fn  ArbreRenduINF2990::obtenirMailletManuel()
+///
+/// Cette fonction permet d'obtenir le maillet controlle avec les touches
+///
+/// @return NoeudAbstrait*
+///
+////////////////////////////////////////////////////////////////////////
+NoeudAbstrait* ArbreRenduINF2990::obtenirMailletManuel()
+{
+	for (NoeudAbstrait * enfant : this->enfants_)
+		if (enfant->obtenirType() == "maillet")
+			if (enfant->estDeuxiemeJoueur == true)
+				return enfant;
+}
+////////////////////////////////////////////////////////////////////////
+///
 /// @fn deplacerMailletAvecClavier(double x, double y)
 ///
 /// Cette fonction permet de deplacer le maillet avedc les touches de clavier
@@ -554,17 +570,17 @@ void  ArbreRenduINF2990::ajouterMailletEtRondelle()
 /// @return rien
 ///
 ////////////////////////////////////////////////////////////////////////
+
 void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 {
 	NoeudAbstrait* dernier = this->enfants_.back();//pour obtenir le maillet du 2eme joueur
 	glm::dvec3 pos = dernier->obtenirPositionRelative();
 	double rayon = dernier->obtenirRayon();
-
 	//bouger vers droite
 	if (x == 1) {
 		if (this->getTable()->dansZone1({ pos.x + rayon , pos.y + rayon, 0 }) && this->getTable()->dansZone1({ pos.x + rayon , pos.y - rayon, 0 })) {
 			if (y == 1) { dernier->assignerPositionRelative({ pos.x + 4, pos.y + 4, 0 }); }
-			else if (y == -1) { dernier->assignerPositionRelative({ pos.x + 4, pos.y - 4, 0 }); }
+			else if (y == -1) { dernier->assignerPositionRelative({ pos.x + 2, pos.y - 2, 0 }); }
 			else dernier->assignerPositionRelative({ pos.x + 4, pos.y, 0 });
 		}
 		else dernier->assignerPositionRelative({ pos.x, pos.y, 0 });//ne pas depasser le centre

@@ -127,6 +127,9 @@ public:
 
   int getScoreAutre() { return scoreAutre_; }
   void setScoreAutre(int scoreAutre) { scoreAutre_ = scoreAutre; }
+  NoeudAbstrait* obtenirMailletManuel();
+  // si le joueur Virtuel Defensif est active' ou non 
+  bool joueurVirtuelDefensif{ true };
 
 private :
 	NoeudTable* noeudTable_;

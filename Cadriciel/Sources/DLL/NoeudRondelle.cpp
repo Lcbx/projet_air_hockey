@@ -23,6 +23,8 @@
 #include "ArbreRenduINF2990.h"
 #include "NoeudTable.h"
 
+#include "../Application/JoueurVirtuel.h"
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn NoeudRondelle::NoeudRondelle(const std::string& typeNoeud)
@@ -96,10 +98,20 @@ void NoeudRondelle::afficherConcret(const glm::mat4& vueProjection) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudRondelle::animer(float temps)
 {
+	JoueurVirtuel J;
 	//pour la lisibilite
 	auto facade = FacadeModele::obtenirInstance();
 	auto table = facade->obtenirArbreRenduINF2990()->getTable();
 
+	/*if (facade->joueurVirtuelActive()) // si le joueur virtuel est active'
+		if (facade->joueurVirtuelDefensif()) //si le scenariodefensif est active'
+		*/
+	//activer le scenario defensif
+	J.setVitesse(3.);
+	J.setProbabilite(0.5);
+	J.deplacerMailletVirtuel();
+	
+	//facade->virtuelDefensif(10, 1);
 
 	//obtient les coefficients
 	auto coeff = facade->getCoefficient();
@@ -132,11 +144,14 @@ void NoeudRondelle::animer(float temps)
 		//recupere le but droit
 		glm::vec3 haut, bas, milieu;
 		table->getButs(1, haut, milieu, bas);
-		//est-ce qu'on est dans la fenetre
+		//est-ce qu'on est dans la fenetre 
+		// a corriger -- parfois ne detecte pas quand la table est deforme -- test si depasse chacun des 2 segments des buts a part
+
 		if(positionActuelle.y > bas.y && positionActuelle.y < haut.y && positionActuelle.x > haut.x) {
 			std::cout << "but droit \n";
 			//pour le fun
 			assignerPositionRelative(positionActuelle);
+			vitesse_ = { 0,0,0 };
 		}
 		else {
 			//recupere le but gauche
@@ -145,6 +160,7 @@ void NoeudRondelle::animer(float temps)
 				std::cout << "but gauche \n"; 
 				//pour le fun
 				assignerPositionRelative(positionActuelle);
+				vitesse_ = { 0,0,0 };
 			}
 			///else
 				///gere les situations bizarres
