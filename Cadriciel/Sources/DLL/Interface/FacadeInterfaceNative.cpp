@@ -578,14 +578,14 @@ extern "C"
 	}
 	////////////////////////////////////////////////////////////////////////
 	///
-	/// @fn __declspec(dllexport) void  deplacerMaillet(int toucheDeplacementAGauche_, int toucheDeplacementADroite_, int toucheDeplacementEnHaut_, int toucheDeplacementEnBas_);
+	/// @fn __declspec(dllexport) void touches(int toucheDeplacementAGauche_, int toucheDeplacementADroite_, int toucheDeplacementEnHaut_, int toucheDeplacementEnBas_);
 	///
 	/// Cette fonction permet de deplacer maillet
 	///
 	/// @return rien
 	///
 	////////////////////////////////////////////////////////////////////////
-	__declspec(dllexport) void  deplacerMaillet(int toucheDeplacementAGauche_, int toucheDeplacementADroite_, int toucheDeplacementEnHaut_, int toucheDeplacementEnBas_);
+	__declspec(dllexport) void  touches(int toucheDeplacementAGauche_, int toucheDeplacementADroite_, int toucheDeplacementEnHaut_, int toucheDeplacementEnBas_);
 	//{
 		//FacadeModele:: obtenirInstance()
 	//}
