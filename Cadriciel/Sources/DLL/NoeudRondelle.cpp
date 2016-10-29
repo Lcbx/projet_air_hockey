@@ -107,7 +107,10 @@ void NoeudRondelle::animer(float temps)
 		if (facade->joueurVirtuelDefensif()) //si le scenariodefensif est active'
 		*/
 	//activer le scenario defensif
+	J.setVitesse(3.);
+	J.setProbabilite(0.5);
 	J.deplacerMailletVirtuel();
+	
 	//facade->virtuelDefensif(10, 1);
 
 	//obtient les coefficients
