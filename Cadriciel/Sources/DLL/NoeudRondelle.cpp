@@ -149,6 +149,7 @@ void NoeudRondelle::animer(float temps)
 			std::cout << "but droit \n";
 			//pour le fun
 			assignerPositionRelative(positionActuelle);
+			vitesse_ = { 0,0,0 };
 		}
 		else {
 			//recupere le but gauche
@@ -157,6 +158,7 @@ void NoeudRondelle::animer(float temps)
 				std::cout << "but gauche \n"; 
 				//pour le fun
 				assignerPositionRelative(positionActuelle);
+				vitesse_ = { 0,0,0 };
 			}
 			///else
 				///gere les situations bizarres
