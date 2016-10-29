@@ -827,9 +827,13 @@ void FacadeModele::virtuelDefensif(float vitesse, int probabilite )
 	glm::vec3 positionRondelle = arbre_->chercher("rondelle")->obtenirPositionRelative();
 	float rayonRondelle = arbre_->chercher("rondelle")->obtenirRayonModele();
 	
-	std::cout << "positionRondelle (" << positionRondelle.x << "," << positionRondelle.y << ")" << std::endl;
+	//std::cout << "positionRondelle (" << positionRondelle.x << "," << positionRondelle.y << ")" << std::endl;
+	
 	NoeudAbstrait * mailletDefensif = arbre_->obtenirMailletManuel();
 	glm::vec3 positionMaillet = mailletDefensif->obtenirPositionRelative();
+	
+	//std::cout << "positionMaillet (" << positionMaillet.x << "," << positionMaillet.y << ")" << std::endl;
+	
 	float rayonMaillet = mailletDefensif->obtenirRayonModele();
 	glm::vec3 positionMailletTable = positionMaillet - rayonMaillet;
 
@@ -838,12 +842,15 @@ void FacadeModele::virtuelDefensif(float vitesse, int probabilite )
 	
 	if (positionRondelle.x > 0) // rondelle dans la zone du joueur humain
 	{
-		if (positionRondelle.y > positionMaillet.y)
-			positionMaillet.y++;
-		else
-			positionMaillet.y--;
+		if (fabs(positionRondelle.y-positionMaillet.y)>0.01)
+			if (positionRondelle.y > positionMaillet.y)
+				positionMaillet.y = positionMaillet.y + 0.5;
+			else
+				if (positionRondelle.y < positionMaillet.y)
+					positionMaillet.y = positionMaillet.y - 0.5;
+
 		if (arbre_->getTable()->dansZone1(positionMailletTable ))
-			positionMaillet.x--;
+			positionMaillet.x = positionMaillet.x - 1;
 	}
 	else // rondelle dans la zone du joueur virtuelle
 	{	

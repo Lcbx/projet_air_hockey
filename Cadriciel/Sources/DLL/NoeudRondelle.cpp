@@ -23,6 +23,8 @@
 #include "ArbreRenduINF2990.h"
 #include "NoeudTable.h"
 
+#include "../Application/JoueurVirtuel.h"
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn NoeudRondelle::NoeudRondelle(const std::string& typeNoeud)
@@ -96,7 +98,7 @@ void NoeudRondelle::afficherConcret(const glm::mat4& vueProjection) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudRondelle::animer(float temps)
 {
-
+	JoueurVirtuel J;
 	//pour la lisibilite
 	auto facade = FacadeModele::obtenirInstance();
 	auto table = facade->obtenirArbreRenduINF2990()->getTable();
@@ -104,8 +106,9 @@ void NoeudRondelle::animer(float temps)
 	/*if (facade->joueurVirtuelActive()) // si le joueur virtuel est active'
 		if (facade->joueurVirtuelDefensif()) //si le scenariodefensif est active'
 		*/
-
-	facade->virtuelDefensif(10, 1);
+	//activer le scenario defensif
+	J.deplacerMailletVirtuel();
+	//facade->virtuelDefensif(10, 1);
 
 	//obtient les coefficients
 	auto coeff = facade->getCoefficient();
