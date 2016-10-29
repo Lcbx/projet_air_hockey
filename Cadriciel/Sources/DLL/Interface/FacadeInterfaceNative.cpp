@@ -664,6 +664,22 @@ extern "C"
 		FacadeModele::obtenirInstance()->effacerPointControle();
 	}
 
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 		_declspec(dllexport) void activerJoueurVirtuel(bool scenario)
+	/// Author : Ali
+	/// Cette fonction permet d'activer le joueur virtuel selon un scenario
+	/// 
+	/// param[in] scenario : true -> defensif ; fasle -> offensif
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void activerJoueurVirtuel(bool scenario)
+	{ ///besoin set
+		FacadeModele::obtenirInstance()->joeurVirtuelActive_ = true;
+		FacadeModele::obtenirInstance()->strategieJoueurvirtuel_ = scenario;
+	}
+
 }
 
 

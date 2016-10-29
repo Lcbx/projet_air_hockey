@@ -169,6 +169,8 @@ public:
 	void effacerPointControle();
 	///deplacer le maillet du jouer virtuel selon le scenario defensif
 	void virtuelDefensif(float vitesse, int probabilite);
+	// test joueur virtuel active
+	void activerJoueurVirtuel(bool activer);
 	
 	///
 private:
@@ -205,6 +207,10 @@ private:
 
    /// Coefficients de configuration
    CoefficientConfiguration coeff_ = COEFFICIENTS_DEFAULT;
+   
+   /// joueur virtuel 
+   bool joeurVirtuelActive_ {false};
+   bool strategieJoueurvirtuel_{ true };
 
 };
 

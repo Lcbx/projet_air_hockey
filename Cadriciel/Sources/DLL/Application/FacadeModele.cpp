@@ -866,3 +866,16 @@ void FacadeModele::virtuelDefensif(float vitesse, int probabilite )
 	mailletDefensif->assignerPositionRelative(positionMaillet);
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void activerJoueurVirtuel(bool activer)
+/// Author : Ali
+/// Cette fonction retourne true si le joeur virtuel est active'
+///
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::activerJoueurVirtuel(bool activer)
+{
+	joeurVirtuelActive_ = activer;		
+}
