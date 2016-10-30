@@ -103,16 +103,12 @@ void NoeudRondelle::animer(float temps)
 	auto facade = FacadeModele::obtenirInstance();
 	auto table = facade->obtenirArbreRenduINF2990()->getTable();
 
-	/*if (facade->joueurVirtuelActive()) // si le joueur virtuel est active'
-		if (facade->joueurVirtuelDefensif()) //si le scenariodefensif est active'
-		*/
-	//activer le scenario defensif
-	{
-		JoueurVirtuel J;
-		J.setVitesse(3.);
-		J.setProbabilite(0.5);
-		J.deplacerMailletVirtuel();
-	}
+	
+	// activer le joueur virtuel
+	//facade->setjoueurVirtuel(true);
+	if (facade->getjoueurVirtuel())
+		facade->ActiverJoueurVirtuel(2.,1.);
+	
 	
 	//facade->virtuelDefensif(10, 1);
 

@@ -119,17 +119,17 @@ extern "C" {
 	///deplacer le maillet du joueur 1 avec souris
 	__declspec(dllexport) void deplacerMailletAvecSouris(double x, double y);
 
-	///deplacer le maillet du jouer virtuel selon le scenario defensif
-	__declspec(dllexport) void virtuelDefensif();
+	/// Ali
 	/// activer le joueur virtuel
-	__declspec(dllexport) void activerJoueurVirtuel(bool scenario);
-
+	__declspec(dllexport) void activerJoueurVirtuel(double vitesse, double probabilite);
+	__declspec(dllexport) void setjoueurVirtuel(bool activer);
+	__declspec(dllexport) bool getjoueurVirtuel();
 	///activer ou deactiver le rayon d'attraction
 	__declspec(dllexport) void activerRayonAttraction();
 	__declspec(dllexport) void deactiverRayonAttraction();
 	///afficher ou effacer les points de controle
 	__declspec(dllexport) void afficherPointControle();
 	__declspec(dllexport) void effacerPointControle();
-		
+	/// Ali
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__

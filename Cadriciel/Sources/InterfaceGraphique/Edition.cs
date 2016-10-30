@@ -272,6 +272,9 @@ namespace InterfaceGraphique
             //Dans le mode edition
             if (estEnModeTest == false)
             {
+                // deactiver le joueur virtuel
+                FonctionsNatives.setjoueurVirtuel(false);
+
                 switch (e.KeyCode)
                 {
                     case Keys.ControlKey: { FonctionsNatives.toucheControl(false); break; }
@@ -342,11 +345,11 @@ namespace InterfaceGraphique
                         {
                             //afficher fenetre test 
                             passerModeTest(true);
-                            //effacer les points de controle
-                            //FonctionsNatives.effacerPointControle();
-                            //Permet d'ajouter les maillets et la rondelle dans la table
-                           // FonctionsNatives.ajouterMailletEtRondelle();
-                            break;
+                                //effacer les points de controle
+                                //FonctionsNatives.effacerPointControle();
+                                //Permet d'ajouter les maillets et la rondelle dans la table
+                                // FonctionsNatives.ajouterMailletEtRondelle();
+                                break;
                         }
                     case Keys.Escape:
                         {
@@ -356,7 +359,7 @@ namespace InterfaceGraphique
 
 
                     default: break;
-                }
+                }                
             }
             //dans le mode test
             else
@@ -382,7 +385,21 @@ namespace InterfaceGraphique
                             FonctionsNatives.reinitialiserPartieCourante();
                             break;
                         }
-                    
+                    case Keys.V:    // Activer le joueur Virtuelle
+                        {
+
+                            Console.WriteLine("+++ Joueur Virtuel Active' +++");
+                            FonctionsNatives.setjoueurVirtuel(true);
+
+                            //FonctionsNatives.activerJoueurVirtuel(2, 0.5);
+                            break;
+                        }
+                    case Keys.B:    // Activer le joueur Virtuelle
+                        {
+                            FonctionsNatives.setjoueurVirtuel(false);
+                            Console.WriteLine("--- Joueur Virtuel Desactive' ---");
+                            break;
+                        }
 
                     default: break;
 
@@ -1768,7 +1785,13 @@ namespace InterfaceGraphique
         public static extern void afficherPointControle();
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void effacerPointControle();
-            
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void activerJoueurVirtuel(double vitesse, double probabilite);
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void setjoueurVirtuel(bool activer);
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool getjoueurVirtuel();
+
 
 
     }

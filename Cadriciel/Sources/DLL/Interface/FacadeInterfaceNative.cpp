@@ -653,7 +653,7 @@ extern "C"
 	////////////////////////////////////////////////////////////////////////
 	/// @fn 		__declspec(dllexport) void effacerPointControle();
 	/// Author : Ali
-	/// Cette fonction permet d'effacer l'affichage les points de controle
+	// Cette fonction permet d'effacer l'affichage les points de controle
 	/// de la table
 	///
 	/// @return rien
@@ -665,21 +665,47 @@ extern "C"
 	}
 
 	////////////////////////////////////////////////////////////////////////
-	/// @fn 		_declspec(dllexport) void activerJoueurVirtuel(bool scenario)
+	/// @fn 		_declspec(dllexport) void activerJoueurVirtuel(double vitesse, double probabilite)
 	/// Author : Ali
-	/// Cette fonction permet d'activer le joueur virtuel selon un scenario
-	/// 
-	/// param[in] scenario : true -> defensif ; fasle -> offensif
+	/// Cette fonction permet d'activer le mode joueur virtuel
+	///	le maillet deplace automatiquement 
+	/// param [in] vitesse : la vitesse du maillet virtuel
+	///				probabilite : probabilite d'etre passif (rien faire)
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void activerJoueurVirtuel(double vitesse, double probabilite)
+	{ 
+		FacadeModele::obtenirInstance()->setjoueurVirtuel(true);
+		FacadeModele::obtenirInstance()->ActiverJoueurVirtuel(vitesse,probabilite);
+		
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 		__declspec(dllexport) void __cdecl setjoueurVirtuel(bool activer)
+	/// Author : Ali
+	// Cette fonction permet de modifier la variable qui permet d'activer le 
+	/// joueur virtuel
 	///
 	/// @return rien
 	///
 	////////////////////////////////////////////////////////////////////////
-	__declspec(dllexport) void activerJoueurVirtuel(bool scenario)
-	{ ///besoin set
-		FacadeModele::obtenirInstance()->joeurVirtuelActive_ = true;
-		FacadeModele::obtenirInstance()->strategieJoueurvirtuel_ = scenario;
+	__declspec(dllexport) void __cdecl setjoueurVirtuel(bool activer)
+	{
+		FacadeModele::obtenirInstance()->setjoueurVirtuel(activer);
 	}
-
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) bool __cdecl getjoueurVirtuel()
+	/// Author : Ali
+	// Cette fonction permet de recupere la valeur de la variable qui permet d'activer le 
+	/// joueur virtuel
+	///
+	/// @return bool
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) bool __cdecl getjoueurVirtuel()
+	{
+		return FacadeModele::obtenirInstance()->getjoueurVirtuel();
+	}
 }
 
 
