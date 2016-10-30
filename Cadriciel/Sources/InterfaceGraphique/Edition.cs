@@ -390,8 +390,10 @@ namespace InterfaceGraphique
 
                             Console.WriteLine("+++ Joueur Virtuel Active' +++");
                             FonctionsNatives.setjoueurVirtuel(true);
-                            FonctionsNatives.setVitesseVirtuel(2);
-                            FonctionsNatives.setProbabiliteVirtuel(1);
+                            // on passe la vitesse
+                            FonctionsNatives.setVitesseVirtuel(1);
+                            // on passe la probabilite
+                            FonctionsNatives.setProbabiliteVirtuel(0.8);
 
 
                             //FonctionsNatives.activerJoueurVirtuel(2, 0.5);

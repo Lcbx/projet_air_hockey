@@ -655,6 +655,7 @@ void ArbreRenduINF2990::reinitialiserPartieCourante()
 		}
 		else if (enfant->obtenirType() == "rondelle") {
 			enfant->assignerPositionRelative({ 0,0,0 });
+			
 		}
 	}
 }

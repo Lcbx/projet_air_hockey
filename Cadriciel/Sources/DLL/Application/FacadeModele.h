@@ -179,6 +179,12 @@ public:
 	double getProbabiliteVirtuel();
 	void setProbabiliteVirtuel(double probabilite);
 
+	// fonctions set/get des buts
+	void setButDroite(bool but);
+	void setButGauche(bool but);
+	bool getButDroite();
+	bool getButGauche();
+
 	/// Ali
 	///
 private:
@@ -221,7 +227,9 @@ private:
    bool joueurVirtuelActive_{false};
    double vitesseVirtuelle_{ 1. };
    double probabilite_{ 0.5 };
-   /// Ali
+   // buts
+   bool butDroite_{ false };
+   bool butGauche_{ false };
    ///
 
 };

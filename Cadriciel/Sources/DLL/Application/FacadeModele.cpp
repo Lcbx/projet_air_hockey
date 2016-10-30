@@ -886,11 +886,11 @@ double FacadeModele::getVitesseVirtuel()
 }
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn double FacadeModele::getVitesseVirtuel()
+/// @fn void FacadeModele::setVitesseVirtuel( double vitesse)
 ///
 /// Author : Ali
 /// Cette fonction permet de modifier la vitesse du maillet virtuelle
-/// @return double
+/// @return rien
 ///
 ////////////////////////////////////////////////////////////////////////
 void FacadeModele::setVitesseVirtuel( double vitesse)
@@ -916,12 +916,63 @@ double FacadeModele::getProbabiliteVirtuel()
 ///
 /// Author : Ali
 /// Cette fonction permet de modifier la prob d'etre passif du maillet virtuelle
-/// @return double
+/// @return rien
 ///
 ////////////////////////////////////////////////////////////////////////
 void FacadeModele::setProbabiliteVirtuel(double probabilite )
 {
 	probabilite_ = probabilite;
 }
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setButDroite(bool but)
+///
+/// Author : Ali
+/// Cette fonction permet de modifier la valeur but droit
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setButDroite(bool but)
+{
+	butDroite_ = but;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setButGauche(bool but)
+///
+/// Author : Ali
+/// Cette fonction permet de modifier la valeur but gauche
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setButGauche(bool but)
+{
+	butGauche_ = but;
+}
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::getButDroite()
+///
+/// Author : Ali
+/// Cette fonction permet de recuperer la valeur but droit
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::getButDroite()
+{
+	return butDroite_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::getButGauche()
+///
+/// Author : Ali
+/// Cette fonction permet de recuperer la valeur but gauche
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::getButGauche()
+{
+	return butGauche_;
+}
