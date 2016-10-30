@@ -871,3 +871,57 @@ bool FacadeModele::getjoueurVirtuel()
 {
 	return joueurVirtuelActive_;
 }
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn double FacadeModele::getVitesseVirtuel()
+///
+/// Author : Ali
+/// Cette fonction permet de recuperer la vitesse du maillet virtuelle
+/// @return double
+///
+////////////////////////////////////////////////////////////////////////
+double FacadeModele::getVitesseVirtuel()
+{
+	return vitesseVirtuelle_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn double FacadeModele::getVitesseVirtuel()
+///
+/// Author : Ali
+/// Cette fonction permet de modifier la vitesse du maillet virtuelle
+/// @return double
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setVitesseVirtuel( double vitesse)
+{
+	vitesseVirtuelle_ = vitesse;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn double FacadeModele::getProbabiliteVirtuel()
+///
+/// Author : Ali
+/// Cette fonction permet de recuperer la prob d'etre passif du maillet virtuelle
+/// @return double
+///
+////////////////////////////////////////////////////////////////////////
+double FacadeModele::getProbabiliteVirtuel()
+{
+	return probabilite_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setProbabiliteVirtuel(double probabilite )
+///
+/// Author : Ali
+/// Cette fonction permet de modifier la prob d'etre passif du maillet virtuelle
+/// @return double
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setProbabiliteVirtuel(double probabilite )
+{
+	probabilite_ = probabilite;
+}
+
+

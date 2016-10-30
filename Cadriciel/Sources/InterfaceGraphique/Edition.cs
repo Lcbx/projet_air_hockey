@@ -390,11 +390,14 @@ namespace InterfaceGraphique
 
                             Console.WriteLine("+++ Joueur Virtuel Active' +++");
                             FonctionsNatives.setjoueurVirtuel(true);
+                            FonctionsNatives.setVitesseVirtuel(2);
+                            FonctionsNatives.setProbabiliteVirtuel(1);
+
 
                             //FonctionsNatives.activerJoueurVirtuel(2, 0.5);
                             break;
                         }
-                    case Keys.B:    // Activer le joueur Virtuelle
+                    case Keys.B:    // Deactiver le joueur Virtuelle
                         {
                             FonctionsNatives.setjoueurVirtuel(false);
                             Console.WriteLine("--- Joueur Virtuel Desactive' ---");
@@ -1785,14 +1788,23 @@ namespace InterfaceGraphique
         public static extern void afficherPointControle();
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void effacerPointControle();
+        // joueur virtuel
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void activerJoueurVirtuel(double vitesse, double probabilite);
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void setjoueurVirtuel(bool activer);
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool getjoueurVirtuel();
-
-
+        // vitesse joueur virtuel
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void setVitesseVirtuel(double vitesse);
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern double getVitesseVirtuel();
+        // probabilite d'etre passif
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern  void setProbabiliteVirtuel(double probabilite);
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern  double getProbabiliteVirtuel();
 
     }
 

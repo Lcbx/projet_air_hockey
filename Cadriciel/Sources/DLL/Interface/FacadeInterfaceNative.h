@@ -120,10 +120,18 @@ extern "C" {
 	__declspec(dllexport) void deplacerMailletAvecSouris(double x, double y);
 
 	/// Ali
-	/// activer le joueur virtuel
+	/// Joueur Virtuel
 	__declspec(dllexport) void activerJoueurVirtuel(double vitesse, double probabilite);
+	// activer joueur
 	__declspec(dllexport) void setjoueurVirtuel(bool activer);
 	__declspec(dllexport) bool getjoueurVirtuel();
+	// vitesse
+	__declspec(dllexport) void setVitesseVirtuel(double vitesse);
+	__declspec(dllexport) double getVitesseVirtuel();
+	// probabilite
+	__declspec(dllexport) void setProbabiliteVirtuel(double probabilite);
+	__declspec(dllexport) double getProbabiliteVirtuel();
+
 	///activer ou deactiver le rayon d'attraction
 	__declspec(dllexport) void activerRayonAttraction();
 	__declspec(dllexport) void deactiverRayonAttraction();

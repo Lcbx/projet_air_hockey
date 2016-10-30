@@ -706,6 +706,72 @@ extern "C"
 	{
 		return FacadeModele::obtenirInstance()->getjoueurVirtuel();
 	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) double getVitesseVirtuel()
+	/// Author : Ali
+	// Cette fonction permet de recupere la vitessedu joueur virtuel
+	///
+	/// @return double
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) double getVitesseVirtuel()
+	{
+		return FacadeModele::obtenirInstance()->getVitesseVirtuel();
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) double getProbabiliteVirtuel()
+	/// Author : Ali
+	// Cette fonction permet de recupere la probabilite du joueur virtuel
+	///
+	/// @return double
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) double getProbabiliteVirtuel()
+	{
+		return FacadeModele::obtenirInstance()->getProbabiliteVirtuel();
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void setProbabiliteVirtuel(double probabilite)
+	/// Author : Ali
+	// Cette fonction permet de modifier la probabilite du joueur virtuel
+	///
+	/// @return double
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void setProbabiliteVirtuel(double probabilite)
+	{
+		double prob;
+		if (probabilite < 0)
+			prob = 0;
+		else
+			if (probabilite > 1)
+				prob = 1;
+			else
+				prob = probabilite;
+		FacadeModele::obtenirInstance()->setProbabiliteVirtuel(prob);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void setVitesseVirtuel(double vitesse)
+	/// Author : Ali
+	// Cette fonction permet de modifier la vitesse du joueur virtuel
+	///
+	/// @return double
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void  setVitesseVirtuel(double vitesse)
+	{
+		double v;
+		if (vitesse < 0)
+			v = 0;
+		else
+			v = vitesse;
+		FacadeModele::obtenirInstance()->setVitesseVirtuel(v);
+	}
+	
+	
+
 }
 
 

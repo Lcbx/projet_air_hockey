@@ -174,6 +174,11 @@ public:
 	// activer deactiver joueur virtuel
 	void setjoueurVirtuel(bool activer);
 	bool getjoueurVirtuel();
+	double getVitesseVirtuel();
+	void setVitesseVirtuel(double vitesse);
+	double getProbabiliteVirtuel();
+	void setProbabiliteVirtuel(double probabilite);
+
 	/// Ali
 	///
 private:

@@ -107,11 +107,12 @@ void NoeudRondelle::animer(float temps)
 	// activer le joueur virtuel
 	//facade->setjoueurVirtuel(true);
 	if (facade->getjoueurVirtuel())
-		facade->ActiverJoueurVirtuel(2.,1.);
+	{
+		double vitesse = facade->getVitesseVirtuel();
+		double prob = facade->getProbabiliteVirtuel();
+		facade->ActiverJoueurVirtuel(vitesse,prob);
+	}
 	
-	
-	//facade->virtuelDefensif(10, 1);
-
 	//obtient les coefficients
 	auto coeff = facade->getCoefficient();
 	glm::vec3 positionActuelle = obtenirPositionRelative();
