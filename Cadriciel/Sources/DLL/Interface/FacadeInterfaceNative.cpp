@@ -653,7 +653,7 @@ extern "C"
 	////////////////////////////////////////////////////////////////////////
 	/// @fn 		__declspec(dllexport) void effacerPointControle();
 	/// Author : Ali
-	/// Cette fonction permet d'effacer l'affichage les points de controle
+	// Cette fonction permet d'effacer l'affichage les points de controle
 	/// de la table
 	///
 	/// @return rien
@@ -663,6 +663,114 @@ extern "C"
 	{
 		FacadeModele::obtenirInstance()->effacerPointControle();
 	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 		_declspec(dllexport) void activerJoueurVirtuel(double vitesse, double probabilite)
+	/// Author : Ali
+	/// Cette fonction permet d'activer le mode joueur virtuel
+	///	le maillet deplace automatiquement 
+	/// param [in] vitesse : la vitesse du maillet virtuel
+	///				probabilite : probabilite d'etre passif (rien faire)
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void activerJoueurVirtuel(double vitesse, double probabilite)
+	{ 
+		FacadeModele::obtenirInstance()->setjoueurVirtuel(true);
+		FacadeModele::obtenirInstance()->ActiverJoueurVirtuel(vitesse,probabilite);
+		
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 		__declspec(dllexport) void __cdecl setjoueurVirtuel(bool activer)
+	/// Author : Ali
+	// Cette fonction permet de modifier la variable qui permet d'activer le 
+	/// joueur virtuel
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl setjoueurVirtuel(bool activer)
+	{
+		FacadeModele::obtenirInstance()->setjoueurVirtuel(activer);
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) bool __cdecl getjoueurVirtuel()
+	/// Author : Ali
+	// Cette fonction permet de recupere la valeur de la variable qui permet d'activer le 
+	/// joueur virtuel
+	///
+	/// @return bool
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) bool __cdecl getjoueurVirtuel()
+	{
+		return FacadeModele::obtenirInstance()->getjoueurVirtuel();
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) double getVitesseVirtuel()
+	/// Author : Ali
+	// Cette fonction permet de recupere la vitessedu joueur virtuel
+	///
+	/// @return double
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) double getVitesseVirtuel()
+	{
+		return FacadeModele::obtenirInstance()->getVitesseVirtuel();
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) double getProbabiliteVirtuel()
+	/// Author : Ali
+	// Cette fonction permet de recupere la probabilite du joueur virtuel
+	///
+	/// @return double
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) double getProbabiliteVirtuel()
+	{
+		return FacadeModele::obtenirInstance()->getProbabiliteVirtuel();
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void setProbabiliteVirtuel(double probabilite)
+	/// Author : Ali
+	// Cette fonction permet de modifier la probabilite du joueur virtuel
+	///
+	/// @return double
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void setProbabiliteVirtuel(double probabilite)
+	{
+		double prob;
+		if (probabilite < 0)
+			prob = 0;
+		else
+			if (probabilite > 1)
+				prob = 1;
+			else
+				prob = probabilite;
+		FacadeModele::obtenirInstance()->setProbabiliteVirtuel(prob);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void setVitesseVirtuel(double vitesse)
+	/// Author : Ali
+	// Cette fonction permet de modifier la vitesse du joueur virtuel
+	///
+	/// @return double
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void  setVitesseVirtuel(double vitesse)
+	{
+		double v;
+		if (vitesse < 0)
+			v = 0;
+		else
+			v = vitesse;
+		FacadeModele::obtenirInstance()->setVitesseVirtuel(v);
+	}
+	
+	
 
 }
 

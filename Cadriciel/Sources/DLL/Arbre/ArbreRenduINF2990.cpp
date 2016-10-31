@@ -641,11 +641,13 @@ void ArbreRenduINF2990::reinitialiserPartieCourante()
 	{
 		if (enfant->obtenirType() == "maillet") {
 			if (enfant->estDeuxiemeJoueur == true) {
+				// get les points du but gauche
 				this->getTable()->getButs(2, pointHaut, pointMilieu, pointBas);
 				
 				enfant->assignerPositionRelative({ pointMilieu.x + enfant->obtenirRayon() + 5,0,0 });
 			}
 			else {
+				// get les points du but droite
 				this->getTable()->getButs(1, pointHaut, pointMilieu, pointBas);
 
 				enfant->assignerPositionRelative({ pointMilieu.x - enfant->obtenirRayon() - 5,0,0 });
@@ -653,6 +655,7 @@ void ArbreRenduINF2990::reinitialiserPartieCourante()
 		}
 		else if (enfant->obtenirType() == "rondelle") {
 			enfant->assignerPositionRelative({ 0,0,0 });
+			
 		}
 	}
 }
@@ -677,21 +680,9 @@ void ArbreRenduINF2990::deplacerMailletAvecSouris(glm::dvec3 pos)
 				this->getTable()->getPointControle(2, P2);
 				this->getTable()->getPointControle(3, P3);
 				this->getTable()->getPointControle(7, P7);
-				if (this->getTable()->dansTable(pos))
+				if (this->getTable()->mailletDansZone2(pos,enfant->obtenirRayonModele()))
 				{	
-					// si depasse la gauche de la zone
-					if (pos.x < enfant->obtenirRayon())
-						pos.x = enfant->obtenirRayon();
-					// si depasse la droite de la zone
-					if ( (pos.x + enfant->obtenirRayon()) > P7.x)
-						pos.x = P7.x - enfant->obtenirRayon();
-					// si depasse le haut de la zone
-					if ((pos.y + enfant->obtenirRayon()) > P2.y)
-						pos.y = P2.y - enfant->obtenirRayon();
-					// si depasse le bas de la zone
-					if ((pos.y - enfant->obtenirRayon()) < P3.y)
-						pos.y = P3.y + enfant->obtenirRayon();
-
+					
 					enfant->assignerPositionRelative(pos);
 				}			
 			}

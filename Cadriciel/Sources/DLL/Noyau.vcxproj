@@ -136,6 +136,7 @@
     <ClCompile Include="Application\Deplacement.cpp" />
     <ClCompile Include="Application\Duplication.cpp" />
     <ClCompile Include="Application\FacadeModele.cpp" />
+    <ClCompile Include="Application\JoeurVirtuel.cpp" />
     <ClCompile Include="Application\Loupe.cpp" />
     <ClCompile Include="Application\PointsControle.cpp" />
     <ClCompile Include="Application\Rotation.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="Application\Deplacement.h" />
     <ClInclude Include="Application\Duplication.h" />
     <ClInclude Include="Application\FacadeModele.h" />
+    <ClInclude Include="Application\JoueurVirtuel.h" />
     <ClInclude Include="Application\Loupe.h" />
     <ClInclude Include="Application\PointsControle.h" />
     <ClInclude Include="Application\Rotation.h" />

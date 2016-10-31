@@ -22,10 +22,8 @@
 #include "Affichage_debuggage.h"
 #include "ArbreRenduINF2990.h"
 #include "NoeudTable.h"
-//#include "JoueurVirtuel.h"
 
-
-
+#include "../Application/JoueurVirtuel.h"
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -100,25 +98,26 @@ void NoeudRondelle::afficherConcret(const glm::mat4& vueProjection) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudRondelle::animer(float temps)
 {
-	
-	//pour la lisibilite
 
+	//pour la lisibilite
 	auto facade = FacadeModele::obtenirInstance();
 	auto table = facade->obtenirArbreRenduINF2990()->getTable();
 
-	/*if (facade->joueurVirtuelActive()) // si le joueur virtuel est active'
-		if (facade->joueurVirtuelDefensif()) //si le scenariodefensif est active'
-		*/
-	//activer le scenario defensif
-	//J.setVitesse(3.);
-	//J.setProbabilite(0.5);
-	//J.deplacerMailletVirtuel();
 	
-	//facade->virtuelDefensif(10, 1);
-
+	// le joueur virtuel suit la rondelle quand il est active'
+	if (facade->getjoueurVirtuel())
+	{
+		double vitesse = facade->getVitesseVirtuel();
+		double prob = facade->getProbabiliteVirtuel();
+		facade->ActiverJoueurVirtuel(vitesse,prob);
+	}
+	
 	//obtient les coefficients
+	//facade->setCoefficient({ 1,0.5,5 });
 	auto coeff = facade->getCoefficient();
+	
 	glm::vec3 positionActuelle = obtenirPositionRelative();
+	
 	float rayon = obtenirRayon();
 
 	//actualisation de la position par rapport a la vitesse
@@ -134,16 +133,21 @@ void NoeudRondelle::animer(float temps)
 		assignerPositionRelative(positionActuelle + deplacement * direction);
 		resultat = v.calculerCollision();
 	}
-	else for (float i = 1; i < deplacement/rayon +1; i+=1.f) {
-		if (i > deplacement/rayon) assignerPositionRelative(positionActuelle + deplacement * direction);
-		else assignerPositionRelative(positionActuelle + i * rayon * direction);
-		resultat = v.calculerCollision();
-		///std::cout << "test " << i << " result " << resultat.type << "\n";
-		if (resultat.type != InfoCollision::AUCUNE) break;
-	}
+	else
+		for (float i = 1; i < deplacement/rayon +1; i+=1.f) 
+		{
+			if (i > deplacement / rayon)
+				assignerPositionRelative(positionActuelle + deplacement * direction);
+			else
+				assignerPositionRelative(positionActuelle + i * rayon * direction);
+			resultat = v.calculerCollision();
+			///std::cout << "test " << i << " result " << resultat.type << "\n";
+			if (resultat.type != InfoCollision::AUCUNE) break;
+		}
 
 	//verifie si le deplacement est dans la table
-	if (!table->dansTable(positionActuelle)) {
+	//if (!table->dansTable(positionActuelle)) {
+	if (!table->dansTable(this->obtenirPositionRelative())) {
 		//recupere le but droit
 		glm::vec3 haut, bas, milieu;
 		table->getButs(1, haut, milieu, bas);
@@ -152,6 +156,7 @@ void NoeudRondelle::animer(float temps)
 
 		if(positionActuelle.y > bas.y && positionActuelle.y < haut.y && positionActuelle.x > haut.x) {
 			std::cout << "but droit \n";
+			facade->setButDroite(true);
 			//pour le fun
 			assignerPositionRelative(positionActuelle);
 			vitesse_ = { 0,0,0 };
@@ -161,6 +166,7 @@ void NoeudRondelle::animer(float temps)
 			table->getButs(2, haut, milieu, bas);
 			if (positionActuelle.y > bas.y && positionActuelle.y < haut.y && positionActuelle.x < haut.x) {
 				std::cout << "but gauche \n"; 
+				facade->setButGauche(true);
 				//pour le fun
 				assignerPositionRelative(positionActuelle);
 				vitesse_ = { 0,0,0 };
@@ -170,7 +176,9 @@ void NoeudRondelle::animer(float temps)
 				///pop_position();
 		}
 	}
-	///else push_position();
+	
+
+	//else push_position();
 
 
 
