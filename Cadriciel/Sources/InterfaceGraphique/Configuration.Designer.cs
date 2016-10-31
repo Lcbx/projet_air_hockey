@@ -65,8 +65,8 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.appliquer2 = new System.Windows.Forms.Button();
             this.creationProfil = new System.Windows.Forms.GroupBox();
+            this.appliquer2 = new System.Windows.Forms.Button();
             this.ajoutProfil = new System.Windows.Forms.Label();
             this.Proba = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -79,6 +79,7 @@
             this.listDeProfils = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.ajouter = new System.Windows.Forms.Button();
+            this.fermer3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -301,6 +302,7 @@
             resources.ApplyResources(this.fermerDebogage, "fermerDebogage");
             this.fermerDebogage.Name = "fermerDebogage";
             this.fermerDebogage.UseVisualStyleBackColor = true;
+            this.fermerDebogage.Click += new System.EventHandler(this.fermerDebogage_Click);
             // 
             // groupBox2
             // 
@@ -364,18 +366,12 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.fermer3);
             this.tabPage4.Controls.Add(this.creationProfil);
             this.tabPage4.Controls.Add(this.listDeProfil);
             resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // appliquer2
-            // 
-            resources.ApplyResources(this.appliquer2, "appliquer2");
-            this.appliquer2.Name = "appliquer2";
-            this.appliquer2.UseVisualStyleBackColor = true;
-            this.appliquer2.Click += new System.EventHandler(this.appliquer2_Click);
             // 
             // creationProfil
             // 
@@ -390,6 +386,13 @@
             resources.ApplyResources(this.creationProfil, "creationProfil");
             this.creationProfil.Name = "creationProfil";
             this.creationProfil.TabStop = false;
+            // 
+            // appliquer2
+            // 
+            resources.ApplyResources(this.appliquer2, "appliquer2");
+            this.appliquer2.Name = "appliquer2";
+            this.appliquer2.UseVisualStyleBackColor = true;
+            this.appliquer2.Click += new System.EventHandler(this.appliquer2_Click);
             // 
             // ajoutProfil
             // 
@@ -464,12 +467,20 @@
             this.ajouter.UseVisualStyleBackColor = true;
             this.ajouter.Click += new System.EventHandler(this.ajouter_Click);
             // 
+            // fermer3
+            // 
+            resources.ApplyResources(this.fermer3, "fermer3");
+            this.fermer3.Name = "fermer3";
+            this.fermer3.UseVisualStyleBackColor = true;
+            this.fermer3.Click += new System.EventHandler(this.fermer3_Click);
+            // 
             // Configuration
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
             this.Name = "Configuration";
+            this.Load += new System.EventHandler(this.Configuration_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -547,5 +558,6 @@
         private System.Windows.Forms.Button appliquer2;
         private System.Windows.Forms.Label ajoutProfil;
         private System.Windows.Forms.Button modifierProfil;
+        private System.Windows.Forms.Button fermer3;
     }
 }

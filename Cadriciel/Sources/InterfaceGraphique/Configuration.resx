@@ -1176,6 +1176,30 @@ Le nombre est entre 1 et 5</value>
   <data name="&gt;&gt;tabPage3.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="fermer3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>653, 711</value>
+  </data>
+  <data name="fermer3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 63</value>
+  </data>
+  <data name="fermer3.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="fermer3.Text" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="&gt;&gt;fermer3.Name" xml:space="preserve">
+    <value>fermer3</value>
+  </data>
+  <data name="&gt;&gt;fermer3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fermer3.Parent" xml:space="preserve">
+    <value>tabPage4</value>
+  </data>
+  <data name="&gt;&gt;fermer3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="appliquer2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -1267,7 +1291,7 @@ passivement</value>
     <value>2</value>
   </data>
   <data name="textBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 394</value>
+    <value>258, 410</value>
   </data>
   <data name="textBox3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 6, 6, 6</value>
@@ -1291,7 +1315,7 @@ passivement</value>
     <value>3</value>
   </data>
   <data name="textBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 286</value>
+    <value>258, 283</value>
   </data>
   <data name="textBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 6, 6, 6</value>
@@ -1345,7 +1369,7 @@ passivement</value>
     <value>5</value>
   </data>
   <data name="textBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 189</value>
+    <value>258, 168</value>
   </data>
   <data name="textBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 6, 6, 6</value>
@@ -1432,7 +1456,7 @@ passivement</value>
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;creationProfil.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="modifierProfil.Location" type="System.Drawing.Point, System.Drawing">
     <value>107, 707</value>
@@ -1567,7 +1591,7 @@ passivement</value>
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;listDeProfil.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="tabPage4.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 44</value>

@@ -201,9 +201,6 @@
     <ClCompile Include="Configuration\ConfigTouches.cpp">
       <Filter>Source Files\Configuration</Filter>
     </ClCompile>
-    <ClCompile Include="Application\JoeurVirtuel.cpp">
-      <Filter>Source Files\Application</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\FacadeModele.h">
@@ -358,9 +355,6 @@
     </ClInclude>
     <ClInclude Include="Configuration\ConfigTouches.h">
       <Filter>Header Files\Configuration</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\JoueurVirtuel.h">
-      <Filter>Header Files\Application</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
