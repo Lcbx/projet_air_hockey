@@ -676,27 +676,19 @@ void ArbreRenduINF2990::deplacerMailletAvecSouris(glm::dvec3 pos)
 		if (enfant->obtenirType() == "maillet") {
 			if (enfant->estDeuxiemeJoueur == false)
 			{
-				glm::vec3 P2, P3, P7;
-				this->getTable()->getPointControle(2, P2);
-				this->getTable()->getPointControle(3, P3);
-				this->getTable()->getPointControle(7, P7);
-				if (this->getTable()->dansTable(pos))
-				{	
-					// si depasse la gauche de la zone
-					if (pos.x < enfant->obtenirRayon())
-						pos.x = enfant->obtenirRayon();
-					// si depasse la droite de la zone
-					if ( (pos.x + enfant->obtenirRayon()) > P7.x)
-						pos.x = P7.x - enfant->obtenirRayon();
-					// si depasse le haut de la zone
-					if ((pos.y + enfant->obtenirRayon()) > P2.y)
-						pos.y = P2.y - enfant->obtenirRayon();
-					// si depasse le bas de la zone
-					if ((pos.y - enfant->obtenirRayon()) < P3.y)
-						pos.y = P3.y + enfant->obtenirRayon();
-
+				if (this->getTable()->dansZone2(pos))
+				{
+					bool result = this->getTable()->mailletDansZone2(pos, enfant->obtenirRayonModele());
 					enfant->assignerPositionRelative(pos);
-				}			
+					glm::vec3 P2, P8;
+					this->getTable()->getPointControle(2, P2);
+					this->getTable()->obtenirPositionRelative();
+					double dist = this->getTable()->distanceEntrePointDroite(P2, P8, pos);
+					//std::cout << "distance Maillet mure p2p8 = " << dist << std::endl;
+					//std::cout << "position P (" << pos.x << "," << pos.y << ")" << std::endl;
+					//std::cout << "position P2 (" << P2.x << "," << P2.y << ")" << std::endl;
+					//std::cout << "position P8 (" << P8.x << "," << P8.y << ")" << std::endl;
+				}
 			}
 		}
 	}
