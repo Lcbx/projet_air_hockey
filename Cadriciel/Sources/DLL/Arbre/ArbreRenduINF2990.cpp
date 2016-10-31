@@ -641,13 +641,11 @@ void ArbreRenduINF2990::reinitialiserPartieCourante()
 	{
 		if (enfant->obtenirType() == "maillet") {
 			if (enfant->estDeuxiemeJoueur == true) {
-				// get les points du but gauche
 				this->getTable()->getButs(2, pointHaut, pointMilieu, pointBas);
 				
 				enfant->assignerPositionRelative({ pointMilieu.x + enfant->obtenirRayon() + 5,0,0 });
 			}
 			else {
-				// get les points du but droite
 				this->getTable()->getButs(1, pointHaut, pointMilieu, pointBas);
 
 				enfant->assignerPositionRelative({ pointMilieu.x - enfant->obtenirRayon() - 5,0,0 });
@@ -655,7 +653,6 @@ void ArbreRenduINF2990::reinitialiserPartieCourante()
 		}
 		else if (enfant->obtenirType() == "rondelle") {
 			enfant->assignerPositionRelative({ 0,0,0 });
-			
 		}
 	}
 }
