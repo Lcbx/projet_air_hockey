@@ -168,7 +168,6 @@ public:
 	/// afficher ou effacer les points de controle
 	void afficherPointControle();
 	void effacerPointControle();
-
 	///deplacer le maillet du jouer virtuel
 	void ActiverJoueurVirtuel(double vitesse, double probabilite);
 	// activer deactiver joueur virtuel
@@ -178,13 +177,11 @@ public:
 	void setVitesseVirtuel(double vitesse);
 	double getProbabiliteVirtuel();
 	void setProbabiliteVirtuel(double probabilite);
-
 	// fonctions set/get des buts
 	void setButDroite(bool but);
 	void setButGauche(bool but);
 	bool getButDroite();
 	bool getButGauche();
-
 	/// Ali
 	///
 private:
@@ -230,7 +227,7 @@ private:
    // buts
    bool butDroite_{ false };
    bool butGauche_{ false };
-   ///
+   /// Ali
 
 };
 

@@ -273,7 +273,7 @@ namespace InterfaceGraphique
             if (estEnModeTest == false)
             {
                 // deactiver le joueur virtuel
-                FonctionsNatives.setjoueurVirtuel(false);
+                ArreterJoueurVirtuel();
 
                 switch (e.KeyCode)
                 {
@@ -386,23 +386,13 @@ namespace InterfaceGraphique
                             break;
                         }
                     case Keys.V:    // Activer le joueur Virtuelle
-                        {
-
-                            Console.WriteLine("+++ Joueur Virtuel Active' +++");
-                            FonctionsNatives.setjoueurVirtuel(true);
-                            // on passe la vitesse
-                            FonctionsNatives.setVitesseVirtuel(1);
-                            // on passe la probabilite
-                            FonctionsNatives.setProbabiliteVirtuel(0.8);
-
-
-                            //FonctionsNatives.activerJoueurVirtuel(2, 0.5);
+                        {                           
+                            DemarerJoueurVirtuel(1, 0.5);
                             break;
                         }
                     case Keys.B:    // Deactiver le joueur Virtuelle
                         {
-                            FonctionsNatives.setjoueurVirtuel(false);
-                            Console.WriteLine("--- Joueur Virtuel Desactive' ---");
+                            ArreterJoueurVirtuel();
                             break;
                         }
 
@@ -1646,11 +1636,42 @@ namespace InterfaceGraphique
             }
 
         }
-
-
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn public void DemarerJoueurVirtuel(double vitesse, double probabilite)
+        /// Author : Ali
+        /// @brief permet d'activer le joueur virtuel
+        ///param[in]
+        ///         double vitesse : la vitesse du maillet virtuel 
+        //          double probabilite : probabilite d'etre passif (rien faire ) entre 0 et 1
+        /// @return rien
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
+        public void DemarerJoueurVirtuel(double vitesse, double probabilite)
+        {
+            Console.WriteLine("+++ Joueur Virtuel Active' +++");
+            FonctionsNatives.setjoueurVirtuel(true);
+            // on passe la vitesse
+            FonctionsNatives.setVitesseVirtuel(vitesse);
+            // on passe la probabilite
+            FonctionsNatives.setProbabiliteVirtuel(probabilite);
+        }
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn public void DemarerJoueurVirtuel()
+        /// Author : Ali
+        /// @brief permet de deactiver le joueur virtuel
+        ///
+        /// @return rien
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
+        public void ArreterJoueurVirtuel()
+        {
+            Console.WriteLine("--- Joueur Virtuel Desactive' ---");
+            FonctionsNatives.setjoueurVirtuel(false);
         }
 
-    static partial class FonctionsNatives
+    }
+   
+        static partial class FonctionsNatives
         {
             [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
             public static extern void initialiserOpenGL(IntPtr handle);

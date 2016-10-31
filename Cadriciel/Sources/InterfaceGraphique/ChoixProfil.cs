@@ -32,7 +32,7 @@ namespace InterfaceGraphique
             this.Close();
             menu_.Show();
         }
-
+        // humain
         private void button1_Click(object sender, EventArgs e)
         {
             Chargement zoneChar = new Chargement(edition_);
@@ -41,6 +41,21 @@ namespace InterfaceGraphique
             {
                 edition_.Show();
                 edition_.passerModePartie(true);
+                this.Hide();
+            }
+
+        }
+        //virtuel
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Chargement zoneChar = new Chargement(edition_);
+            zoneChar.ShowDialog();
+            if (zoneChar.estclique == true)
+            {
+                edition_.Show();
+                edition_.passerModePartie(true);
+                // demarer le joueur virtuel
+                edition_.DemarerJoueurVirtuel(1, 0.5);
                 this.Hide();
             }
 
