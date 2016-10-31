@@ -831,8 +831,12 @@ bool NoeudTable::getPointControle(int numero, glm::vec3 & pointControle)
 {
 	if (numero < 0 || numero >9)
 		return false;
-	else {
-		pointControle = pointControle_[numero];
+	else
+	{
+		if (numero == 8)
+			pointControle = obtenirPositionRelative();
+		else
+			pointControle = pointControle_[numero];
 		return true;
 	}
 }
@@ -855,7 +859,10 @@ bool NoeudTable::setPointControle(int numero, glm::vec3 pointControle)
 		return false;
 	else
 	{
-		pointControle_[numero] = pointControle;
+		if (numero = 8)
+			pointControle_[numero] = obtenirPositionRelative();
+		else
+			pointControle_[numero] = pointControle;
 		return true;
 	}
 }
@@ -1128,14 +1135,46 @@ bool NoeudTable::mailletDansZone2(glm::dvec3 M,double rayon)
 {
 	if (dansZone2(M))
 	{
+		double dist;
 		// tester les distance entre le centre du maillet et les droites (murs) de la table
-		double dist = distanceEntrePointDroite(p(2), obtenirPositionRelative(), M);
-		//std::cout << "rayon =  " << rayon << std::endl;
-		//std::cout << "distance Maillet mure p2p8 = " << dist << std::endl;
-		return true;
+		dist = distanceEntrePointDroite(p(2), p(3), M);
+		std::cout << "rayon =  " << rayon << std::endl;
+		std::cout << "distance Maillet mure p2p3 = " << dist << std::endl;
+		if (dist < rayon) // distance entre mur P2P3
+			return false;
+		else
+		{
+			dist = distanceEntrePointDroite(p(4), p(2), M);
+			if (dist < rayon) // distance entre mur P2P4
+				return false;
+			else
+				return true;
+			//{
+			//	dist = distanceEntrePointDroite(p(4), p(7), M);
+			//	if (dist < rayon) // distance entre mur P4P7
+			//		return false;
+			//	else
+			//	{
+			//		dist = distanceEntrePointDroite(p(7), p(5), M);
+			//		if (dist < rayon) // distance entre mur P7P5
+			//			return false;
+			//		else
+			//		{
+			//			dist = distanceEntrePointDroite(p(3), p(5), M);
+			//			if (dist < rayon) // distance entre mur P3P5
+			//				return false;
+			//			else
+			//				return true;
+			//		}
+			//	}
+			//}
+			
+
+		}
+			
 		
 	}
-	else
+	else // pas dans la zone
 		return false;
 	
 }
