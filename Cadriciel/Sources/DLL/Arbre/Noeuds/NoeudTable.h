@@ -94,10 +94,6 @@ public:
 	// dans la zone du jeu 
 	bool dansZone1(glm::dvec3 M);
 	bool dansZone2(glm::dvec3 M);
-	// maillet dans la zone du jeu
-	bool mailletDansZone2(glm::dvec3 M, double rayon);
-	double distanceEntrePointDroite(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P);
-	glm::vec3 trouverPoint(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P3, double rayon);
 	// get coordonnes des buts 
 	bool getButs(int index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas) ;
 
