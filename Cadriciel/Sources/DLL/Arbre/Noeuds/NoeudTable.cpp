@@ -1136,10 +1136,8 @@ bool NoeudTable::mailletDansZone2(glm::dvec3 M,double rayon)
 	if (dansZone2(M))
 	{
 		double dist;
-		// tester les distance entre le centre du maillet et les droites (murs) de la table
+		//tester les distance entre le centre du maillet et les droites (murs) de la table
 		dist = distanceEntrePointDroite(p(2), p(3), M);
-		std::cout << "rayon =  " << rayon << std::endl;
-		std::cout << "distance Maillet mure p2p3 = " << dist << std::endl;
 		if (dist < rayon) // distance entre mur P2P3
 			return false;
 		else
@@ -1147,27 +1145,30 @@ bool NoeudTable::mailletDansZone2(glm::dvec3 M,double rayon)
 			dist = distanceEntrePointDroite(p(4), p(2), M);
 			if (dist < rayon) // distance entre mur P2P4
 				return false;
-			else
-				return true;
-			//{
-			//	dist = distanceEntrePointDroite(p(4), p(7), M);
-			//	if (dist < rayon) // distance entre mur P4P7
-			//		return false;
-			//	else
-			//	{
-			//		dist = distanceEntrePointDroite(p(7), p(5), M);
-			//		if (dist < rayon) // distance entre mur P7P5
-			//			return false;
-			//		else
-			//		{
-			//			dist = distanceEntrePointDroite(p(3), p(5), M);
-			//			if (dist < rayon) // distance entre mur P3P5
-			//				return false;
-			//			else
-			//				return true;
-			//		}
-			//	}
-			//}
+			else				
+			{
+				dist = distanceEntrePointDroite(p(4), p(7), M);
+				/*std::cout << "P4(" << p(4).x << "," << p(4).y << ") P7(" << p(7).x << "," << p(7).y << ")" << std::endl;
+				std::cout << "M(" << M.x << "," << M.y << ")" << std::endl;
+				std::cout << "rayon =  " << rayon << std::endl;
+				std::cout << "distance Maillet mure p4p7 = " << dist << std::endl;*/
+				if (dist < rayon) // distance entre mur P4P7
+					return false;
+				else					
+				{
+					dist = distanceEntrePointDroite(p(7), p(5), M);
+					if (dist < rayon) // distance entre mur P7P5
+						return false;
+					else
+					{
+						dist = distanceEntrePointDroite(p(5), p(3), M);
+						if (dist < rayon) // distance entre mur P3P5
+							return false;
+						else
+							return true;
+					}
+				}
+			}
 			
 
 		}
@@ -1178,30 +1179,7 @@ bool NoeudTable::mailletDansZone2(glm::dvec3 M,double rayon)
 		return false;
 	
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///
-/// @fn glm::vec3 NoeudTable::trouverPoint(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P3, double rayon)
-///
-/// Cette fonction permet de recuperer le point coin (forme par 3 point)
-/// auquel le maillet ne depasse pas la zone de jeur
-///			P1--------P2			
-///				---P /	
-///				  /	/
-///				 / /
-///				  P3
-///  @param[in] 
-///		point P1,P2,P3 
-///		double rayon : rayon du maillet
-/// @return bool
-///
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-glm::vec3 NoeudTable::trouverPoint(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P3, double rayon)
-{
-	glm::vec3 P = P2;
 
-	while (1)
-	return P;
-}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///
 /// @fn double NoeudTable::distanceEntrePointDroite(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P)
@@ -1215,7 +1193,7 @@ glm::vec3 NoeudTable::trouverPoint(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P3, 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 double NoeudTable::distanceEntrePointDroite(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P)
 {
-	double numer = (P2.y - P1.y)*P.x - (P2.x - P1.x)*P.y + P2.x*P1.x - P2.y*P1.x;
+	double numer = (P2.y - P1.y)*P.x - (P2.x - P1.x)*P.y + P2.x*P1.y - P2.y*P1.x;
 	//std::cout << "num = " << numer << std::endl;
 	double denum = sqrt(pow((P2.y-P1.y), 2) + pow((P2.x-P1.x), 2));
 	//std::cout << "denum = " << denum << std::endl;
