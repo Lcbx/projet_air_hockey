@@ -1130,8 +1130,8 @@ bool NoeudTable::mailletDansZone2(glm::dvec3 M,double rayon)
 	{
 		// tester les distance entre le centre du maillet et les droites (murs) de la table
 		double dist = distanceEntrePointDroite(p(2), obtenirPositionRelative(), M);
-		std::cout << "rayon =  " << rayon << std::endl;
-		std::cout << "distance Maillet mure p2p8 = " << dist << std::endl;
+		//std::cout << "rayon =  " << rayon << std::endl;
+		//std::cout << "distance Maillet mure p2p8 = " << dist << std::endl;
 		return true;
 		
 	}
