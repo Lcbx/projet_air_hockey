@@ -65,8 +65,8 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.appliquer2 = new System.Windows.Forms.Button();
             this.creationProfil = new System.Windows.Forms.GroupBox();
+            this.appliquer2 = new System.Windows.Forms.Button();
             this.ajoutProfil = new System.Windows.Forms.Label();
             this.Proba = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -370,13 +370,6 @@
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // appliquer2
-            // 
-            resources.ApplyResources(this.appliquer2, "appliquer2");
-            this.appliquer2.Name = "appliquer2";
-            this.appliquer2.UseVisualStyleBackColor = true;
-            this.appliquer2.Click += new System.EventHandler(this.appliquer2_Click);
-            // 
             // creationProfil
             // 
             this.creationProfil.Controls.Add(this.appliquer2);
@@ -390,6 +383,13 @@
             resources.ApplyResources(this.creationProfil, "creationProfil");
             this.creationProfil.Name = "creationProfil";
             this.creationProfil.TabStop = false;
+            // 
+            // appliquer2
+            // 
+            resources.ApplyResources(this.appliquer2, "appliquer2");
+            this.appliquer2.Name = "appliquer2";
+            this.appliquer2.UseVisualStyleBackColor = true;
+            this.appliquer2.Click += new System.EventHandler(this.appliquer2_Click);
             // 
             // ajoutProfil
             // 
