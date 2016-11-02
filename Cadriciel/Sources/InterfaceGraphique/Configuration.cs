@@ -17,10 +17,6 @@ namespace InterfaceGraphique
         private static MenuPrincipal menuPrincipal_;
 
         //intilailser les touches du clavier par defaut
-        private int toucheDeplaceAGauche_ = (int)Keys.A;
-        private int toucheDeplaceEnBas_ = (int)Keys.S;
-        private int toucheDeplaceADroite_ = (int)Keys.D;
-        private int toucheDeplaceEnHaut_ = (int)Keys.W;
         private int toucheDeplaceAGauche_;
         private int toucheDeplaceEnBas_;
         private int toucheDeplaceADroite_;
@@ -330,9 +326,6 @@ namespace InterfaceGraphique
         {
 
         }
-    }
-    static partial class FonctionsNatives
-    {
 
         private void appliquer2_Click(object sender, EventArgs e)
         {
