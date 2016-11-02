@@ -23,12 +23,13 @@ class ConfigTouches
 
 public:
 
+	ConfigTouches();
 
 	/// Créer le DOM avec les valeurs (sauvegarde).
-	void creerDOM(tinyxml2::XMLDocument& document);
+	void enregistrerTouches(int haut, int droite, int bas, int gauche);
 
 	/// Lire les valeurs du DOM (chargement).
-	void lireDOM(tinyxml2::XMLDocument const& document);
+	void chargerTouches();
 
 	/// Réinitialiser les touches du joueur 2
 	void resetTouches();
@@ -48,7 +49,7 @@ public:
 	int getToucheGauche();
 
 	/// Accesseurs de toutes les touches
-	void accederTouches(int &haut, int &droite, int &bas, int &gauche);
+	void obtenirTouches(int *touches);
 
 	/// Mutateur de la touche haut
 	void setToucheHaut(int touche);
@@ -67,10 +68,10 @@ public:
 
 
 	// Touches de déplacement pour le joueur 2 par défaut
-	static int HAUTDEF;
-	static int DROITEDEF;
-	static int BASDEF;
-	static int GAUCHEDEF;
+	static const int HAUTDEF;
+	static const int DROITEDEF;
+	static const int BASDEF;
+	static const int GAUCHEDEF;
 
 
 private:

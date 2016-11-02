@@ -70,12 +70,14 @@ public:
 	void chargerZoneJeu(char* fichierZoneJeu) const;
 	/// Enregistre la zone de jeu courante dans un fichier XML.
 	void enregistrerZoneJeu(char* fichierZoneJeu) const;
-	/*
+	
 	/// Charge les touches du joueur 2 à partir d'un fichier XML.
 	void chargerTouches();
 	/// Enregistre les touches du joueur 2 dans un fichier XML.
-	void enregistrerTouches();
-	*/
+	void enregistrerTouches(int haut = ConfigTouches::HAUTDEF, int droite = ConfigTouches::DROITEDEF, int bas = ConfigTouches::BASDEF, int gauche = ConfigTouches::GAUCHEDEF);
+	/// Retourne les touches du joueur 2.
+	void obtenirTouches(int *touches);
+
 	/// Libère le contexte OpenGL.
 	void libererOpenGL();
 	/// Affiche le contenu du modèle.
@@ -178,7 +180,9 @@ public:
 	void effacerPointControle();
 	///deplacer le maillet du jouer virtuel selon le scenario defensif
 	void virtuelDefensif();
-	///
+	/// Renvoie la constante contenant le nom du fichier de configuration
+	//std::string getConfigFile();
+
 private:
 
    /// Constructeur par défaut.

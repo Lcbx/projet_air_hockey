@@ -193,7 +193,7 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 void FacadeModele::chargerConfiguration() const
 {
 	// Vérification de l'existance du ficher
-
+	
 	// Si le fichier n'existe pas, on le crée.
 	if (!utilitaire::fichierExiste(FICHIER_CONFIGURATION)) {
 		enregistrerConfiguration();
@@ -300,26 +300,13 @@ void FacadeModele::enregistrerZoneJeu(char* fichierZoneJeu) const
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-/*void FacadeModele::chargerTouches()
+void FacadeModele::chargerTouches()
 {
-	// Vérification de l'existance du ficher
 
-	// Si le fichier n'existe pas, on le crée.
-	if (!utilitaire::fichierExiste(FICHIER_CONFIGURATION)) {
-		enregistrerTouches();
-	}
-	// si le fichier existe on le lit
-	else {
-		tinyxml2::XMLDocument document;
+	_configTouches.chargerTouches();
 
-		// Lire à partir du fichier de configuration
-		document.LoadFile(FacadeModele::FICHIER_CONFIGURATION.c_str());
-
-		// On lit les différentes configurations.
-		_configTouches.lireDOM(document);
-	}
 }
-*/
+
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -331,19 +318,28 @@ void FacadeModele::enregistrerZoneJeu(char* fichierZoneJeu) const
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-/*void FacadeModele::enregistrerTouches()
+void FacadeModele::enregistrerTouches(int haut, int droite, int bas, int gauche)
 {
-	tinyxml2::XMLDocument document;
-	// Écrire la déclaration XML standard...
-	document.NewDeclaration(R"(?xml version="1.0" standalone="yes"?)");
-
-	// On enregistre les différentes configurations.
-	_configTouches.creerDOM(document);
-
-	// Écrire dans le fichier
-	document.SaveFile(FacadeModele::FICHIER_CONFIGURATION.c_str());
+	_configTouches.enregistrerTouches(haut, droite, bas, gauche);
 }
-*/
+
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn int[4] FacadeModele::obtenirTouches() const
+///
+/// Cette fonction retourne les touches actuelles de déplacement
+/// du joueur 2
+///
+/// @return int[4] : [haut, droite, bas, gauche]
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::obtenirTouches(int *touches)
+{
+	_configTouches.obtenirTouches(touches);
+}
+
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -888,4 +884,18 @@ void FacadeModele::virtuelDefensif()
 	//std::cout << "But 2 (Gauche)" << std::endl;
 	//std::cout << "pointHaut(" << pointHaut.x << "," << pointHaut.y << ") pointMilieu (" << pointMilieu.x << "," << pointMilieu.y << ") pointBas(" << pointBas.x << "," << pointBas.y << ")" << std::endl;
 }
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn std::string getConfigFile();
+///
+///	Permet d'obtenir la chaine de caractère correspondant au nom du
+/// fichier de configuration
+///
+/// @return	std::string	: Nom du fichier de configuration
+///
+////////////////////////////////////////////////////////////////////////
+/*std::string FacadeModele::getConfigFile() {
+	return FICHIER_CONFIGURATION;
+}*/
 

@@ -102,6 +102,11 @@ extern "C" {
 	// Methode pour charger la zone de jeu
 	__declspec(dllexport) void chargerZoneJeu(char *fichierZoneJeu);
 
+	// Methode pour modifier et enregistrer les touches du joueur 2.
+	__declspec(dllexport) void sauvegarderTouches(int haut, int droite, int bas, int gauche);
+	// Methode pour obtenir les touches du joueur 2.
+	__declspec(dllexport) void obtenirTouches(int *touches);
+
 
 	__declspec(dllexport) bool objetEstDansLaTable();
 
