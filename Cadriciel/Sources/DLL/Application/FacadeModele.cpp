@@ -976,3 +976,37 @@ bool FacadeModele::getButGauche()
 {
 	return butGauche_;
 }
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::setNombreButs(int nombre)
+///
+/// Author : Ali
+/// Cette fonction permet de modifier la valeur du nombre 
+/// de but necessaire pour gagner une partie
+///
+/// parm[in] int nombre : nombre entre 1 et 5
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::setNombreButs(int nombre)
+{
+	if (nombre < 1 || nombre > 5)
+		return false;
+	nombreButsMax_ = nombre;
+	return true;	
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn int FacadeModele::getNombreButs()
+///
+/// Author : Ali
+/// Cette fonction permet de recuperer la valeur du nombre 
+/// de but necessaire pour gagner une partie
+/// @return int 
+///
+////////////////////////////////////////////////////////////////////////
+int FacadeModele::getNombreButs()
+{
+	return nombreButsMax_;
+}

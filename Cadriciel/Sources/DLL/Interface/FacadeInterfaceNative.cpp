@@ -769,9 +769,62 @@ extern "C"
 			v = vitesse;
 		FacadeModele::obtenirInstance()->setVitesseVirtuel(v);
 	}
-	
-	
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) bool estButDroite()
+	/// Author : Ali
+	/// Cette fonction permet savoir s'il la rondelle a rentre' dans le but 
+	/// a droite 
+	///
+	/// @return bool
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) bool estButDroite()
+	{
+		return FacadeModele::obtenirInstance()->getButDroite();
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) bool estButGauche()
+	/// Author : Ali
+	/// Cette fonction permet savoir s'il la rondelle a rentre' dans le but 
+	/// a gauche 
+	///
+	/// @return bool
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) bool estButGauche()
+	{
+		return FacadeModele::obtenirInstance()->getButGauche();
+	}
 
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) bool setButDroite()
+	/// Author : Ali
+	/// Cette fonction permet de modifier la varriable butDroite_ 
+	/// dans facade modele 
+	/// on l'utilise lorsque un des 2 joueurs marque un but 
+	///
+	/// @return bool
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) bool setButDroite(bool etat)
+	{
+		FacadeModele::obtenirInstance()->setButDroite(etat);
+		return etat;
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) bool setButGauche()
+	/// Author : Ali
+	/// Cette fonction permet de modifier la varriable butGauche_ 
+	/// dans facade modele 
+	/// on l'utilise lorsque un des 2 joueurs marque un but 
+	/// @return bool
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) bool setButGauche(bool etat)
+	{
+		 FacadeModele::obtenirInstance()->setButGauche(etat);
+		 return etat;
+	}
 }
 
 

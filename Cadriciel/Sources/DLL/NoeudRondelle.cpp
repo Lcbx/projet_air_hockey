@@ -155,7 +155,7 @@ void NoeudRondelle::animer(float temps)
 		// a corriger -- parfois ne detecte pas quand la table est deforme -- test si depasse chacun des 2 segments des buts a part
 
 		if(positionActuelle.y > bas.y && positionActuelle.y < haut.y && positionActuelle.x > haut.x) {
-			std::cout << "but droit \n";
+			//std::cout << "but droit \n";
 			facade->setButDroite(true);
 			//pour le fun
 			assignerPositionRelative(positionActuelle);
@@ -165,7 +165,7 @@ void NoeudRondelle::animer(float temps)
 			//recupere le but gauche
 			table->getButs(2, haut, milieu, bas);
 			if (positionActuelle.y > bas.y && positionActuelle.y < haut.y && positionActuelle.x < haut.x) {
-				std::cout << "but gauche \n"; 
+				//std::cout << "but gauche \n"; 
 				facade->setButGauche(true);
 				//pour le fun
 				assignerPositionRelative(positionActuelle);

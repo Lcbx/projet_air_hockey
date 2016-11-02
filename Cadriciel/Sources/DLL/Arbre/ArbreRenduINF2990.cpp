@@ -522,10 +522,9 @@ void  ArbreRenduINF2990::ajouterMailletEtRondelle()
 	// get les coord du but droit
 	glm::vec3 pointHaut, pointMilieu, pointBas;
 	this->getTable()->getButs(1, pointHaut, pointMilieu, pointBas);
-	//std::cout << "But 1 (Droite)" << std::endl;
-	
 	//AJOUT MAILLET1
 	NoeudAbstrait* noeudMaillet{ creerNoeud(NOM_MAILLET) };
+	// positionner le maillet a 5 pas du but
 	noeudMaillet->assignerPositionRelative({pointMilieu.x - noeudMaillet->obtenirRayon() - 5,0,0 });
 	noeudMaillet->setScale({ 1, 1, 1 });
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet);
@@ -534,10 +533,9 @@ void  ArbreRenduINF2990::ajouterMailletEtRondelle()
 	
 	// get les coord du but gauche
 	this->getTable()->getButs(2, pointHaut, pointMilieu, pointBas);
-	//std::cout << "But 2 (Gauche)" << std::endl;
-	
 	//AJOUT MAILLET2
 	NoeudAbstrait* noeudMaillet2{ creerNoeud(NOM_MAILLET) };
+	// positionner le maillet a 5 pas du but
 	noeudMaillet2->assignerPositionRelative({ pointMilieu.x + noeudMaillet2->obtenirRayon() +5,0,0 });
 	noeudMaillet2->setScale({ 1, 1, 1 });
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet2);
@@ -630,31 +628,40 @@ void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 ////////////////////////////////////////////////////////////////////////
 void ArbreRenduINF2990::reinitialiserPartieCourante()
 {
-	//To-Do; 
-	//re-initilaser sscore
-	this->setScoreMoi(0);
-	this->setScoreAutre(0);
+	// retirer maillet et rondelle
+	//effacer les maillets et la rondelle
+	this->effacer(this->chercher("rondelle"));
 
-	glm::vec3 pointHaut, pointMilieu, pointBas;
-
-	for (NoeudAbstrait * enfant : this->enfants_)
-	{
-		if (enfant->obtenirType() == "maillet") {
-			if (enfant->estDeuxiemeJoueur == true) {
-				this->getTable()->getButs(2, pointHaut, pointMilieu, pointBas);
-				
-				enfant->assignerPositionRelative({ pointMilieu.x + enfant->obtenirRayon() + 5,0,0 });
-			}
-			else {
-				this->getTable()->getButs(1, pointHaut, pointMilieu, pointBas);
-
-				enfant->assignerPositionRelative({ pointMilieu.x - enfant->obtenirRayon() - 5,0,0 });
-			}
-		}
-		else if (enfant->obtenirType() == "rondelle") {
-			enfant->assignerPositionRelative({ 0,0,0 });
-		}
+	while (this->chercher("maillet")) {
+		this->effacer(this->chercher("maillet"));
 	}
+	ajouterMailletEtRondelle();
+
+	////To-Do; 
+	////re-initilaser sscore
+	//this->setScoreMoi(0);
+	//this->setScoreAutre(0);
+
+	//glm::vec3 pointHaut, pointMilieu, pointBas;
+
+	//for (NoeudAbstrait * enfant : this->enfants_)
+	//{
+	//	if (enfant->obtenirType() == "maillet") {
+	//		if (enfant->estDeuxiemeJoueur == true) {
+	//			this->getTable()->getButs(2, pointHaut, pointMilieu, pointBas);
+	//			
+	//			enfant->assignerPositionRelative({ pointMilieu.x + enfant->obtenirRayon() + 5,0,0 });
+	//		}
+	//		else {
+	//			this->getTable()->getButs(1, pointHaut, pointMilieu, pointBas);
+
+	//			enfant->assignerPositionRelative({ pointMilieu.x - enfant->obtenirRayon() - 5,0,0 });
+	//		}
+	//	}
+	//	else if (enfant->obtenirType() == "rondelle") {
+	//		enfant->assignerPositionRelative({ 0,0,0 });
+	//	}
+	//}
 }
 
 ////////////////////////////////////////////////////////////////////////

@@ -138,6 +138,13 @@ extern "C" {
 	///afficher ou effacer les points de controle
 	__declspec(dllexport) void afficherPointControle();
 	__declspec(dllexport) void effacerPointControle();
+
+	// savoir s'il ya un but droit ou gauche
+	__declspec(dllexport) bool estButDroite();
+	__declspec(dllexport) bool estButGauche();
+	// si un joueur marque un but , on remet les 2 a false
+	__declspec(dllexport) bool setButDroite(bool etat);
+	__declspec(dllexport) bool setButGauche(bool etat);
 	/// Ali
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__

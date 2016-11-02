@@ -182,6 +182,9 @@ public:
 	void setButGauche(bool but);
 	bool getButDroite();
 	bool getButGauche();
+	// fonctions get/set nombre de but pour gagner la partie
+	int getNombreButs();
+	bool setNombreButs(int nombre);
 	/// Ali
 	///
 private:
@@ -227,6 +230,8 @@ private:
    // buts
    bool butDroite_{ false };
    bool butGauche_{ false };
+
+   int nombreButsMax_{ 3 };
    /// Ali
 
 };
