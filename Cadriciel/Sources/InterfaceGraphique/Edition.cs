@@ -180,7 +180,8 @@ namespace InterfaceGraphique
                             Console.WriteLine("avant et haut");
                             FonctionsNatives.deplacerMailletAvecClavier(1, 1);
                         }
-                        else if (bas) {
+                        else if (bas)
+                        {
                             Console.WriteLine("avant et bas");
                             FonctionsNatives.deplacerMailletAvecClavier(1, -1);
                         }
@@ -210,7 +211,7 @@ namespace InterfaceGraphique
                         if (avant)
                         {
                             Console.WriteLine("avant et haut 1");
-                           FonctionsNatives.deplacerMailletAvecClavier(1, 1);
+                            FonctionsNatives.deplacerMailletAvecClavier(1, 1);
                         }
                         else if (arriere)
                         {
@@ -272,6 +273,9 @@ namespace InterfaceGraphique
             //Dans le mode edition
             if (estEnModeTest == false)
             {
+                // deactiver le joueur virtuel
+                ArreterJoueurVirtuel();
+
                 switch (e.KeyCode)
                 {
                     case Keys.ControlKey: { FonctionsNatives.toucheControl(false); break; }
@@ -345,7 +349,7 @@ namespace InterfaceGraphique
                             //effacer les points de controle
                             //FonctionsNatives.effacerPointControle();
                             //Permet d'ajouter les maillets et la rondelle dans la table
-                           // FonctionsNatives.ajouterMailletEtRondelle();
+                            // FonctionsNatives.ajouterMailletEtRondelle();
                             break;
                         }
                     case Keys.Escape:
@@ -361,6 +365,7 @@ namespace InterfaceGraphique
             //dans le mode test
             else
             {
+
                 switch (e.KeyCode)
                 {
                     case Keys.Escape:// pause
@@ -371,10 +376,6 @@ namespace InterfaceGraphique
                         {
                             //afficher fenetre edition
                             passerModeTest(false);
-                            //afficher les points de controle
-                           // FonctionsNatives.afficherPointControle();
-                            //Permet de retirer les maillets et la rondelle dans la table
-                            // FonctionsNatives.retirerMailletEtRondelle();
                             break;
                         }
                     case Keys.Space: //reinitialiser la partie
@@ -382,12 +383,21 @@ namespace InterfaceGraphique
                             FonctionsNatives.reinitialiserPartieCourante();
                             break;
                         }
-                    
+                    case Keys.V:    // Activer le joueur Virtuelle
+                        {
+                            DemarerJoueurVirtuel(1, 0.5);
+                            break;
+                        }
+                    case Keys.B:    // Deactiver le joueur Virtuelle
+                        {
+                            ArreterJoueurVirtuel();
+                            break;
+                        }
 
                     default: break;
 
                 }
-           
+
             }
         }
 
@@ -453,7 +463,7 @@ namespace InterfaceGraphique
                 Program.peutAfficher = false;
             }
             FonctionsNatives.clickStart(e.X, e.Y);
-            
+
             mousePressed = true;
         }
 
@@ -499,7 +509,7 @@ namespace InterfaceGraphique
             if (e.Button == System.Windows.Forms.MouseButtons.Right) FonctionsNatives.rightClick(true);
             else FonctionsNatives.rightClick(false);
 
-            if (mousePressed) signeInterdiction =  !FonctionsNatives.clickCurrent(e.X, e.Y);
+            if (mousePressed) signeInterdiction = !FonctionsNatives.clickCurrent(e.X, e.Y);
             else signeInterdiction = !FonctionsNatives.positionSouris(e.X, e.Y);
 
             if (signeInterdiction && (EtatSouris == Etats.AJOUT_ACCELERATEUR || EtatSouris == Etats.AJOUT_MUR || EtatSouris == Etats.AJOUT_PORTAIL))
@@ -955,7 +965,7 @@ namespace InterfaceGraphique
 
                 //Scale
                 float scale = (float)(FonctionsNatives.getScale());
-                scale = (float) Math.Round(scale, 3);
+                scale = (float)Math.Round(scale, 3);
                 // textBox4.Text = scale.ToString();
                 numericUpDown1.Value = Convert.ToDecimal(scale);
             }
@@ -1201,14 +1211,15 @@ namespace InterfaceGraphique
                  MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else {
+            else
+            {
                 FonctionsNatives.configurerObjet(myX, myY, myAngle, myScale);
-                if(FonctionsNatives.objetEstDansLaTable()==false)
+                if (FonctionsNatives.objetEstDansLaTable() == false)
                 {
                     MessageBox.Show("Les coordonnées saisies sont à l'éxterieur de la table ", "Position invalide!",
                                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-             }
+            }
         }
 
 
@@ -1450,8 +1461,7 @@ namespace InterfaceGraphique
 
                 //panel score
                 splitContainer1.Panel1.Hide();
-                splitContainer1.Panel2.Hide();
-
+                splitContainer1.Panel2.Show();
             }
             //si mode edition , afficher les menus a cotés + barre des menus
             else
@@ -1461,7 +1471,7 @@ namespace InterfaceGraphique
                 this.changerMode(Etats.SELECTION);
 
                 estEnPause = false;
-                
+
                 //retirer les maillets
                 FonctionsNatives.retirerMailletEtRondelle();
                 //afficher les points de controle
@@ -1512,11 +1522,13 @@ namespace InterfaceGraphique
         { //En mode Test, si on clique sur Echapp
             if (this.estEnModeTest == true)
             {
-                if (menuStrip1.Visible == false){    //si le menu est masqué, on l'Affiche + pause
+                if (menuStrip1.Visible == false)
+                {    //si le menu est masqué, on l'Affiche + pause
                     estEnPause = true;
                     menuStrip1.Show();
                 }
-                else {     //si non le masque et on retourne dans le jeu
+                else
+                {     //si non le masque et on retourne dans le jeu
                     estEnPause = false;
                     menuStrip1.Hide();
                 }
@@ -1565,16 +1577,6 @@ namespace InterfaceGraphique
             //FonctionsNatives.ajouterMailletEtRondelle();
         }
 
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         public void passerModePartie(bool mode)
         {
             //si mode jeu , masquer les menus a cotés + barre des menus
@@ -1582,15 +1584,15 @@ namespace InterfaceGraphique
             {
                 this.Text = "Partie Rapide";
 
-               
-                 estEnModeTest = true;
+
+                estEnModeTest = true;
                 //this.changerMode(Etats.TEST);
-                
+
                 //Permet d'ajouter les maillets et la rondelle dans la table
                 FonctionsNatives.ajouterMailletEtRondelle();
                 //effacer les points de controle
                 FonctionsNatives.effacerPointControle();
-                
+
                 // estEnPause = false;
 
 
@@ -1612,140 +1614,205 @@ namespace InterfaceGraphique
 
                 //afficher mode editon , menu principal et vues
                 fichierToolStripMenuItem.Visible = true;
-               
+
                 menuPrincipalToolStripMenuItem.Visible = true;
                 vuesToolStripMenuItem.Visible = true;
 
                 //panel score
                 splitContainer1.Panel2.Show();
                 splitContainer1.Panel1.Hide();
-           
+
 
             }
 
         }
-
-
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn public void DemarerJoueurVirtuel(double vitesse, double probabilite)
+        /// Author : Ali
+        /// @brief permet d'activer le joueur virtuel
+        ///param[in]
+        ///         double vitesse : la vitesse du maillet virtuel 
+        //          double probabilite : probabilite d'etre passif (rien faire ) entre 0 et 1
+        /// @return rien
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
+        public void DemarerJoueurVirtuel(double vitesse, double probabilite)
+        {
+            Console.WriteLine("+++ Joueur Virtuel Active' +++");
+            FonctionsNatives.setjoueurVirtuel(true);
+            // on passe la vitesse
+            FonctionsNatives.setVitesseVirtuel(vitesse);
+            // on passe la probabilite
+            FonctionsNatives.setProbabiliteVirtuel(probabilite);
+        }
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn public void DemarerJoueurVirtuel()
+        /// Author : Ali
+        /// @brief permet de deactiver le joueur virtuel
+        ///
+        /// @return rien
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
+        public void ArreterJoueurVirtuel()
+        {
+            Console.WriteLine("--- Joueur Virtuel Desactive' ---");
+            FonctionsNatives.setjoueurVirtuel(false);
         }
 
-    static partial class FonctionsNatives
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn public void DemarerPartie(int nombreButsPourGagner)
+        /// Author : Ali
+        /// @brief permet de demarer une partie du jeu
+        ///
+        /// param[in] int nombreButsPourGagner : le nombre de buts marque's 
+        /// pour pouvoir remporter la partie
+        /// 
+        /// @return rien
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
+        public void DemarerPartie(int nombreButsPourGagner)
         {
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void initialiserOpenGL(IntPtr handle);
+            // nombre de buts courant pour les 2 joueurs
+            int nbButsJoueur1 = 0;
+            int nbButsJoueur2 = 0;
+            while (nbButsJoueur1 != nombreButsPourGagner && nbButsJoueur2 != nombreButsPourGagner)
+            {
+                if (FonctionsNatives.estButDroite())
+                {
+                    nbButsJoueur1++;
+                    //FonctionsNatives.setButDroite(false);
+                    Console.WriteLine("But Droite !!");
+                }
+                if (FonctionsNatives.estButGauche())
+                {
+                    nbButsJoueur2++;
+                    //FonctionsNatives.setButGauche(false);
+                    Console.WriteLine("But Gauche !!");
+                }
+                
+            }
 
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void libererOpenGL();
+        }
+    }
 
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void dessinerOpenGL();
+    static partial class FonctionsNatives
+    {
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void initialiserOpenGL(IntPtr handle);
 
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void animer(double temps);
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void libererOpenGL();
 
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void dessinerOpenGL();
 
-            //Click
-
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void etatDelaSouris(int etat);
-
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void clickStart(int x, int y);
-
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern bool clickCurrent(int x, int y);
-
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void clickEnd(int x, int y);
-
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern bool positionSouris(int x, int y);
-
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void rightClick(bool presse);
-
-            //touche control
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void toucheControl(bool presse);
-
-            //touche alt
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void toucheAlt(bool presse);
-
-            //touche escape
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void escEnfonce();
-
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern double getPosX();
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void animer(double temps);
 
 
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern double getPosY();
+        //Click
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void etatDelaSouris(int etat);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void clickStart(int x, int y);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool clickCurrent(int x, int y);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void clickEnd(int x, int y);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool positionSouris(int x, int y);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void rightClick(bool presse);
+
+        //touche control
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void toucheControl(bool presse);
+
+        //touche alt
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void toucheAlt(bool presse);
+
+        //touche escape
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void escEnfonce();
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern double getPosX();
 
 
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void supprimerObjet();
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern double getPosY();
 
 
-
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void configurerObjet(double x, double y, double angle, double scale);
-
-            // Pour touche +
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void zoomIn();
-
-            // Pour touche -
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void zoomOut();
-
-            // Pour les touches de fleche
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void deplacerVueXY(double deplacementX, double deplacementY);
-
-            //foction test bidon
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void test();
-
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void deplacerPointHaut(int index);
-
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern int nombreObjetSelectionne();
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void supprimerObjet();
 
 
 
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern double getAngle();
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void configurerObjet(double x, double y, double angle, double scale);
+
+        // Pour touche +
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void zoomIn();
+
+        // Pour touche -
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void zoomOut();
+
+        // Pour les touches de fleche
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void deplacerVueXY(double deplacementX, double deplacementY);
+
+        //foction test bidon
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void test();
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void deplacerPointHaut(int index);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int nombreObjetSelectionne();
 
 
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern double getScale();
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern double getAngle();
 
 
-            // Redimensionnement de la fenêtre
-
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)] // pour utiliser une fonction qui se trouve dans le fichier Noyau.dll
-            public static extern void redimensionnerFenetre(int largeur, int hauteur);
-
-            /*
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)] // pour utiliser une fonction qui se trouve dans le fichier Noyau.dll
-            public static extern void passerLargeur( int largeur);
-            */
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern double getScale();
 
 
-            // Sauvegarde et chargement de la zone de jeu
+        // Redimensionnement de la fenêtre
 
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void enregistrerZoneJeu(char[] fichierZoneJeu);
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)] // pour utiliser une fonction qui se trouve dans le fichier Noyau.dll
+        public static extern void redimensionnerFenetre(int largeur, int hauteur);
 
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void chargerZoneJeu(char[] fichierZoneJeu);
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)] // pour utiliser une fonction qui se trouve dans le fichier Noyau.dll
-            public static extern bool objetEstDansLaTable();
+        /*
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)] // pour utiliser une fonction qui se trouve dans le fichier Noyau.dll
+        public static extern void passerLargeur( int largeur);
+        */
 
-            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void initialiserScene();
+
+        // Sauvegarde et chargement de la zone de jeu
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void enregistrerZoneJeu(char[] fichierZoneJeu);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void chargerZoneJeu(char[] fichierZoneJeu);
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)] // pour utiliser une fonction qui se trouve dans le fichier Noyau.dll
+        public static extern bool objetEstDansLaTable();
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void initialiserScene();
 
         //wajdi
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -1762,18 +1829,35 @@ namespace InterfaceGraphique
 
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void deplacerMailletAvecSouris(double x , double y);
+        public static extern void deplacerMailletAvecSouris(double x, double y);
         // afficher ou effacer les points de controle
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void afficherPointControle();
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void effacerPointControle();
-        // Joueur virtuel - Scenario defensif
+        // joueur virtuel
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void virtuelDefensif();
-        
-
+        public static extern void activerJoueurVirtuel(double vitesse, double probabilite);
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void setjoueurVirtuel(bool activer);
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool getjoueurVirtuel();
+        // vitesse joueur virtuel
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void setVitesseVirtuel(double vitesse);
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern double getVitesseVirtuel();
+        // probabilite d'etre passif
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void setProbabiliteVirtuel(double probabilite);
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern double getProbabiliteVirtuel();
+        // savoir s'il ya un but
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool estButDroite();
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool estButGauche();
 
     }
-
 }
+

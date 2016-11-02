@@ -28,11 +28,7 @@ extern "C" {
 	__declspec(dllexport) bool executerTests();
 	
 	// Les fonction qui déplace l'objet vers la gauche, vers la droite, vers le bas et vers le haut
-	__declspec(dllexport) void  deplacerVersLaGauche(int toucheDeplacementAGauche);
-	__declspec(dllexport) void deplacertVersLaDroite(int toucheDeplacementADroite_);
-	__declspec(dllexport) void deplacerVersLeHaut(int toucheDeplacementEnHaut_);
-	__declspec(dllexport)  void deplacerVersLeBas(int toucheDeplacementEnBas_);
-	
+	__declspec(dllexport) void deplacerMaillet(int toucheDeplacementAGauche_, int toucheDeplacementADroite_, int toucheDeplacementEnHaut_, int toucheDeplacementEnBas_);
 	
 	__declspec(dllexport) void ajouterPortail(int x1, int y1);
 	//__declspec(dllexport) void escEnfonce(bool esc);
@@ -129,14 +125,32 @@ extern "C" {
 	///deplacer le maillet du joueur 1 avec souris
 	__declspec(dllexport) void deplacerMailletAvecSouris(double x, double y);
 
-	///deplacer le maillet du jouer virtuel selon le scenario defensif
-	__declspec(dllexport) void virtuelDefensif();
+	/// Ali
+	/// Joueur Virtuel
+	__declspec(dllexport) void activerJoueurVirtuel(double vitesse, double probabilite);
+	// activer joueur
+	__declspec(dllexport) void setjoueurVirtuel(bool activer);
+	__declspec(dllexport) bool getjoueurVirtuel();
+	// vitesse
+	__declspec(dllexport) void setVitesseVirtuel(double vitesse);
+	__declspec(dllexport) double getVitesseVirtuel();
+	// probabilite
+	__declspec(dllexport) void setProbabiliteVirtuel(double probabilite);
+	__declspec(dllexport) double getProbabiliteVirtuel();
+
 	///activer ou deactiver le rayon d'attraction
 	__declspec(dllexport) void activerRayonAttraction();
 	__declspec(dllexport) void deactiverRayonAttraction();
 	///afficher ou effacer les points de controle
 	__declspec(dllexport) void afficherPointControle();
 	__declspec(dllexport) void effacerPointControle();
-		
+
+	// savoir s'il ya un but droit ou gauche
+	__declspec(dllexport) bool estButDroite();
+	__declspec(dllexport) bool estButGauche();
+	// si un joueur marque un but , on remet les 2 a false
+	__declspec(dllexport) bool setButDroite(bool etat);
+	__declspec(dllexport) bool setButGauche(bool etat);
+	/// Ali
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__

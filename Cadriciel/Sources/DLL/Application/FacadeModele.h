@@ -19,6 +19,7 @@
 
 class NoeudAbstrait;
 class ArbreRenduINF2990;
+class JoueurVirtuel;
 
 namespace vue {
    class Vue;
@@ -178,8 +179,24 @@ public:
 	/// afficher ou effacer les points de controle
 	void afficherPointControle();
 	void effacerPointControle();
-	///deplacer le maillet du jouer virtuel selon le scenario defensif
-	void virtuelDefensif();
+	///deplacer le maillet du jouer virtuel
+	void ActiverJoueurVirtuel(double vitesse, double probabilite);
+	// activer deactiver joueur virtuel
+	void setjoueurVirtuel(bool activer);
+	bool getjoueurVirtuel();
+	double getVitesseVirtuel();
+	void setVitesseVirtuel(double vitesse);
+	double getProbabiliteVirtuel();
+	void setProbabiliteVirtuel(double probabilite);
+	// fonctions set/get des buts
+	void setButDroite(bool but);
+	void setButGauche(bool but);
+	bool getButDroite();
+	bool getButGauche();
+	// fonctions get/set nombre de but pour gagner la partie
+	int getNombreButs();
+	bool setNombreButs(int nombre);
+	/// Ali
 	/// Renvoie la constante contenant le nom du fichier de configuration
 	//std::string getConfigFile();
 
@@ -220,6 +237,18 @@ private:
 
    /// Coefficients de configuration
    CoefficientConfiguration coeff_ = COEFFICIENTS_DEFAULT;
+   
+   /// Ali
+   /// joueur virtuel 
+   bool joueurVirtuelActive_{false};
+   double vitesseVirtuelle_{ 1. };
+   double probabilite_{ 0.5 };
+   // buts
+   bool butDroite_{ false };
+   bool butGauche_{ false };
+
+   int nombreButsMax_{ 3 };
+   /// Ali
 
 };
 

@@ -578,59 +578,18 @@ extern "C"
 	}
 	////////////////////////////////////////////////////////////////////////
 	///
-	/// @fn __declspec(dllexport) void  deplacerVersLaGauche(int toucheDeplacementAGauche);
+	/// @fn __declspec(dllexport) void touches(int toucheDeplacementAGauche_, int toucheDeplacementADroite_, int toucheDeplacementEnHaut_, int toucheDeplacementEnBas_);
 	///
-	/// Cette fonction permet de deplacer l'objet vers la gauche
+	/// Cette fonction permet de deplacer maillet
 	///
 	/// @return rien
 	///
 	////////////////////////////////////////////////////////////////////////
-	__declspec(dllexport) void  deplacerVersLaGauche(int toucheDeplacementAGauche);
+	__declspec(dllexport) void  touches(int toucheDeplacementAGauche_, int toucheDeplacementADroite_, int toucheDeplacementEnHaut_, int toucheDeplacementEnBas_);
 	//{
 		//FacadeModele:: obtenirInstance()
 	//}
-	////////////////////////////////////////////////////////////////////////
-	///
-	/// @fn __declspec(dllexport) void deplacertVersLaDroite(int toucheDeplacementADroite_);
-	///
-	/// Cette fonction permet de deplacer l'objet vers la droite
-	///
-	/// @return rien
-	///
-	////////////////////////////////////////////////////////////////////////
-	__declspec(dllexport) void deplacertVersLaDroite(int toucheDeplacementADroite_);
-	//{
-		//FacadeModele::obtenirInstance
-
-	//}
-	////////////////////////////////////////////////////////////////////////
-	///
-	/// @fn __declspec(dllexport) void deplacerVersLeHaut(int toucheDeplacementEnHaut_);
-	///
-	/// Cette fonction permet de deplacer l'objet vers le haut
-	///
-	/// @return rien
-	///
-	////////////////////////////////////////////////////////////////////////
-	__declspec(dllexport) void deplacerVersLeHaut(int toucheDeplacementEnHaut_);
-	//{
-		//FacadeModele::obtenirInstance()
-
-	//}
-	////////////////////////////////////////////////////////////////////////
-	///
-	/// @fn ___declspec(dllexport)  void deplacerVersLeBas(int toucheDeplacementEnBas_);
-	///
-	/// Cette fonction permet de deplacer l'objet vers le bas 
-	///
-	/// @return rien
-	///
-	////////////////////////////////////////////////////////////////////////
-	__declspec(dllexport)  void deplacerVersLeBas(int toucheDeplacementEnBas_);
-	//{
-		//FacadeModele::obtenirInstance()->
-
-	//}
+	
 
 
 
@@ -647,20 +606,6 @@ extern "C"
 	__declspec(dllexport) void __cdecl deplacerMailletAvecSouris(double x, double y)
 	{
 		FacadeModele::obtenirInstance()->deplacerMailletAvecSouris(x, y);
-	}
-
-	////////////////////////////////////////////////////////////////////////
-	/// @fn 		__declspec(dllexport) void virtuelDefensif();
-	/// Author : Ali
-	/// Cette fonction permet de deplacer le maillet du joueur virtuel
-	/// selon un scenario defensif
-	///
-	/// @return rien
-	///
-	////////////////////////////////////////////////////////////////////////
-	__declspec(dllexport) void __cdecl virtuelDefensif()
-	{
-		FacadeModele::obtenirInstance()->virtuelDefensif();
 	}
 
 	////////////////////////////////////////////////////////////////////////
@@ -708,7 +653,7 @@ extern "C"
 	////////////////////////////////////////////////////////////////////////
 	/// @fn 		__declspec(dllexport) void effacerPointControle();
 	/// Author : Ali
-	/// Cette fonction permet d'effacer l'affichage les points de controle
+	// Cette fonction permet d'effacer l'affichage les points de controle
 	/// de la table
 	///
 	/// @return rien
@@ -719,6 +664,167 @@ extern "C"
 		FacadeModele::obtenirInstance()->effacerPointControle();
 	}
 
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 		_declspec(dllexport) void activerJoueurVirtuel(double vitesse, double probabilite)
+	/// Author : Ali
+	/// Cette fonction permet d'activer le mode joueur virtuel
+	///	le maillet deplace automatiquement 
+	/// param [in] vitesse : la vitesse du maillet virtuel
+	///				probabilite : probabilite d'etre passif (rien faire)
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void activerJoueurVirtuel(double vitesse, double probabilite)
+	{ 
+		FacadeModele::obtenirInstance()->setjoueurVirtuel(true);
+		FacadeModele::obtenirInstance()->ActiverJoueurVirtuel(vitesse,probabilite);
+		
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 		__declspec(dllexport) void __cdecl setjoueurVirtuel(bool activer)
+	/// Author : Ali
+	// Cette fonction permet de modifier la variable qui permet d'activer le 
+	/// joueur virtuel
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl setjoueurVirtuel(bool activer)
+	{
+		FacadeModele::obtenirInstance()->setjoueurVirtuel(activer);
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) bool __cdecl getjoueurVirtuel()
+	/// Author : Ali
+	// Cette fonction permet de recupere la valeur de la variable qui permet d'activer le 
+	/// joueur virtuel
+	///
+	/// @return bool
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) bool __cdecl getjoueurVirtuel()
+	{
+		return FacadeModele::obtenirInstance()->getjoueurVirtuel();
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) double getVitesseVirtuel()
+	/// Author : Ali
+	// Cette fonction permet de recupere la vitessedu joueur virtuel
+	///
+	/// @return double
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) double getVitesseVirtuel()
+	{
+		return FacadeModele::obtenirInstance()->getVitesseVirtuel();
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) double getProbabiliteVirtuel()
+	/// Author : Ali
+	// Cette fonction permet de recupere la probabilite du joueur virtuel
+	///
+	/// @return double
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) double getProbabiliteVirtuel()
+	{
+		return FacadeModele::obtenirInstance()->getProbabiliteVirtuel();
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void setProbabiliteVirtuel(double probabilite)
+	/// Author : Ali
+	// Cette fonction permet de modifier la probabilite du joueur virtuel
+	///
+	/// @return double
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void setProbabiliteVirtuel(double probabilite)
+	{
+		double prob;
+		if (probabilite < 0)
+			prob = 0;
+		else
+			if (probabilite > 1)
+				prob = 1;
+			else
+				prob = probabilite;
+		FacadeModele::obtenirInstance()->setProbabiliteVirtuel(prob);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void setVitesseVirtuel(double vitesse)
+	/// Author : Ali
+	// Cette fonction permet de modifier la vitesse du joueur virtuel
+	///
+	/// @return double
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void  setVitesseVirtuel(double vitesse)
+	{
+		double v;
+		if (vitesse < 0)
+			v = 0;
+		else
+			v = vitesse;
+		FacadeModele::obtenirInstance()->setVitesseVirtuel(v);
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) bool estButDroite()
+	/// Author : Ali
+	/// Cette fonction permet savoir s'il la rondelle a rentre' dans le but 
+	/// a droite 
+	///
+	/// @return bool
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) bool estButDroite()
+	{
+		return FacadeModele::obtenirInstance()->getButDroite();
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) bool estButGauche()
+	/// Author : Ali
+	/// Cette fonction permet savoir s'il la rondelle a rentre' dans le but 
+	/// a gauche 
+	///
+	/// @return bool
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) bool estButGauche()
+	{
+		return FacadeModele::obtenirInstance()->getButGauche();
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) bool setButDroite()
+	/// Author : Ali
+	/// Cette fonction permet de modifier la varriable butDroite_ 
+	/// dans facade modele 
+	/// on l'utilise lorsque un des 2 joueurs marque un but 
+	///
+	/// @return bool
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) bool setButDroite(bool etat)
+	{
+		FacadeModele::obtenirInstance()->setButDroite(etat);
+		return etat;
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) bool setButGauche()
+	/// Author : Ali
+	/// Cette fonction permet de modifier la varriable butGauche_ 
+	/// dans facade modele 
+	/// on l'utilise lorsque un des 2 joueurs marque un but 
+	/// @return bool
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) bool setButGauche(bool etat)
+	{
+		 FacadeModele::obtenirInstance()->setButGauche(etat);
+		 return etat;
+	}
 	////////////////////////////////////////////////////////////////////////
 	/// @fn 		__declspec(dllexport) void sauvegarderTouches();
 	/// Author : Arthur
@@ -747,7 +853,6 @@ extern "C"
 		FacadeModele::obtenirInstance()->obtenirTouches(touches);
 	}
 }
-
 
 
 ///////////////////////////////////////////////////////////////////////////////

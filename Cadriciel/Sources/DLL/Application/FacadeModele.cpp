@@ -48,6 +48,8 @@
 
 #include "../SauvegardeZoneDeJeu.h"
 
+#include "JoueurVirtuel.h"
+
 
 
 /// Pointeur vers l'instance unique de la classe.
@@ -165,7 +167,7 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 	// l'arbre après avoir créé le contexte OpenGL.
 	arbre_ = new ArbreRenduINF2990;
 	arbre_->initialiser();
-
+	
 	// On crée une vue par défaut.
 	vue_ = new vue::VueOrtho{
 		vue::Camera{ 
@@ -176,6 +178,7 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 				1, 1000, 5, 0.5, 0.25,
 				200, 200}
 	};
+	
 }
 
 
@@ -801,6 +804,8 @@ void FacadeModele::deplacerMailletAvecSouris(double x, double y)
 	vue_->convertirClotureAVirtuelle(x, y, posDeplacement);
 	arbre_->deplacerMailletAvecSouris(posDeplacement);
 
+	/*if (arbre_->joueurVirtuelDefensif)
+		this->virtuelDefensif(10.,1);*/
 }
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -863,29 +868,199 @@ void FacadeModele::afficherPointControle()
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn void virtuelDefensif()
+/// @fn void ActiverJoueurVirtuel(float vitesse, int probabilite )
 /// Author : Ali
 /// Cette fonction permet de deplacer le maillet du joueur virtuel
-/// selon le scenario defensif
+/// param [in] vitesse : la vitesse du maillet virtuel
+///				probabilite : probabilite d'etre passif (rien faire)
 ///
 /// @return rien
 ///
 ////////////////////////////////////////////////////////////////////////
-void FacadeModele::virtuelDefensif()
-{
-	glm::vec3 positionRondelle = arbre_->chercher("rondelle")->obtenirPositionRelative();
+void FacadeModele::ActiverJoueurVirtuel(double vitesse, double probabilite)
+{	
 
-	//// afficher coord des buts
-	//glm::vec3 pointHaut, pointMilieu, pointBas;
-	//arbre_->getTable()->getButs(1, pointHaut, pointMilieu, pointBas);
-	//std::cout << "But 1 (Droite)" << std::endl;
-	//std::cout << "pointHaut(" << pointHaut.x << "," << pointHaut.y << ") pointMilieu (" << pointMilieu.x << "," << pointMilieu.y << ") pointBas(" << pointBas.x << "," << pointBas.y << ")" << std::endl;
-	//arbre_->getTable()->getButs(2, pointHaut, pointMilieu, pointBas);
-	//std::cout << "But 2 (Gauche)" << std::endl;
-	//std::cout << "pointHaut(" << pointHaut.x << "," << pointHaut.y << ") pointMilieu (" << pointMilieu.x << "," << pointMilieu.y << ") pointBas(" << pointBas.x << "," << pointBas.y << ")" << std::endl;
+	if (joueurVirtuelActive_)
+		
+	{
+		JoueurVirtuel J;
+		J.setVitesse(vitesse);
+		J.setProbabilite(probabilite);
+		//J.setVitesse(vitesseVirtuelle_);
+		//J.setProbabilite(probabilite_);
+		J.deplacerMailletVirtuel();
+
+	}
+	
 }
 
 ////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setjoueurVirtuel(bool activer)
+/// Author : Ali
+/// Cette fonction permet de modifier la variable joueurVirtuelActive_
+/// qui determine si le joueur virtuel est active' ou non
+/// param[in] 
+///			activer : true pour activer le joueur , false le cas contraire
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setjoueurVirtuel(bool activer)
+{
+	joueurVirtuelActive_ = activer;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::getjoueurVirtuel()
+/// Author : Ali
+/// Cette fonction permet de savoir si le joueur virtuel est active ou non
+///
+/// @return bool : true si active' , false sinon
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::getjoueurVirtuel()
+{
+	return joueurVirtuelActive_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn double FacadeModele::getVitesseVirtuel()
+///
+/// Author : Ali
+/// Cette fonction permet de recuperer la vitesse du maillet virtuelle
+/// @return double
+///
+////////////////////////////////////////////////////////////////////////
+double FacadeModele::getVitesseVirtuel()
+{
+	return vitesseVirtuelle_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setVitesseVirtuel( double vitesse)
+///
+/// Author : Ali
+/// Cette fonction permet de modifier la vitesse du maillet virtuelle
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setVitesseVirtuel( double vitesse)
+{
+	vitesseVirtuelle_ = vitesse;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn double FacadeModele::getProbabiliteVirtuel()
+///
+/// Author : Ali
+/// Cette fonction permet de recuperer la prob d'etre passif du maillet virtuelle
+/// @return double
+///
+////////////////////////////////////////////////////////////////////////
+double FacadeModele::getProbabiliteVirtuel()
+{
+	return probabilite_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setProbabiliteVirtuel(double probabilite )
+///
+/// Author : Ali
+/// Cette fonction permet de modifier la prob d'etre passif du maillet virtuelle
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setProbabiliteVirtuel(double probabilite )
+{
+	probabilite_ = probabilite;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setButDroite(bool but)
+///
+/// Author : Ali
+/// Cette fonction permet de modifier la valeur but droit
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setButDroite(bool but)
+{
+	butDroite_ = but;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setButGauche(bool but)
+///
+/// Author : Ali
+/// Cette fonction permet de modifier la valeur but gauche
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setButGauche(bool but)
+{
+	butGauche_ = but;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::getButDroite()
+///
+/// Author : Ali
+/// Cette fonction permet de recuperer la valeur but droit
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::getButDroite()
+{
+	return butDroite_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::getButGauche()
+///
+/// Author : Ali
+/// Cette fonction permet de recuperer la valeur but gauche
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::getButGauche()
+{
+	return butGauche_;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::setNombreButs(int nombre)
+///
+/// Author : Ali
+/// Cette fonction permet de modifier la valeur du nombre 
+/// de but necessaire pour gagner une partie
+///
+/// parm[in] int nombre : nombre entre 1 et 5
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::setNombreButs(int nombre)
+{
+	if (nombre < 1 || nombre > 5)
+		return false;
+	nombreButsMax_ = nombre;
+	return true;	
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn int FacadeModele::getNombreButs()
+///
+/// Author : Ali
+/// Cette fonction permet de recuperer la valeur du nombre 
+/// de but necessaire pour gagner une partie
+/// @return int 
+///
+////////////////////////////////////////////////////////////////////////
+int FacadeModele::getNombreButs()
+{
+	return nombreButsMax_;
+}////////////////////////////////////////////////////////////////////////
 ///
 /// @fn std::string getConfigFile();
 ///
