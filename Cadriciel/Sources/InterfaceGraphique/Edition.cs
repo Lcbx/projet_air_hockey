@@ -167,73 +167,72 @@ namespace InterfaceGraphique
         {
             //TO-DO: Changer les touches par les touches enregistres !!
 
+            string temp = e.KeyCode.ToString();
+            string avant_ = Program.configuration.droite.Text;
+            string arriere_ = Program.configuration.gauche.Text;
+            string haut_ = Program.configuration.haut.Text;
+            string bas_ = Program.configuration.bas.Text;
+
+
             //deplacer le maillet de 2eme joueur
             if (estEnModeTest == true)
             {
                 if (estEnPause == false) // si on est pause, on ne peut pas deplacer le maillet
                 {
-                    if (e.KeyCode == Keys.D)//avant
+                    if (temp == avant_ )//avant
                     {
                         avant = true;
                         if (haut)
                         {
-                            Console.WriteLine("avant et haut");
                             FonctionsNatives.deplacerMailletAvecClavier(1, 1);
                         }
                         else if (bas)
                         {
-                            Console.WriteLine("avant et bas");
                             FonctionsNatives.deplacerMailletAvecClavier(1, -1);
                         }
                         else FonctionsNatives.deplacerMailletAvecClavier(1, 0);
                     }
 
-                    if (e.KeyCode == Keys.A)//arriere
+                    if (temp == arriere_)//arriere
                     {
                         arriere = true;
                         if (haut)
                         {
-                            Console.WriteLine("arriere et haut");
                             FonctionsNatives.deplacerMailletAvecClavier(-1, 1);
                         }
                         else if (bas)
                         {
-                            Console.WriteLine("arriere et bas");
                             FonctionsNatives.deplacerMailletAvecClavier(-1, -1);
                         }
                         else FonctionsNatives.deplacerMailletAvecClavier(-1, 0);
 
                     }
 
-                    if (e.KeyCode == Keys.W)//haut
+                    if (temp == haut_)//haut
                     {
                         haut = true;
                         if (avant)
                         {
-                            Console.WriteLine("avant et haut 1");
                             FonctionsNatives.deplacerMailletAvecClavier(1, 1);
                         }
                         else if (arriere)
                         {
-                            Console.WriteLine("arriere et haut 1 ");
                             FonctionsNatives.deplacerMailletAvecClavier(-1, 1);
                         }
 
                         else FonctionsNatives.deplacerMailletAvecClavier(0, 1);
 
                     }
-                    if (e.KeyCode == Keys.S)//bas
+                    if (temp == bas_)//bas
                     {
                         bas = true;
 
                         if (avant)
                         {
-                            Console.WriteLine("avant et bas 1");
                             FonctionsNatives.deplacerMailletAvecClavier(1, -1);
                         }
                         else if (arriere)
                         {
-                            Console.WriteLine("arriere et bas 1");
                             FonctionsNatives.deplacerMailletAvecClavier(-1, -1);
                         }
                         else FonctionsNatives.deplacerMailletAvecClavier(0, -1);
@@ -245,15 +244,21 @@ namespace InterfaceGraphique
 
         private void toucheManuel2(object sender, KeyEventArgs e)
         {
+            string temp = e.KeyCode.ToString();
+            string avant_ = Program.configuration.droite.Text;
+            string arriere_ = Program.configuration.gauche.Text;
+            string haut_ = Program.configuration.haut.Text;
+            string bas_ = Program.configuration.bas.Text;
+
             //deplacer le maillet de 2eme joueur
             if (estEnModeTest == true)
             {
                 if (estEnPause == false) // si on est pause, on ne peut pas deplacer le maillet
                 {
-                    if (e.KeyCode == Keys.D) avant = false;
-                    if (e.KeyCode == Keys.A) arriere = false;
-                    if (e.KeyCode == Keys.W) haut = false;
-                    if (e.KeyCode == Keys.S) bas = false; //bas
+                    if (temp == avant_) avant = false;
+                    if (temp == arriere_) arriere = false;
+                    if (temp == haut_) haut = false;
+                    if (temp == bas_) bas = false; //bas
                 }
             }
         }

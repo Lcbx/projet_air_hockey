@@ -89,9 +89,6 @@ namespace InterfaceGraphique
 
         private void appliquer_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            menuPrincipal_.Show();
-
             FonctionsNatives.sauvegarderTouches(toucheDeplaceEnHaut_, toucheDeplaceADroite_, toucheDeplaceEnBas_, toucheDeplaceAGauche_);
         }
 
@@ -362,7 +359,28 @@ namespace InterfaceGraphique
             }
 
             }
-            
+
+        private void Configuration_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Configuration_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
+
+            int[] touches = new int[4];
+            FonctionsNatives.obtenirTouches(touches);
+            toucheDeplaceEnHaut_ = touches[0];
+            toucheDeplaceADroite_ = touches[1];
+            toucheDeplaceEnBas_ = touches[2];
+            toucheDeplaceAGauche_ = touches[3];
+            this.haut.Text = ((Keys)touches[0]).ToString();
+            this.droite.Text = ((Keys)touches[1]).ToString();
+            this.bas.Text = ((Keys)touches[2]).ToString();
+            this.gauche.Text = ((Keys)touches[3]).ToString();
+
+        }
     }
     static partial class FonctionsNatives
     {

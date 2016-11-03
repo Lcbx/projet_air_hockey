@@ -470,6 +470,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
             this.Name = "Configuration";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Configuration_FormClosing);
+            this.Load += new System.EventHandler(this.Configuration_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -510,10 +512,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button réintialisation;
         private System.Windows.Forms.Button appliquer;
-        private System.Windows.Forms.Button haut;
-        private System.Windows.Forms.Button bas;
-        private System.Windows.Forms.Button droite;
-        private System.Windows.Forms.Button gauche;
+        public System.Windows.Forms.Button haut;
+        public System.Windows.Forms.Button bas;
+        public System.Windows.Forms.Button droite;
+        public System.Windows.Forms.Button gauche;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label scorePourGagner;
