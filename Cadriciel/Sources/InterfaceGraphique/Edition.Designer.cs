@@ -773,6 +773,7 @@
             this.Name = "Edition";
             this.Text = "Edition";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Exemple_FormClosing);
+            this.Load += new System.EventHandler(this.Edition_Load);
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.Edition_MouseWheel);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

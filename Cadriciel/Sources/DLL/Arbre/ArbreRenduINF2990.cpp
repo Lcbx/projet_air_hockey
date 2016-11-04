@@ -561,6 +561,7 @@ NoeudAbstrait* ArbreRenduINF2990::obtenirMailletManuel()
 }
 
 
+/// Ancien code Wajdi
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn deplacerMailletAvecClavier(double x, double y)
@@ -620,7 +621,7 @@ NoeudAbstrait* ArbreRenduINF2990::obtenirMailletManuel()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//test Ali
+//nouveau code Ali
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn deplacerMailletAvecClavier(double x, double y)
@@ -723,6 +724,19 @@ void ArbreRenduINF2990::deplacerMailletAvecSouris(glm::dvec3 pos)
 				{
 					enfant->assignerPositionRelative(pos);
 				}
+				/*
+				else // si on deplace la souris rapidement
+				{					
+					// si on deplace rapidement en haut ou en bas
+					if (this->getTable()->mailletDansZone2({ pos.x,0,0 }, enfant->obtenirRayonModele()))
+					{
+
+					}
+
+
+				}
+				*/
+
 			}
 		}
 	}
