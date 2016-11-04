@@ -8,6 +8,7 @@
 /// @{
 ////////////////////////////////////////////////////////////////////////////////////
 
+#include "NoeudAbstrait.h"
 #include "NoeudCompositeTest.h"
 #include "NoeudTable.h"
 #include "ArbreRenduINF2990.h"
@@ -57,9 +58,9 @@ void NoeudCompositeTest::tearDown()
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn void NoeudCompositeTest::testEnfants()
+/// @fn void NoeudCompositeTest::testVider()
 ///
-/// Cas de test: s'assurer que le noeud abstrait n'a pas d'enfant
+/// Cas de test: vider la table
 ///
 /// @return Aucune.
 ///
@@ -78,35 +79,71 @@ void NoeudCompositeTest::testVider()
 	noeud->vider();
 	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 0);
 
-
-	/*
-	// On vérifie qu'initialement, le noeud n'a pas d'enfant
-	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 0);
-	CPPUNIT_ASSERT(noeud->calculerProfondeur() == 1);
-
-	// Essaie d'ajouter un noeud
-	NoeudAbstrait* nouveauNoeud{ new NoeudConeCube{ ArbreRenduINF2990::NOM_CONECUBE } };
-	bool ajout{ noeud->ajouter(nouveauNoeud) };
-
-	// L'ajout devrait avoir échoué puisqu'il s'agit d'un noeud abstrait...
-	CPPUNIT_ASSERT(ajout == false);
-
-	// Assurons-nous que le noeud ne possède pas d'enfant...
-	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 0);
-	CPPUNIT_ASSERT(noeud->calculerProfondeur() == 1);
-
-	// Nettoyage
-	delete nouveauNoeud;*/
 }
 
-void NoeudCompositeTest::testDansTable()
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void NoeudCompositeTest::testAjout()
+///
+/// Cas de test: ajouter des objets sur la table
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void NoeudCompositeTest::testAjout()
 {
-	NoeudAbstrait* nouveauNoeud{ new NoeudBonus{ ArbreRenduINF2990::NOM_BONUS } };
+	//creer d'un noeud bonus
+	NoeudAbstrait* noeudBonus{ new NoeudBonus{ ArbreRenduINF2990::NOM_BONUS } };
+	noeudBonus->assignerPositionRelative({ 0,0,0 });
 
-	nouveauNoeud->assignerPositionRelative({ 0,0,0 });
+	NoeudAbstrait* noeudMuret{ new NoeudMuret{ ArbreRenduINF2990::NOM_MURET } };
+	noeudMuret->assignerPositionRelative({ 10,10,0 });
 
-	noeud->ajouter(nouveauNoeud);
 
-	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 1);
+	//ajouter le noeud sur la table 
+	noeud->ajouter(noeudBonus);
+	noeud->ajouter(noeudMuret);
 
+	//verifier le nombre des objets ajoutés
+	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 2);
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void NoeudCompositeTest::testSuppression()
+///
+/// Cas de test: supprimer des objets sur la table
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void NoeudCompositeTest::testSuppression()
+{
+	//creer d'un noeud portail
+	NoeudAbstrait* noeudPortail{ new NoeudPortail{ ArbreRenduINF2990::NOM_PORTAIL } };
+	noeudPortail->assignerPositionRelative({ 0,0,0 });
+
+	//creer d'un 2eme portail
+	NoeudAbstrait* noeudPortail2{ new NoeudPortail{ ArbreRenduINF2990::NOM_PORTAIL } };
+	noeudPortail2->assignerPositionRelative({ 15,10,0 });
+
+	//Etablir le lien entre les deux portails
+	noeudPortail->setFrere(noeudPortail2);
+	noeudPortail2->setFrere(noeudPortail);
+
+	//ajouter le noeud sur la table 
+	noeud->ajouter(noeudPortail);
+	noeud->ajouter(noeudPortail2);
+
+	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 2);
+
+
+	//selectionner le 1ere portail
+	noeudPortail->assignerSelection(true);
+
+	//effacer le portail, doit supprimer le deuxieme portail aussi
+	noeud->effacerSelection();
+
+	//verifier que la table est vide 
+	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 0);
 }

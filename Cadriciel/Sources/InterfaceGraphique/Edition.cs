@@ -36,12 +36,15 @@ namespace InterfaceGraphique
 
         public bool estEnModeTest = false;
         public bool estEnPause = false;
+        public bool estEnModePartie = false;
+
 
         public bool avant = false;
         public bool arriere = false;
         public bool haut = false;
         public bool bas = false;
 
+        public int nbreButMax;
         /////////////////////////////////////////////////////////////////////////
         ///  @fn public Edition()
         /// 
@@ -88,9 +91,13 @@ namespace InterfaceGraphique
             //masquer bouton mode edition quand on est dans le mode edition
             modeEditionToolStripMenuItem.Visible = false;
 
+            //textBox5.ReadOnly = true;
 
-
+            wiiiw();
+           
         }
+
+
 
         /////////////////////////////////////////////////////////////////////////
         ///  @fn         public void InitialiserAnimation()
@@ -175,7 +182,7 @@ namespace InterfaceGraphique
 
 
             //deplacer le maillet de 2eme joueur
-            if (estEnModeTest == true)
+            if (estEnModeTest == true || estEnModePartie == true)
             {
                 if (estEnPause == false) // si on est pause, on ne peut pas deplacer le maillet
                 {
@@ -251,7 +258,7 @@ namespace InterfaceGraphique
             string bas_ = Program.configuration.bas.Text;
 
             //deplacer le maillet de 2eme joueur
-            if (estEnModeTest == true)
+            if (estEnModeTest == true || estEnModePartie == true)
             {
                 if (estEnPause == false) // si on est pause, on ne peut pas deplacer le maillet
                 {
@@ -276,7 +283,7 @@ namespace InterfaceGraphique
         private void keyUpHandler(object sender, KeyEventArgs e)
         {
             //Dans le mode edition
-            if (estEnModeTest == false)
+            if (estEnModeTest == false && estEnModePartie == false)
             {
                 // deactiver le joueur virtuel
                 ArreterJoueurVirtuel();
@@ -368,7 +375,7 @@ namespace InterfaceGraphique
                 }
             }
             //dans le mode test
-            else
+            else if(estEnModeTest == true && estEnModePartie == false)
             {
 
                 switch (e.KeyCode)
@@ -403,6 +410,34 @@ namespace InterfaceGraphique
 
                 }
 
+            }
+            else if (estEnModeTest == false && estEnModePartie == true)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Escape:// pause
+                        {
+                            afficherBarreMenu(); break;
+                        }
+                    case Keys.Space: //reinitialiser la partie
+                        {
+                            FonctionsNatives.reinitialiserPartieCourante();
+                            break;
+                        }
+                    case Keys.V:    // Activer le joueur Virtuelle
+                        {
+                            DemarerJoueurVirtuel(1, 0.5);
+                            break;
+                        }
+                    case Keys.B:    // Deactiver le joueur Virtuelle
+                        {
+                            ArreterJoueurVirtuel();
+                            break;
+                        }
+
+                    default: break;
+
+                }
             }
         }
 
@@ -525,14 +560,14 @@ namespace InterfaceGraphique
             x = e.X; y = e.Y;
 
 
-            if (estEnModeTest)
+            //bouger maillet avec souris
+            if (estEnModeTest || estEnModePartie )
             {
                 if (estEnPause == false)
                 {
                     FonctionsNatives.deplacerMailletAvecSouris(e.X, e.Y);
-                }
+                }     
             }
-
         }
 
 
@@ -1466,7 +1501,7 @@ namespace InterfaceGraphique
 
                 //panel score
                 splitContainer1.Panel1.Hide();
-                splitContainer1.Panel2.Show();
+                splitContainer1.Panel2.Hide();
             }
             //si mode edition , afficher les menus a cotés + barre des menus
             else
@@ -1525,7 +1560,7 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         public void afficherBarreMenu()
         { //En mode Test, si on clique sur Echapp
-            if (this.estEnModeTest == true)
+            if (estEnModeTest == true || estEnModePartie == true)
             {
                 if (menuStrip1.Visible == false)
                 {    //si le menu est masqué, on l'Affiche + pause
@@ -1589,8 +1624,9 @@ namespace InterfaceGraphique
             {
                 this.Text = "Partie Rapide";
 
-
-                estEnModeTest = true;
+                estEnModePartie = true;
+                estEnModeTest = false;
+               
                 //this.changerMode(Etats.TEST);
 
                 //Permet d'ajouter les maillets et la rondelle dans la table
@@ -1698,6 +1734,21 @@ namespace InterfaceGraphique
             }
 
         }
+
+        public void wiiiw()
+        {
+            for(;;)
+            {
+                DemarerPartie(nbreButMax);
+            }
+        }
+
+
+        private void Edition_Load(object sender, EventArgs e)
+        {
+            nbreButMax = Convert.ToInt32(Program.configuration.numericUpDown1.Value);
+        }
+
     }
 
     static partial class FonctionsNatives

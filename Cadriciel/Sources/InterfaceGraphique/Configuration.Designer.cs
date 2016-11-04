@@ -519,7 +519,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label scorePourGagner;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        public System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.GroupBox typeJoueur;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label type;

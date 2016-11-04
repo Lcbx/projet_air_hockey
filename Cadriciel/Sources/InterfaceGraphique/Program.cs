@@ -60,7 +60,7 @@ namespace InterfaceGraphique
 
             Application.Run(menuPrincipal);
         }
-           
+            
 
         ///////////////////////////////////////////////////////////////////////
         /// @fn    static void ExecuterQuandInactif(object sender, EventArgs e)
@@ -90,8 +90,8 @@ namespace InterfaceGraphique
                     lock (unLock)
                     {
                         if (edition != null && peutAfficher)
-                            edition.MettreAJour((double)tempsAccumule.Ticks / TimeSpan.TicksPerSecond);
-
+                            edition.MettreAJour((double)tempsAccumule.Ticks / TimeSpan.TicksPerSecond); 
+                         
                     
                     }
                     tempsAccumule = TimeSpan.Zero;

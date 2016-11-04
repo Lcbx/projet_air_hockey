@@ -35,7 +35,8 @@ class NoeudCompositeTest : public CppUnit::TestFixture
 	// =================================================================
 	CPPUNIT_TEST_SUITE(NoeudCompositeTest);
 	CPPUNIT_TEST(testVider);
-	CPPUNIT_TEST(testDansTable);
+	CPPUNIT_TEST(testAjout);
+	CPPUNIT_TEST(testSuppression);
 
 
 	CPPUNIT_TEST_SUITE_END();
@@ -60,9 +61,11 @@ public:
 	/// Cas de test: vider la table
 	void testVider();
 
-	/// Cas de test: a l'interieur de la table
-	void testDansTable();
+	/// Cas de test: ajout des objets
+	void testAjout();
 
+	/// Cas de test: supprimer des objets
+	void testSuppression();
 
 
 
