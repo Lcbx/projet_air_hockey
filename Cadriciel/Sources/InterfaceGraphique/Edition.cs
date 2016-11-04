@@ -149,14 +149,7 @@ namespace InterfaceGraphique
                     /// Ali
                     /// On demare la partie rapide
                     if (estEnModePartie)
-                    {
                         DemarrerPartie();
-                    }
-                    else
-                    {
-                        FonctionsNatives.setButDroite(false);
-                        FonctionsNatives.setButGauche(false);
-                    }
 
                 });
             }
@@ -1786,6 +1779,31 @@ namespace InterfaceGraphique
                 
             }            
         }
+
+        private void Edition_Load(object sender, EventArgs e)
+        {
+            resetPartie();
+        }
+
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn public void resetPartie()
+        /// Author : Ali
+        /// @brief permet de reinitialiser les scores quand
+        /// une partie est termine ou on quite la partie
+        /// 
+        /// @return rien
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
+        public void resetPartie()
+        {
+            nbButsJoueur1 = 0;
+            nbButsJoueur2 = 0;
+            FonctionsNatives.setButDroite(false);
+            FonctionsNatives.setButGauche(false);
+            textBox4.Text = "0";
+            textBox5.Text = "0";
+        }
+
 
         //////////////////////////////////////////////////////////////////////////////////////////
     }
