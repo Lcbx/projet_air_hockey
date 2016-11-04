@@ -105,7 +105,7 @@ private:
 
 	///la largueur des murs 
 	double largeur_{ 7 };
-	double longueurButs_{ 15 };
+	double longueurButs_{ 20 };
 	/// la hauteur des murs 
 	double hauteur_{ 0.0 };
 	/// la couleur de la table 
