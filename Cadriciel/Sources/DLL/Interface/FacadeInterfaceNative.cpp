@@ -914,9 +914,33 @@ extern "C"
 	{
 		return FacadeModele::obtenirInstance()->estEnPauseRondelle();
 	}
-	
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 		__declspec(dllexport) void sauvegarderTouches();
+	/// Author : Arthur
+	/// Cette fonction permet de modifier et enregistrer les touches de
+	/// déplacement du joueur 2
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl sauvegarderTouches(int haut, int droite, int bas, int gauche)
+	{
+		FacadeModele::obtenirInstance()->enregistrerTouches(haut, droite, bas, gauche);
+	}
 
-
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 		__declspec(dllexport) int[] obtenirTouches();
+	/// Author : Arthur
+	/// Cette fonction permet de charger les touches de
+	/// déplacement du joueur 2
+	///
+	/// @return int[4] : [haut, droite, bas, gauche]
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl obtenirTouches(int *touches)
+	{
+		FacadeModele::obtenirInstance()->obtenirTouches(touches);
+	}
 }
 
 

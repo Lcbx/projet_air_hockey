@@ -122,7 +122,7 @@ void ArbreRenduINF2990::ajouterTable()
 	noeudTable_->ajouter(noeudPointControle6);
 	noeudTable_->ajouter(noeudPointControle7);
 	
-
+	
 	noeudTable_->setPointControles();
 }
 

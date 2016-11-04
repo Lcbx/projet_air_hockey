@@ -9,17 +9,25 @@
 #include "ConfigTouches.h"
 #include <iostream>
 
+#include "Utilitaire.h"
+#include "FacadeModele.h"
 
 /// Nombre de calculs par image.
-int ConfigTouches::HAUTDEF{ 1 };
-int ConfigTouches::DROITEDEF{ 2 };
-int ConfigTouches::BASDEF{ 3 };
-int ConfigTouches::GAUCHEDEF{ 4 };
+const int ConfigTouches::HAUTDEF{ 87 };
+const int ConfigTouches::DROITEDEF{ 68 };
+const int ConfigTouches::BASDEF{ 83 };
+const int ConfigTouches::GAUCHEDEF{ 65 };
 
+
+ConfigTouches::ConfigTouches()
+{
+
+	chargerTouches();
+}
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn void ConfigTouches::creerDOM ( TiXmlNode& node ) const
+/// @fn void ConfigTouches::enregistrerTouches (int haut, int droite, int bas, int gauche)
 ///
 /// Cette methode sauvegarde les touches du jour 2 actuelles dans
 ///  un élément XML.
@@ -27,13 +35,22 @@ int ConfigTouches::GAUCHEDEF{ 4 };
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void ConfigTouches::creerDOM(tinyxml2::XMLDocument& document) const
+void ConfigTouches::enregistrerTouches(int haut, int droite, int bas, int gauche)
 {
+	_haut = haut;
+	_droite = droite;
+	_bas = bas;
+	_gauche = gauche;
+
+	tinyxml2::XMLDocument document;
+	document.NewDeclaration(R"(?xml version="1.0" standalone="yes"?)");
+
 	// Créer le noeud 'configuration'
 	tinyxml2::XMLElement* elementConfiguration{ document.NewElement("configuration") };
 
 	// Créer le noeud 'touches' et définir ses attributs
 	tinyxml2::XMLElement* elementTouches{ document.NewElement("CTouches") };
+
 	elementTouches->SetAttribute("TOUCHE_HAUT", _haut);
 	elementTouches->SetAttribute("TOUCHE_DROITE", _droite);
 	elementTouches->SetAttribute("TOUCHE_BAS", _bas);
@@ -46,12 +63,15 @@ void ConfigTouches::creerDOM(tinyxml2::XMLDocument& document) const
 	// (Rappel : pas besoin de libérer la mémoire de elementConfiguration
 	// puisque toutes les fonctions Link... le font pour nous)
 	document.LinkEndChild(elementConfiguration);
+
+	// Écrire dans le fichier
+	document.SaveFile("touches.xml");
 }
 
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn void ConfigTouches::lireDOM( const TiXmlNode& node )
+/// @fn void ConfigTouches::chargerTouches()
 ///
 /// Cette methode charge les touches du jour 2 actuelles à partir 
 /// d'un élément XML.
@@ -59,19 +79,33 @@ void ConfigTouches::creerDOM(tinyxml2::XMLDocument& document) const
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void ConfigTouches::lireDOM(const tinyxml2::XMLDocument& document)
+void ConfigTouches::chargerTouches()
 {
-	// Tenter d'obtenir le noeud 'Configuration'
-	const tinyxml2::XMLElement* elementConfiguration{ document.FirstChildElement("configuration") };
-	if (elementConfiguration != nullptr) {
-		// Tenter d'obtenir l'élément 'touches', puis les attributs des touches
-		const tinyxml2::XMLElement* elementTouches{ elementConfiguration->FirstChildElement("CTouches") };
-		if (elementTouches != nullptr) {
-			if (elementTouches->QueryIntAttribute("TOUCHE_HAUT", &_haut) != tinyxml2::XML_SUCCESS ||
-				elementTouches->QueryIntAttribute("TOUCHE_DROITE", &_droite) != tinyxml2::XML_SUCCESS ||
-				elementTouches->QueryIntAttribute("TOUCHE_BAS", &_bas) != tinyxml2::XML_SUCCESS ||
-				elementTouches->QueryIntAttribute("TOUCHE_GAUCHE", &_gauche) != tinyxml2::XML_SUCCESS) {
-				std::cerr << "Erreur de chargement des touches" << std::endl;
+	// Vérification de l'existance du ficher
+	if (!utilitaire::fichierExiste("touches.xml")) {
+		// Si le fichier n'existe pas, on le crée.
+		enregistrerTouches(HAUTDEF, DROITEDEF, BASDEF, GAUCHEDEF);
+	}
+	else {
+
+		// Charge le fichier de configuration
+		tinyxml2::XMLDocument document;
+		document.LoadFile("touches.xml");
+
+		// Obtenir le noeud 'Configuration'
+		const tinyxml2::XMLElement* elementConfiguration{ document.FirstChildElement("configuration") };
+		if (elementConfiguration != nullptr) {
+
+			// Obtenir l'élément 'touches'
+			const tinyxml2::XMLElement* elementTouches{ elementConfiguration->FirstChildElement("CTouches") };
+			if (elementTouches != nullptr) {
+				// Obtenir les attributs des touches
+				if (elementTouches->QueryIntAttribute("TOUCHE_HAUT", &_haut) != tinyxml2::XML_SUCCESS ||
+					elementTouches->QueryIntAttribute("TOUCHE_DROITE", &_droite) != tinyxml2::XML_SUCCESS ||
+					elementTouches->QueryIntAttribute("TOUCHE_BAS", &_bas) != tinyxml2::XML_SUCCESS ||
+					elementTouches->QueryIntAttribute("TOUCHE_GAUCHE", &_gauche) != tinyxml2::XML_SUCCESS) {
+					std::cerr << "Erreur de chargement des touches" << std::endl;
+				}
 			}
 		}
 	}
@@ -87,7 +121,7 @@ void ConfigTouches::lireDOM(const tinyxml2::XMLDocument& document)
 void ConfigTouches::resetTouches()
 {
 	_haut = HAUTDEF;
-	_droite - DROITEDEF;
+	_droite = DROITEDEF;
 	_bas = BASDEF;
 	_gauche = GAUCHEDEF;
 }
@@ -137,6 +171,22 @@ int ConfigTouches::getToucheGauche()
 	return _gauche;
 }
 
+////////////////////////////////////////////////////////////////////////
+/// @fn void ConfigTouches::accederTouches()
+/// Cette methode permet d'obtenir les touches correspondants aux
+/// 4 directions
+/// 
+/// @return int[4] : [haut, droite, bas, gauche]
+////////////////////////////////////////////////////////////////////////
+void ConfigTouches::obtenirTouches(int *touches)
+{
+	touches[0] = _haut;
+	touches[1] = _droite;
+	touches[2] = _bas;
+	touches[3] = _gauche;
+
+}
+
 
 ////////////////////////////////////////////////////////////////////////
 /// @fn void ConfigTouches::setToucheHaut()
@@ -184,6 +234,24 @@ void ConfigTouches::setToucheBas(int touche)
 void ConfigTouches::setToucheGauche(int touche)
 {
 	_gauche = touche;
+}
+
+////////////////////////////////////////////////////////////////////////
+/// @fn void ConfigTouches::setTouches()
+/// Cette methode permet de modifier les touches correspondants aux
+/// différentes directions.
+/// @param[in] haut : nouvelle touche haut
+/// @param[in] droite : nouvelle touche droite
+/// @param[in] bas : nouvelle touche bas
+/// @param[in] gauche : nouvelle touche gauche
+/// @return void
+////////////////////////////////////////////////////////////////////////
+void ConfigTouches::setTouches(int haut, int droite, int bas, int gauche)
+{
+	_haut = haut;
+	_droite = droite;
+	_bas = bas;
+	_gauche = gauche;
 }
 
 

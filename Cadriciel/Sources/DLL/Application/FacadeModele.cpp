@@ -196,7 +196,7 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 void FacadeModele::chargerConfiguration() const
 {
 	// Vérification de l'existance du ficher
-
+	
 	// Si le fichier n'existe pas, on le crée.
 	if (!utilitaire::fichierExiste(FICHIER_CONFIGURATION)) {
 		enregistrerConfiguration();
@@ -251,7 +251,6 @@ void FacadeModele::enregistrerConfiguration() const
 ////////////////////////////////////////////////////////////////////////
 void FacadeModele::chargerZoneJeu(char* fichierZoneJeu) const
 {
-	std::cout << "Nom du fichier : " << fichierZoneJeu << std::endl;
 
 	// Créé le document XML à partir du fichier spécifié
 	tinyxml2::XMLDocument document;
@@ -290,6 +289,58 @@ void FacadeModele::enregistrerZoneJeu(char* fichierZoneJeu) const
 
 	// Enregistrer le document XML dans le fichier
 	document.SaveFile(fichierZoneJeu);
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::chargerTouches() const
+///
+/// Cette fonction charge les touches du joueur 2 à partir du fichier
+///  XML de configuration si ce dernier existe.  Sinon, le fichier de
+///  configuration est généré à partir de valeurs par défaut directement
+///  dans le code.
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::chargerTouches()
+{
+
+	_configTouches.chargerTouches();
+
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::enregistrerTouches() const
+///
+/// Cette fonction enregistre dans le fichier XML de cnfiguration les
+/// touches du joueur 2.
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::enregistrerTouches(int haut, int droite, int bas, int gauche)
+{
+	_configTouches.enregistrerTouches(haut, droite, bas, gauche);
+}
+
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn int[4] FacadeModele::obtenirTouches() const
+///
+/// Cette fonction retourne les touches actuelles de déplacement
+/// du joueur 2
+///
+/// @return int[4] : [haut, droite, bas, gauche]
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::obtenirTouches(int *touches)
+{
+	_configTouches.obtenirTouches(touches);
 }
 
 
@@ -1078,4 +1129,16 @@ bool FacadeModele::estEnPauseRondelle()
 	return rondelleEnPause_;
 }
  
- 
+ ////////////////////////////////////////////////////////////////////////
+///
+/// @fn std::string getConfigFile();
+///
+///	Permet d'obtenir la chaine de caractère correspondant au nom du
+/// fichier de configuration
+///
+/// @return	std::string	: Nom du fichier de configuration
+///
+////////////////////////////////////////////////////////////////////////
+/*std::string FacadeModele::getConfigFile() {
+	return FICHIER_CONFIGURATION;
+}*/

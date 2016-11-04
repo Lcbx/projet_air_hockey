@@ -65,8 +65,8 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.appliquer2 = new System.Windows.Forms.Button();
             this.creationProfil = new System.Windows.Forms.GroupBox();
+            this.appliquer2 = new System.Windows.Forms.Button();
             this.ajoutProfil = new System.Windows.Forms.Label();
             this.Proba = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -370,13 +370,6 @@
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // appliquer2
-            // 
-            resources.ApplyResources(this.appliquer2, "appliquer2");
-            this.appliquer2.Name = "appliquer2";
-            this.appliquer2.UseVisualStyleBackColor = true;
-            this.appliquer2.Click += new System.EventHandler(this.appliquer2_Click);
-            // 
             // creationProfil
             // 
             this.creationProfil.Controls.Add(this.appliquer2);
@@ -390,6 +383,13 @@
             resources.ApplyResources(this.creationProfil, "creationProfil");
             this.creationProfil.Name = "creationProfil";
             this.creationProfil.TabStop = false;
+            // 
+            // appliquer2
+            // 
+            resources.ApplyResources(this.appliquer2, "appliquer2");
+            this.appliquer2.Name = "appliquer2";
+            this.appliquer2.UseVisualStyleBackColor = true;
+            this.appliquer2.Click += new System.EventHandler(this.appliquer2_Click);
             // 
             // ajoutProfil
             // 
@@ -470,6 +470,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
             this.Name = "Configuration";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Configuration_FormClosing);
+            this.Load += new System.EventHandler(this.Configuration_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -510,14 +512,14 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button réintialisation;
         private System.Windows.Forms.Button appliquer;
-        private System.Windows.Forms.Button haut;
-        private System.Windows.Forms.Button bas;
-        private System.Windows.Forms.Button droite;
-        private System.Windows.Forms.Button gauche;
+        public System.Windows.Forms.Button haut;
+        public System.Windows.Forms.Button bas;
+        public System.Windows.Forms.Button droite;
+        public System.Windows.Forms.Button gauche;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label scorePourGagner;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        public System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.GroupBox typeJoueur;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label type;
