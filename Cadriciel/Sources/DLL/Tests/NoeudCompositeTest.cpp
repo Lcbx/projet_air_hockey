@@ -32,8 +32,9 @@ CPPUNIT_TEST_SUITE_REGISTRATION(NoeudCompositeTest);
 ////////////////////////////////////////////////////////////////////////
 void NoeudCompositeTest::setUp()
 {
-	noeud = std::make_unique<NoeudTable>(ArbreRenduINF2990::NOM_TABLE);
+	//noeud = std::make_unique<NoeudTable>(ArbreRenduINF2990::NOM_TABLE);
 	//NoeudTable* noeud{ (NoeudTable *)creerNoeud(NOM_TABLE) };
+	noeud= new NoeudTable(ArbreRenduINF2990::NOM_TABLE);
 
 }
 
@@ -99,7 +100,7 @@ void NoeudCompositeTest::testAjout()
 	NoeudAbstrait* noeudMuret{ new NoeudMuret{ ArbreRenduINF2990::NOM_MURET } };
 	noeudMuret->assignerPositionRelative({ 10,10,0 });
 
-
+	
 	//ajouter le noeud sur la table 
 	noeud->ajouter(noeudBonus);
 	noeud->ajouter(noeudMuret);
@@ -146,4 +147,25 @@ void NoeudCompositeTest::testSuppression()
 
 	//verifier que la table est vide 
 	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 0);
+}
+
+
+void NoeudCompositeTest::testDansTable()
+{
+	/*
+	//creer d'un noeud bonus
+	NoeudAbstrait* noeudBonus{ new NoeudBonus{ ArbreRenduINF2990::NOM_BONUS } };
+	noeudBonus->assignerPositionRelative({ 0,0,0 });
+
+
+	//ajouter le noeud sur la table 
+	noeud->ajouter(noeudBonus);
+
+	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 1);
+	
+	//verifier le nombre des objets ajoutés
+	//CPPUNIT_ASSERT_MESSAGE("ici l'erreur",noeud->dansTable({ 0,0,0 }) == true);*/
+
+	
+
 }

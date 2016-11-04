@@ -44,7 +44,6 @@ namespace InterfaceGraphique
         public bool haut = false;
         public bool bas = false;
 
-        public int nbreButMax;
         /////////////////////////////////////////////////////////////////////////
         ///  @fn public Edition()
         /// 
@@ -92,8 +91,6 @@ namespace InterfaceGraphique
             modeEditionToolStripMenuItem.Visible = false;
 
             //textBox5.ReadOnly = true;
-
-            wiiiw();
            
         }
 
@@ -913,10 +910,10 @@ namespace InterfaceGraphique
             int nbreObSelectionnes = FonctionsNatives.nombreObjetSelectionne();
             if (nbreObSelectionnes >= 1)
             {
-                supprimerToolStripMenuItem.Enabled = true;
+                supprimerToolStripMenuItem.Enabled = true;   
             }
             else
-            {
+            {  
                 supprimerToolStripMenuItem.Enabled = false;
             }
         }
@@ -1733,20 +1730,6 @@ namespace InterfaceGraphique
                 
             }
 
-        }
-
-        public void wiiiw()
-        {
-            for(;;)
-            {
-                DemarerPartie(nbreButMax);
-            }
-        }
-
-
-        private void Edition_Load(object sender, EventArgs e)
-        {
-            nbreButMax = Convert.ToInt32(Program.configuration.numericUpDown1.Value);
         }
 
     }

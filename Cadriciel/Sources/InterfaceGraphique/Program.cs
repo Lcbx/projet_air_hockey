@@ -90,7 +90,7 @@ namespace InterfaceGraphique
                     lock (unLock)
                     {
                         if (edition != null && peutAfficher)
-                            edition.MettreAJour((double)tempsAccumule.Ticks / TimeSpan.TicksPerSecond); 
+                            edition.MettreAJour((double)tempsAccumule.Ticks / TimeSpan.TicksPerSecond);                
                          
                     
                     }

@@ -13,6 +13,7 @@
 
 #include <cppunit/extensions/HelperMacros.h>
 #include <memory>
+#include "NoeudTable.h"
 
 class NoeudComposite;
 
@@ -37,6 +38,7 @@ class NoeudCompositeTest : public CppUnit::TestFixture
 	CPPUNIT_TEST(testVider);
 	CPPUNIT_TEST(testAjout);
 	CPPUNIT_TEST(testSuppression);
+	CPPUNIT_TEST(testDansTable);
 
 
 	CPPUNIT_TEST_SUITE_END();
@@ -67,12 +69,15 @@ public:
 	/// Cas de test: supprimer des objets
 	void testSuppression();
 
+	///Cas de test: dans la table
+	void testDansTable();
 
 
 
 private:
 	/// Instance d'un noeud abstrait
-	std::unique_ptr<NoeudComposite> noeud;
+	//std::unique_ptr<NoeudComposite> noeud;
+	NoeudTable *noeud;
 };
 
 #endif // _TESTS_NOEUDABSTRAITTEST_H
