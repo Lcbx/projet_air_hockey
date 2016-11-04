@@ -1687,10 +1687,9 @@ namespace InterfaceGraphique
         {
             if (FonctionsNatives.estButDroite())
             {
-                MessageBox.Show("Player 1 SCORES !","AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand,
-                    MessageBoxDefaultButton.Button3, MessageBoxOptions.ServiceNotification);
+                MessageBox.Show("Player 1 SCORES !","AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 nbButsJoueur1++;
-                textBox4.Text = nbButsJoueur1.ToString();
+                textBox5.Text = nbButsJoueur1.ToString();
                 FonctionsNatives.setButDroite(false);
                 FonctionsNatives.reinitialiserPartieCourante();
                 //Console.WriteLine("But Droite !!");
@@ -1708,18 +1707,23 @@ namespace InterfaceGraphique
             if ((nbButsJoueur1 == nbButsMax) || (nbButsJoueur2 == nbButsMax))
             {
                 if (nbButsJoueur1 == nbButsMax)
+                {
                     MessageBox.Show("** Congratulations! Player 1 wins ! **", "AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand,
                     MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
-                
+                }
                 else
+                {
                     MessageBox.Show("** Congratulations! Player 2 wins ! **", "AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Information,
                     MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                }
+                // reintialiser ou retourner en menu principale
                 nbButsJoueur1 = 0;
                 nbButsJoueur2 = 0;
-                FonctionsNatives.reinitialiserPartieCourante();
+                textBox4.Text = "0"; textBox5.Text = "0";
+                FonctionsNatives.retirerMailletEtRondelle();
                 menuPrincipal_.Show();
                 this.Hide();
-                // TODO -- reintialiser ou retourner en arriere
+                
             }            
         }
 
