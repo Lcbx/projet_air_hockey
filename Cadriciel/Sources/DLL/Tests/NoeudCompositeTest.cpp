@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////////
 /// @file NoeudCompositeTest.cpp
-/// @author Julien Gascon-Samson
-/// @date 2011-07-16
+/// @author Wajdi Gharsalli
+/// @date 2016-11-03
 /// @version 1.0
 ///
 /// @addtogroup inf2990 INF2990
@@ -150,22 +150,39 @@ void NoeudCompositeTest::testSuppression()
 }
 
 
-void NoeudCompositeTest::testDansTable()
+void NoeudCompositeTest::testTrouverObjet()
 {
-	/*
-	//creer d'un noeud bonus
+	
+	//creation d'un noeud bonus
 	NoeudAbstrait* noeudBonus{ new NoeudBonus{ ArbreRenduINF2990::NOM_BONUS } };
-	noeudBonus->assignerPositionRelative({ 0,0,0 });
+	noeudBonus->assignerPositionRelative({ 20,25,0 });
 
+	//creer d'un noeud portail
+	NoeudAbstrait* noeudPortail{ new NoeudPortail{ ArbreRenduINF2990::NOM_PORTAIL } };
+	noeudPortail->assignerPositionRelative({ 0,0,0 });
+
+	//creer d'un 2eme portail
+	NoeudAbstrait* noeudPortail2{ new NoeudPortail{ ArbreRenduINF2990::NOM_PORTAIL } };
+	noeudPortail2->assignerPositionRelative({ 15,10,0 });
+
+	//Etablir le lien entre les deux portails
+	noeudPortail->setFrere(noeudPortail2);
+	noeudPortail2->setFrere(noeudPortail);
 
 	//ajouter le noeud sur la table 
 	noeud->ajouter(noeudBonus);
+	noeud->ajouter(noeudPortail);
+	noeud->ajouter(noeudPortail2);
 
-	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 1);
+	//std::cout << "Mon type: " << noeudBonus->obtenirType() << std::endl;
+	//printf("mon typppe: " , noeudBonus->obtenirType());
 	
-	//verifier le nombre des objets ajoutés
-	//CPPUNIT_ASSERT_MESSAGE("ici l'erreur",noeud->dansTable({ 0,0,0 }) == true);*/
+	//Verifier le nombre des objets
+	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 3); 
 
-	
+	//chercher avec type  
+	CPPUNIT_ASSERT(noeud->chercher("bonus") == noeudBonus);
 
+	//chercher avec indice
+	CPPUNIT_ASSERT(noeud->chercher(1) == noeudPortail);
 }
