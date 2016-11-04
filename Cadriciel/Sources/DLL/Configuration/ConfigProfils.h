@@ -9,6 +9,7 @@
 #define __CONFIGURATION_CONFIGPROFILS_H__
 
 #include <list>
+#include <vector>
 #include "../Application/Profil.h"
 
 ///////////////////////////////////////////////////////////////////////////
@@ -34,6 +35,9 @@ public:
 	/// Ajoute le profil avec les attributs spécifiés, ou le modifie si un profil du même nom existe
 	void setProfil(std::string nom, double vitesse, double probabilite);
 
+	/// Supprime un profil d'après son nom
+	void supprimerProfil(std::string nom);
+
 	/// Obtient un profil selon son nom, ou un Profil nommé 'ERREUR' si il n'existe pas
 	Profil getProfil(std::string nom);
 
@@ -43,8 +47,10 @@ public:
 	/// Obtient la probabilite d'un profil selon son nom, si il existe
 	double getProbabilite(std::string nom);
 
-	/// Supprime un profil d'après son nom
-	//void supprimerProfil(std::string nom);
+	/// Obtient un vecteur des noms des profils
+	std::vector<std::string> getNoms();
+
+
 
 
 

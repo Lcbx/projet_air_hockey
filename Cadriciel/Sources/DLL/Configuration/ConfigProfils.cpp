@@ -125,8 +125,8 @@ void ConfigProfils::setProfil(std::string nom, double vitesse, double probabilit
 	else
 		document.LoadFile(FICHIER_PROFILS.c_str());
 
-	// Obtenir le noeud 'listeProfil', le créé si il n'existe pas
-	tinyxml2::XMLElement* elementListeProfil{ document.FirstChildElement("configuration") };
+	// Obtenir le noeud 'listeProfil', le créer si il n'existe pas
+	tinyxml2::XMLElement* elementListeProfil{ document.FirstChildElement("listeProfil") };
 	if (elementListeProfil == nullptr) {
 		elementListeProfil = document.NewElement("listeProfil");
 		document.LinkEndChild(elementListeProfil);
@@ -145,6 +145,51 @@ void ConfigProfils::setProfil(std::string nom, double vitesse, double probabilit
 	// Écrire dans le fichier
 	document.SaveFile(FICHIER_PROFILS.c_str());
 }
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void ConfigTouches::supprimerProfil (std::string nom)
+///
+/// Cette methode supprime le profil spécifié
+///
+/// @param[in] nom : nom du profil à supprimer
+///
+/// @return void
+///
+////////////////////////////////////////////////////////////////////////
+void ConfigProfils::supprimerProfil(std::string nom)
+{
+	bool exist = false;
+
+	// Parcourt la liste des profils
+	for (std::list<Profil>::iterator it = _listeProfils.begin(); it != _listeProfils.end(); ++it) {
+		// Supprime le profil de la liste
+		if (it->getNom() == nom.c_str()) {
+			_listeProfils.erase(it);
+			exist = true;
+		}
+	}
+
+	// Si le profil existe bien, charger le fichier pour y supprimer le profil
+	if (exist) {
+
+		// Ouvrir le fichier
+		tinyxml2::XMLDocument document;
+		document.LoadFile(FICHIER_PROFILS.c_str());
+
+		// Obtenir le noeud 'listeProfil'
+		tinyxml2::XMLElement* elementListeProfil{ document.FirstChildElement("listeProfil") };
+
+		// Supprimer le noeud
+		elementListeProfil->DeleteChild(elementListeProfil->FirstChildElement(nom.c_str()));
+
+		// Sauvegarder les changements dans le fichier
+		document.SaveFile(FICHIER_PROFILS.c_str());
+	}
+
+}
+
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -169,6 +214,7 @@ Profil ConfigProfils::getProfil(std::string nom)
 	return Profil("ERREUR", 0, 0);
 }
 
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn double ConfigProfils::getVitesse (std::string nom)
@@ -192,6 +238,7 @@ double ConfigProfils::getVitesse(std::string nom)
 	return NULL;
 }
 
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn double ConfigProfils::getProbabilite (std::string nom)
@@ -214,4 +261,26 @@ double ConfigProfils::getProbabilite(std::string nom)
 		}
 	}
 	return NULL;
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn std::vector<std::string> ConfigProfils::getNoms ()
+///
+/// Cette methode retourne un vecteur contenant tout les noms des profils
+///
+/// @return un vecteur de noms de profils
+///
+////////////////////////////////////////////////////////////////////////
+std::vector<std::string> ConfigProfils::getNoms()
+{
+	// Rempli un vecteur des noms des profils
+	std::vector<std::string> noms;
+	for (std::list<Profil>::iterator it = _listeProfils.begin(); it != _listeProfils.end(); ++it) {
+		noms.push_back(it->getNom());
+	}
+
+	// Retourne le vecteur
+	return noms;
 }
