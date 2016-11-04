@@ -21,7 +21,7 @@ namespace InterfaceGraphique
     {
         private Edition edition_;
         private Configuration configuration_;
-        private Tournoi tournoi_ = new Tournoi();
+        private ModeTournoi tournoi_ = new ModeTournoi();
 
 
         public MenuPrincipal()

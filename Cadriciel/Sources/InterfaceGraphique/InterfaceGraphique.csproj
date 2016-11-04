@@ -90,6 +90,18 @@
     <Compile Include="Edition.Designer.cs">
       <DependentUpon>Edition.cs</DependentUpon>
     </Compile>
+    <Compile Include="MatchingTournoi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MatchingTournoi.Designer.cs">
+      <DependentUpon>MatchingTournoi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MatchJoueur.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MatchJoueur.Designer.cs">
+      <DependentUpon>MatchJoueur.cs</DependentUpon>
+    </Compile>
     <Compile Include="MenuPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +163,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Edition.resx">
       <DependentUpon>Edition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MatchingTournoi.resx">
+      <DependentUpon>MatchingTournoi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MatchJoueur.resx">
+      <DependentUpon>MatchJoueur.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>

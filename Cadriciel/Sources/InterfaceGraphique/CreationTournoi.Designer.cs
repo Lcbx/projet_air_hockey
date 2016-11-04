@@ -30,10 +30,10 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.participantTournoi1 = new InterfaceGraphique.ParticipantTournoi();
-            this.participantTournoi2 = new InterfaceGraphique.ParticipantTournoi();
-            this.participantTournoi3 = new InterfaceGraphique.ParticipantTournoi();
             this.participantTournoi4 = new InterfaceGraphique.ParticipantTournoi();
+            this.participantTournoi3 = new InterfaceGraphique.ParticipantTournoi();
+            this.participantTournoi2 = new InterfaceGraphique.ParticipantTournoi();
+            this.participantTournoi1 = new InterfaceGraphique.ParticipantTournoi();
             this.SuspendLayout();
             // 
             // label1
@@ -56,19 +56,12 @@
             this.button1.Text = "Créer le tournoi";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // participantTournoi1
+            // participantTournoi4
             // 
-            this.participantTournoi1.Location = new System.Drawing.Point(180, 35);
-            this.participantTournoi1.Name = "participantTournoi1";
-            this.participantTournoi1.Size = new System.Drawing.Size(150, 45);
-            this.participantTournoi1.TabIndex = 0;
-            // 
-            // participantTournoi2
-            // 
-            this.participantTournoi2.Location = new System.Drawing.Point(337, 35);
-            this.participantTournoi2.Name = "participantTournoi2";
-            this.participantTournoi2.Size = new System.Drawing.Size(150, 45);
-            this.participantTournoi2.TabIndex = 11;
+            this.participantTournoi4.Location = new System.Drawing.Point(181, 86);
+            this.participantTournoi4.Name = "participantTournoi4";
+            this.participantTournoi4.Size = new System.Drawing.Size(150, 45);
+            this.participantTournoi4.TabIndex = 13;
             // 
             // participantTournoi3
             // 
@@ -77,12 +70,19 @@
             this.participantTournoi3.Size = new System.Drawing.Size(150, 45);
             this.participantTournoi3.TabIndex = 12;
             // 
-            // participantTournoi4
+            // participantTournoi2
             // 
-            this.participantTournoi4.Location = new System.Drawing.Point(181, 86);
-            this.participantTournoi4.Name = "participantTournoi4";
-            this.participantTournoi4.Size = new System.Drawing.Size(150, 45);
-            this.participantTournoi4.TabIndex = 13;
+            this.participantTournoi2.Location = new System.Drawing.Point(337, 35);
+            this.participantTournoi2.Name = "participantTournoi2";
+            this.participantTournoi2.Size = new System.Drawing.Size(150, 45);
+            this.participantTournoi2.TabIndex = 11;
+            // 
+            // participantTournoi1
+            // 
+            this.participantTournoi1.Location = new System.Drawing.Point(180, 35);
+            this.participantTournoi1.Name = "participantTournoi1";
+            this.participantTournoi1.Size = new System.Drawing.Size(150, 45);
+            this.participantTournoi1.TabIndex = 0;
             // 
             // CreationTournoi
             // 
