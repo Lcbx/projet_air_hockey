@@ -37,6 +37,7 @@ namespace InterfaceGraphique
         public bool estEnModeTest = false;
         public bool estEnPause = false;
         public bool estEnModePartie = false;
+        public bool estjoueurvirtuel = false;
 
 
         public bool avant = false;
@@ -206,66 +207,69 @@ namespace InterfaceGraphique
             {
                 if (estEnPause == false) // si on est pause, on ne peut pas deplacer le maillet
                 {
-                    if (temp == avant_ )//avant
+                    if (!estjoueurvirtuel)
                     {
-                        avant = true;
-                        if (haut)
+                        if (temp == avant_)//avant
                         {
-                            FonctionsNatives.deplacerMailletAvecClavier(1, 1);
-                        }
-                        else if (bas)
-                        {
-                            FonctionsNatives.deplacerMailletAvecClavier(1, -1);
-                        }
-                        else FonctionsNatives.deplacerMailletAvecClavier(1, 0);
-                    }
-
-                    if (temp == arriere_)//arriere
-                    {
-                        arriere = true;
-                        if (haut)
-                        {
-                            FonctionsNatives.deplacerMailletAvecClavier(-1, 1);
-                        }
-                        else if (bas)
-                        {
-                            FonctionsNatives.deplacerMailletAvecClavier(-1, -1);
-                        }
-                        else FonctionsNatives.deplacerMailletAvecClavier(-1, 0);
-
-                    }
-
-                    if (temp == haut_)//haut
-                    {
-                        haut = true;
-                        if (avant)
-                        {
-                            FonctionsNatives.deplacerMailletAvecClavier(1, 1);
-                        }
-                        else if (arriere)
-                        {
-                            FonctionsNatives.deplacerMailletAvecClavier(-1, 1);
+                            avant = true;
+                            if (haut)
+                            {
+                                FonctionsNatives.deplacerMailletAvecClavier(1, 1);
+                            }
+                            else if (bas)
+                            {
+                                FonctionsNatives.deplacerMailletAvecClavier(1, -1);
+                            }
+                            else FonctionsNatives.deplacerMailletAvecClavier(1, 0);
                         }
 
-                        else FonctionsNatives.deplacerMailletAvecClavier(0, 1);
-
-                    }
-                    if (temp == bas_)//bas
-                    {
-                        bas = true;
-
-                        if (avant)
+                        if (temp == arriere_)//arriere
                         {
-                            FonctionsNatives.deplacerMailletAvecClavier(1, -1);
+                            arriere = true;
+                            if (haut)
+                            {
+                                FonctionsNatives.deplacerMailletAvecClavier(-1, 1);
+                            }
+                            else if (bas)
+                            {
+                                FonctionsNatives.deplacerMailletAvecClavier(-1, -1);
+                            }
+                            else FonctionsNatives.deplacerMailletAvecClavier(-1, 0);
+
                         }
-                        else if (arriere)
+
+                        if (temp == haut_)//haut
                         {
-                            FonctionsNatives.deplacerMailletAvecClavier(-1, -1);
+                            haut = true;
+                            if (avant)
+                            {
+                                FonctionsNatives.deplacerMailletAvecClavier(1, 1);
+                            }
+                            else if (arriere)
+                            {
+                                FonctionsNatives.deplacerMailletAvecClavier(-1, 1);
+                            }
+
+                            else FonctionsNatives.deplacerMailletAvecClavier(0, 1);
+
                         }
-                        else FonctionsNatives.deplacerMailletAvecClavier(0, -1);
-                    }
-                }
-            }
+                        if (temp == bas_)//bas
+                        {
+                            bas = true;
+
+                            if (avant)
+                            {
+                                FonctionsNatives.deplacerMailletAvecClavier(1, -1);
+                            }
+                            else if (arriere)
+                            {
+                                FonctionsNatives.deplacerMailletAvecClavier(-1, -1);
+                            }
+                            else FonctionsNatives.deplacerMailletAvecClavier(0, -1);
+                        }
+                    } // endif joueurvirtuel
+                }   // endif enpause
+            }   // endif modetest || modepartierapide
         }
 
 
@@ -282,10 +286,13 @@ namespace InterfaceGraphique
             {
                 if (estEnPause == false) // si on est pause, on ne peut pas deplacer le maillet
                 {
-                    if (temp == avant_) avant = false;
-                    if (temp == arriere_) arriere = false;
-                    if (temp == haut_) haut = false;
-                    if (temp == bas_) bas = false; //bas
+                    if (!estjoueurvirtuel)
+                    {
+                        if (temp == avant_) avant = false;
+                        if (temp == arriere_) arriere = false;
+                        if (temp == haut_) haut = false;
+                        if (temp == bas_) bas = false; //bas
+                    }
                 }
             }
         }
@@ -412,12 +419,20 @@ namespace InterfaceGraphique
                         }
                     case Keys.V:    // Activer le joueur Virtuelle
                         {
-                            DemarerJoueurVirtuel(1, 0.5);
+                            if (estEnModeTest && !estEnModePartie)
+                            {
+                                estjoueurvirtuel = true;
+                                DemarerJoueurVirtuel(1, 0.5);
+                            }
                             break;
                         }
                     case Keys.B:    // Deactiver le joueur Virtuelle
                         {
-                            ArreterJoueurVirtuel();
+                            if (estEnModeTest && !estEnModePartie)
+                            {
+                                estjoueurvirtuel = false;
+                                ArreterJoueurVirtuel();
+                            }
                             break;
                         }
 
