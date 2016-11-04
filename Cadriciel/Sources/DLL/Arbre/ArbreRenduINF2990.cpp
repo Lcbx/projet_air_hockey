@@ -571,49 +571,12 @@ NoeudAbstrait* ArbreRenduINF2990::obtenirMailletManuel()
 
 void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 {
-	NoeudAbstrait* dernier = this->enfants_.back();//pour obtenir le maillet du 2eme joueur
-	glm::dvec3 pos = dernier->obtenirPositionRelative();
+	auto dernier = (NoeudMaillet*)this->enfants_.back();//pour obtenir le maillet du 2eme joueur
+	auto pos = dernier->obtenirPositionRelative();
 	double rayon = dernier->obtenirRayon();
-	//bouger vers droite
-	if (x == 1) {
-		if (this->getTable()->dansZone1({ pos.x + rayon , pos.y + rayon, 0 }) && this->getTable()->dansZone1({ pos.x + rayon , pos.y - rayon, 0 })) {
-			if (y == 1) { dernier->assignerPositionRelative({ pos.x + 4, pos.y + 4, 0 }); }
-			else if (y == -1) { dernier->assignerPositionRelative({ pos.x + 2, pos.y - 2, 0 }); }
-			else dernier->assignerPositionRelative({ pos.x + 4, pos.y, 0 });
-		}
-		else dernier->assignerPositionRelative({ pos.x, pos.y, 0 });//ne pas depasser le centre
-	}
-
-	if (x == -1) {
-		if (this->getTable()->dansZone1({ pos.x - rayon , pos.y + rayon, 0 }) && this->getTable()->dansZone1({ pos.x - rayon , pos.y - rayon, 0 }))//checker si a l'interieur 
-		{
-			if (y == 1) { dernier->assignerPositionRelative({ pos.x - 4, pos.y + 4, 0 }); }
-			else if (y == -1) { dernier->assignerPositionRelative({ pos.x - 4, pos.y - 4, 0 }); }
-			else dernier->assignerPositionRelative({ pos.x - 4, pos.y, 0 });
-		}
-		else dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
-	}
-
-	if (x == 0) {
-		if (y == 1) {
-			if (this->getTable()->dansZone1({ pos.x , pos.y + rayon , 0 }))
-			{
-				dernier->assignerPositionRelative({ pos.x , pos.y + 4, 0 });
-			}
-			else {
-				dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
-			}
-		}
-			else if (y == -1) { 
-				if (this->getTable()->dansZone1({ pos.x , pos.y - rayon , 0 })) 
-				{
-				dernier->assignerPositionRelative({ pos.x , pos.y - 4, 0 }); 
-				}
-				else {
-					dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
-				}
-		}
-	}
+	float delta = 20;
+	glm::vec3 nouvellePosition = { pos.x + glm::sign(x) * delta, pos.y + glm::sign(y) * delta, pos.z };
+	dernier->deplacer(nouvellePosition);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -680,10 +643,7 @@ void ArbreRenduINF2990::deplacerMailletAvecSouris(glm::dvec3 pos)
 		if (enfant->obtenirType() == "maillet") {
 			if (enfant->estDeuxiemeJoueur == false)
 			{
-				if (this->getTable()->mailletDansZone2(pos, enfant->obtenirRayonModele()))
-				{
-					enfant->assignerPositionRelative(pos);
-				}
+				((NoeudMaillet*)enfant)->deplacer(pos);
 			}
 		}
 	}

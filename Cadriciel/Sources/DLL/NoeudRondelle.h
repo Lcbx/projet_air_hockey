@@ -36,6 +36,8 @@ public:
 	virtual void afficherConcret(const glm::mat4& vueProjection) const;
 	/// Effectue l'animation du cube.
 	virtual void animer(float temps);
+	///applique ue modification à la vitesse en fonction d'une collision avec un maillet
+	void collisionMailletExterne(glm::vec3 vitesse);
 
 
 	///Accepter le visiteur
