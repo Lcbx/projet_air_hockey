@@ -21,6 +21,9 @@
 #include "CompteurAffichage.h"
 #include "BancTests.h"
 
+///TODO: Retirer pour la remise
+#include "../Tournoi.h"
+
 //using namespace std;
 
 
@@ -647,6 +650,22 @@ extern "C"
 	__declspec(dllexport) void __cdecl deplacerMailletAvecSouris(double x, double y)
 	{
 		FacadeModele::obtenirInstance()->deplacerMailletAvecSouris(x, y);
+	}
+
+	/// @fn __declspec(dllexport) void __cdecl testTournoi()
+	/// @brief Permet d'effectuer des tests durant le développemet du mode tournoi
+	/// TODO: Retirer pour la remise
+	/// @return Nothing
+	__declspec(dllexport) void __cdecl testTournoi() {
+		const int len = 1;
+		int* arr = new int[len];
+		for (int i = 0; i < len; i++)
+			arr[i] = i + 1;
+
+		Tournoi<int> tournoi(len, arr);
+		if(tournoi.prochainMatchupExiste())
+			tournoi.obtenirProchainMatchup();
+		
 	}
 }
 

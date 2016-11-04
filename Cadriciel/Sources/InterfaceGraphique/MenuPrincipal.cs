@@ -21,11 +21,13 @@ namespace InterfaceGraphique
     {
         private Edition edition_;
         private Configuration configuration_;
+        private Tournoi tournoi_ = new Tournoi();
 
 
         public MenuPrincipal()
         {
             InitializeComponent();
+            this.tournoi.Click += new System.EventHandler(this.modeTournoiClick);
         }
 
         public void setMenu(Edition edition, Configuration configuration)
@@ -59,6 +61,16 @@ namespace InterfaceGraphique
         {
            configuration_.Show();  //  afficher la boite de configuration quand on clique sur  
            this.Hide();
+        }
+
+        /// <summary>
+        /// Permet d'afficher la fenêtre du mode tournoi
+        /// </summary>
+        /// <param name="sender">Objet sur lequel l'évènement a été produit</param>
+        /// <param name="e">Les arguments d'évèment</param>
+        private void modeTournoiClick(object sender, EventArgs e) {
+            tournoi_.Show();
+            this.Hide();
         }
     }
 }

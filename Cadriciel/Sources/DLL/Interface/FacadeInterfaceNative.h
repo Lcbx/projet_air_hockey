@@ -123,5 +123,8 @@ extern "C" {
 	///deplacer le maillet du joueur 1 avec souris
 	__declspec(dllexport) void deplacerMailletAvecSouris(double x, double y);
 
+	///Permet de tester le mode tournoi TODO: Retirer pour la remise
+	__declspec(dllexport) void testTournoi();
+
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__
