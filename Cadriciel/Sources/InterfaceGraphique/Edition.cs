@@ -144,10 +144,18 @@ namespace InterfaceGraphique
                 {
                     FonctionsNatives.animer(tempsInterAffichage);
                     FonctionsNatives.dessinerOpenGL();
-                    
+
                     /// Ali
                     /// On demare la partie rapide
-                    DemarrerPartie();
+                    if (estEnModePartie)
+                    {
+                        DemarrerPartie();
+                    }
+                    else
+                    {
+                        FonctionsNatives.setButDroite(false);
+                        FonctionsNatives.setButGauche(false);
+                    }
 
                 });
             }
@@ -1513,9 +1521,8 @@ namespace InterfaceGraphique
 
                 //panel score
                 splitContainer1.Panel1.Hide();
-                splitContainer1.Panel2.Show();
-                // demarrer la partie
-                //DemarrerPartie(2, true);
+                splitContainer1.Panel2.Hide();
+                
             }
             //si mode edition , afficher les menus a cotés + barre des menus
             else
