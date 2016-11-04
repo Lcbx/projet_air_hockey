@@ -1133,6 +1133,7 @@ bool NoeudTable::dansZone2(glm::dvec3 M)
 ////////////////////////////////////////////////////////////////////////
 bool NoeudTable::mailletDansZone2(glm::dvec3 M,double rayon) 
 {
+	//TODO -- test la distance % segmant et non droite
 	if (dansZone2(M))
 	{
 		double dist;
@@ -1156,7 +1157,7 @@ bool NoeudTable::mailletDansZone2(glm::dvec3 M,double rayon)
 					return false;
 				else					
 				{
-					dist = distanceEntrePointDroite(p(7), p(5), M);
+					dist = distanceEntrePointDroite(p(5), p(7), M);
 					if (dist < rayon) // distance entre mur P7P5
 						return false;
 					else

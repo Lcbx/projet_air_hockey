@@ -797,34 +797,59 @@ extern "C"
 	}
 
 	////////////////////////////////////////////////////////////////////////
-	/// @fn 	__declspec(dllexport) bool setButDroite()
+	/// @fn 	__declspec(dllexport) void setButDroite()
 	/// Author : Ali
 	/// Cette fonction permet de modifier la varriable butDroite_ 
 	/// dans facade modele 
 	/// on l'utilise lorsque un des 2 joueurs marque un but 
 	///
-	/// @return bool
+	/// @return rien
 	///
 	////////////////////////////////////////////////////////////////////////
-	__declspec(dllexport) bool setButDroite(bool etat)
+	__declspec(dllexport) void setButDroite(bool etat)
 	{
-		FacadeModele::obtenirInstance()->setButDroite(etat);
-		return etat;
+		FacadeModele::obtenirInstance()->setButDroite(etat);		
 	}
 	////////////////////////////////////////////////////////////////////////
-	/// @fn 	__declspec(dllexport) bool setButGauche()
+	/// @fn 	__declspec(dllexport) void setButGauche()
 	/// Author : Ali
 	/// Cette fonction permet de modifier la varriable butGauche_ 
 	/// dans facade modele 
 	/// on l'utilise lorsque un des 2 joueurs marque un but 
-	/// @return bool
+	/// @return rien
 	///
 	////////////////////////////////////////////////////////////////////////
-	__declspec(dllexport) bool setButGauche(bool etat)
+	__declspec(dllexport) void setButGauche(bool etat)
 	{
-		 FacadeModele::obtenirInstance()->setButGauche(etat);
-		 return etat;
+		 FacadeModele::obtenirInstance()->setButGauche(etat);		
 	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) int getNombreButs()
+	/// Author : Ali
+	/// @brief : Cette fonction permet de recuperer le nombre de buts pour
+	/// gagner une partie
+	/// 
+	/// @return int
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) int getNombreButs()
+	{
+		return FacadeModele::obtenirInstance()->getNombreButs();
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void setNombreButs(int nombre)
+	/// Author : Ali
+	/// @brief : Cette fonction permet de modifier le nombre de buts pour
+	/// gagner une partie
+	/// 
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void setNombreButs(int nombre)
+	{
+		FacadeModele::obtenirInstance()->setNombreButs(nombre);
+	}
+
 }
 
 

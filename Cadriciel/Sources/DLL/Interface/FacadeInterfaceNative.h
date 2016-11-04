@@ -143,8 +143,11 @@ extern "C" {
 	__declspec(dllexport) bool estButDroite();
 	__declspec(dllexport) bool estButGauche();
 	// si un joueur marque un but , on remet les 2 a false
-	__declspec(dllexport) bool setButDroite(bool etat);
-	__declspec(dllexport) bool setButGauche(bool etat);
+	__declspec(dllexport) void setButDroite(bool etat);
+	__declspec(dllexport) void setButGauche(bool etat);
+	// set/get le nombre de but pour gagner la partie
+	__declspec(dllexport) int getNombreButs();
+	__declspec(dllexport) void setNombreButs(int nombre);
 	/// Ali
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__
