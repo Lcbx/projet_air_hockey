@@ -16,6 +16,7 @@
 #include <string>
 #include "EtatOpenGL.h"
 #include "../Configuration/ConfigTouches.h"
+#include "../Configuration/ConfigProfils.h"
 
 class NoeudAbstrait;
 class ArbreRenduINF2990;
@@ -239,12 +240,19 @@ private:
    /// Arbre de rendu contenant les différents objets de la scène.
    ArbreRenduINF2990* arbre_{ nullptr };
 
+   /// Arthur
    /// Configuration des touches
    ConfigTouches _configTouches;
+   /// Configuration des profils
+   ConfigProfils _configProfils;
+
+
 
    /// Coefficients de configuration
    CoefficientConfiguration coeff_ = COEFFICIENTS_DEFAULT;
+
    
+
    /// Ali
    /// joueur virtuel 
    bool joueurVirtuelActive_{false};

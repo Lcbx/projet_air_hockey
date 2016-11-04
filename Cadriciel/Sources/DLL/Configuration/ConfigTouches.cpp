@@ -18,7 +18,14 @@ const int ConfigTouches::DROITEDEF{ 68 };
 const int ConfigTouches::BASDEF{ 83 };
 const int ConfigTouches::GAUCHEDEF{ 65 };
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void ConfigTouches::ConfigTouches()
+///
+/// Constructeur par défaut de ConfigTouches
+/// Charge le fichier de touches, si il existe
+///
+////////////////////////////////////////////////////////////////////////
 ConfigTouches::ConfigTouches()
 {
 

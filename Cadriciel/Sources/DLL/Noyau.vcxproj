@@ -139,6 +139,7 @@
     <ClCompile Include="Application\JoeurVirtuel.cpp" />
     <ClCompile Include="Application\Loupe.cpp" />
     <ClCompile Include="Application\PointsControle.cpp" />
+    <ClCompile Include="Application\Profil.cpp" />
     <ClCompile Include="Application\Rotation.cpp" />
     <ClCompile Include="Application\Selection.cpp" />
     <ClCompile Include="Application\StrategieSouris.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="Arbre\Noeuds\NoeudPointControle.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudTable.cpp" />
     <ClCompile Include="BoiteCollision.cpp" />
+    <ClCompile Include="Configuration\ConfigProfils.cpp" />
     <ClCompile Include="Configuration\ConfigScene.cpp" />
     <ClCompile Include="Arbre\ArbreRendu.cpp" />
     <ClCompile Include="Arbre\ArbreRenduINF2990.cpp" />
@@ -193,6 +195,7 @@
     <ClInclude Include="Application\JoueurVirtuel.h" />
     <ClInclude Include="Application\Loupe.h" />
     <ClInclude Include="Application\PointsControle.h" />
+    <ClInclude Include="Application\Profil.h" />
     <ClInclude Include="Application\Rotation.h" />
     <ClInclude Include="Application\Selection.h" />
     <ClInclude Include="Application\StrategieSouris.h" />
@@ -204,6 +207,7 @@
     <ClInclude Include="Arbre\Noeuds\NoeudTypes.h" />
     <ClInclude Include="BoiteCollision.h" />
     <ClInclude Include="BoiteCollisionAbstraite.h" />
+    <ClInclude Include="Configuration\ConfigProfils.h" />
     <ClInclude Include="Configuration\ConfigScene.h" />
     <ClInclude Include="Arbre\ArbreRendu.h" />
     <ClInclude Include="Arbre\ArbreRenduINF2990.h" />
