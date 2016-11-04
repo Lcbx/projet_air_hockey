@@ -196,6 +196,13 @@ public:
 	// fonctions get/set nombre de but pour gagner la partie
 	int getNombreButs();
 	bool setNombreButs(int nombre);
+	// fonctions get/set pour activer/deactiver mode partierapide
+	bool getPartieRapide();
+	void setPartieRapide(bool activer);
+	// activer/deactiver la rondelle - mettre en pause
+	void activerRondelle();
+	void deactiverRondelle();
+	bool estEnPauseRondelle();
 	/// Ali
 	/// Renvoie la constante contenant le nom du fichier de configuration
 	//std::string getConfigFile();
@@ -246,8 +253,12 @@ private:
    // buts
    bool butDroite_{ false };
    bool butGauche_{ false };
-
+   // partieRapide
+   bool partieRapide_{ false };
+   // nombre de but pour gagner la partie
    int nombreButsMax_{ 3 };
+   // rondelle en pause ?
+   bool rondelleEnPause_{ false };
    /// Ali
 
 };

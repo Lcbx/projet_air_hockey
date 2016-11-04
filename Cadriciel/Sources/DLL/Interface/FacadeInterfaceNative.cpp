@@ -797,33 +797,122 @@ extern "C"
 	}
 
 	////////////////////////////////////////////////////////////////////////
-	/// @fn 	__declspec(dllexport) bool setButDroite()
+	/// @fn 	__declspec(dllexport) void setButDroite()
 	/// Author : Ali
 	/// Cette fonction permet de modifier la varriable butDroite_ 
 	/// dans facade modele 
 	/// on l'utilise lorsque un des 2 joueurs marque un but 
 	///
-	/// @return bool
+	/// @return rien
 	///
 	////////////////////////////////////////////////////////////////////////
-	__declspec(dllexport) bool setButDroite(bool etat)
+	__declspec(dllexport) void setButDroite(bool etat)
 	{
-		FacadeModele::obtenirInstance()->setButDroite(etat);
-		return etat;
+		FacadeModele::obtenirInstance()->setButDroite(etat);		
 	}
 	////////////////////////////////////////////////////////////////////////
-	/// @fn 	__declspec(dllexport) bool setButGauche()
+	/// @fn 	__declspec(dllexport) void setButGauche()
 	/// Author : Ali
 	/// Cette fonction permet de modifier la varriable butGauche_ 
 	/// dans facade modele 
 	/// on l'utilise lorsque un des 2 joueurs marque un but 
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void setButGauche(bool etat)
+	{
+		 FacadeModele::obtenirInstance()->setButGauche(etat);		
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) int getNombreButs()
+	/// Author : Ali
+	/// @brief : Cette fonction permet de recuperer le nombre de buts pour
+	/// gagner une partie
+	/// 
+	/// @return int
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) int getNombreButs()
+	{
+		return FacadeModele::obtenirInstance()->getNombreButs();
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void setNombreButs(int nombre)
+	/// Author : Ali
+	/// @brief : Cette fonction permet de modifier le nombre de buts pour
+	/// gagner une partie
+	/// 
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void setNombreButs(int nombre)
+	{
+		FacadeModele::obtenirInstance()->setNombreButs(nombre);
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) bool estPartieRapide()
+	/// Author : Ali
+	/// @brief : Cette fonction permet de savoir si on est en mode partie 
+	/// rapide ou non
+	/// 
 	/// @return bool
 	///
 	////////////////////////////////////////////////////////////////////////
-	__declspec(dllexport) bool setButGauche(bool etat)
+	__declspec(dllexport) bool estPartieRapide()
 	{
-		 FacadeModele::obtenirInstance()->setButGauche(etat);
-		 return etat;
+		return FacadeModele::obtenirInstance()->getPartieRapide();
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void setPartieRapide(bool activer)
+	/// Author : Ali
+	/// @brief : Cette fonction permet d'activer ou deactiver le mode partie
+	/// rapide 
+	/// param[in] bool activer : true si activer / false sinon 
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void setPartieRapide(bool activer)
+	{
+		FacadeModele::obtenirInstance()->setPartieRapide(activer);
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void activerRondelle()
+	/// Author : Ali
+	/// @brief : Cette fonction permet de remettre la rondelle en mouvement
+	/// apres qu'elle etait mise en pause
+	/// 
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void activerRondelle()
+	{
+		FacadeModele::obtenirInstance()->activerRondelle();
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void deactiverRondelle()
+	/// Author : Ali
+	/// @brief : Cette fonction permet de mettre la rondelle en pause
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void deactiverRondelle()
+	{
+		FacadeModele::obtenirInstance()->deactiverRondelle();
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) bool estEnPauseRondelle()
+	/// Author : Ali
+	/// @brief : Cette fonction permet de savoir si la rondelle est en 
+	/// pause ou non
+	///
+	/// @return bool 
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) bool estEnPauseRondelle()
+	{
+		return FacadeModele::obtenirInstance()->estEnPauseRondelle();
 	}
 	////////////////////////////////////////////////////////////////////////
 	/// @fn 		__declspec(dllexport) void sauvegarderTouches();
