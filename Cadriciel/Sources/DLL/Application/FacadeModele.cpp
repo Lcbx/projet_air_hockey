@@ -1010,3 +1010,72 @@ int FacadeModele::getNombreButs()
 {
 	return nombreButsMax_;
 }
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::getPartieRapide()
+///
+/// Author : Ali
+/// Cette fonction permet de savoir si on est en mode partie rapide ou non
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::getPartieRapide()
+{
+	return partieRapide_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setPartieRapide(bool activer)
+///
+/// Author : Ali
+/// Cette fonction permet d'activer ou deactiver le mode partie rapide 
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setPartieRapide(bool activer)
+{
+	partieRapide_ = activer;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::activerRondelle()
+///
+/// Author : Ali
+/// @Brief :  Cette fonction permet d'activer la rondelle - apres la pause
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::activerRondelle()
+{
+	rondelleEnPause_ = false;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::deactiverRondelle()
+///
+/// Author : Ali
+/// @Brief :  Cette fonction permet de mettre la rondelle en pause
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::deactiverRondelle()
+{
+	rondelleEnPause_ = true;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::estEnPauseRondelle()
+///
+/// Author : Ali
+/// @Brief :  Cette fonction permet de savoir si la rondelle est en pause 
+/// ou non 
+/// @return bool : true si en pause / false sinon
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::estEnPauseRondelle()
+{
+	return rondelleEnPause_;
+}
+ 
+ 

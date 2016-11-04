@@ -140,41 +140,10 @@ namespace InterfaceGraphique
                 {
                     FonctionsNatives.animer(tempsInterAffichage);
                     FonctionsNatives.dessinerOpenGL();
+                    
                     /// Ali
-                    /////////////////////////////////////////////////////////////////////
-                    if (FonctionsNatives.estButDroite())
-                    {
-                        MessageBox.Show("But Joueur 1");
-                        nbButsJoueur1++;
-                        textBox4.Text = nbButsJoueur1.ToString();
-                        FonctionsNatives.setButDroite(false);
-                        FonctionsNatives.reinitialiserPartieCourante();
-                        //Console.WriteLine("But Droite !!");
-                    }
-                    if (FonctionsNatives.estButGauche())
-                    {
-                        MessageBox.Show("But Joueur 2");
-                        nbButsJoueur2++;
-                        textBox4.Text = nbButsJoueur2.ToString();
-                        FonctionsNatives.setButGauche(false);
-                        FonctionsNatives.reinitialiserPartieCourante();
-                        //Console.WriteLine("But Gauche !!");
-                    }
-                    int nbButsMax = FonctionsNatives.getNombreButs();
-                    if ( (nbButsJoueur1 == nbButsMax) || (nbButsJoueur2 == nbButsMax) )
-                    {
-                        if (nbButsJoueur1 == nbButsMax)
-                            MessageBox.Show("** FELICITATIONS JOUEUR 1 GAGNE **");
-                        else
-                            MessageBox.Show("** FELICITATIONS JOUEUR 2 GAGNE **");
-                        nbButsJoueur1 = 0;
-                        nbButsJoueur2 = 0;
-                        FonctionsNatives.reinitialiserPartieCourante();
-                        menuPrincipal_.Show();
-                        this.Hide();
-                        // TODO -- reintialiser ou retourner en arriere
-                    }
-                    /////////////////////////////////////////////////////////////////////
+                    /// On demare la partie rapide
+                    DemarrerPartie();
 
                 });
             }
@@ -566,7 +535,12 @@ namespace InterfaceGraphique
                 if (estEnPause == false)
                 {
                     FonctionsNatives.deplacerMailletAvecSouris(e.X, e.Y);
+                    //Ali 
+                    // La rondelle peut deplacer
+                    FonctionsNatives.activerRondelle();
                 }
+                else
+                    FonctionsNatives.deactiverRondelle();
             }
 
         }
@@ -1504,7 +1478,7 @@ namespace InterfaceGraphique
                 splitContainer1.Panel1.Hide();
                 splitContainer1.Panel2.Show();
                 // demarrer la partie
-                DemarrerPartie(2, true);
+                //DemarrerPartie(2, true);
             }
             //si mode edition , afficher les menus a cotés + barre des menus
             else
@@ -1701,54 +1675,55 @@ namespace InterfaceGraphique
             Console.WriteLine("--- Joueur Virtuel Desactive' ---");
             FonctionsNatives.setjoueurVirtuel(false);
         }
-
         ///////////////////////////////////////////////////////////////////////
-        /// @fn public void DemarrerPartie(int nombreButsPourGagner)
+        /// @fn public void DemarrerPartie()
         /// Author : Ali
         /// @brief permet de demarer une partie du jeu
-        ///
-        /// param[in] int nombreButsPourGagner : le nombre de buts marques 
-        /// pour pouvoir remporter la partie
         /// 
         /// @return rien
         //
         //////////////////////////////////////////////////////////////////////////////////////////
-        public void DemarrerPartie(int nombreButsPourGagner,bool activerVirtuel)
+        public void DemarrerPartie()
         {
-            // si joueur virtuel est active ou non
-            FonctionsNatives.setjoueurVirtuel(activerVirtuel);
-            // TODO -- set vitesse et prob du joueur virtuel
-            FonctionsNatives.setProbabiliteVirtuel(0.5);
-            FonctionsNatives.setVitesseVirtuel(2);
-
-            // nombre de buts courant pour les 2 joueurs
-            int nbButsJoueur1 = 0;
-            int nbButsJoueur2 = 0;
-            // ConsoleKeyInfo input;
-            //do
+            if (FonctionsNatives.estButDroite())
             {
-                //passerModeTest(true);
-                //DemarerJoueurVirtuel(1, 0.5);
-                //input = Console.ReadKey();
-                if (FonctionsNatives.estButDroite())
-                {
-                    //MessageBox.Show("But Joueur virtuel");
-                    nbButsJoueur1++;
-                    textBox4.Text = nbButsJoueur1.ToString();
-                    //FonctionsNatives.setButDroite(false);
-                    Console.WriteLine("But Droite !!");
-                }
-                if (FonctionsNatives.estButGauche())
-                {
-                    nbButsJoueur2++;
-                    textBox4.Text = nbButsJoueur2.ToString();
-                    //FonctionsNatives.setButGauche(false);
-                    Console.WriteLine("But Gauche !!");
-                }
-            }// while (input.Key != ConsoleKey.Escape);
-           // while (nbButsJoueur1 != nombreButsPourGagner && nbButsJoueur2 != nombreButsPourGagner);
+                MessageBox.Show("Player 1 SCORES !","AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand,
+                    MessageBoxDefaultButton.Button3, MessageBoxOptions.ServiceNotification);
+                nbButsJoueur1++;
+                textBox4.Text = nbButsJoueur1.ToString();
+                FonctionsNatives.setButDroite(false);
+                FonctionsNatives.reinitialiserPartieCourante();
+                //Console.WriteLine("But Droite !!");
+            }
+            if (FonctionsNatives.estButGauche())
+            {
+                MessageBox.Show("Player 2 SCORES !", "AirHockey" , MessageBoxButtons.OK, MessageBoxIcon.Information);
+                nbButsJoueur2++;
+                textBox4.Text = nbButsJoueur2.ToString();
+                FonctionsNatives.setButGauche(false);
+                FonctionsNatives.reinitialiserPartieCourante();
+                //Console.WriteLine("But Gauche !!");
+            }
+            int nbButsMax = FonctionsNatives.getNombreButs();
+            if ((nbButsJoueur1 == nbButsMax) || (nbButsJoueur2 == nbButsMax))
+            {
+                if (nbButsJoueur1 == nbButsMax)
+                    MessageBox.Show("** Congratulations! Player 1 wins ! **", "AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand,
+                    MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                
+                else
+                    MessageBox.Show("** Congratulations! Player 2 wins ! **", "AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                nbButsJoueur1 = 0;
+                nbButsJoueur2 = 0;
+                FonctionsNatives.reinitialiserPartieCourante();
+                menuPrincipal_.Show();
+                this.Hide();
+                // TODO -- reintialiser ou retourner en arriere
+            }            
         }
-        //
+
+        //////////////////////////////////////////////////////////////////////////////////////////
     }
 
     static partial class FonctionsNatives
@@ -1877,6 +1852,8 @@ namespace InterfaceGraphique
         
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void deplacerMailletAvecSouris(double x, double y);
+
+        // Ali
         // afficher ou effacer les points de controle
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void afficherPointControle();
@@ -1914,6 +1891,20 @@ namespace InterfaceGraphique
         public static extern int getNombreButs();
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void setNombreButs(int nombre);
+        // fonctions mode partie rapide
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool estPartieRapide();
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void setPartieRapide(bool activer);
+        // fonctions rondelle en pause 
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void activerRondelle();
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void deactiverRondelle();
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool estEnPauseRondelle();
+        //Ali
+
     }
 }
 

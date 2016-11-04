@@ -849,6 +849,73 @@ extern "C"
 	{
 		FacadeModele::obtenirInstance()->setNombreButs(nombre);
 	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) bool estPartieRapide()
+	/// Author : Ali
+	/// @brief : Cette fonction permet de savoir si on est en mode partie 
+	/// rapide ou non
+	/// 
+	/// @return bool
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) bool estPartieRapide()
+	{
+		return FacadeModele::obtenirInstance()->getPartieRapide();
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void setPartieRapide(bool activer)
+	/// Author : Ali
+	/// @brief : Cette fonction permet d'activer ou deactiver le mode partie
+	/// rapide 
+	/// param[in] bool activer : true si activer / false sinon 
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void setPartieRapide(bool activer)
+	{
+		FacadeModele::obtenirInstance()->setPartieRapide(activer);
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void activerRondelle()
+	/// Author : Ali
+	/// @brief : Cette fonction permet de remettre la rondelle en mouvement
+	/// apres qu'elle etait mise en pause
+	/// 
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void activerRondelle()
+	{
+		FacadeModele::obtenirInstance()->activerRondelle();
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void deactiverRondelle()
+	/// Author : Ali
+	/// @brief : Cette fonction permet de mettre la rondelle en pause
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void deactiverRondelle()
+	{
+		FacadeModele::obtenirInstance()->deactiverRondelle();
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) bool estEnPauseRondelle()
+	/// Author : Ali
+	/// @brief : Cette fonction permet de savoir si la rondelle est en 
+	/// pause ou non
+	///
+	/// @return bool 
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) bool estEnPauseRondelle()
+	{
+		return FacadeModele::obtenirInstance()->estEnPauseRondelle();
+	}
+	
+
 
 }
 

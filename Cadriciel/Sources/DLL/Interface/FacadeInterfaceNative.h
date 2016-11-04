@@ -131,14 +131,12 @@ extern "C" {
 	// probabilite
 	__declspec(dllexport) void setProbabiliteVirtuel(double probabilite);
 	__declspec(dllexport) double getProbabiliteVirtuel();
-
 	///activer ou deactiver le rayon d'attraction
 	__declspec(dllexport) void activerRayonAttraction();
 	__declspec(dllexport) void deactiverRayonAttraction();
 	///afficher ou effacer les points de controle
 	__declspec(dllexport) void afficherPointControle();
 	__declspec(dllexport) void effacerPointControle();
-
 	// savoir s'il ya un but droit ou gauche
 	__declspec(dllexport) bool estButDroite();
 	__declspec(dllexport) bool estButGauche();
@@ -148,6 +146,13 @@ extern "C" {
 	// set/get le nombre de but pour gagner la partie
 	__declspec(dllexport) int getNombreButs();
 	__declspec(dllexport) void setNombreButs(int nombre);
+	// set/get partieRapide
+	__declspec(dllexport) bool estPartieRapide();
+	__declspec(dllexport) void setPartieRapide(bool activer);
+	// activer/deactiver la rondelle - mettre en pause
+	__declspec(dllexport) void activerRondelle();
+	__declspec(dllexport) void deactiverRondelle();
+	__declspec(dllexport) bool estEnPauseRondelle();
 	/// Ali
 }
 #endif // __FACADE_INTERFACE_NATIVE_H__
