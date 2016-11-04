@@ -1,13 +1,12 @@
-//////////////////////////////////////////////////////////////////////////////
-/// @file NoeudAbstraitTest.h
-/// @author Julien Gascon-Samson
-/// @date 2011-07-16
+////////////////////////////////////////////////////////////////////////////////////
+/// @file NoeudCompositeTest.cpp
+/// @author Wajdi Gharsalli
+/// @date 2016-11-03
 /// @version 1.0
 ///
 /// @addtogroup inf2990 INF2990
 /// @{
-//////////////////////////////////////////////////////////////////////////////
-
+////////////////////////////////////////////////////////////////////////////////////
 #ifndef _TESTS_NOEUDCOMPOSITETEST_H
 #define _TESTS_NOEUDCOMPOSITETEST_H
 
@@ -22,8 +21,8 @@ class NoeudComposite;
 /// @brief Classe de test cppunit pour tester le bon fonctionnement des
 ///        méthodes de la classe NoeudAbstrait
 ///
-/// @author Julien Gascon-Samson
-/// @date 2011-07-16
+/// @author Wajdi Gharsalli
+/// @date 2016-11-03
 ///////////////////////////////////////////////////////////////////////////
 class NoeudCompositeTest : public CppUnit::TestFixture
 {
@@ -38,7 +37,7 @@ class NoeudCompositeTest : public CppUnit::TestFixture
 	CPPUNIT_TEST(testVider);
 	CPPUNIT_TEST(testAjout);
 	CPPUNIT_TEST(testSuppression);
-	CPPUNIT_TEST(testDansTable);
+	CPPUNIT_TEST(testTrouverObjet);
 
 
 	CPPUNIT_TEST_SUITE_END();
@@ -70,7 +69,7 @@ public:
 	void testSuppression();
 
 	///Cas de test: dans la table
-	void testDansTable();
+	void testTrouverObjet();
 
 
 
