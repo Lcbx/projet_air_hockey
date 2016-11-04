@@ -192,6 +192,21 @@
     <ClCompile Include="Test.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
+    <ClCompile Include="VisiteurCollision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Affichage_debuggage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Configuration\ConfigTouches.cpp">
+      <Filter>Source Files\Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\JoeurVirtuel.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\NoeudCompositeTest.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\FacadeModele.h">
@@ -337,6 +352,21 @@
     </ClInclude>
     <ClInclude Include="Test.h">
       <Filter>Header Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="VisiteurCollision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Affichage_debuggage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuration\ConfigTouches.h">
+      <Filter>Header Files\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\JoueurVirtuel.h">
+      <Filter>Header Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\NoeudCompositeTest.h">
+      <Filter>Header Files\Tests</Filter>
     </ClInclude>
     <ClInclude Include="Affichage_debuggage.h">
       <Filter>Header Files</Filter>

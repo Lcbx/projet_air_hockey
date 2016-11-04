@@ -494,7 +494,6 @@ void NoeudAbstrait::accepter(Visiteur *v)
 ////////////////////////////////////////////////
 void NoeudAbstrait::setFrere(NoeudAbstrait* frere)
 {
-	cout << "Dans le set " << endl;
 	this->frere_ = frere;
 }
 

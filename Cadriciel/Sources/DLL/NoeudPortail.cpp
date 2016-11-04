@@ -18,6 +18,8 @@
 #include "Utilitaire.h"
 
 #include <../Visiteur.h>
+#include "Affichage_debuggage.h"
+
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -68,10 +70,10 @@ void NoeudPortail::afficherConcret(const glm::mat4& vueProjection) const
 	//vbo_->dessiner(vueProjection);
 	glm::vec3 p = { obtenirPositionRelative().x ,obtenirPositionRelative().y,obtenirPositionRelative().z };
 	glm::vec3 position = glm::vec3(vueProjection * glm::vec4(p, 1));
-	if (affiche_)
+	if (Debug::obtenirInstance().afficherAttraction)
 	{
 		//tracerCercle(vueProjection, position.x, position.y,  2*obtenirRayon(), 50);
-		tracerCercle(vueProjection, position.x, position.y, 3 * obtenirRayon(), 50);
+		tracerCercle(vueProjection, position.x, position.y, 3 * obtenirRayonModele(), 50);
 	}
 
 	vbo_->dessiner(vueProjection);

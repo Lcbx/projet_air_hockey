@@ -44,23 +44,34 @@ namespace InterfaceGraphique
 
         private void editeur_Click(object sender, EventArgs e)
         {
-          
+         
             edition_.Show();                   //  l'afficher
             this.Hide();                      // fermer la fenêtre Menu principal
-
+            edition_.passerModeTest(false);
         }
 
         private void partieRapide_Click(object sender, EventArgs e)
         {
-            edition_.Show();
-            this.Hide();    
+            ChoixProfil choix = new ChoixProfil();
+            
+            choix.setMenuPrincipal(this, edition_);
+            choix.Show();
+
+            //Chargement zoneChar = new Chargement(edition_);
+            //zoneChar.ShowDialog();
+            //if (zoneChar.estclique == true)
+            //{
+            //    edition_.Show();
+            //    edition_.passerModePartie(true);
+            //    this.Hide();
+            //}
         }
 
        
         private void configuration_Click(object sender, EventArgs e)
         {
-           configuration_.Show();  //  afficher la boite de configuration quand on clique sur  
-           this.Hide();
+           configuration_.ShowDialog();  //  afficher la boite de configuration quand on clique sur  
+           //this.Hide();
         }
 
         /// <summary>

@@ -18,8 +18,9 @@ namespace InterfaceGraphique
         
         private static MenuPrincipal menuPrincipal;
         private static Edition edition;
-        private static Configuration configuration;
-        private static TimeSpan dernierTemps;
+        public static Configuration configuration;
+        private static Profil joueurVirtuel;
+        private static TimeSpan dernierTemps; 
         private static TimeSpan tempsAccumule;
         private static Stopwatch chrono = Stopwatch.StartNew();
         private static TimeSpan tempsEcouleVoulu = TimeSpan.FromTicks(TimeSpan.TicksPerSecond / NB_IMAGES_PAR_SECONDE);
@@ -46,18 +47,20 @@ namespace InterfaceGraphique
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            menuPrincipal = new MenuPrincipal();
             edition = new Edition();
             configuration = new Configuration();
-            
-
-            //Application.Run(edition);
-            menuPrincipal = new MenuPrincipal();
+            joueurVirtuel = new Profil();
+             
+            ///Application.Run(edition);
+           
             menuPrincipal.setMenu(edition, configuration);
             edition.setMenuPrincipal(menuPrincipal);
             configuration.setMenuPrincipalConfig(menuPrincipal);
+
             Application.Run(menuPrincipal);
         }
-
+            
 
         ///////////////////////////////////////////////////////////////////////
         /// @fn    static void ExecuterQuandInactif(object sender, EventArgs e)
@@ -74,7 +77,7 @@ namespace InterfaceGraphique
         {
             FonctionsNatives.Message message;
 
-            while (!FonctionsNatives.PeekMessage(out message, IntPtr.Zero, 0, 0, 0))
+            while (!FonctionsNatives.PeekMessage(out message, IntPtr.Zero, 0, 0, 0))        
             {
                 TimeSpan currentTime = chrono.Elapsed;
                 TimeSpan elapsedTime = currentTime - dernierTemps;
@@ -87,8 +90,8 @@ namespace InterfaceGraphique
                     lock (unLock)
                     {
                         if (edition != null && peutAfficher)
-                            edition.MettreAJour((double)tempsAccumule.Ticks / TimeSpan.TicksPerSecond);
-
+                            edition.MettreAJour((double)tempsAccumule.Ticks / TimeSpan.TicksPerSecond);                
+                         
                     
                     }
                     tempsAccumule = TimeSpan.Zero;

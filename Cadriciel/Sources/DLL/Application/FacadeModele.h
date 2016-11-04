@@ -15,9 +15,11 @@
 #include <ctime>
 #include <string>
 #include "EtatOpenGL.h"
+#include "../Configuration/ConfigTouches.h"
 
 class NoeudAbstrait;
 class ArbreRenduINF2990;
+class JoueurVirtuel;
 
 namespace vue {
    class Vue;
@@ -37,9 +39,9 @@ struct CoefficientConfiguration{
 	double acceleration;	//Accélération des bonus vitesse
 } typedef CoefficientConfiguration;
 
-const CoefficientConfiguration COEFFICIENTS_MINIMAUX = { 0.0, 0, 0 };
-const CoefficientConfiguration COEFFICIENTS_DEFAULT = { 1.2, 0.8, 5 };
-const CoefficientConfiguration COEFFICIENTS_MAXIMAUX = { 100, 1, 10 };
+const CoefficientConfiguration COEFFICIENTS_MINIMAUX = { 0, 0, 0 };
+const CoefficientConfiguration COEFFICIENTS_DEFAULT = { 10, 0.8, 10 };
+const CoefficientConfiguration COEFFICIENTS_MAXIMAUX = { 100, 1, 100 };
 
 ///////////////////////////////////////////////////////////////////////////
 /// @class FacadeModele
@@ -59,18 +61,28 @@ public:
 
 	/// Crée un contexte OpenGL et initialise celui-ci.
 	void initialiserOpenGL(HWND hWnd);
+
 	/// Charge la configuration à partir d'un fichier XML.
 	void chargerConfiguration() const;
 	/// Enregistre la configuration courante dans un fichier XML.
 	void enregistrerConfiguration() const;
+
 	/// Charge la zone de jeu à partir d'un fichier XML.
 	void chargerZoneJeu(char* fichierZoneJeu) const;
 	/// Enregistre la zone de jeu courante dans un fichier XML.
 	void enregistrerZoneJeu(char* fichierZoneJeu) const;
+	
+	/// Charge les touches du joueur 2 à partir d'un fichier XML.
+	void chargerTouches();
+	/// Enregistre les touches du joueur 2 dans un fichier XML.
+	void enregistrerTouches(int haut = ConfigTouches::HAUTDEF, int droite = ConfigTouches::DROITEDEF, int bas = ConfigTouches::BASDEF, int gauche = ConfigTouches::GAUCHEDEF);
+	/// Retourne les touches du joueur 2.
+	void obtenirTouches(int *touches);
+
 	/// Libère le contexte OpenGL.
 	void libererOpenGL();
 	/// Affiche le contenu du modèle.
-	void afficher();
+	void afficher() const;
 	/// Affiche la base du contenu du modèle.
 	void afficherBase() const;
 
@@ -160,6 +172,41 @@ public:
 	///permert de deplacer le maillet avec la souris
 	void deplacerMailletAvecSouris(double x, double y);
 
+	/// Ali
+	/// activer ou deactiver le rayon d'attraction des portails
+	void activerRayonAttraction();
+	void deactiverRayonAttraction();
+	/// afficher ou effacer les points de controle
+	void afficherPointControle();
+	void effacerPointControle();
+	///deplacer le maillet du jouer virtuel
+	void ActiverJoueurVirtuel(double vitesse, double probabilite);
+	// activer deactiver joueur virtuel
+	void setjoueurVirtuel(bool activer);
+	bool getjoueurVirtuel();
+	double getVitesseVirtuel();
+	void setVitesseVirtuel(double vitesse);
+	double getProbabiliteVirtuel();
+	void setProbabiliteVirtuel(double probabilite);
+	// fonctions set/get des buts
+	void setButDroite(bool but);
+	void setButGauche(bool but);
+	bool getButDroite();
+	bool getButGauche();
+	// fonctions get/set nombre de but pour gagner la partie
+	int getNombreButs();
+	bool setNombreButs(int nombre);
+	// fonctions get/set pour activer/deactiver mode partierapide
+	bool getPartieRapide();
+	void setPartieRapide(bool activer);
+	// activer/deactiver la rondelle - mettre en pause
+	void activerRondelle();
+	void deactiverRondelle();
+	bool estEnPauseRondelle();
+	/// Ali
+	/// Renvoie la constante contenant le nom du fichier de configuration
+	//std::string getConfigFile();
+
 private:
 
    /// Constructeur par défaut.
@@ -192,17 +239,28 @@ private:
    /// Arbre de rendu contenant les différents objets de la scène.
    ArbreRenduINF2990* arbre_{ nullptr };
 
+   /// Configuration des touches
+   ConfigTouches _configTouches;
+
    /// Coefficients de configuration
    CoefficientConfiguration coeff_ = COEFFICIENTS_DEFAULT;
+   
+   /// Ali
+   /// joueur virtuel 
+   bool joueurVirtuelActive_{false};
+   double vitesseVirtuelle_{ 1. };
+   double probabilite_{ 0.5 };
+   // buts
+   bool butDroite_{ false };
+   bool butGauche_{ false };
+   // partieRapide
+   bool partieRapide_{ false };
+   // nombre de but pour gagner la partie
+   int nombreButsMax_{ 3 };
+   // rondelle en pause ?
+   bool rondelleEnPause_{ false };
+   /// Ali
 
-
-   //animation
-   ///temps ecoule pour l'animation
-   long currentTime_;
-   ///remet le temps ecoule a 0
-   void dtReset() { currentTime_ = clock(); }
-   ///retourne le temps ecoule
-   long dt() { long temp = currentTime_; currentTime_ = clock(); return currentTime_ - temp; }
 };
 
 

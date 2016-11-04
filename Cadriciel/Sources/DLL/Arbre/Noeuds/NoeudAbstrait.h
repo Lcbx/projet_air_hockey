@@ -39,6 +39,7 @@ class VisiteurSelection;
 class VisiteurRotation;
 class VisiteurMiseEchelle;
 class VisiteurAjout;
+class VisiteurCollision;
 
 
 
@@ -180,7 +181,7 @@ public:
 	///definir le deuxieme joueur
 	bool estDeuxiemeJoueur = false;
 
-
+	
 protected:
 	/// Type du noeud.
 	std::string      type_;

@@ -28,11 +28,7 @@ extern "C" {
 	__declspec(dllexport) bool executerTests();
 	
 	// Les fonction qui déplace l'objet vers la gauche, vers la droite, vers le bas et vers le haut
-	__declspec(dllexport) void  deplacerVersLaGauche(int toucheDeplacementAGauche);
-	__declspec(dllexport) void deplacertVersLaDroite(int toucheDeplacementADroite_);
-	__declspec(dllexport) void deplacerVersLeHaut(int toucheDeplacementEnHaut_);
-	__declspec(dllexport)  void deplacerVersLeBas(int toucheDeplacementEnBas_);
-	
+	__declspec(dllexport) void deplacerMaillet(int toucheDeplacementAGauche_, int toucheDeplacementADroite_, int toucheDeplacementEnHaut_, int toucheDeplacementEnBas_);
 	
 	__declspec(dllexport) void ajouterPortail(int x1, int y1);
 	//__declspec(dllexport) void escEnfonce(bool esc);
@@ -96,11 +92,17 @@ extern "C" {
 	__declspec(dllexport) double getCoefficientRebond();
 	/// Permet d'obtenir le coefficient d'accélération
 	__declspec(dllexport) double getCoefficientAcceleration();
+
 	// Methode pour sauvegarder la zone de jeu
 	__declspec(dllexport) void enregistrerZoneJeu(char *fichierZoneJeu);
-
 	// Methode pour charger la zone de jeu
 	__declspec(dllexport) void chargerZoneJeu(char *fichierZoneJeu);
+
+	// Methode pour modifier et enregistrer les touches du joueur 2.
+	__declspec(dllexport) void sauvegarderTouches(int haut, int droite, int bas, int gauche);
+	// Methode pour obtenir les touches du joueur 2.
+	__declspec(dllexport) void obtenirTouches(int *touches);
+
 
 	__declspec(dllexport) bool objetEstDansLaTable();
 
@@ -123,6 +125,41 @@ extern "C" {
 	///deplacer le maillet du joueur 1 avec souris
 	__declspec(dllexport) void deplacerMailletAvecSouris(double x, double y);
 
+	/// Ali
+	/// Joueur Virtuel
+	__declspec(dllexport) void activerJoueurVirtuel(double vitesse, double probabilite);
+	// activer joueur
+	__declspec(dllexport) void setjoueurVirtuel(bool activer);
+	__declspec(dllexport) bool getjoueurVirtuel();
+	// vitesse
+	__declspec(dllexport) void setVitesseVirtuel(double vitesse);
+	__declspec(dllexport) double getVitesseVirtuel();
+	// probabilite
+	__declspec(dllexport) void setProbabiliteVirtuel(double probabilite);
+	__declspec(dllexport) double getProbabiliteVirtuel();
+	///activer ou deactiver le rayon d'attraction
+	__declspec(dllexport) void activerRayonAttraction();
+	__declspec(dllexport) void deactiverRayonAttraction();
+	///afficher ou effacer les points de controle
+	__declspec(dllexport) void afficherPointControle();
+	__declspec(dllexport) void effacerPointControle();
+	// savoir s'il ya un but droit ou gauche
+	__declspec(dllexport) bool estButDroite();
+	__declspec(dllexport) bool estButGauche();
+	// si un joueur marque un but , on remet les 2 a false
+	__declspec(dllexport) void setButDroite(bool etat);
+	__declspec(dllexport) void setButGauche(bool etat);
+	// set/get le nombre de but pour gagner la partie
+	__declspec(dllexport) int getNombreButs();
+	__declspec(dllexport) void setNombreButs(int nombre);
+	// set/get partieRapide
+	__declspec(dllexport) bool estPartieRapide();
+	__declspec(dllexport) void setPartieRapide(bool activer);
+	// activer/deactiver la rondelle - mettre en pause
+	__declspec(dllexport) void activerRondelle();
+	__declspec(dllexport) void deactiverRondelle();
+	__declspec(dllexport) bool estEnPauseRondelle();
+	/// Ali
 	///Permet de tester le mode tournoi TODO: Retirer pour la remise
 	__declspec(dllexport) void testTournoi();
 

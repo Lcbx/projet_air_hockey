@@ -96,8 +96,17 @@ namespace InterfaceGraphique
         //
         //////////////////////////////////////////////////////////////////////////////////////////
         public void saveLastFile() {
-            if(edition_.getCurrentFile() != "")
-                FonctionsNatives.enregistrerZoneJeu(Path.Combine(Edition.SAVE_FILEPATH, edition_.getCurrentFile() + ".xml").ToCharArray());
+            if (edition_.getCurrentFile() != "")
+            {
+
+                char[] f = Path.Combine(Edition.SAVE_FILEPATH, edition_.getCurrentFile() + ".xml").ToCharArray();
+                char[] file = new char[f.Length + 1];
+                for (int i = 0; i < f.Length; i++)
+                    file[i] = f[i];
+                file[f.Length] = '\0';
+
+                FonctionsNatives.enregistrerZoneJeu(file);
+            }
         }
 
 

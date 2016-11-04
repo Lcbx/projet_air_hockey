@@ -129,12 +129,14 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Affichage_debuggage.cpp" />
     <ClCompile Include="Application\AjoutAccelerateur.cpp" />
     <ClCompile Include="Application\AjoutMur.cpp" />
     <ClCompile Include="Application\AjoutPortail.cpp" />
     <ClCompile Include="Application\Deplacement.cpp" />
     <ClCompile Include="Application\Duplication.cpp" />
     <ClCompile Include="Application\FacadeModele.cpp" />
+    <ClCompile Include="Application\JoeurVirtuel.cpp" />
     <ClCompile Include="Application\Loupe.cpp" />
     <ClCompile Include="Application\PointsControle.cpp" />
     <ClCompile Include="Application\Rotation.cpp" />
@@ -150,6 +152,7 @@
     <ClCompile Include="Arbre\ArbreRenduINF2990.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudAbstrait.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudComposite.cpp" />
+    <ClCompile Include="Configuration\ConfigTouches.cpp" />
     <ClCompile Include="Interface\FacadeInterfaceNative.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Trim\Desktop\inf2990-10\Cadriciel\Sources\DLL\Application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -167,7 +170,9 @@
     <ClCompile Include="Tests\BancTests.cpp" />
     <ClCompile Include="Tests\ConfigSceneTest.cpp" />
     <ClCompile Include="Tests\NoeudAbstraitTest.cpp" />
+    <ClCompile Include="Tests\NoeudCompositeTest.cpp" />
     <ClCompile Include="VisiteurAjout.cpp" />
+    <ClCompile Include="VisiteurCollision.cpp" />
     <ClCompile Include="VisiteurDansLaTable.cpp" />
     <ClCompile Include="VisiteurDeplacement.cpp" />
     <ClCompile Include="VisiteurDuplication.cpp" />
@@ -185,6 +190,7 @@
     <ClInclude Include="Application\Deplacement.h" />
     <ClInclude Include="Application\Duplication.h" />
     <ClInclude Include="Application\FacadeModele.h" />
+    <ClInclude Include="Application\JoueurVirtuel.h" />
     <ClInclude Include="Application\Loupe.h" />
     <ClInclude Include="Application\PointsControle.h" />
     <ClInclude Include="Application\Rotation.h" />
@@ -204,6 +210,7 @@
     <ClInclude Include="Arbre\Usines\UsineNoeud.h" />
     <ClInclude Include="Arbre\Noeuds\NoeudAbstrait.h" />
     <ClInclude Include="Arbre\Noeuds\NoeudComposite.h" />
+    <ClInclude Include="Configuration\ConfigTouches.h" />
     <ClInclude Include="Interface\FacadeInterfaceNative.h" />
     <ClInclude Include="MiseEchelle.h" />
     <ClInclude Include="NoeudBonus.h" />
@@ -217,9 +224,11 @@
     <ClInclude Include="Tests\BancTests.h" />
     <ClInclude Include="Tests\ConfigSceneTest.h" />
     <ClInclude Include="Tests\NoeudAbstraitTest.h" />
+    <ClInclude Include="Tests\NoeudCompositeTest.h" />
     <ClInclude Include="Tournoi.h" />
     <ClInclude Include="Visiteur.h" />
     <ClInclude Include="VisiteurAjout.h" />
+    <ClInclude Include="VisiteurCollision.h" />
     <ClInclude Include="VisiteurDansLaTable.h" />
     <ClInclude Include="VisiteurDeplacement.h" />
     <ClInclude Include="VisiteurDuplication.h" />

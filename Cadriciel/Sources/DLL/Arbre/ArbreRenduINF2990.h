@@ -115,9 +115,26 @@ public:
   ///deplacer avec souris
   void deplacerMailletAvecSouris(glm::dvec3 pos);
 
+  ///activer ou deactiver le rayon d'attraction d'un portail
+  void activerRayonPortail();
+  void deactiverRayonPortail();
+  /// afficher ou effacer les points de controle
+  void afficherPointControle();
+  void effacerPointControle();
+
+  int getScoreMoi() { return scoreMoi_; }
+  void setScoreMoi(int scoreMoi) { scoreMoi_ = scoreMoi; }
+
+  int getScoreAutre() { return scoreAutre_; }
+  void setScoreAutre(int scoreAutre) { scoreAutre_ = scoreAutre; }
+  NoeudAbstrait* obtenirMailletManuel();
+  // si le joueur Virtuel Defensif est active' ou non 
+  bool joueurVirtuelDefensif{ true };
 
 private :
 	NoeudTable* noeudTable_;
+	int scoreMoi_;
+	int scoreAutre_;
 };
 
 
