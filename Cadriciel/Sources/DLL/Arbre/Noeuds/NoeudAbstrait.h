@@ -181,9 +181,7 @@ public:
 	///definir le deuxieme joueur
 	bool estDeuxiemeJoueur = false;
 
-	/// vitesse du maillet
-	double vitesse{ 10. };
-
+	
 protected:
 	/// Type du noeud.
 	std::string      type_;

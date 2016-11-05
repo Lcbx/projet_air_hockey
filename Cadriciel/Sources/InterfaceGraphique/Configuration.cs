@@ -17,22 +17,23 @@ namespace InterfaceGraphique
         private static MenuPrincipal menuPrincipal_;
 
         //intilailser les touches du clavier par defaut
-        private int toucheDeplaceAGauche_ = (int)Keys.A;
-        private int toucheDeplaceEnBas_ = (int)Keys.S;
-        private int toucheDeplaceADroite_ = (int)Keys.D;
-        private int toucheDeplaceEnHaut_ = (int)Keys.W;
+        private int toucheDeplaceAGauche_;
+        private int toucheDeplaceEnBas_;
+        private int toucheDeplaceADroite_;
+        private int toucheDeplaceEnHaut_;
 
         //le nombre de buts nécessaires (entre 1 et 5) pour gagner une partie.
         private int scorePourGangner = 2;
 
+        //les attributs de Profil
+        //private float vitesse = 0;
+        //private string nom = "";
+        //private float probaDAgirPassivemnt = 0;
 
         private bool estVirtuel = true;
         Profil joueurVirtuelDefault_ = new Profil();
         Profil joueurVirtuelCourant_;
         List<Profil> profils =new List<Profil>();
-        private string nom_ = "";
-        private double vitesse_ = 0;
-        private double ProbDePassivite_ = 0;
         
         
 
@@ -46,7 +47,6 @@ namespace InterfaceGraphique
         private bool modifierActif = false;
         private bool ajouterActif = false;
         public Configuration()
-
         {
             InitializeComponent();
             profils.Add(joueurVirtuelDefault_);
@@ -56,6 +56,17 @@ namespace InterfaceGraphique
             textBox3.Text=(Convert.ToString(joueurVirtuelCourant_.getProbProfil()));
             listDeProfils.Items.Add(joueurVirtuelCourant_.getNomProfil());
 
+            
+            int[] touches = new int[4];
+            FonctionsNatives.obtenirTouches(touches);
+            toucheDeplaceEnHaut_ = touches[0];
+            toucheDeplaceADroite_ = touches[1];
+            toucheDeplaceEnBas_ = touches[2];
+            toucheDeplaceAGauche_ = touches[3];
+            this.haut.Text = ((Keys)touches[0]).ToString();
+            this.droite.Text = ((Keys)touches[1]).ToString();
+            this.bas.Text = ((Keys)touches[2]).ToString();
+            this.gauche.Text = ((Keys)touches[3]).ToString();
         }
 
         public void setMenuPrincipalConfig(MenuPrincipal menuPrincipal)
@@ -73,26 +84,28 @@ namespace InterfaceGraphique
             this.droite.Text = "D";
             this.bas.Text = "S";
             this.haut.Text = "W";
+            FonctionsNatives.sauvegarderTouches(toucheDeplaceEnHaut_, toucheDeplaceADroite_, toucheDeplaceEnBas_, toucheDeplaceAGauche_);
         }
 
         private void appliquer_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            menuPrincipal_.Show();
+            FonctionsNatives.sauvegarderTouches(toucheDeplaceEnHaut_, toucheDeplaceADroite_, toucheDeplaceEnBas_, toucheDeplaceAGauche_);
         }
 
-      private string changerTouche(KeyEventArgs ke)
+        private string changerTouche(KeyEventArgs ke)
             {
                 KeysConverter kc = new KeysConverter();
                 string keyChar = kc.ConvertToString(ke.KeyData);
                 return keyChar;
             }
+
+
         private void gauche_KeyDown(object sender, KeyEventArgs e)
         {
             if (toucheDeplaceADroite_ == e.KeyValue)
             {
                 toucheDeplaceADroite_ = toucheDeplaceAGauche_;
-                this.droite.Text =this.gauche.Text;
+                this.droite.Text = this.gauche.Text;
                 toucheDeplaceAGauche_ = e.KeyValue;
                 this.gauche.Text = changerTouche(e);
             }
@@ -275,14 +288,11 @@ namespace InterfaceGraphique
 
         private void listDeProfils_SelectedIndexChanged(object sender, EventArgs e)
         {
-            for (int i = 0; i < profils.Count; i++)
-               
-                if (i ==listDeProfils.SelectedIndex)
+            for (int i = 0; i < Convert.ToInt32(profils.LongCount()); i++)
+
+                if (profils[i]==listDeProfils.SelectedItem)
                 {
                     joueurVirtuelCourant_ = profils[i];
-                    nom_ = joueurVirtuelCourant_.getNomProfil();
-                    vitesse_= joueurVirtuelCourant_.getVitesseProfil();
-                    ProbDePassivite_= joueurVirtuelCourant_.getProbProfil();
                     textBox1.Text = (joueurVirtuelCourant_.getNomProfil());
                     textBox2.Text = (Convert.ToString(joueurVirtuelCourant_.getVitesseProfil()));
                     textBox3.Text = (Convert.ToString(joueurVirtuelCourant_.getProbProfil()));
@@ -300,17 +310,18 @@ namespace InterfaceGraphique
 
         private void button2_Click(object sender, EventArgs e)
         {
-            for (int i = 1; i < profils.Count; i++)
+            for (int i = 0; i < profils.Count; i++)
 
-                if (i == listDeProfils.SelectedIndex)
+                if (profils[i] == listDeProfils.SelectedItem)
                 {
                     profils.Remove(profils[i]);
-                    listDeProfils.Items.Remove(textBox1.Text);
-                    textBox1.Text = "";
-                    textBox2.Text = "";
-                    textBox3.Text = "";
                 }
-            
+             listDeProfils.Items.Remove(textBox1.Text);
+        }
+
+        private void Configuration_Shown(object sender, EventArgs e)
+        {
+
         }
 
         private void appliquer2_Click(object sender, EventArgs e)
@@ -322,54 +333,53 @@ namespace InterfaceGraphique
 
             if (ajouterActif)
             {
+                
                 if (!(listDeProfils.Items.Contains(textBox1.Text)))
                 {
                     profils.Add(joueur);
                     listDeProfils.Items.Add(textBox1.Text);
-                    textBox1.Text = "";
-                    textBox2.Text = "";
-                    textBox3.Text = "";
                     ajouterActif = false;
-                    creationProfil.Enabled = false;
                 }
             }
 
             if (modifierActif)
             {
-                for (int i = 1; i < profils.Count; i++)
+                for (int i = 0; i < profils.LongCount(); i++)
 
-                    if (i==listDeProfils.SelectedIndex)
+                    if (listDeProfils.Items.Equals(profils[i].getNomProfil()))
                     {
-                       
                         profils[i].setNomProfil(textBox1.Text);
                         profils[i].setVitesseProfil(Convert.ToDouble(textBox2.Text));
                         profils[i].setProbProfil(Convert.ToDouble(textBox3.Text));
                         modifierActif = false;
-                        listDeProfils.Items.RemoveAt(i);
+                        listDeProfils.Items.Remove(textBox1.Text);
                         listDeProfils.Items.Add(textBox1.Text);
-                       
                     }
-                creationProfil.Enabled = false;
+               
             }
 
             }
-
-        private void fermer3_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            menuPrincipal_.Show();
-        }
 
         private void Configuration_Load(object sender, EventArgs e)
         {
-            this.Hide();
-            menuPrincipal_.Show();
+
         }
 
-        private void fermerDebogage_Click(object sender, EventArgs e)
+        private void Configuration_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Hide();
-            menuPrincipal_.Show();
+
+            int[] touches = new int[4];
+            FonctionsNatives.obtenirTouches(touches);
+            toucheDeplaceEnHaut_ = touches[0];
+            toucheDeplaceADroite_ = touches[1];
+            toucheDeplaceEnBas_ = touches[2];
+            toucheDeplaceAGauche_ = touches[3];
+            this.haut.Text = ((Keys)touches[0]).ToString();
+            this.droite.Text = ((Keys)touches[1]).ToString();
+            this.bas.Text = ((Keys)touches[2]).ToString();
+            this.gauche.Text = ((Keys)touches[3]).ToString();
+
         }
     }
     static partial class FonctionsNatives
@@ -377,10 +387,12 @@ namespace InterfaceGraphique
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void touches(int toucheDeplacementAGauche_, int toucheDeplacementADroite_, int toucheDeplacementEnHaut_, int toucheDeplacementEnBas_);
 
+        // Configuration des touches
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void profilCourant(string nom, double vitesse_, double ProbDePassivite_);
+        public static extern void sauvegarderTouches(int haut, int droite, int bas, int gauche);
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void affichageDebog(bool debogageActif_, bool debogCollision_, bool debogVitesse_, bool eclairageActif_, bool effetVisuelActif);
+        public static extern void obtenirTouches(int[] touches);
+
     }
 }

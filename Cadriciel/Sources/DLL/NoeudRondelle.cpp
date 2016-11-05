@@ -22,10 +22,8 @@
 #include "Affichage_debuggage.h"
 #include "ArbreRenduINF2990.h"
 #include "NoeudTable.h"
-//#include "JoueurVirtuel.h"
 
-
-
+#include "../Application/JoueurVirtuel.h"
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -102,152 +100,169 @@ void NoeudRondelle::animer(float temps)
 {
 	
 	//pour la lisibilite
-
 	auto facade = FacadeModele::obtenirInstance();
 	auto table = facade->obtenirArbreRenduINF2990()->getTable();
 
-	/*if (facade->joueurVirtuelActive()) // si le joueur virtuel est active'
-		if (facade->joueurVirtuelDefensif()) //si le scenariodefensif est active'
-		*/
-	//activer le scenario defensif
-	//J.setVitesse(3.);
-	//J.setProbabilite(0.5);
-	//J.deplacerMailletVirtuel();
-	
-	//facade->virtuelDefensif(10, 1);
+	// Ali
+	// la rondelle ne bouge pas si on est en mode pause
+	if (!facade->estEnPauseRondelle()) {
 
-	//obtient les coefficients
-	auto coeff = facade->getCoefficient();
-	glm::vec3 positionActuelle = obtenirPositionRelative();
-	float rayon = obtenirRayon();
-
-	//actualisation de la position par rapport a la vitesse
-	glm::vec3 direction = glm::normalize(vitesse_);
-	float deplacement = glm::length(vitesse_) * temps;
-
-	//verificateur de collision
-	InfoCollision resultat;
-	VisiteurCollision v(this);
-	//pour eviter de sauter des objets
-	float nombreSauts = deplacement / rayon;
-	if (nombreSauts < 1) {
-		assignerPositionRelative(positionActuelle + deplacement * direction);
-		resultat = v.calculerCollision();
-	}
-	else for (float i = 1; i < deplacement/rayon +1; i+=1.f) {
-		if (i > deplacement/rayon) assignerPositionRelative(positionActuelle + deplacement * direction);
-		else assignerPositionRelative(positionActuelle + i * rayon * direction);
-		resultat = v.calculerCollision();
-		///std::cout << "test " << i << " result " << resultat.type << "\n";
-		if (resultat.type != InfoCollision::AUCUNE) break;
-	}
-
-	//verifie si le deplacement est dans la table
-	if (!table->dansTable(positionActuelle)) {
-		//recupere le but droit
-		glm::vec3 haut, bas, milieu;
-		table->getButs(1, haut, milieu, bas);
-		//est-ce qu'on est dans la fenetre 
-		// a corriger -- parfois ne detecte pas quand la table est deforme -- test si depasse chacun des 2 segments des buts a part
-
-		if(positionActuelle.y > bas.y && positionActuelle.y < haut.y && positionActuelle.x > haut.x) {
-			std::cout << "but droit \n";
-			//pour le fun
-			assignerPositionRelative(positionActuelle);
-			vitesse_ = { 0,0,0 };
+		// le joueur virtuel suit la rondelle quand il est active'
+		if (facade->getjoueurVirtuel())
+		{
+			double vitesse = facade->getVitesseVirtuel();
+			double prob = facade->getProbabiliteVirtuel();
+			facade->ActiverJoueurVirtuel(vitesse, prob);
 		}
-		else {
-			//recupere le but gauche
-			table->getButs(2, haut, milieu, bas);
-			if (positionActuelle.y > bas.y && positionActuelle.y < haut.y && positionActuelle.x < haut.x) {
-				std::cout << "but gauche \n"; 
+
+		//obtient les coefficients
+		//facade->setCoefficient({ 1,0.5,5 });
+		auto coeff = facade->getCoefficient();
+
+		glm::vec3 positionActuelle = obtenirPositionRelative();
+
+		float rayon = obtenirRayon();
+
+		//actualisation de la position par rapport a la vitesse
+		glm::vec3 direction = glm::normalize(vitesse_);
+		float deplacement = glm::length(vitesse_) * temps;
+
+		//verificateur de collision
+		InfoCollision resultat;
+		VisiteurCollision v(this);
+		//pour eviter de sauter des objets
+		float nombreSauts = deplacement / rayon;
+		if (nombreSauts < 1) {
+			assignerPositionRelative(positionActuelle + deplacement * direction);
+			resultat = v.calculerCollision();
+		}
+		else
+			for (float i = 1; i < deplacement / rayon + 1; i += 1.f)
+			{
+				if (i > deplacement / rayon)
+					assignerPositionRelative(positionActuelle + deplacement * direction);
+				else
+					assignerPositionRelative(positionActuelle + i * rayon * direction);
+				resultat = v.calculerCollision();
+				///std::cout << "test " << i << " result " << resultat.type << "\n";
+				if (resultat.type != InfoCollision::AUCUNE) break;
+			}
+
+		//verifie si le deplacement est dans la table
+		//if (!table->dansTable(positionActuelle)) {
+		if (!table->dansTable(this->obtenirPositionRelative())) {
+			//recupere le but droit
+			glm::vec3 haut, bas, milieu;
+			table->getButs(1, haut, milieu, bas);
+			//est-ce qu'on est dans la fenetre 
+			// a corriger -- parfois ne detecte pas quand la table est deforme -- test si depasse chacun des 2 segments des buts a part
+
+			if (positionActuelle.y > bas.y && positionActuelle.y < haut.y && positionActuelle.x > haut.x) {
+				//std::cout << "but droit \n";
+				facade->setButDroite(true);
 				//pour le fun
 				assignerPositionRelative(positionActuelle);
 				vitesse_ = { 0,0,0 };
 			}
-			///else
-				///gere les situations bizarres
-				///pop_position();
-		}
-	}
-	///else push_position();
-
-
-
-	//pour l'affichage de Debug
-	std::string typeObjetDebug;
-
-	//gerer la collision
-	if (resultat.type != InfoCollision::AUCUNE) {
-		//la normale rencontree
-		glm::vec3 normale = glm::normalize(resultat.details.direction);
-		//la position qui annulle la collision
-		glm::vec3 positionHorsCollision = positionActuelle + normale * (float)resultat.details.enfoncement;
-		//en fonction du type de collision
-		switch (resultat.type) {
-		case InfoCollision::MUR: {
-			typeObjetDebug = "mur";
-			assignerPositionRelative(positionHorsCollision);
-			vitesse_ = glm::reflect(vitesse_, normale) * (float)coeff.rebond;
-			break;
-		}
-		case InfoCollision::BONUS: {
-			typeObjetDebug = "bonus";
-			glm::vec3 direction = glm::normalize( -((NoeudBonus*)resultat.objet)->obtenirDroiteDirectrice().lireVecteur() );
-			vitesse_ += direction * (float) glm::pow(coeff.acceleration, 1.5);
-			break;
-		}
-		case InfoCollision::PORTAIL: {
-			typeObjetDebug = "portail";
-			auto noeud = (NoeudPortail*)resultat.objet;
-			auto frere = (NoeudPortail*)noeud->getFrere();
-			assignerPositionRelative(	frere->obtenirPositionRelative()
-										+ (float)frere->obtenirRayon()
-										* glm::normalize(positionHorsCollision - noeud->obtenirPositionRelative()) );
-			vitesse_ *= -1.f;
-			portails_[ frere ] = false;
-			///std::cout << "portail " << frere->getScale().x << " desactive\n";
-			break;
-		}
-		case InfoCollision::MAILLET: {
-			typeObjetDebug = "maillet";
-			assignerPositionRelative(positionHorsCollision);
-			///float facteurRebond = glm::clamp(max(glm::dot(-vitesse_, normale), glm::dot(vitesse_, normale)) / glm::length(vitesse_), (float) 0.3, (float) 1.);
-			vitesse_ = glm::reflect(vitesse_, normale) - ((NoeudMaillet*)resultat.objet)->getVitesse();
-			break;
-		}
-		default: break;
-		}
-	}
-
-	//attraction des portails
-#define CST_ASPIRATION 10.f
-	for (auto it = portails_.begin(); it != portails_.end(); it++) {
-		auto portail = it->first;
-		glm::vec3 vecteur_distance = portail->obtenirPositionRelative() - obtenirPositionRelative();
-		float distance = glm::length(vecteur_distance);
-		float rayon_attraction = 3.f * portail->obtenirRayon();
-		if (it->second) {
-			if (distance < rayon_attraction) {
-				///std::cout << "portail " << portail->getScale().x << " attracte\n";
-				vitesse_ += CST_ASPIRATION * rayon_attraction/distance  * glm::normalize(vecteur_distance);
+			else {
+				//recupere le but gauche
+				table->getButs(2, haut, milieu, bas);
+				if (positionActuelle.y > bas.y && positionActuelle.y < haut.y && positionActuelle.x < haut.x) {
+					//std::cout << "but gauche \n"; 
+					facade->setButGauche(true);
+					//pour le fun
+					assignerPositionRelative(positionActuelle);
+					vitesse_ = { 0,0,0 };
+				}
+				///else
+					///gere les situations bizarres
+					///pop_position();
 			}
 		}
-		else if (distance > rayon_attraction) {
-			it->second = true;
-			///std::cout << "portail " << portail->getScale().x << " active  : rayon " << rayon_attraction << ", distance " << distance << "\n";
+
+
+		//else push_position();
+
+
+
+		//pour l'affichage de Debug
+		std::string typeObjetDebug;
+
+		//gerer la collision
+		if (resultat.type != InfoCollision::AUCUNE) {
+			//la normale rencontree
+			glm::vec3 normale = glm::normalize(resultat.details.direction);
+			//la position qui annulle la collision
+			glm::vec3 positionHorsCollision = positionActuelle + normale * (float)resultat.details.enfoncement;
+			//en fonction du type de collision
+			switch (resultat.type) {
+			case InfoCollision::MUR: {
+				typeObjetDebug = "mur";
+				assignerPositionRelative(positionHorsCollision);
+				vitesse_ = glm::reflect(vitesse_, normale) * (float)coeff.rebond;
+				break;
+			}
+			case InfoCollision::BONUS: {
+				typeObjetDebug = "bonus";
+				glm::vec3 direction = glm::normalize(-((NoeudBonus*)resultat.objet)->obtenirDroiteDirectrice().lireVecteur());
+				vitesse_ += direction * (float)glm::pow(coeff.acceleration, 1.5);
+				break;
+			}
+			case InfoCollision::PORTAIL: {
+				typeObjetDebug = "portail";
+				auto noeud = (NoeudPortail*)resultat.objet;
+				auto frere = (NoeudPortail*)noeud->getFrere();
+				assignerPositionRelative(frere->obtenirPositionRelative()
+					+ (float)frere->obtenirRayon()
+					* glm::normalize(positionHorsCollision - noeud->obtenirPositionRelative()));
+				vitesse_ *= -1.f;
+				portails_[frere] = false;
+				///std::cout << "portail " << frere->getScale().x << " desactive\n";
+				break;
+			}
+			case InfoCollision::MAILLET: {
+				typeObjetDebug = "maillet";
+				assignerPositionRelative(positionHorsCollision);
+				///float facteurRebond = glm::clamp(max(glm::dot(-vitesse_, normale), glm::dot(vitesse_, normale)) / glm::length(vitesse_), (float) 0.3, (float) 1.);
+				vitesse_ = glm::reflect(vitesse_, normale) - ((NoeudMaillet*)resultat.objet)->getVitesse();
+				break;
+			}
+			default: break;
+			}
 		}
-	}
 
-	//application de la friction
-	float module_vitesse = glm::length(vitesse_);
+		//attraction des portails
+#define CST_ASPIRATION 10.f
+		for (auto it = portails_.begin(); it != portails_.end(); it++) {
+			auto portail = it->first;
+			glm::vec3 vecteur_distance = portail->obtenirPositionRelative() - obtenirPositionRelative();
+			float distance = glm::length(vecteur_distance);
+			float rayon_attraction = 3.f * portail->obtenirRayon();
+			if (it->second) {
+				if (distance < rayon_attraction) {
+					///std::cout << "portail " << portail->getScale().x << " attracte\n";
+					vitesse_ += CST_ASPIRATION * rayon_attraction / distance  * glm::normalize(vecteur_distance);
+				}
+			}
+			else if (distance > rayon_attraction) {
+				it->second = true;
+				///std::cout << "portail " << portail->getScale().x << " active  : rayon " << rayon_attraction << ", distance " << distance << "\n";
+			}
+		}
+
+		//application de la friction
+		float module_vitesse = glm::length(vitesse_);
 #define VITESSE_MAX 999.
-	vitesse_ *= glm::clamp(module_vitesse - coeff.friction * temps, 0.005, VITESSE_MAX) / module_vitesse;
-	module_vitesse = glm::length(vitesse_);
+		vitesse_ *= glm::clamp(module_vitesse - coeff.friction * temps, 0.005, VITESSE_MAX) / module_vitesse;
+		module_vitesse = glm::length(vitesse_);
 
-	//affichages de Debug
-	if (Debug::obtenirInstance().afficherCollision && resultat.type != InfoCollision::AUCUNE) Debug::obtenirInstance().afficher("Collision : " + typeObjetDebug);
-	if (Debug::obtenirInstance().afficherVitesse && resultat.type != InfoCollision::AUCUNE) Debug::obtenirInstance().afficher("Vitesse : " + std::to_string(module_vitesse).substr(0,3));
+		//affichages de Debug
+		if (Debug::obtenirInstance().afficherCollision && resultat.type != InfoCollision::AUCUNE) Debug::obtenirInstance().afficher("Collision : " + typeObjetDebug);
+		if (Debug::obtenirInstance().afficherVitesse && resultat.type != InfoCollision::AUCUNE) Debug::obtenirInstance().afficher("Vitesse : " + std::to_string(module_vitesse).substr(0, 3));
+	
+	}// End - if mode pause 
+	
+		
 }
 
 /*

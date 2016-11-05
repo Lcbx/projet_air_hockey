@@ -79,7 +79,6 @@
             this.listDeProfils = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.ajouter = new System.Windows.Forms.Button();
-            this.fermer3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -302,7 +301,6 @@
             resources.ApplyResources(this.fermerDebogage, "fermerDebogage");
             this.fermerDebogage.Name = "fermerDebogage";
             this.fermerDebogage.UseVisualStyleBackColor = true;
-            this.fermerDebogage.Click += new System.EventHandler(this.fermerDebogage_Click);
             // 
             // groupBox2
             // 
@@ -366,7 +364,6 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.fermer3);
             this.tabPage4.Controls.Add(this.creationProfil);
             this.tabPage4.Controls.Add(this.listDeProfil);
             resources.ApplyResources(this.tabPage4, "tabPage4");
@@ -467,19 +464,13 @@
             this.ajouter.UseVisualStyleBackColor = true;
             this.ajouter.Click += new System.EventHandler(this.ajouter_Click);
             // 
-            // fermer3
-            // 
-            resources.ApplyResources(this.fermer3, "fermer3");
-            this.fermer3.Name = "fermer3";
-            this.fermer3.UseVisualStyleBackColor = true;
-            this.fermer3.Click += new System.EventHandler(this.fermer3_Click);
-            // 
             // Configuration
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
             this.Name = "Configuration";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Configuration_FormClosing);
             this.Load += new System.EventHandler(this.Configuration_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -521,14 +512,14 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button réintialisation;
         private System.Windows.Forms.Button appliquer;
-        private System.Windows.Forms.Button haut;
-        private System.Windows.Forms.Button bas;
-        private System.Windows.Forms.Button droite;
-        private System.Windows.Forms.Button gauche;
+        public System.Windows.Forms.Button haut;
+        public System.Windows.Forms.Button bas;
+        public System.Windows.Forms.Button droite;
+        public System.Windows.Forms.Button gauche;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label scorePourGagner;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        public System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.GroupBox typeJoueur;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label type;
@@ -558,6 +549,5 @@
         private System.Windows.Forms.Button appliquer2;
         private System.Windows.Forms.Label ajoutProfil;
         private System.Windows.Forms.Button modifierProfil;
-        private System.Windows.Forms.Button fermer3;
     }
 }

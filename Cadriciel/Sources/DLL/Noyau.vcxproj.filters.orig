@@ -189,10 +189,6 @@
     <ClCompile Include="VisiteurDansLaTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="Configuration\ConfigTouches.cpp">
-      <Filter>Source Files\Configuration</Filter>
-=======
     <ClCompile Include="Test.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
@@ -201,7 +197,22 @@
     </ClCompile>
     <ClCompile Include="Affichage_debuggage.cpp">
       <Filter>Source Files</Filter>
->>>>>>> ab0c5bc7f27bcc57a6212e86e67c5c4c38bd991d
+    </ClCompile>
+    <ClCompile Include="Configuration\ConfigTouches.cpp">
+      <Filter>Source Files\Configuration</Filter>
+    </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="Tests\RedimensionnementTest.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraTest.cpp">
+=======
+    <ClCompile Include="Application\JoeurVirtuel.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\NoeudCompositeTest.cpp">
+>>>>>>> b0d11b0f83b04ba762abfa56b6b54bc1e1dbf9da
+      <Filter>Source Files\Tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -346,10 +357,6 @@
     <ClInclude Include="VisiteurDansLaTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="Configuration\ConfigTouches.h">
-      <Filter>Header Files\Configuration</Filter>
-=======
     <ClInclude Include="Test.h">
       <Filter>Header Files\Application</Filter>
     </ClInclude>
@@ -358,7 +365,22 @@
     </ClInclude>
     <ClInclude Include="Affichage_debuggage.h">
       <Filter>Header Files</Filter>
->>>>>>> ab0c5bc7f27bcc57a6212e86e67c5c4c38bd991d
+    </ClInclude>
+    <ClInclude Include="Configuration\ConfigTouches.h">
+      <Filter>Header Files\Configuration</Filter>
+    </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="Tests\RedimensionnementTest.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraTest.h">
+=======
+    <ClInclude Include="Application\JoueurVirtuel.h">
+      <Filter>Header Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\NoeudCompositeTest.h">
+>>>>>>> b0d11b0f83b04ba762abfa56b6b54bc1e1dbf9da
+      <Filter>Header Files\Tests</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -94,6 +94,10 @@ public:
 	// dans la zone du jeu 
 	bool dansZone1(glm::dvec3 M);
 	bool dansZone2(glm::dvec3 M);
+	// maillet dans la zone du jeu
+	bool mailletDansZone2(glm::dvec3 M, double rayon);
+	bool mailletDansZone1(glm::dvec3 M, double rayon);
+	double distanceEntrePointDroite(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P);
 	// get coordonnes des buts 
 	bool getButs(int index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas) ;
 
@@ -101,7 +105,7 @@ private:
 
 	///la largueur des murs 
 	double largeur_{ 7 };
-	double longueurButs_{ 15 };
+	double longueurButs_{ 20 };
 	/// la hauteur des murs 
 	double hauteur_{ 0.0 };
 	/// la couleur de la table 

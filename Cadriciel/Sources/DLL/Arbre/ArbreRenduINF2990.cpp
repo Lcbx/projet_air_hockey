@@ -122,7 +122,7 @@ void ArbreRenduINF2990::ajouterTable()
 	noeudTable_->ajouter(noeudPointControle6);
 	noeudTable_->ajouter(noeudPointControle7);
 	
-
+	
 	noeudTable_->setPointControles();
 }
 
@@ -522,10 +522,9 @@ void  ArbreRenduINF2990::ajouterMailletEtRondelle()
 	// get les coord du but droit
 	glm::vec3 pointHaut, pointMilieu, pointBas;
 	this->getTable()->getButs(1, pointHaut, pointMilieu, pointBas);
-	//std::cout << "But 1 (Droite)" << std::endl;
-	
 	//AJOUT MAILLET1
 	NoeudAbstrait* noeudMaillet{ creerNoeud(NOM_MAILLET) };
+	// positionner le maillet a 5 pas du but
 	noeudMaillet->assignerPositionRelative({pointMilieu.x - noeudMaillet->obtenirRayon() - 5,0,0 });
 	noeudMaillet->setScale({ 1, 1, 1 });
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet);
@@ -534,10 +533,9 @@ void  ArbreRenduINF2990::ajouterMailletEtRondelle()
 	
 	// get les coord du but gauche
 	this->getTable()->getButs(2, pointHaut, pointMilieu, pointBas);
-	//std::cout << "But 2 (Gauche)" << std::endl;
-	
 	//AJOUT MAILLET2
 	NoeudAbstrait* noeudMaillet2{ creerNoeud(NOM_MAILLET) };
+	// positionner le maillet a 5 pas du but
 	noeudMaillet2->assignerPositionRelative({ pointMilieu.x + noeudMaillet2->obtenirRayon() +5,0,0 });
 	noeudMaillet2->setScale({ 1, 1, 1 });
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet2);
@@ -561,6 +559,9 @@ NoeudAbstrait* ArbreRenduINF2990::obtenirMailletManuel()
 			if (enfant->estDeuxiemeJoueur == true)
 				return enfant;
 }
+
+
+/// Ancien code Wajdi
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn deplacerMailletAvecClavier(double x, double y)
@@ -570,53 +571,90 @@ NoeudAbstrait* ArbreRenduINF2990::obtenirMailletManuel()
 /// @return rien
 ///
 ////////////////////////////////////////////////////////////////////////
+//void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
+//{
+//	NoeudAbstrait* dernier = this->enfants_.back();//pour obtenir le maillet du 2eme joueur
+//	glm::dvec3 pos = dernier->obtenirPositionRelative();
+//	double rayon = dernier->obtenirRayon();
+//	//bouger vers droite
+//	if (x == 1) {
+//		if (this->getTable()->dansZone1({ pos.x + rayon , pos.y + rayon, 0 }) && this->getTable()->dansZone1({ pos.x + rayon , pos.y - rayon, 0 })) 		
+//		{
+//			if (y == 1) { dernier->assignerPositionRelative({ pos.x + 4, pos.y + 4, 0 }); }
+//			else if (y == -1) { dernier->assignerPositionRelative({ pos.x + 2, pos.y - 2, 0 }); }
+//			else dernier->assignerPositionRelative({ pos.x + 4, pos.y, 0 });
+//		}
+//		else dernier->assignerPositionRelative({ pos.x, pos.y, 0 });//ne pas depasser le centre
+//	}
+//
+//	if (x == -1) {
+//		if (this->getTable()->dansZone1({ pos.x - rayon , pos.y + rayon, 0 }) && this->getTable()->dansZone1({ pos.x - rayon , pos.y - rayon, 0 }))//checker si a l'interieur 		
+//		{
+//			if (y == 1) { dernier->assignerPositionRelative({ pos.x - 4, pos.y + 4, 0 }); }
+//			else if (y == -1) { dernier->assignerPositionRelative({ pos.x - 4, pos.y - 4, 0 }); }
+//			else dernier->assignerPositionRelative({ pos.x - 4, pos.y, 0 });
+//		}
+//		else dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
+//	}
+//
+//	if (x == 0) {
+//		if (y == 1) {
+//			if (this->getTable()->dansZone1({ pos.x , pos.y + rayon , 0 }))			
+//			{
+//				dernier->assignerPositionRelative({ pos.x , pos.y + 4, 0 });
+//			}
+//			else {
+//				dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
+//			}
+//		}
+//			else if (y == -1) { 
+//				if (this->getTable()->dansZone1({ pos.x , pos.y - rayon , 0 })) 				
+//				{
+//				dernier->assignerPositionRelative({ pos.x , pos.y - 4, 0 }); 
+//				}
+//				else {
+//					dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
+//				}
+//		}
+//	}
+//}
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//nouveau code Ali
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn deplacerMailletAvecClavier(double x, double y)
+///
+/// Cette fonction permet de deplacer le maillet avedc les touches de clavier
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
 void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 {
 	NoeudAbstrait* dernier = this->enfants_.back();//pour obtenir le maillet du 2eme joueur
-	glm::dvec3 pos = dernier->obtenirPositionRelative();
-	double rayon = dernier->obtenirRayon();
-	//bouger vers droite
-	if (x == 1) {
-		if (this->getTable()->dansZone1({ pos.x + rayon , pos.y + rayon, 0 }) && this->getTable()->dansZone1({ pos.x + rayon , pos.y - rayon, 0 })) {
-			if (y == 1) { dernier->assignerPositionRelative({ pos.x + 4, pos.y + 4, 0 }); }
-			else if (y == -1) { dernier->assignerPositionRelative({ pos.x + 2, pos.y - 2, 0 }); }
-			else dernier->assignerPositionRelative({ pos.x + 4, pos.y, 0 });
-		}
-		else dernier->assignerPositionRelative({ pos.x, pos.y, 0 });//ne pas depasser le centre
-	}
-
-	if (x == -1) {
-		if (this->getTable()->dansZone1({ pos.x - rayon , pos.y + rayon, 0 }) && this->getTable()->dansZone1({ pos.x - rayon , pos.y - rayon, 0 }))//checker si a l'interieur 
-		{
-			if (y == 1) { dernier->assignerPositionRelative({ pos.x - 4, pos.y + 4, 0 }); }
-			else if (y == -1) { dernier->assignerPositionRelative({ pos.x - 4, pos.y - 4, 0 }); }
-			else dernier->assignerPositionRelative({ pos.x - 4, pos.y, 0 });
-		}
-		else dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
-	}
-
-	if (x == 0) {
-		if (y == 1) {
-			if (this->getTable()->dansZone1({ pos.x , pos.y + rayon , 0 }))
-			{
-				dernier->assignerPositionRelative({ pos.x , pos.y + 4, 0 });
-			}
-			else {
-				dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
-			}
-		}
-			else if (y == -1) { 
-				if (this->getTable()->dansZone1({ pos.x , pos.y - rayon , 0 })) 
-				{
-				dernier->assignerPositionRelative({ pos.x , pos.y - 4, 0 }); 
-				}
-				else {
-					dernier->assignerPositionRelative({ pos.x, pos.y, 0 });
-				}
-		}
-	}
+	glm::vec3 positionActuelle = dernier->obtenirPositionRelative();
+	glm::vec3 nouvellePosition = positionActuelle;
+	double rayon = dernier->obtenirRayonModele();
+	if (x == 1)
+		nouvellePosition.x = nouvellePosition.x + 4;
+	if (x == -1)
+		nouvellePosition.x = nouvellePosition.x - 4;
+	if (y == 1)
+		nouvellePosition.y = nouvellePosition.y + 4;
+	if (y == -1)
+		nouvellePosition.y = nouvellePosition.y - 4;
+	if (this->getTable()->mailletDansZone1(nouvellePosition, rayon))
+		dernier->assignerPositionRelative(nouvellePosition);
+	else
+		dernier->assignerPositionRelative(positionActuelle);	
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -630,31 +668,40 @@ void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 ////////////////////////////////////////////////////////////////////////
 void ArbreRenduINF2990::reinitialiserPartieCourante()
 {
-	//To-Do; 
-	//re-initilaser sscore
-	this->setScoreMoi(0);
-	this->setScoreAutre(0);
+	// retirer maillet et rondelle
+	//effacer les maillets et la rondelle
+	this->effacer(this->chercher("rondelle"));
 
-	glm::vec3 pointHaut, pointMilieu, pointBas;
-
-	for (NoeudAbstrait * enfant : this->enfants_)
-	{
-		if (enfant->obtenirType() == "maillet") {
-			if (enfant->estDeuxiemeJoueur == true) {
-				this->getTable()->getButs(2, pointHaut, pointMilieu, pointBas);
-				
-				enfant->assignerPositionRelative({ pointMilieu.x + enfant->obtenirRayon() + 5,0,0 });
-			}
-			else {
-				this->getTable()->getButs(1, pointHaut, pointMilieu, pointBas);
-
-				enfant->assignerPositionRelative({ pointMilieu.x - enfant->obtenirRayon() - 5,0,0 });
-			}
-		}
-		else if (enfant->obtenirType() == "rondelle") {
-			enfant->assignerPositionRelative({ 0,0,0 });
-		}
+	while (this->chercher("maillet")) {
+		this->effacer(this->chercher("maillet"));
 	}
+	ajouterMailletEtRondelle();
+
+	////To-Do; 
+	////re-initilaser sscore
+	//this->setScoreMoi(0);
+	//this->setScoreAutre(0);
+
+	//glm::vec3 pointHaut, pointMilieu, pointBas;
+
+	//for (NoeudAbstrait * enfant : this->enfants_)
+	//{
+	//	if (enfant->obtenirType() == "maillet") {
+	//		if (enfant->estDeuxiemeJoueur == true) {
+	//			this->getTable()->getButs(2, pointHaut, pointMilieu, pointBas);
+	//			
+	//			enfant->assignerPositionRelative({ pointMilieu.x + enfant->obtenirRayon() + 5,0,0 });
+	//		}
+	//		else {
+	//			this->getTable()->getButs(1, pointHaut, pointMilieu, pointBas);
+
+	//			enfant->assignerPositionRelative({ pointMilieu.x - enfant->obtenirRayon() - 5,0,0 });
+	//		}
+	//	}
+	//	else if (enfant->obtenirType() == "rondelle") {
+	//		enfant->assignerPositionRelative({ 0,0,0 });
+	//	}
+	//}
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -673,27 +720,23 @@ void ArbreRenduINF2990::deplacerMailletAvecSouris(glm::dvec3 pos)
 		if (enfant->obtenirType() == "maillet") {
 			if (enfant->estDeuxiemeJoueur == false)
 			{
-				glm::vec3 P2, P3, P7;
-				this->getTable()->getPointControle(2, P2);
-				this->getTable()->getPointControle(3, P3);
-				this->getTable()->getPointControle(7, P7);
-				if (this->getTable()->dansTable(pos))
-				{	
-					// si depasse la gauche de la zone
-					if (pos.x < enfant->obtenirRayon())
-						pos.x = enfant->obtenirRayon();
-					// si depasse la droite de la zone
-					if ( (pos.x + enfant->obtenirRayon()) > P7.x)
-						pos.x = P7.x - enfant->obtenirRayon();
-					// si depasse le haut de la zone
-					if ((pos.y + enfant->obtenirRayon()) > P2.y)
-						pos.y = P2.y - enfant->obtenirRayon();
-					// si depasse le bas de la zone
-					if ((pos.y - enfant->obtenirRayon()) < P3.y)
-						pos.y = P3.y + enfant->obtenirRayon();
-
+				if (this->getTable()->mailletDansZone2(pos, enfant->obtenirRayonModele()))
+				{
 					enfant->assignerPositionRelative(pos);
-				}			
+				}
+				/*
+				else // si on deplace la souris rapidement
+				{					
+					// si on deplace rapidement en haut ou en bas
+					if (this->getTable()->mailletDansZone2({ pos.x,0,0 }, enfant->obtenirRayonModele()))
+					{
+
+					}
+
+
+				}
+				*/
+
 			}
 		}
 	}

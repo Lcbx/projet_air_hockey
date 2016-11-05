@@ -151,7 +151,6 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 	}
 	glEnd();
 	
-	
 	// tracer les murs 
 	tracerMurs(vueProjection);
 	// tracer les buts 
@@ -832,8 +831,12 @@ bool NoeudTable::getPointControle(int numero, glm::vec3 & pointControle)
 {
 	if (numero < 0 || numero >9)
 		return false;
-	else {
-		pointControle = pointControle_[numero];
+	else
+	{
+		if (numero == 8)
+			pointControle = obtenirPositionRelative();
+		else
+			pointControle = pointControle_[numero];
 		return true;
 	}
 }
@@ -856,7 +859,10 @@ bool NoeudTable::setPointControle(int numero, glm::vec3 pointControle)
 		return false;
 	else
 	{
-		pointControle_[numero] = pointControle;
+		if (numero = 8)
+			pointControle_[numero] = obtenirPositionRelative();
+		else
+			pointControle_[numero] = pointControle;
 		return true;
 	}
 }
@@ -1057,7 +1063,8 @@ bool NoeudTable::dansTable(glm::dvec3 M) {
 /// @return bool
 ///
 ////////////////////////////////////////////////////////////////////////
-bool NoeudTable::dansZone1(glm::dvec3 M) {
+bool NoeudTable::dansZone1(glm::dvec3 M)
+{
 	/*
 	etapes du check :
 	p0----------p2----------p4
@@ -1090,7 +1097,8 @@ bool NoeudTable::dansZone1(glm::dvec3 M) {
 /// @return bool
 ///
 ////////////////////////////////////////////////////////////////////////
-bool NoeudTable::dansZone2(glm::dvec3 M) {
+bool NoeudTable::dansZone2(glm::dvec3 M)
+{
 	/*
 	etapes du check :
 	p0----------p2----------p4
@@ -1109,4 +1117,146 @@ bool NoeudTable::dansZone2(glm::dvec3 M) {
 		|| utilitaire::MdansTriangleABC(p8, p(7), p(5), M)
 		|| utilitaire::MdansTriangleABC(p8, p(5), p(3), M);
 	return result;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::mailletDansZone2(glm::dvec3 M,double rayon)
+///
+/// Cette fonction permet de savoir si un point est dans la zone2 
+///  (zone droite) mais a une distance des murs
+/// pour que le maillet ne depasse pas les murs
+///  @param[in] 
+///		point M
+///		double rayon : rayon du maillet
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool NoeudTable::mailletDansZone2(glm::dvec3 M,double rayon) 
+{
+	if (dansZone2(M))
+	{
+		double dist;
+		//tester les distance entre le centre du maillet et les droites (murs) de la table
+		dist = distanceEntrePointDroite(p(2), p(3), M);
+		if (dist < rayon) // distance entre mur P2P3
+			return false;
+		else
+		{
+			dist = distanceEntrePointDroite(p(4), p(2), M);
+			if (dist < rayon) // distance entre mur P2P4
+				return false;
+			else				
+			{
+				dist = distanceEntrePointDroite(p(4), p(7), M);
+				/*std::cout << "P4(" << p(4).x << "," << p(4).y << ") P7(" << p(7).x << "," << p(7).y << ")" << std::endl;
+				std::cout << "M(" << M.x << "," << M.y << ")" << std::endl;
+				std::cout << "rayon =  " << rayon << std::endl;
+				std::cout << "distance Maillet mure p4p7 = " << dist << std::endl;*/
+				if ((dist < rayon) && (M.y >= p(7).y)) // distance entre mur P4P7 et au dessus de P7
+					return false;
+				else					
+				{
+					dist = distanceEntrePointDroite(p(5), p(7), M);
+					if ( (dist < rayon) && (M.y < p(7).y) ) // distance entre mur P7P5 et au dessous de P7
+						return false;
+					else
+					{
+						dist = distanceEntrePointDroite(p(5), p(3), M);
+						if (dist < rayon) // distance entre mur P3P5
+							return false;
+						else
+							return true;
+					}
+				}
+			}
+			
+
+		}
+			
+		
+	}
+	else // pas dans la zone
+		return false;
+	
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::mailletDansZone1(glm::dvec3 M,double rayon)
+///
+/// Cette fonction permet de savoir si un point est dans la zone1 
+///  (zone gauche) mais a une distance des murs 
+/// pour que le maillet ne depasse pas les murs
+/// utilise pour maillet touche et virtuel
+///  @param[in] 
+///		point M
+///		double rayon : rayon du maillet
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool NoeudTable::mailletDansZone1(glm::dvec3 M, double rayon)
+{
+
+	if (dansZone1(M))
+	{
+		double dist;
+		//tester les distance entre le centre du maillet et les droites (murs) de la table
+		dist = distanceEntrePointDroite(p(2), p(3), M);
+		if (dist < rayon) // distance entre mur P2P3
+			return false;
+		else
+		{
+			dist = distanceEntrePointDroite(p(0), p(2), M);
+			if (dist < rayon) // distance entre mur P2P0
+				return false;
+			else
+			{
+				dist = distanceEntrePointDroite(p(0), p(6), M);
+				if ((dist < rayon) && (M.y >= p(6).y)) // distance entre mur P0P6 et au dessus de P6
+					return false;
+				else
+				{
+					dist = distanceEntrePointDroite(p(6), p(1), M);
+					if ((dist < rayon) && (M.y < p(6).y)) // distance entre mur P1P6 et au dessous de P6
+						return false;
+					else
+					{
+						dist = distanceEntrePointDroite(p(1), p(3), M);
+						if (dist < rayon) // distance entre mur P1P5
+							return false;
+						else
+							return true;
+					}
+				}
+			}
+
+
+		}
+
+
+	}
+	else // pas dans la zone
+		return false;
+
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @fn double NoeudTable::distanceEntrePointDroite(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P)
+///
+/// Cette fonction calcule la distance entre un point P et la droite (P1P2) forme' par les points P1 et P2
+///  @param[in] 
+///		glm::vec3 P1,P2,P 
+///		
+/// @return double
+///
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+double NoeudTable::distanceEntrePointDroite(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P)
+{
+	double numer = (P2.y - P1.y)*P.x - (P2.x - P1.x)*P.y + P2.x*P1.y - P2.y*P1.x;
+	//std::cout << "num = " << numer << std::endl;
+	double denum = sqrt(pow((P2.y-P1.y), 2) + pow((P2.x-P1.x), 2));
+	//std::cout << "denum = " << denum << std::endl;
+	return  fabs(numer ) / (denum);
 }
