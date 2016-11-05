@@ -291,56 +291,68 @@ void FacadeModele::enregistrerZoneJeu(char* fichierZoneJeu) const
 	document.SaveFile(fichierZoneJeu);
 }
 
+
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn void FacadeModele::chargerTouches() const
+/// @fn ConfigTouches getConfigTouches()
 ///
-/// Cette fonction charge les touches du joueur 2 à partir du fichier
-///  XML de configuration si ce dernier existe.  Sinon, le fichier de
-///  configuration est généré à partir de valeurs par défaut directement
-///  dans le code.
+/// Cette fonction retourne l'objet ConfigTouches de FacadeModele, afin
+/// de manipuler les touches du joueur 2
 ///
-/// @return Aucune.
+/// @return ConfigTouches : l'objet ConfigTouches de l'instance de FacadeModele
 ///
 ////////////////////////////////////////////////////////////////////////
-void FacadeModele::chargerTouches()
+ConfigTouches FacadeModele::getConfigTouches()
 {
-
-	_configTouches.chargerTouches();
-
+	return _configTouches;
 }
 
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn void FacadeModele::enregistrerTouches() const
+/// @fn ConfigJeu getConfigJeu()
 ///
-/// Cette fonction enregistre dans le fichier XML de cnfiguration les
-/// touches du joueur 2.
+/// Cette fonction retourne l'objet ConfigJeu de FacadeModele, afin
+/// de manipuler les options de jeu
 ///
-/// @return Aucune.
+/// @return ConfigJeu : l'objet ConfigJeu de l'instance de FacadeModele
 ///
 ////////////////////////////////////////////////////////////////////////
-void FacadeModele::enregistrerTouches(int haut, int droite, int bas, int gauche)
+ConfigJeu FacadeModele::getConfigJeu()
 {
-	_configTouches.enregistrerTouches(haut, droite, bas, gauche);
+	return _configJeu;
 }
 
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn ConfigDebug getConfigDebug()
+///
+/// Cette fonction retourne l'objet ConfigDebug de FacadeModele, afin
+/// de manipuler les options de debug
+///
+/// @return ConfigDebug : l'objet ConfigDebug de l'instance de FacadeModele
+///
+////////////////////////////////////////////////////////////////////////
+ConfigDebug FacadeModele::getConfigDebug()
+{
+	return _configDebug;
+}
+
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn int[4] FacadeModele::obtenirTouches() const
+/// @fn ConfigProfils getConfigProfils()
 ///
-/// Cette fonction retourne les touches actuelles de déplacement
-/// du joueur 2
+/// Cette fonction retourne l'objet ConfigProfil de FacadeModele, afin
+/// de manipuler les profils enregistrés
 ///
-/// @return int[4] : [haut, droite, bas, gauche]
+/// @return ConfigProfils l'objet ConfigProfils de l'instance de FacadeModele
 ///
 ////////////////////////////////////////////////////////////////////////
-void FacadeModele::obtenirTouches(int *touches)
+ConfigProfils FacadeModele::getConfigProfils()
 {
-	_configTouches.obtenirTouches(touches);
+	return _configProfils;
 }
 
 

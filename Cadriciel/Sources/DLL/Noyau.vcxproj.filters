@@ -213,11 +213,31 @@
     <ClCompile Include="Tests\NoeudCompositeTest.cpp">
       <Filter>Source Files\Tests</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="AdaptateurJoueur.cpp">
       <Filter>Source Files\Tournoi</Filter>
     </ClCompile>
     <ClCompile Include="Tournoi.cpp">
       <Filter>Source Files\Tournoi</Filter>
+=======
+    <ClCompile Include="Tests\RedimensionnementTest.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraTest.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Configuration\ConfigProfils.cpp">
+      <Filter>Source Files\Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Profil.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Configuration\ConfigJeu.cpp">
+      <Filter>Source Files\Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="Configuration\ConfigDebug.cpp">
+      <Filter>Source Files\Configuration</Filter>
+>>>>>>> origin/development
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -388,6 +408,24 @@
     </ClInclude>
     <ClInclude Include="AdaptateurJoueur.h">
       <Filter>Header Files\Tournoi</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\RedimensionnementTest.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraTest.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuration\ConfigProfils.h">
+      <Filter>Header Files\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Profil.h">
+      <Filter>Header Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuration\ConfigJeu.h">
+      <Filter>Header Files\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuration\ConfigDebug.h">
+      <Filter>Header Files\Configuration</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

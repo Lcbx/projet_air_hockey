@@ -633,27 +633,14 @@ NoeudAbstrait* ArbreRenduINF2990::obtenirMailletManuel()
 ////////////////////////////////////////////////////////////////////////
 void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 {
-	NoeudAbstrait* dernier = this->enfants_.back();//pour obtenir le maillet du 2eme joueur
-	glm::vec3 positionActuelle = dernier->obtenirPositionRelative();
-	glm::vec3 nouvellePosition = positionActuelle;
-	double rayon = dernier->obtenirRayonModele();
-	if (x == 1)
-		nouvellePosition.x = nouvellePosition.x + 4;
-	if (x == -1)
-		nouvellePosition.x = nouvellePosition.x - 4;
-	if (y == 1)
-		nouvellePosition.y = nouvellePosition.y + 4;
-	if (y == -1)
-		nouvellePosition.y = nouvellePosition.y - 4;
-	if (this->getTable()->mailletDansZone1(nouvellePosition, rayon))
-		dernier->assignerPositionRelative(nouvellePosition);
-	else
-		dernier->assignerPositionRelative(positionActuelle);	
+	auto maillet = (NoeudMaillet*)this->enfants_.back();//pour obtenir le maillet du 2eme joueur
+	auto pos = maillet->obtenirPositionRelative();
+	double rayon = maillet->obtenirRayon();
+	auto vitesseMaillet = glm::length(maillet->getVitesse());
+	float delta = 3.f * rayon + vitesseMaillet/10.f;
+	glm::vec3 nouvellePosition = { pos.x + glm::sign(x) * delta, pos.y + glm::sign(y) * delta, pos.z };
+	((NoeudMaillet*)maillet)->deplacer(nouvellePosition);
 }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -694,7 +681,6 @@ void ArbreRenduINF2990::reinitialiserPartieCourante()
 	//		}
 	//		else {
 	//			this->getTable()->getButs(1, pointHaut, pointMilieu, pointBas);
-
 	//			enfant->assignerPositionRelative({ pointMilieu.x - enfant->obtenirRayon() - 5,0,0 });
 	//		}
 	//	}
@@ -720,23 +706,7 @@ void ArbreRenduINF2990::deplacerMailletAvecSouris(glm::dvec3 pos)
 		if (enfant->obtenirType() == "maillet") {
 			if (enfant->estDeuxiemeJoueur == false)
 			{
-				if (this->getTable()->mailletDansZone2(pos, enfant->obtenirRayonModele()))
-				{
-					enfant->assignerPositionRelative(pos);
-				}
-				/*
-				else // si on deplace la souris rapidement
-				{					
-					// si on deplace rapidement en haut ou en bas
-					if (this->getTable()->mailletDansZone2({ pos.x,0,0 }, enfant->obtenirRayonModele()))
-					{
-
-					}
-
-
-				}
-				*/
-
+				((NoeudMaillet*)enfant)->deplacer(pos);	
 			}
 		}
 	}

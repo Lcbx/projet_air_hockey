@@ -58,7 +58,7 @@ namespace InterfaceGraphique
             edition.setMenuPrincipal(menuPrincipal);
             configuration.setMenuPrincipalConfig(menuPrincipal);
 
-            Application.Run(menuPrincipal);
+            Application.Run(menuPrincipal); 
         }
             
 
@@ -77,7 +77,7 @@ namespace InterfaceGraphique
         {
             FonctionsNatives.Message message;
 
-            while (!FonctionsNatives.PeekMessage(out message, IntPtr.Zero, 0, 0, 0))        
+            while (!FonctionsNatives.PeekMessage(out message, IntPtr.Zero, 0, 0, 0))            
             {
                 TimeSpan currentTime = chrono.Elapsed;
                 TimeSpan elapsedTime = currentTime - dernierTemps;

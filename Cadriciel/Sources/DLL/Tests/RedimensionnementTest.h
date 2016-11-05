@@ -1,31 +1,28 @@
-////////////////////////////////////////////////////////////////////////////////////
-/// @file NoeudCompositeTest.cpp
-/// @author Wajdi Gharsalli
+//////////////////////////////////////////////////////////////////////////////
+/// @file RedimensionnementTest.h
+/// @author Medaoud Ikram
 /// @date 2016-11-03
 /// @version 1.0
 ///
-/// @addtogroup inf2990 INF2990
-/// @{
-////////////////////////////////////////////////////////////////////////////////////
-#ifndef _TESTS_NOEUDCOMPOSITETEST_H
-#define _TESTS_NOEUDCOMPOSITETEST_H
+//////////////////////////////////////////////////////////////////////////////
 
+#ifndef _TESTS_REDIMENSIONNEMENTTEST_H
+#define _TESTS_REDIMENSIONNEMENTTEST_H
+#include "ProjectionOrtho.h"
 #include <cppunit/extensions/HelperMacros.h>
 #include <memory>
-#include "NoeudTable.h"
-#include "AideGL.h"
 
-class NoeudComposite;
+class ProjectionOrtho;
 
 ///////////////////////////////////////////////////////////////////////////
-/// @class NoeudAbstraitTest
+/// @class RedimensionnementTest
 /// @brief Classe de test cppunit pour tester le bon fonctionnement des
-///        méthodes de la classe NoeudAbstrait
+///        méthodes de la classe ProjectionOrtho
 ///
-/// @author Wajdi Gharsalli
+/// @author Medaoud Ikram
 /// @date 2016-11-03
 ///////////////////////////////////////////////////////////////////////////
-class NoeudCompositeTest : public CppUnit::TestFixture
+class RedimensionnementTest : public CppUnit::TestFixture
 {
 
 	// =================================================================
@@ -34,13 +31,8 @@ class NoeudCompositeTest : public CppUnit::TestFixture
 	// Important, vous devez définir chacun de vos cas de tests à l'aide
 	// de la macro CPPUNIT_TEST sinon ce dernier ne sera pas exécuté !
 	// =================================================================
-	CPPUNIT_TEST_SUITE(NoeudCompositeTest);
-	CPPUNIT_TEST(testVider);
-	CPPUNIT_TEST(testAjout);
-	CPPUNIT_TEST(testSuppression);
-	CPPUNIT_TEST(testTrouverObjet);
-	CPPUNIT_TEST(testSelectionMultiple);
-
+	CPPUNIT_TEST_SUITE(RedimensionnementTest);
+	CPPUNIT_TEST(testFenetre);
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -60,31 +52,20 @@ public:
 	// Définissez ici les différents cas de tests...
 	// =================================================================
 
-	/// Cas de test: vider la table
-	void testVider();
+	/// Cas de test: écriture/lecture de la position relative
+	
 
-	/// Cas de test: ajout des objets
-	void testAjout();
+	void testFenetre();
 
-	/// Cas de test: supprimer des objets
-	void testSuppression();
-
-	///Cas de test: dans la table
-	void testTrouverObjet();
-
-	///Cas de test: selection multiple
-	void testSelectionMultiple();
-
-
+	
 private:
 	/// Instance d'un noeud abstrait
-	//std::unique_ptr<NoeudComposite> noeud;
-	NoeudTable *noeud;
+	std::unique_ptr<vue::ProjectionOrtho> fenetre;
 };
 
-#endif // _TESTS_NOEUDABSTRAITTEST_H
-
+#endif // _TESTS_REDIMENSIONNEMENTTEST_H
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
 ///////////////////////////////////////////////////////////////////////////////
+#pragma once

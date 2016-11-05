@@ -1,4 +1,13 @@
-﻿using System;
+﻿
+////////////////////////////////////////////////////////////////////////////////////
+/// @file Configuration.cs
+/// @author Medaoud Ikram
+/// @date 2016-9-15
+/// @version 1.0 
+///
+////////////////////////////////////////////////////////////////////////////////////
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,7 +20,7 @@ using System.Runtime.InteropServices;
 
 
 namespace InterfaceGraphique
-{
+{    
     public partial class Configuration : Form
     {
         private static MenuPrincipal menuPrincipal_;
@@ -25,17 +34,17 @@ namespace InterfaceGraphique
         //le nombre de buts nécessaires (entre 1 et 5) pour gagner une partie.
         private int scorePourGangner = 2;
 
-        //les attributs de Profil
-        //private float vitesse = 0;
-        //private string nom = "";
-        //private float probaDAgirPassivemnt = 0;
+        
 
-        private bool estVirtuel = true;
+        private bool estVirtuel = true;    
         Profil joueurVirtuelDefault_ = new Profil();
         Profil joueurVirtuelCourant_;
         List<Profil> profils =new List<Profil>();
         
-        
+        //les attributs de Profil
+        private double vitesse_ = 0;
+        private string nom = "";
+        private double probaDAgirPassivemnt = 0;
 
 
         // Volet débogage
@@ -49,14 +58,19 @@ namespace InterfaceGraphique
         public Configuration()
         {
             InitializeComponent();
-            profils.Add(joueurVirtuelDefault_);
+            
             joueurVirtuelCourant_ = joueurVirtuelDefault_;
+            profils.Add(joueurVirtuelCourant_);
             textBox1.Text=(joueurVirtuelCourant_.getNomProfil());
             textBox2.Text=(Convert.ToString(joueurVirtuelCourant_.getVitesseProfil()));
             textBox3.Text=(Convert.ToString(joueurVirtuelCourant_.getProbProfil()));
             listDeProfils.Items.Add(joueurVirtuelCourant_.getNomProfil());
+            creationProfil.Enabled = false;
+            vitesse_ = joueurVirtuelCourant_.getVitesseProfil();
+            nom = joueurVirtuelCourant_.getNomProfil();
+            probaDAgirPassivemnt = joueurVirtuelCourant_.getProbProfil();
 
-            
+
             int[] touches = new int[4];
             FonctionsNatives.obtenirTouches(touches);
             toucheDeplaceEnHaut_ = touches[0];
@@ -224,7 +238,7 @@ namespace InterfaceGraphique
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            if (numericUpDown1.Value <= 2 || numericUpDown1.Value <= 5)
+            if (numericUpDown1.Value >= 1 || numericUpDown1.Value <= 5)
                 scorePourGangner = Convert.ToInt32(numericUpDown1.Value);
 
         }
@@ -281,6 +295,7 @@ namespace InterfaceGraphique
         {
             creationProfil.Enabled = true;
             ajouterActif = true;
+            modifierActif = false;
             
 
            
@@ -288,21 +303,21 @@ namespace InterfaceGraphique
 
         private void listDeProfils_SelectedIndexChanged(object sender, EventArgs e)
         {
-            for (int i = 0; i < Convert.ToInt32(profils.LongCount()); i++)
 
-                if (profils[i]==listDeProfils.SelectedItem)
+            for (int i = 1; i <listDeProfils.Items.Count; i++)
+                if (i == listDeProfils.SelectedIndex)
                 {
                     joueurVirtuelCourant_ = profils[i];
                     textBox1.Text = (joueurVirtuelCourant_.getNomProfil());
                     textBox2.Text = (Convert.ToString(joueurVirtuelCourant_.getVitesseProfil()));
                     textBox3.Text = (Convert.ToString(joueurVirtuelCourant_.getProbProfil()));
-                }
-                    
+                }      
         }
 
         private void modifierProfil_Click(object sender, EventArgs e)
         {
             creationProfil.Enabled = true;
+            ajouterActif = false;
             modifierActif = true;
           
 
@@ -310,19 +325,16 @@ namespace InterfaceGraphique
 
         private void button2_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < profils.LongCount(); i++)
+            for (int i = 1; i < profils.Count; i++)
 
-                if (profils[i] == listDeProfils.SelectedItem)
+                if ( i== listDeProfils.SelectedIndex)
                 {
                     profils.Remove(profils[i]);
+                    listDeProfils.Items.Remove(textBox1.Text);
                 }
-             listDeProfils.Items.Remove(textBox1.Text);
+           
         }
 
-        private void Configuration_Shown(object sender, EventArgs e)
-        {
-
-        }
 
         private void appliquer2_Click(object sender, EventArgs e)
         {
@@ -338,33 +350,29 @@ namespace InterfaceGraphique
                 {
                     profils.Add(joueur);
                     listDeProfils.Items.Add(textBox1.Text);
-                    ajouterActif = false;
+                    creationProfil.Enabled = false;
                 }
             }
 
             if (modifierActif)
             {
-                for (int i = 0; i < profils.LongCount(); i++)
+                for (int i = 1; i < profils.Count; i++)
 
-                    if (listDeProfils.Items.Equals(profils[i].getNomProfil()))
+                    if (i==listDeProfils.SelectedIndex)
                     {
                         profils[i].setNomProfil(textBox1.Text);
                         profils[i].setVitesseProfil(Convert.ToDouble(textBox2.Text));
                         profils[i].setProbProfil(Convert.ToDouble(textBox3.Text));
-                        modifierActif = false;
-                        listDeProfils.Items.Remove(textBox1.Text);
-                        listDeProfils.Items.Add(textBox1.Text);
+                        listDeProfils.Items.RemoveAt(i);
+                        listDeProfils.Items.Insert(i,textBox1.Text);
+                        creationProfil.Enabled=false;
                     }
                
             }
 
             }
 
-        private void Configuration_Load(object sender, EventArgs e)
-        {
-
-        }
-
+       
         private void Configuration_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Hide();
@@ -393,6 +401,12 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void obtenirTouches(int[] touches);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void profilCourant(string nom, double vitesse_, double probaDAgirPassivemnt);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void debogConfig(bool debogageActif_, bool debogCollision_, bool debogVitesse_, bool eclairageActif_,bool effetVisuelActif_);
 
     }
 }

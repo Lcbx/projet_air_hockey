@@ -34,6 +34,8 @@ public:
 	virtual void afficherConcret(const glm::mat4& vueProjection) const;
 	/// Effectue l'animation du cube.
 	virtual void animer(float temps);
+	///permet de deplacer selon l'endroit voulu
+	void deplacer(glm::vec3 pos);
 
 	///Accepter le visiteur
 	virtual void accepter(Visiteur* v);
@@ -44,9 +46,12 @@ public:
 private:
 
 	///la position au moment de la derniere animation
-	glm::vec3 dernierePoition_;
-	///la vitesse du meillet
+	glm::vec3 dernierePosition_;
+	///la vitesse du maillet
 	glm::vec3 vitesse_;
+	///la position vers laquelle le maillet se deplace
+	glm::vec3 positionFuture_;
+
 
 	/// Angle selon l'axe des X.
 	float angleX_{ 0.f };

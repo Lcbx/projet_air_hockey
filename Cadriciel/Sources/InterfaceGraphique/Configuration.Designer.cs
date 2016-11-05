@@ -463,6 +463,7 @@
             this.ajouter.Name = "ajouter";
             this.ajouter.UseVisualStyleBackColor = true;
             this.ajouter.Click += new System.EventHandler(this.ajouter_Click);
+            this.ajouter.StyleChanged += new System.EventHandler(this.ajouter_Click);
             // 
             // Configuration
             // 
@@ -471,7 +472,6 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "Configuration";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Configuration_FormClosing);
-            this.Load += new System.EventHandler(this.Configuration_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

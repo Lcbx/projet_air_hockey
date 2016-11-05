@@ -1,31 +1,28 @@
-////////////////////////////////////////////////////////////////////////////////////
-/// @file NoeudCompositeTest.cpp
-/// @author Wajdi Gharsalli
+//////////////////////////////////////////////////////////////////////////////
+/// @file CameraTest.h
+/// @author Medaoud Ikram
 /// @date 2016-11-03
 /// @version 1.0
 ///
-/// @addtogroup inf2990 INF2990
-/// @{
-////////////////////////////////////////////////////////////////////////////////////
-#ifndef _TESTS_NOEUDCOMPOSITETEST_H
-#define _TESTS_NOEUDCOMPOSITETEST_H
+//////////////////////////////////////////////////////////////////////////////
 
+#ifndef _TESTS_CAMERATEST_H
+#define _TESTS_CAMERATEST_H
+#include "vue.h"
 #include <cppunit/extensions/HelperMacros.h>
 #include <memory>
-#include "NoeudTable.h"
-#include "AideGL.h"
 
-class NoeudComposite;
+class Camera;
 
 ///////////////////////////////////////////////////////////////////////////
-/// @class NoeudAbstraitTest
+/// @class CameraTest
 /// @brief Classe de test cppunit pour tester le bon fonctionnement des
-///        méthodes de la classe NoeudAbstrait
+///        méthodes de la classe Camera
 ///
-/// @author Wajdi Gharsalli
+/// @author Medaoud Ikram
 /// @date 2016-11-03
 ///////////////////////////////////////////////////////////////////////////
-class NoeudCompositeTest : public CppUnit::TestFixture
+class CameraTest : public CppUnit::TestFixture
 {
 
 	// =================================================================
@@ -34,13 +31,9 @@ class NoeudCompositeTest : public CppUnit::TestFixture
 	// Important, vous devez définir chacun de vos cas de tests à l'aide
 	// de la macro CPPUNIT_TEST sinon ce dernier ne sera pas exécuté !
 	// =================================================================
-	CPPUNIT_TEST_SUITE(NoeudCompositeTest);
-	CPPUNIT_TEST(testVider);
-	CPPUNIT_TEST(testAjout);
-	CPPUNIT_TEST(testSuppression);
-	CPPUNIT_TEST(testTrouverObjet);
-	CPPUNIT_TEST(testSelectionMultiple);
-
+	CPPUNIT_TEST_SUITE(CameraTest);
+	CPPUNIT_TEST(testDeplacerXY);
+	CPPUNIT_TEST(testDeplacerZ);
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -56,35 +49,23 @@ public:
 	void tearDown();
 
 
+
 	// =================================================================
 	// Définissez ici les différents cas de tests...
 	// =================================================================
 
-	/// Cas de test: vider la table
-	void testVider();
-
-	/// Cas de test: ajout des objets
-	void testAjout();
-
-	/// Cas de test: supprimer des objets
-	void testSuppression();
-
-	///Cas de test: dans la table
-	void testTrouverObjet();
-
-	///Cas de test: selection multiple
-	void testSelectionMultiple();
-
+	void testDeplacerXY();
+	void testDeplacerZ();
 
 private:
 	/// Instance d'un noeud abstrait
-	//std::unique_ptr<NoeudComposite> noeud;
-	NoeudTable *noeud;
+	std::unique_ptr<vue::Camera> camera;
 };
 
-#endif // _TESTS_NOEUDABSTRAITTEST_H
-
+#endif // _TESTS_CAMERATEST_H
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
 ///////////////////////////////////////////////////////////////////////////////
+#pragma once
+
