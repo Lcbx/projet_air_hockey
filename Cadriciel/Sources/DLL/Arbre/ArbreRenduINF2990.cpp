@@ -636,7 +636,7 @@ void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 	auto maillet = (NoeudMaillet*)this->enfants_.back();//pour obtenir le maillet du 2eme joueur
 	auto pos = maillet->obtenirPositionRelative();
 	double rayon = maillet->obtenirRayon();
-	float delta = 3.f * rayon;
+	float delta = 2.f * rayon;
 	glm::vec3 nouvellePosition = { pos.x + glm::sign(x) * delta, pos.y + glm::sign(y) * delta, pos.z };
 	((NoeudMaillet*)maillet)->deplacer(nouvellePosition);
 }

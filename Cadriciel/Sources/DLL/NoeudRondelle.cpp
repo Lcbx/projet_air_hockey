@@ -204,9 +204,9 @@ void NoeudRondelle::animer(float temps)
 			}
 			case InfoCollision::MAILLET: {
 				typeObjetDebug = "maillet";
-				positionActuelle = positionHorsCollision;
+				//positionActuelle = positionHorsCollision;
 				auto vitesseMaillet = ((NoeudMaillet*)resultat.objet)->getVitesse();
-				vitesse_ = glm::reflect(vitesse_, normale) + glm::dot(vitesseMaillet, normale) * normale;
+				vitesse_ = - glm::reflect(vitesse_, normale) + glm::dot(vitesseMaillet, normale) * normale;
 				break;
 			}
 			default: break;
@@ -221,7 +221,7 @@ void NoeudRondelle::animer(float temps)
 #define CST_ASPIRATION 10.f
 		for (auto it = portails_.begin(); it != portails_.end(); it++) {
 			auto portail = it->first;
-			glm::vec3 vecteur_distance = portail->obtenirPositionRelative() - obtenirPositionRelative();
+			glm::vec3 vecteur_distance = portail->obtenirPositionRelative() - positionActuelle;
 			float distance = glm::length(vecteur_distance);
 			float rayon_attraction = 3.f * portail->obtenirRayon();
 			if (it->second) {
@@ -238,7 +238,7 @@ void NoeudRondelle::animer(float temps)
 
 		//application de la friction
 		float moduleVitesse = glm::length(vitesse_);
-#define VITESSE_MAX 999.
+#define VITESSE_MAX 300.
 		vitesse_ *= glm::clamp(moduleVitesse - coeff.friction * temps, 0.005, VITESSE_MAX) / moduleVitesse;
 		moduleVitesse = glm::length(vitesse_);
 
@@ -256,8 +256,8 @@ void NoeudRondelle::collisionMailletExterne(glm::vec3 vitesseMaillet, glm::vec3 
 	auto vitesseIntermediaire = glm::reflect(vitesse_, normale) - glm::dot(vitesseMaillet, normale) * normale;
 	float moduleVitesse = glm::clamp((float)glm::length(vitesseIntermediaire), 0.f, (float) VITESSE_MAX);
 	vitesse_ = moduleVitesse * glm::normalize(vitesseIntermediaire);
-	Debug::obtenirInstance().afficher("Collision : maillet");
-	Debug::obtenirInstance().afficher("Vitesse : " + std::to_string(moduleVitesse).substr(0, 3));
+	if (Debug::obtenirInstance().afficherCollision) Debug::obtenirInstance().afficher("Collision : maillet");
+	if (Debug::obtenirInstance().afficherVitesse) Debug::obtenirInstance().afficher("Vitesse : " + std::to_string(moduleVitesse).substr(0, 3));
 }
 
 

@@ -35,7 +35,6 @@
 NoeudMaillet::NoeudMaillet(const std::string& typeNoeud)
 	: NoeudAbstrait{ typeNoeud }
 {
-	positionFuture_ = obtenirPositionRelative();
 }
 
 
@@ -88,16 +87,19 @@ void NoeudMaillet::afficherConcret(const glm::mat4& vueProjection) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudMaillet::animer(float temps)
 {
-	//pour eviter de sauter des objets
+	
 	auto positionActuelle = obtenirPositionRelative();
+	//evite unpetit bug
+	if (positionFuture_ == glm::vec3(0, 0, 0)) positionFuture_ = positionActuelle;
 	glm::vec3	deplacement = positionFuture_ - positionActuelle;
 	float		rayon = obtenirRayon();
-	float		distance = glm::clamp(glm::length(deplacement), 0.f, 0.5f * rayon);	//eviter d'aller trop vite
+	float		distance = glm::clamp(glm::length(deplacement), 0.f, 4.f);	//eviter d'aller trop vite
 	glm::vec3	direction = glm::normalize(deplacement);
 
 
 	InfoCollision resultat;
 	VisiteurCollision v;
+	//pour eviter de sauter des objets
 	for (float i = 0.1f; i < distance / rayon + 0.15f; i += 0.1f)
 	{
 		glm::vec3 positionIntermediaire = positionActuelle + glm::clamp(i * rayon, 0.f, distance) * direction;
