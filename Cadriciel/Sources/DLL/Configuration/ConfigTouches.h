@@ -23,6 +23,7 @@ class ConfigTouches
 
 public:
 
+	/// Constructeur par défaut
 	ConfigTouches();
 
 	/// Créer le DOM avec les valeurs (sauvegarde).

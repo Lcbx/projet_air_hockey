@@ -13,6 +13,7 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <memory>
 #include "NoeudTable.h"
+#include "AideGL.h"
 
 class NoeudComposite;
 
@@ -38,7 +39,7 @@ class NoeudCompositeTest : public CppUnit::TestFixture
 	CPPUNIT_TEST(testAjout);
 	CPPUNIT_TEST(testSuppression);
 	CPPUNIT_TEST(testTrouverObjet);
-
+	CPPUNIT_TEST(testSelectionMultiple);
 
 	CPPUNIT_TEST_SUITE_END();
 
@@ -71,6 +72,8 @@ public:
 	///Cas de test: dans la table
 	void testTrouverObjet();
 
+	///Cas de test: selection multiple
+	void testSelectionMultiple();
 
 
 private:

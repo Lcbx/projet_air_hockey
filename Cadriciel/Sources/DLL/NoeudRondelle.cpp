@@ -133,9 +133,16 @@ void NoeudRondelle::animer(float temps)
 			glm::vec3 positionIntermediaire = positionActuelle + glm::clamp(i * rayon, 0.f, distance) * direction;
 			resultat = v.calculerCollision(positionIntermediaire, obtenirRayon(), true);
 			///std::cout << "test " << i << " result " << resultat.type << "\n";
-			if (resultat.type != InfoCollision::AUCUNE && resultat.type != InfoCollision::BONUS || i >= distance / rayon ) {
-				positionActuelle = positionIntermediaire;
-				break;
+
+			//pour l'aplication des bonus
+			if (!affecteParBonus_ && resultat.type == InfoCollision::BONUS) affecteParBonus_ = true;
+			else if (resultat.type == InfoCollision::BONUS) resultat.type = InfoCollision::AUCUNE;
+
+			//arrete lors d'une collision importante
+			if (resultat.type != InfoCollision::AUCUNE  || i >= distance / rayon ) {
+					affecteParBonus_ = false;
+					positionActuelle = positionIntermediaire;
+					break;
 			}
 		}
 
@@ -187,7 +194,8 @@ void NoeudRondelle::animer(float temps)
 			case InfoCollision::BONUS: {
 				typeObjetDebug = "bonus";
 				glm::vec3 direction = glm::normalize(-((NoeudBonus*)resultat.objet)->obtenirDroiteDirectrice().lireVecteur());
-				vitesse_ += direction * (float)glm::pow(coeff.acceleration, 1.5);
+				vitesse_ += direction * (float)glm::pow(coeff.acceleration, 1);
+				affecteParBonus_ = true;
 				break;
 			}
 			case InfoCollision::PORTAIL: {
@@ -204,7 +212,7 @@ void NoeudRondelle::animer(float temps)
 			}
 			case InfoCollision::MAILLET: {
 				typeObjetDebug = "maillet";
-				//positionActuelle = positionHorsCollision;
+				positionActuelle = positionHorsCollision;
 				auto vitesseMaillet = ((NoeudMaillet*)resultat.objet)->getVitesse();
 				vitesse_ = - glm::reflect(vitesse_, normale) + glm::dot(vitesseMaillet, normale) * normale;
 				break;

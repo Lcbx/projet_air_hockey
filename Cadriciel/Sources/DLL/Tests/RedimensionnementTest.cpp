@@ -64,8 +64,6 @@ void RedimensionnementTest::testFenetre()
 
 	// Premier test : on vérifie que la position initiale est un vector nul
 	fenetre->obtenirDimensionFenetreVirtuelle();
-	
-
 
 	//// On modifie la dimension de la fenêtre
 	fenetre->redimensionnerFenetre(600,700);
