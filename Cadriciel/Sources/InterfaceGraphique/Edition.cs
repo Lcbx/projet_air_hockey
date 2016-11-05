@@ -1663,7 +1663,7 @@ namespace InterfaceGraphique
                 //effacer les points de controle
                 FonctionsNatives.effacerPointControle();
 
-                // estEnPause = false;
+                estEnPause = false;
 
 
                 toolStrip1.Hide();

@@ -13,6 +13,10 @@
 #include "NoeudTable.h"
 #include "ArbreRenduINF2990.h"
 #include "Utilitaire.h"
+#include "Vue.h"
+#include "AideGL.h"
+#include "../Noeuds/NoeudTypes.h"
+#include "../VisiteurSelection.h"
 
 // Enregistrement de la suite de tests au sein du registre
 CPPUNIT_TEST_SUITE_REGISTRATION(NoeudCompositeTest);
@@ -234,3 +238,5 @@ void NoeudCompositeTest::testSelectionMultiple()
 	CPPUNIT_ASSERT(noeudMuret->estSelectionne() == false);
 	CPPUNIT_ASSERT(noeudBonus2->estSelectionne() == false);
 }
+
+

@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 
 
 namespace InterfaceGraphique
-{
+{    
     public partial class Configuration : Form
     {
         private static MenuPrincipal menuPrincipal_;
@@ -39,7 +39,7 @@ namespace InterfaceGraphique
         //private string nom = "";
         //private float probaDAgirPassivemnt = 0;
 
-        private bool estVirtuel = true;
+        private bool estVirtuel = true;    
         Profil joueurVirtuelDefault_ = new Profil();
         Profil joueurVirtuelCourant_;
         List<Profil> profils =new List<Profil>();

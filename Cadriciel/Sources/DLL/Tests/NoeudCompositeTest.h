@@ -13,6 +13,7 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <memory>
 #include "NoeudTable.h"
+#include "AideGL.h"
 
 class NoeudComposite;
 
@@ -73,8 +74,6 @@ public:
 
 	///Cas de test: selection multiple
 	void testSelectionMultiple();
-
-
 
 
 private:
