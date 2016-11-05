@@ -72,8 +72,8 @@ void RedimensionnementTest::testFenetre()
 
 	//// Second test : on vérifie que la fenêtre a été modifiée
 	glm::dvec2 vecteur({ fenetre->obtenirDimensionFenetreVirtuelle() });
-	//CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[0] == 600));
-	//CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[1] ==700));
+	CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[0] == 700));
+	CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[1] ==600));
 }
 
 

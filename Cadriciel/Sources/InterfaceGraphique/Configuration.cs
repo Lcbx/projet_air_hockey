@@ -288,9 +288,9 @@ namespace InterfaceGraphique
 
         private void listDeProfils_SelectedIndexChanged(object sender, EventArgs e)
         {
-            for (int i = 0; i < Convert.ToInt32(profils.LongCount()); i++)
+            for (int i = 1; i < Convert.ToInt32(profils.LongCount()); i++)
 
-                if (profils[i]==listDeProfils.SelectedItem)
+                if (i == listDeProfils.SelectedIndex)
                 {
                     joueurVirtuelCourant_ = profils[i];
                     textBox1.Text = (joueurVirtuelCourant_.getNomProfil());
@@ -310,13 +310,14 @@ namespace InterfaceGraphique
 
         private void button2_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < profils.Count; i++)
+            for (int i = 1; i < profils.Count; i++)
 
-                if (profils[i] == listDeProfils.SelectedItem)
+                if ( i== listDeProfils.SelectedIndex)
                 {
                     profils.Remove(profils[i]);
+                    listDeProfils.Items.Remove(textBox1.Text);
                 }
-             listDeProfils.Items.Remove(textBox1.Text);
+           
         }
 
         private void Configuration_Shown(object sender, EventArgs e)
@@ -344,7 +345,7 @@ namespace InterfaceGraphique
 
             if (modifierActif)
             {
-                for (int i = 0; i < profils.LongCount(); i++)
+                for (int i = 1; i < profils.LongCount(); i++)
 
                     if (listDeProfils.Items.Equals(profils[i].getNomProfil()))
                     {

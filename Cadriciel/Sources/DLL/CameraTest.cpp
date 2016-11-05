@@ -58,19 +58,22 @@ void CameraTest::tearDown()
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void CameraTest::testPosition()
+void CameraTest::testDeplacerXY()
 {
 
-	// Premier test : on vérifie que la position initiale est un vector nul
-	//fenetre->obtenirDimensionFenetreVirtuelle();
+	 //Premier test : on vérifie que la position initiale est un vector nul
+		camera->obtenirPosition();
+		glm::dvec3 vecteur { camera->obtenirPosition() };
+		CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[0]));
+		CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[1]));
 
-	//// On modifie la dimension de la fenêtre
-	//fenetre->redimensionnerFenetre(600, 700);
+		camera->deplacerXY(50, 60, true);
 
 	//// Second test : on vérifie que la fenêtre a été modifiée
-	//glm::dvec2 vecteur({ fenetre->obtenirDimensionFenetreVirtuelle() });
-	//CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[0] == 600));
-	//CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[1] == 700));
+		vecteur = camera-> obtenirPosition();
+		CPPUNIT_ASSERT(vecteur[0]==50);
+		CPPUNIT_ASSERT(vecteur[1]==60);
+
 }
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -81,47 +84,19 @@ void CameraTest::testPosition()
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void CameraTest::testPointVise()
+void CameraTest::testDeplacerZ()
 {
 
-	// Premier test : on vérifie que la position initiale est un vector nul
-	//fenetre->obtenirDimensionFenetreVirtuelle();
-
-	//// On modifie la dimension de la fenêtre
-	//fenetre->redimensionnerFenetre(600, 700);
-
-	//// Second test : on vérifie que la fenêtre a été modifiée
-	//glm::dvec2 vecteur({ fenetre->obtenirDimensionFenetreVirtuelle() });
-	//CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[0] == 600));
-	//CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[1] == 700));
-}
-////////////////////////////////////////////////////////////////////////
-///
-/// @fn void RedimensionnementTest::testFenetre()
-///
-/// Cas de test: écriture/lecture de la cloture
-///
-/// @return Aucune.
-///
-////////////////////////////////////////////////////////////////////////
-void CameraTest::testUp()
-{
-
-	// Premier test : on vérifie que la position initiale est un vector nul
-	//fenetre->obtenirDimensionFenetreVirtuelle();
-
-	//// On modifie la dimension de la fenêtre
-	//fenetre->redimensionnerFenetre(600, 700);
+	//Premier test : on vérifie que la position initiale est un vector nul
+	camera->obtenirPosition();
+	glm::dvec3 vecteur{ camera->obtenirPosition() };
+	CPPUNIT_ASSERT((vecteur[2] == 200));
+	camera->deplacerZ(100, true);
 
 	//// Second test : on vérifie que la fenêtre a été modifiée
-	//glm::dvec2 vecteur({ fenetre->obtenirDimensionFenetreVirtuelle() });
-	//CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[0] == 600));
-	//CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[1] == 700));
+	vecteur = camera->obtenirPosition();
+	CPPUNIT_ASSERT(vecteur[2] == 300);
 }
-
-
-
-
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
