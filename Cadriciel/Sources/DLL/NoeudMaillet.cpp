@@ -87,20 +87,22 @@ void NoeudMaillet::afficherConcret(const glm::mat4& vueProjection) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudMaillet::animer(float temps)
 {
-	
+	//notre position actuelle qui sera modifiee et reassignee
 	auto positionActuelle = obtenirPositionRelative();
 	//evite unpetit bug
 	if (positionFuture_ == glm::vec3(0, 0, 0)) positionFuture_ = positionActuelle;
 	glm::vec3	deplacement = positionFuture_ - positionActuelle;
 	float		rayon = obtenirRayon();
-	float		distance = glm::clamp(glm::length(deplacement), 0.f, 4.f);	//eviter d'aller trop vite
+	//permet une acceleration (10m/s) evite d'aller trop vite
+	float		deplacementMax = (glm::length(vitesse_) + 10.f) * temps;
+	float		distance = glm::clamp(glm::length(deplacement), 0.f, deplacementMax);
 	glm::vec3	direction = glm::normalize(deplacement);
 
 
 	InfoCollision resultat;
 	VisiteurCollision v;
 	//pour eviter de sauter des objets
-	for (float i = 0.1f; i < distance / rayon + 0.15f; i += 0.1f)
+	for (float i = 0.1f; i < distance / rayon + 0.3f; i += 0.3f)
 	{
 		glm::vec3 positionIntermediaire = positionActuelle + glm::clamp(i * rayon, 0.f, distance) * direction;
 		bool estDanslaBonneZone = estDeuxiemeJoueur ?
