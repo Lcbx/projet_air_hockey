@@ -20,6 +20,7 @@
 #include "ArbreRenduINF2990.h"
 #include "CompteurAffichage.h"
 #include "BancTests.h"
+#include "../Affichage_debuggage.h"
 
 //using namespace std;
 
@@ -965,6 +966,19 @@ extern "C"
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl debogConfig(bool debogageActif_, bool debogCollision_, bool debogVitesse_, bool eclairageActif_, bool effetVisuelActif_)
 	{
+		///std::cout << "helloLuc\n";
+		if (debogageActif_) {
+			Debug::obtenirInstance().afficherCollision = debogCollision_;
+			Debug::obtenirInstance().afficherVitesse = debogVitesse_;
+			Debug::obtenirInstance().afficherLumieres = eclairageActif_;
+			Debug::obtenirInstance().afficherAttraction = effetVisuelActif_;
+		}
+		else {
+			Debug::obtenirInstance().afficherCollision = false;
+			Debug::obtenirInstance().afficherVitesse = false;
+			Debug::obtenirInstance().afficherLumieres = false;
+			Debug::obtenirInstance().afficherAttraction = false;
+		}
 	}
 
 
