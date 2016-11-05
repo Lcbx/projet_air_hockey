@@ -128,7 +128,7 @@ void NoeudRondelle::animer(float temps)
 		InfoCollision resultat;
 		VisiteurCollision v;
 		//pour eviter de sauter des objets
-		for (float i = 0.1f; i < distance / rayon + 0.3f; i += 0.3f)
+		for (float i = 0.1f; i < distance / rayon + 0.5f; i += 0.5f)
 		{
 			glm::vec3 positionIntermediaire = positionActuelle + glm::clamp(i * rayon, 0.f, distance) * direction;
 			resultat = v.calculerCollision(positionIntermediaire, obtenirRayon(), true);
