@@ -11,20 +11,21 @@ private:
 	std::string nomJoueur;
 
 public:
-	/// @fn AdaptateurJoueur(std::string nomJoueur)
-	/// @brief Constructeur par nom
-	AdaptateurJoueur(std::string nomJoueur) {
-		this->nomJoueur = nomJoueur;
-		this->joueurVirtuel = nullptr;
-	}
+	/// Constructeur par défaut ne doit pas être appelé
+	AdaptateurJoueur() = delete;
 
-	/// @fn AdaptateurJoueur(std::string nomJoueur, JoueurVirtuel joueurVirtuel)
-	/// @brief Constructeur par nom et joueur virtuel
-	AdaptateurJoueur(std::string nomJoueur, JoueurVirtuel joueurVirtuel) {
-		this->nomJoueur = nomJoueur;
-		this->joueurVirtuel = new JoueurVirtuel(joueurVirtuel);
-	}
+	/// Constructeur par nom
+	AdaptateurJoueur(std::string nomJoueur);
 
-	/// @brief Permet de savoir si un joueur est un ordinateur
+	/// Constructeur par nom et joueur virtuel
+	AdaptateurJoueur(std::string nomJoueur, JoueurVirtuel joueurVirtuel);
 
+	/// Permet de savoir si un joueur est un ordinateur
+	bool estHumain();
+
+	/// Permet d'obtenir le nom du joueur
+	std::string getNomJoueur();
+
+	/// Permet d'obtenir le profil du joueur virtuel
+	JoueurVirtuel AdaptateurJoueur::getJoueurVirtuel();
 };

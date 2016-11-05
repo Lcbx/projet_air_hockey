@@ -36,7 +36,5 @@ namespace InterfaceGraphique
         private void creerTournoi(object sender, EventArgs e) {
             this.parent_.SwitchStatusTournoi(ModeTournoi.StatusTournoi.MatchMaking);
         }
-
-
     }
 }
