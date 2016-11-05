@@ -17,17 +17,54 @@ namespace InterfaceGraphique
     {
         private CreationTournoi creationTournoi_;
         private MatchingTournoi matchingTournoi_;
+        private MenuPrincipal parent_;
+
+
+        /// @enum public enum StatusTournoi 
+        /// @brief Différents status du tournoi
+        public enum StatusTournoi {
+            Creation,
+            MatchMaking,
+            Won
+        };
 
         /// @fn public ModeTournoi()
         /// @brief Permet de créer le mode tournoi
-        public ModeTournoi()
-        {
+        public ModeTournoi() {
             InitializeComponent();
-            this.creationTournoi_ = new CreationTournoi();
-            this.matchingTournoi_ = new MatchingTournoi();
+            this.SwitchStatusTournoi(StatusTournoi.Creation);
+        }
 
+        /// @fn public ModeTournoi(MenuPrincipal parent_)
+        /// @brief Permet de créer le mode tournoi
+        public ModeTournoi(MenuPrincipal parent)
+        {
+            this.parent_ = parent;
+            InitializeComponent();
+            this.SwitchStatusTournoi(StatusTournoi.Creation);
+        }
+
+        /// @fn public SwitchStatusTournoi(StatusTournoi status)
+        /// @brief Permet de changer le status et changer le user control
+        public void SwitchStatusTournoi(StatusTournoi status) {
             this.panel1.Controls.Clear();
-            this.panel1.Controls.Add(this.matchingTournoi_);
+            if (status == StatusTournoi.Creation) {
+                this.creationTournoi_ = new CreationTournoi(this);
+                this.panel1.Controls.Add(this.creationTournoi_);
+            } else {
+                this.matchingTournoi_ = new MatchingTournoi(this);
+                this.panel1.Controls.Add(this.matchingTournoi_);
+            }
+        }
+
+        /// @fn private void button1_Click(object sender, EventArgs e)
+        /// @brief Permet de revenir au menu principal
+        /// @param sender, Objet d'envois
+        /// @param e, Évènement
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.parent_.Show();
+            this.Hide();
         }
     }
 }

@@ -21,7 +21,7 @@ namespace InterfaceGraphique
     {
         private Edition edition_;
         private Configuration configuration_;
-        private ModeTournoi tournoi_ = new ModeTournoi();
+        private ModeTournoi tournoi_;
 
 
         public MenuPrincipal()
@@ -80,6 +80,9 @@ namespace InterfaceGraphique
         /// <param name="sender">Objet sur lequel l'évènement a été produit</param>
         /// <param name="e">Les arguments d'évèment</param>
         private void modeTournoiClick(object sender, EventArgs e) {
+            if(this.tournoi_ == null || this.tournoi_.IsDisposed)
+                this.tournoi_ = new ModeTournoi(this);
+
             tournoi_.Show();
             this.Hide();
         }

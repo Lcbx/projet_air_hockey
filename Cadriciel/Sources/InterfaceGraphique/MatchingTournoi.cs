@@ -14,30 +14,48 @@ namespace InterfaceGraphique
     /// @brief Représente le match making pour un tournoi
     public partial class MatchingTournoi : UserControl
     {
+        ModeTournoi parent_;
         private MatchJoueur[] matches;
         private int nbJoueurs = (int) Math.Pow(2, 3) - 1; //TODO: Refactor
         private const int stepDistance = 20;
 
         /// @fn public MatchingTournoi()
         /// @brief Permet de créer un MatchMaking d'un tournoi
-        /// 
         /// Dessine les différents participants pour le match making à partir du nombre de joueurs
         public MatchingTournoi() {
             InitializeComponent();
+            this.initMatchs();
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.matchingTournoi_paint);
+        }
+
+        /// @fn public MatchingTournoi()
+        /// @brief Permet de créer un MatchMaking d'un tournoi
+        /// Dessine les différents participants pour le match making à partir du nombre de joueurs
+        public MatchingTournoi(ModeTournoi parent)
+        {
+            this.parent_ = parent;
+            InitializeComponent();
+            this.initMatchs();
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.matchingTournoi_paint);
+        }
+
+        /// @fn private void initMatchs()
+        /// @brief Permet d'initialiser la structure des matchs
+        private void initMatchs() {
             this.matches = new MatchJoueur[nbJoueurs];
 
             this.SuspendLayout();
 
             int maxDepth = (int)Math.Log((nbJoueurs + 1), 2);
 
-            for (int i = 0; i < nbJoueurs; i++) { //TODO: Refactor
+            for (int i = 0; i < nbJoueurs; i++)
+            { //TODO: Refactor
                 this.matches[i] = new MatchJoueur("No name", 3);
-                int depth = (int) Math.Log((i + 1), 2);
-                int height = (i + 1) - (int) Math.Pow(2, depth);
-                int ajustedHeight = height * (int) Math.Pow(2, maxDepth - depth);
-                this.matches[i].Location = 
-                    new System.Drawing.Point(depth * (this.matches[i].Size.Width + stepDistance), 
+                int depth = (int)Math.Log((i + 1), 2);
+                int height = (i + 1) - (int)Math.Pow(2, depth);
+                int ajustedHeight = height * (int)Math.Pow(2, maxDepth - depth);
+                this.matches[i].Location =
+                    new System.Drawing.Point(depth * (this.matches[i].Size.Width + stepDistance),
                         (ajustedHeight) * (this.matches[i].Size.Height) + this.label1.Size.Height + stepDistance);
                 this.Controls.Add(this.matches[i]);
             }

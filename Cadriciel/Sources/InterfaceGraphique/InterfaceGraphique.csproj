@@ -143,12 +143,6 @@
     <Compile Include="Sauvegarde.Designer.cs">
       <DependentUpon>Sauvegarde.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tournoi.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Tournoi.Designer.cs">
-      <DependentUpon>Tournoi.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="BoiteAide.resx">
       <DependentUpon>BoiteAide.cs</DependentUpon>
     </EmbeddedResource>
