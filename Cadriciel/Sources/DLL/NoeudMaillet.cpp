@@ -17,6 +17,8 @@
 
 #include "Utilitaire.h"
 #include "../Visiteur.h"
+#include "VisiteurCollision.h";
+#include "ArbreRenduINF2990.h"
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -33,6 +35,7 @@
 NoeudMaillet::NoeudMaillet(const std::string& typeNoeud)
 	: NoeudAbstrait{ typeNoeud }
 {
+	positionFuture_ = obtenirPositionRelative();
 }
 
 
@@ -85,9 +88,68 @@ void NoeudMaillet::afficherConcret(const glm::mat4& vueProjection) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudMaillet::animer(float temps)
 {
-	vitesse_ = (dernierePoition_ - obtenirPositionRelative())/temps;
-	///std::cout << "vitesse maillet " << glm::length(vitesse_) << "\n";
-	dernierePoition_ = obtenirPositionRelative();
+	//pour eviter de sauter des objets
+	auto positionActuelle = obtenirPositionRelative();
+	glm::vec3	deplacement = positionFuture_ - positionActuelle;
+	float		rayon = obtenirRayon();
+	float		distance = glm::clamp(glm::length(deplacement), 0.f, 0.5f * rayon);	//eviter d'aller trop vite
+	glm::vec3	direction = glm::normalize(deplacement);
+
+
+	InfoCollision resultat;
+	VisiteurCollision v;
+	for (float i = 0.1f; i < distance / rayon + 0.15f; i += 0.1f)
+	{
+		glm::vec3 positionIntermediaire = positionActuelle + glm::clamp(i * rayon, 0.f, distance) * direction;
+		bool estDanslaBonneZone = estDeuxiemeJoueur ?
+			FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->mailletDansZone1(positionIntermediaire, rayon) :
+			FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->mailletDansZone2(positionIntermediaire, rayon);
+		positionIntermediaire = estDanslaBonneZone ? positionIntermediaire : positionActuelle;
+		resultat = v.calculerCollision(positionIntermediaire, obtenirRayon(), false);
+		///std::cout << "test " << i << " result " << resultat.type << "\n";
+		if (resultat.type != InfoCollision::AUCUNE && resultat.type != InfoCollision::BONUS || i >= distance / rayon) {
+			positionActuelle = positionIntermediaire;
+			break;
+		}
+	}
+
+	//gerer la collision
+	if (resultat.type != InfoCollision::AUCUNE) {
+		//la normale rencontree
+		glm::vec3 normale = glm::normalize(resultat.details.direction);
+		//la position qui annulle la collision
+		glm::vec3 positionHorsCollision = positionActuelle + normale * (float)resultat.details.enfoncement;
+		//en fonction du type de collision
+		switch (resultat.type) {
+		case InfoCollision::MUR: {
+			positionActuelle = positionHorsCollision;
+			break;
+		}
+		case InfoCollision::BONUS: {
+			break;
+		}
+		case InfoCollision::PORTAIL: {
+			break;
+		}
+		case InfoCollision::MAILLET: {
+			std::cout << "maillet touche maillet ????\n";
+			break;
+		}
+		case InfoCollision::RONDELLE: {
+			positionActuelle = positionHorsCollision;
+			((NoeudRondelle*)resultat.objet)->collisionMailletExterne(vitesse_, normale);
+			break;
+		}
+		default: break;
+		}
+	}
+
+	//on assigne la nouvelle position
+	assignerPositionRelative(positionActuelle);
+	//determine la vitesse
+	vitesse_ = (dernierePosition_ - positionActuelle) / temps;
+	//pour la vitesse future
+	dernierePosition_ = positionActuelle;
 }
 
 
@@ -103,4 +165,18 @@ void NoeudMaillet::animer(float temps)
 void NoeudMaillet::accepter(Visiteur* v)
 {
 	v->visiter(this);
+}
+
+
+////////////////////////////////////////////////
+/// 
+/// NoeudMaillet::deplacer(glm::vec3 pos)
+///
+/// le maillet va tenter de se rendre à la position pos
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////
+void NoeudMaillet::deplacer(glm::vec3 pos) {
+	positionFuture_ = pos;
 }

@@ -36,6 +36,8 @@ public:
 	virtual void afficherConcret(const glm::mat4& vueProjection) const;
 	/// Effectue l'animation du cube.
 	virtual void animer(float temps);
+	///applique ue modification à la vitesse en fonction d'une collision avec un maillet
+	void collisionMailletExterne(glm::vec3 vitesseMaillet, glm::vec3 normale);
 
 
 	///Accepter le visiteur
@@ -54,7 +56,7 @@ private:
 
 
 	///vecteur vitesse
-	glm::vec3 vitesse_ = { 50,30,0 };
+	glm::vec3 vitesse_{0.1,0,0};
 	
 	///les portails : numero de noeud et active ou non
 	std::map<NoeudPortail*, bool> portails_;

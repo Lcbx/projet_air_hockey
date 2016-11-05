@@ -41,12 +41,12 @@ class VisiteurCollision : public Visiteur
 {
 	///le resultat a rendre
 	InfoCollision result_;
-	///l'objet qui verifie ses collisions
-	NoeudAbstrait* objet_ = nullptr;
+	///la position de l'objet dont on verifie les collisions
+	glm::vec3 position_ ;
 	///le rayon de l'objet qui verifie ses collisions
 	double rayon_;
-	///la position de l'objet qui verifie ses collisions
-	glm::vec3 position_;
+	///s'il s'agit de la rondelle
+	bool rondelle_;
 
 	///donne la collision la plus pertinente avec une suite segments
 	aidecollision::DetailsCollision collisionSegments(glm::vec3 ensemble[], int nombre);
@@ -57,8 +57,7 @@ class VisiteurCollision : public Visiteur
 
 public:
 
-	VisiteurCollision(NoeudAbstrait* objet);
-	InfoCollision& calculerCollision();
+	InfoCollision& calculerCollision(glm::vec3 position, double rayon, bool rondelle);
 
 
 	virtual void visiter(NoeudAbstrait* noeud);
