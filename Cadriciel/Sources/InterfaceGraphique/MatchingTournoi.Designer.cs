@@ -40,7 +40,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(213, 25);
             this.label1.TabIndex = 10;
-            this.label1.Text = "Création d\'un tournoi";
+            this.label1.Text = "Déroulement d\'un tournoi";
             // 
             // MatchingTournoi
             // 

@@ -25,5 +25,6 @@ public:
 		this->joueurVirtuel = new JoueurVirtuel(joueurVirtuel);
 	}
 
+	/// @brief Permet de savoir si un joueur est un ordinateur
 
 };
