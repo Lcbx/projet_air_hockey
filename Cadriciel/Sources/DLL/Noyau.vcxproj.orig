@@ -139,7 +139,6 @@
     <ClCompile Include="Application\JoeurVirtuel.cpp" />
     <ClCompile Include="Application\Loupe.cpp" />
     <ClCompile Include="Application\PointsControle.cpp" />
-    <ClCompile Include="Application\Profil.cpp" />
     <ClCompile Include="Application\Rotation.cpp" />
     <ClCompile Include="Application\Selection.cpp" />
     <ClCompile Include="Application\StrategieSouris.cpp" />
@@ -149,7 +148,6 @@
     <ClCompile Include="Arbre\Noeuds\NoeudTable.cpp" />
     <ClCompile Include="BoiteCollision.cpp" />
     <ClCompile Include="CameraTest.cpp" />
-    <ClCompile Include="Configuration\ConfigProfils.cpp" />
     <ClCompile Include="Configuration\ConfigScene.cpp" />
     <ClCompile Include="Arbre\ArbreRendu.cpp" />
     <ClCompile Include="Arbre\ArbreRenduINF2990.cpp" />
@@ -173,8 +171,11 @@
     <ClCompile Include="Tests\BancTests.cpp" />
     <ClCompile Include="Tests\ConfigSceneTest.cpp" />
     <ClCompile Include="Tests\NoeudAbstraitTest.cpp" />
-    <ClCompile Include="Tests\NoeudCompositeTest.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Tests\RedimensionnementTest.cpp" />
+=======
+    <ClCompile Include="Tests\NoeudCompositeTest.cpp" />
+>>>>>>> b0d11b0f83b04ba762abfa56b6b54bc1e1dbf9da
     <ClCompile Include="VisiteurAjout.cpp" />
     <ClCompile Include="VisiteurCollision.cpp" />
     <ClCompile Include="VisiteurDansLaTable.cpp" />
@@ -197,7 +198,6 @@
     <ClInclude Include="Application\JoueurVirtuel.h" />
     <ClInclude Include="Application\Loupe.h" />
     <ClInclude Include="Application\PointsControle.h" />
-    <ClInclude Include="Application\Profil.h" />
     <ClInclude Include="Application\Rotation.h" />
     <ClInclude Include="Application\Selection.h" />
     <ClInclude Include="Application\StrategieSouris.h" />
@@ -210,7 +210,6 @@
     <ClInclude Include="BoiteCollision.h" />
     <ClInclude Include="BoiteCollisionAbstraite.h" />
     <ClInclude Include="CameraTest.h" />
-    <ClInclude Include="Configuration\ConfigProfils.h" />
     <ClInclude Include="Configuration\ConfigScene.h" />
     <ClInclude Include="Arbre\ArbreRendu.h" />
     <ClInclude Include="Arbre\ArbreRenduINF2990.h" />
@@ -231,8 +230,11 @@
     <ClInclude Include="Tests\BancTests.h" />
     <ClInclude Include="Tests\ConfigSceneTest.h" />
     <ClInclude Include="Tests\NoeudAbstraitTest.h" />
-    <ClInclude Include="Tests\NoeudCompositeTest.h" />
+<<<<<<< HEAD
     <ClInclude Include="Tests\RedimensionnementTest.h" />
+=======
+    <ClInclude Include="Tests\NoeudCompositeTest.h" />
+>>>>>>> b0d11b0f83b04ba762abfa56b6b54bc1e1dbf9da
     <ClInclude Include="Visiteur.h" />
     <ClInclude Include="VisiteurAjout.h" />
     <ClInclude Include="VisiteurCollision.h" />

@@ -207,6 +207,12 @@
     <ClCompile Include="Tests\NoeudCompositeTest.cpp">
       <Filter>Source Files\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="Tests\RedimensionnementTest.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraTest.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
     <ClCompile Include="Configuration\ConfigProfils.cpp">
       <Filter>Source Files\Configuration</Filter>
     </ClCompile>
@@ -372,6 +378,12 @@
       <Filter>Header Files\Application</Filter>
     </ClInclude>
     <ClInclude Include="Tests\NoeudCompositeTest.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\RedimensionnementTest.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraTest.h">
       <Filter>Header Files\Tests</Filter>
     </ClInclude>
     <ClInclude Include="Configuration\ConfigProfils.h">
