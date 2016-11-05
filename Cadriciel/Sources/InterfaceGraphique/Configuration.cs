@@ -1,6 +1,6 @@
 ﻿
 ////////////////////////////////////////////////////////////////////////////////////
-/// @file Edition.cs
+/// @file Configuration.cs
 /// @author Medaoud Ikram
 /// @date 2016-9-15
 /// @version 1.0 
@@ -58,7 +58,6 @@ namespace InterfaceGraphique
         public Configuration()
         {
             InitializeComponent();
-            //profils.Add(joueurVirtuelDefault_);
             
             joueurVirtuelCourant_ = joueurVirtuelDefault_;
             profils.Add(joueurVirtuelCourant_);
@@ -301,6 +300,7 @@ namespace InterfaceGraphique
 
         private void listDeProfils_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             for (int i = 1; i <listDeProfils.Items.Count; i++)
                 if (i == listDeProfils.SelectedIndex)
                 {
