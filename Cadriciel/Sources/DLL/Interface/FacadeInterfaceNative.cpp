@@ -941,9 +941,34 @@ extern "C"
 	{
 		FacadeModele::obtenirInstance()->obtenirTouches(touches);
 	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) profilCourant(string nom, double vitesse, double probaDAgirPassivemnt)
+	/// Author : ikram
+	/// Cette fonction permet de envoyer le joueur courant 
+	/// 
+	///
+	/// @return aucun
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl  profilCourant(string nom, double vitesse_, double probaDAgirPassivemnt)
+	{
+		
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) debogConfig(bool debogageActif_, bool debogCollision_, bool debogVitesse_, bool eclairageActif_,bool effetVisuelActif_);
+	/// Author : Arthur
+	/// Cette fonction permet de envoyer les information sur la configuration de débogage.
+	/// déplacement du joueur 2
+	///
+	/// @return aucun
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl debogConfig(bool debogageActif_, bool debogCollision_, bool debogVitesse_, bool eclairageActif_, bool effetVisuelActif_)
+	{
+	}
+
+
 }
-
-
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
 ///////////////////////////////////////////////////////////////////////////////

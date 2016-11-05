@@ -159,6 +159,8 @@ extern "C" {
 	__declspec(dllexport) void activerRondelle();
 	__declspec(dllexport) void deactiverRondelle();
 	__declspec(dllexport) bool estEnPauseRondelle();
-	/// Ali
-}
+	/// Ali 
+	__declspec(dllexport) void profilCourant(string nom, double vitesse_, double probaDAgirPassivemnt);
+	__declspec(dllexport) void debogConfig(bool debogageActif_, bool debogCollision_, bool debogVitesse_, bool eclairageActif_, bool effetVisuelActif_);
+} 
 #endif // __FACADE_INTERFACE_NATIVE_H__

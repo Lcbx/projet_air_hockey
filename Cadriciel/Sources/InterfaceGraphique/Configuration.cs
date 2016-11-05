@@ -34,17 +34,17 @@ namespace InterfaceGraphique
         //le nombre de buts nécessaires (entre 1 et 5) pour gagner une partie.
         private int scorePourGangner = 2;
 
-        //les attributs de Profil
-        //private float vitesse = 0;
-        //private string nom = "";
-        //private float probaDAgirPassivemnt = 0;
+        
 
         private bool estVirtuel = true;
         Profil joueurVirtuelDefault_ = new Profil();
         Profil joueurVirtuelCourant_;
         List<Profil> profils =new List<Profil>();
         
-        
+        //les attributs de Profil
+        private double vitesse_ = 0;
+        private string nom = "";
+        private double probaDAgirPassivemnt = 0;
 
 
         // Volet débogage
@@ -66,8 +66,11 @@ namespace InterfaceGraphique
             textBox3.Text=(Convert.ToString(joueurVirtuelCourant_.getProbProfil()));
             listDeProfils.Items.Add(joueurVirtuelCourant_.getNomProfil());
             creationProfil.Enabled = false;
+            vitesse_ = joueurVirtuelCourant_.getVitesseProfil();
+            nom = joueurVirtuelCourant_.getNomProfil();
+            probaDAgirPassivemnt = joueurVirtuelCourant_.getProbProfil();
 
-            
+
             int[] touches = new int[4];
             FonctionsNatives.obtenirTouches(touches);
             toucheDeplaceEnHaut_ = touches[0];
@@ -400,7 +403,10 @@ namespace InterfaceGraphique
         public static extern void obtenirTouches(int[] touches);
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void profilCourant(String nom, double vitesse, double prob);
+        public static extern void profilCourant(string nom, double vitesse_, double probaDAgirPassivemnt);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void debogConfig(bool debogageActif_, bool debogCollision_, bool debogVitesse_, bool eclairageActif_,bool effetVisuelActif_);
 
     }
 }
