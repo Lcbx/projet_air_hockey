@@ -157,6 +157,8 @@ void NoeudRondelle::animer(float temps)
 			if (positionActuelle.y > bas.y && positionActuelle.y < haut.y && positionActuelle.x > haut.x) {
 				//std::cout << "but droit \n";
 				facade->setButDroite(true);
+				positionActuelle = { 0,0,0 };
+				vitesse_ = {0.1,0,0};
 			}
 			else {
 				//recupere le but gauche
@@ -164,6 +166,8 @@ void NoeudRondelle::animer(float temps)
 				if (positionActuelle.y > bas.y && positionActuelle.y < haut.y && positionActuelle.x < haut.x) {
 					//std::cout << "but gauche \n"; 
 					facade->setButGauche(true);
+					positionActuelle = { 0,0,0 };
+					vitesse_ = { 0.1,0,0 };
 				}
 				///else
 					///gere les situations bizarres
