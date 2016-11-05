@@ -61,6 +61,9 @@ private:
 	///les portails : numero de noeud et active ou non
 	std::map<NoeudPortail*, bool> portails_;
 
+	///si a deja ete affecte par un bonus
+	bool affecteParBonus_ = false;
+
 	/// Angle selon l'axe des X.
 	float angleX_{ 0.f };
 	/// Angle selon l'axe des Y.
