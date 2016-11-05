@@ -205,7 +205,8 @@ void NoeudRondelle::animer(float temps)
 			case InfoCollision::MAILLET: {
 				typeObjetDebug = "maillet";
 				positionActuelle = positionHorsCollision;
-				vitesse_ = glm::reflect(vitesse_, normale) - ((NoeudMaillet*)resultat.objet)->getVitesse();
+				auto vitesseMaillet = ((NoeudMaillet*)resultat.objet)->getVitesse();
+				vitesse_ = glm::reflect(vitesse_, normale) + glm::dot(vitesseMaillet, normale) * normale;
 				break;
 			}
 			default: break;
@@ -237,7 +238,7 @@ void NoeudRondelle::animer(float temps)
 
 		//application de la friction
 		float moduleVitesse = glm::length(vitesse_);
-#define VITESSE_MAX 300.
+#define VITESSE_MAX 999.
 		vitesse_ *= glm::clamp(moduleVitesse - coeff.friction * temps, 0.005, VITESSE_MAX) / moduleVitesse;
 		moduleVitesse = glm::length(vitesse_);
 
@@ -250,10 +251,10 @@ void NoeudRondelle::animer(float temps)
 		
 }
 
-//ajoute une vitesse lors d'une collision par le maillet
-void NoeudRondelle::collisionMailletExterne(glm::vec3 vitesse) {
-	auto vitesseIntermediaire = vitesse_ + vitesse;
-	float moduleVitesse = glm::clamp(glm::length(vitesseIntermediaire), 0.f, (float) VITESSE_MAX);
+//ajoute une vitesse lors d'une collision par le maillet lors de son deplacement
+void NoeudRondelle::collisionMailletExterne(glm::vec3 vitesseMaillet, glm::vec3 normale) {
+	auto vitesseIntermediaire = glm::reflect(vitesse_, normale) - glm::dot(vitesseMaillet, normale) * normale;
+	float moduleVitesse = glm::clamp((float)glm::length(vitesseIntermediaire), 0.f, (float) VITESSE_MAX);
 	vitesse_ = moduleVitesse * glm::normalize(vitesseIntermediaire);
 	Debug::obtenirInstance().afficher("Collision : maillet");
 	Debug::obtenirInstance().afficher("Vitesse : " + std::to_string(moduleVitesse).substr(0, 3));

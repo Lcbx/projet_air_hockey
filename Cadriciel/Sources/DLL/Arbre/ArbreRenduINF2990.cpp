@@ -574,9 +574,9 @@ void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 	auto dernier = (NoeudMaillet*)this->enfants_.back();//pour obtenir le maillet du 2eme joueur
 	auto pos = dernier->obtenirPositionRelative();
 	double rayon = dernier->obtenirRayon();
-	float delta = 20;
+	float delta = 3.f * rayon;
 	glm::vec3 nouvellePosition = { pos.x + glm::sign(x) * delta, pos.y + glm::sign(y) * delta, pos.z };
-	dernier->deplacer(nouvellePosition);
+	((NoeudMaillet*)dernier)->deplacer(nouvellePosition);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -617,7 +617,6 @@ void ArbreRenduINF2990::reinitialiserPartieCourante()
 	//		}
 	//		else {
 	//			this->getTable()->getButs(1, pointHaut, pointMilieu, pointBas);
-
 	//			enfant->assignerPositionRelative({ pointMilieu.x - enfant->obtenirRayon() - 5,0,0 });
 	//		}
 	//	}

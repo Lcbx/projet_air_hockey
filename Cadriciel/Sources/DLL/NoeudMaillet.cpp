@@ -35,6 +35,7 @@
 NoeudMaillet::NoeudMaillet(const std::string& typeNoeud)
 	: NoeudAbstrait{ typeNoeud }
 {
+	positionFuture_ = obtenirPositionRelative();
 }
 
 
@@ -87,52 +88,23 @@ void NoeudMaillet::afficherConcret(const glm::mat4& vueProjection) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudMaillet::animer(float temps)
 {
-	vitesse_ = (dernierePosition_ - obtenirPositionRelative())/temps;
-	///std::cout << "vitesse maillet " << glm::length(vitesse_) << "\n";
-	dernierePosition_ = obtenirPositionRelative();
-}
-
-
-////////////////////////////////////////////////
-/// 
-/// NoeudMaillet::accepter(Visiteur* v)
-///
-/// permet de visiter le noeud
-///
-/// @return Aucune.
-///
-////////////////////////////////////////////////
-void NoeudMaillet::accepter(Visiteur* v)
-{
-	v->visiter(this);
-}
-
-
-////////////////////////////////////////////////
-/// 
-/// NoeudMaillet::deplacer(glm::vec3 pos)
-///
-/// le maillet va tenter de se rendre à la position pos
-///
-/// @return Aucune.
-///
-////////////////////////////////////////////////
-void NoeudMaillet::deplacer(glm::vec3 pos) {
 	//pour eviter de sauter des objets
-	glm::vec3	positionActuelle	= obtenirPositionRelative();
-	glm::vec3	deplacement			= pos - positionActuelle;
-	float		rayon				= obtenirRayon();
-	float		distance			= glm::clamp(glm::length(deplacement), 0.f, 0.5f * rayon);	//eviter d'aller trop vite
-	glm::vec3	direction			= glm::normalize(deplacement);
+	auto positionActuelle = obtenirPositionRelative();
+	glm::vec3	deplacement = positionFuture_ - positionActuelle;
+	float		rayon = obtenirRayon();
+	float		distance = glm::clamp(glm::length(deplacement), 0.f, 0.5f * rayon);	//eviter d'aller trop vite
+	glm::vec3	direction = glm::normalize(deplacement);
 
 
 	InfoCollision resultat;
 	VisiteurCollision v;
-	glm::vec3 positionIntermediaire = positionActuelle;
 	for (float i = 0.1f; i < distance / rayon + 0.15f; i += 0.1f)
 	{
-		if(FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->mailletDansZone2(positionActuelle + glm::clamp(i * rayon, 0.f, distance) * direction, rayon))
-			 positionIntermediaire = positionActuelle + glm::clamp(i * rayon, 0.f, distance) * direction;
+		glm::vec3 positionIntermediaire = positionActuelle + glm::clamp(i * rayon, 0.f, distance) * direction;
+		bool estDanslaBonneZone = estDeuxiemeJoueur ?
+			FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->mailletDansZone1(positionIntermediaire, rayon) :
+			FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->mailletDansZone2(positionIntermediaire, rayon);
+		positionIntermediaire = estDanslaBonneZone ? positionIntermediaire : positionActuelle;
 		resultat = v.calculerCollision(positionIntermediaire, obtenirRayon(), false);
 		///std::cout << "test " << i << " result " << resultat.type << "\n";
 		if (resultat.type != InfoCollision::AUCUNE && resultat.type != InfoCollision::BONUS || i >= distance / rayon) {
@@ -165,8 +137,7 @@ void NoeudMaillet::deplacer(glm::vec3 pos) {
 		}
 		case InfoCollision::RONDELLE: {
 			positionActuelle = positionHorsCollision;
-			auto vitesse_rebond = max(glm::dot(-vitesse_, normale), glm::dot(vitesse_, normale)) * glm::reflect(normale, direction);
-			((NoeudRondelle*)resultat.objet)->collisionMailletExterne(vitesse_rebond);
+			((NoeudRondelle*)resultat.objet)->collisionMailletExterne(vitesse_, normale);
 			break;
 		}
 		default: break;
@@ -175,5 +146,37 @@ void NoeudMaillet::deplacer(glm::vec3 pos) {
 
 	//on assigne la nouvelle position
 	assignerPositionRelative(positionActuelle);
+	//determine la vitesse
+	vitesse_ = (dernierePosition_ - positionActuelle) / temps;
+	//pour la vitesse future
+	dernierePosition_ = positionActuelle;
+}
 
+
+////////////////////////////////////////////////
+/// 
+/// NoeudMaillet::accepter(Visiteur* v)
+///
+/// permet de visiter le noeud
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////
+void NoeudMaillet::accepter(Visiteur* v)
+{
+	v->visiter(this);
+}
+
+
+////////////////////////////////////////////////
+/// 
+/// NoeudMaillet::deplacer(glm::vec3 pos)
+///
+/// le maillet va tenter de se rendre à la position pos
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////
+void NoeudMaillet::deplacer(glm::vec3 pos) {
+	positionFuture_ = pos;
 }

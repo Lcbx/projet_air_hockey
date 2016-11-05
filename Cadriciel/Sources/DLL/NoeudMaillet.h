@@ -47,8 +47,11 @@ private:
 
 	///la position au moment de la derniere animation
 	glm::vec3 dernierePosition_;
-	///la vitesse du meillet
+	///la vitesse du maillet
 	glm::vec3 vitesse_;
+	///la position vers laquelle le maillet se deplace
+	glm::vec3 positionFuture_;
+
 
 	/// Angle selon l'axe des X.
 	float angleX_{ 0.f };

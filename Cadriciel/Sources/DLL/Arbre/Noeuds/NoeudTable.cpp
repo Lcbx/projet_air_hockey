@@ -1120,6 +1120,34 @@ bool NoeudTable::dansZone2(glm::dvec3 M)
 }
 ////////////////////////////////////////////////////////////////////////
 ///
+/// @fn bool NoeudTable::mailletDansZone1(glm::dvec3 M,double rayon)
+///
+/// Cette fonction permet de savoir si un point est dans la zone1
+///  (zone droite) mais a une distance des murs
+/// pour que le maillet ne depasse pas les murs
+///  @param[in] 
+///		point M
+///		double rayon : rayon du maillet
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool NoeudTable::mailletDansZone1(glm::dvec3 M, double rayon)
+{
+	//TODO -- test la distance % segmant et non droite
+	if (!dansZone1(M)) return false;
+	else
+		//tester les distance entre le centre du maillet et les droites (murs) de la table
+#define TEST_DISTANCE_DROITE(p1, p2) if( distanceEntrePointDroite(p(p1), p(p2), M) < rayon ) return false; else
+	TEST_DISTANCE_DROITE(2, 3)
+	TEST_DISTANCE_DROITE(1, 3)
+	TEST_DISTANCE_DROITE(1, 6)
+	TEST_DISTANCE_DROITE(0, 6)
+	TEST_DISTANCE_DROITE(0, 2);
+	return true;
+#undef TEST_DISTANCE_DROITE
+}
+////////////////////////////////////////////////////////////////////////
+///
 /// @fn bool NoeudTable::mailletDansZone2(glm::dvec3 M,double rayon)
 ///
 /// Cette fonction permet de savoir si un point est dans la zone2 
