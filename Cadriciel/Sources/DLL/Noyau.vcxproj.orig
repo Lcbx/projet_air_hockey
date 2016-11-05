@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{67188F6B-27BE-4E93-A7EF-C512656343A1}</ProjectGuid>
+    <RootNamespace>INF2990</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectName>Noyau</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\Exe\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\Exe\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>../../Commun/Externe/Box2D/include;../../Commun/Externe/assimp/include;../../Commun/Externe/cppunit/include;../../Commun/Externe/FMOD/include;../../Commun/Externe/FreeImage/include;../../Commun/Externe/FreeType/include;../../Commun/Externe/FTGL/include;../../Commun/Externe/GLEW/include;../../Commun/Externe/glm/include;../../Commun/Externe/RapidJSON/include;../../Commun/Externe/tinyxml2/include;../../Commun/Utilitaire;../../Commun/Utilitaire/OpenGL;../../Commun/Utilitaire/Modele;../../Commun/Utilitaire/Vue;Application;Arbre;Arbre/Noeuds;Arbre/Usines;Configuration;Interface;Tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;GLEW_BUILD;_DEBUG;_WINDOWS;_USRDLL;INF2990_EXPORTS;FTGL_LIBRARY_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;freetype246_D_x64.lib;glew32s.lib;tinyxml_D_x64.lib;assimp.lib;cppunit_D_x64.lib;ftgl.lib;fmodexL64_vc.lib;FreeImage.lib;Box2D_D_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../../Exe/$(ProjectName).dll</OutputFile>
+      <AdditionalLibraryDirectories>../../Commun/Externe/Box2D/lib;../../Commun/Externe/assimp/lib;../../Commun/Externe/cppunit/lib;../../Commun/Externe/FMOD/lib;../../Commun/Externe/FreeImage/lib;../../Commun/Externe/FreeType/lib;../../Commun/Externe/FTGL/lib;../../Commun/Externe/GLEW/lib;../../Commun/Externe/tinyxml2/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalOptions>/NODEFAULTLIB:LIBCMT %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>../../Commun/Externe/Box2D/include;../../Commun/Externe/assimp/include;../../Commun/Externe/cppunit/include;../../Commun/Externe/FMOD/include;../../Commun/Externe/FreeImage/include;../../Commun/Externe/FreeType/include;../../Commun/Externe/FTGL/include;../../Commun/Externe/GLEW/include;../../Commun/Externe/glm/include;../../Commun/Externe/RapidJSON/include;../../Commun/Externe/tinyxml2/include;../../Commun/Utilitaire;../../Commun/Utilitaire/OpenGL;../../Commun/Utilitaire/Modele;../../Commun/Utilitaire/Vue;Application;Arbre;Arbre/Noeuds;Arbre/Usines;Configuration;Interface;Tests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;GLEW_BUILD;NDEBUG;_WINDOWS;_USRDLL;INF2990_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;freetype246_R_x64.lib;glew32s.lib;tinyxml_R_x64.lib;assimp.lib;cppunit_R_x64.lib;ftgl.lib;fmodex64_vc.lib;FreeImage.lib;Box2D_R_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../../Exe/$(ProjectName).dll</OutputFile>
+      <AdditionalLibraryDirectories>../../Commun/Externe/Box2D/lib;../../Commun/Externe/assimp/lib;../../Commun/Externe/cppunit/lib;../../Commun/Externe/FMOD/lib;../../Commun/Externe/FreeImage/lib;../../Commun/Externe/FreeType/lib;../../Commun/Externe/FTGL/lib;../../Commun/Externe/GLEW/lib;../../Commun/Externe/tinyxml2/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalOptions>/NODEFAULTLIB:LIBCMT %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Affichage_debuggage.cpp" />
+    <ClCompile Include="Application\AjoutAccelerateur.cpp" />
+    <ClCompile Include="Application\AjoutMur.cpp" />
+    <ClCompile Include="Application\AjoutPortail.cpp" />
+    <ClCompile Include="Application\Deplacement.cpp" />
+    <ClCompile Include="Application\Duplication.cpp" />
+    <ClCompile Include="Application\FacadeModele.cpp" />
+    <ClCompile Include="Application\JoeurVirtuel.cpp" />
+    <ClCompile Include="Application\Loupe.cpp" />
+    <ClCompile Include="Application\PointsControle.cpp" />
+    <ClCompile Include="Application\Rotation.cpp" />
+    <ClCompile Include="Application\Selection.cpp" />
+    <ClCompile Include="Application\StrategieSouris.cpp" />
+    <ClCompile Include="Arbre\Noeuds\NoeudAraignee.cpp" />
+    <ClCompile Include="Arbre\Noeuds\NoeudConeCube.cpp" />
+    <ClCompile Include="Arbre\Noeuds\NoeudPointControle.cpp" />
+    <ClCompile Include="Arbre\Noeuds\NoeudTable.cpp" />
+    <ClCompile Include="BoiteCollision.cpp" />
+    <ClCompile Include="CameraTest.cpp" />
+    <ClCompile Include="Configuration\ConfigScene.cpp" />
+    <ClCompile Include="Arbre\ArbreRendu.cpp" />
+    <ClCompile Include="Arbre\ArbreRenduINF2990.cpp" />
+    <ClCompile Include="Arbre\Noeuds\NoeudAbstrait.cpp" />
+    <ClCompile Include="Arbre\Noeuds\NoeudComposite.cpp" />
+    <ClCompile Include="Configuration\ConfigTouches.cpp" />
+    <ClCompile Include="Interface\FacadeInterfaceNative.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Trim\Desktop\inf2990-10\Cadriciel\Sources\DLL\Application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="MiseEchelle.cpp" />
+    <ClCompile Include="NoeudBonus.cpp" />
+    <ClCompile Include="NoeudMaillet.cpp" />
+    <ClCompile Include="NoeudMuret.cpp" />
+    <ClCompile Include="NoeudPortail.cpp" />
+    <ClCompile Include="NoeudRondelle.cpp" />
+    <ClCompile Include="Application\Souris.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="SauvegardeZoneDeJeu.cpp" />
+    <ClCompile Include="Test.cpp" />
+    <ClCompile Include="Tests\BancTests.cpp" />
+    <ClCompile Include="Tests\ConfigSceneTest.cpp" />
+    <ClCompile Include="Tests\NoeudAbstraitTest.cpp" />
+<<<<<<< HEAD
+    <ClCompile Include="Tests\RedimensionnementTest.cpp" />
+=======
+    <ClCompile Include="Tests\NoeudCompositeTest.cpp" />
+>>>>>>> b0d11b0f83b04ba762abfa56b6b54bc1e1dbf9da
+    <ClCompile Include="VisiteurAjout.cpp" />
+    <ClCompile Include="VisiteurCollision.cpp" />
+    <ClCompile Include="VisiteurDansLaTable.cpp" />
+    <ClCompile Include="VisiteurDeplacement.cpp" />
+    <ClCompile Include="VisiteurDuplication.cpp" />
+    <ClCompile Include="VisiteurMiseEchelle.cpp" />
+    <ClCompile Include="VisiteurPointMilieu.cpp" />
+    <ClCompile Include="VisiteurRotation.cpp" />
+    <ClCompile Include="VisiteurSauvegarde.cpp" />
+    <ClCompile Include="VisiteurSelection.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Affichage_debuggage.h" />
+    <ClInclude Include="Application\AjoutAccelerateur.h" />
+    <ClInclude Include="Application\AjoutMur.h" />
+    <ClInclude Include="Application\AjoutPortail.h" />
+    <ClInclude Include="Application\Deplacement.h" />
+    <ClInclude Include="Application\Duplication.h" />
+    <ClInclude Include="Application\FacadeModele.h" />
+    <ClInclude Include="Application\JoueurVirtuel.h" />
+    <ClInclude Include="Application\Loupe.h" />
+    <ClInclude Include="Application\PointsControle.h" />
+    <ClInclude Include="Application\Rotation.h" />
+    <ClInclude Include="Application\Selection.h" />
+    <ClInclude Include="Application\StrategieSouris.h" />
+    <ClInclude Include="Arbre\Noeuds\Couleurs.h" />
+    <ClInclude Include="Arbre\Noeuds\NoeudAraignee.h" />
+    <ClInclude Include="Arbre\Noeuds\NoeudConeCube.h" />
+    <ClInclude Include="Arbre\Noeuds\NoeudPointControle.h" />
+    <ClInclude Include="Arbre\Noeuds\NoeudTable.h" />
+    <ClInclude Include="Arbre\Noeuds\NoeudTypes.h" />
+    <ClInclude Include="BoiteCollision.h" />
+    <ClInclude Include="BoiteCollisionAbstraite.h" />
+    <ClInclude Include="CameraTest.h" />
+    <ClInclude Include="Configuration\ConfigScene.h" />
+    <ClInclude Include="Arbre\ArbreRendu.h" />
+    <ClInclude Include="Arbre\ArbreRenduINF2990.h" />
+    <ClInclude Include="Arbre\Usines\UsineNoeud.h" />
+    <ClInclude Include="Arbre\Noeuds\NoeudAbstrait.h" />
+    <ClInclude Include="Arbre\Noeuds\NoeudComposite.h" />
+    <ClInclude Include="Configuration\ConfigTouches.h" />
+    <ClInclude Include="Interface\FacadeInterfaceNative.h" />
+    <ClInclude Include="MiseEchelle.h" />
+    <ClInclude Include="NoeudBonus.h" />
+    <ClInclude Include="NoeudMaillet.h" />
+    <ClInclude Include="NoeudMuret.h" />
+    <ClInclude Include="NoeudPortail.h" />
+    <ClInclude Include="NoeudRondelle.h" />
+    <ClInclude Include="Application\Souris.h" />
+    <ClInclude Include="SauvegardeZoneDeJeu.h" />
+    <ClInclude Include="Test.h" />
+    <ClInclude Include="Tests\BancTests.h" />
+    <ClInclude Include="Tests\ConfigSceneTest.h" />
+    <ClInclude Include="Tests\NoeudAbstraitTest.h" />
+<<<<<<< HEAD
+    <ClInclude Include="Tests\RedimensionnementTest.h" />
+=======
+    <ClInclude Include="Tests\NoeudCompositeTest.h" />
+>>>>>>> b0d11b0f83b04ba762abfa56b6b54bc1e1dbf9da
+    <ClInclude Include="Visiteur.h" />
+    <ClInclude Include="VisiteurAjout.h" />
+    <ClInclude Include="VisiteurCollision.h" />
+    <ClInclude Include="VisiteurDansLaTable.h" />
+    <ClInclude Include="VisiteurDeplacement.h" />
+    <ClInclude Include="VisiteurDuplication.h" />
+    <ClInclude Include="VisiteurMiseEchelle.h" />
+    <ClInclude Include="VisiteurPointMilieu.h" />
+    <ClInclude Include="VisiteurRotation.h" />
+    <ClInclude Include="VisiteurSauvegarde.h" />
+    <ClInclude Include="VisiteurSelection.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Commun\Utilitaire\Utilitaire.vcxproj">
+      <Project>{bb8c9c8a-3b65-4599-b4fe-ca965ee76d2a}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

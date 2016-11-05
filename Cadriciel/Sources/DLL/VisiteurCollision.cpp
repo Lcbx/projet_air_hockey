@@ -13,15 +13,13 @@
 #include "AideCollision.h"
 #include <array>
 
-///initialisation
-VisiteurCollision::VisiteurCollision(NoeudAbstrait* objet) {
-	this->objet_ = objet;
-	this->rayon_ = objet->obtenirRayon();
-}
 
 ///fonction apppellee generalement
-InfoCollision& VisiteurCollision::calculerCollision() {
-	this->position_ = objet_->obtenirPositionRelative();
+InfoCollision& VisiteurCollision::calculerCollision(glm::vec3 position, double rayon, bool rondelle) {
+	position_ = position;
+	rayon_ = rayon;
+	rondelle_ = rondelle;
+
 	result_.objet = nullptr;
 	result_.details = { aidecollision::COLLISION_AUCUNE, glm::vec3(0,0,0), 0 };
 
@@ -124,7 +122,7 @@ void VisiteurCollision::visiter(NoeudComposite *noeud) {
 }
 
 void VisiteurCollision::visiter(NoeudRondelle* noeud) {
-	if(objet_->obtenirType() != "rondelle"){
+	if(!rondelle_){
 		auto detail = visiterNoeudCercle(noeud, noeud->obtenirRayon());
 		if (detail.type != aidecollision::COLLISION_AUCUNE) {
 			result_.type = InfoCollision::RONDELLE;
@@ -154,7 +152,7 @@ void VisiteurCollision::visiter(NoeudBonus* noeud) {
 }
 
 void VisiteurCollision::visiter(NoeudMaillet* noeud) {
-	if (objet_->obtenirType() != "maillet") {
+	if (rondelle_) {
 		auto detail = visiterNoeudCercle(noeud, noeud->obtenirRayon());
 		if (detail.type != aidecollision::COLLISION_AUCUNE) {
 			result_.type = InfoCollision::MAILLET;

@@ -32,9 +32,8 @@ class CameraTest : public CppUnit::TestFixture
 	// de la macro CPPUNIT_TEST sinon ce dernier ne sera pas exécuté !
 	// =================================================================
 	CPPUNIT_TEST_SUITE(CameraTest);
-	CPPUNIT_TEST(testPosition);
-	CPPUNIT_TEST(testPointVise);
-	CPPUNIT_TEST(testUp);
+	CPPUNIT_TEST(testDeplacerXY);
+	CPPUNIT_TEST(testDeplacerZ);
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -50,13 +49,13 @@ public:
 	void tearDown();
 
 
+
 	// =================================================================
 	// Définissez ici les différents cas de tests...
 	// =================================================================
 
-	void testPosition();
-	void testPointVise();
-	void testUp();
+	void testDeplacerXY();
+	void testDeplacerZ();
 
 private:
 	/// Instance d'un noeud abstrait
