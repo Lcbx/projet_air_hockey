@@ -120,6 +120,10 @@ void NoeudCompositeTest::testAjout()
 ////////////////////////////////////////////////////////////////////////
 void NoeudCompositeTest::testSuppression()
 {
+	//creation d'un noeud bonus
+	NoeudAbstrait* noeudBonus{ new NoeudBonus{ ArbreRenduINF2990::NOM_BONUS } };
+	noeudBonus->assignerPositionRelative({ 20,25,0 });
+
 	//creer d'un noeud portail
 	NoeudAbstrait* noeudPortail{ new NoeudPortail{ ArbreRenduINF2990::NOM_PORTAIL } };
 	noeudPortail->assignerPositionRelative({ 0,0,0 });
@@ -135,8 +139,10 @@ void NoeudCompositeTest::testSuppression()
 	//ajouter le noeud sur la table 
 	noeud->ajouter(noeudPortail);
 	noeud->ajouter(noeudPortail2);
+	noeud->ajouter(noeudBonus);
 
-	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 2);
+	//Verifier le nombre d'enfant tjrs
+	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 3);
 
 
 	//selectionner le 1ere portail
@@ -145,8 +151,8 @@ void NoeudCompositeTest::testSuppression()
 	//effacer le portail, doit supprimer le deuxieme portail aussi
 	noeud->effacerSelection();
 
-	//verifier que la table est vide 
-	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 0);
+	//Supprimer juste les elements selectionnées
+	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 1);
 }
 
 
@@ -173,9 +179,6 @@ void NoeudCompositeTest::testTrouverObjet()
 	noeud->ajouter(noeudBonus);
 	noeud->ajouter(noeudPortail);
 	noeud->ajouter(noeudPortail2);
-
-	//std::cout << "Mon type: " << noeudBonus->obtenirType() << std::endl;
-	//printf("mon typppe: " , noeudBonus->obtenirType());
 	
 	//Verifier le nombre des objets
 	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 3); 
@@ -185,4 +188,49 @@ void NoeudCompositeTest::testTrouverObjet()
 
 	//chercher avec indice
 	CPPUNIT_ASSERT(noeud->chercher(1) == noeudPortail);
+}
+
+
+void NoeudCompositeTest::testSelectionMultiple()
+{
+	//creation d'un noeud bonus
+	NoeudAbstrait* noeudBonus{ new NoeudBonus{ ArbreRenduINF2990::NOM_BONUS } };
+	noeudBonus->assignerPositionRelative({ 20,25,0 });
+
+	//creer d'un noeud portail
+	NoeudAbstrait* noeudMuret{ new NoeudMuret{ ArbreRenduINF2990::NOM_MURET } };
+	noeudMuret->assignerPositionRelative({ 0,0,0 });
+
+
+	//ajouter le noeud sur la table 
+	noeud->ajouter(noeudBonus);
+	noeud->ajouter(noeudMuret);
+	
+	//Verifier le nombre des objets
+	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 2);
+
+	//selectionner tous les objets
+	noeud->selectionnerTout();
+
+	//verifier s'il sont selectionnes
+	CPPUNIT_ASSERT(noeudBonus->estSelectionne() == true);
+	CPPUNIT_ASSERT(noeudMuret->estSelectionne() == true);
+
+
+	//on cree un deuxieme bonus qu'on va le selectionner seul
+	NoeudAbstrait* noeudBonus2{ new NoeudBonus{ ArbreRenduINF2990::NOM_BONUS } };
+	noeudBonus2->assignerPositionRelative({ 10,15,0 });
+
+	noeud->ajouter(noeudBonus2);
+	
+	noeudBonus2->assignerSelection(true);
+
+
+	//Deselectionner tous les objets
+	noeud->deselectionnerTout();
+
+	//verifier s'il sont deselectionnes
+	CPPUNIT_ASSERT(noeudBonus->estSelectionne() == false);
+	CPPUNIT_ASSERT(noeudMuret->estSelectionne() == false);
+	CPPUNIT_ASSERT(noeudBonus2->estSelectionne() == false);
 }

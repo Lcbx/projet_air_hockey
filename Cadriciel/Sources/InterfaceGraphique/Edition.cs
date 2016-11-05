@@ -17,10 +17,10 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-
+ 
 namespace InterfaceGraphique
 {
-    public partial class Edition : Form 
+    public partial class Edition : Form   
     {
         private static MenuPrincipal menuPrincipal_;
         //private static double friction_;
