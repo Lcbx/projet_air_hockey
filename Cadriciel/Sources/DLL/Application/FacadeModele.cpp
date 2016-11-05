@@ -346,6 +346,38 @@ void FacadeModele::obtenirTouches(int *touches)
 
 ////////////////////////////////////////////////////////////////////////
 ///
+/// @fn ConfigJeu getConfigJeu()
+///
+/// Cette fonction retourne l'objet ConfigJeu de FacadeModele, afin
+/// de manipuler les options de jeu
+///
+/// @return ConfigJeu : l'objet ConfigJeu de l'instance de FacadeModele
+///
+////////////////////////////////////////////////////////////////////////
+ConfigJeu FacadeModele::getConfigJeu()
+{
+	return _configJeu;
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn ConfigDebug getConfigDebug()
+///
+/// Cette fonction retourne l'objet ConfigDebug de FacadeModele, afin
+/// de manipuler les options de debug
+///
+/// @return ConfigDebug : l'objet ConfigDebug de l'instance de FacadeModele
+///
+////////////////////////////////////////////////////////////////////////
+ConfigDebug FacadeModele::getConfigDebug()
+{
+	return _configDebug;
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
 /// @fn ConfigProfils getConfigProfils()
 ///
 /// Cette fonction retourne l'objet ConfigProfil de FacadeModele, afin
