@@ -18,9 +18,9 @@ namespace InterfaceGraphique
         
         private static MenuPrincipal menuPrincipal;
         private static Edition edition;
-        private static Configuration configuration;
+        public static Configuration configuration;
         private static Profil joueurVirtuel;
-        private static TimeSpan dernierTemps;
+        private static TimeSpan dernierTemps; 
         private static TimeSpan tempsAccumule;
         private static Stopwatch chrono = Stopwatch.StartNew();
         private static TimeSpan tempsEcouleVoulu = TimeSpan.FromTicks(TimeSpan.TicksPerSecond / NB_IMAGES_PAR_SECONDE);
@@ -51,8 +51,8 @@ namespace InterfaceGraphique
             edition = new Edition();
             configuration = new Configuration();
             joueurVirtuel = new Profil();
-
-            //Application.Run(edition);
+             
+            ///Application.Run(edition);
            
             menuPrincipal.setMenu(edition, configuration);
             edition.setMenuPrincipal(menuPrincipal);
@@ -60,7 +60,7 @@ namespace InterfaceGraphique
 
             Application.Run(menuPrincipal);
         }
-
+            
 
         ///////////////////////////////////////////////////////////////////////
         /// @fn    static void ExecuterQuandInactif(object sender, EventArgs e)
@@ -77,7 +77,7 @@ namespace InterfaceGraphique
         {
             FonctionsNatives.Message message;
 
-            while (!FonctionsNatives.PeekMessage(out message, IntPtr.Zero, 0, 0, 0))
+            while (!FonctionsNatives.PeekMessage(out message, IntPtr.Zero, 0, 0, 0))        
             {
                 TimeSpan currentTime = chrono.Elapsed;
                 TimeSpan elapsedTime = currentTime - dernierTemps;
@@ -90,8 +90,8 @@ namespace InterfaceGraphique
                     lock (unLock)
                     {
                         if (edition != null && peutAfficher)
-                            edition.MettreAJour((double)tempsAccumule.Ticks / TimeSpan.TicksPerSecond);
-
+                            edition.MettreAJour((double)tempsAccumule.Ticks / TimeSpan.TicksPerSecond);                
+                         
                     
                     }
                     tempsAccumule = TimeSpan.Zero;

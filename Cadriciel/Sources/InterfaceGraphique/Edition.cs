@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 
 namespace InterfaceGraphique
 {
-    public partial class Edition : Form
+    public partial class Edition : Form 
     {
         private static MenuPrincipal menuPrincipal_;
         //private static double friction_;
@@ -36,6 +36,9 @@ namespace InterfaceGraphique
 
         public bool estEnModeTest = false;
         public bool estEnPause = false;
+        public bool estEnModePartie = false;
+        public bool estjoueurvirtuel = false;
+
 
         public bool avant = false;
         public bool arriere = false;
@@ -102,6 +105,8 @@ namespace InterfaceGraphique
 
         }
 
+
+
         /////////////////////////////////////////////////////////////////////////
         ///  @fn         public void InitialiserAnimation()
         /// 
@@ -112,7 +117,7 @@ namespace InterfaceGraphique
         /// @return aucune
         //
         //////////////////////////////////////////////////////////////////////////////////////////
-        public void InitialiserAnimation()
+        public void InitialiserAnimation()       
         {
             this.DoubleBuffered = false;
 
@@ -140,10 +145,11 @@ namespace InterfaceGraphique
                 {
                     FonctionsNatives.animer(tempsInterAffichage);
                     FonctionsNatives.dessinerOpenGL();
-                    
+
                     /// Ali
                     /// On demare la partie rapide
-                    DemarrerPartie();
+                    if (estEnModePartie)
+                        DemarrerPartie();
 
                 });
             }
@@ -182,93 +188,104 @@ namespace InterfaceGraphique
         {
             //TO-DO: Changer les touches par les touches enregistres !!
 
+            string temp = e.KeyCode.ToString();
+            string avant_ = Program.configuration.droite.Text;
+            string arriere_ = Program.configuration.gauche.Text;
+            string haut_ = Program.configuration.haut.Text;
+            string bas_ = Program.configuration.bas.Text;
+
+
             //deplacer le maillet de 2eme joueur
-            if (estEnModeTest == true)
+            if (estEnModeTest == true || estEnModePartie == true)
             {
                 if (estEnPause == false) // si on est pause, on ne peut pas deplacer le maillet
                 {
-                    if (e.KeyCode == Keys.D)//avant
+                    if (!estjoueurvirtuel)
                     {
-                        avant = true;
-                        if (haut)
+                        if (temp == avant_)//avant
                         {
-                            Console.WriteLine("avant et haut");
-                            FonctionsNatives.deplacerMailletAvecClavier(1, 1);
-                        }
-                        else if (bas)
-                        {
-                            Console.WriteLine("avant et bas");
-                            FonctionsNatives.deplacerMailletAvecClavier(1, -1);
-                        }
-                        else FonctionsNatives.deplacerMailletAvecClavier(1, 0);
-                    }
-
-                    if (e.KeyCode == Keys.A)//arriere
-                    {
-                        arriere = true;
-                        if (haut)
-                        {
-                            Console.WriteLine("arriere et haut");
-                            FonctionsNatives.deplacerMailletAvecClavier(-1, 1);
-                        }
-                        else if (bas)
-                        {
-                            Console.WriteLine("arriere et bas");
-                            FonctionsNatives.deplacerMailletAvecClavier(-1, -1);
-                        }
-                        else FonctionsNatives.deplacerMailletAvecClavier(-1, 0);
-
-                    }
-
-                    if (e.KeyCode == Keys.W)//haut
-                    {
-                        haut = true;
-                        if (avant)
-                        {
-                            Console.WriteLine("avant et haut 1");
-                            FonctionsNatives.deplacerMailletAvecClavier(1, 1);
-                        }
-                        else if (arriere)
-                        {
-                            Console.WriteLine("arriere et haut 1 ");
-                            FonctionsNatives.deplacerMailletAvecClavier(-1, 1);
+                            avant = true;
+                            if (haut)
+                            {
+                                FonctionsNatives.deplacerMailletAvecClavier(1, 1);
+                            }
+                            else if (bas)
+                            {
+                                FonctionsNatives.deplacerMailletAvecClavier(1, -1);
+                            }
+                            else FonctionsNatives.deplacerMailletAvecClavier(1, 0);
                         }
 
-                        else FonctionsNatives.deplacerMailletAvecClavier(0, 1);
-
-                    }
-                    if (e.KeyCode == Keys.S)//bas
-                    {
-                        bas = true;
-
-                        if (avant)
+                        if (temp == arriere_)//arriere
                         {
-                            Console.WriteLine("avant et bas 1");
-                            FonctionsNatives.deplacerMailletAvecClavier(1, -1);
+                            arriere = true;
+                            if (haut)
+                            {
+                                FonctionsNatives.deplacerMailletAvecClavier(-1, 1);
+                            }
+                            else if (bas)
+                            {
+                                FonctionsNatives.deplacerMailletAvecClavier(-1, -1);
+                            }
+                            else FonctionsNatives.deplacerMailletAvecClavier(-1, 0);
+
                         }
-                        else if (arriere)
+
+                        if (temp == haut_)//haut
                         {
-                            Console.WriteLine("arriere et bas 1");
-                            FonctionsNatives.deplacerMailletAvecClavier(-1, -1);
+                            haut = true;
+                            if (avant)
+                            {
+                                FonctionsNatives.deplacerMailletAvecClavier(1, 1);
+                            }
+                            else if (arriere)
+                            {
+                                FonctionsNatives.deplacerMailletAvecClavier(-1, 1);
+                            }
+
+                            else FonctionsNatives.deplacerMailletAvecClavier(0, 1);
+
                         }
-                        else FonctionsNatives.deplacerMailletAvecClavier(0, -1);
-                    }
-                }
-            }
+                        if (temp == bas_)//bas
+                        {
+                            bas = true;
+
+                            if (avant)
+                            {
+                                FonctionsNatives.deplacerMailletAvecClavier(1, -1);
+                            }
+                            else if (arriere)
+                            {
+                                FonctionsNatives.deplacerMailletAvecClavier(-1, -1);
+                            }
+                            else FonctionsNatives.deplacerMailletAvecClavier(0, -1);
+                        }
+                    } // endif joueurvirtuel
+                }   // endif enpause
+            }   // endif modetest || modepartierapide
         }
 
 
         private void toucheManuel2(object sender, KeyEventArgs e)
         {
+            string temp = e.KeyCode.ToString();
+            string avant_ = Program.configuration.droite.Text;
+            string arriere_ = Program.configuration.gauche.Text;
+            string haut_ = Program.configuration.haut.Text;
+            string bas_ = Program.configuration.bas.Text;
+
             //deplacer le maillet de 2eme joueur
-            if (estEnModeTest == true)
+            if (estEnModeTest == true || estEnModePartie == true)
             {
                 if (estEnPause == false) // si on est pause, on ne peut pas deplacer le maillet
                 {
-                    if (e.KeyCode == Keys.D) avant = false;
-                    if (e.KeyCode == Keys.A) arriere = false;
-                    if (e.KeyCode == Keys.W) haut = false;
-                    if (e.KeyCode == Keys.S) bas = false; //bas
+                    if (!estjoueurvirtuel)
+                    {
+                        if (temp == avant_) avant = false;
+                        if (temp == arriere_) arriere = false;
+                        if (temp == haut_) haut = false;
+                        if (temp == bas_) bas = false; //bas
+                    }
                 }
             }
         }
@@ -286,7 +303,7 @@ namespace InterfaceGraphique
         private void keyUpHandler(object sender, KeyEventArgs e)
         {
             //Dans le mode edition
-            if (estEnModeTest == false)
+            if (estEnModeTest == false && estEnModePartie == false)
             {
                 // deactiver le joueur virtuel
                 ArreterJoueurVirtuel();
@@ -374,7 +391,7 @@ namespace InterfaceGraphique
                 }
             }
             //dans le mode test
-            else
+            else if(estEnModeTest == true && estEnModePartie == false)
             {
                 switch (e.KeyCode)
                 {
@@ -395,6 +412,43 @@ namespace InterfaceGraphique
                         }
                     case Keys.V:    // Activer le joueur Virtuelle
                         {
+                            if (estEnModeTest && !estEnModePartie)
+                            {
+                                estjoueurvirtuel = true;
+                                DemarerJoueurVirtuel(1, 0.5);
+                            }
+                            break;
+                        }
+                    case Keys.B:    // Deactiver le joueur Virtuelle
+                        {
+                            if (estEnModeTest && !estEnModePartie)
+                            {
+                                estjoueurvirtuel = false;
+                                ArreterJoueurVirtuel();
+                            }
+                            break;
+                        }
+
+                    default: break;
+
+                }
+
+            }
+            else if (estEnModeTest == false && estEnModePartie == true)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Escape:// pause
+                        {
+                            afficherBarreMenu(); break;
+                        }
+                    case Keys.Space: //reinitialiser la partie
+                        {
+                            FonctionsNatives.reinitialiserPartieCourante();
+                            break;
+                        }
+                    case Keys.V:    // Activer le joueur Virtuelle
+                        {
                             DemarerJoueurVirtuel(1, 0.5);
                             break;
                         }
@@ -407,7 +461,6 @@ namespace InterfaceGraphique
                     default: break;
 
                 }
-
             }
         }
 
@@ -530,7 +583,8 @@ namespace InterfaceGraphique
             x = e.X; y = e.Y;
 
 
-            if (estEnModeTest)
+            //bouger maillet avec souris
+            if (estEnModeTest || estEnModePartie )
             {
                 if (estEnPause == false)
                 {
@@ -542,7 +596,6 @@ namespace InterfaceGraphique
                 else
                     FonctionsNatives.deactiverRondelle();
             }
-
         }
 
 
@@ -888,10 +941,10 @@ namespace InterfaceGraphique
             int nbreObSelectionnes = FonctionsNatives.nombreObjetSelectionne();
             if (nbreObSelectionnes >= 1)
             {
-                supprimerToolStripMenuItem.Enabled = true;
+                supprimerToolStripMenuItem.Enabled = true;   
             }
             else
-            {
+            {  
                 supprimerToolStripMenuItem.Enabled = false;
             }
         }
@@ -1476,9 +1529,8 @@ namespace InterfaceGraphique
 
                 //panel score
                 splitContainer1.Panel1.Hide();
-                splitContainer1.Panel2.Show();
-                // demarrer la partie
-                //DemarrerPartie(2, true);
+                splitContainer1.Panel2.Hide();
+                
             }
             //si mode edition , afficher les menus a cotés + barre des menus
             else
@@ -1537,7 +1589,7 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         public void afficherBarreMenu()
         { //En mode Test, si on clique sur Echapp
-            if (this.estEnModeTest == true)
+            if (estEnModeTest == true || estEnModePartie == true)
             {
                 if (menuStrip1.Visible == false)
                 {    //si le menu est masqué, on l'Affiche + pause
@@ -1601,8 +1653,9 @@ namespace InterfaceGraphique
             {
                 this.Text = "Partie Rapide";
 
-
-                estEnModeTest = true;
+                estEnModePartie = true;
+                estEnModeTest = false;
+               
                 //this.changerMode(Etats.TEST);
 
                 //Permet d'ajouter les maillets et la rondelle dans la table
@@ -1726,6 +1779,31 @@ namespace InterfaceGraphique
                 
             }            
         }
+
+        private void Edition_Load(object sender, EventArgs e)
+        {
+            resetPartie();
+        }
+
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn public void resetPartie()
+        /// Author : Ali
+        /// @brief permet de reinitialiser les scores quand
+        /// une partie est termine ou on quite la partie
+        /// 
+        /// @return rien
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
+        public void resetPartie()
+        {
+            nbButsJoueur1 = 0;
+            nbButsJoueur2 = 0;
+            FonctionsNatives.setButDroite(false);
+            FonctionsNatives.setButGauche(false);
+            textBox4.Text = "0";
+            textBox5.Text = "0";
+        }
+
 
         //////////////////////////////////////////////////////////////////////////////////////////
     }

@@ -54,7 +54,7 @@ void JoueurVirtuel::deplacerMailletVirtuel()
 				nouvellePositionMaillet.y = positionMaillet.y - vitesse_;					
 		}
 		
-		if (facade->obtenirArbreRenduINF2990()->getTable()->dansZone1({ nouvellePositionMaillet.x - vitesse_, 0,0 }))
+		if (facade->obtenirArbreRenduINF2990()->getTable()->mailletDansZone1({ nouvellePositionMaillet.x - vitesse_, 0,0 },rayonMaillet))
 			nouvellePositionMaillet.x = positionMaillet.x - vitesse_;
 		
 	}
@@ -74,7 +74,7 @@ void JoueurVirtuel::deplacerMailletVirtuel()
 	if (agir())
 	{
 		// a la fin on teste si la nouvelle position est dans la zone du jeu
-		if (facade->obtenirArbreRenduINF2990()->getTable()->dansZone1(nouvellePositionMaillet))
+		if (facade->obtenirArbreRenduINF2990()->getTable()->mailletDansZone1(nouvellePositionMaillet,rayonMaillet))
 			mailletVirtuel->assignerPositionRelative(nouvellePositionMaillet);
 	}
 		
