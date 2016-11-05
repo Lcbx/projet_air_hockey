@@ -171,8 +171,11 @@
     <ClCompile Include="Tests\BancTests.cpp" />
     <ClCompile Include="Tests\ConfigSceneTest.cpp" />
     <ClCompile Include="Tests\NoeudAbstraitTest.cpp" />
-    <ClCompile Include="Tests\NoeudCompositeTest.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Tests\RedimensionnementTest.cpp" />
+=======
+    <ClCompile Include="Tests\NoeudCompositeTest.cpp" />
+>>>>>>> b0d11b0f83b04ba762abfa56b6b54bc1e1dbf9da
     <ClCompile Include="VisiteurAjout.cpp" />
     <ClCompile Include="VisiteurCollision.cpp" />
     <ClCompile Include="VisiteurDansLaTable.cpp" />
@@ -227,8 +230,11 @@
     <ClInclude Include="Tests\BancTests.h" />
     <ClInclude Include="Tests\ConfigSceneTest.h" />
     <ClInclude Include="Tests\NoeudAbstraitTest.h" />
-    <ClInclude Include="Tests\NoeudCompositeTest.h" />
+<<<<<<< HEAD
     <ClInclude Include="Tests\RedimensionnementTest.h" />
+=======
+    <ClInclude Include="Tests\NoeudCompositeTest.h" />
+>>>>>>> b0d11b0f83b04ba762abfa56b6b54bc1e1dbf9da
     <ClInclude Include="Visiteur.h" />
     <ClInclude Include="VisiteurAjout.h" />
     <ClInclude Include="VisiteurCollision.h" />

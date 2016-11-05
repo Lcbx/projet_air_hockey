@@ -1186,8 +1186,9 @@ bool NoeudTable::mailletDansZone2(glm::dvec3 M,double rayon)
 /// @fn bool NoeudTable::mailletDansZone1(glm::dvec3 M,double rayon)
 ///
 /// Cette fonction permet de savoir si un point est dans la zone1 
-///  (zone gauche) mais a une distance des murs
+///  (zone gauche) mais a une distance des murs 
 /// pour que le maillet ne depasse pas les murs
+/// utilise pour maillet touche et virtuel
 ///  @param[in] 
 ///		point M
 ///		double rayon : rayon du maillet
