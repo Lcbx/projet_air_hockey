@@ -52,6 +52,7 @@ public:
 	/// Accesseurs de toutes les touches
 	void obtenirTouches(int *touches);
 
+	// Ne pas utiliser les mutateurs suivants en dehors de la classe, utiliser enregistrerTouches() à la place
 	/// Mutateur de la touche haut
 	void setToucheHaut(int touche);
 
