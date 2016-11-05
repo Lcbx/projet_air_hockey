@@ -32,7 +32,7 @@ namespace InterfaceGraphique
         /// @brief Permet de créer le mode tournoi
         public ModeTournoi() {
             InitializeComponent();
-            this.SwitchStatusTournoi(StatusTournoi.Creation);
+            this.initTournoi();
         }
 
         /// @fn public ModeTournoi(MenuPrincipal parent_)
@@ -41,7 +41,7 @@ namespace InterfaceGraphique
         {
             this.parent_ = parent;
             InitializeComponent();
-            this.SwitchStatusTournoi(StatusTournoi.Creation);
+            this.initTournoi();
         }
 
         /// @fn public SwitchStatusTournoi(StatusTournoi status)
@@ -65,6 +65,19 @@ namespace InterfaceGraphique
         {
             this.parent_.Show();
             this.Hide();
+        }
+
+        /// @fn private void initTournoi()
+        /// @brief Permet d'initialiser la fenêtre du tournoi
+        private void initTournoi(){
+            this.SwitchStatusTournoi(StatusTournoi.Creation);
+
+            this.panel1.Size = new System.Drawing.Size(0, 0);
+            this.panel1.AutoSize = true;
+            this.panel1.Location = new Point(
+                this.ClientSize.Width / 2 - this.panel1.Size.Width / 2,
+                this.ClientSize.Height / 2 - this.panel1.Size.Height / 2);
+            this.panel1.Anchor = AnchorStyles.None;
         }
     }
 }

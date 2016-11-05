@@ -16,13 +16,17 @@ namespace InterfaceGraphique
     public partial class ParticipantTournoi : UserControl
     {
         private bool nameTextBoxIsSet = false;
+        private List<Profil> profileList;
 
         /// @fn public int TypeJoueur
         /// @brief Permet de get le type de joueur sélectionné
         /// @return Le type de joueur sélectionné
-        public int TypeJoueur {
+        public Profil TypeJoueur {
             get {
-                return this.typeJoueurCBO.SelectedItem.GetHashCode();
+                if (this.typeJoueurCBO.Enabled)
+                    return (Profil)this.typeJoueurCBO.SelectedItem;
+                else
+                    return null;
             }
         }
 
@@ -82,7 +86,20 @@ namespace InterfaceGraphique
         private void typeJoueurCBO_Init() {
             this.typeJoueurCBO.BeginUpdate();
             this.typeJoueurCBO.Text = "Type de joueur";
+            this.profileList = new List<Profil>();
+            Profil profil = new Profil("Default", 10, 0.2);
+            this.profileList.Add(profil);
+            this.typeJoueurCBO.DataSource = this.profileList;
+            this.typeJoueurCBO.DisplayMember = "Nom";
             this.typeJoueurCBO.EndUpdate();
+        }
+
+
+        /// @fn private void isHuman_CheckedChanged(object sender, EventArgs e)
+        /// @brief Permet de retirer la sélection d'un profil
+        /// @return rien
+        private void isHuman_CheckedChanged(object sender, EventArgs e) {
+            this.typeJoueurCBO.Enabled = !this.isHuman.Checked;
         }
     }
 }

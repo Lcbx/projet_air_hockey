@@ -44,23 +44,26 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panel1.AutoScroll = true;
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 41);
+            this.panel1.AutoSize = true;
+            this.panel1.Location = new System.Drawing.Point(-37, 6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(654, 305);
+            this.panel1.Size = new System.Drawing.Size(0, 0);
             this.panel1.TabIndex = 1;
             // 
             // ModeTournoi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(654, 346);
+            this.ClientSize = new System.Drawing.Size(584, 361);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
+            this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "ModeTournoi";
             this.Text = "ModeTournoi";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

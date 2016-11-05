@@ -129,6 +129,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AdaptateurJoueur.cpp" />
     <ClCompile Include="Affichage_debuggage.cpp" />
     <ClCompile Include="Application\AjoutAccelerateur.cpp" />
     <ClCompile Include="Application\AjoutMur.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="Tests\ConfigSceneTest.cpp" />
     <ClCompile Include="Tests\NoeudAbstraitTest.cpp" />
     <ClCompile Include="Tests\NoeudCompositeTest.cpp" />
+    <ClCompile Include="Tournoi.cpp" />
     <ClCompile Include="VisiteurAjout.cpp" />
     <ClCompile Include="VisiteurCollision.cpp" />
     <ClCompile Include="VisiteurDansLaTable.cpp" />
@@ -183,6 +185,7 @@
     <ClCompile Include="VisiteurSelection.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdaptateurJoueur.h" />
     <ClInclude Include="Affichage_debuggage.h" />
     <ClInclude Include="Application\AjoutAccelerateur.h" />
     <ClInclude Include="Application\AjoutMur.h" />

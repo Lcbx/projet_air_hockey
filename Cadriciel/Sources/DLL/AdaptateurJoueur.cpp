@@ -32,5 +32,5 @@ std::string AdaptateurJoueur::getNomJoueur() {
 /// @fn std::string AdaptateurJoueur::getJoueurVirtuel()
 /// @brief Permet d'obtenir le profil du joueur virtuel
 JoueurVirtuel AdaptateurJoueur::getJoueurVirtuel() {
-	return *(this->getJoueurVirtuel);
+	return *(this->joueurVirtuel);
 }
