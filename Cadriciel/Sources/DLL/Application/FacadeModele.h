@@ -80,6 +80,9 @@ public:
 	/// Retourne les touches du joueur 2.
 	void obtenirTouches(int *touches);
 
+	/// Accède à l'objet ConfigProfils
+	ConfigProfils getConfigProfils();
+
 	/// Libère le contexte OpenGL.
 	void libererOpenGL();
 	/// Affiche le contenu du modèle.

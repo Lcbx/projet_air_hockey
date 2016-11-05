@@ -346,6 +346,22 @@ void FacadeModele::obtenirTouches(int *touches)
 
 ////////////////////////////////////////////////////////////////////////
 ///
+/// @fn ConfigProfils getConfigProfils()
+///
+/// Cette fonction retourne l'objet ConfigProfil de FacadeModele, afin
+/// de manipuler les profils enregistrés
+///
+/// @return ConfigProfils l'objet ConfigProfils de l'instance de FacadeModele
+///
+////////////////////////////////////////////////////////////////////////
+ConfigProfils FacadeModele::getConfigProfils()
+{
+	return _configProfils;
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
 /// @fn void FacadeModele::libererOpenGL()
 ///
 /// Cette fonction libère le contexte OpenGL et désinitialise FreeImage.
