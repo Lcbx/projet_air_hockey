@@ -75,12 +75,9 @@ public:
 	/// Enregistre la zone de jeu courante dans un fichier XML.
 	void enregistrerZoneJeu(char* fichierZoneJeu) const;
 	
-	/// Charge les touches du joueur 2 à partir d'un fichier XML.
-	void chargerTouches();
-	/// Enregistre les touches du joueur 2 dans un fichier XML.
-	void enregistrerTouches(int haut = ConfigTouches::HAUTDEF, int droite = ConfigTouches::DROITEDEF, int bas = ConfigTouches::BASDEF, int gauche = ConfigTouches::GAUCHEDEF);
-	/// Retourne les touches du joueur 2.
-	void obtenirTouches(int *touches);
+
+	/// Accède à l'objet ConfigTouches
+	ConfigTouches getConfigTouches();
 
 	/// Accède à l'objet ConfigProfils
 	ConfigJeu getConfigJeu();

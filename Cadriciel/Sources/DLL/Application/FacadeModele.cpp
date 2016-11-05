@@ -291,56 +291,20 @@ void FacadeModele::enregistrerZoneJeu(char* fichierZoneJeu) const
 	document.SaveFile(fichierZoneJeu);
 }
 
+
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn void FacadeModele::chargerTouches() const
+/// @fn ConfigTouches getConfigTouches()
 ///
-/// Cette fonction charge les touches du joueur 2 à partir du fichier
-///  XML de configuration si ce dernier existe.  Sinon, le fichier de
-///  configuration est généré à partir de valeurs par défaut directement
-///  dans le code.
+/// Cette fonction retourne l'objet ConfigTouches de FacadeModele, afin
+/// de manipuler les touches du joueur 2
 ///
-/// @return Aucune.
+/// @return ConfigTouches : l'objet ConfigTouches de l'instance de FacadeModele
 ///
 ////////////////////////////////////////////////////////////////////////
-void FacadeModele::chargerTouches()
+ConfigTouches FacadeModele::getConfigTouches()
 {
-
-	_configTouches.chargerTouches();
-
-}
-
-
-////////////////////////////////////////////////////////////////////////
-///
-/// @fn void FacadeModele::enregistrerTouches() const
-///
-/// Cette fonction enregistre dans le fichier XML de cnfiguration les
-/// touches du joueur 2.
-///
-/// @return Aucune.
-///
-////////////////////////////////////////////////////////////////////////
-void FacadeModele::enregistrerTouches(int haut, int droite, int bas, int gauche)
-{
-	_configTouches.enregistrerTouches(haut, droite, bas, gauche);
-}
-
-
-
-////////////////////////////////////////////////////////////////////////
-///
-/// @fn int[4] FacadeModele::obtenirTouches() const
-///
-/// Cette fonction retourne les touches actuelles de déplacement
-/// du joueur 2
-///
-/// @return int[4] : [haut, droite, bas, gauche]
-///
-////////////////////////////////////////////////////////////////////////
-void FacadeModele::obtenirTouches(int *touches)
-{
-	_configTouches.obtenirTouches(touches);
+	return _configTouches;
 }
 
 
