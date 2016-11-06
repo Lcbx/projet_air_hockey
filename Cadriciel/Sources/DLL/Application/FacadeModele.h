@@ -16,6 +16,8 @@
 #include <string>
 #include "EtatOpenGL.h"
 #include "../Configuration/ConfigTouches.h"
+#include "../Configuration/ConfigJeu.h"
+#include "../Configuration/ConfigDebug.h"
 #include "../Configuration/ConfigProfils.h"
 
 class NoeudAbstrait;
@@ -73,15 +75,19 @@ public:
 	/// Enregistre la zone de jeu courante dans un fichier XML.
 	void enregistrerZoneJeu(char* fichierZoneJeu) const;
 	
-	/// Charge les touches du joueur 2 à partir d'un fichier XML.
-	void chargerTouches();
-	/// Enregistre les touches du joueur 2 dans un fichier XML.
-	void enregistrerTouches(int haut = ConfigTouches::HAUTDEF, int droite = ConfigTouches::DROITEDEF, int bas = ConfigTouches::BASDEF, int gauche = ConfigTouches::GAUCHEDEF);
-	/// Retourne les touches du joueur 2.
-	void obtenirTouches(int *touches);
+
+	/// Accède à l'objet ConfigTouches
+	ConfigTouches getConfigTouches();
+
+	/// Accède à l'objet ConfigProfils
+	ConfigJeu getConfigJeu();
+
+	/// Accède à l'objet ConfigProfils
+	ConfigDebug getConfigDebug();
 
 	/// Accède à l'objet ConfigProfils
 	ConfigProfils getConfigProfils();
+
 
 	/// Libère le contexte OpenGL.
 	void libererOpenGL();
@@ -246,6 +252,10 @@ private:
    /// Arthur
    /// Configuration des touches
    ConfigTouches _configTouches;
+   /// Configuration des options de jeu
+   ConfigJeu _configJeu;
+   /// Configuration des options de debug
+   ConfigDebug _configDebug;
    /// Configuration des profils
    ConfigProfils _configProfils;
 

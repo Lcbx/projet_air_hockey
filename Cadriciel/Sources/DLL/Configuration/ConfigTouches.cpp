@@ -78,7 +78,7 @@ void ConfigTouches::enregistrerTouches(int haut, int droite, int bas, int gauche
 	elementTouches->SetAttribute("TOUCHE_GAUCHE", _gauche);
 
 	// Sauvegarder les changements dans le fichier
-	document.SaveFile("touches.xml");
+	document.SaveFile("configuration.xml");
 }
 
 
@@ -95,15 +95,18 @@ void ConfigTouches::enregistrerTouches(int haut, int droite, int bas, int gauche
 void ConfigTouches::chargerTouches()
 {
 	// Vérification de l'existance du ficher
-	if (!utilitaire::fichierExiste("touches.xml")) {
-		// Si le fichier n'existe pas, on le crée.
-		enregistrerTouches(HAUTDEF, DROITEDEF, BASDEF, GAUCHEDEF);
+	if (!utilitaire::fichierExiste("configuration.xml")) {
+		// Si le fichier n'existe pas, on utilise les valeurs par défaut
+		_haut = HAUTDEF;
+		_droite = DROITEDEF;
+		_bas = BASDEF;
+		_gauche = GAUCHEDEF;
 	}
 	else {
 
 		// Charge le fichier de configuration
 		tinyxml2::XMLDocument document;
-		document.LoadFile("touches.xml");
+		document.LoadFile("configuration.xml");
 
 		// Obtenir le noeud 'Configuration'
 		const tinyxml2::XMLElement* elementConfiguration{ document.FirstChildElement("configuration") };
