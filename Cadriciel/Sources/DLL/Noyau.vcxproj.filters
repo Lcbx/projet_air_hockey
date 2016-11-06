@@ -213,6 +213,18 @@
     <ClCompile Include="CameraTest.cpp">
       <Filter>Source Files\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="Configuration\ConfigProfils.cpp">
+      <Filter>Source Files\Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Profil.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Configuration\ConfigJeu.cpp">
+      <Filter>Source Files\Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="Configuration\ConfigDebug.cpp">
+      <Filter>Source Files\Configuration</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\FacadeModele.h">
@@ -379,6 +391,18 @@
     </ClInclude>
     <ClInclude Include="CameraTest.h">
       <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuration\ConfigProfils.h">
+      <Filter>Header Files\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Profil.h">
+      <Filter>Header Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuration\ConfigJeu.h">
+      <Filter>Header Files\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuration\ConfigDebug.h">
+      <Filter>Header Files\Configuration</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

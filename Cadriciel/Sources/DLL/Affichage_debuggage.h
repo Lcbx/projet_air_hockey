@@ -35,13 +35,13 @@ class Debug {
 public :
 
 	///booleen pour affichage de collision
-	bool afficherCollision = true;
+	bool afficherCollision = false;
 	///booleen pour affichage de vitesse
-	bool afficherVitesse = true;
+	bool afficherVitesse = false;
 	///booleen pour affichage de changement d'éclairage
-	bool afficherLumieres = true;
+	bool afficherLumieres = false;
 	///booleen pour affichage de cercle d'attraction des portails
-	bool afficherAttraction = true;
+	bool afficherAttraction = false;
 
 	///obtenirInstance
 	static Debug& obtenirInstance();

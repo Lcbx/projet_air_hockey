@@ -20,6 +20,7 @@
 #include "ArbreRenduINF2990.h"
 #include "CompteurAffichage.h"
 #include "BancTests.h"
+#include "../Affichage_debuggage.h"
 
 //using namespace std;
 
@@ -925,7 +926,7 @@ extern "C"
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl sauvegarderTouches(int haut, int droite, int bas, int gauche)
 	{
-		FacadeModele::obtenirInstance()->enregistrerTouches(haut, droite, bas, gauche);
+		FacadeModele::obtenirInstance()->getConfigTouches().enregistrerTouches(haut, droite, bas, gauche);
 	}
 
 	////////////////////////////////////////////////////////////////////////
@@ -939,11 +940,49 @@ extern "C"
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl obtenirTouches(int *touches)
 	{
-		FacadeModele::obtenirInstance()->obtenirTouches(touches);
+		FacadeModele::obtenirInstance()->getConfigTouches().obtenirTouches(touches);
 	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) profilCourant(string nom, double vitesse, double probaDAgirPassivemnt)
+	/// Author : ikram
+	/// Cette fonction permet de envoyer le joueur courant 
+	/// 
+	///
+	/// @return aucun
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl  profilCourant(string nom, double vitesse_, double probaDAgirPassivemnt)
+	{
+		
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) debogConfig(bool debogageActif_, bool debogCollision_, bool debogVitesse_, bool eclairageActif_,bool effetVisuelActif_);
+	/// Author : Arthur
+	/// Cette fonction permet de envoyer les information sur la configuration de débogage.
+	/// déplacement du joueur 2
+	///
+	/// @return aucun
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl debogConfig(bool debogageActif_, bool debogCollision_, bool debogVitesse_, bool eclairageActif_, bool effetVisuelActif_)
+	{
+		///std::cout << "helloLuc\n";
+		if (debogageActif_) {
+			Debug::obtenirInstance().afficherCollision = debogCollision_;
+			Debug::obtenirInstance().afficherVitesse = debogVitesse_;
+			Debug::obtenirInstance().afficherLumieres = eclairageActif_;
+			Debug::obtenirInstance().afficherAttraction = effetVisuelActif_;
+		}
+		else {
+			Debug::obtenirInstance().afficherCollision = false;
+			Debug::obtenirInstance().afficherVitesse = false;
+			Debug::obtenirInstance().afficherLumieres = false;
+			Debug::obtenirInstance().afficherAttraction = false;
+		}
+	}
+
+
 }
-
-
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
 ///////////////////////////////////////////////////////////////////////////////

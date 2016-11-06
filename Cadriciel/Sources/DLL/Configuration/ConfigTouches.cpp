@@ -18,7 +18,14 @@ const int ConfigTouches::DROITEDEF{ 68 };
 const int ConfigTouches::BASDEF{ 83 };
 const int ConfigTouches::GAUCHEDEF{ 65 };
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void ConfigTouches::ConfigTouches()
+///
+/// Constructeur par défaut de ConfigTouches
+/// Charge le fichier de touches, si il existe
+///
+////////////////////////////////////////////////////////////////////////
 ConfigTouches::ConfigTouches()
 {
 
@@ -42,30 +49,36 @@ void ConfigTouches::enregistrerTouches(int haut, int droite, int bas, int gauche
 	_bas = bas;
 	_gauche = gauche;
 
+	// Créer un nouveau document XML si le fichier n'existe pas, ou le charger depuis le fichier dans le cas contraire
 	tinyxml2::XMLDocument document;
-	document.NewDeclaration(R"(?xml version="1.0" standalone="yes"?)");
+	if (!utilitaire::fichierExiste("configuration.xml"))
+		document.NewDeclaration(R"(?xml version="1.0" standalone="yes"?)");
+	else
+		document.LoadFile("configuration.xml");
 
-	// Créer le noeud 'configuration'
-	tinyxml2::XMLElement* elementConfiguration{ document.NewElement("configuration") };
+	// Obtenir le noeud 'configuration', le créer si il n'existe pas
+	tinyxml2::XMLElement* elementConfiguration{ document.FirstChildElement("configuration") };
+	if (elementConfiguration == nullptr) {
+		elementConfiguration = document.NewElement("configuration");
+		document.LinkEndChild(elementConfiguration);
+	}
 
-	// Créer le noeud 'touches' et définir ses attributs
-	tinyxml2::XMLElement* elementTouches{ document.NewElement("CTouches") };
 
+	// Obtenir le noeud 'CTouches', le créer si il n'existe pas
+	tinyxml2::XMLElement* elementTouches{ elementConfiguration->FirstChildElement("CTouches") };
+	if (elementTouches == nullptr) {
+		elementTouches = document.NewElement("CTouches");
+		elementConfiguration->LinkEndChild(elementTouches);
+	}
+
+	// Enregistrer les valeurs des touches dans les attributs du noeud 'CTouches'
 	elementTouches->SetAttribute("TOUCHE_HAUT", _haut);
 	elementTouches->SetAttribute("TOUCHE_DROITE", _droite);
 	elementTouches->SetAttribute("TOUCHE_BAS", _bas);
 	elementTouches->SetAttribute("TOUCHE_GAUCHE", _gauche);
 
-	// Adjoindre le noeud 'elementScene'
-	elementConfiguration->LinkEndChild(elementTouches);
-
-	// Adjoindre le noeud 'configuration' au noeud principal
-	// (Rappel : pas besoin de libérer la mémoire de elementConfiguration
-	// puisque toutes les fonctions Link... le font pour nous)
-	document.LinkEndChild(elementConfiguration);
-
-	// Écrire dans le fichier
-	document.SaveFile("touches.xml");
+	// Sauvegarder les changements dans le fichier
+	document.SaveFile("configuration.xml");
 }
 
 
@@ -82,15 +95,18 @@ void ConfigTouches::enregistrerTouches(int haut, int droite, int bas, int gauche
 void ConfigTouches::chargerTouches()
 {
 	// Vérification de l'existance du ficher
-	if (!utilitaire::fichierExiste("touches.xml")) {
-		// Si le fichier n'existe pas, on le crée.
-		enregistrerTouches(HAUTDEF, DROITEDEF, BASDEF, GAUCHEDEF);
+	if (!utilitaire::fichierExiste("configuration.xml")) {
+		// Si le fichier n'existe pas, on utilise les valeurs par défaut
+		_haut = HAUTDEF;
+		_droite = DROITEDEF;
+		_bas = BASDEF;
+		_gauche = GAUCHEDEF;
 	}
 	else {
 
 		// Charge le fichier de configuration
 		tinyxml2::XMLDocument document;
-		document.LoadFile("touches.xml");
+		document.LoadFile("configuration.xml");
 
 		// Obtenir le noeud 'Configuration'
 		const tinyxml2::XMLElement* elementConfiguration{ document.FirstChildElement("configuration") };
