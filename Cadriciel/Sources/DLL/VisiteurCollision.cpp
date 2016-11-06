@@ -14,7 +14,20 @@
 #include <array>
 
 
-///fonction apppellee generalement
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn InfoCollision& VisiteurCollision::calculerCollision(glm::vec3 position, double rayon, bool rondelle)
+///
+/// Cette fonction renvoie la collision la plus pertinente pour un objet rond a la position donnee ;
+/// prend en compte s'il s'agit de la rondelle, sinon assume que c'est un maillet
+///
+/// @param[in]	position : la position de l'objet teste
+///				rayon : le rayon de l'objet teste
+///				rondelle : s'il s'agit de la rondelle.
+///
+/// @return InfoCollision&.
+///
+////////////////////////////////////////////////////////////////////////
 InfoCollision& VisiteurCollision::calculerCollision(glm::vec3 position, double rayon, bool rondelle) {
 	position_ = position;
 	rayon_ = rayon;
@@ -73,7 +86,18 @@ InfoCollision& VisiteurCollision::calculerCollision(glm::vec3 position, double r
 	return result_;
 }
 
-///donne la collision la plus pertinente avec une suite segments
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn DetailsCollision VisiteurCollision::collisionSegments(glm::vec3 ensemble[], int nombre)
+///
+/// Cette fonction donne la collision la plus pertinente avec une suite de segments
+///
+/// @param[in]	ensemble : un tableau de points
+///				nombre : le nombre de points
+///
+/// @return DetailsCollision.
+///
+////////////////////////////////////////////////////////////////////////
 aidecollision::DetailsCollision VisiteurCollision::collisionSegments(glm::vec3 ensemble[], int nombre) {
 	//determine la collision pour chacun des segments
 	aidecollision::DetailsCollision detail = { aidecollision::COLLISION_AUCUNE, glm::vec3(0,0,0), 0 };
@@ -84,11 +108,21 @@ aidecollision::DetailsCollision VisiteurCollision::collisionSegments(glm::vec3 e
 			///std::cout << "collision " << detail.type << " segment n " << i << " enfoncement " << detail.enfoncement << "\n";
 		}
 	}
-	
 	return detail;
 }
 
-///calcul de collision avec un objet circulaire
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn DetailsCollision VisiteurCollision::collisionSegments(glm::vec3 ensemble[], int nombre)
+///
+/// Cette fonction calcule une collision avec un objet circulaire
+///
+/// @param[in]	ensemble : un tableau de points
+///				nombre : le nombre de points
+///
+/// @return DetailsCollision.
+///
+////////////////////////////////////////////////////////////////////////
 aidecollision::DetailsCollision VisiteurCollision::visiterNoeudCercle(NoeudAbstrait* noeud, float rayon) {
 	//calcul de la collision entre les deux cercles 
 	glm::vec3 position = noeud->obtenirPositionRelative();

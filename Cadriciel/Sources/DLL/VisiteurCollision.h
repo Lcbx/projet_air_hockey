@@ -14,15 +14,12 @@
 
 
 ///////////////////////////////////////////////////////////////////////////
-/// @class VisiteurCollision
-/// @brief Cette classe permet de déterminer si il y a collision entre
-///		l'objet circulaire passé en argument du constructeur et le reste des objets de l'arbre de rendu
+/// @class InfoCollision
+/// @brief Cette classe contient les informations ayant trait à une collision
 ///
 /// @author Luc Courbariaux
 /// @date 2016-09-25
 //////////////////////////////////////////////////////////////////////////
-
-
 class InfoCollision {
 public:
 	///types d'objets rencontres
@@ -36,7 +33,14 @@ public:
 };
 
 
-
+///////////////////////////////////////////////////////////////////////////
+/// @class VisiteurCollision
+/// @brief Cette classe permet de déterminer si il y a collision entre
+///		l'objet circulaire passé en argument du constructeur et le reste des objets de l'arbre de rendu
+///
+/// @author Luc Courbariaux
+/// @date 2016-09-25
+//////////////////////////////////////////////////////////////////////////
 class VisiteurCollision : public Visiteur
 {
 	///le resultat a rendre
@@ -57,6 +61,7 @@ class VisiteurCollision : public Visiteur
 
 public:
 
+	///renvoie la collision la plus pertinente pour un objet rond
 	InfoCollision& calculerCollision(glm::vec3 position, double rayon, bool rondelle);
 
 
