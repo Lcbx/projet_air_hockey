@@ -24,7 +24,6 @@ void VisiteurSauvegarde::visiter(NoeudAbstrait* noeud)
 
 void VisiteurSauvegarde::visiter(NoeudComposite* noeud)
 {
-	std::cout << "visite composite debut" << std::endl;
 	// Le noeud composite n'est pas enregistré, on parcourt simplement ses fils
 
 	// Visite les fils de ce noeud composite
@@ -35,7 +34,6 @@ void VisiteurSauvegarde::visiter(NoeudComposite* noeud)
 			delete VS;
 		}
 	}
-	std::cout << "visite composite fin" << std::endl;
 	
 }
 
@@ -46,7 +44,6 @@ void VisiteurSauvegarde::visiter(NoeudRondelle* noeud)
 
 void VisiteurSauvegarde::visiter(NoeudMuret* noeud)
 {
-	std::cout << "visite muret" << std::endl;
 	// Cree l'element XML correspondant a ce noeud
 	tinyxml2::XMLElement* elementMuret{ documentXML_->NewElement("NoeudMuret") };
 
@@ -66,7 +63,6 @@ void VisiteurSauvegarde::visiter(NoeudMuret* noeud)
 
 void VisiteurSauvegarde::visiter(NoeudBonus* noeud)
 {
-	std::cout << "visite bonus" << std::endl;
 	// Cree l'element XML correspondant a ce noeud
 	tinyxml2::XMLElement* elementBonus{ documentXML_->NewElement("NoeudBonus") };
 
@@ -91,7 +87,6 @@ void VisiteurSauvegarde::visiter(NoeudMaillet* noeud)
 
 void VisiteurSauvegarde::visiter(NoeudPortail* noeud)
 {
-	std::cout << "visite portail" << std::endl;
 
 	// Dans le noeud XML est stocké la paire de portails
 
@@ -123,5 +118,4 @@ void VisiteurSauvegarde::visiter(NoeudPortail* noeud)
 	// Ajouter le noeud a l'arbre
 	elementXMLPere_->LinkEndChild(elementPortail);
 
-	std::cout << "Visite du portail 2" << std::endl;
 }

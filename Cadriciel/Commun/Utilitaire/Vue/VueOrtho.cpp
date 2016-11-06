@@ -136,7 +136,7 @@ namespace vue {
 
 		// Déplacement afin que le centre du rectangle elastique devienne le centre de la nouvelle cloture
 		
-		std::cout << "Nouveau centre : (" << (coin1[0] + coin2[0]) / 2 << "," << (coin1[1] + coin2[1]) / 2 << ")" << std::endl;
+		//std::cout << "Nouveau centre : (" << (coin1[0] + coin2[0]) / 2 << "," << (coin1[1] + coin2[1]) / 2 << ")" << std::endl;
 
 		glm::ivec2 deplacementXY;
 
@@ -151,9 +151,9 @@ namespace vue {
 		double ratioElastique = glm::abs( double(coin2[0] - coin1[0]) / double(coin2[1] - coin1[1]) );
 		double ratioCloture = double(projection_.obtenirDimensionCloture()[0]) / double(projection_.obtenirDimensionCloture()[1]);
 
-		std::cout << "Ratio Elastique : " << ratioElastique << " Ratio cloture : " << ratioCloture << std::endl;
+		//std::cout << "Ratio Elastique : " << ratioElastique << " Ratio cloture : " << ratioCloture << std::endl;
 
-		std::cout << "";
+		//std::cout << "";
 
 		if (ratioElastique < ratioCloture) {
 			projection_.zoomerTo(projection_.obtenirZoomActuel() * (double(projection_.obtenirDimensionCloture()[1]) / glm::abs(coin2[1] - coin1[1])));
@@ -190,7 +190,7 @@ namespace vue {
 		double ratioElastique = glm::abs(double(coin2[0] - coin1[0]) / double(coin2[1] - coin1[1]));
 		double ratioCloture = double(projection_.obtenirDimensionCloture()[0]) / double(projection_.obtenirDimensionCloture()[1]);
 
-		std::cout << "Ratio Elastique : " << ratioElastique << " Ratio cloture : " << ratioCloture << std::endl;
+		//std::cout << "Ratio Elastique : " << ratioElastique << " Ratio cloture : " << ratioCloture << std::endl;
 
 
 		if (ratioElastique > ratioCloture) {
