@@ -213,13 +213,12 @@
     <ClCompile Include="Tests\NoeudCompositeTest.cpp">
       <Filter>Source Files\Tests</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="AdaptateurJoueur.cpp">
       <Filter>Source Files\Tournoi</Filter>
     </ClCompile>
     <ClCompile Include="Tournoi.cpp">
       <Filter>Source Files\Tournoi</Filter>
-=======
+    </ClCompile>
     <ClCompile Include="Tests\RedimensionnementTest.cpp">
       <Filter>Source Files\Tests</Filter>
     </ClCompile>
@@ -237,7 +236,6 @@
     </ClCompile>
     <ClCompile Include="Configuration\ConfigDebug.cpp">
       <Filter>Source Files\Configuration</Filter>
->>>>>>> origin/development
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
