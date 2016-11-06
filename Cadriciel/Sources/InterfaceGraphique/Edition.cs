@@ -51,6 +51,8 @@ namespace InterfaceGraphique
         public int nbButsJoueur1 = 0;
         public int nbButsJoueur2 = 0;
 
+        int ancienPosX;
+        int ancienPosY;
         /////////////////////////////////////////////////////////////////////////
         ///  @fn public Edition()
         /// 
@@ -102,7 +104,10 @@ namespace InterfaceGraphique
             this.textBox5.ReadOnly = true;
 
 
+           ancienPosX = panel1.Location.X;
+           ancienPosY = panel1.Location.Y;
 
+            panel2.Hide();
         }
 
 
@@ -444,6 +449,7 @@ namespace InterfaceGraphique
                         }
                     case Keys.Space: //reinitialiser la partie
                         {
+                            resetPartie();
                             FonctionsNatives.reinitialiserPartieCourante();
                             break;
                         }
@@ -1476,7 +1482,6 @@ namespace InterfaceGraphique
         }
 
 
-
         ///////////////////////////////////////////////////////////////////////
         /// @fn public void passerModeTest(bool mode)
         ///
@@ -1494,6 +1499,11 @@ namespace InterfaceGraphique
             //si mode jeu ou test , masquer les menus a cotés + barre des menus
             if (mode == true)
             {
+              
+
+                panel1.Location = new Point (0,0);
+                panel1.Dock = DockStyle.Fill;
+
                 this.Text = "Mode Test";
                 estEnModeTest = true;
                 this.changerMode(Etats.TEST);
@@ -1527,14 +1537,18 @@ namespace InterfaceGraphique
                 menuPrincipalToolStripMenuItem.Visible = true;
                 vuesToolStripMenuItem.Visible = true;
 
+                splitContainer1.Hide();
                 //panel score
-                splitContainer1.Panel1.Hide();
-                splitContainer1.Panel2.Hide();
-                
+                // splitContainer1.Panel1.Hide();
+                //splitContainer1.Panel2.Hide();
+
             }
             //si mode edition , afficher les menus a cotés + barre des menus
             else
             {
+
+                panel1.Location = new Point(ancienPosX, ancienPosY);
+
                 this.Text = "Mode Edition";
                 estEnModeTest = false;
                 this.changerMode(Etats.SELECTION);
@@ -1567,10 +1581,7 @@ namespace InterfaceGraphique
                 modeEditionToolStripMenuItem.Visible = false;
 
                 //panel score afficher - panel proprietes desactiver
-                splitContainer1.Panel1.Show();
-                splitContainer1.Panel2.Hide();
-
-
+                splitContainer1.Show();
 
             }
         }
@@ -1646,6 +1657,17 @@ namespace InterfaceGraphique
             //FonctionsNatives.ajouterMailletEtRondelle();
         }
 
+
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn public void passerModePartie(bool mode)
+        ///
+        /// @brief permet de faire le passage au mode partie rapide
+        /// @param[in] mode: bool qui determine le mode 
+        ///
+        ///
+        /// @return rien
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         public void passerModePartie(bool mode)
         {
             //si mode jeu , masquer les menus a cotés + barre des menus
@@ -1653,10 +1675,13 @@ namespace InterfaceGraphique
             {
                 this.Text = "Partie Rapide";
 
+                panel1.Location = new Point(0, 0);
+                panel1.Dock = DockStyle.Fill;
+
                 estEnModePartie = true;
                 estEnModeTest = false;
                
-                //this.changerMode(Etats.TEST);
+                this.changerMode(Etats.TEST);
 
                 //Permet d'ajouter les maillets et la rondelle dans la table
                 FonctionsNatives.ajouterMailletEtRondelle();
@@ -1688,10 +1713,11 @@ namespace InterfaceGraphique
                 menuPrincipalToolStripMenuItem.Visible = true;
                 vuesToolStripMenuItem.Visible = true;
 
-                //panel score
-                splitContainer1.Panel2.Show();
-                splitContainer1.Panel1.Hide();
+                //panel parametres
+                splitContainer1.Hide();
 
+                //score
+                panel2.Show();
 
             }
 
@@ -1740,18 +1766,18 @@ namespace InterfaceGraphique
         {
             if (FonctionsNatives.estButDroite())
             {
-                MessageBox.Show("Player 1 SCORES !","AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                nbButsJoueur1++;
-                textBox5.Text = nbButsJoueur1.ToString();
+                MessageBox.Show("Player 2 SCORES !","AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                nbButsJoueur2++;
+                textBox4.Text = nbButsJoueur2.ToString();
                 FonctionsNatives.setButDroite(false);
                 FonctionsNatives.reinitialiserPartieCourante();
                 //Console.WriteLine("But Droite !!");
             }
             if (FonctionsNatives.estButGauche())
             {
-                MessageBox.Show("Player 2 SCORES !", "AirHockey" , MessageBoxButtons.OK, MessageBoxIcon.Information);
-                nbButsJoueur2++;
-                textBox4.Text = nbButsJoueur2.ToString();
+                MessageBox.Show("Player 1 SCORES !", "AirHockey" , MessageBoxButtons.OK, MessageBoxIcon.Information);
+                nbButsJoueur1++;
+                textBox5.Text = nbButsJoueur1.ToString();
                 FonctionsNatives.setButGauche(false);
                 FonctionsNatives.reinitialiserPartieCourante();
                 //Console.WriteLine("But Gauche !!");
@@ -1784,6 +1810,8 @@ namespace InterfaceGraphique
         {
             resetPartie();
         }
+
+
 
         ///////////////////////////////////////////////////////////////////////
         /// @fn public void resetPartie()
