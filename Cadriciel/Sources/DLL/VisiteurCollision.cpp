@@ -26,9 +26,9 @@ InfoCollision& VisiteurCollision::calculerCollision(glm::vec3 position, double r
 	//test des murs (table)
 	auto table = FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable();
 	//recupere les buts
-	glm::vec3 droiteHaut, droiteBas, gaucheHaut, gaucheBas, dummy;
-	table->getButs(1, droiteHaut, dummy, droiteBas);
-	table->getButs(2, gaucheHaut, dummy, gaucheBas);
+	glm::vec3 droiteHaut, droiteBas, gaucheHaut, gaucheBas, milieu;
+	table->getButs(1, droiteHaut, milieu, droiteBas);
+	table->getButs(2, gaucheHaut, milieu, gaucheBas);
 	// les 8 points de controle de la table
 	/*
 				p0----------p2----------p4
@@ -81,7 +81,7 @@ aidecollision::DetailsCollision VisiteurCollision::collisionSegments(glm::vec3 e
 		aidecollision::DetailsCollision temp = aidecollision::calculerCollisionSegment( ensemble[ i ], ensemble[ i+1 ], position_, rayon_ );
 		if (temp.type != aidecollision::COLLISION_AUCUNE && temp.enfoncement > detail.enfoncement) {
 			detail = temp;
-			//std::cout << "collision " << detail.type << " segment n " << i << " enfoncement " << detail.enfoncement << "\n";
+			///std::cout << "collision " << detail.type << " segment n " << i << " enfoncement " << detail.enfoncement << "\n";
 		}
 	}
 	
@@ -164,10 +164,14 @@ void VisiteurCollision::visiter(NoeudMaillet* noeud) {
 
 void VisiteurCollision::visiter(NoeudPortail* noeud) {
 	//on reduit la taille de la zone de collision pour eviter la sortie de jeu de rondelle
-	auto detail = visiterNoeudCercle(noeud, noeud->obtenirRayon() *0.6);
+	auto detail = visiterNoeudCercle(noeud, noeud->obtenirRayon() * 0.9f );
 	if (detail.type != aidecollision::COLLISION_AUCUNE) {
 		result_.type = InfoCollision::PORTAIL;
 		result_.objet = noeud;
 		result_.details = detail;
 	}
 }
+
+
+
+

@@ -207,9 +207,10 @@ void NoeudRondelle::animer(float temps)
 				auto noeud = (NoeudPortail*)resultat.objet;
 				auto frere = (NoeudPortail*)noeud->getFrere();
 				positionActuelle = frere->obtenirPositionRelative()
-					+ (float)frere->obtenirRayon()
+					+ ((float)frere->obtenirRayon() * 0.9f + rayon)
 					* glm::normalize(positionHorsCollision - noeud->obtenirPositionRelative());
 				vitesse_ *= -1.f;
+				//desactive l'attraction du frere
 				portails_[frere] = false;
 				///std::cout << "portail " << frere->getScale().x << " desactive\n";
 				break;
@@ -236,16 +237,13 @@ void NoeudRondelle::animer(float temps)
 			glm::vec3 vecteur_distance = portail->obtenirPositionRelative() - positionActuelle;
 			float distance = glm::length(vecteur_distance);
 			float rayon_attraction = 3.f * portail->obtenirRayon();
-			if (it->second) {
-				if (distance < rayon_attraction) {
-					///std::cout << "portail " << portail->getScale().x << " attracte\n";
-					vitesse_ += CST_ASPIRATION * rayon_attraction / distance  * glm::normalize(vecteur_distance);
-				}
+			//si on est dans le rayon d'attraction
+			if (distance < rayon_attraction) {
+				//et que on a le droit d'attracter, on attracte
+				if (it->second) vitesse_ += CST_ASPIRATION * rayon_attraction / distance  * glm::normalize(vecteur_distance);
 			}
-			else if (distance > rayon_attraction) {
-				it->second = true;
-				///std::cout << "portail " << portail->getScale().x << " active  : rayon " << rayon_attraction << ", distance " << distance << "\n";
-			}
+			//sinon on pourra de nouveau etre attracte dans le futur
+			else it->second = true;
 		}
 
 		//application de la friction
