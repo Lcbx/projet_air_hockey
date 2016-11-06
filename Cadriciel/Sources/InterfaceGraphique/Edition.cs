@@ -155,8 +155,10 @@ namespace InterfaceGraphique
                     /// On demare la partie rapide
                     if (estEnModePartie)
                         DemarrerPartie();
+             
 
                 });
+
             }
             catch (Exception)
             {
