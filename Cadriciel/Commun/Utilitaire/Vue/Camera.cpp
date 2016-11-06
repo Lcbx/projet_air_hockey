@@ -66,10 +66,10 @@ namespace vue {
 		position_[0] += deplacementX;
 		position_[1] += deplacementY;
 		if (bougePointVise) {
-			std::cout << pointVise_[0] << " " << pointVise_[1] << std::endl;
+		//	std::cout << pointVise_[0] << " " << pointVise_[1] << std::endl;
 			pointVise_[0] += deplacementX;
 			pointVise_[1] += deplacementY;
-			std::cout << pointVise_[0] << " " << pointVise_[1] << std::endl;
+			//std::cout << pointVise_[0] << " " << pointVise_[1] << std::endl;
 		}
 	}
 
