@@ -225,6 +225,9 @@
     <ClCompile Include="Configuration\ConfigDebug.cpp">
       <Filter>Source Files\Configuration</Filter>
     </ClCompile>
+    <ClCompile Include="Tests\PointControleTest.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\FacadeModele.h">
@@ -403,6 +406,9 @@
     </ClInclude>
     <ClInclude Include="Configuration\ConfigDebug.h">
       <Filter>Header Files\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\PointControleTest.h">
+      <Filter>Header Files\Tests</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -40,6 +40,7 @@ class NoeudCompositeTest : public CppUnit::TestFixture
 	CPPUNIT_TEST(testSuppression);
 	CPPUNIT_TEST(testTrouverObjet);
 	CPPUNIT_TEST(testSelectionMultiple);
+	CPPUNIT_TEST(testScale);
 
 	CPPUNIT_TEST_SUITE_END();
 
@@ -74,6 +75,9 @@ public:
 
 	///Cas de test: selection multiple
 	void testSelectionMultiple();
+
+	///Cas de test: scale
+	void testScale();
 
 
 private:

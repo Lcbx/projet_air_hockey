@@ -101,6 +101,9 @@ public:
 	// get coordonnes des buts 
 	bool getButs(int index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas);
 
+	glm::vec3 getPc(int i) { return pointControle_[i]; }
+
+
 private:
 
 	///la largueur des murs 

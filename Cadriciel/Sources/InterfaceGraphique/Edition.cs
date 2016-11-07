@@ -22,7 +22,7 @@ namespace InterfaceGraphique
 {
     public partial class Edition : Form   
     {
-        private static MenuPrincipal menuPrincipal_;
+        private static MenuPrincipal menuPrincipal_;  
         //private static double friction_;
         //private static double rebond_;
         //private static double acceleration_;
@@ -145,15 +145,15 @@ namespace InterfaceGraphique
         public void MettreAJour(double tempsInterAffichage)
         {
             try
-            {
-                this.Invoke((MethodInvoker)delegate
-                {
+            {   
+                this.Invoke((MethodInvoker)delegate 
+                {  
                     FonctionsNatives.animer(tempsInterAffichage);
                     FonctionsNatives.dessinerOpenGL();
 
                     /// Ali
                     /// On demare la partie rapide
-                    if (estEnModePartie)
+                    if (estEnModePartie) 
                         DemarrerPartie();
              
 
@@ -534,7 +534,6 @@ namespace InterfaceGraphique
                 Program.peutAfficher = false;
             }
             FonctionsNatives.clickStart(e.X, e.Y);
-
             mousePressed = true;
         }
 
@@ -1785,7 +1784,7 @@ namespace InterfaceGraphique
                 //Console.WriteLine("But Gauche !!");
             }
             int nbButsMax = FonctionsNatives.getNombreButs();
-            if ((nbButsJoueur1 == nbButsMax) || (nbButsJoueur2 == nbButsMax))
+            if ((nbButsJoueur1 == nbButsMax) || (nbButsJoueur2 == nbButsMax))     
             {
                 if (nbButsJoueur1 == nbButsMax)
                 {
