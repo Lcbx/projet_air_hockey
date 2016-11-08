@@ -94,15 +94,9 @@ void ConfigTouches::enregistrerTouches(int haut, int droite, int bas, int gauche
 ////////////////////////////////////////////////////////////////////////
 void ConfigTouches::chargerTouches()
 {
+	bool touchesDejaDefinies = false;
 	// Vérification de l'existance du ficher
-	if (!utilitaire::fichierExiste("configuration.xml")) {
-		// Si le fichier n'existe pas, on utilise les valeurs par défaut
-		_haut = HAUTDEF;
-		_droite = DROITEDEF;
-		_bas = BASDEF;
-		_gauche = GAUCHEDEF;
-	}
-	else {
+	if (utilitaire::fichierExiste("configuration.xml")) {
 
 		// Charge le fichier de configuration
 		tinyxml2::XMLDocument document;
@@ -122,8 +116,17 @@ void ConfigTouches::chargerTouches()
 					elementTouches->QueryIntAttribute("TOUCHE_GAUCHE", &_gauche) != tinyxml2::XML_SUCCESS) {
 					std::cerr << "Erreur de chargement des touches" << std::endl;
 				}
+				else
+					touchesDejaDefinies = true;
 			}
 		}
+	}
+	// Si les touches n'ont pas pu être chargées, utiliser les valeurs par défaut
+	if (!touchesDejaDefinies) {
+		_haut = HAUTDEF;
+		_droite = DROITEDEF;
+		_bas = BASDEF;
+		_gauche = GAUCHEDEF;
 	}
 }
 

@@ -71,12 +71,12 @@ public:
 	void testSuppression();
 
 	///Cas de test: dans la table
-	void testTrouverObjet();
+	void testTrouverObjet(); 
 
 	///Cas de test: selection multiple
 	void testSelectionMultiple();
 
-	///Cas de test: scale
+	///Cas de test: modifier le scale
 	void testScale();
 
 

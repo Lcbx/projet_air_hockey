@@ -28,10 +28,11 @@ void JoueurVirtuel::deplacerMailletVirtuel()
 
 	glm::vec3 positionRondelle = facade->obtenirArbreRenduINF2990()->chercher("rondelle")->obtenirPositionRelative();
 	float rayonRondelle = facade->obtenirArbreRenduINF2990()->chercher("rondelle")->obtenirRayonModele();
-
+	vitesse_ = vitesse_ / 100;
 	//std::cout << "positionRondelle (" << positionRondelle.x << "," << positionRondelle.y << ")" << std::endl;
 
 	NoeudAbstrait * mailletVirtuel = facade->obtenirArbreRenduINF2990()->obtenirMailletManuel();
+	NoeudMaillet * maillet = (NoeudMaillet *) mailletVirtuel;
 	glm::vec3 positionMaillet = mailletVirtuel->obtenirPositionRelative();
 	glm::vec3 nouvellePositionMaillet;
 	nouvellePositionMaillet = positionMaillet;
@@ -74,8 +75,9 @@ void JoueurVirtuel::deplacerMailletVirtuel()
 	if (agir())
 	{
 		// a la fin on teste si la nouvelle position est dans la zone du jeu
-		if (facade->obtenirArbreRenduINF2990()->getTable()->mailletDansZone1(nouvellePositionMaillet,rayonMaillet))
-			mailletVirtuel->assignerPositionRelative(nouvellePositionMaillet);
+		if (facade->obtenirArbreRenduINF2990()->getTable()->mailletDansZone1(nouvellePositionMaillet, rayonMaillet))
+			//mailletVirtuel->assignerPositionRelative(nouvellePositionMaillet);
+			maillet->deplacer(nouvellePositionMaillet);
 	}
 		
 }

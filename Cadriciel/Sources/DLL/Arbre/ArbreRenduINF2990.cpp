@@ -704,6 +704,7 @@ void ArbreRenduINF2990::deplacerMailletAvecSouris(glm::dvec3 pos)
 			if (enfant->estDeuxiemeJoueur == false)
 			{
 				((NoeudMaillet*)enfant)->deplacer(pos);	
+				
 			}
 		}
 	}

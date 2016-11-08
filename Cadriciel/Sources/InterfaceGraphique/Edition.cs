@@ -437,7 +437,7 @@ namespace InterfaceGraphique
                             if (estEnModeTest && !estEnModePartie)
                             {
                                 estjoueurvirtuel = true;
-                                DemarerJoueurVirtuel(1, 0.5);
+                                DemarerJoueurVirtuel(70, 0.9);
                             }
                             break;
                         }
@@ -1815,7 +1815,7 @@ namespace InterfaceGraphique
             {
                 DialogResult dialog = MessageBox.Show("La partie est finie, vous voulez rejouer encore ? ",
                         "Rejouer ou revenir au menu principal", MessageBoxButtons.YesNo);
-
+                 
                 if (dialog == DialogResult.Yes)
                 {
                     nbButsJoueur1 = 0;
