@@ -33,7 +33,7 @@ public:
 	void setProfil(Profil profil);
 
 	/// Ajoute le profil avec les attributs spécifiés, ou le modifie si un profil du même nom existe
-	void setProfil(std::string nom, double vitesse, double probabilite);
+	void setProfil(std::string nom, int vitesse, float probabilite);
 
 	/// Supprime un profil d'après son nom
 	void supprimerProfil(std::string nom);

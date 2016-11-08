@@ -168,6 +168,8 @@ extern "C" {
 	
 	__declspec(dllexport) void sauvegarderTypeButMax(int nbButMax, bool estVirtuel);
 
+	__declspec(dllexport) void sauvegarderProfil (const char* nom, double vitesse, double proba);
+
 
 } 
 #endif // __FACADE_INTERFACE_NATIVE_H__
