@@ -47,8 +47,10 @@ public:
 	////////////////////////////////////////////////////////////////////////
 	virtual double obtenirRayon() const { return obtenirRayonModele() * getScale().x; };
 
-private:
+	///pour l'attraction
+	bool attracte_ = true;
 
+private:
 
 	/// Angle selon l'axe des X.
 	float angleX_{ 0.f };

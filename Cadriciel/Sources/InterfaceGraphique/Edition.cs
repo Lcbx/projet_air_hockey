@@ -208,12 +208,12 @@ namespace InterfaceGraphique
         private void toucheManuel(object sender, KeyEventArgs e)
         {
             //TO-DO: Changer les touches par les touches enregistres !!
-
-            string temp = e.KeyCode.ToString();
-            string avant_ = Program.configuration.droite.Text;
-            string arriere_ = Program.configuration.gauche.Text;
-            string haut_ = Program.configuration.haut.Text;
-            string bas_ = Program.configuration.bas.Text;
+            
+            int temp = e.KeyValue;
+            int avant_ = Program.configuration.toucheDeplaceADroite_;
+            int arriere_ = Program.configuration.toucheDeplaceAGauche_;
+            int haut_ = Program.configuration.toucheDeplaceEnHaut_;
+            int bas_ = Program.configuration.toucheDeplaceEnBas_;
 
 
             //deplacer le maillet de 2eme joueur
@@ -289,11 +289,11 @@ namespace InterfaceGraphique
 
         private void toucheManuel2(object sender, KeyEventArgs e)
         {
-            string temp = e.KeyCode.ToString();
-            string avant_ = Program.configuration.droite.Text;
-            string arriere_ = Program.configuration.gauche.Text;
-            string haut_ = Program.configuration.haut.Text;
-            string bas_ = Program.configuration.bas.Text;
+            int temp = e.KeyValue;
+            int avant_ = Program.configuration.toucheDeplaceADroite_;
+            int arriere_ = Program.configuration.toucheDeplaceAGauche_;
+            int haut_ = Program.configuration.toucheDeplaceEnHaut_;
+            int bas_ = Program.configuration.toucheDeplaceEnBas_;
 
             //deplacer le maillet de 2eme joueur
             if (estEnModeTest == true || estEnModePartie == true)
@@ -406,7 +406,18 @@ namespace InterfaceGraphique
                             FonctionsNatives.escEnfonce();
                             break;
                         }
-
+                    case Keys.J: {
+                            FonctionsNatives.changerLumieresActives(true, false, false);
+                            break;
+                        }
+                    case Keys.K: {
+                            FonctionsNatives.changerLumieresActives(false, true, false);
+                            break;
+                        }
+                    case Keys.L: {
+                            FonctionsNatives.changerLumieresActives(false, false, true);
+                            break;
+                        }
 
                     default: break;
                 }
@@ -1779,7 +1790,6 @@ namespace InterfaceGraphique
             FonctionsNatives.setjoueurVirtuel(false);
         }
 
-        bool estDejaAffiché = false;
         ///////////////////////////////////////////////////////////////////////
         /// @fn public void DemarrerPartie()
         /// Author : Ali
@@ -2055,6 +2065,8 @@ namespace InterfaceGraphique
         public static extern void deactiverRondelle();
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool estEnPauseRondelle();
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void changerLumieresActives(bool jLumiereAmbiente, bool kLumiereDirectionnelle, bool jLumiereSpots );
         //Ali
 
     }

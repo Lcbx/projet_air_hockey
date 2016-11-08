@@ -1,3 +1,4 @@
 <configuration>
     <CScene CALCULS_PAR_IMAGE="50"/>
+    <CTouches TOUCHE_HAUT="49" TOUCHE_DROITE="52" TOUCHE_BAS="51" TOUCHE_GAUCHE="50"/>
 </configuration>
