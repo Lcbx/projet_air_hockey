@@ -32,7 +32,7 @@ namespace InterfaceGraphique
         public int toucheDeplaceEnHaut_;
 
         //le nombre de buts nécessaires (entre 1 et 5) pour gagner une partie.
-        private int scorePourGangner = 2;
+        private int nbButMax = 2 ;
 
         
 
@@ -81,6 +81,8 @@ namespace InterfaceGraphique
             this.droite.Text = ((Keys)touches[1]).ToString();
             this.bas.Text = ((Keys)touches[2]).ToString();
             this.gauche.Text = ((Keys)touches[3]).ToString();
+
+            
         }
 
         public void setMenuPrincipalConfig(MenuPrincipal menuPrincipal)
@@ -239,21 +241,26 @@ namespace InterfaceGraphique
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             if (numericUpDown1.Value >= 1 || numericUpDown1.Value <= 5)
-                scorePourGangner = Convert.ToInt32(numericUpDown1.Value);
+            {
+                nbButMax = Convert.ToInt32(numericUpDown1.Value);
+            }
 
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (e.Equals("Joueur humain"))
+            if (comboBox1.Text.Equals("Joueur humain"))
+            { 
                 estVirtuel = false;
+            }
+
+            else if (comboBox1.Text.Equals("Joueur virtuel"))
+            {
+                estVirtuel = true;
+            }
         }
 
-        private void fermer_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            menuPrincipal_.Show();
-        }
+       
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
@@ -377,6 +384,12 @@ namespace InterfaceGraphique
         {
             this.Hide();
         }
+
+        private void Sauvegarder_Click(object sender, EventArgs e)
+        {
+
+            FonctionsNatives.sauvegarderTypeButMax(nbButMax, estVirtuel);
+        }
     }
     static partial class FonctionsNatives
     {
@@ -395,6 +408,10 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void debogConfig(bool debogageActif_, bool debogCollision_, bool debogVitesse_, bool eclairageActif_,bool effetVisuelActif_);
+
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void sauvegarderTypeButMax(int nombreMax, bool estVirtuel);
 
     }
 }

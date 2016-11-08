@@ -45,7 +45,7 @@
             this.réintialisation = new System.Windows.Forms.Button();
             this.appliquer = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.fermer = new System.Windows.Forms.Button();
+            this.Sauvegarder = new System.Windows.Forms.Button();
             this.typeJoueur = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.type = new System.Windows.Forms.Label();
@@ -205,19 +205,19 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.fermer);
+            this.tabPage2.Controls.Add(this.Sauvegarder);
             this.tabPage2.Controls.Add(this.typeJoueur);
             this.tabPage2.Controls.Add(this.scoreGangant);
             resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // fermer
+            // Sauvegarder
             // 
-            resources.ApplyResources(this.fermer, "fermer");
-            this.fermer.Name = "fermer";
-            this.fermer.UseVisualStyleBackColor = true;
-            this.fermer.Click += new System.EventHandler(this.fermer_Click);
+            resources.ApplyResources(this.Sauvegarder, "Sauvegarder");
+            this.Sauvegarder.Name = "Sauvegarder";
+            this.Sauvegarder.UseVisualStyleBackColor = true;
+            this.Sauvegarder.Click += new System.EventHandler(this.Sauvegarder_Click);
             // 
             // typeJoueur
             // 
@@ -243,7 +243,8 @@
             this.comboBox1.Cursor = System.Windows.Forms.Cursors.Default;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            resources.GetString("comboBox1.Items")});
+            resources.GetString("comboBox1.Items"),
+            resources.GetString("comboBox1.Items1")});
             resources.ApplyResources(this.comboBox1, "comboBox1");
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
@@ -524,7 +525,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label type;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button fermer;
+        private System.Windows.Forms.Button Sauvegarder;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox console;
         private System.Windows.Forms.CheckBox checkBox1;

@@ -164,5 +164,10 @@ extern "C" {
 	__declspec(dllexport) void profilCourant(string nom, double vitesse_, double probaDAgirPassivemnt);
 	__declspec(dllexport) void debogConfig(bool debogageActif_, bool debogCollision_, bool debogVitesse_, bool eclairageActif_, bool effetVisuelActif_);
 	__declspec(dllexport) void changerLumieresActives(bool jLumiereAmbiente, bool kLumiereDirectionnelle, bool jLumiereSpots);
+
+	
+	__declspec(dllexport) void sauvegarderTypeButMax(int nbButMax, bool estVirtuel);
+
+
 } 
 #endif // __FACADE_INTERFACE_NATIVE_H__
