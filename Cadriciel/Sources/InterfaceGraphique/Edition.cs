@@ -157,8 +157,18 @@ namespace InterfaceGraphique
                     /// Ali
                     /// On demare la partie rapide
 
-                        if (estEnModePartie)
-                            DemarrerPartie();
+                    if (estEnModePartie)
+                        DemarrerPartie();
+                    // si je suis en mode test
+                    if (estEnModeTest)
+                    {
+                        if (FonctionsNatives.estButDroite() || FonctionsNatives.estButGauche())
+                        {
+                            FonctionsNatives.reinitialiserPartieCourante();
+                            FonctionsNatives.setButDroite(false);
+                            FonctionsNatives.setButGauche(false);
+                        }
+                    }
           
 
                 });

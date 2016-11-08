@@ -1287,3 +1287,82 @@ double NoeudTable::distanceEntrePointDroite(glm::dvec3 P1, glm::dvec3 P2, glm::d
 	//std::cout << "denum = " << denum << std::endl;
 	return  fabs(numer ) / (denum);
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @fn double NoeudTable::distanceEntrePointSegment(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P)
+///
+/// Cette fonction calcule la distance entre un point P et le segment forme' par les points P1 et P2
+/// 
+///  @param[in] 
+///		glm::vec3 P1,P2,P 
+///		
+/// @return double 
+///
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+double NoeudTable::distanceEntrePointSegment(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P)
+{
+	//TODO
+	double distanceDroite = distanceEntrePointDroite(P1, P2, P);
+	double distanceP1 = distanceEntre2Points(P1, P);
+	double distanceP2 = distanceEntre2Points(P2, P);
+
+	//if 
+	
+	return min(min(distanceP1, distanceP2), distanceDroite);
+	
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @fn double NoeudTable::distanceEntre2Points(glm::dvec3 P1, glm::dvec3 P2)
+///
+/// Cette fonction calcule la distance entre 2 points P1 et P2
+///  @param[in] 
+///		glm::vec3 P1,P2 
+///		
+/// @return double
+///
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+double NoeudTable::distanceEntre2Points(glm::dvec3 P1, glm::dvec3 P2)
+{
+	return sqrt(pow((P2.y - P1.y), 2) + pow((P2.x - P1.x), 2));
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @fn glm::vec3 NoeudTable::intersection2Droites(glm::dvec3 D1P1, glm::dvec3 D1P2, glm::dvec3 D2P1, glm::dvec3 D2P2)
+///
+/// Cette fonction permet de trouve le point d'intersection entre 2 droites
+///
+///  @param[in] 
+///		glm::vec3 D1P1,D1P2,D2P1,D2P2 : les points qui forment les 2 droites 
+///		
+/// @return glm::vec3
+///
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+glm::vec3 NoeudTable::intersection2Droites(glm::dvec3 D1P1, glm::dvec3 D1P2, glm::dvec3 D2P1, glm::dvec3 D2P2)
+{
+	//TODO 
+	return D1P1;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::appartientDroite(glm::dvec3 point, glm::dvec3 D1P1, glm::dvec3 D1P2)
+///
+/// Cette fonction permet de savoir si un tel point appartient a la droite
+///
+///  @param[in] 
+///		glm::vec3 D1P1,D1P2 : les points qui forment la droite
+///		glm::vec3 point : le point a verifier
+///		
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool NoeudTable::appartientDroite( glm::dvec3 D1P1, glm::dvec3 D1P2, glm::dvec3 point)
+{
+	if (distanceEntrePointDroite(D1P1, D1P2, point) == 0)
+		return true;
+	else
+		return false;
+}

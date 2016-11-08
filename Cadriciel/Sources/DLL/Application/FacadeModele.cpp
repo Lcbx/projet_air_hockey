@@ -827,6 +827,11 @@ void FacadeModele::deplacerMailletAvecSouris(double x, double y)
 	vue_->convertirClotureAVirtuelle(x, y, posDeplacement);
 	arbre_->deplacerMailletAvecSouris(posDeplacement);
 
+	// test fct appartient
+	//if (arbre_->getTable()->appartientDroite({ 0,50,0 }, { 0,-50,0 }, { 0,0,0 }))
+	//	std::cout << "Yay!";
+
+
 	/*if (arbre_->joueurVirtuelDefensif)
 		this->virtuelDefensif(10.,1);*/
 }
