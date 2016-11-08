@@ -19,6 +19,8 @@
 #include "../Configuration/ConfigJeu.h"
 #include "../Configuration/ConfigDebug.h"
 #include "../Configuration/ConfigProfils.h"
+#include "../Tournoi.h"
+#include "../AdaptateurJoueur.h"
 
 class NoeudAbstrait;
 class ArbreRenduINF2990;
@@ -88,6 +90,8 @@ public:
 	/// Accède à l'objet ConfigProfils
 	ConfigProfils getConfigProfils();
 
+	/// Permet d'obtenir le tournoi
+	Tournoi<AdaptateurJoueur>* getTournoi();
 
 	/// Libère le contexte OpenGL.
 	void libererOpenGL();
@@ -258,6 +262,8 @@ private:
    ConfigDebug _configDebug;
    /// Configuration des profils
    ConfigProfils _configProfils;
+   /// Tournoi cible
+   Tournoi<AdaptateurJoueur>* tournoi;
 
 
 
