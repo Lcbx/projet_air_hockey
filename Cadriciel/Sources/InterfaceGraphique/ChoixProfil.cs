@@ -43,8 +43,9 @@ namespace InterfaceGraphique
                 // 
                 edition_.estjoueurvirtuel = false;
                 edition_.passerModePartie(true);
-                edition_.resetPartie();            
+                edition_.resetPartie();
 
+                menu_.Hide();
                 this.Hide();
             }
 
@@ -63,7 +64,7 @@ namespace InterfaceGraphique
                 edition_.DemarerJoueurVirtuel(1, 0.5);
                 edition_.resetPartie();
 
-
+                menu_.Hide();
                 this.Hide();
             }
 

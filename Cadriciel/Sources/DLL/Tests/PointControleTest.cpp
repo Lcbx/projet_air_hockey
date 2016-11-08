@@ -32,8 +32,6 @@ CPPUNIT_TEST_SUITE_REGISTRATION(PointControleTest);
 void PointControleTest::setUp()
 {
 	
-	// Nous pourrions initialiser l'objet, mais puisqu'il s'agit d'un singleton,
-	// aucune initialisation n'est requise.
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -51,21 +49,15 @@ void PointControleTest::setUp()
 ////////////////////////////////////////////////////////////////////////
 void PointControleTest::tearDown()
 {
-	// Nous pourrions libérer l'objet, mais puisqu'il s'agit d'un singleton,
-	// aucune libération n'est requise.
-	//delete arbreTest;
+	
 }
 
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void ConfigSceneTest::testSauvegardeChargement()
 ///
-/// Cas de test: sauvegarde et chargement XML de la configuration
-/// Modifier la valeur CALCULS_PAR_IMAGE, enregistrer la configuration,
-/// restaurer la valeur CALCULS_PAR_IMAGE, charger la configuration,
-/// s'assurer que la valeur sauvegardée a bien été restaurée du fichier
-/// XML, restaurer la valeur par défaut.
-///
+/// cas de test: tester si deux points sont symetriques
+/// 
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
@@ -74,6 +66,7 @@ void PointControleTest::testWiiw()
 	NoeudTable* nouveauNoeud{ new NoeudTable{ ArbreRenduINF2990::NOM_TABLE } };
 	nouveauNoeud->assignerPositionRelative({ 0,0,0 });
 	
+
 	glm::vec3 p0 =  nouveauNoeud->getPc(0);
 	glm::vec3 p4 = nouveauNoeud->getPc(4);
 

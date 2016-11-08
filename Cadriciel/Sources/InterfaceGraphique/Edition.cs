@@ -53,6 +53,7 @@ namespace InterfaceGraphique
 
         int ancienPosX;
         int ancienPosY;
+
         /////////////////////////////////////////////////////////////////////////
         ///  @fn public Edition()
         /// 
@@ -108,6 +109,8 @@ namespace InterfaceGraphique
            ancienPosY = panel1.Location.Y;
 
             panel2.Hide();
+        
+
         }
 
 
@@ -153,9 +156,10 @@ namespace InterfaceGraphique
 
                     /// Ali
                     /// On demare la partie rapide
-                    if (estEnModePartie) 
-                        DemarrerPartie();
-             
+
+                        if (estEnModePartie)
+                            DemarrerPartie();
+          
 
                 });
 
@@ -466,11 +470,11 @@ namespace InterfaceGraphique
                             break;
                         }
 
-                    default: break;
+                    default: break;  
 
                 }
             }
-        }
+        } 
 
 
         public enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, AJOUT_MUR, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, REDIMENSIONNEMENT, NBETATS, TEST };
@@ -1507,6 +1511,8 @@ namespace InterfaceGraphique
 
                 this.Text = "Mode Test";
                 estEnModeTest = true;
+                estEnModePartie = false;
+
                 this.changerMode(Etats.TEST);
                 //Permet d'ajouter les maillets et la rondelle dans la table
                 FonctionsNatives.ajouterMailletEtRondelle();
@@ -1543,16 +1549,21 @@ namespace InterfaceGraphique
                 // splitContainer1.Panel1.Hide();
                 //splitContainer1.Panel2.Hide();
 
+                panel2.Hide();
+
             }
             //si mode edition , afficher les menus a cotés + barre des menus
             else
             {
+                if (estEnModePartie) { FonctionsNatives.initialiserScene(); }
 
                 panel1.Location = new Point(ancienPosX, ancienPosY);
 
                 this.Text = "Mode Edition";
-                estEnModeTest = false;
                 this.changerMode(Etats.SELECTION);
+
+                estEnModePartie = false;
+                estEnModeTest = false;
 
                 estEnPause = false;
 
@@ -1583,6 +1594,8 @@ namespace InterfaceGraphique
 
                 //panel score afficher - panel proprietes desactiver
                 splitContainer1.Show();
+
+                panel2.Hide();
 
             }
         }
@@ -1755,6 +1768,8 @@ namespace InterfaceGraphique
             Console.WriteLine("--- Joueur Virtuel Desactive' ---");
             FonctionsNatives.setjoueurVirtuel(false);
         }
+
+        bool estDejaAffiché = false;
         ///////////////////////////////////////////////////////////////////////
         /// @fn public void DemarrerPartie()
         /// Author : Ali
@@ -1767,7 +1782,7 @@ namespace InterfaceGraphique
         {
             if (FonctionsNatives.estButDroite())
             {
-                MessageBox.Show("Player 2 SCORES !","AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                //MessageBox.Show("Player 2 SCORES !","AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 nbButsJoueur2++;
                 textBox4.Text = nbButsJoueur2.ToString();
                 FonctionsNatives.setButDroite(false);
@@ -1776,35 +1791,51 @@ namespace InterfaceGraphique
             }
             if (FonctionsNatives.estButGauche())
             {
-                MessageBox.Show("Player 1 SCORES !", "AirHockey" , MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("Player 1 SCORES !", "AirHockey" , MessageBoxButtons.OK, MessageBoxIcon.Information);
                 nbButsJoueur1++;
                 textBox5.Text = nbButsJoueur1.ToString();
                 FonctionsNatives.setButGauche(false);
                 FonctionsNatives.reinitialiserPartieCourante();
                 //Console.WriteLine("But Gauche !!");
             }
-            int nbButsMax = FonctionsNatives.getNombreButs();
-            if ((nbButsJoueur1 == nbButsMax) || (nbButsJoueur2 == nbButsMax))     
+
+            int  nbButsMax = FonctionsNatives.getNombreButs();
+            if ((nbButsJoueur1 == nbButsMax) || (nbButsJoueur2 == nbButsMax))
             {
-                if (nbButsJoueur1 == nbButsMax)
+                DialogResult dialog = MessageBox.Show("La partie est finie, vous voulez rejouer encore ? ",
+                        "Rejouer ou revenir au menu principal", MessageBoxButtons.YesNo);
+
+                if (dialog == DialogResult.Yes)
                 {
-                    MessageBox.Show("** Congratulations! Player 1 wins ! **", "AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand,
-                    MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                    nbButsJoueur1 = 0;
+                    nbButsJoueur2 = 0;
+                    textBox4.Text = "0"; textBox5.Text = "0";
+                    FonctionsNatives.reinitialiserPartieCourante();
+
                 }
-                else
+
+                else if (dialog == DialogResult.No) //revenir menu principal
                 {
-                    MessageBox.Show("** Congratulations! Player 2 wins ! **", "AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                    estEnModePartie = false;
+                    this.Hide();
+                    menuPrincipal_.Show();
+                    FonctionsNatives.reinitialiserPartieCourante();
                 }
-                // reintialiser ou retourner en menu principale
-                nbButsJoueur1 = 0;
-                nbButsJoueur2 = 0;
-                textBox4.Text = "0"; textBox5.Text = "0";
-                FonctionsNatives.retirerMailletEtRondelle();
-                menuPrincipal_.Show();
-                this.Hide();
-                
-            }            
+            }
+
+            /* if (nbButsJoueur1 == nbButsMax)
+             {
+                 MessageBox.Show("** Congratulations! Player 1 wins ! **", "AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand,
+                 MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+             }
+             else
+             {
+                 MessageBox.Show("** Congratulations! Player 2 wins ! **", "AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Information,
+                 MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);¸*/
+
+            //menuPrincipal_.Show();
+            //this.Hide();
+
         }
 
         private void Edition_Load(object sender, EventArgs e)

@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 
 namespace InterfaceGraphique
 {    
-    public partial class Configuration : Form                  
+    public partial class Configuration : Form                   
     { 
         private static MenuPrincipal menuPrincipal_;        
 

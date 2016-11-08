@@ -16,7 +16,7 @@
 #include "NoeudPointControle.h"
 #include "ArbreRenduINF2990.h"
 
-class ArbreRenduINF2990;
+class pointsControle;
 
 ///////////////////////////////////////////////////////////////////////////
 /// @class PointControleTest
