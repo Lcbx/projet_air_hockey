@@ -1,6 +1,7 @@
 #pragma once
 
 #include <tuple>
+#include <vector>
 #include <cmath>
 
 ///
@@ -16,13 +17,18 @@ private:
 	// La structure du matchup est similaire à celle d'un arbre
 	// avec le gagnant à la case 0, les deux participants du matchup
 	// en 2^1 + 0 et 2^1 + 1 et ainsi de suite
-	// Le second paramètre est le score attribué lors du matchup
-	std::pair<T*, int>* matchups;
+	// Le premier int représente la case dans le vecteur participant (-1 signifie que le matchup n'a pas eu lieu)
+	// Le second int représente le score du participant
+	std::vector<std::pair<int, int>> matchups;
+	
 	// La profondeur de l'arbre
 	int matchupDepth;
-
+	
 	// La liste des participants
-	T* participants;
+	std::vector<T> participants;
+
+	// Le nombre de participants
+	size_t nbJoueurs;
 
 
 public:
@@ -30,7 +36,7 @@ public:
 	Tournoi() = delete;
 
 	/// Constructeur avec un ensemble de participants
-	Tournoi(int nbJoueurs, T* participants);
+	Tournoi(std::vector<T> participants);
 
 	/// Destructeur
 	~Tournoi();
@@ -46,49 +52,46 @@ public:
 	bool prochainMatchupExiste();
 
 	/// Permet d'obtenir l'arbre complet des matchups
-	std::pair<T, int>* obtenirMatchups();
+	std::vector<std::pair<T, int>> obtenirMatchups(T value = T());
 
 private:
 	/// Permet d'obtenir la position du deuxième joueur du prochain matchup
 	int positionProchainMatchup();
 
-	/// Permet de mettre un gagnant par défaut si un des deux joueurs est inexistant (null)
-	void gagnerProchainMatchParDefaut();
+	/// Permet d'obtenir le participant à la position donnée dans le tableau matchups
+	T participantAuMatchup(int positionMatchup);
+
 };
 
-/// @fn Tournoi<T>::Tournoi(int nbJoueurs, T* participants)
+/// @fn Tournoi<T>::Tournoi(std::vector<T> paticipants)
 /// @brief Permet de créer un tournoi à partir d'une liste de participants
 ///
 /// Le tournoi est créé de façon à ce que tous les joueurs peuvent être placés
 /// Sur la branche la plus profonde. Peut causer des problèmes de précision autour
 template<typename T>
-Tournoi<T>::Tournoi(int nbJoueurs, T* participants) {
-	this->matchupDepth = ceil(log2(nbJoueurs)); // Counting the root as depth 0
+Tournoi<T>::Tournoi(std::vector<T> participants) {
+	this->participants = participants; //La liste des participants
+	this->nbJoueurs = this->participants.size();
+	this->matchupDepth = (int) ceil(log2(this->nbJoueurs));
 
-	this->participants = new T[nbJoueurs];
-	for (int i = 0; i < nbJoueurs; i++) {
-		this->participants[i] = *(participants + i);
-	}
+	if (log2(this->nbJoueurs) != this->matchupDepth)
+		throw new std::invalid_argument("Le nombre de joueurs doit être un multiple de 2.");
+	
+	// La liste des pairings des participants
+	this->matchups.resize((size_t) pow(2, matchupDepth + 1) - 1, { -1, 0 });
 
-	int length = pow(2, matchupDepth + 1) - 1;
-	this->matchups = new std::pair<T*, int>[length];
-
-	int basePos = pow(2, matchupDepth) - 1;
-	for (int i = 0; i < nbJoueurs; i++) {
-		this->matchups[basePos + i] = std::make_pair<T*, int>((participants + i), 0);
-	}
+	// Les participants sont ajoutés à la fin de l'arbre
+	int basePos = (int) pow(2, matchupDepth) - 1;
+	for (int i = 0; i < this->nbJoueurs; i++)
+		this->matchups[basePos + i] = { i, 0 };
 }
+
+
 
 /// @fn Tournoi<T>::~Tournoi()
 /// @brief Permet de libérer la mémoire de l'arbre de tournoi
-///
-/// Le tournoi est créé de façon à ce que tous les joueurs peuvent être placés
-/// Sur la branche la plus profonde. Peut causer des problèmes de précision autour
 template<typename T>
-Tournoi<T>::~Tournoi() {
-	delete[] this->matchups;
-	delete[] this->participants;
-}
+Tournoi<T>::~Tournoi() { }
 
 /// @fn std::pair<T, T> Tournoi<T>::obtenirProchainMatchup()
 /// @brief Permet d'obtenir le prochain matchup pour un tournoi
@@ -98,27 +101,10 @@ Tournoi<T>::~Tournoi() {
 /// Visite l'arbre en depth first afin de trouver un matchup qui ne possède pas
 /// de parents (soit de gagnant). On considère que le matchup est gagné si on
 /// atteint le haut de l'arbre (la racine)
-template<typename T> //TODO: Refactoriser
+template<typename T>
 std::pair<T, T> Tournoi<T>::obtenirProchainMatchup() {
-	this->gagnerProchainMatchParDefaut();
 	int pos = this->positionProchainMatchup();
-	return std::pair<T, T>(*(this->matchups[pos - 1].first), *(this->matchups[pos].first));
-}
-
-
-/// @fn void Tournoi<T>::gagnerProchainMatchParDefaut()
-/// @brief Permet de définir un gagnant par défaut pour le prochain matchup si un des participants est inexistant
-///
-/// Vérifie si les prochains matchups, de façon récursive, n'ont qu'un participant. Si c'est le cas, il gagne automatiquement le match
-///
-/// @return Rien
-template<typename T> //TODO: Refactoriser
-void Tournoi<T>::gagnerProchainMatchParDefaut() {
-	int pos = this->positionProchainMatchup();
-	while (this->matchups[pos].first == nullptr || this->matchups[pos - 1].first == nullptr) {
-		this->matchups[(pos + 1)/ 2 - 1].first = (this->matchups[pos].first == nullptr) ? this->matchups[pos - 1].first : this->matchups[pos].first;
-		pos = this->positionProchainMatchup();
-	}
+	return { this->participantAuMatchup(pos-1), this->participantAuMatchup(pos) };
 }
 
 /// @fn int Tournoi<T>::positionProchainMatchup()
@@ -127,11 +113,10 @@ void Tournoi<T>::gagnerProchainMatchParDefaut() {
 /// @return La position du deuxième joueur dans le prochain matchup dans l'arbre de matchup
 template<typename T>
 int Tournoi<T>::positionProchainMatchup() {
-	int pos = pow(2, this->matchupDepth + 1) - 2;
-	while (pos > 0 &&
-		((this->matchups[(pos + 1) / 2 - 1].first != nullptr) ||
-		(this->matchups[pos].first == nullptr && this->matchups[pos - 1].first == nullptr))) {
-		pos -= 2;
+	int pos = (int) pow(2, this->matchupDepth + 1) - 2;
+
+	while (pos > 0 && (this->matchups[(pos + 1) / 2 - 1].first >= 0)) {
+		pos -= 2; //On considère que tous les matchups sont remplis par défaut
 	}
 
 	return pos;
@@ -147,30 +132,61 @@ int Tournoi<T>::positionProchainMatchup() {
 /// Assigne le score au prochain matchup et place le joueur gagnant dans le matchup supérieur
 template<typename T>
 T Tournoi<T>::affecterScoreProchainMatchup(int scoreParticipant1, int scoreParticipant2) {
-	this->gagnerProchainMatchParDefaut(); //TODO: Refactoriser
 	int pos = this->positionProchainMatchup();
 	this->matchups[pos - 1].second = scoreParticipant1;
 	this->matchups[pos].second = scoreParticipant2;
+	int posGagnant = (pos + 1) / 2 - 1;
 	if (scoreParticipant1 > scoreParticipant2) {
-		this->matchups[(pos + 1) / 2 - 1].first = this->matchups[pos - 1].first;
+		this->matchups[posGagnant].first = this->matchups[pos - 1].first;
 	} else {
-		this->matchups[(pos + 1) / 2 - 1].first = this->matchups[pos].first;
+		this->matchups[posGagnant].first = this->matchups[pos].first;
 	}
 
-	return *(this->matchups[(pos + 1) / 2 - 1].first);
+	return this->participantAuMatchup(posGagnant);
 }
 
 
-/// @fn T Tournoi<T>::affecterScoreProchainMatchup(int scoreParticipant1, int scoreParticipant2)
-/// @brief Permet d'affecter le score au prochain matchup
-/// @param[in] int scoreParticipant1 : Score du premier participant défini par obtenirProchainMatchup
-/// @param[in] int scoreParticipant2 : Score du second participant défini par obtenirProchainMatchup
+/// @fn T Tournoi<T>::prochainMatchupExiste()
+/// @brief Permet de savoir si un gagnant existe pour le tournoi
 ///
-/// @return Le gagnant du matchup
-///
-/// Assigne le score au prochain matchup et place le joueur gagnant dans le matchup supérieur
+/// @return Vrai s'il existe un prochain matchup, faux si le tournoi a été gagné
 template<typename T>
 bool Tournoi<T>::prochainMatchupExiste() {
-	this->gagnerProchainMatchParDefaut(); //TODO: Refactoriser
 	return this->positionProchainMatchup() != 0;
+}
+
+
+/// @fn T Tournoi<T>::participantAuMatchup(int postionMatchup)
+/// @brief Permet de connaître le joueur au matchup donné
+/// @param[in] int positionMatchup : Position selon le tableau de matchup
+///
+/// @return Le joueur du matchup
+template<typename T>
+T Tournoi<T>::participantAuMatchup(int positionMatchup) {
+	int pos = this->matchups[positionMatchup].first;
+	if (pos < 0)
+		throw new std::logic_error("Le participant n'a pas encore été assigné au matchup");
+	return this->participants[pos];
+}
+
+
+/// @fn T Tournoi<T>::obtenirMatchups(T value = T())
+/// @brief Permet de connaître l'ensemble des matchups
+/// @param[in] T value : Valeur par défaut pour les cas nuls
+///
+/// @return Le vecteur des matchups (joueur et score)
+template<typename T>
+std::vector<std::pair<T, int>> Tournoi<T>::obtenirMatchups(T value = T()) {
+	std::vector<std::pair<T, int>> ret;
+
+	for (auto matchup : this->matchups) {
+		std::pair<T, int> retMatchup({ value, matchup.second });
+
+		if (matchup.first >= 0) 
+			retMatchup.first = this->participants[matchup.first];
+
+		ret.push_back(retMatchup);
+	}
+
+	return ret;
 }

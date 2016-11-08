@@ -7,12 +7,13 @@
 /// @brief Permet d'adapter un joueur virtuel et un joueur humain pour un tournoi
 class AdaptateurJoueur {
 private:
-	JoueurVirtuel *joueurVirtuel;
+	JoueurVirtuel joueurVirtuel;
+	bool isHuman;
 	std::string nomJoueur;
 
 public:
-	/// Constructeur par défaut ne doit pas être appelé
-	AdaptateurJoueur() = delete;
+	/// Constructeur par défaut, représente un cas nul
+	AdaptateurJoueur();
 
 	/// Constructeur par nom
 	AdaptateurJoueur(std::string nomJoueur);
