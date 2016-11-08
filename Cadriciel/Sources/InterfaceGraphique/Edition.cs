@@ -426,7 +426,7 @@ namespace InterfaceGraphique
                             if (estEnModeTest && !estEnModePartie)
                             {
                                 estjoueurvirtuel = true;
-                                DemarerJoueurVirtuel(1, 0.5);
+                                DemarerJoueurVirtuel(70, 0.9);
                             }
                             break;
                         }

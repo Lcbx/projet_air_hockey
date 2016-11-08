@@ -1140,30 +1140,50 @@ bool NoeudTable::mailletDansZone2(glm::dvec3 M,double rayon)
 		dist = distanceEntrePointDroite(p(2), p(3), M);
 		if (dist < rayon) // distance entre mur P2P3
 			return false;
-		else
+
+		else  // distance entre mur P2P4
 		{
 			dist = distanceEntrePointDroite(p(4), p(2), M);
-			if (dist < rayon) // distance entre mur P2P4
-				return false;
-			else				
+			if (dist < rayon) 
+			{
+				if (p(4).y >= p(2).y) 
+					return false;					
+				else
+					if (M.y >= p(4).y) 
+						return false;
+			}
+				
+			else // distance entre mur P4P7 			
 			{
 				dist = distanceEntrePointDroite(p(4), p(7), M);
-				/*std::cout << "P4(" << p(4).x << "," << p(4).y << ") P7(" << p(7).x << "," << p(7).y << ")" << std::endl;
-				std::cout << "M(" << M.x << "," << M.y << ")" << std::endl;
-				std::cout << "rayon =  " << rayon << std::endl;
-				std::cout << "distance Maillet mure p4p7 = " << dist << std::endl;*/
-				if ((dist < rayon) && (M.y >= p(7).y)) // distance entre mur P4P7 et au dessus de P7
-					return false;
-				else					
-				{
-					dist = distanceEntrePointDroite(p(5), p(7), M);
-					if ( (dist < rayon) && (M.y < p(7).y) ) // distance entre mur P7P5 et au dessous de P7
+				//if ((dist < rayon) && ((M.y >= p(7).y) && (M.y<= p(4).y))) 
+				if ((dist < rayon) && (M.y >= p(7).y))
+					if (p(4).x >= p(7).x)
 						return false;
 					else
+						if (p(4).y > p(2).y)
+							return false;
+						else
+							// TODO -- reste un cas (p7p4 inter p2p3 apprtient a p2p3)
+							return false;
+
+				else // distance entre mur P7P5					
+				{
+					dist = distanceEntrePointDroite(p(5), p(7), M);
+					if ( (dist < rayon) && (M.y <= p(7).y) ) // TODO -- tester meme cas que p4p7
+						return false;
+					
+					else // distance entre mur P3P5
 					{
 						dist = distanceEntrePointDroite(p(5), p(3), M);
-						if (dist < rayon) // distance entre mur P3P5
-							return false;
+						if (dist < rayon) 
+						{
+							if (p(5).y <= p(3).y) 
+								return false;
+							else
+								if (M.y < p(5).y) 
+									return false;							
+						}
 						else
 							return true;
 					}
@@ -1207,9 +1227,16 @@ bool NoeudTable::mailletDansZone1(glm::dvec3 M, double rayon)
 			return false;
 		else
 		{
+			
 			dist = distanceEntrePointDroite(p(0), p(2), M);
-			if (dist < rayon) // distance entre mur P2P0
-				return false;
+			if (dist < rayon)	// distance entre mur P2P0
+			{
+				if(p(0).y >= p(2).y)
+					return false;
+				else
+				if (M.y > p(0).y)
+					return false;				
+			}
 			else
 			{
 				dist = distanceEntrePointDroite(p(0), p(6), M);
@@ -1218,12 +1245,12 @@ bool NoeudTable::mailletDansZone1(glm::dvec3 M, double rayon)
 				else
 				{
 					dist = distanceEntrePointDroite(p(6), p(1), M);
-					if ((dist < rayon) && (M.y < p(6).y)) // distance entre mur P1P6 et au dessous de P6
+					if ((dist < rayon) && (M.y <= p(6).y)) // distance entre mur P1P6 et au dessous de P6
 						return false;
 					else
 					{
 						dist = distanceEntrePointDroite(p(1), p(3), M);
-						if (dist < rayon) // distance entre mur P1P5
+						if ( (dist < rayon) ) // && (M.y <= p(1).y) ) // distance entre mur P1P5 et au dessous de P1
 							return false;
 						else
 							return true;
