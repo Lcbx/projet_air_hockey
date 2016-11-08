@@ -98,16 +98,20 @@ public:
 	bool mailletDansZone2(glm::dvec3 M, double rayon);
 	/// distance entre un point et une droite
 	double distanceEntrePointDroite(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P);
-	/// distance entre un point et un segment
-	double distanceEntrePointSegment(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P);
+	
 	/// distance entre 2 pts 
 	double distanceEntre2Points(glm::dvec3 P1, glm::dvec3 P2);
 	/// point d'intersection entre 2 droites
-	glm::vec3 intersection2Droites(glm::dvec3 D1P1, glm::dvec3 D1P2, glm::dvec3 D2P1, glm::dvec3 D2P2);
+	bool intersection2Droites(glm::vec3 D1P1, glm::vec3 D1P2, glm::vec3 D2P1, glm::vec3 D2P2, glm::vec3 & pointIntersection); // const;
 	/// point appartient a une droite
 	bool appartientDroite( glm::dvec3 D1P1, glm::dvec3 D1P2, glm::dvec3 point );
 	/// get coordonnes des buts 
 	bool getButs(int index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas);
+
+	
+
+	double Dot(glm::vec3 a, glm::vec3 b);
+	double PerpDot(glm::vec3 a, glm::vec3 b);
 
 	glm::vec3 getPc(int i) { return pointControle_[i]; }
 

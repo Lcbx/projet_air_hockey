@@ -151,6 +151,22 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 	}
 	glEnd();
 	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// tracer pt intersection
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//glm::vec3 PI;
+	//intersection2Droites(p(2), p(3), p(4), p(7), PI);
+	//{
+	//	glColor3f(0, 1, 1);
+	//	glPointSize(10);
+	//	glBegin(GL_POINTS);
+	//	glVertex3fv(PROJvec(PI));
+	//	glEnd();
+	//}
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 	// tracer les murs 
 	tracerMurs(vueProjection);
 	// tracer les buts 
@@ -508,13 +524,7 @@ double NoeudTable::calculPente(glm::vec3 P0, glm::vec3 P1) const
 ////////////////////////////////////////////////////////////////////////
 double NoeudTable::calculB(double pente, glm::vec3 point) const
 {
-	if (pente == 0.)
-		return point.y;
-	else
-		if (pente == 1.)
-			return point.x;
-		else
-			return (point.y - pente*point.x);	
+	return (point.y - pente*point.x);	
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -1156,7 +1166,6 @@ bool NoeudTable::mailletDansZone2(glm::dvec3 M,double rayon)
 			else // distance entre mur P4P7 			
 			{
 				dist = distanceEntrePointDroite(p(4), p(7), M);
-				//if ((dist < rayon) && ((M.y >= p(7).y) && (M.y<= p(4).y))) 
 				if ((dist < rayon) && (M.y >= p(7).y))
 					if (p(4).x >= p(7).x)
 						return false;
@@ -1164,14 +1173,28 @@ bool NoeudTable::mailletDansZone2(glm::dvec3 M,double rayon)
 						if (p(4).y > p(2).y)
 							return false;
 						else
-							// TODO -- reste un cas (p7p4 inter p2p3 apprtient a p2p3)
-							return false;
-
+						{
+							glm::vec3 PI;
+							intersection2Droites(p(2), p(3), p(4), p(7), PI);
+							if (PI.y > p(2).y)
+								return false;
+						}
 				else // distance entre mur P7P5					
 				{
 					dist = distanceEntrePointDroite(p(5), p(7), M);
-					if ( (dist < rayon) && (M.y <= p(7).y) ) // TODO -- tester meme cas que p4p7
-						return false;
+					if ( (dist < rayon) && (M.y <= p(7).y) )
+						if (p(5).x >= p(7).x)
+							return false;
+						else
+							if (p(5).y < p(3).y)
+								return false;
+							else
+							{
+								glm::vec3 PI;
+								intersection2Droites(p(2), p(3), p(5), p(7), PI);
+								if (PI.y < p(3).y)
+									return false;
+							}
 					
 					else // distance entre mur P3P5
 					{
@@ -1290,30 +1313,6 @@ double NoeudTable::distanceEntrePointDroite(glm::dvec3 P1, glm::dvec3 P2, glm::d
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///
-/// @fn double NoeudTable::distanceEntrePointSegment(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P)
-///
-/// Cette fonction calcule la distance entre un point P et le segment forme' par les points P1 et P2
-/// 
-///  @param[in] 
-///		glm::vec3 P1,P2,P 
-///		
-/// @return double 
-///
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-double NoeudTable::distanceEntrePointSegment(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P)
-{
-	//TODO
-	double distanceDroite = distanceEntrePointDroite(P1, P2, P);
-	double distanceP1 = distanceEntre2Points(P1, P);
-	double distanceP2 = distanceEntre2Points(P2, P);
-
-	//if 
-	
-	return min(min(distanceP1, distanceP2), distanceDroite);
-	
-}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///
 /// @fn double NoeudTable::distanceEntre2Points(glm::dvec3 P1, glm::dvec3 P2)
 ///
 /// Cette fonction calcule la distance entre 2 points P1 et P2
@@ -1330,20 +1329,47 @@ double NoeudTable::distanceEntre2Points(glm::dvec3 P1, glm::dvec3 P2)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///
-/// @fn glm::vec3 NoeudTable::intersection2Droites(glm::dvec3 D1P1, glm::dvec3 D1P2, glm::dvec3 D2P1, glm::dvec3 D2P2)
+/// @fn bool NoeudTable::intersection2Droites(glm::vec3 D1P1, glm::vec3 D1P2, glm::vec3 D2P1, glm::vec3 D2P2, glm::vec3 & pointIntersection)
 ///
 /// Cette fonction permet de trouve le point d'intersection entre 2 droites
 ///
 ///  @param[in] 
 ///		glm::vec3 D1P1,D1P2,D2P1,D2P2 : les points qui forment les 2 droites 
-///		
-/// @return glm::vec3
+///	 @param[out] : glm::vec3 pointIntersection : les coord. du point d'intersection
+/// @return bool : true si s'intersectent , false paralleles
 ///
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-glm::vec3 NoeudTable::intersection2Droites(glm::dvec3 D1P1, glm::dvec3 D1P2, glm::dvec3 D2P1, glm::dvec3 D2P2)
+bool NoeudTable::intersection2Droites(glm::vec3 D1P1, glm::vec3 D1P2, glm::vec3 D2P1, glm::vec3 D2P2, glm::vec3 & pointIntersection) //const
 {
-	//TODO 
-	return D1P1;
+	float a1 = calculPente(D1P1, D1P2);
+	float b1 = calculB(a1, D1P1);
+
+	//std::cout << "P1(" << D1P1.x << "," << D1P1.y << ") P2(" << D1P2.x << "," << D1P2.y << ")" << std::endl;
+	//std::cout << "a1=" << a1 << " b1=" << b1 << std::endl;
+
+	float a2 = calculPente(D2P1, D2P2);
+	float b2 = calculB(a2, D2P1);
+
+	//std::cout << "P1(" << D2P1.x << "," << D2P1.y << ") P2(" << D2P2.x << "," << D2P2.y << ")" << std::endl;
+	//std::cout << "a2=" << a2 << " b2=" << b2 << std::endl;
+
+	if (D1P1.x == D1P2.x)  // mon cas -- TODO les autres cas
+	{
+		pointIntersection.y = a2*D1P1.x + b2;
+		pointIntersection.x = D1P1.x;
+		return true;
+	}
+	
+	if ((a1 - a2) == 0)
+		return false;
+	else
+	{
+		
+		pointIntersection.x = (b2 - b1) / (a1 - a2);
+		pointIntersection.y = a1*pointIntersection.x + b1;
+		//std::cout << "PointIntersection(" << pointIntersection.x << "," << pointIntersection.y << ")" << std::endl;
+		return true;
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
