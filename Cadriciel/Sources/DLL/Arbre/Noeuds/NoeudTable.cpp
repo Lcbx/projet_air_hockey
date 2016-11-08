@@ -1346,7 +1346,7 @@ bool NoeudTable::intersection2Droites(glm::vec3 D1P1, glm::vec3 D1P2, glm::vec3 
 
 	//std::cout << "P1(" << D1P1.x << "," << D1P1.y << ") P2(" << D1P2.x << "," << D1P2.y << ")" << std::endl;
 	//std::cout << "a1=" << a1 << " b1=" << b1 << std::endl;
-
+	//
 	float a2 = calculPente(D2P1, D2P2);
 	float b2 = calculB(a2, D2P1);
 
