@@ -17,6 +17,7 @@ struct OptionsJeu {
 	bool joueurTestEstHumain;
 };
 
+
 ///////////////////////////////////////////////////////////////////////////
 /// @class ConfigJeu
 /// @brief Représente les options de jeu
@@ -26,7 +27,6 @@ struct OptionsJeu {
 ///////////////////////////////////////////////////////////////////////////
 class ConfigJeu
 {
-
 public:
 
 	/// Constructeur par défaut
@@ -40,7 +40,7 @@ public:
 
 
 	/// Accesseur des options de jeu
-	OptionsJeu getOptionsJeu();
+	struct OptionsJeu* getOptionsJeu();
 
 	/// Accesseur du nombre de but
 	int getNombreDeButs();
@@ -54,11 +54,12 @@ public:
 	static const int NOMBRE_BUT_DEFAUT;
 	static const bool JOUEUR_TEST_EST_HUMAIN_DEFAUT;
 
+
+
 private:
 
 	// Options de jeu
-	int _nbrBut;
-	bool _joueurTestEstHumain;
+	struct OptionsJeu _optionsJeu;
 };
 
 

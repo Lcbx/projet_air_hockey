@@ -13,6 +13,7 @@
 #include <iostream>
 
 
+
 using namespace std;
 
 extern "C" {
@@ -108,7 +109,7 @@ extern "C" {
 	// Methode pour modifier et enregistrer les options de jeu
 	__declspec(dllexport) void sauvegarderTypeButMax(int nbButMax, bool estVirtuel);
 	// Methode pour obtenir les options de jeu
-	__declspec(dllexport) OptionsJeu obtenirOptionsJeu();
+	__declspec(dllexport) struct OptionsJeu* obtenirOptionsJeu();
 
 	__declspec(dllexport) bool objetEstDansLaTable();
 

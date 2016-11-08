@@ -946,30 +946,26 @@ extern "C"
 		FacadeModele::obtenirInstance()->getConfigTouches()->obtenirTouches(touches);
 	}
 	////////////////////////////////////////////////////////////////////////
-	/// @fn 		__declspec(dllexport) void enregistrerOptionsJeu();
+	/// A DEPLACER ICI:
+	/// @fn 	__declspec(dllexport) void enregistrerOptionsJeu();
 	/// Author : Arthur
 	/// Cette fonction permet de modifier et enregistrer les options de jeu
 	///
 	/// @return rien
 	///
 	////////////////////////////////////////////////////////////////////////
-	__declspec(dllexport) void __cdecl enregist(int haut, int droite, int bas, int gauche)
-	{
-		FacadeModele::obtenirInstance()->getConfigTouches()->enregistrerTouches(haut, droite, bas, gauche);
-	}
-
+	
 	////////////////////////////////////////////////////////////////////////
-	/// @fn 		__declspec(dllexport) int[] obtenirTouches();
+	/// @fn __declspec(dllexport) OptionsJeu obtenirOptionsJeu();
 	/// Author : Arthur
-	/// Cette fonction permet de charger les touches de
-	/// déplacement du joueur 2
+	/// Cette fonction permet d'obtenir les options de jeu
 	///
-	/// @return int[4] : [haut, droite, bas, gauche]
+	/// @return OptionsJeu : {nombre de buts, type de joueur}
 	///
 	////////////////////////////////////////////////////////////////////////
-	__declspec(dllexport) void __cdecl obtenirTouches(int *touches)
+	__declspec(dllexport) struct OptionsJeu* __cdecl obtenirOptionsJeu()
 	{
-		FacadeModele::obtenirInstance()->getConfigTouches()->obtenirTouches(touches);
+		return FacadeModele::obtenirInstance()->getConfigJeu()->getOptionsJeu();
 	}
 
 	////////////////////////////////////////////////////////////////////////

@@ -32,7 +32,7 @@ namespace InterfaceGraphique
         public int toucheDeplaceEnHaut_;
 
         //le nombre de buts nécessaires (entre 1 et 5) pour gagner une partie.
-        private int nbButMax = 2 ;
+        private int nbButMax;
 
         
 
@@ -85,7 +85,22 @@ namespace InterfaceGraphique
             this.bas.Text = ((Keys)touches[2]).ToString();
             this.gauche.Text = ((Keys)touches[3]).ToString();
 
-            
+            // Charge les options de jeu
+            unsafe
+            {
+                OptionsJeu* data = (OptionsJeu*)FonctionsNatives.obtenirOptionsJeu();
+
+                Console.WriteLine(data->nbrBut);
+                Console.WriteLine(data->joueurTestEstHumain);
+                numericUpDown1.Value = data->nbrBut;
+                if (data->joueurTestEstHumain == true)
+                    comboBox1.Text = "Joueur humain";
+                else
+                    comboBox1.Text = "Joueur virtuel";
+            }
+
+
+
         }
 
         public void setMenuPrincipalConfig(MenuPrincipal menuPrincipal)
@@ -422,7 +437,16 @@ namespace InterfaceGraphique
          }
 
 
-}
+
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct OptionsJeu
+    {
+        public int nbrBut;
+        public bool joueurTestEstHumain;
+    };
+
     static partial class FonctionsNatives
     {
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -447,15 +471,10 @@ namespace InterfaceGraphique
 
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void getOptionsJeu([In, MarshalAs(UnmanagedType.LPStruct)] OptionsJeu opJeu);
+        public static extern IntPtr obtenirOptionsJeu();
 
+       
 
-        [StructLayout(LayoutKind.Sequential)]
-        struct OptionsJeu
-        {
-            int nbrBut;
-            bool joueurTestEstHumain;
-        };
     }
 
 }

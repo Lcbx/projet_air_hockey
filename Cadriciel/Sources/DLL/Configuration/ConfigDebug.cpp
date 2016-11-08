@@ -40,16 +40,9 @@ ConfigDebug::ConfigDebug()
 ////////////////////////////////////////////////////////////////////////
 void ConfigDebug::chargerOptionsDebug()
 {
+	bool optionsDebugDejaDefinies = false;
 	// Vérification de l'existance du ficher
-	if (!utilitaire::fichierExiste("configuration.xml")) {
-		// Si le fichier n'existe pas, on utilise les valeurs par défaut
-		_isDebugActif = false;
-		_showCollisionRondelle = false;
-		_showVitesseRondelle = false;
-		_showEclairage = false;
-		_showAttractionPortail = false;
-	}
-	else {
+	if (utilitaire::fichierExiste("configuration.xml")) {
 
 		// Charge le fichier de configuration
 		tinyxml2::XMLDocument document;
@@ -70,8 +63,19 @@ void ConfigDebug::chargerOptionsDebug()
 					elementDebug->QueryBoolAttribute("SHOW_ATTRACTION_PORTAIL", &_showAttractionPortail) != tinyxml2::XML_SUCCESS) {
 					std::cerr << "Erreur de chargement des options de debug" << std::endl;
 				}
+				else
+					optionsDebugDejaDefinies = true;
 			}
 		}
+	}
+	// Si les options de debug n'ont pas pu être chargées, utiliser les valeurs par défaut
+	if (!optionsDebugDejaDefinies)
+	{
+		_isDebugActif = false;
+		_showCollisionRondelle = false;
+		_showVitesseRondelle = false;
+		_showEclairage = false;
+		_showAttractionPortail = false;
 	}
 }
 
