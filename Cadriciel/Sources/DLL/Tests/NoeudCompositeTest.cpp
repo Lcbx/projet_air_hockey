@@ -97,6 +97,9 @@ void NoeudCompositeTest::testVider()
 ////////////////////////////////////////////////////////////////////////
 void NoeudCompositeTest::testAjout()
 {
+	//Verifier que la table est vid
+	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 0);
+
 	//creer d'un noeud bonus
 	NoeudAbstrait* noeudBonus{ new NoeudBonus{ ArbreRenduINF2990::NOM_BONUS } };
 	noeudBonus->assignerPositionRelative({ 0,0,0 });
@@ -200,6 +203,11 @@ void NoeudCompositeTest::testTrouverObjet()
 
 	//chercher avec indice
 	CPPUNIT_ASSERT(noeud->chercher(1) == noeudPortail);
+
+	//chercher avec indice
+	CPPUNIT_ASSERT(noeud->chercher(4) != noeudBonus);
+	CPPUNIT_ASSERT(noeud->chercher(4) != noeudPortail);
+	CPPUNIT_ASSERT(noeud->chercher(4) != noeudPortail2);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -233,26 +241,10 @@ void NoeudCompositeTest::testSelectionMultiple()
 	noeud->selectionnerTout();
 
 	//verifier s'il sont selectionnes
+	CPPUNIT_ASSERT(noeud->estSelectionne() == true);
 	CPPUNIT_ASSERT(noeudBonus->estSelectionne() == true);
 	CPPUNIT_ASSERT(noeudMuret->estSelectionne() == true);
 
-
-	//on cree un deuxieme bonus qu'on va le selectionner seul
-	NoeudAbstrait* noeudBonus2{ new NoeudBonus{ ArbreRenduINF2990::NOM_BONUS } };
-	noeudBonus2->assignerPositionRelative({ 10,15,0 });
-
-	noeud->ajouter(noeudBonus2);
-	
-	noeudBonus2->assignerSelection(true);
-
-
-	//Deselectionner tous les objets
-	noeud->deselectionnerTout();
-
-	//verifier s'il sont deselectionnes
-	CPPUNIT_ASSERT(noeudBonus->estSelectionne() == false);
-	CPPUNIT_ASSERT(noeudMuret->estSelectionne() == false);
-	CPPUNIT_ASSERT(noeudBonus2->estSelectionne() == false);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -286,7 +278,7 @@ void NoeudCompositeTest::testScale()
 	CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[1] - 1));
 	CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[2] - 1));
 
-	//modifier le scale
+	//modifier le scale angrandir
 	noeudBonus->setScale({ 5,10,2 });
 
 	vecteur = noeudBonus->getScale();
@@ -294,5 +286,15 @@ void NoeudCompositeTest::testScale()
 	CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[0] - 5));
 	CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[1] - 10));
 	CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[2] - 2));
+
+
+	//modifier le scale diminuer 
+	noeudBonus->setScale({ 2,2,0 });
+
+	vecteur = noeudBonus->getScale();
+	//verifier encore
+	CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[0] - 2));
+	CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[1] - 2));
+	CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[2] - 0));
 }
 

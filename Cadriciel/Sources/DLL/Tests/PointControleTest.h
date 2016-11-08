@@ -36,7 +36,7 @@ class PointControleTest : public CppUnit::TestFixture
 	// de la macro CPPUNIT_TEST sinon ce dernier ne sera pas exécuté !
 	// =================================================================
 	CPPUNIT_TEST_SUITE(PointControleTest);
-	CPPUNIT_TEST(testWiiw);
+	CPPUNIT_TEST(testPositionPoint);
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -56,7 +56,7 @@ public:
 	// =================================================================
 
 	/// Cas de test: sauvegarde et chargement XML de la configuration
-	void testWiiw();
+	void testPositionPoint();
 
 
 

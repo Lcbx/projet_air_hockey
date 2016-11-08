@@ -61,12 +61,11 @@ void PointControleTest::tearDown()
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void PointControleTest::testWiiw()
+void PointControleTest::testPositionPoint()
 {
 	NoeudTable* nouveauNoeud{ new NoeudTable{ ArbreRenduINF2990::NOM_TABLE } };
 	nouveauNoeud->assignerPositionRelative({ 0,0,0 });
 	
-
 	glm::vec3 p0 =  nouveauNoeud->getPc(0);
 	glm::vec3 p4 = nouveauNoeud->getPc(4);
 
