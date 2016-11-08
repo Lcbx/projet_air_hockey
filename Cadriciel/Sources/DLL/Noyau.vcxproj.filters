@@ -61,6 +61,12 @@
     <Filter Include="Source Files\Collision">
       <UniqueIdentifier>{13bbe7ea-a117-4ff4-950d-08bd958cc530}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Tournoi">
+      <UniqueIdentifier>{1a9e09fb-3737-4216-965d-fc1f758d2731}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tournoi">
+      <UniqueIdentifier>{d345f250-408b-41fa-a27e-89b5a23bdd8a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\FacadeModele.cpp">
@@ -203,6 +209,12 @@
     </ClCompile>
     <ClCompile Include="Tests\NoeudCompositeTest.cpp">
       <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="AdaptateurJoueur.cpp">
+      <Filter>Source Files\Tournoi</Filter>
+    </ClCompile>
+    <ClCompile Include="Tournoi.cpp">
+      <Filter>Source Files\Tournoi</Filter>
     </ClCompile>
     <ClCompile Include="Tests\RedimensionnementTest.cpp">
       <Filter>Source Files\Tests</Filter>
@@ -388,6 +400,15 @@
     </ClInclude>
     <ClInclude Include="Tests\NoeudCompositeTest.h">
       <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Affichage_debuggage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tournoi.h">
+      <Filter>Header Files\Tournoi</Filter>
+    </ClInclude>
+    <ClInclude Include="AdaptateurJoueur.h">
+      <Filter>Header Files\Tournoi</Filter>
     </ClInclude>
     <ClInclude Include="Tests\RedimensionnementTest.h">
       <Filter>Header Files\Tests</Filter>

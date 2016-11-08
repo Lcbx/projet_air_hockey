@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceGraphique", "InterfaceGraphique\InterfaceGraphique.csproj", "{B861DACD-1D37-4C9D-A1D0-3468C9072C74}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -19,6 +19,7 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{B861DACD-1D37-4C9D-A1D0-3468C9072C74}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{B861DACD-1D37-4C9D-A1D0-3468C9072C74}.Debug|x64.Build.0 = Debug|Any CPU
+		{B861DACD-1D37-4C9D-A1D0-3468C9072C74}.Debug|x64.Deploy.0 = Debug|Any CPU
 		{B861DACD-1D37-4C9D-A1D0-3468C9072C74}.Release|x64.ActiveCfg = Release|Any CPU
 		{B861DACD-1D37-4C9D-A1D0-3468C9072C74}.Release|x64.Build.0 = Release|Any CPU
 		{BB8C9C8A-3B65-4599-B4FE-CA965EE76D2A}.Debug|x64.ActiveCfg = Debug|x64

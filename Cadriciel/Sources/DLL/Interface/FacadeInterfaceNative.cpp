@@ -22,6 +22,9 @@
 #include "BancTests.h"
 #include "../Affichage_debuggage.h"
 
+///TODO: Retirer pour la remise
+#include "../Tournoi.h"
+
 //using namespace std;
 
 
@@ -980,8 +983,6 @@ extern "C"
 			Debug::obtenirInstance().afficherAttraction = false;
 		}
 	}
-
-
 }
 ///////////////////////////////////////////////////////////////////////////////
 /// @}

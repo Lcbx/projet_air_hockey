@@ -129,6 +129,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AdaptateurJoueur.cpp" />
     <ClCompile Include="Affichage_debuggage.cpp" />
     <ClCompile Include="Application\AjoutAccelerateur.cpp" />
     <ClCompile Include="Application\AjoutMur.cpp" />
@@ -176,6 +177,7 @@
     <ClCompile Include="Tests\ConfigSceneTest.cpp" />
     <ClCompile Include="Tests\NoeudAbstraitTest.cpp" />
     <ClCompile Include="Tests\NoeudCompositeTest.cpp" />
+    <ClCompile Include="Tournoi.cpp" />
     <ClCompile Include="Tests\PointControleTest.cpp" />
     <ClCompile Include="Tests\RedimensionnementTest.cpp" />
     <ClCompile Include="VisiteurAjout.cpp" />
@@ -190,6 +192,7 @@
     <ClCompile Include="VisiteurSelection.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdaptateurJoueur.h" />
     <ClInclude Include="Affichage_debuggage.h" />
     <ClInclude Include="Application\AjoutAccelerateur.h" />
     <ClInclude Include="Application\AjoutMur.h" />
@@ -237,6 +240,7 @@
     <ClInclude Include="Tests\ConfigSceneTest.h" />
     <ClInclude Include="Tests\NoeudAbstraitTest.h" />
     <ClInclude Include="Tests\NoeudCompositeTest.h" />
+    <ClInclude Include="Tournoi.h" />
     <ClInclude Include="Tests\PointControleTest.h" />
     <ClInclude Include="Tests\RedimensionnementTest.h" />
     <ClInclude Include="Visiteur.h" />
