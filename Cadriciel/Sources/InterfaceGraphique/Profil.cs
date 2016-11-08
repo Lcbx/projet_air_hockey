@@ -6,6 +6,10 @@
         private double vitesse_;
         private double probaDAgirPassivemnt_;
 
+        public string Nom {
+            get { return this.getNomProfil(); }
+        }
+
         public Profil()
         {
             nom_ = "Defaut";

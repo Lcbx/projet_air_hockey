@@ -15,7 +15,7 @@
     </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -81,11 +81,29 @@
     <Compile Include="Configuration.Designer.cs">
       <DependentUpon>Configuration.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreationTournoi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CreationTournoi.Designer.cs">
+      <DependentUpon>CreationTournoi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Edition.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Edition.Designer.cs">
       <DependentUpon>Edition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MatchingTournoi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MatchingTournoi.Designer.cs">
+      <DependentUpon>MatchingTournoi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MatchJoueur.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MatchJoueur.Designer.cs">
+      <DependentUpon>MatchJoueur.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuPrincipal.cs">
       <SubType>Form</SubType>
@@ -93,11 +111,23 @@
     <Compile Include="MenuPrincipal.Designer.cs">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModeTournoi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModeTournoi.Designer.cs">
+      <DependentUpon>ModeTournoi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Nouveau.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Nouveau.Designer.cs">
       <DependentUpon>Nouveau.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ParticipantTournoi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ParticipantTournoi.Designer.cs">
+      <DependentUpon>ParticipantTournoi.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -125,14 +155,29 @@
     <EmbeddedResource Include="Configuration.resx">
       <DependentUpon>Configuration.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CreationTournoi.resx">
+      <DependentUpon>CreationTournoi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Edition.resx">
       <DependentUpon>Edition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MatchingTournoi.resx">
+      <DependentUpon>MatchingTournoi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MatchJoueur.resx">
+      <DependentUpon>MatchJoueur.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModeTournoi.resx">
+      <DependentUpon>ModeTournoi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Nouveau.resx">
       <DependentUpon>Nouveau.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ParticipantTournoi.resx">
+      <DependentUpon>ParticipantTournoi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
