@@ -233,7 +233,7 @@ void NoeudRondelle::animer(float temps)
 			float rayon_attraction = 3.f * portail->obtenirRayon();
 			//si on est dans le rayon d'attraction
 			if (distance < rayon_attraction) {
-				//et que on a le droit d'attracter, on attracte
+				//et qu'on ne sort pas de ce portail, on a le droit d'attracter
 				if (it->second) vitesse_ += CST_ASPIRATION * rayon_attraction / distance  * glm::normalize(vecteur_distance);
 			}
 			//sinon on pourra de nouveau etre attracte dans le futur

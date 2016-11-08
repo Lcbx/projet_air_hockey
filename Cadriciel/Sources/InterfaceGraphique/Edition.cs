@@ -396,7 +396,18 @@ namespace InterfaceGraphique
                             FonctionsNatives.escEnfonce();
                             break;
                         }
-
+                    case Keys.J: {
+                            FonctionsNatives.changerLumieresActives(true, false, false);
+                            break;
+                        }
+                    case Keys.K: {
+                            FonctionsNatives.changerLumieresActives(false, true, false);
+                            break;
+                        }
+                    case Keys.L: {
+                            FonctionsNatives.changerLumieresActives(false, false, true);
+                            break;
+                        }
 
                     default: break;
                 }
@@ -2045,6 +2056,8 @@ namespace InterfaceGraphique
         public static extern void deactiverRondelle();
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool estEnPauseRondelle();
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void changerLumieresActives(bool jLumiereAmbiente, bool kLumiereDirectionnelle, bool jLumiereSpots );
         //Ali
 
     }

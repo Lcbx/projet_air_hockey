@@ -57,5 +57,8 @@ public :
 	///affiche le timestamp
 	void afficher(std::string message);
 
+	///les lumieres actives (temporaire)
+	bool lumiereAmbiente = true, lumiereDirectionnelle = true, lumiereSpots = true;
+
 };
 

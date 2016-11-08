@@ -47,7 +47,7 @@ extern "C"
 		if (handle == nullptr)
 			return;
 
-		FacadeModele::obtenirInstance()->initialiserOpenGL((HWND) handle);
+		FacadeModele::obtenirInstance()->initialiserOpenGL((HWND)handle);
 	}
 
 
@@ -65,7 +65,7 @@ extern "C"
 	__declspec(dllexport) void __cdecl libererOpenGL()
 	{
 		FacadeModele::obtenirInstance()->libererOpenGL();
-		
+
 
 		// Désinitialisation de la façade.  Le fait de le faire après la
 		// désinitialisation du contexte OpenGL aura pour conséquence que la
@@ -131,7 +131,7 @@ extern "C"
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl animer(double temps)
 	{
-		FacadeModele::obtenirInstance()->animer((float) temps);
+		FacadeModele::obtenirInstance()->animer((float)temps);
 	}
 
 
@@ -195,7 +195,7 @@ extern "C"
 		return reussite ? 0 : 1;
 	}
 
-	
+
 	// Click
 	__declspec(dllexport) void __cdecl etatDelaSouris(int etat) {
 		Souris::obtenirInstance()->EtatdelaSouris(etat);
@@ -233,8 +233,8 @@ extern "C"
 	{
 		Souris::obtenirInstance()->setAlt(presse);
 	}
-	
-	
+
+
 	////touche escape
 	__declspec(dllexport) void escEnfonce()
 	{
@@ -257,12 +257,12 @@ extern "C"
 	}
 
 
-	/*__declspec(dllexport) void escEnfonce(bool escTouche) 
+	/*__declspec(dllexport) void escEnfonce(bool escTouche)
 	{
 		std::printf("je suis ici dans facade native");
 		//prend un bool en param (touche esc est enfonce ou pas)
 		FacadeModele::obtenirInstance()->supprimerPortail(escTouche);
-		
+
 	}*/
 
 
@@ -423,9 +423,9 @@ extern "C"
 	/// 
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void setCoefficient(double friction, double rebond, double acceleration) {
-		FacadeModele::obtenirInstance()->setCoefficient({friction, rebond, acceleration});
+		FacadeModele::obtenirInstance()->setCoefficient({ friction, rebond, acceleration });
 	}
-	
+
 
 	////////////////////////////////////////////////////////////////////////
 	///
@@ -440,7 +440,7 @@ extern "C"
 	__declspec(dllexport) double getCoefficientFriction() {
 		return FacadeModele::obtenirInstance()->getCoefficient().friction;
 	}
-		
+
 
 
 	////////////////////////////////////////////////////////////////////////
@@ -487,7 +487,7 @@ extern "C"
 		FacadeModele::obtenirInstance()->enregistrerZoneJeu(fichierZoneJeu);
 	}
 
-	
+
 	////////////////////////////////////////////////////////////////////////
 	///
 	/// @fn __declspec(dllexport) void chargerZoneJeu(char *fichierZoneJeu)
@@ -562,7 +562,7 @@ extern "C"
 	}
 
 
-	
+
 	////////////////////////////////////////////////////////////////////////
 	///
 	/// @fn __declspec(dllexport) void reinitialiserPartieCourante();
@@ -590,7 +590,7 @@ extern "C"
 	//{
 		//FacadeModele:: obtenirInstance()
 	//}
-	
+
 
 
 
@@ -676,10 +676,10 @@ extern "C"
 	///
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void activerJoueurVirtuel(double vitesse, double probabilite)
-	{ 
+	{
 		FacadeModele::obtenirInstance()->setjoueurVirtuel(true);
-		FacadeModele::obtenirInstance()->ActiverJoueurVirtuel(vitesse,probabilite);
-		
+		FacadeModele::obtenirInstance()->ActiverJoueurVirtuel(vitesse, probabilite);
+
 	}
 	////////////////////////////////////////////////////////////////////////
 	/// @fn 		__declspec(dllexport) void __cdecl setjoueurVirtuel(bool activer)
@@ -809,7 +809,7 @@ extern "C"
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void setButDroite(bool etat)
 	{
-		FacadeModele::obtenirInstance()->setButDroite(etat);		
+		FacadeModele::obtenirInstance()->setButDroite(etat);
 	}
 	////////////////////////////////////////////////////////////////////////
 	/// @fn 	__declspec(dllexport) void setButGauche()
@@ -822,7 +822,7 @@ extern "C"
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void setButGauche(bool etat)
 	{
-		 FacadeModele::obtenirInstance()->setButGauche(etat);		
+		FacadeModele::obtenirInstance()->setButGauche(etat);
 	}
 	////////////////////////////////////////////////////////////////////////
 	/// @fn 	__declspec(dllexport) int getNombreButs()
@@ -953,7 +953,7 @@ extern "C"
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl  profilCourant(string nom, double vitesse_, double probaDAgirPassivemnt)
 	{
-		
+
 	}
 	////////////////////////////////////////////////////////////////////////
 	/// @fn __declspec(dllexport) debogConfig(bool debogageActif_, bool debogCollision_, bool debogVitesse_, bool eclairageActif_,bool effetVisuelActif_);
@@ -981,8 +981,39 @@ extern "C"
 		}
 	}
 
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) void __cdecl changerLumieresActives(bool jLumiereAmbiente, bool kLumiereDirectionnelle, bool jLumiereSpots)
+	/// Author : Luc
+	/// Cette fonction permet d'envoyer les changements d'activation des lumieres ambiantes.
+	///
+	/// @return aucun
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl changerLumieresActives(bool jLumiereAmbiente, bool kLumiereDirectionnelle, bool jLumiereSpots) {
+		if (Debug::obtenirInstance().afficherLumieres) {
+			std::string message = "lumiere";
+			if (jLumiereAmbiente) {
+				Debug::obtenirInstance().lumiereAmbiente = !Debug::obtenirInstance().lumiereAmbiente;
+				message += " ambiente ";
+				message += Debug::obtenirInstance().lumiereAmbiente ? "ouverte" : "fermee";
+
+			}
+			if (kLumiereDirectionnelle) {
+				Debug::obtenirInstance().lumiereDirectionnelle = !Debug::obtenirInstance().lumiereDirectionnelle;
+				message += " directionnele ";
+				message += Debug::obtenirInstance().lumiereDirectionnelle ? "ouverte" : "fermee";
+			}
+			if (jLumiereSpots) {
+				Debug::obtenirInstance().lumiereSpots = !Debug::obtenirInstance().lumiereSpots;
+				message += "s des spots ";
+				message += Debug::obtenirInstance().lumiereSpots ? "ouvertes" : "fermees";
+			}
+			Debug::obtenirInstance().afficher(message);
+		}
+	}
 
 }
+
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
 ///////////////////////////////////////////////////////////////////////////////
