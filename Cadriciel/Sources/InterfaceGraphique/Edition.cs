@@ -22,7 +22,7 @@ namespace InterfaceGraphique
 {
     public partial class Edition : Form   
     {
-        private static MenuPrincipal menuPrincipal_;
+        private static MenuPrincipal menuPrincipal_;  
         //private static double friction_;
         //private static double rebond_;
         //private static double acceleration_;
@@ -50,6 +50,9 @@ namespace InterfaceGraphique
         
         public int nbButsJoueur1 = 0;
         public int nbButsJoueur2 = 0;
+
+        int ancienPosX;
+        int ancienPosY;
 
         /////////////////////////////////////////////////////////////////////////
         ///  @fn public Edition()
@@ -102,6 +105,11 @@ namespace InterfaceGraphique
             this.textBox5.ReadOnly = true;
 
 
+           ancienPosX = panel1.Location.X;
+           ancienPosY = panel1.Location.Y;
+
+            panel2.Hide();
+        
 
         }
 
@@ -140,18 +148,21 @@ namespace InterfaceGraphique
         public void MettreAJour(double tempsInterAffichage)
         {
             try
-            {
-                this.Invoke((MethodInvoker)delegate
-                {
+            {   
+                this.Invoke((MethodInvoker)delegate 
+                {  
                     FonctionsNatives.animer(tempsInterAffichage);
                     FonctionsNatives.dessinerOpenGL();
 
                     /// Ali
                     /// On demare la partie rapide
-                    if (estEnModePartie)
-                        DemarrerPartie();
+
+                        if (estEnModePartie)
+                            DemarrerPartie();
+          
 
                 });
+
             }
             catch (Exception)
             {
@@ -444,6 +455,7 @@ namespace InterfaceGraphique
                         }
                     case Keys.Space: //reinitialiser la partie
                         {
+                            resetPartie();
                             FonctionsNatives.reinitialiserPartieCourante();
                             break;
                         }
@@ -458,11 +470,11 @@ namespace InterfaceGraphique
                             break;
                         }
 
-                    default: break;
+                    default: break;  
 
                 }
             }
-        }
+        } 
 
 
         public enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, AJOUT_MUR, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, REDIMENSIONNEMENT, NBETATS, TEST };
@@ -526,7 +538,6 @@ namespace InterfaceGraphique
                 Program.peutAfficher = false;
             }
             FonctionsNatives.clickStart(e.X, e.Y);
-
             mousePressed = true;
         }
 
@@ -1476,7 +1487,6 @@ namespace InterfaceGraphique
         }
 
 
-
         ///////////////////////////////////////////////////////////////////////
         /// @fn public void passerModeTest(bool mode)
         ///
@@ -1494,8 +1504,15 @@ namespace InterfaceGraphique
             //si mode jeu ou test , masquer les menus a cotés + barre des menus
             if (mode == true)
             {
+              
+
+                panel1.Location = new Point (0,0);
+                panel1.Dock = DockStyle.Fill;
+
                 this.Text = "Mode Test";
                 estEnModeTest = true;
+                estEnModePartie = false;
+
                 this.changerMode(Etats.TEST);
                 //Permet d'ajouter les maillets et la rondelle dans la table
                 FonctionsNatives.ajouterMailletEtRondelle();
@@ -1527,17 +1544,26 @@ namespace InterfaceGraphique
                 menuPrincipalToolStripMenuItem.Visible = true;
                 vuesToolStripMenuItem.Visible = true;
 
+                splitContainer1.Hide();
                 //panel score
-                splitContainer1.Panel1.Hide();
-                splitContainer1.Panel2.Hide();
-                
+                // splitContainer1.Panel1.Hide();
+                //splitContainer1.Panel2.Hide();
+
+                panel2.Hide();
+
             }
             //si mode edition , afficher les menus a cotés + barre des menus
             else
             {
+                if (estEnModePartie) { FonctionsNatives.initialiserScene(); }
+
+                panel1.Location = new Point(ancienPosX, ancienPosY);
+
                 this.Text = "Mode Edition";
-                estEnModeTest = false;
                 this.changerMode(Etats.SELECTION);
+
+                estEnModePartie = false;
+                estEnModeTest = false;
 
                 estEnPause = false;
 
@@ -1567,10 +1593,9 @@ namespace InterfaceGraphique
                 modeEditionToolStripMenuItem.Visible = false;
 
                 //panel score afficher - panel proprietes desactiver
-                splitContainer1.Panel1.Show();
-                splitContainer1.Panel2.Hide();
+                splitContainer1.Show();
 
-
+                panel2.Hide();
 
             }
         }
@@ -1646,6 +1671,17 @@ namespace InterfaceGraphique
             //FonctionsNatives.ajouterMailletEtRondelle();
         }
 
+
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn public void passerModePartie(bool mode)
+        ///
+        /// @brief permet de faire le passage au mode partie rapide
+        /// @param[in] mode: bool qui determine le mode 
+        ///
+        ///
+        /// @return rien
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////
         public void passerModePartie(bool mode)
         {
             //si mode jeu , masquer les menus a cotés + barre des menus
@@ -1653,10 +1689,13 @@ namespace InterfaceGraphique
             {
                 this.Text = "Partie Rapide";
 
+                panel1.Location = new Point(0, 0);
+                panel1.Dock = DockStyle.Fill;
+
                 estEnModePartie = true;
                 estEnModeTest = false;
                
-                //this.changerMode(Etats.TEST);
+                this.changerMode(Etats.TEST);
 
                 //Permet d'ajouter les maillets et la rondelle dans la table
                 FonctionsNatives.ajouterMailletEtRondelle();
@@ -1688,10 +1727,11 @@ namespace InterfaceGraphique
                 menuPrincipalToolStripMenuItem.Visible = true;
                 vuesToolStripMenuItem.Visible = true;
 
-                //panel score
-                splitContainer1.Panel2.Show();
-                splitContainer1.Panel1.Hide();
+                //panel parametres
+                splitContainer1.Hide();
 
+                //score
+                panel2.Show();
 
             }
 
@@ -1728,6 +1768,8 @@ namespace InterfaceGraphique
             Console.WriteLine("--- Joueur Virtuel Desactive' ---");
             FonctionsNatives.setjoueurVirtuel(false);
         }
+
+        bool estDejaAffiché = false;
         ///////////////////////////////////////////////////////////////////////
         /// @fn public void DemarrerPartie()
         /// Author : Ali
@@ -1740,50 +1782,68 @@ namespace InterfaceGraphique
         {
             if (FonctionsNatives.estButDroite())
             {
-                MessageBox.Show("Player 1 SCORES !","AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                nbButsJoueur1++;
-                textBox5.Text = nbButsJoueur1.ToString();
+                //MessageBox.Show("Player 2 SCORES !","AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                nbButsJoueur2++;
+                textBox4.Text = nbButsJoueur2.ToString();
                 FonctionsNatives.setButDroite(false);
                 FonctionsNatives.reinitialiserPartieCourante();
                 //Console.WriteLine("But Droite !!");
             }
             if (FonctionsNatives.estButGauche())
             {
-                MessageBox.Show("Player 2 SCORES !", "AirHockey" , MessageBoxButtons.OK, MessageBoxIcon.Information);
-                nbButsJoueur2++;
-                textBox4.Text = nbButsJoueur2.ToString();
+                //MessageBox.Show("Player 1 SCORES !", "AirHockey" , MessageBoxButtons.OK, MessageBoxIcon.Information);
+                nbButsJoueur1++;
+                textBox5.Text = nbButsJoueur1.ToString();
                 FonctionsNatives.setButGauche(false);
                 FonctionsNatives.reinitialiserPartieCourante();
                 //Console.WriteLine("But Gauche !!");
             }
-            int nbButsMax = FonctionsNatives.getNombreButs();
+
+            int  nbButsMax = FonctionsNatives.getNombreButs();
             if ((nbButsJoueur1 == nbButsMax) || (nbButsJoueur2 == nbButsMax))
             {
-                if (nbButsJoueur1 == nbButsMax)
+                DialogResult dialog = MessageBox.Show("La partie est finie, vous voulez rejouer encore ? ",
+                        "Rejouer ou revenir au menu principal", MessageBoxButtons.YesNo);
+
+                if (dialog == DialogResult.Yes)
                 {
-                    MessageBox.Show("** Congratulations! Player 1 wins ! **", "AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand,
-                    MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                    nbButsJoueur1 = 0;
+                    nbButsJoueur2 = 0;
+                    textBox4.Text = "0"; textBox5.Text = "0";
+                    FonctionsNatives.reinitialiserPartieCourante();
+
                 }
-                else
+
+                else if (dialog == DialogResult.No) //revenir menu principal
                 {
-                    MessageBox.Show("** Congratulations! Player 2 wins ! **", "AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                    estEnModePartie = false;
+                    this.Hide();
+                    menuPrincipal_.Show();
+                    FonctionsNatives.reinitialiserPartieCourante();
                 }
-                // reintialiser ou retourner en menu principale
-                nbButsJoueur1 = 0;
-                nbButsJoueur2 = 0;
-                textBox4.Text = "0"; textBox5.Text = "0";
-                FonctionsNatives.retirerMailletEtRondelle();
-                menuPrincipal_.Show();
-                this.Hide();
-                
-            }            
+            }
+
+            /* if (nbButsJoueur1 == nbButsMax)
+             {
+                 MessageBox.Show("** Congratulations! Player 1 wins ! **", "AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand,
+                 MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+             }
+             else
+             {
+                 MessageBox.Show("** Congratulations! Player 2 wins ! **", "AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Information,
+                 MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);¸*/
+
+            //menuPrincipal_.Show();
+            //this.Hide();
+
         }
 
         private void Edition_Load(object sender, EventArgs e)
         {
             resetPartie();
         }
+
+
 
         ///////////////////////////////////////////////////////////////////////
         /// @fn public void resetPartie()

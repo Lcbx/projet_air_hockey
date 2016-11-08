@@ -13,17 +13,17 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
+using System.Text;  
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Windows.Forms;   
 using System.Runtime.InteropServices;
 
 
 namespace InterfaceGraphique
 {    
-    public partial class Configuration : Form
-    {
-        private static MenuPrincipal menuPrincipal_;
+    public partial class Configuration : Form                   
+    { 
+        private static MenuPrincipal menuPrincipal_;        
 
         //intilailser les touches du clavier par defaut
         private int toucheDeplaceAGauche_;

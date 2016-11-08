@@ -88,18 +88,20 @@ public:
 	bool setCouleurContour(glm::vec4 couleur);
 
 
-	//determiner si dans la table
-	/// dansTable
+	///determiner si dans la table
 	bool dansTable(glm::dvec3 M);
-	// dans la zone du jeu 
+	/// dans la zone du jeu 
 	bool dansZone1(glm::dvec3 M);
 	bool dansZone2(glm::dvec3 M);
-	// maillet dans la zone du jeu
+	/// maillet dans la zone du jeu
 	bool mailletDansZone1(glm::dvec3 M, double rayon);
 	bool mailletDansZone2(glm::dvec3 M, double rayon);
 	double distanceEntrePointDroite(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P);
-	// get coordonnes des buts 
+	/// get coordonnes des buts 
 	bool getButs(int index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas);
+
+	glm::vec3 getPc(int i) { return pointControle_[i]; }
+
 
 private:
 

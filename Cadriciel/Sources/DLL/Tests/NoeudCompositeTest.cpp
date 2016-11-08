@@ -159,7 +159,15 @@ void NoeudCompositeTest::testSuppression()
 	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 1);
 }
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void NoeudCompositeTest::testTrouverObjet()
+///
+/// Cas de test: trouver un objet sur la table
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
 void NoeudCompositeTest::testTrouverObjet()
 {
 	
@@ -194,7 +202,15 @@ void NoeudCompositeTest::testTrouverObjet()
 	CPPUNIT_ASSERT(noeud->chercher(1) == noeudPortail);
 }
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void NoeudCompositeTest::testSelectionMultiple()
+///
+/// Cas de test: selctionner plusieurs objets
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
 void NoeudCompositeTest::testSelectionMultiple()
 {
 	//creation d'un noeud bonus
@@ -239,4 +255,44 @@ void NoeudCompositeTest::testSelectionMultiple()
 	CPPUNIT_ASSERT(noeudBonus2->estSelectionne() == false);
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void NoeudCompositeTest::testScale()
+///
+/// Cas de test: modifier le scale d'un objet
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void NoeudCompositeTest::testScale()
+{
+
+	//Creer un noeud 
+	NoeudAbstrait* noeudBonus{ new NoeudBonus{ ArbreRenduINF2990::NOM_BONUS } };
+	noeudBonus->assignerPositionRelative({ 0,0,0 });
+
+	//ajouter et selectionner 
+	noeud->ajouter(noeudBonus);
+	noeudBonus->assignerSelection(true);
+
+	//declarer un vecteur
+	glm::dvec3 vecteur{ noeudBonus->getScale() };
+
+	// Second test : on vérifie que la position a été modifiée
+	vecteur = noeudBonus->getScale();
+
+	//Verification initial
+	CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[0] - 1));
+	CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[1] - 1));
+	CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[2] - 1));
+
+	//modifier le scale
+	noeudBonus->setScale({ 5,10,2 });
+
+	vecteur = noeudBonus->getScale();
+	//verifier encore
+	CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[0] - 5));
+	CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[1] - 10));
+	CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[2] - 2));
+}
 

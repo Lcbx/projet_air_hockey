@@ -178,6 +178,7 @@
     <ClCompile Include="Tests\NoeudAbstraitTest.cpp" />
     <ClCompile Include="Tests\NoeudCompositeTest.cpp" />
     <ClCompile Include="Tournoi.cpp" />
+    <ClCompile Include="Tests\PointControleTest.cpp" />
     <ClCompile Include="Tests\RedimensionnementTest.cpp" />
     <ClCompile Include="VisiteurAjout.cpp" />
     <ClCompile Include="VisiteurCollision.cpp" />
@@ -240,6 +241,7 @@
     <ClInclude Include="Tests\NoeudAbstraitTest.h" />
     <ClInclude Include="Tests\NoeudCompositeTest.h" />
     <ClInclude Include="Tournoi.h" />
+    <ClInclude Include="Tests\PointControleTest.h" />
     <ClInclude Include="Tests\RedimensionnementTest.h" />
     <ClInclude Include="Visiteur.h" />
     <ClInclude Include="VisiteurAjout.h" />

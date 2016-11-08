@@ -1,3 +1,3 @@
 <configuration>
-    <CTouches TOUCHE_HAUT="90" TOUCHE_DROITE="86" TOUCHE_BAS="67" TOUCHE_GAUCHE="88"/>
+    <CScene CALCULS_PAR_IMAGE="50"/>
 </configuration>

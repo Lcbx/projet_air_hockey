@@ -503,7 +503,7 @@ void FacadeModele::ajouterPortail(int x1, int y1)
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn FacadeModele::void FacadeModele::ajouterPortailDeux(int x2, int y2)
+/// @fn void FacadeModele::ajouterPortailDeux(int x2, int y2)
 ///
 /// Cette fonction permet d'ajouter le deuxieme portail a la scene
 ///
@@ -519,7 +519,18 @@ void FacadeModele::ajouterPortailDeux(int x2, int y2)
 	arbre_->ajouterPortailDeux(position2);
 }
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::ajouterMuret(int x1, int y1, int x2, int y2)
+///
+/// Cette fonction permet d'ajouter un muret a la scene
+///
+/// @param[in]	x1, y1 : position du premier clic de la souris.
+///				x2, y2 : position du second clic de la souris .
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
 void FacadeModele::ajouterMuret(int x1, int y1, int x2, int y2)
 {
 	glm::dvec3 position1;

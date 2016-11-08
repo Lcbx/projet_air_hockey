@@ -96,19 +96,19 @@ void NoeudPortail::afficherConcret(const glm::mat4& vueProjection) const
 ////////////////////////////////////////////////////////////////////////
 void NoeudPortail::tracerCercle(const glm::mat4& vueProjection, double cx, double cy, double r, int nb_segments) const
 {
-#define vecPROJvec(arg)					glm::vec3(vueProjection * glm::vec4(arg, 1))
+#define vecPROJvec(arg)	glm::value_ptr(glm::vec3(vueProjection * glm::vec4(arg, 1)))
 	glColor3f(1, 0, 0);
 
 	glDisable(GL_TEXTURE_2D);
 
 	glBegin(GL_LINE_LOOP);
-	for (int ii = 0; ii < nb_segments; ii++)
+	for (float ii = 0; ii < nb_segments; ii++)
 	{
-		double theta = 2.0f * 3.1415926f * double(ii) / double(nb_segments); //l'angle courant
-		double x = r * cosf(theta);
-		double y = r * sinf(theta);
+		float theta = 2.0f * 3.1415926f * ii / (float) nb_segments; //l'angle courant
+		float x = r * cosf(theta);
+		float y = r * sinf(theta);
 		glm::vec3 point{ x + cx, y + cy, 0 };
-		glVertex2f(vecPROJvec(point).x, vecPROJvec(point).y);
+		glVertex3fv(vecPROJvec(point));
 	}
 	glEnd();
 #undef vecProJvec

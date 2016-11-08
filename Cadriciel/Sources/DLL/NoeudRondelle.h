@@ -19,7 +19,7 @@
 
 ///////////////////////////////////////////////////////////////////////////
 /// @class NoeudRondelle
-/// @brief Classe qui représente un le noeud muret de l'arbre de rendu.
+/// @brief Classe qui représente un la rondelle de l'arbre de rendu.
 ///
 /// @author Wajdi Gharsalli
 /// @date 2016-10-19
@@ -45,16 +45,6 @@ public:
 
 private:
 
-	/*
-	///dernieres positions valides
-	std::list<glm::vec3> dernieresPositions_;
-	///ajoute une nouvelle position
-	void push_position();
-	///charge une ancienne position
-	void pop_position();
-	*/
-
-
 	///vecteur vitesse
 	glm::vec3 vitesse_{0.1,0,0};
 	
@@ -73,7 +63,7 @@ private:
 };
 
 
-#endif // __ARBRE_NOEUDS_NOEUDMURET_H__
+#endif
 
 
 ///////////////////////////////////////////////////////////////////////////////
