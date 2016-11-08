@@ -1018,7 +1018,7 @@ extern "C"
 	__declspec(dllexport) void __cdecl sauvegarderTypeButMax(int nbButMax, bool estVirtuel)
 	{
 		std::cout << "nb but max: "<< nbButMax << " virtuel: " <<estVirtuel<< std::endl;
-
+		FacadeModele::obtenirInstance()->getConfigJeu()->setOptionsJeu(nbButMax, estVirtuel);
 	}
 
 

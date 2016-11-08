@@ -55,7 +55,7 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.fermerDebogage = new System.Windows.Forms.Button();
+            this.SauvegarderDebogage = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
@@ -272,7 +272,7 @@
             0,
             0});
             this.numericUpDown1.Minimum = new decimal(new int[] {
-            2,
+            1,
             0,
             0,
             0});
@@ -291,17 +291,18 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.fermerDebogage);
+            this.tabPage3.Controls.Add(this.SauvegarderDebogage);
             this.tabPage3.Controls.Add(this.groupBox2);
             resources.ApplyResources(this.tabPage3, "tabPage3");
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // fermerDebogage
+            // SauvegarderDebogage
             // 
-            resources.ApplyResources(this.fermerDebogage, "fermerDebogage");
-            this.fermerDebogage.Name = "fermerDebogage";
-            this.fermerDebogage.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.SauvegarderDebogage, "SauvegarderDebogage");
+            this.SauvegarderDebogage.Name = "SauvegarderDebogage";
+            this.SauvegarderDebogage.UseVisualStyleBackColor = true;
+            this.SauvegarderDebogage.Click += new System.EventHandler(this.SauvegarderDebogage_Click);
             // 
             // groupBox2
             // 
@@ -529,7 +530,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox console;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button fermerDebogage;
+        private System.Windows.Forms.Button SauvegarderDebogage;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.CheckBox checkBox4;

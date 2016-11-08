@@ -61,11 +61,14 @@ namespace InterfaceGraphique
             
             joueurVirtuelCourant_ = joueurVirtuelDefault_;
             profils.Add(joueurVirtuelCourant_);
+
             textBox1.Text=(joueurVirtuelCourant_.getNomProfil());
             textBox2.Text=(Convert.ToString(joueurVirtuelCourant_.getVitesseProfil()));
             textBox3.Text=(Convert.ToString(joueurVirtuelCourant_.getProbProfil()));
             listDeProfils.Items.Add(joueurVirtuelCourant_.getNomProfil());
+
             creationProfil.Enabled = false;
+
             vitesse_ = joueurVirtuelCourant_.getVitesseProfil();
             nom = joueurVirtuelCourant_.getNomProfil();
             probaDAgirPassivemnt = joueurVirtuelCourant_.getProbProfil();
@@ -270,31 +273,46 @@ namespace InterfaceGraphique
                 console.Enabled = true;
                 groupBox3.Enabled = true;
             }
-            
+            else
+            {
+                debogageActif_ = false;
+                console.Enabled = false;
+                groupBox3.Enabled = false;
+
+            }
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox2.Checked)
                 debogCollision_ = true;
+            else
+                debogCollision_ = false;
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox3.Checked)
                 debogVitesse_ = true;
+            else
+                debogVitesse_ = false;
+
         }
 
         private void checkBox4_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox4.Checked)
                 eclairageActif_ = true;
+            else
+                eclairageActif_ = false;
         }
 
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox5.Checked)
                 effetVisuelActif_ = true;
+            else
+                effetVisuelActif_ = false;
         }
 
        
@@ -303,9 +321,7 @@ namespace InterfaceGraphique
             creationProfil.Enabled = true;
             ajouterActif = true;
             modifierActif = false;
-            
 
-           
         }
 
         private void listDeProfils_SelectedIndexChanged(object sender, EventArgs e)
@@ -385,12 +401,28 @@ namespace InterfaceGraphique
             this.Hide();
         }
 
+        /// <summary>
+        /// Sauvegarder nombre de buts max et le type de joueur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Sauvegarder_Click(object sender, EventArgs e)
         {
-
             FonctionsNatives.sauvegarderTypeButMax(nbButMax, estVirtuel);
         }
-    }
+
+        /// <summary>
+        /// Sauvegarder les informations de debogage 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SauvegarderDebogage_Click(object sender, EventArgs e)
+        {
+            FonctionsNatives.debogConfig(debogageActif_, debogCollision_, debogVitesse_, eclairageActif_, effetVisuelActif_);
+         }
+
+
+}
     static partial class FonctionsNatives
     {
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -412,6 +444,11 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void sauvegarderTypeButMax(int nombreMax, bool estVirtuel);
+
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void sauvegarderTypeButMax(bool collision, bool vitesse, bool eclairage, bool effetVisuel);
+
 
     }
 }

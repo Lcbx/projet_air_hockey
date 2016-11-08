@@ -813,31 +813,31 @@ Le nombre est entre 1 et 5</value>
   <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="fermerDebogage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="SauvegarderDebogage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="fermerDebogage.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="SauvegarderDebogage.Location" type="System.Drawing.Point, System.Drawing">
     <value>284, 388</value>
   </data>
-  <data name="fermerDebogage.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="SauvegarderDebogage.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 29</value>
   </data>
-  <data name="fermerDebogage.TabIndex" type="System.Int32, mscorlib">
+  <data name="SauvegarderDebogage.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="fermerDebogage.Text" xml:space="preserve">
-    <value>Fermer</value>
+  <data name="SauvegarderDebogage.Text" xml:space="preserve">
+    <value>Sauvegarder</value>
   </data>
-  <data name="&gt;&gt;fermerDebogage.Name" xml:space="preserve">
-    <value>fermerDebogage</value>
+  <data name="&gt;&gt;SauvegarderDebogage.Name" xml:space="preserve">
+    <value>SauvegarderDebogage</value>
   </data>
-  <data name="&gt;&gt;fermerDebogage.Type" xml:space="preserve">
+  <data name="&gt;&gt;SauvegarderDebogage.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;fermerDebogage.Parent" xml:space="preserve">
+  <data name="&gt;&gt;SauvegarderDebogage.Parent" xml:space="preserve">
     <value>tabPage3</value>
   </data>
-  <data name="&gt;&gt;fermerDebogage.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;SauvegarderDebogage.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="checkBox5.AutoSize" type="System.Boolean, mscorlib">
