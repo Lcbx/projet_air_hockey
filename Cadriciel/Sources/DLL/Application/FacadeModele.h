@@ -77,16 +77,16 @@ public:
 	
 
 	/// Accède à l'objet ConfigTouches
-	ConfigTouches getConfigTouches();
+	ConfigTouches* getConfigTouches();
 
 	/// Accède à l'objet ConfigProfils
-	ConfigJeu getConfigJeu();
+	ConfigJeu* getConfigJeu();
 
 	/// Accède à l'objet ConfigProfils
-	ConfigDebug getConfigDebug();
+	ConfigDebug* getConfigDebug();
 
 	/// Accède à l'objet ConfigProfils
-	ConfigProfils getConfigProfils();
+	ConfigProfils* getConfigProfils();
 
 
 	/// Libère le contexte OpenGL.

@@ -49,7 +49,7 @@ private:
 	glm::vec3 vitesse_{0.1,0,0};
 	
 	///les portails : numero de noeud et active ou non
-	std::map<NoeudPortail*, bool> portails_;
+	//std::map<NoeudAbstrait*, bool> portails_;
 
 	///si a deja ete affecte par un bonus
 	bool affecteParBonus_ = false;

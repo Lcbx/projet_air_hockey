@@ -302,9 +302,9 @@ void FacadeModele::enregistrerZoneJeu(char* fichierZoneJeu) const
 /// @return ConfigTouches : l'objet ConfigTouches de l'instance de FacadeModele
 ///
 ////////////////////////////////////////////////////////////////////////
-ConfigTouches FacadeModele::getConfigTouches()
+ConfigTouches* FacadeModele::getConfigTouches()
 {
-	return _configTouches;
+	return &_configTouches;
 }
 
 
@@ -318,9 +318,9 @@ ConfigTouches FacadeModele::getConfigTouches()
 /// @return ConfigJeu : l'objet ConfigJeu de l'instance de FacadeModele
 ///
 ////////////////////////////////////////////////////////////////////////
-ConfigJeu FacadeModele::getConfigJeu()
+ConfigJeu* FacadeModele::getConfigJeu()
 {
-	return _configJeu;
+	return &_configJeu;
 }
 
 
@@ -334,9 +334,9 @@ ConfigJeu FacadeModele::getConfigJeu()
 /// @return ConfigDebug : l'objet ConfigDebug de l'instance de FacadeModele
 ///
 ////////////////////////////////////////////////////////////////////////
-ConfigDebug FacadeModele::getConfigDebug()
+ConfigDebug* FacadeModele::getConfigDebug()
 {
-	return _configDebug;
+	return &_configDebug;
 }
 
 
@@ -350,9 +350,9 @@ ConfigDebug FacadeModele::getConfigDebug()
 /// @return ConfigProfils l'objet ConfigProfils de l'instance de FacadeModele
 ///
 ////////////////////////////////////////////////////////////////////////
-ConfigProfils FacadeModele::getConfigProfils()
+ConfigProfils* FacadeModele::getConfigProfils()
 {
-	return _configProfils;
+	return &_configProfils;
 }
 
 

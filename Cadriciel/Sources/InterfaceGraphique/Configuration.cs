@@ -70,7 +70,7 @@ namespace InterfaceGraphique
             nom = joueurVirtuelCourant_.getNomProfil();
             probaDAgirPassivemnt = joueurVirtuelCourant_.getProbProfil();
 
-
+            // Charge les touches du joueur 2
             int[] touches = new int[4];
             FonctionsNatives.obtenirTouches(touches);
             toucheDeplaceEnHaut_ = touches[0];

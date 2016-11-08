@@ -36,12 +36,14 @@
 NoeudRondelle::NoeudRondelle(const std::string& typeNoeud)
 	: NoeudAbstrait{ typeNoeud }
 {
+	/*
 	//ajoute tous les portails
 	auto arbre = FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990();
 	for (int i = 0; i < arbre->obtenirNombreEnfants(); i++) {
 		auto noeud = arbre->chercher(i);
-		if (noeud->obtenirType() == "portail") portails_[ (NoeudPortail*)arbre->chercher(i) ] = true;
+		if (noeud->obtenirType() == "portail") portails_[ arbre->chercher(i) ] = true;
 	}
+	*/
 }
 
 
@@ -97,7 +99,8 @@ void NoeudRondelle::animer(float temps)
 	
 	//pour la lisibilite
 	auto facade = FacadeModele::obtenirInstance();
-	auto table = facade->obtenirArbreRenduINF2990()->getTable();
+	auto arbre = facade->obtenirArbreRenduINF2990();
+	auto table = arbre->getTable();
 
 	// Ali
 	// la rondelle ne bouge pas si on est en mode pause
@@ -198,14 +201,14 @@ void NoeudRondelle::animer(float temps)
 			}
 			case InfoCollision::PORTAIL: {
 				typeObjetDebug = "portail";
-				auto noeud = (NoeudPortail*)resultat.objet;
-				auto frere = (NoeudPortail*)noeud->getFrere();
+				auto noeud = resultat.objet;
+				auto frere = noeud->getFrere();
 				positionActuelle = frere->obtenirPositionRelative()
-					+ ((float)frere->obtenirRayon() * 0.9f + rayon)
+					- ((float)frere->obtenirRayon() * 0.9f + rayon)
 					* glm::normalize(positionHorsCollision - noeud->obtenirPositionRelative());
-				vitesse_ *= -1.f;
 				//desactive l'attraction du frere
-				portails_[frere] = false;
+				//portails_[frere] = false;
+				((NoeudPortail*)frere)->attracte_ = false;
 				///std::cout << "portail " << frere->getScale().x << " desactive\n";
 				break;
 			}
@@ -226,18 +229,21 @@ void NoeudRondelle::animer(float temps)
 
 		//attraction des portails
 #define CST_ASPIRATION 10.f
-		for (auto it = portails_.begin(); it != portails_.end(); it++) {
-			auto portail = it->first;
-			glm::vec3 vecteur_distance = portail->obtenirPositionRelative() - positionActuelle;
-			float distance = glm::length(vecteur_distance);
-			float rayon_attraction = 3.f * portail->obtenirRayon();
-			//si on est dans le rayon d'attraction
-			if (distance < rayon_attraction) {
-				//et qu'on ne sort pas de ce portail, on a le droit d'attracter
-				if (it->second) vitesse_ += CST_ASPIRATION * rayon_attraction / distance  * glm::normalize(vecteur_distance);
+		for (int i = 0; i < arbre->obtenirNombreEnfants(); i++) {
+			auto noeud = arbre->chercher(i);
+			if (noeud->obtenirType() == "portail") {
+				auto		portail = (NoeudPortail*) noeud;
+				glm::vec3	vecteur_distance = portail->obtenirPositionRelative() - positionActuelle;
+				float		distance = glm::length(vecteur_distance);
+				float		rayon_attraction = 3.f * portail->obtenirRayon();
+				//si on est dans le rayon d'attraction
+				if (distance < rayon_attraction) {
+					//et qu'on ne sort pas de ce portail, on a le droit d'attracter
+					if (portail->attracte_) vitesse_ += CST_ASPIRATION * rayon_attraction / distance  * glm::normalize(vecteur_distance);
+				}
+				//sinon on pourra de nouveau etre attracte dans le futur
+				else portail->attracte_ = true;
 			}
-			//sinon on pourra de nouveau etre attracte dans le futur
-			else it->second = true;
 		}
 
 		//application de la friction
