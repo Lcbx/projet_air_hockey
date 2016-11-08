@@ -121,6 +121,16 @@ void ConfigJeu::setOptionsJeu(int nbrBut, bool joueurTestEstHumain)
 
 
 
+////////////////////////////////////////////////////////////////////////
+/// @fn int ConfigJeu::getOptionsJeu()
+/// Cette methode permet d'obtenir une structure contenant les options
+/// de jeu
+/// @return une structure OptionsJeu
+////////////////////////////////////////////////////////////////////////
+OptionsJeu ConfigJeu::getOptionsJeu()
+{
+	return{_nbrBut, _joueurTestEstHumain};
+}
 
 
 

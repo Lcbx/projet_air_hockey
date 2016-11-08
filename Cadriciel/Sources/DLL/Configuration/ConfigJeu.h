@@ -11,6 +11,12 @@
 
 #include "../../../Commun/Externe/tinyxml2/include/tinyxml2.h"
 
+
+struct OptionsJeu {
+	int nbrBut;
+	bool joueurTestEstHumain;
+};
+
 ///////////////////////////////////////////////////////////////////////////
 /// @class ConfigJeu
 /// @brief Représente les options de jeu
@@ -33,6 +39,8 @@ public:
 	void setOptionsJeu(int nbrBut, bool joueurTestEstHumain);
 
 
+	/// Accesseur des options de jeu
+	OptionsJeu getOptionsJeu();
 
 	/// Accesseur du nombre de but
 	int getNombreDeButs();
@@ -55,7 +63,6 @@ private:
 
 
 #endif // __CONFIGURATION_CONFIGJEU_H__
-
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @}

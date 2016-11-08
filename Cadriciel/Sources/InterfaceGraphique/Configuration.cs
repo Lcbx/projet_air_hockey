@@ -446,5 +446,16 @@ namespace InterfaceGraphique
         public static extern void sauvegarderTypeButMax(int nombreMax, bool estVirtuel);
 
 
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void getOptionsJeu([In, MarshalAs(UnmanagedType.LPStruct)] OptionsJeu opJeu);
+
+
+        [StructLayout(LayoutKind.Sequential)]
+        struct OptionsJeu
+        {
+            int nbrBut;
+            bool joueurTestEstHumain;
+        };
     }
+
 }
