@@ -7,22 +7,18 @@
 /// @addtogroup inf2990 INF2990
 /// @{
 ///////////////////////////////////////////////////////////////////////////////
-#include "NoeudRondelle.h"
 
+#include "NoeudRondelle.h"
 #include "GL/glew.h"
 #include <cmath>
-
 #include "Modele3D.h"
 #include "OpenGL_VBO.h"
-
 #include "Utilitaire.h"
-
 #include <../Visiteur.h>
 #include "VisiteurCollision.h"
 #include "Affichage_debuggage.h"
 #include "ArbreRenduINF2990.h"
 #include "NoeudTable.h"
-
 #include "../Application/JoueurVirtuel.h"
 
 ////////////////////////////////////////////////////////////////////////
@@ -30,7 +26,7 @@
 /// @fn NoeudRondelle::NoeudRondelle(const std::string& typeNoeud)
 ///
 /// Ce constructeur ne fait qu'appeler la version de la classe et base
-/// et donner des valeurs par défaut aux variables membres.
+/// et donner des valeurs par défaut aux variables membres (comme les portails pour l'attraction)
 ///
 /// @param[in] typeNoeud : Le type du noeud.
 ///
@@ -86,7 +82,7 @@ void NoeudRondelle::afficherConcret(const glm::mat4& vueProjection) const
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn void NoeudCube::animer(float temps)
+/// @fn void NoeudRondelle::animer(float temps)
 ///
 /// Cette fonction effectue l'animation du noeud pour un certain
 /// intervalle de temps.
@@ -176,8 +172,6 @@ void NoeudRondelle::animer(float temps)
 		}
 		///else push_position();
 
-
-
 		//pour l'affichage de Debug
 		std::string typeObjetDebug;
 
@@ -261,7 +255,19 @@ void NoeudRondelle::animer(float temps)
 		
 }
 
-//ajoute une vitesse lors d'une collision par le maillet lors de son deplacement
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void NoeudRondelle::collisionMailletExterne(glm::vec3 vitesseMaillet, glm::vec3 normale)
+///
+/// Cette fonction effectue l'animation du noeud pour un certaingere une collision provenant du deplacement du maillet
+/// et non de celui de la rondelle (donc externe).
+///
+/// @param[in]	vitesseMaillet : Ia vitesse du maillet lors de la collision
+///				normale : la normale de la collision.
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
 void NoeudRondelle::collisionMailletExterne(glm::vec3 vitesseMaillet, glm::vec3 normale) {
 	auto vitesseIntermediaire = glm::reflect(vitesse_, normale) - glm::dot(vitesseMaillet, normale) * normale;
 	float moduleVitesse = glm::clamp((float)glm::length(vitesseIntermediaire), 0.f, (float) VITESSE_MAX);
@@ -270,20 +276,6 @@ void NoeudRondelle::collisionMailletExterne(glm::vec3 vitesseMaillet, glm::vec3 
 	if (Debug::obtenirInstance().afficherVitesse) Debug::obtenirInstance().afficher("Vitesse : " + std::to_string(moduleVitesse).substr(0, 3));
 }
 
-
-/*
-///ajoute une nouvelle position
-void NoeudRondelle::push_position() {
-	dernieresPositions_.push_front(obtenirPositionRelative());
-	if (dernieresPositions_.size() > 5) dernieresPositions_.pop_back();
-}
-///charge une ancienne position
-void NoeudRondelle::pop_position() {
-	glm::vec3 positionIntermediaire = (dernieresPositions_.front());
-	assignerPositionRelative(positionIntermediaire);
-	if (dernieresPositions_.size() > 1) dernieresPositions_.pop_front();
-}
-*/
 
 ////////////////////////////////////////////////
 /// 

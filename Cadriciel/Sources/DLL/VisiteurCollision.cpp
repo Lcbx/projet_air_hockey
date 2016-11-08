@@ -14,7 +14,20 @@
 #include <array>
 
 
-///fonction apppellee generalement
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn InfoCollision& VisiteurCollision::calculerCollision(glm::vec3 position, double rayon, bool rondelle)
+///
+/// Cette fonction renvoie la collision la plus pertinente pour un objet rond a la position donnee ;
+/// prend en compte s'il s'agit de la rondelle, sinon assume que c'est un maillet
+///
+/// @param[in]	position : la position de l'objet teste
+///				rayon : le rayon de l'objet teste
+///				rondelle : s'il s'agit de la rondelle.
+///
+/// @return InfoCollision&.
+///
+////////////////////////////////////////////////////////////////////////
 InfoCollision& VisiteurCollision::calculerCollision(glm::vec3 position, double rayon, bool rondelle) {
 	position_ = position;
 	rayon_ = rayon;
@@ -73,7 +86,18 @@ InfoCollision& VisiteurCollision::calculerCollision(glm::vec3 position, double r
 	return result_;
 }
 
-///donne la collision la plus pertinente avec une suite segments
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn DetailsCollision VisiteurCollision::collisionSegments(glm::vec3 ensemble[], int nombre)
+///
+/// Cette fonction donne la collision la plus pertinente avec une suite de segments
+///
+/// @param[in]	ensemble : un tableau de points
+///				nombre : le nombre de points
+///
+/// @return DetailsCollision.
+///
+////////////////////////////////////////////////////////////////////////
 aidecollision::DetailsCollision VisiteurCollision::collisionSegments(glm::vec3 ensemble[], int nombre) {
 	//determine la collision pour chacun des segments
 	aidecollision::DetailsCollision detail = { aidecollision::COLLISION_AUCUNE, glm::vec3(0,0,0), 0 };
@@ -84,11 +108,21 @@ aidecollision::DetailsCollision VisiteurCollision::collisionSegments(glm::vec3 e
 			///std::cout << "collision " << detail.type << " segment n " << i << " enfoncement " << detail.enfoncement << "\n";
 		}
 	}
-	
 	return detail;
 }
 
-///calcul de collision avec un objet circulaire
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn DetailsCollision VisiteurCollision::collisionSegments(glm::vec3 ensemble[], int nombre)
+///
+/// Cette fonction calcule une collision avec un objet circulaire
+///
+/// @param[in]	ensemble : un tableau de points
+///				nombre : le nombre de points
+///
+/// @return DetailsCollision.
+///
+////////////////////////////////////////////////////////////////////////
 aidecollision::DetailsCollision VisiteurCollision::visiterNoeudCercle(NoeudAbstrait* noeud, float rayon) {
 	//calcul de la collision entre les deux cercles 
 	glm::vec3 position = noeud->obtenirPositionRelative();
@@ -100,7 +134,17 @@ aidecollision::DetailsCollision VisiteurCollision::visiterNoeudCercle(NoeudAbstr
 }
 
 
-///cacul de collission avec un objet rectangulaire
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn DetailsCollision VisiteurCollision::visiterNoeudQuadrilatere(NoeudAbstrait* noeud)
+///
+/// Cette fonction calcule une collission avec un objet rectangulaire
+///
+/// @param[in]	noeud : le noeud rectangulaire
+///
+/// @return DetailsCollision.
+///
+////////////////////////////////////////////////////////////////////////
 aidecollision::DetailsCollision VisiteurCollision::visiterNoeudQuadrilatere(NoeudAbstrait* noeud) {
 
 	//recupere la boite de collision
@@ -114,13 +158,34 @@ aidecollision::DetailsCollision VisiteurCollision::visiterNoeudQuadrilatere(Noeu
 
 void VisiteurCollision::visiter(NoeudAbstrait* noeud) {}
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void VisiteurCollision::visiter(NoeudComposite *noeud)
+///
+/// Cette fonction passe le visiteur aux enfant du noeud composite
+///
+/// @param[in]	noeud : le noeud composite
+///
+/// @return Aucun.
+///
+////////////////////////////////////////////////////////////////////////
 void VisiteurCollision::visiter(NoeudComposite *noeud) {
 	for (unsigned int i = 0; i < noeud->obtenirNombreEnfants(); i++) {
 		noeud->chercher(i)->accepter(this);
 	}
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void VisiteurCollision::visiter(NoeudRondelle *noeud)
+///
+/// Cette fonction verifie une collision avec la rondelle
+///
+/// @param[in]	noeud : la rondelle
+///
+/// @return Aucun.
+///
+///////////////////////////////////////////////////////////////////////////
 void VisiteurCollision::visiter(NoeudRondelle* noeud) {
 	if(!rondelle_){
 		auto detail = visiterNoeudCercle(noeud, noeud->obtenirRayon());
@@ -132,7 +197,17 @@ void VisiteurCollision::visiter(NoeudRondelle* noeud) {
 	}
 }
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void VisiteurCollision::visiter(NoeudMuret* noeud)
+///
+/// Cette fonction calcule une collission avec un muret
+///
+/// @param[in]	noeud : le muret
+///
+/// @return Aucun.
+///
+////////////////////////////////////////////////////////////////////////
 void VisiteurCollision::visiter(NoeudMuret* noeud) {
 	auto detail = visiterNoeudQuadrilatere(noeud);
 	if (detail.type != aidecollision::COLLISION_AUCUNE) {
@@ -142,6 +217,17 @@ void VisiteurCollision::visiter(NoeudMuret* noeud) {
 	}
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void VisiteurCollision::visiter(NoeudBonus* noeud)
+///
+/// Cette fonction calcule une collission avec un objet bonus
+///
+/// @param[in]	noeud : le bonus
+///
+/// @return Aucun.
+///
+////////////////////////////////////////////////////////////////////////
 void VisiteurCollision::visiter(NoeudBonus* noeud) {
 	auto detail = visiterNoeudQuadrilatere(noeud);
 	if (detail.type != aidecollision::COLLISION_AUCUNE) {
@@ -151,6 +237,17 @@ void VisiteurCollision::visiter(NoeudBonus* noeud) {
 	}
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void VisiteurCollision::visiter(NoeudMaillet* noeud)
+///
+/// Cette fonction calcule une collission avec un maillet
+///
+/// @param[in]	noeud : le maillet
+///
+/// @return Aucun.
+///
+////////////////////////////////////////////////////////////////////////
 void VisiteurCollision::visiter(NoeudMaillet* noeud) {
 	if (rondelle_) {
 		auto detail = visiterNoeudCercle(noeud, noeud->obtenirRayon());
@@ -162,6 +259,17 @@ void VisiteurCollision::visiter(NoeudMaillet* noeud) {
 	}
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void VisiteurCollision::visiter(NoeudPortail* noeud)
+///
+/// Cette fonction calcule une collission avec un objet portail
+///
+/// @param[in]	noeud : le portail
+///
+/// @return Aucun.
+///
+////////////////////////////////////////////////////////////////////////
 void VisiteurCollision::visiter(NoeudPortail* noeud) {
 	//on reduit la taille de la zone de collision pour eviter la sortie de jeu de rondelle
 	auto detail = visiterNoeudCercle(noeud, noeud->obtenirRayon() * 0.9f );

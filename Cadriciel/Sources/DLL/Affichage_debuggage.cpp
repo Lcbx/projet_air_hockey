@@ -13,13 +13,30 @@
 #include <iostream>
 #include <iomanip>
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Debug& Debug::obtenirInstance
+///
+/// cette fonction renvoie l'instance statique de la classe Debug (patron singleton)
+///
+/// @return Debug&.
+///
+////////////////////////////////////////////////////////////////////////
 Debug& Debug::obtenirInstance()
 {
 	static Debug instance_;
 	return instance_;
 }
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn Debug::Debug()
+///
+/// Cette fonction initialise l'objet Debug créé dont son compteur de temps interne
+///
+/// @return Aucune (constructeur).
+///
+////////////////////////////////////////////////////////////////////////
 Debug::Debug() {
 	//les heures et les secondes du systeme d'exploitation
 	time_t now = time(0);
@@ -29,7 +46,15 @@ Debug::Debug() {
 	current_ = clock();
 }
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void Debug::actualiser()
+///
+/// Cette fonction effectue actualise le temps écoulé depuis la derniere actualisation
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
 void Debug::actualiser() {
 	//actualise milli_
 	milli_ = clock() - current_;
@@ -46,6 +71,17 @@ void Debug::actualiser() {
 	}
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void Debug::afficher(std::string message)
+///
+/// Cette fonction affiche le message passe en orgument accompagné d'un timestamp
+///
+/// @param[in] message : le message a afficher
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
 void Debug::afficher(std::string message) {
 	actualiser();
 	std::cout << std::setfill('0') << std::setw(2) << temps_.tm_hour << ":"
