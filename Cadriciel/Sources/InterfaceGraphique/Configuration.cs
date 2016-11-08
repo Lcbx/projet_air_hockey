@@ -446,9 +446,5 @@ namespace InterfaceGraphique
         public static extern void sauvegarderTypeButMax(int nombreMax, bool estVirtuel);
 
 
-        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void sauvegarderTypeButMax(bool collision, bool vitesse, bool eclairage, bool effetVisuel);
-
-
     }
 }

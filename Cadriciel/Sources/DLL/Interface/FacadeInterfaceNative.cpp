@@ -982,6 +982,10 @@ extern "C"
 			Debug::obtenirInstance().afficherLumieres = false;
 			Debug::obtenirInstance().afficherAttraction = false;
 		}
+
+		FacadeModele::obtenirInstance()->getConfigDebug()->setOptionsDebug(debogageActif_, debogCollision_,
+			debogVitesse_, eclairageActif_, effetVisuelActif_);
+
 	}
 
 	////////////////////////////////////////////////////////////////////////
