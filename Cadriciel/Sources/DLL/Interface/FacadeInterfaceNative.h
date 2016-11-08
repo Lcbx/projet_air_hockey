@@ -166,7 +166,8 @@ extern "C" {
 	__declspec(dllexport) void changerLumieresActives(bool jLumiereAmbiente, bool kLumiereDirectionnelle, bool jLumiereSpots);
 
 	
-	__declspec(dllexport) void sauvegarderTypeButMax(int nbButMax, bool estVirtuel);
+	__declspec(dllexport) void sauvegarderTypeButMax(int nbButMax, bool estHumain);
+
 
 	__declspec(dllexport) void sauvegarderProfil (const char* nom, double vitesse, double proba);
 

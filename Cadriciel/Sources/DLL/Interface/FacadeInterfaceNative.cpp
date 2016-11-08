@@ -1019,9 +1019,9 @@ extern "C"
 		}
 	}
 
-	__declspec(dllexport) void __cdecl sauvegarderTypeButMax(int nbButMax, bool estVirtuel)
+	__declspec(dllexport) void __cdecl sauvegarderTypeButMax(int nbButMax, bool estHumain)
 	{
-		FacadeModele::obtenirInstance()->getConfigJeu()->setOptionsJeu(nbButMax, estVirtuel);
+		FacadeModele::obtenirInstance()->getConfigJeu()->setOptionsJeu(nbButMax, estHumain);
 	}
 
 	__declspec(dllexport) void __cdecl sauvegarderProfil(const char* nom, double vitesse, double proba)
@@ -1032,6 +1032,7 @@ extern "C"
 		
 		FacadeModele::obtenirInstance()->getConfigProfils()->setProfil(nom, vitesse, proba);
 	}
+	
 
 }
 

@@ -36,7 +36,7 @@ namespace InterfaceGraphique
 
         
 
-        private bool estVirtuel = true;    
+        private bool estHumain = false;    
         Profil joueurVirtuelDefault_ = new Profil();
         Profil joueurVirtuelCourant_;
         List<Profil> profils =new List<Profil>();
@@ -256,12 +256,12 @@ namespace InterfaceGraphique
         {
             if (comboBox1.Text.Equals("Joueur humain"))
             { 
-                estVirtuel = false;
+                estHumain= true;
             }
 
             else if (comboBox1.Text.Equals("Joueur virtuel"))
             {
-                estVirtuel = true;
+                estHumain = false;
             }
         }
 
@@ -455,7 +455,7 @@ namespace InterfaceGraphique
         /// <param name="e"></param>
         private void Sauvegarder_Click(object sender, EventArgs e)
         {
-            FonctionsNatives.sauvegarderTypeButMax(nbButMax, estVirtuel);
+            FonctionsNatives.sauvegarderTypeButMax(nbButMax, estHumain);
         }
 
         /// <summary>
@@ -490,7 +490,7 @@ namespace InterfaceGraphique
 
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void sauvegarderTypeButMax(int nombreMax, bool estVirtuel);
+        public static extern void sauvegarderTypeButMax(int nombreMax, bool estHumain);
 
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
