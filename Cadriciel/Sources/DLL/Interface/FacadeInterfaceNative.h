@@ -28,6 +28,7 @@ extern "C" {
 	__declspec(dllexport) bool executerTests();
 	
 	// Les fonction qui déplace l'objet vers la gauche, vers la droite, vers le bas et vers le haut
+	__declspec(dllexport) void deplacerMaillet(int toucheDeplacementAGauche_, int toucheDeplacementADroite_, int toucheDeplacementEnHaut_, int toucheDeplacementEnBas_);
 	__declspec(dllexport) void touches(int toucheDeplacementAGauche_, int toucheDeplacementADroite_, int toucheDeplacementEnHaut_, int toucheDeplacementEnBas_);
 	
 	__declspec(dllexport) void ajouterPortail(int x1, int y1);
