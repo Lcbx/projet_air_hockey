@@ -198,12 +198,12 @@ namespace InterfaceGraphique
         private void toucheManuel(object sender, KeyEventArgs e)
         {
             //TO-DO: Changer les touches par les touches enregistres !!
-
-            string temp = e.KeyCode.ToString();
-            string avant_ = Program.configuration.droite.Text;
-            string arriere_ = Program.configuration.gauche.Text;
-            string haut_ = Program.configuration.haut.Text;
-            string bas_ = Program.configuration.bas.Text;
+            
+            int temp = e.KeyValue;
+            int avant_ = Program.configuration.toucheDeplaceADroite_;
+            int arriere_ = Program.configuration.toucheDeplaceAGauche_;
+            int haut_ = Program.configuration.toucheDeplaceEnHaut_;
+            int bas_ = Program.configuration.toucheDeplaceEnBas_;
 
 
             //deplacer le maillet de 2eme joueur
@@ -279,11 +279,11 @@ namespace InterfaceGraphique
 
         private void toucheManuel2(object sender, KeyEventArgs e)
         {
-            string temp = e.KeyCode.ToString();
-            string avant_ = Program.configuration.droite.Text;
-            string arriere_ = Program.configuration.gauche.Text;
-            string haut_ = Program.configuration.haut.Text;
-            string bas_ = Program.configuration.bas.Text;
+            int temp = e.KeyValue;
+            int avant_ = Program.configuration.toucheDeplaceADroite_;
+            int arriere_ = Program.configuration.toucheDeplaceAGauche_;
+            int haut_ = Program.configuration.toucheDeplaceEnHaut_;
+            int bas_ = Program.configuration.toucheDeplaceEnBas_;
 
             //deplacer le maillet de 2eme joueur
             if (estEnModeTest == true || estEnModePartie == true)
@@ -1780,7 +1780,6 @@ namespace InterfaceGraphique
             FonctionsNatives.setjoueurVirtuel(false);
         }
 
-        bool estDejaAffiché = false;
         ///////////////////////////////////////////////////////////////////////
         /// @fn public void DemarrerPartie()
         /// Author : Ali
