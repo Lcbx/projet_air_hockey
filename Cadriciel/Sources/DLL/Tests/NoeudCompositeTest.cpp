@@ -268,7 +268,7 @@ void NoeudCompositeTest::testScale()
 	noeudBonus->assignerSelection(true);
 
 	//declarer un vecteur
-	glm::dvec3 vecteur{ noeudBonus->getScale() };
+	glm::dvec3 vecteur{ noeudBonus->getScale() };   
 
 	// Second test : on vérifie que la position a été modifiée
 	vecteur = noeudBonus->getScale();

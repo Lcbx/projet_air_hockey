@@ -10,7 +10,7 @@ namespace InterfaceGraphique
 {
     static class Program
     {
-        private const int NB_IMAGES_PAR_SECONDE = 60;
+        private const int NB_IMAGES_PAR_SECONDE = 60; 
 
         public static Object unLock = new Object();
         public static bool peutAfficher = true;
