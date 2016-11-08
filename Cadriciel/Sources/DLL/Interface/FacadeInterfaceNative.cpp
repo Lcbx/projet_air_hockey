@@ -1044,10 +1044,17 @@ extern "C"
 
 	__declspec(dllexport) void __cdecl sauvegarderTypeButMax(int nbButMax, bool estVirtuel)
 	{
-		std::cout << "nb but max: "<< nbButMax << " virtuel: " <<estVirtuel<< std::endl;
 		FacadeModele::obtenirInstance()->getConfigJeu()->setOptionsJeu(nbButMax, estVirtuel);
 	}
 
+	__declspec(dllexport) void __cdecl sauvegarderProfil(const char* nom, double vitesse, double proba)
+	{
+		std::string str(nom);
+		
+		std::cout <<"le nom est:  "<< nom <<"  son vitesse:  " << vitesse << "  proba: " << proba << std::endl;
+		
+		FacadeModele::obtenirInstance()->getConfigProfils()->setProfil(nom, vitesse, proba);
+	}
 
 }
 

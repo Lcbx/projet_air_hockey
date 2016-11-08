@@ -34,11 +34,11 @@ public:
 	/// Mutateur de vitesse
 	void  setVitesse(double vitesse);
 	/// Accesseur de vitesse
-	double getVitesse();
+	int getVitesse();
 	/// Mutateur de probabilite
 	void setProbabilite(double probabilite);
 	/// Accesseur de probabilite
-	double getProbabilite();
+	float getProbabilite();
 
 
 private:
@@ -47,10 +47,10 @@ private:
 	std::string nom_;
 
 	// Vitesse du maillet du profil
-	double vitesse_;
+	int vitesse_;
 
 	// Probabilite d'agir passivement du profil
-	double probabilite_;
+	float probabilite_;
 
 
 

@@ -79,6 +79,8 @@
             this.listDeProfils = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.ajouter = new System.Windows.Forms.Button();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -93,6 +95,8 @@
             this.tabPage4.SuspendLayout();
             this.creationProfil.SuspendLayout();
             this.listDeProfil.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -374,6 +378,8 @@
             // 
             // creationProfil
             // 
+            this.creationProfil.Controls.Add(this.numericUpDown3);
+            this.creationProfil.Controls.Add(this.numericUpDown2);
             this.creationProfil.Controls.Add(this.appliquer2);
             this.creationProfil.Controls.Add(this.ajoutProfil);
             this.creationProfil.Controls.Add(this.Proba);
@@ -467,6 +473,41 @@
             this.ajouter.Click += new System.EventHandler(this.ajouter_Click);
             this.ajouter.StyleChanged += new System.EventHandler(this.ajouter_Click);
             // 
+            // numericUpDown2 vitesse
+            // 
+            resources.ApplyResources(this.numericUpDown2, "numericUpDown2");
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            numericUpDown2.Increment = 1M;
+
+            // 
+            // numericUpDown3 prob
+            // 
+            resources.ApplyResources(this.numericUpDown3, "numericUpDown3");
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown3.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            numericUpDown3.DecimalPlaces = 1;
+            numericUpDown3.Increment = 0.1M;
+
+            // 
             // Configuration
             // 
             resources.ApplyResources(this, "$this");
@@ -495,6 +536,8 @@
             this.creationProfil.ResumeLayout(false);
             this.creationProfil.PerformLayout();
             this.listDeProfil.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -551,5 +594,7 @@
         private System.Windows.Forms.Button appliquer2;
         private System.Windows.Forms.Label ajoutProfil;
         private System.Windows.Forms.Button modifierProfil;
+        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
     }
 }

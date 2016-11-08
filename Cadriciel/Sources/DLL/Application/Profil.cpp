@@ -71,13 +71,13 @@ void Profil::setVitesse(double vitesse)
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-/// @fn double Profil::getVitesse()
+/// @fn int Profil::getVitesse()
 ///
 /// Cette fonction permet d'obtenir la vitesse du maillet d'un profil
 ///			
 /// @return double vitesse : la vitesse de deplacement du maillet
 /////////////////////////////////////////////////////////////////////////////////////////////////
-double Profil::getVitesse()
+int Profil::getVitesse()
 {
 	return vitesse_;
 }
@@ -105,7 +105,7 @@ void Profil::setProbabilite(double probabilite)
 ///			
 /// @return double probabilite : la probabilite d'agir passivement
 /////////////////////////////////////////////////////////////////////////////////////////////////
-double Profil::getProbabilite()
+float Profil::getProbabilite()
 {
 	return probabilite_;
 }
