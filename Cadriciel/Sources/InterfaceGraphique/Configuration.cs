@@ -70,7 +70,7 @@ namespace InterfaceGraphique
             nom = joueurVirtuelCourant_.getNomProfil();
             probaDAgirPassivemnt = joueurVirtuelCourant_.getProbProfil();
 
-
+            // Charge les touches du joueur 2
             int[] touches = new int[4];
             FonctionsNatives.obtenirTouches(touches);
             toucheDeplaceEnHaut_ = touches[0];
@@ -376,18 +376,7 @@ namespace InterfaceGraphique
         private void Configuration_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Hide();
-
-            int[] touches = new int[4];
-            FonctionsNatives.obtenirTouches(touches);
-            toucheDeplaceEnHaut_ = touches[0];
-            toucheDeplaceADroite_ = touches[1];
-            toucheDeplaceEnBas_ = touches[2];
-            toucheDeplaceAGauche_ = touches[3];
-            this.haut.Text = ((Keys)touches[0]).ToString();
-            this.droite.Text = ((Keys)touches[1]).ToString();
-            this.bas.Text = ((Keys)touches[2]).ToString();
-            this.gauche.Text = ((Keys)touches[3]).ToString();
-
+            
         }
     }
     static partial class FonctionsNatives

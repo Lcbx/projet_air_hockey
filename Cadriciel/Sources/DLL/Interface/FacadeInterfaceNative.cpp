@@ -929,7 +929,7 @@ extern "C"
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl sauvegarderTouches(int haut, int droite, int bas, int gauche)
 	{
-		FacadeModele::obtenirInstance()->getConfigTouches().enregistrerTouches(haut, droite, bas, gauche);
+		FacadeModele::obtenirInstance()->getConfigTouches()->enregistrerTouches(haut, droite, bas, gauche);
 	}
 
 	////////////////////////////////////////////////////////////////////////
@@ -943,7 +943,7 @@ extern "C"
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl obtenirTouches(int *touches)
 	{
-		FacadeModele::obtenirInstance()->getConfigTouches().obtenirTouches(touches);
+		FacadeModele::obtenirInstance()->getConfigTouches()->obtenirTouches(touches);
 	}
 	////////////////////////////////////////////////////////////////////////
 	/// @fn __declspec(dllexport) profilCourant(string nom, double vitesse, double probaDAgirPassivemnt)
