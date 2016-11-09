@@ -93,10 +93,7 @@ namespace InterfaceGraphique
             {
                 // Options de jeu
                 OptionsJeu* data = (OptionsJeu*)FonctionsNatives.obtenirOptionsJeu();
-
-                Console.WriteLine(data->nbrBut);
-                Console.WriteLine(data->joueurTestEstHumain);
-
+                
                 numericUpDown1.Value = data->nbrBut;
                 nbButMax = data->nbrBut;
 
