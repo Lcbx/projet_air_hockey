@@ -853,7 +853,7 @@ bool NoeudTable::getPointControle(int numero, glm::vec3 & pointControle)
 			pointControle = obtenirPositionRelative();
 		else
 			pointControle = pointControle_[numero];
-		std::cout << "pointControle[" << numero << "]" << "= (" << pointControle[0] << "," << pointControle[1] << "," << pointControle[2] << ")" << std::endl;
+		//std::cout << "pointControle[" << numero << "]" << "= (" << pointControle[0] << "," << pointControle[1] << "," << pointControle[2] << ")" << std::endl;
 		return true;
 	}
 }

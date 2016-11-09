@@ -49,19 +49,21 @@ void ConfigProfils::chargerProfils()
 		document.LoadFile(FICHIER_PROFILS.c_str());
 
 		// Obtenir le noeud 'listeProfil'
-		const tinyxml2::XMLElement* elementListeProfil{ document.FirstChildElement("listeProfil") };
+		tinyxml2::XMLElement* elementListeProfil{ document.FirstChildElement("listeProfil") };
 		if (elementListeProfil != nullptr) {
 
 			// Trouve le premier element profil
-			const tinyxml2::XMLElement* elementProfil{ elementListeProfil->FirstChildElement() };
+			tinyxml2::XMLElement* elementProfil{ elementListeProfil->FirstChildElement() };
 			while(elementProfil != nullptr) {
 				// Ajoute l'element du fichier dans la liste de profils
+				std::cout << elementProfil->Attribute("NOM") << " - " << elementProfil->DoubleAttribute("VITESSE") << " - " << elementProfil->DoubleAttribute("PROBABILITE") << std::endl;
 				_listeProfils.push_back(Profil(
 					elementProfil->Attribute("NOM"),
 					elementProfil->DoubleAttribute("VITESSE"),
 					elementProfil->DoubleAttribute("PROBABILITE")));
 				// Passe au profil suivant
-				elementProfil = elementListeProfil->NextSiblingElement();
+				elementProfil = elementProfil->NextSiblingElement();
+
 			}
 
 		}
@@ -273,14 +275,48 @@ double ConfigProfils::getProbabilite(std::string nom)
 /// @return un vecteur de noms de profils
 ///
 ////////////////////////////////////////////////////////////////////////
-std::vector<std::string> ConfigProfils::getNoms()
+void ConfigProfils::getNoms(int *noms)
 {
 	// Rempli un vecteur des noms des profils
-	std::vector<std::string> noms;
+	/*for (std::list<Profil>::iterator it = _listeProfils.begin(); it != _listeProfils.end(); ++it) {
+		_listeNoms.push_back(it->getNom());
+	}
+	// Retourne le vecteur
+	return noms;*/
+
+	/*for (std::list<Profil>::iterator it = _listeProfils.begin(); it != _listeProfils.end(); ++it) {
+		noms[0] = it->getNom().c_str();
+	}*/
+
+	std::string str = "";
 	for (std::list<Profil>::iterator it = _listeProfils.begin(); it != _listeProfils.end(); ++it) {
-		noms.push_back(it->getNom());
+		str.append(it->getNom());
+		str.append("#?&");
 	}
 
-	// Retourne le vecteur
-	return noms;
+	for (int i = 0; i < str.size(); i++) {
+		noms[i] = str[i];
+	}
+	
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn int ConfigProfils::getNombre()
+///
+/// Cette methode retourne le nombre de profils
+///
+/// @return le nombre de profils
+///
+////////////////////////////////////////////////////////////////////////
+int ConfigProfils::getNombre()
+{
+	int count = 0;
+
+	for (std::list<Profil>::iterator it = _listeProfils.begin(); it != _listeProfils.end(); ++it) {
+		count += it->getNom().size();
+		count += 3;
+	}
+
+	return count;
 }

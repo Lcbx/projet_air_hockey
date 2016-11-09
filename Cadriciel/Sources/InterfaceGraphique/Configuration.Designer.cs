@@ -66,11 +66,11 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.creationProfil = new System.Windows.Forms.GroupBox();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.appliquer2 = new System.Windows.Forms.Button();
             this.ajoutProfil = new System.Windows.Forms.Label();
             this.Proba = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.vitesse = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.nomProfil = new System.Windows.Forms.Label();
@@ -79,8 +79,6 @@
             this.listDeProfils = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.ajouter = new System.Windows.Forms.Button();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -94,9 +92,9 @@
             this.console.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.creationProfil.SuspendLayout();
-            this.listDeProfil.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            this.listDeProfil.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -383,14 +381,48 @@
             this.creationProfil.Controls.Add(this.appliquer2);
             this.creationProfil.Controls.Add(this.ajoutProfil);
             this.creationProfil.Controls.Add(this.Proba);
-            this.creationProfil.Controls.Add(this.textBox3);
-            this.creationProfil.Controls.Add(this.textBox2);
             this.creationProfil.Controls.Add(this.vitesse);
             this.creationProfil.Controls.Add(this.textBox1);
             this.creationProfil.Controls.Add(this.nomProfil);
             resources.ApplyResources(this.creationProfil, "creationProfil");
             this.creationProfil.Name = "creationProfil";
             this.creationProfil.TabStop = false;
+            // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.DecimalPlaces = 1;
+            this.numericUpDown3.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            resources.ApplyResources(this.numericUpDown3, "numericUpDown3");
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown3.Name = "numericUpDown3";
+            // 
+            // numericUpDown2
+            // 
+            resources.ApplyResources(this.numericUpDown2, "numericUpDown2");
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // appliquer2
             // 
@@ -408,16 +440,6 @@
             // 
             resources.ApplyResources(this.Proba, "Proba");
             this.Proba.Name = "Proba";
-            // 
-            // textBox3
-            // 
-            resources.ApplyResources(this.textBox3, "textBox3");
-            this.textBox3.Name = "textBox3";
-            // 
-            // textBox2
-            // 
-            resources.ApplyResources(this.textBox2, "textBox2");
-            this.textBox2.Name = "textBox2";
             // 
             // vitesse
             // 
@@ -473,41 +495,6 @@
             this.ajouter.Click += new System.EventHandler(this.ajouter_Click);
             this.ajouter.StyleChanged += new System.EventHandler(this.ajouter_Click);
             // 
-            // numericUpDown2 vitesse
-            // 
-            resources.ApplyResources(this.numericUpDown2, "numericUpDown2");
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            numericUpDown2.Increment = 1M;
-
-            // 
-            // numericUpDown3 prob
-            // 
-            resources.ApplyResources(this.numericUpDown3, "numericUpDown3");
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown3.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            numericUpDown3.DecimalPlaces = 1;
-            numericUpDown3.Increment = 0.1M;
-
-            // 
             // Configuration
             // 
             resources.ApplyResources(this, "$this");
@@ -535,9 +522,9 @@
             this.tabPage4.ResumeLayout(false);
             this.creationProfil.ResumeLayout(false);
             this.creationProfil.PerformLayout();
-            this.listDeProfil.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            this.listDeProfil.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -585,8 +572,6 @@
         private System.Windows.Forms.Button ajouter;
         private System.Windows.Forms.GroupBox creationProfil;
         private System.Windows.Forms.GroupBox listDeProfil;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label vitesse;
         private System.Windows.Forms.Label Proba;
         public System.Windows.Forms.ListBox listDeProfils;
