@@ -89,5 +89,9 @@ namespace InterfaceGraphique
             tournoi_.Show();
             this.Hide();
         }
+
+        public Edition getEdition()
+        { return edition_; }
+
     }
 }
