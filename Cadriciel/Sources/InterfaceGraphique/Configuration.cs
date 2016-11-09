@@ -112,12 +112,53 @@ namespace InterfaceGraphique
                 OptionsDebug* optsDebug = (OptionsDebug*)FonctionsNatives.obtenirOptionsDebug();
                 if(optsDebug->isDebugActif)
                 {
+                    debogageActif_ = true;
                     checkBox1.Checked = true;
 
-                    if (optsDebug->showCollisionRondelle) checkBox2.Checked = true;
-                    if (optsDebug->showVitesseRondelle) checkBox3.Checked = true;
-                    if (optsDebug->showEclairage) checkBox4.Checked = true;
-                    if (optsDebug->showAttractionPortail) checkBox5.Checked = true;
+                    if (optsDebug->showCollisionRondelle){
+                        debogCollision_ = true;
+                        checkBox2.Checked = true;}
+                    else
+                    {
+                        debogCollision_ = false;
+                        checkBox2.Checked = false; ;
+                    }
+
+                    if (optsDebug->showVitesseRondelle){
+                            debogVitesse_ = true;
+                            checkBox3.Checked = true;}
+                    else
+                    {
+                        debogVitesse_ = false;
+                        checkBox3.Checked = false;
+                    }
+
+                    if (optsDebug->showEclairage) {
+                        eclairageActif_ = true;
+                        checkBox4.Checked = true; }
+                    else
+                    {
+                        eclairageActif_ = false;
+                        checkBox4.Checked = false;
+                    }
+
+                    if (optsDebug->showAttractionPortail) {
+                        effetVisuelActif_ = true;
+                        checkBox5.Checked = true; }
+                    else
+                    {
+                        effetVisuelActif_ = false;
+                        checkBox5.Checked = true;
+                    }
+
+                    FonctionsNatives.debogConfig(debogageActif_, debogCollision_, debogVitesse_, eclairageActif_, effetVisuelActif_);
+                }
+                else
+                {
+                    debogageActif_ = false;
+                    checkBox1.Checked = false;
+                    FonctionsNatives.debogConfig(debogageActif_, debogCollision_, debogVitesse_, eclairageActif_, effetVisuelActif_);
+
                 }
 
             }
