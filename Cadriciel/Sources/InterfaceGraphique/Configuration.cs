@@ -23,7 +23,8 @@ namespace InterfaceGraphique
 {    
     public partial class Configuration : Form                   
     { 
-        private static MenuPrincipal menuPrincipal_;        
+        private static MenuPrincipal menuPrincipal_;
+        private static Edition edition_;
 
         //intilailser les touches du clavier par defaut
         public int toucheDeplaceAGauche_;
@@ -33,9 +34,6 @@ namespace InterfaceGraphique
 
         //le nombre de buts nécessaires (entre 1 et 5) pour gagner une partie.
         public int nbButMax;
-        
-        
-        
 
         public bool estHumain = false;    
         Profil joueurVirtuelDefault_ = new Profil();
@@ -57,6 +55,7 @@ namespace InterfaceGraphique
 
         private bool modifierActif = false;
         private bool ajouterActif = false;
+
 
         public Configuration()
         {
@@ -101,6 +100,8 @@ namespace InterfaceGraphique
                 {
                     comboBox1.Text = "Joueur humain";
                     estHumain = true;
+
+                   
                 }
                 else
                 {
@@ -187,9 +188,10 @@ namespace InterfaceGraphique
 
         }
 
-        public void setMenuPrincipalConfig(MenuPrincipal menuPrincipal)
+        public void setMenuPrincipalConfig(MenuPrincipal menuPrincipal, Edition edition)
         {
             menuPrincipal_ = menuPrincipal;
+            edition_ = edition;
         }
                     
         private void renitialisation_Click(object sender, EventArgs e)

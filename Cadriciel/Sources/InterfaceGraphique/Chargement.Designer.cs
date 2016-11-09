@@ -52,6 +52,7 @@
             this.filename.ReadOnly = true;
             this.filename.Size = new System.Drawing.Size(112, 20);
             this.filename.TabIndex = 1;
+            this.filename.TextChanged += new System.EventHandler(this.filename_TextChanged);
             // 
             // label1
             // 
@@ -80,6 +81,7 @@
             this.label2.Size = new System.Drawing.Size(32, 17);
             this.label2.TabIndex = 4;
             this.label2.Text = ".xml";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // Chargement
             // 
@@ -92,7 +94,7 @@
             this.Controls.Add(this.filename);
             this.Controls.Add(this.bouttonSauvegarder);
             this.Name = "Chargement";
-            this.Text = "Chargement";
+            this.Text = "Choix de la zone du jeu";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Sauvegarde_FormClosing);
             this.Load += new System.EventHandler(this.Sauvegarde_Load);
             this.Shown += new System.EventHandler(this.Sauvegarde_Load);

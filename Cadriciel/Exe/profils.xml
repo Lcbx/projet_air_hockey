@@ -3,4 +3,5 @@
     <Perceval NOM="Perceval" VITESSE="3" PROBABILITE="0.4"/>
     <Leodagan NOM="Leodagan" VITESSE="4" PROBABILITE="0.6"/>
     <ddd NOM="ddd" VITESSE="3" PROBABILITE="0.1"/>
+    <sadsda NOM="sadsda" VITESSE="10" PROBABILITE="0.2"/>
 </listeProfil>

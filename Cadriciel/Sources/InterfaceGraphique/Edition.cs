@@ -446,24 +446,25 @@ namespace InterfaceGraphique
                             FonctionsNatives.reinitialiserPartieCourante();
                             break;
                         }
-                    case Keys.V:    // Activer le joueur Virtuelle
-                        {
-                            if (estEnModeTest && !estEnModePartie)
-                            {
-                                estjoueurvirtuel = true;
-                                DemarerJoueurVirtuel(70, 0.9);
-                            }
-                            break;
-                        }
-                    case Keys.B:    // Deactiver le joueur Virtuelle
-                        {
-                            if (estEnModeTest && !estEnModePartie)
-                            {
-                                estjoueurvirtuel = false;
-                                ArreterJoueurVirtuel();
-                            }
-                            break;
-                        }
+                    //case Keys.V:    // Activer le joueur Virtuelle
+                    //    {
+                    //        if (estEnModeTest && !estEnModePartie)
+                    //        {
+                    //            estjoueurvirtuel = true;
+                    //            DemarerJoueurVirtuel(10, 1);
+                    //        }
+                    //        break;
+                    //    }
+                    //case Keys.B:    // Deactiver le joueur Virtuelle
+                    //    {
+                    //        if (estEnModeTest && !estEnModePartie)
+                    //        {
+
+                    //            estjoueurvirtuel = false;
+                    //            ArreterJoueurVirtuel();
+                    //        }
+                    //        break;
+                    //    }
 
                     default: break;
 
@@ -484,16 +485,16 @@ namespace InterfaceGraphique
                             FonctionsNatives.reinitialiserPartieCourante();
                             break;
                         }
-                    case Keys.V:    // Activer le joueur Virtuelle
-                        {
-                            DemarerJoueurVirtuel(1, 0.5);
-                            break;
-                        }
-                    case Keys.B:    // Deactiver le joueur Virtuelle
-                        {
-                            ArreterJoueurVirtuel();
-                            break;
-                        }
+                    //case Keys.V:    // Activer le joueur Virtuelle
+                    //    {
+                    //        DemarerJoueurVirtuel(1, 0.5);
+                    //        break;
+                    //    }
+                    //case Keys.B:    // Deactiver le joueur Virtuelle
+                    //    {
+                    //        ArreterJoueurVirtuel();
+                    //        break;
+                    //    }
 
                     default: break;  
 
@@ -1536,18 +1537,26 @@ namespace InterfaceGraphique
                 this.Text = "Mode Test";
                 estEnModeTest = true;
                 estEnModePartie = false;
-
+                estEnPause = false;
+	        //State
+                //state = States.Test;
                 this.changerMode(Etats.TEST);
                 //Permet d'ajouter les maillets et la rondelle dans la table
                 FonctionsNatives.ajouterMailletEtRondelle();
                 //effacer les points de controle
                 FonctionsNatives.effacerPointControle();
 
-                estEnPause = false;
-
-                //State
-                //state = States.Test;
-
+                //check le mode du joueur modetest dans le panel de configuration
+                if (Program.configuration.estHumain) // arreter joueur virtuel
+                {
+                    estjoueurvirtuel = false;
+                    ArreterJoueurVirtuel();
+                }
+                else // activer joueur virtuel
+                {
+                    estjoueurvirtuel = true;
+                    DemarerJoueurVirtuel(10, 1);
+                }
 
                 toolStrip1.Hide();
                 menuStrip1.Hide();
@@ -1582,7 +1591,7 @@ namespace InterfaceGraphique
             //si mode edition , afficher les menus a cotés + barre des menus
             else
             {
-                if (estEnModePartie == true) { FonctionsNatives.initialiserScene(); }
+                if (estEnModePartie) { FonctionsNatives.initialiserScene(); }
 
                 panel1.Location = new Point(ancienPosX, ancienPosY);
 
@@ -1782,7 +1791,7 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         public void DemarerJoueurVirtuel(double vitesse, double probabilite)
         {
-            Console.WriteLine("+++ Joueur Virtuel Active' +++");
+            //Console.WriteLine("+++ Joueur Virtuel Active' +++");
             FonctionsNatives.setjoueurVirtuel(true);
             // on passe la vitesse
             FonctionsNatives.setVitesseVirtuel(vitesse);
@@ -1799,7 +1808,7 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         public void ArreterJoueurVirtuel()
         {
-            Console.WriteLine("--- Joueur Virtuel Desactive' ---");
+           // Console.WriteLine("--- Joueur Virtuel Desactive' ---");
             FonctionsNatives.setjoueurVirtuel(false);
         }
 
@@ -1813,7 +1822,6 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         public void DemarrerPartie()
         {
-           
             if (FonctionsNatives.estButDroite())
             {
                 //MessageBox.Show("Player 2 SCORES !","AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand);
