@@ -20,6 +20,8 @@ namespace InterfaceGraphique
         private ModeTournoi parent_ = null;
         private List<ParticipantTournoi> participants = new List<ParticipantTournoi>(NB_PARTICIPANTS);
 
+        private Timer t;
+
 
         /// @fn public CreationTournoi()
         /// @brief Permet de créer un tournoi par défaut
@@ -46,7 +48,7 @@ namespace InterfaceGraphique
 
            
             ///wajdi code 
-            Timer t = new Timer(); //creer le timer 
+            t = new Timer(); //creer le timer 
             t.Interval = 5000;     // specify interval time as you want (en milisecondes) ( 5000 = 5 sec)
             t.Tick += new EventHandler(timer1_Tick);  //evenement qui se declanche a la fin des 5 sec
             t.Start();
@@ -72,9 +74,12 @@ namespace InterfaceGraphique
             //Centre pour un participant
             int center = this.participants[0].Size.Width / 2;
 
-            this.createButton.Location = new System.Drawing.Point(
-                center - this.createButton.Size.Width / 2, 
+            this.cbmZoneDeJeu.Location = new System.Drawing.Point(
+                center - this.cbmZoneDeJeu.Size.Width / 2,
                 ((participants[0].Size.Height + SPACING_PARTICIPANTS) * NB_PARTICIPANTS + this.title.Height + SPACING_PARTICIPANTS));
+            this.createButton.Location = new System.Drawing.Point(
+                center - this.createButton.Size.Width / 2,
+                ((participants[0].Size.Height + SPACING_PARTICIPANTS) * NB_PARTICIPANTS + this.title.Height + SPACING_PARTICIPANTS * 2 + this.cbmZoneDeJeu.Height));
             this.title.Location = new System.Drawing.Point(
                 center - this.title.Size.Width / 2, 0);
                 
@@ -85,6 +90,7 @@ namespace InterfaceGraphique
         {
             this.parent_.Hide();
             this.parent_.passeModeJeu();
+            t.Stop();
         }
 
 

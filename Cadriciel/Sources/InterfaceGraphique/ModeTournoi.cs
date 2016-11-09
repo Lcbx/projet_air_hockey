@@ -85,9 +85,9 @@ namespace InterfaceGraphique
             this.panel1.Anchor = AnchorStyles.None;
         }
 
-        //Wajdi -- lier cette fenetre a edition
-        public void setEdition(Edition edition)
-        {
+        /// @fn public void setEdition(Edition edition) 
+        /// @brief Permet de lier la fenêtre d'édition au mode tournoi
+        public void setEdition(Edition edition) {
             edition_ = edition;
         }
 
