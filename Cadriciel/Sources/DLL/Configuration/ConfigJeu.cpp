@@ -45,13 +45,9 @@ ConfigJeu::ConfigJeu()
 ////////////////////////////////////////////////////////////////////////
 void ConfigJeu::chargerOptionsJeu()
 {
+	bool optionsJeuDejaDefinies = false;
 	// Vérification de l'existance du ficher
-	if (!utilitaire::fichierExiste("configuration.xml")) {
-		// Si le fichier n'existe pas, on utilise les valeurs par défaut
-		_nbrBut = NOMBRE_BUT_DEFAUT;
-		_joueurTestEstHumain = JOUEUR_TEST_EST_HUMAIN_DEFAUT;
-	}
-	else {
+	if (utilitaire::fichierExiste("configuration.xml")) {
 
 		// Charge le fichier de configuration
 		tinyxml2::XMLDocument document;
@@ -65,12 +61,19 @@ void ConfigJeu::chargerOptionsJeu()
 			const tinyxml2::XMLElement* elementJeu{ elementConfiguration->FirstChildElement("CJeu") };
 			if (elementJeu != nullptr) {
 				// Obtenir les attributs des options de jeu
-				if (elementJeu->QueryIntAttribute("NOMBRE_BUT", &_nbrBut) != tinyxml2::XML_SUCCESS ||
-					elementJeu->QueryBoolAttribute("JOUEUR_TEST_EST_HUMAIN", &_joueurTestEstHumain) != tinyxml2::XML_SUCCESS) {
+				if (elementJeu->QueryIntAttribute("NOMBRE_BUT", &_optionsJeu.nbrBut) != tinyxml2::XML_SUCCESS ||
+					elementJeu->QueryBoolAttribute("JOUEUR_TEST_EST_HUMAIN", &_optionsJeu.joueurTestEstHumain) != tinyxml2::XML_SUCCESS) {
 					std::cerr << "Erreur de chargement des options de jeu" << std::endl;
 				}
+				else
+					optionsJeuDejaDefinies = true;
 			}
 		}
+	}
+	// Si les options de jeu n'ont pas pu être chargées, utiliser les valeurs par défaut
+	if (!optionsJeuDejaDefinies) {
+		_optionsJeu.nbrBut = NOMBRE_BUT_DEFAUT;
+		_optionsJeu.joueurTestEstHumain = JOUEUR_TEST_EST_HUMAIN_DEFAUT;
 	}
 }
 
@@ -86,8 +89,8 @@ void ConfigJeu::chargerOptionsJeu()
 ////////////////////////////////////////////////////////////////////////
 void ConfigJeu::setOptionsJeu(int nbrBut, bool joueurTestEstHumain)
 {
-	_nbrBut = nbrBut;
-	_joueurTestEstHumain = joueurTestEstHumain;
+	_optionsJeu.nbrBut = nbrBut;
+	_optionsJeu.joueurTestEstHumain = joueurTestEstHumain;
 
 	// Créer un nouveau document XML si le fichier n'existe pas, ou le charger depuis le fichier dans le cas contraire
 	tinyxml2::XMLDocument document;
@@ -112,8 +115,8 @@ void ConfigJeu::setOptionsJeu(int nbrBut, bool joueurTestEstHumain)
 	}
 
 	// Enregistrer les valeurs des options de jeu dans les attributs du noeud 'CJeu'
-	elementJeu->SetAttribute("NOMBRE_BUT", _nbrBut);
-	elementJeu->SetAttribute("JOUEUR_TEST_EST_HUMAIN", _joueurTestEstHumain);
+	elementJeu->SetAttribute("NOMBRE_BUT", _optionsJeu.nbrBut);
+	elementJeu->SetAttribute("JOUEUR_TEST_EST_HUMAIN", _optionsJeu.joueurTestEstHumain);
 
 	// Sauvegarder les changements dans le fichier
 	document.SaveFile("configuration.xml");
@@ -121,6 +124,16 @@ void ConfigJeu::setOptionsJeu(int nbrBut, bool joueurTestEstHumain)
 
 
 
+////////////////////////////////////////////////////////////////////////
+/// @fn OptionsJeu ConfigJeu::getOptionsJeu()
+/// Cette methode permet d'obtenir une structure contenant les options
+/// de jeu
+/// @return une structure OptionsJeu
+////////////////////////////////////////////////////////////////////////
+struct OptionsJeu* ConfigJeu::getOptionsJeu()
+{
+	return &_optionsJeu;
+}
 
 
 
@@ -132,7 +145,7 @@ void ConfigJeu::setOptionsJeu(int nbrBut, bool joueurTestEstHumain)
 ////////////////////////////////////////////////////////////////////////
 int ConfigJeu::getNombreDeButs()
 {
-	return _nbrBut;
+	return _optionsJeu.nbrBut;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -144,7 +157,7 @@ int ConfigJeu::getNombreDeButs()
 ////////////////////////////////////////////////////////////////////////
 bool ConfigJeu::joueurTestEstHumain()
 {
-	return _joueurTestEstHumain;
+	return _optionsJeu.joueurTestEstHumain;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

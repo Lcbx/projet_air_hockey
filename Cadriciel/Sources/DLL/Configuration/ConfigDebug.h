@@ -11,6 +11,15 @@
 
 #include "../../../Commun/Externe/tinyxml2/include/tinyxml2.h"
 
+
+struct OptionsDebug {
+	bool isDebugActif;
+	bool showCollisionRondelle;
+	bool showVitesseRondelle;
+	bool showEclairage;
+	bool showAttractionPortail;
+};
+
 ///////////////////////////////////////////////////////////////////////////
 /// @class ConfigDebug
 /// @brief Représente les options de debug
@@ -33,8 +42,10 @@ public:
 	void setOptionsDebug(bool isDebugActif, bool showCollisionRondelle, bool showVitesseRondelle, bool showEclairage, bool showAttractionPortail);
 
 
+	/// Accesseur des options de jeu
+	struct OptionsDebug* getOptionsDebug();
 
-	/// Accesseurs des options de debug
+	/// Accesseurs des options de debug indivuduels
 	bool isDebugActif();
 	bool showCollisionRondelle();
 	bool showVitesseRondelle();
@@ -47,11 +58,7 @@ public:
 private:
 
 	// Options de debug
-	bool _isDebugActif;
-	bool _showCollisionRondelle;
-	bool _showVitesseRondelle;
-	bool _showEclairage;
-	bool _showAttractionPortail;
+	OptionsDebug _optionsDebug;
 };
 
 

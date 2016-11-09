@@ -40,16 +40,9 @@ ConfigDebug::ConfigDebug()
 ////////////////////////////////////////////////////////////////////////
 void ConfigDebug::chargerOptionsDebug()
 {
+	bool optionsDebugDejaDefinies = false;
 	// Vérification de l'existance du ficher
-	if (!utilitaire::fichierExiste("configuration.xml")) {
-		// Si le fichier n'existe pas, on utilise les valeurs par défaut
-		_isDebugActif = false;
-		_showCollisionRondelle = false;
-		_showVitesseRondelle = false;
-		_showEclairage = false;
-		_showAttractionPortail = false;
-	}
-	else {
+	if (utilitaire::fichierExiste("configuration.xml")) {
 
 		// Charge le fichier de configuration
 		tinyxml2::XMLDocument document;
@@ -63,15 +56,26 @@ void ConfigDebug::chargerOptionsDebug()
 			const tinyxml2::XMLElement* elementDebug{ elementConfiguration->FirstChildElement("CDebug") };
 			if (elementDebug != nullptr) {
 				// Obtenir les attributs des options de debug
-				if (elementDebug->QueryBoolAttribute("IS_DEBUG_ACTIF", &_isDebugActif) != tinyxml2::XML_SUCCESS ||
-					elementDebug->QueryBoolAttribute("SHOW_COLLISION_RONDELLE", &_showCollisionRondelle) != tinyxml2::XML_SUCCESS ||
-					elementDebug->QueryBoolAttribute("SHOW_VITESSE_RONDELLE", &_showVitesseRondelle) != tinyxml2::XML_SUCCESS ||
-					elementDebug->QueryBoolAttribute("SHOW_ECLAIRAGE", &_showEclairage) != tinyxml2::XML_SUCCESS ||
-					elementDebug->QueryBoolAttribute("SHOW_ATTRACTION_PORTAIL", &_showAttractionPortail) != tinyxml2::XML_SUCCESS) {
+				if (elementDebug->QueryBoolAttribute("IS_DEBUG_ACTIF", &_optionsDebug.isDebugActif) != tinyxml2::XML_SUCCESS ||
+					elementDebug->QueryBoolAttribute("SHOW_COLLISION_RONDELLE", &_optionsDebug.showCollisionRondelle) != tinyxml2::XML_SUCCESS ||
+					elementDebug->QueryBoolAttribute("SHOW_VITESSE_RONDELLE", &_optionsDebug.showVitesseRondelle) != tinyxml2::XML_SUCCESS ||
+					elementDebug->QueryBoolAttribute("SHOW_ECLAIRAGE", &_optionsDebug.showEclairage) != tinyxml2::XML_SUCCESS ||
+					elementDebug->QueryBoolAttribute("SHOW_ATTRACTION_PORTAIL", &_optionsDebug.showAttractionPortail) != tinyxml2::XML_SUCCESS) {
 					std::cerr << "Erreur de chargement des options de debug" << std::endl;
 				}
+				else
+					optionsDebugDejaDefinies = true;
 			}
 		}
+	}
+	// Si les options de debug n'ont pas pu être chargées, utiliser les valeurs par défaut
+	if (!optionsDebugDejaDefinies)
+	{
+		_optionsDebug.isDebugActif = false;
+		_optionsDebug.showCollisionRondelle = false;
+		_optionsDebug.showVitesseRondelle = false;
+		_optionsDebug.showEclairage = false;
+		_optionsDebug.showAttractionPortail = false;
 	}
 }
 
@@ -87,11 +91,11 @@ void ConfigDebug::chargerOptionsDebug()
 ////////////////////////////////////////////////////////////////////////
 void ConfigDebug::setOptionsDebug(bool isDebugActif, bool showCollisionRondelle, bool showVitesseRondelle, bool showEclairage, bool showAttractionPortail)
 {
-	_isDebugActif = isDebugActif;
-	_showCollisionRondelle = showCollisionRondelle;
-	_showVitesseRondelle = showVitesseRondelle;
-	_showEclairage = showEclairage;
-	_showAttractionPortail = showAttractionPortail;
+	_optionsDebug.isDebugActif = isDebugActif;
+	_optionsDebug.showCollisionRondelle = showCollisionRondelle;
+	_optionsDebug.showVitesseRondelle = showVitesseRondelle;
+	_optionsDebug.showEclairage = showEclairage;
+	_optionsDebug.showAttractionPortail = showAttractionPortail;
 
 	// Créer un nouveau document XML si le fichier n'existe pas, ou le charger depuis le fichier dans le cas contraire
 	tinyxml2::XMLDocument document;
@@ -116,15 +120,29 @@ void ConfigDebug::setOptionsDebug(bool isDebugActif, bool showCollisionRondelle,
 	}
 
 	// Enregistrer les valeurs des options de jeu dans les attributs du noeud 'CJeu'
-	elementDebug->SetAttribute("IS_DEBUG_ACTIF", _isDebugActif);
-	elementDebug->SetAttribute("SHOW_COLLISION_RONDELLE", _showCollisionRondelle);
-	elementDebug->SetAttribute("SHOW_VITESSE_RONDELLE", _showVitesseRondelle);
-	elementDebug->SetAttribute("SHOW_ECLAIRAGE", _showEclairage);
-	elementDebug->SetAttribute("SHOW_ATTRACTION_PORTAIL", _showAttractionPortail);
+	elementDebug->SetAttribute("IS_DEBUG_ACTIF", _optionsDebug.isDebugActif);
+	elementDebug->SetAttribute("SHOW_COLLISION_RONDELLE", _optionsDebug.showCollisionRondelle);
+	elementDebug->SetAttribute("SHOW_VITESSE_RONDELLE", _optionsDebug.showVitesseRondelle);
+	elementDebug->SetAttribute("SHOW_ECLAIRAGE", _optionsDebug.showEclairage);
+	elementDebug->SetAttribute("SHOW_ATTRACTION_PORTAIL", _optionsDebug.showAttractionPortail);
 
 	// Sauvegarder les changements dans le fichier
 	document.SaveFile("configuration.xml");
 }
+
+
+
+////////////////////////////////////////////////////////////////////////
+/// @fn OptionsDebug ConfigDebug::getOptionsDebug()
+/// Cette methode permet d'obtenir une structure contenant les options
+/// de debug
+/// @return une structure OptionsDebug
+////////////////////////////////////////////////////////////////////////
+struct OptionsDebug* ConfigDebug::getOptionsDebug()
+{
+	return &_optionsDebug;
+}
+
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -134,7 +152,7 @@ void ConfigDebug::setOptionsDebug(bool isDebugActif, bool showCollisionRondelle,
 ////////////////////////////////////////////////////////////////////////
 bool ConfigDebug::isDebugActif()
 {
-	return _isDebugActif;
+	return _optionsDebug.isDebugActif;
 }
 
 
@@ -146,7 +164,7 @@ bool ConfigDebug::isDebugActif()
 ////////////////////////////////////////////////////////////////////////
 bool ConfigDebug::showCollisionRondelle()
 {
-	return _showCollisionRondelle;
+	return _optionsDebug.showCollisionRondelle;
 }
 
 
@@ -159,7 +177,7 @@ bool ConfigDebug::showCollisionRondelle()
 ////////////////////////////////////////////////////////////////////////
 bool ConfigDebug::showVitesseRondelle()
 {
-	return _showVitesseRondelle;
+	return _optionsDebug.showVitesseRondelle;
 }
 
 
@@ -172,7 +190,7 @@ bool ConfigDebug::showVitesseRondelle()
 ////////////////////////////////////////////////////////////////////////
 bool ConfigDebug::showEclairage()
 {
-	return _showEclairage;
+	return _optionsDebug.showEclairage;
 }
 
 
@@ -185,7 +203,7 @@ bool ConfigDebug::showEclairage()
 ////////////////////////////////////////////////////////////////////////
 bool ConfigDebug::showAttractionPortail()
 {
-	return _showAttractionPortail;
+	return _optionsDebug.showAttractionPortail;
 }
 
 

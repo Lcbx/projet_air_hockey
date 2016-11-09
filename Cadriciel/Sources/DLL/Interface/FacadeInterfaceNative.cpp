@@ -946,6 +946,42 @@ extern "C"
 		FacadeModele::obtenirInstance()->getConfigTouches()->obtenirTouches(touches);
 	}
 	////////////////////////////////////////////////////////////////////////
+	/// A DEPLACER ICI:
+	/// @fn 	__declspec(dllexport) void enregistrerOptionsJeu();
+	/// Author : Arthur
+	/// Cette fonction permet de modifier et enregistrer les options de jeu
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) OptionsJeu obtenirOptionsJeu();
+	/// Author : Arthur
+	/// Cette fonction permet d'obtenir les options de jeu
+	///
+	/// @return OptionsJeu : {nombre de buts, type de joueur}
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) struct OptionsJeu* __cdecl obtenirOptionsJeu()
+	{
+		return FacadeModele::obtenirInstance()->getConfigJeu()->getOptionsJeu();
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) OptionsDebug obtenirOptionsDebug();
+	/// Author : Arthur
+	/// Cette fonction permet d'obtenir les options de debug
+	///
+	/// @return struct OptionsDebug
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) struct OptionsDebug* __cdecl obtenirOptionsDebug()
+	{
+		return FacadeModele::obtenirInstance()->getConfigDebug()->getOptionsDebug();
+	}
+
+	////////////////////////////////////////////////////////////////////////
 	/// @fn __declspec(dllexport) profilCourant(string nom, double vitesse, double probaDAgirPassivemnt)
 	/// Author : ikram
 	/// Cette fonction permet de envoyer le joueur courant 
@@ -1019,9 +1055,9 @@ extern "C"
 		}
 	}
 
-	__declspec(dllexport) void __cdecl sauvegarderTypeButMax(int nbButMax, bool estVirtuel)
+	__declspec(dllexport) void __cdecl sauvegarderTypeButMax(int nbButMax, bool estHumain)
 	{
-		FacadeModele::obtenirInstance()->getConfigJeu()->setOptionsJeu(nbButMax, estVirtuel);
+		FacadeModele::obtenirInstance()->getConfigJeu()->setOptionsJeu(nbButMax, estHumain);
 	}
 
 	__declspec(dllexport) void __cdecl sauvegarderProfil(const char* nom, double vitesse, double proba)
@@ -1032,6 +1068,7 @@ extern "C"
 		
 		FacadeModele::obtenirInstance()->getConfigProfils()->setProfil(nom, vitesse, proba);
 	}
+	
 
 }
 

@@ -32,11 +32,12 @@ namespace InterfaceGraphique
         public int toucheDeplaceEnHaut_;
 
         //le nombre de buts nécessaires (entre 1 et 5) pour gagner une partie.
-        private int nbButMax = 2 ;
-
+        public int nbButMax;
+        
+        
         
 
-        private bool estVirtuel = true;    
+        public bool estHumain = false;    
         Profil joueurVirtuelDefault_ = new Profil();
         Profil joueurVirtuelCourant_;
         List<Profil> profils =new List<Profil>();
@@ -87,7 +88,42 @@ namespace InterfaceGraphique
             this.bas.Text = ((Keys)touches[2]).ToString();
             this.gauche.Text = ((Keys)touches[3]).ToString();
 
-            
+            // Charge les options (unsafe pour cause de pointeur)
+            unsafe
+            {
+                // Options de jeu
+                OptionsJeu* data = (OptionsJeu*)FonctionsNatives.obtenirOptionsJeu();
+                
+                numericUpDown1.Value = data->nbrBut;
+                nbButMax = data->nbrBut;
+
+                if (data->joueurTestEstHumain == true)
+                {
+                    comboBox1.Text = "Joueur humain";
+                    estHumain = true;
+                }
+                else
+                {
+                    comboBox1.Text = "Joueur virtuel";
+                    estHumain = false;
+                }
+
+                // Options de debug
+                OptionsDebug* optsDebug = (OptionsDebug*)FonctionsNatives.obtenirOptionsDebug();
+                if(optsDebug->isDebugActif)
+                {
+                    checkBox1.Checked = true;
+
+                    if (optsDebug->showCollisionRondelle) checkBox2.Checked = true;
+                    if (optsDebug->showVitesseRondelle) checkBox3.Checked = true;
+                    if (optsDebug->showEclairage) checkBox4.Checked = true;
+                    if (optsDebug->showAttractionPortail) checkBox5.Checked = true;
+                }
+
+            }
+
+
+
         }
 
         public void setMenuPrincipalConfig(MenuPrincipal menuPrincipal)
@@ -256,12 +292,12 @@ namespace InterfaceGraphique
         {
             if (comboBox1.Text.Equals("Joueur humain"))
             { 
-                estVirtuel = false;
+                estHumain= true;
             }
 
             else if (comboBox1.Text.Equals("Joueur virtuel"))
             {
-                estVirtuel = true;
+                estHumain = false;
             }
         }
 
@@ -455,7 +491,7 @@ namespace InterfaceGraphique
         /// <param name="e"></param>
         private void Sauvegarder_Click(object sender, EventArgs e)
         {
-            FonctionsNatives.sauvegarderTypeButMax(nbButMax, estVirtuel);
+            FonctionsNatives.sauvegarderTypeButMax(nbButMax, estHumain);
         }
 
         /// <summary>
@@ -469,7 +505,26 @@ namespace InterfaceGraphique
          }
 
 
-}
+
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct OptionsJeu
+    {
+        public int nbrBut;
+        public bool joueurTestEstHumain;
+    };
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct OptionsDebug
+    {
+        public bool isDebugActif;
+        public bool showCollisionRondelle;
+        public bool showVitesseRondelle;
+        public bool showEclairage;
+        public bool showAttractionPortail;
+    };
+
     static partial class FonctionsNatives
     {
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -490,11 +545,19 @@ namespace InterfaceGraphique
 
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void sauvegarderTypeButMax(int nombreMax, bool estVirtuel);
+        public static extern void sauvegarderTypeButMax(int nombreMax, bool estHumain);
+
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr obtenirOptionsJeu();
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr obtenirOptionsDebug();
 
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void sauvegarderProfil(string nom, double vitesse, double proba);
 
     }
+
 }

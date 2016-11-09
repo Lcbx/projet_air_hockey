@@ -13,6 +13,7 @@
 #include <iostream>
 
 
+
 using namespace std;
 
 extern "C" {
@@ -94,6 +95,7 @@ extern "C" {
 	/// Permet d'obtenir le coefficient d'accélération
 	__declspec(dllexport) double getCoefficientAcceleration();
 
+
 	// Methode pour sauvegarder la zone de jeu
 	__declspec(dllexport) void enregistrerZoneJeu(char *fichierZoneJeu);
 	// Methode pour charger la zone de jeu
@@ -104,6 +106,12 @@ extern "C" {
 	// Methode pour obtenir les touches du joueur 2.
 	__declspec(dllexport) void obtenirTouches(int *touches);
 
+	// Methode pour modifier et enregistrer les options de jeu
+	__declspec(dllexport) void sauvegarderTypeButMax(int nbButMax, bool estVirtuel);
+	// Methode pour obtenir les options de jeu
+	__declspec(dllexport) struct OptionsJeu* obtenirOptionsJeu();
+	// Methode pour obtenir les options de debug
+	__declspec(dllexport) struct OptionsDebug* obtenirOptionsDebug();
 
 	__declspec(dllexport) bool objetEstDansLaTable();
 
@@ -166,7 +174,7 @@ extern "C" {
 	__declspec(dllexport) void changerLumieresActives(bool jLumiereAmbiente, bool kLumiereDirectionnelle, bool jLumiereSpots);
 
 	
-	__declspec(dllexport) void sauvegarderTypeButMax(int nbButMax, bool estVirtuel);
+
 
 	__declspec(dllexport) void sauvegarderProfil (const char* nom, double vitesse, double proba);
 
