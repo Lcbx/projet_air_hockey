@@ -982,6 +982,10 @@ extern "C"
 			Debug::obtenirInstance().afficherLumieres = false;
 			Debug::obtenirInstance().afficherAttraction = false;
 		}
+
+		FacadeModele::obtenirInstance()->getConfigDebug()->setOptionsDebug(debogageActif_, debogCollision_,
+			debogVitesse_, eclairageActif_, effetVisuelActif_);
+
 	}
 
 	////////////////////////////////////////////////////////////////////////
@@ -1015,7 +1019,19 @@ extern "C"
 		}
 	}
 
+	__declspec(dllexport) void __cdecl sauvegarderTypeButMax(int nbButMax, bool estVirtuel)
+	{
+		FacadeModele::obtenirInstance()->getConfigJeu()->setOptionsJeu(nbButMax, estVirtuel);
+	}
+
+	__declspec(dllexport) void __cdecl sauvegarderProfil(const char* nom, double vitesse, double proba)
+	{
+		std::string str(nom);
+		
+		std::cout <<"le nom est:  "<< nom <<"  son vitesse:  " << vitesse << "  proba: " << proba << std::endl;
+		
+		FacadeModele::obtenirInstance()->getConfigProfils()->setProfil(nom, vitesse, proba);
+	}
+
 }
-///////////////////////////////////////////////////////////////////////////////
-/// @}
-///////////////////////////////////////////////////////////////////////////////
+

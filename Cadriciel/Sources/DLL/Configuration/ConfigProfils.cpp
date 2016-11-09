@@ -98,7 +98,7 @@ void ConfigProfils::setProfil(Profil profil)
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void ConfigProfils::setProfil(std::string nom, double vitesse, double probabilite)
+void ConfigProfils::setProfil(std::string nom, int vitesse, float probabilite)
 {
 	bool alreadyExist = false;
 

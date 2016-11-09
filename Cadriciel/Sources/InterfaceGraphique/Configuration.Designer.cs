@@ -45,7 +45,7 @@
             this.réintialisation = new System.Windows.Forms.Button();
             this.appliquer = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.fermer = new System.Windows.Forms.Button();
+            this.Sauvegarder = new System.Windows.Forms.Button();
             this.typeJoueur = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.type = new System.Windows.Forms.Label();
@@ -55,7 +55,7 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.fermerDebogage = new System.Windows.Forms.Button();
+            this.SauvegarderDebogage = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
@@ -79,6 +79,8 @@
             this.listDeProfils = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.ajouter = new System.Windows.Forms.Button();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -93,6 +95,8 @@
             this.tabPage4.SuspendLayout();
             this.creationProfil.SuspendLayout();
             this.listDeProfil.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -205,19 +209,19 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.fermer);
+            this.tabPage2.Controls.Add(this.Sauvegarder);
             this.tabPage2.Controls.Add(this.typeJoueur);
             this.tabPage2.Controls.Add(this.scoreGangant);
             resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // fermer
+            // Sauvegarder
             // 
-            resources.ApplyResources(this.fermer, "fermer");
-            this.fermer.Name = "fermer";
-            this.fermer.UseVisualStyleBackColor = true;
-            this.fermer.Click += new System.EventHandler(this.fermer_Click);
+            resources.ApplyResources(this.Sauvegarder, "Sauvegarder");
+            this.Sauvegarder.Name = "Sauvegarder";
+            this.Sauvegarder.UseVisualStyleBackColor = true;
+            this.Sauvegarder.Click += new System.EventHandler(this.Sauvegarder_Click);
             // 
             // typeJoueur
             // 
@@ -243,7 +247,8 @@
             this.comboBox1.Cursor = System.Windows.Forms.Cursors.Default;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            resources.GetString("comboBox1.Items")});
+            resources.GetString("comboBox1.Items"),
+            resources.GetString("comboBox1.Items1")});
             resources.ApplyResources(this.comboBox1, "comboBox1");
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
@@ -271,7 +276,7 @@
             0,
             0});
             this.numericUpDown1.Minimum = new decimal(new int[] {
-            2,
+            1,
             0,
             0,
             0});
@@ -290,17 +295,18 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.fermerDebogage);
+            this.tabPage3.Controls.Add(this.SauvegarderDebogage);
             this.tabPage3.Controls.Add(this.groupBox2);
             resources.ApplyResources(this.tabPage3, "tabPage3");
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // fermerDebogage
+            // SauvegarderDebogage
             // 
-            resources.ApplyResources(this.fermerDebogage, "fermerDebogage");
-            this.fermerDebogage.Name = "fermerDebogage";
-            this.fermerDebogage.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.SauvegarderDebogage, "SauvegarderDebogage");
+            this.SauvegarderDebogage.Name = "SauvegarderDebogage";
+            this.SauvegarderDebogage.UseVisualStyleBackColor = true;
+            this.SauvegarderDebogage.Click += new System.EventHandler(this.SauvegarderDebogage_Click);
             // 
             // groupBox2
             // 
@@ -372,6 +378,8 @@
             // 
             // creationProfil
             // 
+            this.creationProfil.Controls.Add(this.numericUpDown3);
+            this.creationProfil.Controls.Add(this.numericUpDown2);
             this.creationProfil.Controls.Add(this.appliquer2);
             this.creationProfil.Controls.Add(this.ajoutProfil);
             this.creationProfil.Controls.Add(this.Proba);
@@ -465,6 +473,41 @@
             this.ajouter.Click += new System.EventHandler(this.ajouter_Click);
             this.ajouter.StyleChanged += new System.EventHandler(this.ajouter_Click);
             // 
+            // numericUpDown2 vitesse
+            // 
+            resources.ApplyResources(this.numericUpDown2, "numericUpDown2");
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            numericUpDown2.Increment = 1M;
+
+            // 
+            // numericUpDown3 prob
+            // 
+            resources.ApplyResources(this.numericUpDown3, "numericUpDown3");
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown3.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            numericUpDown3.DecimalPlaces = 1;
+            numericUpDown3.Increment = 0.1M;
+
+            // 
             // Configuration
             // 
             resources.ApplyResources(this, "$this");
@@ -493,6 +536,8 @@
             this.creationProfil.ResumeLayout(false);
             this.creationProfil.PerformLayout();
             this.listDeProfil.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -524,11 +569,11 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label type;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button fermer;
+        private System.Windows.Forms.Button Sauvegarder;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox console;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button fermerDebogage;
+        private System.Windows.Forms.Button SauvegarderDebogage;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.CheckBox checkBox4;
@@ -549,5 +594,7 @@
         private System.Windows.Forms.Button appliquer2;
         private System.Windows.Forms.Label ajoutProfil;
         private System.Windows.Forms.Button modifierProfil;
+        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
     }
 }
