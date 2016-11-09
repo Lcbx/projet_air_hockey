@@ -1565,7 +1565,7 @@ namespace InterfaceGraphique
             //si mode edition , afficher les menus a cotés + barre des menus
             else
             {
-                if (estEnModePartie) { FonctionsNatives.initialiserScene(); }
+                if (estEnModePartie == true) { FonctionsNatives.initialiserScene(); }
 
                 panel1.Location = new Point(ancienPosX, ancienPosY);
 
@@ -1812,8 +1812,8 @@ namespace InterfaceGraphique
             //int  nbButsMax = FonctionsNatives.getNombreButs();
             if ((nbButsJoueur1 == nbButsMax) || (nbButsJoueur2 == nbButsMax))
             {
-                DialogResult dialog = MessageBox.Show("La partie est finie, vous voulez rejouer encore ? ",
-                        "Rejouer ou revenir au menu principal", MessageBoxButtons.YesNo);
+                DialogResult dialog = MessageBox.Show("La partie est finie, vous voulez rejouer encore ? Yes pour Rejouer, No pour retourner au menu Principal",
+                        "Rejouer ou retour au menu principal", MessageBoxButtons.YesNo);
                  
                 if (dialog == DialogResult.Yes)
                 {
@@ -1829,7 +1829,7 @@ namespace InterfaceGraphique
                     estEnModePartie = false;
                     this.Hide();
                     menuPrincipal_.Show();
-                    FonctionsNatives.reinitialiserPartieCourante();
+                    FonctionsNatives.initialiserScene();
                 }
             }
 
