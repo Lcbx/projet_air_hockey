@@ -8,6 +8,9 @@
 /// @{
 ///////////////////////////////////////////////////////////////////////////////
 #include "NoeudTable.h"
+#include "ArbreRenduINF2990.h"
+#include "Utilitaire.h"
+#include "GL/glew.h"
 
 #include "GL/glew.h"
 #include <cmath>
@@ -151,6 +154,22 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 	}
 	glEnd();
 	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// tracer pt intersection
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//glm::vec3 PI;
+	//intersection2Droites(p(2), p(3), p(4), p(7), PI);
+	//{
+	//	glColor3f(0, 1, 1);
+	//	glPointSize(10);
+	//	glBegin(GL_POINTS);
+	//	glVertex3fv(PROJvec(PI));
+	//	glEnd();
+	//}
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 	// tracer les murs 
 	tracerMurs(vueProjection);
 	// tracer les buts 
@@ -508,13 +527,7 @@ double NoeudTable::calculPente(glm::vec3 P0, glm::vec3 P1) const
 ////////////////////////////////////////////////////////////////////////
 double NoeudTable::calculB(double pente, glm::vec3 point) const
 {
-	if (pente == 0.)
-		return point.y;
-	else
-		if (pente == 1.)
-			return point.x;
-		else
-			return (point.y - pente*point.x);	
+	return (point.y - pente*point.x);	
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -833,10 +846,14 @@ bool NoeudTable::getPointControle(int numero, glm::vec3 & pointControle)
 		return false;
 	else
 	{
+		for (int i=0; i<3; i++)
+			if (pointControle[i] == NULL)
+				return false;
 		if (numero == 8)
 			pointControle = obtenirPositionRelative();
 		else
 			pointControle = pointControle_[numero];
+		std::cout << "pointControle[" << numero << "]" << "= (" << pointControle[0] << "," << pointControle[1] << "," << pointControle[2] << ")" << std::endl;
 		return true;
 	}
 }
@@ -1156,7 +1173,6 @@ bool NoeudTable::mailletDansZone2(glm::dvec3 M,double rayon)
 			else // distance entre mur P4P7 			
 			{
 				dist = distanceEntrePointDroite(p(4), p(7), M);
-				//if ((dist < rayon) && ((M.y >= p(7).y) && (M.y<= p(4).y))) 
 				if ((dist < rayon) && (M.y >= p(7).y))
 					if (p(4).x >= p(7).x)
 						return false;
@@ -1164,14 +1180,28 @@ bool NoeudTable::mailletDansZone2(glm::dvec3 M,double rayon)
 						if (p(4).y > p(2).y)
 							return false;
 						else
-							// TODO -- reste un cas (p7p4 inter p2p3 apprtient a p2p3)
-							return false;
-
+						{
+							glm::vec3 PI;
+							intersection2Droites(p(2), p(3), p(4), p(7), PI);
+							if (PI.y > p(2).y)
+								return false;
+						}
 				else // distance entre mur P7P5					
 				{
 					dist = distanceEntrePointDroite(p(5), p(7), M);
-					if ( (dist < rayon) && (M.y <= p(7).y) ) // TODO -- tester meme cas que p4p7
-						return false;
+					if ( (dist < rayon) && (M.y <= p(7).y) )
+						if (p(5).x >= p(7).x)
+							return false;
+						else
+							if (p(5).y < p(3).y)
+								return false;
+							else
+							{
+								glm::vec3 PI;
+								intersection2Droites(p(2), p(3), p(5), p(7), PI);
+								if (PI.y < p(3).y)
+									return false;
+							}
 					
 					else // distance entre mur P3P5
 					{
@@ -1225,47 +1255,72 @@ bool NoeudTable::mailletDansZone1(glm::dvec3 M, double rayon)
 		dist = distanceEntrePointDroite(p(2), p(3), M);
 		if (dist < rayon) // distance entre mur P2P3
 			return false;
-		else
+
+		else  // distance entre mur P2P0
 		{
-			
 			dist = distanceEntrePointDroite(p(0), p(2), M);
-			if (dist < rayon)	// distance entre mur P2P0
+			if (dist < rayon)
 			{
-				if(p(0).y >= p(2).y)
+				if (p(0).y >= p(2).y)
 					return false;
 				else
-				if (M.y > p(0).y)
-					return false;				
+					if (M.y >= p(0).y)
+						return false;
 			}
-			else
+
+			else // distance entre mur P0P6 			
 			{
 				dist = distanceEntrePointDroite(p(0), p(6), M);
-				if ((dist < rayon) && (M.y >= p(6).y)) // distance entre mur P0P6 et au dessus de P6
-					return false;
-				else
-				{
-					dist = distanceEntrePointDroite(p(6), p(1), M);
-					if ((dist < rayon) && (M.y <= p(6).y)) // distance entre mur P1P6 et au dessous de P6
+				if ((dist < rayon) && (M.y >= p(6).y))
+					if (p(0).x <= p(6).x)
 						return false;
 					else
+						if (p(0).y >= p(2).y)
+							return false;
+						else
+						{
+							glm::vec3 PI;
+							intersection2Droites(p(2), p(3), p(0), p(6), PI);
+							if (PI.y > p(2).y)
+								return false;
+						}
+				else // distance entre mur P6P1					
+				{
+					dist = distanceEntrePointDroite(p(6), p(1), M);
+					if ((dist < rayon) && (M.y <= p(6).y))
+						if (p(1).x <= p(6).x)
+							return false;
+						else
+							if (p(1).y < p(3).y)
+								return false;
+							else
+							{
+								glm::vec3 PI;
+								intersection2Droites(p(2), p(3), p(6), p(1), PI);
+								if (PI.y < p(3).y)
+									return false;
+							}
+
+					else // distance entre mur P3P1
 					{
 						dist = distanceEntrePointDroite(p(1), p(3), M);
-						if ( (dist < rayon) ) // && (M.y <= p(1).y) ) // distance entre mur P1P5 et au dessous de P1
-							return false;
+						if (dist < rayon)
+						{
+							if (p(1).y <= p(3).y)
+								return false;
+							else
+								if (M.y < p(1).y)
+									return false;
+						}
 						else
 							return true;
 					}
 				}
 			}
-
-
 		}
-
-
 	}
 	else // pas dans la zone
 		return false;
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1286,4 +1341,86 @@ double NoeudTable::distanceEntrePointDroite(glm::dvec3 P1, glm::dvec3 P2, glm::d
 	double denum = sqrt(pow((P2.y-P1.y), 2) + pow((P2.x-P1.x), 2));
 	//std::cout << "denum = " << denum << std::endl;
 	return  fabs(numer ) / (denum);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @fn double NoeudTable::distanceEntre2Points(glm::dvec3 P1, glm::dvec3 P2)
+///
+/// Cette fonction calcule la distance entre 2 points P1 et P2
+///  @param[in] 
+///		glm::vec3 P1,P2 
+///		
+/// @return double
+///
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+double NoeudTable::distanceEntre2Points(glm::dvec3 P1, glm::dvec3 P2)
+{
+	return sqrt(pow((P2.y - P1.y), 2) + pow((P2.x - P1.x), 2));
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::intersection2Droites(glm::vec3 D1P1, glm::vec3 D1P2, glm::vec3 D2P1, glm::vec3 D2P2, glm::vec3 & pointIntersection)
+///
+/// Cette fonction permet de trouve le point d'intersection entre 2 droites
+///
+///  @param[in] 
+///		glm::vec3 D1P1,D1P2,D2P1,D2P2 : les points qui forment les 2 droites 
+///	 @param[out] : glm::vec3 pointIntersection : les coord. du point d'intersection
+/// @return bool : true si s'intersectent , false paralleles
+///
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool NoeudTable::intersection2Droites(glm::vec3 D1P1, glm::vec3 D1P2, glm::vec3 D2P1, glm::vec3 D2P2, glm::vec3 & pointIntersection) //const
+{
+	float a1 = calculPente(D1P1, D1P2);
+	float b1 = calculB(a1, D1P1);
+
+	//std::cout << "P1(" << D1P1.x << "," << D1P1.y << ") P2(" << D1P2.x << "," << D1P2.y << ")" << std::endl;
+	//std::cout << "a1=" << a1 << " b1=" << b1 << std::endl;
+	
+	float a2 = calculPente(D2P1, D2P2);
+	float b2 = calculB(a2, D2P1);
+
+	//std::cout << "P1(" << D2P1.x << "," << D2P1.y << ") P2(" << D2P2.x << "," << D2P2.y << ")" << std::endl;
+	//std::cout << "a2=" << a2 << " b2=" << b2 << std::endl;
+
+	if (D1P1.x == D1P2.x)  // mon cas -- TODO les autres cas
+	{
+		pointIntersection.y = a2*D1P1.x + b2;
+		pointIntersection.x = D1P1.x;
+		return true;
+	}
+	
+	if ((a1 - a2) == 0)
+		return false;
+	else
+	{
+		
+		pointIntersection.x = (b2 - b1) / (a1 - a2);
+		pointIntersection.y = a1*pointIntersection.x + b1;
+		//std::cout << "PointIntersection(" << pointIntersection.x << "," << pointIntersection.y << ")" << std::endl;
+		return true;
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::appartientDroite(glm::dvec3 point, glm::dvec3 D1P1, glm::dvec3 D1P2)
+///
+/// Cette fonction permet de savoir si un tel point appartient a la droite
+///
+///  @param[in] 
+///		glm::vec3 D1P1,D1P2 : les points qui forment la droite
+///		glm::vec3 point : le point a verifier
+///		
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool NoeudTable::appartientDroite( glm::dvec3 D1P1, glm::dvec3 D1P2, glm::dvec3 point)
+{
+	if (distanceEntrePointDroite(D1P1, D1P2, point) == 0)
+		return true;
+	else
+		return false;
 }

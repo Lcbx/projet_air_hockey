@@ -536,7 +536,7 @@ void  ArbreRenduINF2990::ajouterMailletEtRondelle()
 	//AJOUT MAILLET2
 	NoeudAbstrait* noeudMaillet2{ creerNoeud(NOM_MAILLET) };
 	// positionner le maillet a 5 pas du but
-	noeudMaillet2->assignerPositionRelative({ pointMilieu.x + noeudMaillet2->obtenirRayon() +5,0,0 });
+	noeudMaillet2->assignerPositionRelative({ pointMilieu.x + noeudMaillet2->obtenirRayon() + 5,0,0 });
 	noeudMaillet2->setScale({ 1, 1, 1 });
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeudMaillet2);
 	noeudMaillet2->estDeuxiemeJoueur = true;
