@@ -110,6 +110,8 @@ extern "C" {
 	__declspec(dllexport) void sauvegarderTypeButMax(int nbButMax, bool estVirtuel);
 	// Methode pour obtenir les options de jeu
 	__declspec(dllexport) struct OptionsJeu* obtenirOptionsJeu();
+	// Methode pour obtenir les options de debug
+	__declspec(dllexport) struct OptionsDebug* obtenirOptionsDebug();
 
 	__declspec(dllexport) bool objetEstDansLaTable();
 

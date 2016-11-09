@@ -969,6 +969,19 @@ extern "C"
 	}
 
 	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) OptionsDebug obtenirOptionsDebug();
+	/// Author : Arthur
+	/// Cette fonction permet d'obtenir les options de debug
+	///
+	/// @return struct OptionsDebug
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) struct OptionsDebug* __cdecl obtenirOptionsDebug()
+	{
+		return FacadeModele::obtenirInstance()->getConfigDebug()->getOptionsDebug();
+	}
+
+	////////////////////////////////////////////////////////////////////////
 	/// @fn __declspec(dllexport) profilCourant(string nom, double vitesse, double probaDAgirPassivemnt)
 	/// Author : ikram
 	/// Cette fonction permet de envoyer le joueur courant 

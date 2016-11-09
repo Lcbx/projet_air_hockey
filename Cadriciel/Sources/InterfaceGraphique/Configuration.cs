@@ -87,9 +87,10 @@ namespace InterfaceGraphique
             this.bas.Text = ((Keys)touches[2]).ToString();
             this.gauche.Text = ((Keys)touches[3]).ToString();
 
-            // Charge les options de jeu
+            // Charge les options (unsafe pour cause de pointeur)
             unsafe
             {
+                // Options de jeu
                 OptionsJeu* data = (OptionsJeu*)FonctionsNatives.obtenirOptionsJeu();
 
                 Console.WriteLine(data->nbrBut);
@@ -99,6 +100,19 @@ namespace InterfaceGraphique
                     comboBox1.Text = "Joueur humain";
                 else
                     comboBox1.Text = "Joueur virtuel";
+
+                // Options de debug
+                OptionsDebug* optsDebug = (OptionsDebug*)FonctionsNatives.obtenirOptionsDebug();
+                if(optsDebug->isDebugActif)
+                {
+                    checkBox1.Checked = true;
+
+                    if (optsDebug->showCollisionRondelle) checkBox2.Checked = true;
+                    if (optsDebug->showVitesseRondelle) checkBox3.Checked = true;
+                    if (optsDebug->showEclairage) checkBox4.Checked = true;
+                    if (optsDebug->showAttractionPortail) checkBox5.Checked = true;
+                }
+
             }
 
 
@@ -494,6 +508,16 @@ namespace InterfaceGraphique
         public bool joueurTestEstHumain;
     };
 
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct OptionsDebug
+    {
+        public bool isDebugActif;
+        public bool showCollisionRondelle;
+        public bool showVitesseRondelle;
+        public bool showEclairage;
+        public bool showAttractionPortail;
+    };
+
     static partial class FonctionsNatives
     {
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -520,7 +544,9 @@ namespace InterfaceGraphique
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr obtenirOptionsJeu();
 
-       
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr obtenirOptionsDebug();
+
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void sauvegarderProfil(string nom, double vitesse, double proba);
