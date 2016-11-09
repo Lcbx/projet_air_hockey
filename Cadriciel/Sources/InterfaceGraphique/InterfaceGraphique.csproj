@@ -125,10 +125,10 @@
     <Compile Include="Nouveau.Designer.cs">
       <DependentUpon>Nouveau.cs</DependentUpon>
     </Compile>
-    <Compile Include="ParticipantTournoi.cs">
+    <Compile Include="Tournoi\ParticipantTournoi.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ParticipantTournoi.Designer.cs">
+    <Compile Include="Tournoi\ParticipantTournoi.Designer.cs">
       <DependentUpon>ParticipantTournoi.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -184,7 +184,7 @@
     <EmbeddedResource Include="Nouveau.resx">
       <DependentUpon>Nouveau.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ParticipantTournoi.resx">
+    <EmbeddedResource Include="Tournoi\ParticipantTournoi.resx">
       <DependentUpon>ParticipantTournoi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

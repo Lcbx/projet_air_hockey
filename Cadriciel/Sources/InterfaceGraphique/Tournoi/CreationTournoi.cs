@@ -22,7 +22,6 @@ namespace InterfaceGraphique
 
         private Timer t;
 
-
         /// @fn public CreationTournoi()
         /// @brief Permet de créer un tournoi par défaut
         public CreationTournoi()
@@ -44,8 +43,7 @@ namespace InterfaceGraphique
         /// @brief Permet de creer un tournoi
         /// TODO: Compléter l'implémentation
         private void creerTournoi(object sender, EventArgs e) {
-           // this.parent_.SwitchStatusTournoi(ModeTournoi.StatusTournoi.MatchMaking);
-
+            // this.parent_.SwitchStatusTournoi(ModeTournoi.StatusTournoi.MatchMaking);
            
             ///wajdi code 
             t = new Timer(); //creer le timer 
@@ -66,10 +64,17 @@ namespace InterfaceGraphique
                 ParticipantTournoi participant = new ParticipantTournoi();
                 participant.Location = new System.Drawing.Point(0, ((participant.Size.Height + SPACING_PARTICIPANTS) * i + this.title.Height + SPACING_PARTICIPANTS));
 
+                foreach (Control c in participant.Controls) {
+                    c.Validating += ValidateForm;
+                    if (c is CheckBox) (c as CheckBox).CheckedChanged += ValidateForm;
+                }
+                
                 this.Controls.Add(participant);
-
                 participants.Add(participant);
             }
+
+            this.cbmZoneDeJeu.Validating += ValidateForm;
+            this.createButton.Enabled = false;
 
             //Centre pour un participant
             int center = this.participants[0].Size.Width / 2;
@@ -82,7 +87,10 @@ namespace InterfaceGraphique
                 ((participants[0].Size.Height + SPACING_PARTICIPANTS) * NB_PARTICIPANTS + this.title.Height + SPACING_PARTICIPANTS * 2 + this.cbmZoneDeJeu.Height));
             this.title.Location = new System.Drawing.Point(
                 center - this.title.Size.Width / 2, 0);
-                
+        }
+
+        private void ValidateForm(object sender, EventArgs e) {
+            this.createButton.Enabled = isValidForm();
         }
 
         //wajdi-- temps fini
@@ -93,6 +101,23 @@ namespace InterfaceGraphique
             t.Stop();
         }
 
+        /// @brief Permet de valider le formulaire
+        private bool isValidForm() {
+            if (this.cbmZoneDeJeu.choixZoneDeJeu == null)
+                return false;
 
+            bool humanExists = false;
+            foreach(ParticipantTournoi p in participants) {
+                if (p.NomJoueur != String.Empty) {
+                    if (p.TypeJoueur == null)
+                    {
+                        humanExists = true;
+                        break;
+                    }
+                }
+            }
+
+            return humanExists;
+        }
     }
 }

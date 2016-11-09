@@ -35,7 +35,9 @@ namespace InterfaceGraphique
         /// @return Le nom du joueur
         public string NomJoueur {
             get {
-                return this.nameTextBox.Text;
+                if(this.nameTextBoxIsSet)
+                    return this.nameTextBox.Text;
+                return String.Empty;
             }
         }
 
