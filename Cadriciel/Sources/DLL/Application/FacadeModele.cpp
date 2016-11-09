@@ -113,6 +113,10 @@ FacadeModele::~FacadeModele()
 {
 	delete arbre_;
 	delete vue_;
+	if (this->tournoi != nullptr) {
+		delete this->tournoi;
+		this->tournoi = nullptr;
+	}
 }
 
 
@@ -1165,3 +1169,11 @@ bool FacadeModele::estEnPauseRondelle()
 /*std::string FacadeModele::getConfigFile() {
 	return FICHIER_CONFIGURATION;
 }*/
+
+/// @fn Tournoi<AdaptateurJoueur>* FacadeModele::getTournoi()  
+/// @brief Permet d'obtenir le tournoi cible
+///
+/// @return Le tournoi de joueurs ou nullptr s'il n'a pas été initialisé
+Tournoi <AdaptateurJoueur>* FacadeModele::getTournoi() {
+	return this->tournoi;
+}

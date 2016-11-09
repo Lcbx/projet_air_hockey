@@ -180,6 +180,7 @@
     <ClCompile Include="Tournoi.cpp" />
     <ClCompile Include="Tests\PointControleTest.cpp" />
     <ClCompile Include="Tests\RedimensionnementTest.cpp" />
+    <ClCompile Include="TournoiTest.cpp" />
     <ClCompile Include="VisiteurAjout.cpp" />
     <ClCompile Include="VisiteurCollision.cpp" />
     <ClCompile Include="VisiteurDansLaTable.cpp" />
@@ -243,6 +244,7 @@
     <ClInclude Include="Tournoi.h" />
     <ClInclude Include="Tests\PointControleTest.h" />
     <ClInclude Include="Tests\RedimensionnementTest.h" />
+    <ClInclude Include="TournoiTest.h" />
     <ClInclude Include="Visiteur.h" />
     <ClInclude Include="VisiteurAjout.h" />
     <ClInclude Include="VisiteurCollision.h" />
