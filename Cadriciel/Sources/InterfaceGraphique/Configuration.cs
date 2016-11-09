@@ -122,7 +122,27 @@ namespace InterfaceGraphique
 
             }
 
+            // Charge les profils
+            int nbrChar = FonctionsNatives.obtenirNombreProfils();
+            string temp = "";
+            List<string> liste = new List<string>();
+            int[] noms = new int[nbrChar];
+            FonctionsNatives.obtenirListeProfils(noms);
 
+            for (int i = 0; i < nbrChar; i++)
+            {
+                if ((char)noms[i] != '#' || (char)noms[i+1] != '?' || (char)noms[i+2] != '&') {
+                    temp += (char)noms[i];
+                }
+                else {
+                    liste.Add(temp);
+                    i += 2;
+                    temp = "";
+                }
+            }
+            foreach (string st in liste)
+               Console.WriteLine(st);
+            
 
         }
 
@@ -557,6 +577,14 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void sauvegarderProfil(string nom, double vitesse, double proba);
+
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void obtenirListeProfils(int[] noms);
+
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int obtenirNombreProfils();
 
     }
 
