@@ -19,9 +19,9 @@ namespace InterfaceGraphique
 {
     public partial class MenuPrincipal : Form
     {
-        private Edition edition_;
+        public Edition edition_;
         private Configuration configuration_;
-        private ModeTournoi tournoi_;
+        public ModeTournoi tournoi_;
 
 
         public MenuPrincipal()
@@ -36,7 +36,10 @@ namespace InterfaceGraphique
             configuration_ = configuration;
         }
 
-
+        public void setTournoi (ModeTournoi tournoi)
+        {
+            tournoi_ = tournoi;
+        }
         private void quitter_Click(object sender, EventArgs e)
         {
             Application.Exit();

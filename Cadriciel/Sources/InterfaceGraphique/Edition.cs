@@ -54,6 +54,10 @@ namespace InterfaceGraphique
         int ancienPosX;
         int ancienPosY;
 
+
+        public enum States {Edition = 0, Test, PartieRapide, Tournoi };
+        public States state = States.Edition;
+
         /////////////////////////////////////////////////////////////////////////
         ///  @fn public Edition()
         /// 
@@ -1531,6 +1535,9 @@ namespace InterfaceGraphique
 
                 estEnPause = false;
 
+                //State
+                //state = States.Test;
+
 
                 toolStrip1.Hide();
                 menuStrip1.Hide();
@@ -1576,6 +1583,10 @@ namespace InterfaceGraphique
                 estEnModeTest = false;
 
                 estEnPause = false;
+
+                //State
+                //state = States.Edition;
+
 
                 //retirer les maillets
                 FonctionsNatives.retirerMailletEtRondelle();
@@ -1707,6 +1718,9 @@ namespace InterfaceGraphique
                
                 this.changerMode(Etats.TEST);
 
+                //State
+               state = States.PartieRapide;
+
                 //Permet d'ajouter les maillets et la rondelle dans la table
                 FonctionsNatives.ajouterMailletEtRondelle();
                 //effacer les points de controle
@@ -1789,6 +1803,7 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         public void DemarrerPartie()
         {
+           
             if (FonctionsNatives.estButDroite())
             {
                 //MessageBox.Show("Player 2 SCORES !","AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand);
@@ -1810,41 +1825,61 @@ namespace InterfaceGraphique
 
             int nbButsMax = Program.configuration.nbButMax;
             //int  nbButsMax = FonctionsNatives.getNombreButs();
-            if ((nbButsJoueur1 == nbButsMax) || (nbButsJoueur2 == nbButsMax))
+            if (state == States.Tournoi)
             {
-                DialogResult dialog = MessageBox.Show("La partie est finie, vous voulez rejouer encore ? Yes pour Rejouer, No pour retourner au menu Principal",
-                        "Rejouer ou retour au menu principal", MessageBoxButtons.YesNo);
-                 
-                if (dialog == DialogResult.Yes)
+                if ((nbButsJoueur1 == nbButsMax) || (nbButsJoueur2 == nbButsMax))
                 {
-                    nbButsJoueur1 = 0;
-                    nbButsJoueur2 = 0;
-                    textBox4.Text = "0"; textBox5.Text = "0";
-                    FonctionsNatives.reinitialiserPartieCourante();
+                    DialogResult dialog = MessageBox.Show("La partie est finie, voulez-vous revenir au tournoi ! Yes pour tournoi , No pour retourner au menu Principal",
+                            "Revenir mode Tournoi ", MessageBoxButtons.YesNo);
 
+                    if (dialog == DialogResult.Yes)
+                    {
+                        menuPrincipal_.tournoi_.Show();
+                        nbButsJoueur1 = 0;
+                        nbButsJoueur2 = 0;
+                        textBox4.Text = "0"; textBox5.Text = "0";
+                  
+
+                    }
+
+                    else if (dialog == DialogResult.No) //revenir menu principal
+                    {
+                        estEnModePartie = false;
+                        this.Hide();
+                        menuPrincipal_.Show();
+                        FonctionsNatives.initialiserScene();
+                    }
                 }
 
-                else if (dialog == DialogResult.No) //revenir menu principal
-                {
-                    estEnModePartie = false;
-                    this.Hide();
-                    menuPrincipal_.Show();
-                    FonctionsNatives.initialiserScene();
-                }
+
             }
 
-            /* if (nbButsJoueur1 == nbButsMax)
-             {
-                 MessageBox.Show("** Congratulations! Player 1 wins ! **", "AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand,
-                 MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
-             }
-             else
-             {
-                 MessageBox.Show("** Congratulations! Player 2 wins ! **", "AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Information,
-                 MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);¸*/
+            else
+            {
+                if ((nbButsJoueur1 == nbButsMax) || (nbButsJoueur2 == nbButsMax))
+                {
+                    DialogResult dialog = MessageBox.Show("La partie est finie, vous voulez rejouer encore ? Yes pour Rejouer, No pour retourner au menu Principal",
+                            "Rejouer ou retour au menu principal", MessageBoxButtons.YesNo);
 
-            //menuPrincipal_.Show();
-            //this.Hide();
+                    if (dialog == DialogResult.Yes)
+                    {
+                        nbButsJoueur1 = 0;
+                        nbButsJoueur2 = 0;
+                        textBox4.Text = "0"; textBox5.Text = "0";
+                        FonctionsNatives.reinitialiserPartieCourante();
+
+                    }
+
+                    else if (dialog == DialogResult.No) //revenir menu principal
+                    {
+                        estEnModePartie = false;
+                        this.Hide();
+                        menuPrincipal_.Show();
+                        FonctionsNatives.initialiserScene();
+                    }
+                }
+
+            }
 
         }
 
