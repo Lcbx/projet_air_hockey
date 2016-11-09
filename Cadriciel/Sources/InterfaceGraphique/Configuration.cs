@@ -32,11 +32,12 @@ namespace InterfaceGraphique
         public int toucheDeplaceEnHaut_;
 
         //le nombre de buts nécessaires (entre 1 et 5) pour gagner une partie.
-        private int nbButMax = 2 ;
-
+        public int nbButMax;
+        
+        
         
 
-        private bool estHumain = false;    
+        public bool estHumain = false;    
         Profil joueurVirtuelDefault_ = new Profil();
         Profil joueurVirtuelCourant_;
         List<Profil> profils =new List<Profil>();
@@ -87,7 +88,31 @@ namespace InterfaceGraphique
             this.bas.Text = ((Keys)touches[2]).ToString();
             this.gauche.Text = ((Keys)touches[3]).ToString();
 
-            
+            // Charge les options de jeu
+            unsafe
+            {
+                OptionsJeu* data = (OptionsJeu*)FonctionsNatives.obtenirOptionsJeu();
+
+                Console.WriteLine(data->nbrBut);
+                Console.WriteLine(data->joueurTestEstHumain);
+
+                numericUpDown1.Value = data->nbrBut;
+                nbButMax = data->nbrBut;
+
+                if (data->joueurTestEstHumain == true)
+                {
+                    comboBox1.Text = "Joueur humain";
+                    estHumain = true;
+                }
+                else
+                {
+                    comboBox1.Text = "Joueur virtuel";
+                    estHumain = false;
+                }
+            }
+
+
+
         }
 
         public void setMenuPrincipalConfig(MenuPrincipal menuPrincipal)
@@ -469,7 +494,16 @@ namespace InterfaceGraphique
          }
 
 
-}
+
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct OptionsJeu
+    {
+        public int nbrBut;
+        public bool joueurTestEstHumain;
+    };
+
     static partial class FonctionsNatives
     {
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -494,7 +528,13 @@ namespace InterfaceGraphique
 
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr obtenirOptionsJeu();
+
+       
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void sauvegarderProfil(string nom, double vitesse, double proba);
 
     }
+
 }

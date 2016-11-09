@@ -11,6 +11,13 @@
 
 #include "../../../Commun/Externe/tinyxml2/include/tinyxml2.h"
 
+
+struct OptionsJeu {
+	int nbrBut;
+	bool joueurTestEstHumain;
+};
+
+
 ///////////////////////////////////////////////////////////////////////////
 /// @class ConfigJeu
 /// @brief Représente les options de jeu
@@ -20,7 +27,6 @@
 ///////////////////////////////////////////////////////////////////////////
 class ConfigJeu
 {
-
 public:
 
 	/// Constructeur par défaut
@@ -33,6 +39,8 @@ public:
 	void setOptionsJeu(int nbrBut, bool joueurTestEstHumain);
 
 
+	/// Accesseur des options de jeu
+	struct OptionsJeu* getOptionsJeu();
 
 	/// Accesseur du nombre de but
 	int getNombreDeButs();
@@ -46,16 +54,16 @@ public:
 	static const int NOMBRE_BUT_DEFAUT;
 	static const bool JOUEUR_TEST_EST_HUMAIN_DEFAUT;
 
+
+
 private:
 
 	// Options de jeu
-	int _nbrBut;
-	bool _joueurTestEstHumain;
+	struct OptionsJeu _optionsJeu;
 };
 
 
 #endif // __CONFIGURATION_CONFIGJEU_H__
-
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @}

@@ -946,6 +946,29 @@ extern "C"
 		FacadeModele::obtenirInstance()->getConfigTouches()->obtenirTouches(touches);
 	}
 	////////////////////////////////////////////////////////////////////////
+	/// A DEPLACER ICI:
+	/// @fn 	__declspec(dllexport) void enregistrerOptionsJeu();
+	/// Author : Arthur
+	/// Cette fonction permet de modifier et enregistrer les options de jeu
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) OptionsJeu obtenirOptionsJeu();
+	/// Author : Arthur
+	/// Cette fonction permet d'obtenir les options de jeu
+	///
+	/// @return OptionsJeu : {nombre de buts, type de joueur}
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) struct OptionsJeu* __cdecl obtenirOptionsJeu()
+	{
+		return FacadeModele::obtenirInstance()->getConfigJeu()->getOptionsJeu();
+	}
+
+	////////////////////////////////////////////////////////////////////////
 	/// @fn __declspec(dllexport) profilCourant(string nom, double vitesse, double probaDAgirPassivemnt)
 	/// Author : ikram
 	/// Cette fonction permet de envoyer le joueur courant 
