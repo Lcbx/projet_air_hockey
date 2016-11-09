@@ -73,6 +73,12 @@
     <Compile Include="ChoixProfil.Designer.cs">
       <DependentUpon>ChoixProfil.cs</DependentUpon>
     </Compile>
+    <Compile Include="FenetreProfilVirtuel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FenetreProfilVirtuel.Designer.cs">
+      <DependentUpon>FenetreProfilVirtuel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Profil.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -138,12 +144,6 @@
     <Compile Include="Chargement.Designer.cs">
       <DependentUpon>Chargement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Resources\choixProfilVirtuel.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Resources\choixProfilVirtuel.Designer.cs">
-      <DependentUpon>choixProfilVirtuel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Sauvegarde.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,6 +167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Edition.resx">
       <DependentUpon>Edition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FenetreProfilVirtuel.resx">
+      <DependentUpon>FenetreProfilVirtuel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MatchingTournoi.resx">
       <DependentUpon>MatchingTournoi.cs</DependentUpon>
@@ -198,9 +201,6 @@
     </Compile>
     <EmbeddedResource Include="Chargement.resx">
       <DependentUpon>Chargement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\choixProfilVirtuel.resx">
-      <DependentUpon>choixProfilVirtuel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sauvegarde.resx">
       <DependentUpon>Sauvegarde.cs</DependentUpon>

@@ -85,6 +85,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ChoixProfil";
             this.Text = "ChoixProfil";
             this.ResumeLayout(false);

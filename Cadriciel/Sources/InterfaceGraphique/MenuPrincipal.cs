@@ -58,7 +58,7 @@ namespace InterfaceGraphique
             ChoixProfil choix = new ChoixProfil();
             
             choix.setMenuPrincipal(this, edition_);
-            choix.Show();
+            choix.ShowDialog();
 
             //Chargement zoneChar = new Chargement(edition_);
             //zoneChar.ShowDialog();

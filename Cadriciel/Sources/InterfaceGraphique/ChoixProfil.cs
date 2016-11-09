@@ -27,12 +27,13 @@ namespace InterfaceGraphique
 
         }
 
+        // button Annuler
         private void button3_Click(object sender, EventArgs e)
         {
             this.Close();
             menu_.Show();
         }
-        // humain
+        // button joueur Humain
         private void button1_Click(object sender, EventArgs e)
         {
             Chargement zoneChar = new Chargement(edition_);
@@ -44,36 +45,21 @@ namespace InterfaceGraphique
                 edition_.estjoueurvirtuel = false;
                 edition_.passerModePartie(true);
                 edition_.resetPartie();
-                
-                // Edit by Ali
-                // forcer le joueur virtuel a arreter 
                 edition_.ArreterJoueurVirtuel();
-                // End of edit
 
                 menu_.Hide();
                 this.Hide();
             }
 
         }
-        //virtuel
+        // click sur button joueur virtuel
         private void button2_Click(object sender, EventArgs e)
         {
-            Chargement zoneChar = new Chargement(edition_);
-            zoneChar.ShowDialog();
-            if (zoneChar.estclique == true)
-            {
-                edition_.Show();
-                edition_.passerModePartie(true);
-                // demarer le joueur virtuel
-                edition_.estjoueurvirtuel = true;
-                // il faut passer les parametres du joueur virtuel ici
-                edition_.DemarerJoueurVirtuel(1, 0.5);
-                edition_.resetPartie();
-
-                menu_.Hide();
-                this.Hide();
-            }
-
+            FenetreProfilVirtuel fenetre = new FenetreProfilVirtuel(edition_);
+            fenetre.ShowDialog();
+            this.Hide();
+            menu_.Hide();
         }
+
     }
 }

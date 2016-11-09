@@ -1791,7 +1791,7 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         public void DemarerJoueurVirtuel(double vitesse, double probabilite)
         {
-            Console.WriteLine("+++ Joueur Virtuel Active' +++");
+            //Console.WriteLine("+++ Joueur Virtuel Active' +++");
             FonctionsNatives.setjoueurVirtuel(true);
             // on passe la vitesse
             FonctionsNatives.setVitesseVirtuel(vitesse);
@@ -1808,7 +1808,7 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         public void ArreterJoueurVirtuel()
         {
-            Console.WriteLine("--- Joueur Virtuel Desactive' ---");
+           // Console.WriteLine("--- Joueur Virtuel Desactive' ---");
             FonctionsNatives.setjoueurVirtuel(false);
         }
 
