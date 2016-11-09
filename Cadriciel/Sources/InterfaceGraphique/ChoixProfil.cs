@@ -40,7 +40,7 @@ namespace InterfaceGraphique
             if (zoneChar.estclique == true)
             {
                 edition_.Show();
-                // 
+
                 edition_.estjoueurvirtuel = false;
                 edition_.passerModePartie(true);
                 edition_.resetPartie();
@@ -66,6 +66,7 @@ namespace InterfaceGraphique
                 edition_.passerModePartie(true);
                 // demarer le joueur virtuel
                 edition_.estjoueurvirtuel = true;
+                // il faut passer les parametres du joueur virtuel ici
                 edition_.DemarerJoueurVirtuel(1, 0.5);
                 edition_.resetPartie();
 

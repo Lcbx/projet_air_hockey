@@ -138,6 +138,12 @@
     <Compile Include="Chargement.Designer.cs">
       <DependentUpon>Chargement.cs</DependentUpon>
     </Compile>
+    <Compile Include="Resources\choixProfilVirtuel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Resources\choixProfilVirtuel.Designer.cs">
+      <DependentUpon>choixProfilVirtuel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sauvegarde.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,6 +198,9 @@
     </Compile>
     <EmbeddedResource Include="Chargement.resx">
       <DependentUpon>Chargement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\choixProfilVirtuel.resx">
+      <DependentUpon>choixProfilVirtuel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sauvegarde.resx">
       <DependentUpon>Sauvegarde.cs</DependentUpon>
