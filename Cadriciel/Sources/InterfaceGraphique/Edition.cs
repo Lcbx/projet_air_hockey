@@ -1515,7 +1515,6 @@ namespace InterfaceGraphique
             //si mode jeu ou test , masquer les menus a cotés + barre des menus
             if (mode == true)
             {
-              
 
                 panel1.Location = new Point (0,0);
                 panel1.Dock = DockStyle.Fill;
@@ -1809,7 +1808,8 @@ namespace InterfaceGraphique
                 //Console.WriteLine("But Gauche !!");
             }
 
-            int  nbButsMax = FonctionsNatives.getNombreButs();
+            int nbButsMax = Program.configuration.nbButMax;
+            //int  nbButsMax = FonctionsNatives.getNombreButs();
             if ((nbButsJoueur1 == nbButsMax) || (nbButsJoueur2 == nbButsMax))
             {
                 DialogResult dialog = MessageBox.Show("La partie est finie, vous voulez rejouer encore ? ",

@@ -32,11 +32,12 @@ namespace InterfaceGraphique
         public int toucheDeplaceEnHaut_;
 
         //le nombre de buts nécessaires (entre 1 et 5) pour gagner une partie.
-        private int nbButMax;
-
+        public int nbButMax;
+        
+        
         
 
-        private bool estVirtuel = true;    
+        public bool estHumain = false;    
         Profil joueurVirtuelDefault_ = new Profil();
         Profil joueurVirtuelCourant_;
         List<Profil> profils =new List<Profil>();
@@ -95,11 +96,20 @@ namespace InterfaceGraphique
 
                 Console.WriteLine(data->nbrBut);
                 Console.WriteLine(data->joueurTestEstHumain);
+
                 numericUpDown1.Value = data->nbrBut;
+                nbButMax = data->nbrBut;
+
                 if (data->joueurTestEstHumain == true)
+                {
                     comboBox1.Text = "Joueur humain";
+                    estHumain = true;
+                }
                 else
+                {
                     comboBox1.Text = "Joueur virtuel";
+                    estHumain = false;
+                }
 
                 // Options de debug
                 OptionsDebug* optsDebug = (OptionsDebug*)FonctionsNatives.obtenirOptionsDebug();
@@ -285,12 +295,12 @@ namespace InterfaceGraphique
         {
             if (comboBox1.Text.Equals("Joueur humain"))
             { 
-                estVirtuel = false;
+                estHumain= true;
             }
 
             else if (comboBox1.Text.Equals("Joueur virtuel"))
             {
-                estVirtuel = true;
+                estHumain = false;
             }
         }
 
@@ -484,7 +494,7 @@ namespace InterfaceGraphique
         /// <param name="e"></param>
         private void Sauvegarder_Click(object sender, EventArgs e)
         {
-            FonctionsNatives.sauvegarderTypeButMax(nbButMax, estVirtuel);
+            FonctionsNatives.sauvegarderTypeButMax(nbButMax, estHumain);
         }
 
         /// <summary>
@@ -538,7 +548,7 @@ namespace InterfaceGraphique
 
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void sauvegarderTypeButMax(int nombreMax, bool estVirtuel);
+        public static extern void sauvegarderTypeButMax(int nombreMax, bool estHumain);
 
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
