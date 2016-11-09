@@ -142,8 +142,6 @@ void SauvegardeZoneDeJeu::lireArbre(const tinyxml2::XMLDocument& document)
 
 	
 		// Parcours le reste des noeuds
-		SauvegardeZoneDeJeu::lireNoeudXML(*(elementArbreDeRendu->FirstChild()->ToElement()));
-		
 		if(elementArbreDeRendu->FirstChild() != nullptr) {
 			SauvegardeZoneDeJeu::lireNoeudXML(*(elementArbreDeRendu->FirstChild()->ToElement()));
 		}
