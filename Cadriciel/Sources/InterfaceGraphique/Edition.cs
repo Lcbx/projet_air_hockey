@@ -1719,7 +1719,7 @@ namespace InterfaceGraphique
                 this.changerMode(Etats.TEST);
 
                 //State
-               state = States.PartieRapide;
+              // state = States.PartieRapide;
 
                 //Permet d'ajouter les maillets et la rondelle dans la table
                 FonctionsNatives.ajouterMailletEtRondelle();

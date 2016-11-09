@@ -66,8 +66,8 @@ namespace InterfaceGraphique
             profils.Add(joueurVirtuelCourant_);
 
             textBox1.Text=(joueurVirtuelCourant_.getNomProfil());
-            textBox2.Text=(Convert.ToString(joueurVirtuelCourant_.getVitesseProfil()));
-            textBox3.Text=(Convert.ToString(joueurVirtuelCourant_.getProbProfil()));
+            numericUpDown2.Value = Convert.ToDecimal( (joueurVirtuelCourant_.getVitesseProfil()));
+            numericUpDown3.Value = Convert.ToDecimal(joueurVirtuelCourant_.getProbProfil());
             listDeProfils.Items.Add(joueurVirtuelCourant_.getNomProfil());
 
             creationProfil.Enabled = false;
@@ -432,8 +432,9 @@ namespace InterfaceGraphique
                 {
                     joueurVirtuelCourant_ = profils[i];
                     textBox1.Text = (joueurVirtuelCourant_.getNomProfil());
-                    textBox2.Text = (Convert.ToString(joueurVirtuelCourant_.getVitesseProfil()));
-                    textBox3.Text = (Convert.ToString(joueurVirtuelCourant_.getProbProfil()));
+                  
+                    numericUpDown2.Value = Convert.ToDecimal((joueurVirtuelCourant_.getVitesseProfil()));
+                    numericUpDown3.Value = Convert.ToDecimal(joueurVirtuelCourant_.getProbProfil());
                 }      
         }
 
@@ -493,8 +494,8 @@ namespace InterfaceGraphique
                    if (i==listDeProfils.SelectedIndex)
                    {
                        profils[i].setNomProfil(textBox1.Text);
-                       profils[i].setVitesseProfil(Convert.ToDouble(textBox2.Text));
-                       profils[i].setProbProfil(Convert.ToDouble(textBox3.Text));
+                       profils[i].setVitesseProfil(Convert.ToDouble(numericUpDown2.Value));
+                       profils[i].setProbProfil(Convert.ToDouble(numericUpDown3.Value));
                        listDeProfils.Items.RemoveAt(i);
                        listDeProfils.Items.Insert(i,textBox1.Text);
                        creationProfil.Enabled=false;
