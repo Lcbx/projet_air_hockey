@@ -44,6 +44,11 @@ namespace InterfaceGraphique
                 edition_.estjoueurvirtuel = false;
                 edition_.passerModePartie(true);
                 edition_.resetPartie();
+                
+                // Edit by Ali
+                // forcer le joueur virtuel a arreter 
+                edition_.ArreterJoueurVirtuel();
+                // End of edit
 
                 menu_.Hide();
                 this.Hide();

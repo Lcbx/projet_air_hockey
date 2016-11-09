@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.title = new System.Windows.Forms.Label();
             this.createButton = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // title
@@ -53,6 +55,10 @@
             this.createButton.UseVisualStyleBackColor = true;
             this.createButton.Click += new System.EventHandler(this.creerTournoi);
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // CreationTournoi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -70,5 +76,6 @@
         #endregion
         private System.Windows.Forms.Label title;
         private System.Windows.Forms.Button createButton;
+        private System.Windows.Forms.Timer timer1;
     }
 }

@@ -18,6 +18,11 @@ namespace InterfaceGraphique
         private CreationTournoi creationTournoi_;
         private MatchingTournoi matchingTournoi_;
         private MenuPrincipal parent_;
+        
+
+        //wajdi 
+        private Chargement menuChargement_;
+        private Edition edition_;
 
 
         /// @enum public enum StatusTournoi 
@@ -42,6 +47,11 @@ namespace InterfaceGraphique
             this.parent_ = parent;
             InitializeComponent();
             this.initTournoi();
+
+
+            //State
+            this.parent_.edition_.state = Edition.States.Tournoi;
+            parent_.setTournoi(this);
         }
 
         /// @fn public SwitchStatusTournoi(StatusTournoi status)
@@ -79,5 +89,38 @@ namespace InterfaceGraphique
                 this.ClientSize.Height / 2 - this.panel1.Size.Height / 2);
             this.panel1.Anchor = AnchorStyles.None;
         }
+
+        //Wajdi -- lier cette fenetre a edition
+        public void setEdition(Edition edition)
+        {
+            edition_ = edition;
+        }
+
+
+        //wajdi -- permet de passer au mode partie rapide (a travers la selection de zone 
+        public void passeModeJeu()
+        {
+            this.Hide();
+            setEdition(this.parent_.getEdition());
+
+            Chargement zoneChar = new Chargement(edition_);
+            zoneChar.ShowDialog();
+
+            if (zoneChar.estclique == true)
+            {
+                edition_.Show();
+                // 
+                edition_.estjoueurvirtuel = false;
+                edition_.passerModePartie(true);
+                edition_.resetPartie();
+            }
+        }
+        //wajdi -- sert a appeller la fct qui a son tour affiche la fenetre de chargement
+        private void button3_Click(object sender, EventArgs e)
+        {
+            passeModeJeu();
+        }
+        
+
     }
 }

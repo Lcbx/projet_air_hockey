@@ -20,12 +20,14 @@ namespace InterfaceGraphique
         private ModeTournoi parent_ = null;
         private List<ParticipantTournoi> participants = new List<ParticipantTournoi>(NB_PARTICIPANTS);
 
+
         /// @fn public CreationTournoi()
         /// @brief Permet de créer un tournoi par défaut
         public CreationTournoi()
         {
             InitializeComponent();
             this.initParticipants();
+
         }
 
         /// @fn public CreationTournoi(ModeTournoi parent)
@@ -40,7 +42,19 @@ namespace InterfaceGraphique
         /// @brief Permet de creer un tournoi
         /// TODO: Compléter l'implémentation
         private void creerTournoi(object sender, EventArgs e) {
+           // this.parent_.SwitchStatusTournoi(ModeTournoi.StatusTournoi.MatchMaking);
+
+           
+            ///wajdi code 
+            Timer t = new Timer(); //creer le timer 
+            t.Interval = 5000;     // specify interval time as you want (en milisecondes) ( 5000 = 5 sec)
+            t.Tick += new EventHandler(timer1_Tick);  //evenement qui se declanche a la fin des 5 sec
+            t.Start();
             this.parent_.SwitchStatusTournoi(ModeTournoi.StatusTournoi.MatchMaking);
+
+            //enable le boutton
+            this.parent_.button3.Enabled = true;
+
         }
 
         /// @fn private void initParticipants()
@@ -65,5 +79,14 @@ namespace InterfaceGraphique
                 center - this.title.Size.Width / 2, 0);
                 
         }
+
+        //wajdi-- temps fini
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.parent_.Hide();
+            this.parent_.passeModeJeu();
+        }
+
+
     }
 }

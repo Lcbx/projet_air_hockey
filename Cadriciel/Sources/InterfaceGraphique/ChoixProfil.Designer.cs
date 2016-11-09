@@ -68,11 +68,11 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(241, 152);
+            this.button3.Location = new System.Drawing.Point(290, 152);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(148, 25);
+            this.button3.Size = new System.Drawing.Size(99, 25);
             this.button3.TabIndex = 3;
-            this.button3.Text = "Revenir au menu principal";
+            this.button3.Text = "Annuler";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
