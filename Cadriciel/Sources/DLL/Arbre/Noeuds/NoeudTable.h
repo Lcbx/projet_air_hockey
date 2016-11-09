@@ -108,11 +108,6 @@ public:
 	/// get coordonnes des buts 
 	bool getButs(int index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas);
 
-	
-
-	double Dot(glm::vec3 a, glm::vec3 b);
-	double PerpDot(glm::vec3 a, glm::vec3 b);
-
 	glm::vec3 getPc(int i) { return pointControle_[i]; }
 
 
