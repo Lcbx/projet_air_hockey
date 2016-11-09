@@ -1,3 +1,4 @@
 <configuration>
     <CScene CALCULS_PAR_IMAGE="50"/>
+    <CJeu NOMBRE_BUT="1" JOUEUR_TEST_EST_HUMAIN="0"/>
 </configuration>

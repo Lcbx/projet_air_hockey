@@ -107,12 +107,6 @@ namespace InterfaceGraphique
                 {
                     comboBox1.Text = "Joueur virtuel";
                     estHumain = false;
-
-                    //if (edition_.estEnModeTest && !edition_.estEnModePartie)
-                    //{
-                    //    edition_.estjoueurvirtuel = true;
-                    //    edition_.DemarerJoueurVirtuel(10, 1);
-                    //}
                 }
 
                 // Options de debug

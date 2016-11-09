@@ -442,24 +442,25 @@ namespace InterfaceGraphique
                             FonctionsNatives.reinitialiserPartieCourante();
                             break;
                         }
-                    case Keys.V:    // Activer le joueur Virtuelle
-                        {
-                            if (estEnModeTest && !estEnModePartie)
-                            {
-                                estjoueurvirtuel = true;
-                                DemarerJoueurVirtuel(10, 1);
-                            }
-                            break;
-                        }
-                    case Keys.B:    // Deactiver le joueur Virtuelle
-                        {
-                            if (estEnModeTest && !estEnModePartie)
-                            {
-                                estjoueurvirtuel = false;
-                                ArreterJoueurVirtuel();
-                            }
-                            break;
-                        }
+                    //case Keys.V:    // Activer le joueur Virtuelle
+                    //    {
+                    //        if (estEnModeTest && !estEnModePartie)
+                    //        {
+                    //            estjoueurvirtuel = true;
+                    //            DemarerJoueurVirtuel(10, 1);
+                    //        }
+                    //        break;
+                    //    }
+                    //case Keys.B:    // Deactiver le joueur Virtuelle
+                    //    {
+                    //        if (estEnModeTest && !estEnModePartie)
+                    //        {
+
+                    //            estjoueurvirtuel = false;
+                    //            ArreterJoueurVirtuel();
+                    //        }
+                    //        break;
+                    //    }
 
                     default: break;
 
@@ -480,16 +481,16 @@ namespace InterfaceGraphique
                             FonctionsNatives.reinitialiserPartieCourante();
                             break;
                         }
-                    case Keys.V:    // Activer le joueur Virtuelle
-                        {
-                            DemarerJoueurVirtuel(1, 0.5);
-                            break;
-                        }
-                    case Keys.B:    // Deactiver le joueur Virtuelle
-                        {
-                            ArreterJoueurVirtuel();
-                            break;
-                        }
+                    //case Keys.V:    // Activer le joueur Virtuelle
+                    //    {
+                    //        DemarerJoueurVirtuel(1, 0.5);
+                    //        break;
+                    //    }
+                    //case Keys.B:    // Deactiver le joueur Virtuelle
+                    //    {
+                    //        ArreterJoueurVirtuel();
+                    //        break;
+                    //    }
 
                     default: break;  
 
@@ -1532,6 +1533,7 @@ namespace InterfaceGraphique
                 this.Text = "Mode Test";
                 estEnModeTest = true;
                 estEnModePartie = false;
+                estEnPause = false;
 
                 this.changerMode(Etats.TEST);
                 //Permet d'ajouter les maillets et la rondelle dans la table
@@ -1539,8 +1541,17 @@ namespace InterfaceGraphique
                 //effacer les points de controle
                 FonctionsNatives.effacerPointControle();
 
-                estEnPause = false;
-
+                //check le mode du joueur modetest dans le panel de configuration
+                if (Program.configuration.estHumain) // arreter joueur virtuel
+                {
+                    estjoueurvirtuel = false;
+                    ArreterJoueurVirtuel();
+                }
+                else // activer joueur virtuel
+                {
+                    estjoueurvirtuel = true;
+                    DemarerJoueurVirtuel(10, 1);
+                }
 
                 toolStrip1.Hide();
                 menuStrip1.Hide();
