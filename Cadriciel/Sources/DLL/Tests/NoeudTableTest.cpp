@@ -32,7 +32,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(NoeudTableTest);
 void NoeudTableTest::setUp()
 {
 	noeud = std::make_unique<NoeudTable>(ArbreRenduINF2990::NOM_TABLE);
-	FacadeModele::obtenirInstance()->initialiserOpenGL(nullptr);
+	//FacadeModele::obtenirInstance()->initialiserOpenGL(nullptr);
 	arbre = new ArbreRenduINF2990();
 	arbre->initialiser();
 	

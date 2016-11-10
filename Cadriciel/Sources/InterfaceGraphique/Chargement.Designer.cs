@@ -93,6 +93,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.filename);
             this.Controls.Add(this.bouttonSauvegarder);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "Chargement";
             this.Text = "Choix de la zone du jeu";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Sauvegarde_FormClosing);

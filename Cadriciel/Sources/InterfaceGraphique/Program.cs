@@ -53,7 +53,7 @@ namespace InterfaceGraphique
             joueurVirtuel = new Profil(); 
              
             ///Application.Run(edition); 
-           
+           //
             menuPrincipal.setMenu(edition, configuration);
             edition.setMenuPrincipal(menuPrincipal);
             configuration.setMenuPrincipalConfig(menuPrincipal,edition);

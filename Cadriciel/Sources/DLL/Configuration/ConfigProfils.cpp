@@ -241,6 +241,7 @@ double ConfigProfils::getVitesse(std::string nom)
 	for (std::list<Profil>::iterator it = _listeProfils.begin(); it != _listeProfils.end(); ++it) {
 		// Si le profil existe déjà, le mettre à jour
 		if (it->getNom() == nom.c_str()) {
+			std::cout << "vitesse = " << it->getVitesse() << std::endl;
 			return it->getVitesse();
 		}
 	}
