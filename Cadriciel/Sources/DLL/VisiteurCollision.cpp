@@ -272,7 +272,7 @@ void VisiteurCollision::visiter(NoeudMaillet* noeud) {
 ////////////////////////////////////////////////////////////////////////
 void VisiteurCollision::visiter(NoeudPortail* noeud) {
 	//on reduit la taille de la zone de collision pour eviter la sortie de jeu de rondelle
-	auto detail = visiterNoeudCercle(noeud, noeud->obtenirRayon() * 0.9f );
+	auto detail = visiterNoeudCercle(noeud, noeud->obtenirRayon() * 0.8f );
 	if (detail.type != aidecollision::COLLISION_AUCUNE) {
 		result_.type = InfoCollision::PORTAIL;
 		result_.objet = noeud;

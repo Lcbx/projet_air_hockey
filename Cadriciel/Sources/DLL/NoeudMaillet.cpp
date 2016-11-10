@@ -94,7 +94,7 @@ void NoeudMaillet::animer(float temps)
 	glm::vec3	deplacement = positionFuture_ - positionActuelle;
 	float		rayon = obtenirRayon();
 	//permet une acceleration (10m/s) evite d'aller trop vite
-	float		deplacementMax = (glm::length(vitesse_) + 10.f) * temps;
+	float		deplacementMax = (module_vitesse_ + module_acceleration_) * temps;
 	float		distance = glm::clamp(glm::length(deplacement), 0.f, deplacementMax);
 	glm::vec3	direction = glm::normalize(deplacement);
 
@@ -109,9 +109,9 @@ void NoeudMaillet::animer(float temps)
 			FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->mailletDansZone1(positionIntermediaire, rayon) :
 			FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->mailletDansZone2(positionIntermediaire, rayon);
 		positionIntermediaire = estDanslaBonneZone ? positionIntermediaire : positionActuelle;
-		resultat = v.calculerCollision(positionIntermediaire, obtenirRayon(), false);
+		resultat = v.calculerCollision(positionIntermediaire, rayon, false);
 		///std::cout << "test " << i << " result " << resultat.type << "\n";
-		if (resultat.type != InfoCollision::AUCUNE && resultat.type != InfoCollision::BONUS || i >= distance / rayon) {
+		if (resultat.type != InfoCollision::AUCUNE && resultat.type != InfoCollision::BONUS && resultat.type != InfoCollision::PORTAIL || i >= distance / rayon) {
 			positionActuelle = positionIntermediaire;
 			break;
 		}
@@ -152,6 +152,7 @@ void NoeudMaillet::animer(float temps)
 	assignerPositionRelative(positionActuelle);
 	//determine la vitesse
 	vitesse_ = (dernierePosition_ - positionActuelle) / temps;
+	module_vitesse_ = glm::length(vitesse_);
 	//pour la vitesse future
 	dernierePosition_ = positionActuelle;
 }
