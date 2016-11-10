@@ -57,6 +57,16 @@ namespace InterfaceGraphique
         private bool ajouterActif = false;
 
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public Configuration()
+        /// 
+        /// @brief Constructeur par defaut de la classe Configuration
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////    
         public Configuration()
         {
             InitializeComponent();
@@ -188,12 +198,33 @@ namespace InterfaceGraphique
 
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public setMenuPrincipalConfig(MenuPrincipal menuPrincipal)
+        /// 
+        /// @brief assigner l'instance menu principale dans menu configuration
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         public void setMenuPrincipalConfig(MenuPrincipal menuPrincipal, Edition edition)
         {
             menuPrincipal_ = menuPrincipal;
             edition_ = edition;
         }
                     
+					
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public renitialisation_Click(object sender, EventArgs e)
+        /// 
+        /// @brief rénitialise les touches de jeu par défaut
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void renitialisation_Click(object sender, EventArgs e)
         {
             toucheDeplaceAGauche_ = (int)Keys.A;
@@ -207,11 +238,32 @@ namespace InterfaceGraphique
             FonctionsNatives.sauvegarderTouches(toucheDeplaceEnHaut_, toucheDeplaceADroite_, toucheDeplaceEnBas_, toucheDeplaceAGauche_);
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public appliquer_Click(object sender, EventArgs e)
+        /// 
+        /// @brief applique les changements de touches   
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void appliquer_Click(object sender, EventArgs e)
         {
             FonctionsNatives.sauvegarderTouches(toucheDeplaceEnHaut_, toucheDeplaceADroite_, toucheDeplaceEnBas_, toucheDeplaceAGauche_);
         }
 
+		
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public  changerTouche(KeyEventArgs ke)
+        /// 
+        /// @brief cette fonction retourne le string d'une touche de clavier 
+        /// 
+        /// @param[in] la touche
+        ///
+        /// @return string
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private string changerTouche(KeyEventArgs ke)
             {
                 KeysConverter kc = new KeysConverter();
@@ -220,6 +272,15 @@ namespace InterfaceGraphique
             }
 
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public  void gauche_KeyDown(object sender, KeyEventArgs e)
+        /// 
+        /// @brief cette fonction assigne une touche de clavier au déplacement gauche du maillet 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void gauche_KeyDown(object sender, KeyEventArgs e)
         {
             if (toucheDeplaceADroite_ == e.KeyValue)
@@ -251,6 +312,15 @@ namespace InterfaceGraphique
             }         
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public  void droite_KeyDown(object sender, KeyEventArgs e)
+        /// 
+        /// @brief cette fonction assigne une touche de clavier au déplacement droite du maillet 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void droite_KeyDown(object sender, KeyEventArgs e)
         {
             if (toucheDeplaceAGauche_ == e.KeyValue)
@@ -281,6 +351,15 @@ namespace InterfaceGraphique
             }
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public  void bas_KeyDown(object sender, KeyEventArgs e)
+        /// 
+        /// @brief cette fonction assigne une touche de clavier au déplacement en bas du maillet 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void bas_KeyDown(object sender, KeyEventArgs e)
         {
             if (toucheDeplaceAGauche_ == e.KeyValue)
@@ -311,6 +390,15 @@ namespace InterfaceGraphique
             }
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public  void haut_KeyDown(object sender, KeyEventArgs e)
+        /// 
+        /// @brief cette fonction assigne une touche de clavier au déplacement en haut du maillet 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void haut_KeyDown(object sender, KeyEventArgs e)
         {
             if (toucheDeplaceAGauche_ == e.KeyValue)
@@ -342,6 +430,15 @@ namespace InterfaceGraphique
                 
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public  void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction assigne une valeur pour le nombre de but nécessaire pour gagner une partie . Les valeurs sont entre 1 et 5
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             if (numericUpDown1.Value >= 1 || numericUpDown1.Value <= 5)
@@ -351,6 +448,15 @@ namespace InterfaceGraphique
 
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public  void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction indique c'est le type du joueur adversaire est humain ou virtuel;
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.Text.Equals("Joueur humain"))
@@ -366,6 +472,16 @@ namespace InterfaceGraphique
 
        
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void checkBox1_CheckedChanged(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction assigne true ou false à l'affichage de débogage (l'interrupteur)
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked)
@@ -383,6 +499,16 @@ namespace InterfaceGraphique
             }
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void checkBox2_CheckedChanged(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction assigne true ou false à l'affichage de débogage de collision
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox2.Checked)
@@ -391,6 +517,16 @@ namespace InterfaceGraphique
                 debogCollision_ = false;
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void checkBox3_CheckedChanged(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction assigne true ou false à l'affichage de débogage de la vitesse de la rondelle après une collision
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox3.Checked)
@@ -400,6 +536,16 @@ namespace InterfaceGraphique
 
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void checkBox4_CheckedChanged(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction assigne true ou false à l'affichage ou non de l'éclairage
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void checkBox4_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox4.Checked)
@@ -408,6 +554,16 @@ namespace InterfaceGraphique
                 eclairageActif_ = false;
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void checkBox5_CheckedChanged(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction assigne true ou false à l'affichage ou non de la limite d'attraction du portail
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox5.Checked)
@@ -417,6 +573,16 @@ namespace InterfaceGraphique
         }
 
        
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void ajouter_Click(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction assigne true ou false à l'affichage ou non de la limite d'attraction du portail
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void ajouter_Click(object sender, EventArgs e)
         {
             textBox1.Clear();
@@ -429,6 +595,16 @@ namespace InterfaceGraphique
 
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void listDeProfils_SelectedIndexChanged(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction attribue le profil selectionné au profil courant 
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void listDeProfils_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -443,6 +619,16 @@ namespace InterfaceGraphique
                 }      
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void modifierProfil_Click(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction active le champs de création de profil pour la modification
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void modifierProfil_Click(object sender, EventArgs e)
         {
             creationProfil.Enabled = true;
@@ -452,6 +638,16 @@ namespace InterfaceGraphique
 
         }
 
+		////////////////////////////////////////////////////////////////////////
+        /// @fn public button2_Click(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction supprime un profil de la liste
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void button2_Click(object sender, EventArgs e)
         {
             for (int i = 1; i < profils.Count; i++)
@@ -465,6 +661,16 @@ namespace InterfaceGraphique
         }
 
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void appliquer2_Click(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction applique l'ajout à la liste  et la modification d'un profil
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void appliquer2_Click(object sender, EventArgs e)
         {
             int v = Convert.ToInt32(numericUpDown2.Value);
@@ -518,6 +724,16 @@ namespace InterfaceGraphique
         }
 
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn private void Configuration_FormClosing(object sender, FormClosingEventArgs e)
+        /// 
+        /// @brief cette fonction gere l'event de fermeture 
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void Configuration_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Hide();
