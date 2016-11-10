@@ -66,4 +66,25 @@ void TournoiTest::testGagnant() {
 	CPPUNIT_ASSERT_MESSAGE("Should return romain (Tournament winner)", gagnant3 == tournoi.affecterScoreProchainMatchup(1, 2));
 }
 
+
+/// @fn void TournoiTest::testArbre() 
+/// @brief Permet de tester si l'arbre final est le bon
+void TournoiTest::testArbre() {
+	Tournoi<std::string> tournoi({ "albert","robert","romain","andre" });
+	tournoi.affecterScoreProchainMatchup(2, 1); //Romain gagne
+	tournoi.affecterScoreProchainMatchup(1, 2); //Robert gagne
+	tournoi.affecterScoreProchainMatchup(2, 1); //Robert gagne
+	std::vector<std::pair<std::string, int>> resultats = tournoi.obtenirMatchups();
+	std::vector<std::string> nomsResultats({ "robert","robert","romain","albert","robert","romain","andre" });
+	std::vector<int> scoreResultats({ 0, 2, 1, 1, 2, 2, 1 });
+	for (size_t i = 0; i < 7; i++) {
+		std::string text = "Should return " + nomsResultats[i];
+		CPPUNIT_ASSERT_MESSAGE(text.c_str(), resultats[i].first == nomsResultats[i]);
+		if (i > 0) {
+			text = "Should return " + char(scoreResultats[i] + '0');
+			CPPUNIT_ASSERT_MESSAGE(text.c_str(), resultats[i].second == scoreResultats[i]);
+		}
+	}
+}
+
 /// @}

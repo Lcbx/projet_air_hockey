@@ -25,6 +25,7 @@ namespace InterfaceGraphique
             }
         }
 
+        /// @brief
         private int ScoreJoueur_;
         public int ScoreJoueur
         {
@@ -67,11 +68,12 @@ namespace InterfaceGraphique
             this.scoreJoueur.DataBindings.Add(new Binding("Text", this, "ScoreJoueur"));
         }
 
+        /// 
+        public event PropertyChangedEventHandler PropertyChanged;
         /// @fn protected void RaisePropertyChanged(string propertyName)
         /// @brief Permet de réaliser du databinding complet
         /// @param propertyName Nom de la propriété qui est mise à jour
         /// @source http://stackoverflow.com/questions/17764323/how-to-bind-a-simple-string-value-to-a-text-box
-        public event PropertyChangedEventHandler PropertyChanged;
         protected void RaisePropertyChanged(string propertyName)
         {
             var handler = PropertyChanged;

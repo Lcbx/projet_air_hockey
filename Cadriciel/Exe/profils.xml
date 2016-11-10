@@ -4,4 +4,5 @@
     <Leodagan NOM="Leodagan" VITESSE="4" PROBABILITE="0.6"/>
     <ddd NOM="ddd" VITESSE="3" PROBABILITE="0.1"/>
     <sadsda NOM="sadsda" VITESSE="10" PROBABILITE="0.2"/>
+    <carl NOM="carl" VITESSE="10" PROBABILITE="1"/>
 </listeProfil>

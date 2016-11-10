@@ -32,6 +32,7 @@ class TournoiTest : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(TournoiTest);
 	CPPUNIT_TEST(testMatchup);
 	CPPUNIT_TEST(testGagnant);
+	CPPUNIT_TEST(testArbre);
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -54,6 +55,9 @@ public:
 
 	/// Cas de test : Obtenir le gagnant d'un matchup
 	void testGagnant();
+
+	/// Case de test : Obtenir un arbre du tournoi au complet
+	void testArbre();
 };
 
 /// @}
