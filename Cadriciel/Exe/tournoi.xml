@@ -1,0 +1,8 @@
+<joueurs>
+    <joueur nom="asdf" esthumain="1" profil="defaut"/>
+    <joueur nom="fdas" esthumain="0" profil="defaut"/>
+    <joueur nom="1234" esthumain="0" profil="defaut"/>
+    <joueur nom="4321" esthumain="0" profil="defaut"/>
+</joueurs>
+
+<zone nom="zones\defaut.xml"/>

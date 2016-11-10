@@ -30,9 +30,37 @@ namespace InterfaceGraphique
             }
         }
 
+        /// @fn public void setTypeJoueur(string nomType)
+        /// @brief Permet de set le type de joueur sélectionné
+        /// @param nomType Nom du profil sélectionné
+        public void setTypeJoueur(string nomType) {
+            Profil profilChoisi = this.profileList.Find(x => x.Nom == nomType);
+            if (profilChoisi != null) {
+                this.typeJoueurCBO.SelectedItem = profilChoisi;
+            }
+        }
+
+        /// @fn public void setEstHumain(bool estHumain)
+        /// @brief Permet de changer si le joueur est humain ou non
+        /// @param estHumain : Si le joueur est humain ou non
+        public void setEstHumain(bool estHumain) {
+            this.isHuman.Checked = estHumain;
+        }
+
+        public void setNomJoueur(string nomJoueur) {
+            this.nameTextBox.Text = nomJoueur;
+            if (this.nameTextBox.Text.Trim() == "") {
+                this.nameTextBox_Init();
+            }
+            else
+            {
+                this.nameTextBoxIsSet = true;
+            }
+        }
+
         public bool EstHumain {
             get {
-                return this.typeJoueurCBO.Enabled;
+                return this.isHuman.Checked;
             }
         }
 

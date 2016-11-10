@@ -49,6 +49,7 @@
 #include "../SauvegardeZoneDeJeu.h"
 
 #include "JoueurVirtuel.h"
+#include "../ConfigTournoi.h"
 
 
 
@@ -1187,5 +1188,27 @@ void FacadeModele::creerTournoi(const char* nomZone, const int count, const char
 		AdaptateurJoueur joueur(nomJoueur, estHumain, nomProfil);
 		joueurs.push_back(joueur);
 	}
-	this->tournoi_ = new Tournoi<AdaptateurJoueur>(joueurs);
+	this->tournoi_ = new Tournoi<AdaptateurJoueur>(joueurs, nomZone);
+	ConfigTournoi::sauvegarderJoueurs(joueurs, nomZone);
+}
+
+
+/// @fn void FacadeModele::loadTournoi(const char* nomZone, const int count, const char** nomsJoueurs, const bool* sontHumains, const char** nomProfils)
+/// @brief Permet de charger la configuration d'un tournoi
+/// @param[out] nomZone : Nom de la zone de jeu
+/// @param[in] count : Nombre de joueurs
+/// @param[out] nomsJoueurs : Noms des joueurs
+/// @param[out] sontHumains : Si les joueurs sont humains ou non
+/// @param[out] nomProfils : Si le joueur est virtuel, le nom du profil
+void FacadeModele::loadTournoi(char* nomZone, int count, char** nomsJoueurs, bool* sontHumains, char** nomProfils) {
+	std::vector<AdaptateurJoueur> joueurs;
+	std::string zone;
+	ConfigTournoi::obtenirJoueurs(joueurs, zone);
+
+	strcpy(nomZone, zone.c_str());
+	for (int i = 0; i < count; i++) {
+		strcpy(nomsJoueurs[i],joueurs[i].getNomJoueur().c_str());
+		sontHumains[i] = joueurs[i].estHumain();
+		strcpy(nomProfils[i], joueurs[i].getProfil().getNom().c_str());
+	}
 }
