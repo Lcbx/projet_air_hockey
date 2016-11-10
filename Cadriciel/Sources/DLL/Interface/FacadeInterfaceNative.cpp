@@ -1046,18 +1046,66 @@ extern "C"
 	}
 
 	////////////////////////////////////////////////////////////////////////
-	/// @fn __declspec(dllexport) void obtenirListeProfils(const char **noms)
+	/// @fn __declspec(dllexport) void obtenirListeProfils(int *noms)
 	/// Author : Arthur
-	/// Cette fonction permet d'obtenir une liste des noms des profils
+	/// Cette fonction permet d'obtenir une liste des noms des profils,
+	///  enregistrée dans une chaine d'entier afin d'être transmise entre
+	///  les parties c# et c++ du programme
 	///
-	/// @return std::vector<std::string>
+	/// @param[out] noms : chaine d'entier correspondant à la liste des
+	///                      noms des profils
+	///
+	/// @return void
 	///
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl obtenirListeProfils(int *noms)
 	{
 		FacadeModele::obtenirInstance()->getConfigProfils()->getNoms(noms);
-		//std::cout << noms << std::endl;
-		//return noms[10];
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) double obtenirVitesseProfil(char *nom)
+	/// Author : Arthur
+	/// Cette fonction permet d'obtenir la vitesse d'un profil spécifié
+	///
+	/// @param[in] nom : nom du profil recherché
+	///
+	/// @return double : vitesse du profil spécifié
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) double __cdecl obtenirVitesseProfil(char *nom)
+	{
+		return FacadeModele::obtenirInstance()->getConfigProfils()->getVitesse((std::string) nom);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) double obtenirProbabiliteProfil(char *nom)
+	/// Author : Arthur
+	/// Cette fonction permet d'obtenir la probabilite d'un profil spécifié
+	///
+	/// @param[in] nom : nom du profil recherché
+	///
+	/// @return double : probabilite du profil spécifié
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) double __cdecl obtenirProbabiliteProfil(char *nom)
+	{
+		return FacadeModele::obtenirInstance()->getConfigProfils()->getProbabilite((std::string)nom);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) void supprimerProfil(char *nom)
+	/// Author : Arthur
+	/// Cette fonction permet de supprimer un profil spécifié
+	///
+	/// @param[in] nom : nom du profil à supprimer
+	///
+	/// @return void
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl supprimerProfil(char *nom)
+	{
+		FacadeModele::obtenirInstance()->getConfigProfils()->supprimerProfil(nom);
 	}
 
 	////////////////////////////////////////////////////////////////////////
