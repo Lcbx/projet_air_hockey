@@ -41,6 +41,7 @@ ConfigProfils::ConfigProfils()
 ////////////////////////////////////////////////////////////////////////
 void ConfigProfils::chargerProfils()
 {
+	bool listeExisteDeja = false;
 	// Vérification de l'existance du ficher
 	if (utilitaire::fichierExiste(FICHIER_PROFILS)) {
 
@@ -56,17 +57,23 @@ void ConfigProfils::chargerProfils()
 			tinyxml2::XMLElement* elementProfil{ elementListeProfil->FirstChildElement() };
 			while(elementProfil != nullptr) {
 				// Ajoute l'element du fichier dans la liste de profils
-				std::cout << elementProfil->Attribute("NOM") << " - " << elementProfil->DoubleAttribute("VITESSE") << " - " << elementProfil->DoubleAttribute("PROBABILITE") << std::endl;
 				_listeProfils.push_back(Profil(
 					elementProfil->Attribute("NOM"),
 					elementProfil->DoubleAttribute("VITESSE"),
 					elementProfil->DoubleAttribute("PROBABILITE")));
+				listeExisteDeja = true;
+
 				// Passe au profil suivant
 				elementProfil = elementProfil->NextSiblingElement();
 
 			}
 
 		}
+	}
+	// Si il n'y a pas déjà d'éléments, on ajoute le profil par défaut
+	if (!listeExisteDeja)
+	{
+		_listeProfils.push_back(Profil("Defaut", 10, 0.2));
 	}
 }
 
@@ -136,7 +143,7 @@ void ConfigProfils::setProfil(std::string nom, int vitesse, float probabilite)
 
 	// 
 	tinyxml2::XMLElement* elementProfil{ elementListeProfil->FirstChildElement(nom.c_str()) };
-	if (elementListeProfil != nullptr) {
+	if (elementProfil == nullptr) {
 		elementProfil = document.NewElement(nom.c_str());
 		elementListeProfil->LinkEndChild(elementProfil);
 	}
@@ -170,12 +177,12 @@ void ConfigProfils::supprimerProfil(std::string nom)
 		if (it->getNom() == nom.c_str()) {
 			_listeProfils.erase(it);
 			exist = true;
+			break;
 		}
 	}
 
 	// Si le profil existe bien, charger le fichier pour y supprimer le profil
 	if (exist) {
-
 		// Ouvrir le fichier
 		tinyxml2::XMLDocument document;
 		document.LoadFile(FICHIER_PROFILS.c_str());

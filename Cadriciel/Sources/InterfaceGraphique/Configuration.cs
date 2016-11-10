@@ -34,12 +34,13 @@ namespace InterfaceGraphique
 
         //le nombre de buts nécessaires (entre 1 et 5) pour gagner une partie.
         public int nbButMax;
-
         public bool estHumain = false;    
-        Profil joueurVirtuelDefault_ = new Profil();
-        Profil joueurVirtuelCourant_;
-        List<Profil> profils =new List<Profil>();
         
+        // Profil actuellement selectionne
+        string nomJoueurVirtuelCourant_;
+        // Liste des noms des profils
+        List<string> nomsProfils = new List<string>();
+
         //les attributs de Profil
         private double vitesse_ = 0;
         private string nom = "";
@@ -70,20 +71,56 @@ namespace InterfaceGraphique
         public Configuration()
         {
             InitializeComponent();
-            
-            joueurVirtuelCourant_ = joueurVirtuelDefault_;
-            profils.Add(joueurVirtuelCourant_);
 
-            textBox1.Text=(joueurVirtuelCourant_.getNomProfil());
-            numericUpDown2.Value = Convert.ToDecimal( (joueurVirtuelCourant_.getVitesseProfil()));
-            numericUpDown3.Value = Convert.ToDecimal(joueurVirtuelCourant_.getProbProfil());
-            listDeProfils.Items.Add(joueurVirtuelCourant_.getNomProfil());
+
+            // Chargement des profils
+
+            int nbrChar = FonctionsNatives.obtenirNombreProfils();
+            string temp = "";
+            List<string> liste = new List<string>();
+            int[] noms = new int[nbrChar];
+            FonctionsNatives.obtenirListeProfils(noms);
+
+            for (int i = 0; i < nbrChar; i++)
+            {
+                if ((char)noms[i] != '#' || (char)noms[i + 1] != '?' || (char)noms[i + 2] != '&')
+                {
+                    temp += (char)noms[i];
+                }
+                else
+                {
+                    liste.Add(temp);
+                    i += 2;
+                    temp = "";
+                }
+            }
+            foreach (string st in liste)
+            {
+                nomsProfils.Add(st);
+                listDeProfils.Items.Add(st);
+            }
+
+            nomJoueurVirtuelCourant_ = liste[0];
+
+            textBox1.Text=(nomJoueurVirtuelCourant_);
+
+            char[] cNom = nomJoueurVirtuelCourant_.ToCharArray();
+            char[] nt_cNom = new char[nomJoueurVirtuelCourant_.Length + 1];
+            for (int i = 0; i < nomJoueurVirtuelCourant_.Length; i++)
+                nt_cNom[i] = cNom[i];
+            nt_cNom[nomJoueurVirtuelCourant_.Length] = '\0';
+
+            numericUpDown2.Value = Convert.ToDecimal(FonctionsNatives.obtenirVitesseProfil(nt_cNom));
+            numericUpDown3.Value = Convert.ToDecimal(FonctionsNatives.obtenirProbabiliteProfil(nt_cNom));
 
             creationProfil.Enabled = false;
 
-            vitesse_ = joueurVirtuelCourant_.getVitesseProfil();
-            nom = joueurVirtuelCourant_.getNomProfil();
-            probaDAgirPassivemnt = joueurVirtuelCourant_.getProbProfil();
+            vitesse_ = FonctionsNatives.obtenirVitesseProfil(nomJoueurVirtuelCourant_.ToCharArray());
+            nom = nomJoueurVirtuelCourant_;
+            probaDAgirPassivemnt = FonctionsNatives.obtenirProbabiliteProfil(nomJoueurVirtuelCourant_.ToCharArray());
+
+
+
 
             // Charge les touches du joueur 2
             int[] touches = new int[4];
@@ -173,41 +210,9 @@ namespace InterfaceGraphique
                 }
 
             }
-
-            // Charge les profils
-            int nbrChar = FonctionsNatives.obtenirNombreProfils();
-            string temp = "";
-            List<string> liste = new List<string>();
-            int[] noms = new int[nbrChar];
-            FonctionsNatives.obtenirListeProfils(noms);
-
-            for (int i = 0; i < nbrChar; i++)
-            {
-                if ((char)noms[i] != '#' || (char)noms[i+1] != '?' || (char)noms[i+2] != '&') {
-                    temp += (char)noms[i];
-                }
-                else {
-                    liste.Add(temp);
-                    i += 2;
-                    temp = "";
-                }
-            }
-            foreach (string st in liste)
-               Console.WriteLine(st);
-            
-
+          
         }
 
-		/////////////////////////////////////////////////////////////////////////
-        /// @fn public setMenuPrincipalConfig(MenuPrincipal menuPrincipal)
-        /// 
-        /// @brief assigner l'instance menu principale dans menu configuration
-        /// 
-        /// @param[in] aucun
-        ///
-        /// @return aucune
-        //
-        ////////////////////////////////////////////////////////////////////////////////////////// 
         public void setMenuPrincipalConfig(MenuPrincipal menuPrincipal, Edition edition)
         {
             menuPrincipal_ = menuPrincipal;
@@ -607,16 +612,20 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void listDeProfils_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (listDeProfils.SelectedIndex >= 0)
+            {
+                nomJoueurVirtuelCourant_ = nomsProfils[listDeProfils.SelectedIndex];
+                textBox1.Text = (nomJoueurVirtuelCourant_);
 
-            for (int i = 1; i <listDeProfils.Items.Count; i++)
-                if (i == listDeProfils.SelectedIndex)
-                {
-                    joueurVirtuelCourant_ = profils[i];
-                    textBox1.Text = (joueurVirtuelCourant_.getNomProfil());
-                  
-                    numericUpDown2.Value = Convert.ToDecimal((joueurVirtuelCourant_.getVitesseProfil()));
-                    numericUpDown3.Value = Convert.ToDecimal(joueurVirtuelCourant_.getProbProfil());
-                }       
+                char[] cNom = nomJoueurVirtuelCourant_.ToCharArray();
+                char[] nt_cNom = new char[nomJoueurVirtuelCourant_.Length + 1];
+                for (int i = 0; i < nomJoueurVirtuelCourant_.Length; i++)
+                    nt_cNom[i] = cNom[i];
+                nt_cNom[nomJoueurVirtuelCourant_.Length] = '\0';
+
+                numericUpDown2.Value = Convert.ToDecimal(FonctionsNatives.obtenirVitesseProfil(nt_cNom));
+                numericUpDown3.Value = Convert.ToDecimal(FonctionsNatives.obtenirProbabiliteProfil(nt_cNom));
+            }
         }
 
 		/////////////////////////////////////////////////////////////////////////
@@ -631,11 +640,12 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void modifierProfil_Click(object sender, EventArgs e)
         {
-            creationProfil.Enabled = true;
-            ajouterActif = false;
-            modifierActif = true;
-          
-
+            if (nomsProfils[listDeProfils.SelectedIndex] != "Defaut")
+            {
+                creationProfil.Enabled = true;
+                ajouterActif = false;
+                modifierActif = true;
+            }
         }
 
 		////////////////////////////////////////////////////////////////////////
@@ -650,14 +660,22 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void button2_Click(object sender, EventArgs e)
         {
-            for (int i = 1; i < profils.Count; i++)
+            if (nomsProfils[listDeProfils.SelectedIndex] != "Defaut")
+            {
 
-                if ( i== listDeProfils.SelectedIndex)
-                {
-                    profils.Remove(profils[i]);
-                    listDeProfils.Items.Remove(textBox1.Text);
-                }
-           
+
+                char[] cNom = nomsProfils[listDeProfils.SelectedIndex].ToCharArray();
+                char[] nt_cNom = new char[nomsProfils[listDeProfils.SelectedIndex].Length + 1];
+                for (int i = 0; i < nomsProfils[listDeProfils.SelectedIndex].Length; i++)
+                    nt_cNom[i] = cNom[i];
+                nt_cNom[nomsProfils[listDeProfils.SelectedIndex].Length] = '\0';
+
+                FonctionsNatives.supprimerProfil(nt_cNom);
+
+                nomsProfils.Remove(nomsProfils[listDeProfils.SelectedIndex]);
+                listDeProfils.Items.Remove(textBox1.Text);
+            }
+                
         }
 
 
@@ -677,18 +695,15 @@ namespace InterfaceGraphique
             decimal prob = numericUpDown3.Value;
             float p = (float)prob;
             string nomP = textBox1.Text.ToString();
-            Profil joueur = new Profil(nomP, v, p);
-           
 
-           if (ajouterActif)
-           {
-               if (!(listDeProfils.Items.Contains(textBox1.Text)))
-               {
+            if (ajouterActif)
+            {
+                if (!(listDeProfils.Items.Contains(textBox1.Text)))
+                {
                     //wajdi - sauvegarder 
                     if (numericUpDown2.Text != "" && numericUpDown3.Text != "" )
                     {
-
-                        profils.Add(joueur);
+                        nomsProfils.Add(nomP);
                         listDeProfils.Items.Add(nomP);
 
                         //initiliaser 
@@ -705,22 +720,28 @@ namespace InterfaceGraphique
                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     } 
                }
-           }
+            }
 
-           if (modifierActif)
-           {
-               for (int i = 1; i < profils.Count; i++)
+            if (modifierActif)
+            {
+                int index = listDeProfils.SelectedIndex;
 
-                   if (i==listDeProfils.SelectedIndex)
-                   {
-                       profils[i].setNomProfil(textBox1.Text);
-                       profils[i].setVitesseProfil(Convert.ToDouble(numericUpDown2.Value));
-                       profils[i].setProbProfil(Convert.ToDouble(numericUpDown3.Value));
-                       listDeProfils.Items.RemoveAt(i);
-                       listDeProfils.Items.Insert(i,textBox1.Text);
-                       creationProfil.Enabled=false;
-                   }
-           }
+                   
+                nomsProfils[index] = textBox1.Text;
+                //nomsProfils[index].setVitesseProfil(Convert.ToDouble(textBox2.Text));
+                //nomsProfils[index].setProbProfil(Convert.ToDouble(textBox3.Text));
+                listDeProfils.Items.RemoveAt(index);
+                listDeProfils.Items.Insert(index, textBox1.Text);
+                creationProfil.Enabled=false;
+
+                char[] cNom = nomP.ToCharArray();
+                char[] nt_cNom = new char[nomJoueurVirtuelCourant_.Length + 1];
+                for (int i = 0; i < nomJoueurVirtuelCourant_.Length; i++)
+                    nt_cNom[i] = cNom[i];
+                nt_cNom[nomJoueurVirtuelCourant_.Length] = '\0';
+                FonctionsNatives.sauvegarderProfil(nomP, v, p);
+
+            }
         }
 
 
@@ -817,9 +838,17 @@ namespace InterfaceGraphique
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void obtenirListeProfils(int[] noms);
 
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern double obtenirVitesseProfil(char[] nom);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern double obtenirProbabiliteProfil(char[] nom);
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int obtenirNombreProfils();
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void supprimerProfil(char[] nom);
 
     }
 

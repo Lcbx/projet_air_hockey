@@ -116,6 +116,12 @@ extern "C" {
 
 	// Methode pour obtenir la liste des noms des profils
 	__declspec(dllexport) void obtenirListeProfils(int *noms);
+	// Methode pour obtenir la vitesse d'un profil selon son nom
+	__declspec(dllexport) double obtenirVitesseProfil(char *nom);
+	// Methode pour obtenir la probabilite d'un profil selon son nom
+	__declspec(dllexport) double obtenirProbabiliteProfil(char *nom);
+	// Methode pour supprimer un profil
+	__declspec(dllexport) void supprimerProfil(char *nom);
 	// Methode pour obtenir le nombre de profils
 	__declspec(dllexport) int obtenirNombreProfils();
 
