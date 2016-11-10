@@ -11,13 +11,18 @@
 #include "FacadeModele.h"
 #include "../ArbreRenduINF2990.h"
 
+/// @brief Nom par défaut pour un profil
+const std::string Profil::NOM_DEFAUT{ "defaut" };
 
-Profil::Profil()
-{
+/// @fn Profil::Profil()
+/// @brief Constructeur par défaut
+Profil::Profil() { }
 
-}
-
-
+/// @fn Profil::Profil(std::string nom, double vitesse, double probabilite)
+/// @brief Constructeur par paramètres
+/// @param nom : Nom du profil
+/// @param vitesse : Vitesse du joueur virtuel
+/// @param probabilite : Probabilité de d'agir passivement
 Profil::Profil(std::string nom, double vitesse, double probabilite)
 {
 	nom_ = nom;

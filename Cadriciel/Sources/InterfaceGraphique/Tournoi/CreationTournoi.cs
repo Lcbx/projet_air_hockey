@@ -67,7 +67,15 @@ namespace InterfaceGraphique
         /// @fn private void initParticipants()
         /// @brief Permet d'initialiser la liste des participants
         private void initParticipants() {
-            for(int i = 0; i < NB_PARTICIPANTS; i++) {
+            char[] nomZone = new char[255];
+            char[] nomsParticipants = new char[2000];
+            bool[] sontHumains = new bool[NB_PARTICIPANTS];
+            char[] nomsProfilsVirtuels = new char[2000];
+            FonctionsNatives.loadTournoi(nomZone, NB_PARTICIPANTS, nomsParticipants, sontHumains, nomsProfilsVirtuels);
+            string[] nomsParticipantsStr = new string(nomsParticipants).Split('\0');
+            string[] nomsProfilsVirtuelsStr = new string(nomsProfilsVirtuels).Split('\0');
+
+            for (int i = 0; i < NB_PARTICIPANTS; i++) {
                 ParticipantTournoi participant = new ParticipantTournoi();
                 participant.Location = new System.Drawing.Point(0, ((participant.Size.Height + SPACING_PARTICIPANTS) * i + this.title.Height + SPACING_PARTICIPANTS));
 
@@ -75,13 +83,18 @@ namespace InterfaceGraphique
                     c.Validating += ValidateForm;
                     if (c is CheckBox) (c as CheckBox).CheckedChanged += ValidateForm;
                 }
-                
+
+                participant.setNomJoueur(nomsParticipantsStr[i]);
+                participant.setEstHumain(sontHumains[i]);
+                participant.setTypeJoueur(nomsProfilsVirtuelsStr[i]);
+
                 this.Controls.Add(participant);
                 participants.Add(participant);
             }
 
+            this.cbmZoneDeJeu.setChoixZone(nomZone);
             this.cbmZoneDeJeu.Validating += ValidateForm;
-            this.createButton.Enabled = false;
+            this.createButton.Enabled = isValidForm();
 
             //Centre pour un participant
             int center = this.participants[0].Size.Width / 2;
@@ -129,6 +142,9 @@ namespace InterfaceGraphique
         static partial class FonctionsNatives {
             [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
             public static extern void createTournoi(char[] nomZone, int count, string[] nomsJoueurs, bool[] sontHumains, string[] nomProfils);
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void loadTournoi([Out] char[] nomZone, [Out] int count, [Out] char[] nomsJoueurs, [Out] bool[] sontHumains, [Out] char[] nomProfils);
         }
     }
 }

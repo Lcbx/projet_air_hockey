@@ -21,6 +21,8 @@
 ///////////////////////////////////////////////////////////////////////////
 class Profil {
 public:
+	/// Nom par défaut
+	static const std::string NOM_DEFAUT;
 
 	/// Constructeur par défaut
 	Profil();

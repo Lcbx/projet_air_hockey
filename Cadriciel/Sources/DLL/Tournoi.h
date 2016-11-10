@@ -3,6 +3,7 @@
 #include <tuple>
 #include <vector>
 #include <cmath>
+#include "ConfigTournoi.h"
 
 ///
 /// @class Tournoi
@@ -30,13 +31,15 @@ private:
 	// Le nombre de participants
 	size_t nbJoueurs;
 
+	std::string nomZone;
+
 
 public:
 	/// Constructeur par défaut
 	Tournoi() = delete;
 
 	/// Constructeur avec un ensemble de participants
-	Tournoi(std::vector<T> participants);
+	Tournoi(std::vector<T> participants, std::string nomZone = ConfigTournoi::ZONE_DEFAUT);
 
 	/// Destructeur
 	~Tournoi();
@@ -65,11 +68,13 @@ private:
 
 /// @fn Tournoi<T>::Tournoi(std::vector<T> paticipants)
 /// @brief Permet de créer un tournoi à partir d'une liste de participants
+/// @param participants : Liste des participants au tournoi
+/// @param nomZone : Nom de la zone de jeu
 ///
 /// Le tournoi est créé de façon à ce que tous les joueurs peuvent être placés
 /// Sur la branche la plus profonde. Peut causer des problèmes de précision autour
 template<typename T>
-Tournoi<T>::Tournoi(std::vector<T> participants) {
+Tournoi<T>::Tournoi(std::vector<T> participants, std::string nomZone) {
 	this->participants = participants; //La liste des participants
 	this->nbJoueurs = this->participants.size();
 	this->matchupDepth = (int) ceil(log2(this->nbJoueurs));
@@ -84,6 +89,8 @@ Tournoi<T>::Tournoi(std::vector<T> participants) {
 	int basePos = (int) pow(2, matchupDepth) - 1;
 	for (int i = 0; i < this->nbJoueurs; i++)
 		this->matchups[basePos + i] = { i, 0 };
+
+	this->nomZone = nomZone;
 }
 
 

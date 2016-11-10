@@ -213,7 +213,7 @@ Profil ConfigProfils::getProfil(std::string nom)
 			return *it;
 		}
 	}
-	return Profil("defaut", 50, 0.2);
+	return Profil(Profil::NOM_DEFAUT, 50, 0.2);
 }
 
 

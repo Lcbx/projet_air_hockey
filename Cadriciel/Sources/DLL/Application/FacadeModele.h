@@ -109,6 +109,8 @@ public:
 	inline Tournoi<AdaptateurJoueur>* obtenirTournoi();
 	/// Permet de créer le tournoi
 	void creerTournoi(const char* nomZone, const int count, const char** nomsJoueurs, const bool* sontHumains, const char** nomProfils);
+	/// Permet d'obtenir la configuration du tournoi
+	void loadTournoi(char* nomZone, int count, char* nomsJoueurs, bool* sontHumains, char* nomProfils);
 
 	/// Réinitialise la scène.
 	void reinitialiser();

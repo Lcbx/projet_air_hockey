@@ -25,6 +25,20 @@ namespace InterfaceGraphique.Tournoi
             }
         }
 
+        /// @fn public bool setChoixZone(char[] nomZone)
+        /// @brief Permet de choisir la zone de jeu à partir de son nom
+        /// @param nomZone : Nom de la zone de jeu
+        /// @return True if a zone with the name exists, false otherwise
+        public bool setChoixZone(char[] nomZone) {
+            string stripNomZone = new string(nomZone).Split('\0')[0];
+            Fichier choix = this.listeFichiers.FirstOrDefault(x => x.PathNameFichier.SequenceEqual(stripNomZone.ToCCharArray()));
+            if(choix != null) {
+                this.cbmZonesDeJeu.SelectedItem = choix;
+                return true;
+            }
+            return false;
+        }
+
         /// @biref Constructeur par défaut de la zone de jeu
         public ZoneDeJeu()
         {
