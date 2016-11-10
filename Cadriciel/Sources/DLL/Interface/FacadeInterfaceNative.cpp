@@ -1118,5 +1118,60 @@ extern "C"
 	__declspec(dllexport) void loadTournoi(char* nomZone, int count, char* nomsJoueurs, bool* sontHumains, char* nomProfils) {
 		FacadeModele::obtenirInstance()->loadTournoi(nomZone, count, nomsJoueurs, sontHumains, nomProfils);
 	}
+
+	/// @fn __declspec(dllexport) void taillesArbreTournoi(int &nbMatchups, int &tailleChaineArbre)
+	/// @brief Permet d'obtenir la taille de l'arbre de tournoi
+	/// @param[out] nbMatchups : Nombre de matchups dans l'arbre
+	/// @param[out] tailleChaineArbre : Taille maximale à allouer pour le transport des noms des joueurs dans l'arbres
+	///TODO: Remove, became unused
+	__declspec(dllexport) void taillesArbreTournoi(int nbMatchups, int tailleChaineArbre) {
+		std::vector<AdaptateurJoueur> participants = FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirParticipants();
+		nbMatchups = FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirTailleArbre();
+
+		int maxLength = 1; //Une chaîne doit minimalement contenir \0
+		for (auto participant : participants) {
+			// On calcule le \0 additionnel
+			int len = participant.getNomJoueur().length() + 1;
+			maxLength = (maxLength < len ? len : maxLength);
+		}
+
+		tailleChaineArbre = maxLength * nbMatchups;
+	}
+	
+	/// @fn __declspec(dllexport) int nombreMatchupsTournoi()
+	/// @brief Permet d'obtenir le nombre de matchups dans le tournoi
+	/// @return Le nombre de matchups dans le tournoi
+	__declspec(dllexport) int nombreMatchupsTournoi() {
+		return FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirTailleArbre();
+	}
+
+
+	/// @fn __declspec(dllexport) int plusLongNomTournoi()
+	/// @brief Permet d'obtenir la longeur du plus long nom du tournoi
+	/// @return La longeur du plus long nom du tournoi
+	__declspec(dllexport) int plusLongNomTournoi() {
+		return FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirTailleArbre();
+	}
+
+	/// @fn __declspec(dllexport) int loadArbreTournoi(char* nomsJoueurs, int* scores)
+	/// @brief Permet d'obtenir l'arbre de tournoi
+	/// @param[out] nomsJoueurs : Noms des joueurs
+	/// @param[out] scores : Scores associés avec les joueurs
+	/// @return Le nombre de participants dans l'arbre
+	/// La case 0 représente le gagnant du tournoi. 1 et 2 la finale et ainsi de suite
+	__declspec(dllexport) int loadArbreTournoi(char* nomsJoueurs, int* scores) {
+		auto arbre = FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirMatchups();
+		int iNJLen = 0; //Itérateur sur les noms de joueurs
+		int i = 0;
+		for (auto scoreEtNomJoueur : arbre) {
+			scores[i] = scoreEtNomJoueur.second;
+			int j; std::string nom = scoreEtNomJoueur.first.getNomJoueur();
+			for (j = 0; j < nom.length(); j++, iNJLen++)
+				nomsJoueurs[iNJLen] = nom[j];
+			nomsJoueurs[iNJLen++] = '\0';
+		}
+
+		return FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirParticipants().size();
+	}
 }
 

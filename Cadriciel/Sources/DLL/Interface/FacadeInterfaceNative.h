@@ -185,6 +185,14 @@ extern "C" {
 	__declspec(dllexport) void createTournoi(const char* nomZone, const int count, const char** nomsJoueurs, const bool* sontHumains, const char** nomProfils);
 	// Permet de charger les informations pour un tournoi
 	__declspec(dllexport) void loadTournoi(char* nomZone, int count, char* nomsJoueurs, bool* sontHumains, char* nomProfils);
+	// Permet d'obtenir la taille minimale pour le tableau de caractères pour l'arbre de tournoi
+	__declspec(dllexport) void taillesArbreTournoi(int nbMatchups, int tailleChaineArbre); //TODO: Remove, became unused
+	// Permet d'obtenir le nombre de matchups dans le tournoi
+	__declspec(dllexport) int nombreMatchupsTournoi();
+	// Permet d'obtenir la longeur du plus long nom du tournoi
+	__declspec(dllexport) int plusLongNomTournoi();
 
+	// Permet d'obtenir l'arbre des participants d'un tournoi avec leurs scores
+	__declspec(dllexport) int loadArbreTournoi(char* nomsJoueurs, int* scores);
 } 
 #endif // __FACADE_INTERFACE_NATIVE_H__

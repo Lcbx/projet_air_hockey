@@ -56,7 +56,7 @@ namespace InterfaceGraphique
             t = new Timer(); //creer le timer 
             t.Interval = 5000;     // specify interval time as you want (en milisecondes) ( 5000 = 5 sec)
             t.Tick += new EventHandler(timer1_Tick);  //evenement qui se declanche a la fin des 5 sec
-            t.Start();
+            //t.Start();
             this.parent_.SwitchStatusTournoi(ModeTournoi.StatusTournoi.MatchMaking);
 
             //enable le boutton

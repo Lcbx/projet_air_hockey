@@ -57,6 +57,12 @@ public:
 	/// Permet d'obtenir l'arbre complet des matchups
 	std::vector<std::pair<T, int>> obtenirMatchups(T value = T());
 
+	/// Permet d'obtenir la taille de l'arbre
+	int obtenirTailleArbre();
+
+	/// Permet d'obtenir la liste des participants
+	std::vector<T> obtenirParticipants();
+
 private:
 	/// Permet d'obtenir la position du deuxième joueur du prochain matchup
 	int positionProchainMatchup();
@@ -196,4 +202,20 @@ std::vector<std::pair<T, int>> Tournoi<T>::obtenirMatchups(T value = T()) {
 	}
 
 	return ret;
+}
+
+/// @fn T Tournoi<T>::obtenirTailleArbre()
+/// @brief Permet d'obtenir la taille de l'arbre
+/// @return La taille de l'arbre (nombre d'éléments
+template<typename T>
+int Tournoi<T>::obtenirTailleArbre() {
+	return this->matchups.size();
+}
+
+/// @fn T Tournoi<T>::obtenirParticipants()
+/// @brief Permet d'obtenir la liste des participants
+/// @return Le vecteur des participants
+template<typename T>
+std::vector<T> Tournoi<T>::obtenirParticipants() {
+	return this->participants;
 }

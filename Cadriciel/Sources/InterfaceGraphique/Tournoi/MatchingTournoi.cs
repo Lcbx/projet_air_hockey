@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace InterfaceGraphique
 {
@@ -49,8 +50,8 @@ namespace InterfaceGraphique
             int maxDepth = (int)Math.Log((nbJoueurs + 1), 2);
 
             for (int i = 0; i < nbJoueurs; i++)
-            { //TODO: Refactor
-                this.matches[i] = new MatchJoueur("No name", 3);
+            {
+                this.matches[i] = new MatchJoueur("", 0);
                 int depth = (int)Math.Log((i + 1), 2);
                 int height = (i + 1) - (int)Math.Pow(2, depth);
                 int ajustedHeight = height * (int)Math.Pow(2, maxDepth - depth);
@@ -60,8 +61,27 @@ namespace InterfaceGraphique
                 this.Controls.Add(this.matches[i]);
             }
 
+            this.updateMatchups();
+
             this.ResumeLayout(false);
             this.PerformLayout();
+        }
+
+        /// @fn private void updateMatchups()
+        /// @brief Permet de mettre à jour les participants des matchup avec le C++
+        private void updateMatchups() {
+            int nbMatchups = FonctionsNatives.nombreMatchupsTournoi();
+            int tailleTableauChar = FonctionsNatives.plusLongNomTournoi() * nbMatchups; ;
+
+            int[] scoresMatchups = new int[nbMatchups];
+            char[] nomsJoueursMatchups = new char[tailleTableauChar];
+            FonctionsNatives.loadArbreTournoi(nomsJoueursMatchups, scoresMatchups);
+
+            string[] nomsJoueurs = new string(nomsJoueursMatchups).Split('\0');
+            for(int i = 0; i < nbMatchups; i++) {
+                this.matches[i].ScoreJoueur = scoresMatchups[i];
+                this.matches[i].NomJoueur = nomsJoueurs[i];
+            }
         }
 
         /// @fn private void matchingTournoi_paint(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -95,6 +115,18 @@ namespace InterfaceGraphique
                 g.DrawLine(System.Drawing.Pens.Black, point2, point3);
                 g.DrawLine(System.Drawing.Pens.Black, point3, point4);
             }
+        }
+
+        static partial class FonctionsNatives
+        {
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern int nombreMatchupsTournoi();
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern int plusLongNomTournoi();
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void loadArbreTournoi([Out] char[] nomsJoueurs, [Out] int[] scores);
         }
     }
 }
