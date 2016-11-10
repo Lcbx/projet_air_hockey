@@ -116,8 +116,8 @@ namespace InterfaceGraphique
 
 
                 // test afficher les vitesses et les probabilites a la console - yay! ca marche
-                vitesse_ = FonctionsNatives.obtenirVitesseProfil(nt_cNom);
-                probabilite_ = FonctionsNatives.obtenirProbabiliteProfil(nt_cNom);
+                //vitesse_ = FonctionsNatives.obtenirVitesseProfil(nt_cNom);
+                //probabilite_ = FonctionsNatives.obtenirProbabiliteProfil(nt_cNom);
                 edition_.DemarerJoueurVirtuel(FonctionsNatives.obtenirVitesseProfil(nt_cNom), FonctionsNatives.obtenirProbabiliteProfil(nt_cNom));
                 //edition_.DemarerJoueurVirtuel(1, 0.5);
                 edition_.resetPartie();
@@ -147,7 +147,7 @@ namespace InterfaceGraphique
                 vitesse_ = FonctionsNatives.obtenirVitesseProfil(nt_cNom);
                 probabilite_ = FonctionsNatives.obtenirProbabiliteProfil(nt_cNom);
                 
-                Console.WriteLine("vitesse = " + Convert.ToDecimal(vitesse_) + "prob = " + Convert.ToDecimal(probabilite_));
+                //Console.WriteLine("vitesse = " + Convert.ToDecimal(vitesse_) + "prob = " + Convert.ToDecimal(probabilite_));
                 
             }
         }

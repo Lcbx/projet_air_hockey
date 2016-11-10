@@ -46,9 +46,7 @@ namespace InterfaceGraphique
                 edition_.passerModePartie(true);
                 edition_.resetPartie();
                 edition_.ArreterJoueurVirtuel();
-                edition_.Focus();
-
-                edition_.TopMost = true;
+    
 
                 menu_.Hide();
                 this.Close();
