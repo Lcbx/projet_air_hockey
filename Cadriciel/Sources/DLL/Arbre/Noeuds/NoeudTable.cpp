@@ -846,9 +846,6 @@ bool NoeudTable::getPointControle(int numero, glm::vec3 & pointControle)
 		return false;
 	else
 	{
-		for (int i=0; i<3; i++)
-			if (pointControle[i] == NULL)
-				return false;
 		if (numero == 8)
 			pointControle = obtenirPositionRelative();
 		else

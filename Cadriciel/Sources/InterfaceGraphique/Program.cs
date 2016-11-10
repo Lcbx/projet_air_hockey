@@ -50,9 +50,9 @@ namespace InterfaceGraphique
             menuPrincipal = new MenuPrincipal();
             edition = new Edition();
             configuration = new Configuration();
-            joueurVirtuel = new Profil();
+            joueurVirtuel = new Profil(); 
              
-            ///Application.Run(edition);
+            ///Application.Run(edition); 
            
             menuPrincipal.setMenu(edition, configuration);
             edition.setMenuPrincipal(menuPrincipal);

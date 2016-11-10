@@ -13,6 +13,7 @@
 
 #include <cppunit/extensions/HelperMacros.h>
 #include <memory>
+#include "ArbreRenduINF2990.h"
 
 class NoeudTable;
 
@@ -60,6 +61,7 @@ public:
 private:
 	/// Instance d'un noeud Table
 	std::unique_ptr<NoeudTable> noeud;
+	ArbreRenduINF2990 * arbre;
 };
 
 #endif // _TESTS_NOEUDTABLETEST_H

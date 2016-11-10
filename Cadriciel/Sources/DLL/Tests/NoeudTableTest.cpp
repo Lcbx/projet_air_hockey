@@ -9,6 +9,7 @@
 #include "NoeudTableTest.h"
 #include "NoeudTable.h"
 #include "GL/glew.h"
+#include "FacadeModele.h"
 #include "ArbreRenduINF2990.h"
 #include "Utilitaire.h"
 
@@ -30,7 +31,11 @@ CPPUNIT_TEST_SUITE_REGISTRATION(NoeudTableTest);
 ////////////////////////////////////////////////////////////////////////
 void NoeudTableTest::setUp()
 {
-	noeud = std::make_unique<NoeudTable>(ArbreRenduINF2990::NOM_TABLE);	
+	noeud = std::make_unique<NoeudTable>(ArbreRenduINF2990::NOM_TABLE);
+	FacadeModele::obtenirInstance()->initialiserOpenGL(nullptr);
+	arbre = new ArbreRenduINF2990();
+	arbre->initialiser();
+	
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -48,6 +53,7 @@ void NoeudTableTest::setUp()
 ////////////////////////////////////////////////////////////////////////
 void NoeudTableTest::tearDown()
 {
+	delete arbre;
 }
 
 
@@ -63,26 +69,24 @@ void NoeudTableTest::tearDown()
 ////////////////////////////////////////////////////////////////////////
 void NoeudTableTest::testDansTable()
 {
-	//  Premier test : on vérifie que la position initiale des points de controles est un vector nul
-	glm::vec3  pointControle[8];
-	for (int i=0; i<8 ; i++)
-		noeud->getPointControle(i, pointControle[i]);
-
-	for (int i = 0; i<8; i++)
-		for (int j = 0; j < 3; j++)
-		{
-			//CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(pointControle[i][j]));
-			CPPUNIT_ASSERT_MESSAGE("failed to get pointdecontrole", utilitaire::EGAL_ZERO(pointControle[i][j]));
-		}
-
-	//// On modifie la position
-	//noeud->assignerPositionRelative(glm::dvec3{ 2.2, 3.3, 4.4 });
-
-	//// Second test : on vérifie que la position a été modifiée
-	//vecteur = noeud->obtenirPositionRelative();
-	//CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[0] - 2.2));
-	//CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[1] - 3.3));
-	//CPPUNIT_ASSERT(utilitaire::EGAL_ZERO(vecteur[2] - 4.4));
+	
+	// on test avec des position qui se trouve dans la table 
+	glm::dvec3 positionObjet[3] = { {0,0,0 }, {-84,10,0}, {84,-30,0} };
+	// on teste si la position est dans la table 
+	for (int i = 0; i < 3; i++)
+	{
+		bool danstable = arbre->getTable()->dansTable(positionObjet[i]);
+		CPPUNIT_ASSERT_MESSAGE("objet est pas dans la table!!", danstable == true);
+	}
+	
+	// on test avec des position qui se trouve a l'exterieur de la table 
+	glm::dvec3 positionObjet2[5] = { { -86,20,0 },{ 86,-40,0 },{ 10,-76,0 }, {-30,76,0}, {200,200,0} };
+	// on teste si la position est dans la table 
+	for (int i = 0; i < 5; i++)
+	{
+		bool danstable = arbre->getTable()->dansTable(positionObjet2[i]);
+		CPPUNIT_ASSERT_MESSAGE("objet n'est pas dans la table!!", danstable == false);
+	}
 
 	
 }
