@@ -176,7 +176,7 @@ extern "C" {
 	// Permet d'envoyer la des informations pour un tournoi
 	__declspec(dllexport) void createTournoi(const char* nomZone, const int count, const char** nomsJoueurs, const bool* sontHumains, const char** nomProfils);
 	// Permet de charger les informations pour un tournoi
-	__declspec(dllexport) void loadTournoi(char* nomZone, int count, char** nomsJoueurs, bool* sontHumains, char** nomProfils);
+	__declspec(dllexport) void loadTournoi(char* nomZone, int count, char* nomsJoueurs, bool* sontHumains, char* nomProfils);
 
 } 
 #endif // __FACADE_INTERFACE_NATIVE_H__

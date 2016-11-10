@@ -1074,7 +1074,7 @@ extern "C"
 	/// @param nomsJoueurs : Noms des joueurs
 	/// @param sontHumains : Si les joueurs sont humains ou non
 	/// @param nomProfils : Si le joueur est virtuel, le nom du profil
-	__declspec(dllexport) void loadTournoi(char* nomZone, int count, char** nomsJoueurs, bool* sontHumains, char** nomProfils) {
+	__declspec(dllexport) void loadTournoi(char* nomZone, int count, char* nomsJoueurs, bool* sontHumains, char* nomProfils) {
 		FacadeModele::obtenirInstance()->loadTournoi(nomZone, count, nomsJoueurs, sontHumains, nomProfils);
 	}
 }

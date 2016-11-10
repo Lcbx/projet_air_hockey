@@ -1200,15 +1200,33 @@ void FacadeModele::creerTournoi(const char* nomZone, const int count, const char
 /// @param[out] nomsJoueurs : Noms des joueurs
 /// @param[out] sontHumains : Si les joueurs sont humains ou non
 /// @param[out] nomProfils : Si le joueur est virtuel, le nom du profil
-void FacadeModele::loadTournoi(char* nomZone, int count, char** nomsJoueurs, bool* sontHumains, char** nomProfils) {
+void FacadeModele::loadTournoi(char* nomZone, int count, char* nomsJoueurs, bool* sontHumains, char* nomProfils) {
 	std::vector<AdaptateurJoueur> joueurs;
 	std::string zone;
 	ConfigTournoi::obtenirJoueurs(joueurs, zone);
-
 	strcpy(nomZone, zone.c_str());
+	
+	int iNom = 0;
+	int iProfil = 0;
 	for (int i = 0; i < count; i++) {
-		strcpy(nomsJoueurs[i],joueurs[i].getNomJoueur().c_str());
+		std::string nomJoueur = joueurs[i].getNomJoueur();
+		int j = 0;
+		while (j < nomJoueur.length()) {
+			nomsJoueurs[iNom + j] = nomJoueur[j];
+			j++;
+		}
+		nomsJoueurs[iNom + j] = '\0';
+		iNom += ++j;
+
 		sontHumains[i] = joueurs[i].estHumain();
-		strcpy(nomProfils[i], joueurs[i].getProfil().getNom().c_str());
+
+		std::string nomProfil = joueurs[i].getProfil().getNom();
+		j = 0;
+		while (j < nomProfil.length()) {
+			nomProfils[iProfil + j] = nomProfil[j];
+			j++;
+		}
+		nomProfils[iProfil + j] = '\0';
+		iProfil += ++j;
 	}
 }

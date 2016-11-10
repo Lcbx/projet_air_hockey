@@ -67,11 +67,13 @@ namespace InterfaceGraphique
         /// @fn private void initParticipants()
         /// @brief Permet d'initialiser la liste des participants
         private void initParticipants() {
-            string nomZone = "";
-            string[] nomsParticipants = new string[] { "", "", "", "" };
+            char[] nomZone = new char[255];
+            char[] nomsParticipants = new char[2000];
             bool[] sontHumains = new bool[NB_PARTICIPANTS];
-            string[] nomsProfilsVirtuels = new string[] { "", "", "", "" };
-            //FonctionsNatives.loadTournoi(nomZone, NB_PARTICIPANTS, nomsParticipants, sontHumains, nomsProfilsVirtuels);
+            char[] nomsProfilsVirtuels = new char[2000];
+            FonctionsNatives.loadTournoi(nomZone, NB_PARTICIPANTS, nomsParticipants, sontHumains, nomsProfilsVirtuels);
+            string[] nomsParticipantsStr = new string(nomsParticipants).Split('\0');
+            string[] nomsProfilsVirtuelsStr = new string(nomsProfilsVirtuels).Split('\0');
 
             for (int i = 0; i < NB_PARTICIPANTS; i++) {
                 ParticipantTournoi participant = new ParticipantTournoi();
@@ -82,9 +84,9 @@ namespace InterfaceGraphique
                     if (c is CheckBox) (c as CheckBox).CheckedChanged += ValidateForm;
                 }
 
-                participant.setNomJoueur(nomsParticipants[i]);
+                participant.setNomJoueur(nomsParticipantsStr[i]);
                 participant.setEstHumain(sontHumains[i]);
-                participant.setTypeJoueur(nomsProfilsVirtuels[i]);
+                participant.setTypeJoueur(nomsProfilsVirtuelsStr[i]);
 
                 this.Controls.Add(participant);
                 participants.Add(participant);
@@ -141,7 +143,7 @@ namespace InterfaceGraphique
             public static extern void createTournoi(char[] nomZone, int count, string[] nomsJoueurs, bool[] sontHumains, string[] nomProfils);
 
             [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
-            public static extern void loadTournoi([Out] string nomZone, [Out] int count, [Out] string[] nomsJoueurs, [Out] bool[] sontHumains, [Out] string[] nomProfils);
+            public static extern void loadTournoi([Out] char[] nomZone, [Out] int count, [Out] char[] nomsJoueurs, [Out] bool[] sontHumains, [Out] char[] nomProfils);
         }
     }
 }
