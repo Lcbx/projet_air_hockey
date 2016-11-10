@@ -1903,7 +1903,8 @@ namespace InterfaceGraphique
 
         private void Edition_Load(object sender, EventArgs e)
         {
-            resetPartie();
+            resetPartie(); 
+
         }
 
 
