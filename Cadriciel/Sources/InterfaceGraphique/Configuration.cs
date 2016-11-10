@@ -36,7 +36,9 @@ namespace InterfaceGraphique
         public int nbButMax;
         public bool estHumain = false;    
         
+        // Profil actuellement selectionne
         string nomJoueurVirtuelCourant_;
+        // Liste des noms des profils
         List<string> nomsProfils = new List<string>();
 
         //les attributs de Profil
@@ -84,10 +86,8 @@ namespace InterfaceGraphique
             }
             foreach (string st in liste)
             {
-                //Profil joueur = new Profil(st, FonctionsNatives., p);
                 nomsProfils.Add(st);
                 listDeProfils.Items.Add(st);
-                Console.WriteLine(st);
             }
 
             nomJoueurVirtuelCourant_ = liste[0];
@@ -446,7 +446,6 @@ namespace InterfaceGraphique
 
         private void listDeProfils_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Console.WriteLine(listDeProfils.SelectedIndex);
             if (listDeProfils.SelectedIndex >= 0)
             {
                 nomJoueurVirtuelCourant_ = nomsProfils[listDeProfils.SelectedIndex];
@@ -484,8 +483,6 @@ namespace InterfaceGraphique
                 for (int i = 0; i < nomsProfils[listDeProfils.SelectedIndex].Length; i++)
                     nt_cNom[i] = cNom[i];
                 nt_cNom[nomsProfils[listDeProfils.SelectedIndex].Length] = '\0';
-
-                Console.WriteLine(nt_cNom);
 
                 FonctionsNatives.supprimerProfil(nt_cNom);
 

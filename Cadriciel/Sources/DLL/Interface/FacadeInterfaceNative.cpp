@@ -984,8 +984,6 @@ extern "C"
 	__declspec(dllexport) void __cdecl obtenirListeProfils(int *noms)
 	{
 		FacadeModele::obtenirInstance()->getConfigProfils()->getNoms(noms);
-		//std::cout << noms << std::endl;
-		//return noms[10];
 	}
 
 	////////////////////////////////////////////////////////////////////////

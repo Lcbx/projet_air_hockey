@@ -57,7 +57,6 @@ void ConfigProfils::chargerProfils()
 			tinyxml2::XMLElement* elementProfil{ elementListeProfil->FirstChildElement() };
 			while(elementProfil != nullptr) {
 				// Ajoute l'element du fichier dans la liste de profils
-				std::cout << elementProfil->Attribute("NOM") << " - " << elementProfil->DoubleAttribute("VITESSE") << " - " << elementProfil->DoubleAttribute("PROBABILITE") << std::endl;
 				_listeProfils.push_back(Profil(
 					elementProfil->Attribute("NOM"),
 					elementProfil->DoubleAttribute("VITESSE"),
@@ -116,7 +115,6 @@ void ConfigProfils::setProfil(std::string nom, int vitesse, float probabilite)
 	for (std::list<Profil>::iterator it = _listeProfils.begin(); it != _listeProfils.end(); ++it) {
 		// Si le profil existe déjà, le mettre à jour
 		if (it->getNom() == nom.c_str()) {
-			std::cout << "Modification" << std::endl;
 			it->setNom(nom);
 			it->setVitesse(vitesse);
 			it->setProbabilite(probabilite);
@@ -177,9 +175,7 @@ void ConfigProfils::supprimerProfil(std::string nom)
 	for (std::list<Profil>::iterator it = _listeProfils.begin(); it != _listeProfils.end(); ++it) {
 		// Supprime le profil de la liste
 		if (it->getNom() == nom.c_str()) {
-			std::cout << "A. " << std::endl;
 			_listeProfils.erase(it);
-			std::cout << "B. " << std::endl;
 			exist = true;
 			break;
 		}
@@ -187,7 +183,6 @@ void ConfigProfils::supprimerProfil(std::string nom)
 
 	// Si le profil existe bien, charger le fichier pour y supprimer le profil
 	if (exist) {
-		std::cout << "NOUH" << std::endl;
 		// Ouvrir le fichier
 		tinyxml2::XMLDocument document;
 		document.LoadFile(FICHIER_PROFILS.c_str());
