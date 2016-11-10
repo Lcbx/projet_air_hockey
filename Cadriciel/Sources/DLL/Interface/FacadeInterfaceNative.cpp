@@ -199,46 +199,123 @@ extern "C"
 	}
 
 	
-	// Click
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl etatDelaSouris(int etat)
+	///
+	/// Cette fonction est appelée quand on change d,outil d'edition
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl etatDelaSouris(int etat) {
 		Souris::obtenirInstance()->EtatdelaSouris(etat);
 	}
-
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl clickStart(int x, int y)
+	///
+	/// Cette fonction est appelée au debut d'un click de la souris
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl clickStart(int x, int y)
 	{
 		Souris::obtenirInstance()->startClick(x, y);
 	}
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) bool __cdecl clickCurrent(int x, int y)
+	///
+	/// Cette fonction est appelée au cours d'un click de la souris
+	///
+	/// @return un booleen signifiant que l'emplacement est dans la table.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) bool __cdecl clickCurrent(int x, int y)
 	{
 		return Souris::obtenirInstance()->currentClick(x, y);
 	}
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl clickEnd(int x, int y)
+	///
+	/// Cette fonction est appelée à la fin d'un click de la souris
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl clickEnd(int x, int y)
 	{
 		Souris::obtenirInstance()->endClick(x, y);
 	}
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl positionSouris(int x, int y)
+	///
+	/// Cette fonction est appelée quand la souris n'est pas pesee
+	///
+	/// @return un booleen signifiant que l'emplacement est dans la table.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) bool __cdecl positionSouris(int x, int y)
 	{
 		return Souris::obtenirInstance()->sourisPostition(x, y);
 	}
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl rightClick(bool presse)
+	///
+	/// Cette fonction est appelée quand le bouton droit de la souris est pese
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void rightClick(bool presse)
 	{
 		Souris::obtenirInstance()->clickRight(presse);
 	}
 
-	//touche control
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl toucheControl(bool presse)
+	///
+	/// Cette fonction est appelée quand la touche control est pressée
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl toucheControl(bool presse)
 	{
 		Souris::obtenirInstance()->setControl(presse);
 	}
 
-	//touche alt
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl toucheAlt(bool presse)
+	///
+	/// Cette fonction est appelée quand la touche alt est pressée
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl toucheAlt(bool presse)
 	{
 		Souris::obtenirInstance()->setAlt(presse);
 	}
 	
-	
-	////touche escape
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl escEnfonce()
+	///
+	/// Cette fonction est appelée quand la touche echap est pressée
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void escEnfonce()
 	{
 		Souris::obtenirInstance()->escPresse();
@@ -1082,12 +1159,26 @@ extern "C"
 			Debug::obtenirInstance().afficher(message);
 		}
 	}
-
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) void __cdecl sauvegarderTypeButMax(int nbButMax, bool estHumain)
+	/// Author : Luc
+	/// Cette fonction permet d'enregistrer des infomation à propos d'un match
+	///
+	/// @return aucun
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl sauvegarderTypeButMax(int nbButMax, bool estHumain)
 	{
 		FacadeModele::obtenirInstance()->getConfigJeu()->setOptionsJeu(nbButMax, estHumain);
 	}
-
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport)  void __cdecl sauvegarderProfil(const char* nom, double vitesse, double proba)
+	///
+	/// Cette fonction permet d'enregistrer un profil
+	///
+	/// @return aucun
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl sauvegarderProfil(const char* nom, double vitesse, double proba)
 	{
 		std::string str(nom);
