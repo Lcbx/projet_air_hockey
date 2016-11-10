@@ -616,7 +616,7 @@ namespace InterfaceGraphique
                   
                     numericUpDown2.Value = Convert.ToDecimal((joueurVirtuelCourant_.getVitesseProfil()));
                     numericUpDown3.Value = Convert.ToDecimal(joueurVirtuelCourant_.getProbProfil());
-                }      
+                }       
         }
 
 		/////////////////////////////////////////////////////////////////////////
