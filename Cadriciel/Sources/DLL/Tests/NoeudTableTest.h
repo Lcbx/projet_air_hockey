@@ -60,6 +60,7 @@ public:
 
 private:
 	/// Instance d'un noeud Table
+
 	std::unique_ptr<NoeudTable> noeud;
 	ArbreRenduINF2990 * arbre;
 };
