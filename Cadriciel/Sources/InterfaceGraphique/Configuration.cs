@@ -46,6 +46,9 @@ namespace InterfaceGraphique
         private string nom = "";
         private double probaDAgirPassivemnt = 0;
 
+        // Nom original, dans le cas d'une modification
+        string nomOriginalModif;
+
 
         // Volet débogage
         private bool debogageActif_ = false;
@@ -469,6 +472,8 @@ namespace InterfaceGraphique
                 creationProfil.Enabled = true;
                 ajouterActif = false;
                 modifierActif = true;
+                nomOriginalModif = nomsProfils[listDeProfils.SelectedIndex];
+
             }
         }
 
@@ -544,6 +549,16 @@ namespace InterfaceGraphique
                     nt_cNom[i] = cNom[i];
                 nt_cNom[nomJoueurVirtuelCourant_.Length] = '\0';
                 FonctionsNatives.sauvegarderProfil(nomP, v, p);
+
+                if (nomP != nomOriginalModif)
+                {
+                    char[] cNomOrig = nomOriginalModif.ToCharArray();
+                    char[] nt_cNomOrig = new char[nomOriginalModif.Length + 1];
+                    for (int i = 0; i < nomOriginalModif.Length; i++)
+                        nt_cNomOrig[i] = cNomOrig[i];
+                    nt_cNomOrig[nomOriginalModif.Length] = '\0';
+                    FonctionsNatives.supprimerProfil(nt_cNomOrig);
+                }
 
             }
         }
