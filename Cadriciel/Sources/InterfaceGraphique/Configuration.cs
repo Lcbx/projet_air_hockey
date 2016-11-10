@@ -420,6 +420,9 @@ namespace InterfaceGraphique
         private void ajouter_Click(object sender, EventArgs e)
         {
             textBox1.Clear();
+            numericUpDown2.ResetText();
+            numericUpDown3.ResetText();
+
             creationProfil.Enabled = true;
             ajouterActif = true;
             modifierActif = false;
@@ -475,17 +478,26 @@ namespace InterfaceGraphique
            {
                if (!(listDeProfils.Items.Contains(textBox1.Text)))
                {
-                   profils.Add(joueur);
-                   listDeProfils.Items.Add(nomP);
-                   creationProfil.Enabled = false;
+                    //wajdi - sauvegarder 
+                    if (numericUpDown2.Text != "" && numericUpDown3.Text != "" )
+                    {
 
-                   //wajdi - sauvegarder 
-                   FonctionsNatives.sauvegarderProfil(nomP, v, p);
+                        profils.Add(joueur);
+                        listDeProfils.Items.Add(nomP);
 
-                    //initiliaser 
-                    textBox1.Clear();
-                    numericUpDown2.ResetText();
-                    numericUpDown3.ResetText();
+                        //initiliaser 
+                        textBox1.Clear();
+                        numericUpDown2.ResetText();
+                        numericUpDown3.ResetText();
+                        creationProfil.Enabled = false;
+
+                        FonctionsNatives.sauvegarderProfil(nomP, v, p);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Verifier les valeurs entrées", "erreur",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    } 
                }
            }
 
@@ -502,44 +514,7 @@ namespace InterfaceGraphique
                        listDeProfils.Items.Insert(i,textBox1.Text);
                        creationProfil.Enabled=false;
                    }
-
            }
-
-
-            /*   double v = Convert.ToDouble(textBox2.Text);
-               double p = Convert.ToDouble(textBox3.Text);
-               Profil joueur = new Profil(textBox1.Text, v, p);
-
-
-               if (ajouterActif)
-               {
-                   if (!(listDeProfils.Items.Contains(textBox1.Text)))
-                   {
-                       profils.Add(joueur);
-                       listDeProfils.Items.Add(textBox1.Text);
-                       creationProfil.Enabled = false;
-
-                       //wajdi - sauvegarder 
-                       //FonctionsNatives.sauvegarderProfil(textBox1.ToString(), v, p);
-                   }
-               }
-
-               if (modifierActif)
-               {
-                   for (int i = 1; i < profils.Count; i++)
-
-                       if (i==listDeProfils.SelectedIndex)
-                       {
-                           profils[i].setNomProfil(textBox1.Text);
-                           profils[i].setVitesseProfil(Convert.ToDouble(textBox2.Text));
-                           profils[i].setProbProfil(Convert.ToDouble(textBox3.Text));
-                           listDeProfils.Items.RemoveAt(i);
-                           listDeProfils.Items.Insert(i,textBox1.Text);
-                           creationProfil.Enabled=false;
-                       }
-
-               }*/
-
         }
 
 
