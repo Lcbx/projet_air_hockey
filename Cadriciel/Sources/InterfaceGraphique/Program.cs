@@ -16,7 +16,7 @@ namespace InterfaceGraphique
         public static bool peutAfficher = true;
 
         
-        private static MenuPrincipal menuPrincipal;
+        private static MenuPrincipal menuPrincipal; 
         private static Edition edition;
         public static Configuration configuration;
         private static Profil joueurVirtuel;
@@ -29,11 +29,11 @@ namespace InterfaceGraphique
         /// Point d'entrée principal de l'application.
         /// </summary>
         [STAThread]
-        static void Main(string[] args)
-        {
+        static void Main(string[] args)    
+        {    
             if (args.Length != 0)
                 if (args[0] == "testsC++")
-                {
+                { 
                     if (FonctionsNatives.executerTests())
                         System.Console.WriteLine("Échec d'un ou plusieurs tests.");
                     else
