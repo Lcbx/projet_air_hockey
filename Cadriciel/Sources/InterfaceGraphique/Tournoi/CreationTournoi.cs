@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using InterfaceGraphique.Utility;
 
 namespace InterfaceGraphique
 {
@@ -41,10 +43,15 @@ namespace InterfaceGraphique
 
         /// @fn private void creerTournoi(object sender, EventArgs e)
         /// @brief Permet de creer un tournoi
-        /// TODO: Compléter l'implémentation
+        /// Crée le tournoi et change à la prochaine fenêtre qui est celle du match making
         private void creerTournoi(object sender, EventArgs e) {
-            // this.parent_.SwitchStatusTournoi(ModeTournoi.StatusTournoi.MatchMaking);
-           
+            char[] nomZone = this.cbmZoneDeJeu.choixZoneDeJeu.PathNameFichier;
+            string[] nomsParticipants = this.participants.Select(x => x.NomJoueur.ToString()).ToArray();
+            bool[] sontHumains = this.participants.Select(x => x.EstHumain).ToArray();
+            string[] nomsProfilsVirtuels = this.participants.Select(x => x.TypeJoueur.Nom.ToString()).ToArray();
+
+            FonctionsNatives.createTournoi(nomZone, NB_PARTICIPANTS, nomsParticipants, sontHumains, nomsProfilsVirtuels);
+            
             ///wajdi code 
             t = new Timer(); //creer le timer 
             t.Interval = 5000;     // specify interval time as you want (en milisecondes) ( 5000 = 5 sec)
@@ -89,6 +96,10 @@ namespace InterfaceGraphique
                 center - this.title.Size.Width / 2, 0);
         }
 
+        /// @fn private void ValidateForm(object sender, EventArgs e)
+        /// @brief Permet de changer l'état du bouton de création
+        /// @param sender : objet d'appel
+        /// @param e : Évènement
         private void ValidateForm(object sender, EventArgs e) {
             this.createButton.Enabled = isValidForm();
         }
@@ -101,23 +112,23 @@ namespace InterfaceGraphique
             t.Stop();
         }
 
-        /// @brief Permet de valider le formulaire
+        /// @fn private bool isValidForm()
+        /// @brief Permet de vérifier la validité du formulaire
+        /// @return Vrai si le formulaire, faux autrement
         private bool isValidForm() {
             if (this.cbmZoneDeJeu.choixZoneDeJeu == null)
                 return false;
 
-            bool humanExists = false;
-            foreach(ParticipantTournoi p in participants) {
-                if (p.NomJoueur != String.Empty) {
-                    if (p.TypeJoueur == null)
-                    {
-                        humanExists = true;
-                        break;
-                    }
-                }
-            }
+            bool humanExists = participants.Exists(x => x.EstHumain);
+            bool nomsRemplis = !participants.Exists(x => x.NomJoueur == String.Empty);
+            bool uniqueNames = participants.Select(x => x.NomJoueur).Distinct().Count() == participants.Count();
 
-            return humanExists;
+            return humanExists && nomsRemplis && uniqueNames;
+        }
+
+        static partial class FonctionsNatives {
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void createTournoi(char[] nomZone, int count, string[] nomsJoueurs, bool[] sontHumains, string[] nomProfils);
         }
     }
 }

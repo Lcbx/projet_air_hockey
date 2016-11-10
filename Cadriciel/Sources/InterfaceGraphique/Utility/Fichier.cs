@@ -32,13 +32,7 @@ namespace InterfaceGraphique.Utility
         /// @brief Nom complet du fichier terminé par un null byte
         public char[] PathNameFichier {
             get {
-                char[] f = Path.Combine(PathFichier, NomFichier + "." + ExtensionFichier).ToCharArray();
-                
-                char[] file = new char[f.Length + 1];
-                for (int i = 0; i < f.Length; i++)
-                    file[i] = f[i];
-                file[f.Length] = '\0';
-                return file;
+                return Path.Combine(PathFichier, NomFichier + "." + ExtensionFichier).ToCCharArray();
             }
         }
 

@@ -151,6 +151,7 @@
     <Compile Include="Tournoi\ZoneDeJeu.Designer.cs">
       <DependentUpon>ZoneDeJeu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utility\Utility.cs" />
     <EmbeddedResource Include="BoiteAide.resx">
       <DependentUpon>BoiteAide.cs</DependentUpon>
     </EmbeddedResource>

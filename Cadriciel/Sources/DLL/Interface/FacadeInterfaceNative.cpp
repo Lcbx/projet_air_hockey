@@ -1056,6 +1056,16 @@ extern "C"
 		FacadeModele::obtenirInstance()->getConfigProfils()->setProfil(nom, vitesse, proba);
 	}
 	
+	/// @fn __declspec(dllexport) void createTournoi(const char* nomZone, const int count, const char** nomsJoueurs, const bool* sontHumains, const char** nomProfils)
+	/// @brief Permet de créer un tournoi
+	/// @param nomZone : Nom de la zone de jeu
+	/// @param count : Nombre de joueurs
+	/// @param nomsJoueurs : Noms des joueurs
+	/// @param sontHumains : Si les joueurs sont humains ou non
+	/// @param nomProfils : Si le joueur est virtuel, le nom du profil
+	__declspec(dllexport) void createTournoi(const char* nomZone, const int count, const char** nomsJoueurs, const bool* sontHumains, const char** nomProfils) {
+		FacadeModele::obtenirInstance()->creerTournoi(nomZone, count, nomsJoueurs, sontHumains, nomProfils);
+	}
 
 }
 

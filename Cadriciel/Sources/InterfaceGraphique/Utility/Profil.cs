@@ -12,7 +12,7 @@
 
         public Profil()
         {
-            nom_ = "Defaut";
+            nom_ = "defaut";
             vitesse_ = 10;
             probaDAgirPassivemnt_ = 0.2;
         }

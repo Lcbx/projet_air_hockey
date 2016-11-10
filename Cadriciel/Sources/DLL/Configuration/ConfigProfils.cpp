@@ -211,7 +211,7 @@ Profil ConfigProfils::getProfil(std::string nom)
 			return *it;
 		}
 	}
-	return Profil("ERREUR", 0, 0);
+	return Profil("defaut", 50, 0.2);
 }
 
 

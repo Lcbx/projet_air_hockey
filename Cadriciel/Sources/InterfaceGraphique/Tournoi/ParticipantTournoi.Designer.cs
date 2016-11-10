@@ -39,7 +39,7 @@
             this.nameTextBox.Location = new System.Drawing.Point(0, 0);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(168, 20);
-            this.nameTextBox.TabIndex = 0;
+            this.nameTextBox.TabIndex = 1;
             this.nameTextBox.Text = "Nom joueur";
             this.nameTextBox.Enter += new System.EventHandler(this.nameTextBox_Enter);
             this.nameTextBox.Leave += new System.EventHandler(this.nameTextBox_Leave);
@@ -51,7 +51,7 @@
             this.typeJoueurCBO.Name = "typeJoueurCBO";
             this.typeJoueurCBO.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.typeJoueurCBO.Size = new System.Drawing.Size(168, 21);
-            this.typeJoueurCBO.TabIndex = 1;
+            this.typeJoueurCBO.TabIndex = 3;
             // 
             // isHuman
             // 
@@ -71,7 +71,7 @@
             this.label1.Location = new System.Drawing.Point(264, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 13);
-            this.label1.TabIndex = 3;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Type joueur virtuel:";
             // 
             // ParticipantTournoi

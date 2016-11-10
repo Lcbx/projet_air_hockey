@@ -26,7 +26,13 @@ namespace InterfaceGraphique
                 if (this.typeJoueurCBO.Enabled)
                     return (Profil)this.typeJoueurCBO.SelectedItem;
                 else
-                    return null;
+                    return new Profil();
+            }
+        }
+
+        public bool EstHumain {
+            get {
+                return this.typeJoueurCBO.Enabled;
             }
         }
 
@@ -89,7 +95,7 @@ namespace InterfaceGraphique
             this.typeJoueurCBO.BeginUpdate();
             this.typeJoueurCBO.Text = "Type de joueur";
             this.profileList = new List<Profil>();
-            Profil profil = new Profil("Default", 10, 0.2);
+            Profil profil = new Profil();
             this.profileList.Add(profil);
             this.typeJoueurCBO.DataSource = this.profileList;
             this.typeJoueurCBO.DisplayMember = "Nom";
