@@ -23,7 +23,8 @@ namespace InterfaceGraphique
 {    
     public partial class Configuration : Form                   
     { 
-        private static MenuPrincipal menuPrincipal_;        
+        private static MenuPrincipal menuPrincipal_;
+        private static Edition edition_;
 
         //intilailser les touches du clavier par defaut
         public int toucheDeplaceAGauche_;
@@ -33,9 +34,6 @@ namespace InterfaceGraphique
 
         //le nombre de buts nécessaires (entre 1 et 5) pour gagner une partie.
         public int nbButMax;
-        
-        
-        
 
         public bool estHumain = false;    
         Profil joueurVirtuelDefault_ = new Profil();
@@ -58,6 +56,7 @@ namespace InterfaceGraphique
         private bool modifierActif = false;
         private bool ajouterActif = false;
 
+
         public Configuration()
         {
             InitializeComponent();
@@ -66,8 +65,8 @@ namespace InterfaceGraphique
             profils.Add(joueurVirtuelCourant_);
 
             textBox1.Text=(joueurVirtuelCourant_.getNomProfil());
-            textBox2.Text=(Convert.ToString(joueurVirtuelCourant_.getVitesseProfil()));
-            textBox3.Text=(Convert.ToString(joueurVirtuelCourant_.getProbProfil()));
+            numericUpDown2.Value = Convert.ToDecimal( (joueurVirtuelCourant_.getVitesseProfil()));
+            numericUpDown3.Value = Convert.ToDecimal(joueurVirtuelCourant_.getProbProfil());
             listDeProfils.Items.Add(joueurVirtuelCourant_.getNomProfil());
 
             creationProfil.Enabled = false;
@@ -101,6 +100,8 @@ namespace InterfaceGraphique
                 {
                     comboBox1.Text = "Joueur humain";
                     estHumain = true;
+
+                   
                 }
                 else
                 {
@@ -112,12 +113,53 @@ namespace InterfaceGraphique
                 OptionsDebug* optsDebug = (OptionsDebug*)FonctionsNatives.obtenirOptionsDebug();
                 if(optsDebug->isDebugActif)
                 {
+                    debogageActif_ = true;
                     checkBox1.Checked = true;
 
-                    if (optsDebug->showCollisionRondelle) checkBox2.Checked = true;
-                    if (optsDebug->showVitesseRondelle) checkBox3.Checked = true;
-                    if (optsDebug->showEclairage) checkBox4.Checked = true;
-                    if (optsDebug->showAttractionPortail) checkBox5.Checked = true;
+                    if (optsDebug->showCollisionRondelle){
+                        debogCollision_ = true;
+                        checkBox2.Checked = true;}
+                    else
+                    {
+                        debogCollision_ = false;
+                        checkBox2.Checked = false; ;
+                    }
+
+                    if (optsDebug->showVitesseRondelle){
+                            debogVitesse_ = true;
+                            checkBox3.Checked = true;}
+                    else
+                    {
+                        debogVitesse_ = false;
+                        checkBox3.Checked = false;
+                    }
+
+                    if (optsDebug->showEclairage) {
+                        eclairageActif_ = true;
+                        checkBox4.Checked = true; }
+                    else
+                    {
+                        eclairageActif_ = false;
+                        checkBox4.Checked = false;
+                    }
+
+                    if (optsDebug->showAttractionPortail) {
+                        effetVisuelActif_ = true;
+                        checkBox5.Checked = true; }
+                    else
+                    {
+                        effetVisuelActif_ = false;
+                        checkBox5.Checked = true;
+                    }
+
+                    FonctionsNatives.debogConfig(debogageActif_, debogCollision_, debogVitesse_, eclairageActif_, effetVisuelActif_);
+                }
+                else
+                {
+                    debogageActif_ = false;
+                    checkBox1.Checked = false;
+                    FonctionsNatives.debogConfig(debogageActif_, debogCollision_, debogVitesse_, eclairageActif_, effetVisuelActif_);
+
                 }
 
             }
@@ -146,9 +188,10 @@ namespace InterfaceGraphique
 
         }
 
-        public void setMenuPrincipalConfig(MenuPrincipal menuPrincipal)
+        public void setMenuPrincipalConfig(MenuPrincipal menuPrincipal, Edition edition)
         {
             menuPrincipal_ = menuPrincipal;
+            edition_ = edition;
         }
                     
         private void renitialisation_Click(object sender, EventArgs e)
@@ -377,6 +420,9 @@ namespace InterfaceGraphique
         private void ajouter_Click(object sender, EventArgs e)
         {
             textBox1.Clear();
+            numericUpDown2.ResetText();
+            numericUpDown3.ResetText();
+
             creationProfil.Enabled = true;
             ajouterActif = true;
             modifierActif = false;
@@ -391,8 +437,9 @@ namespace InterfaceGraphique
                 {
                     joueurVirtuelCourant_ = profils[i];
                     textBox1.Text = (joueurVirtuelCourant_.getNomProfil());
-                    textBox2.Text = (Convert.ToString(joueurVirtuelCourant_.getVitesseProfil()));
-                    textBox3.Text = (Convert.ToString(joueurVirtuelCourant_.getProbProfil()));
+                  
+                    numericUpDown2.Value = Convert.ToDecimal((joueurVirtuelCourant_.getVitesseProfil()));
+                    numericUpDown3.Value = Convert.ToDecimal(joueurVirtuelCourant_.getProbProfil());
                 }      
         }
 
@@ -431,17 +478,26 @@ namespace InterfaceGraphique
            {
                if (!(listDeProfils.Items.Contains(textBox1.Text)))
                {
-                   profils.Add(joueur);
-                   listDeProfils.Items.Add(nomP);
-                   creationProfil.Enabled = false;
+                    //wajdi - sauvegarder 
+                    if (numericUpDown2.Text != "" && numericUpDown3.Text != "" )
+                    {
 
-                   //wajdi - sauvegarder 
-                   FonctionsNatives.sauvegarderProfil(nomP, v, p);
+                        profils.Add(joueur);
+                        listDeProfils.Items.Add(nomP);
 
-                    //initiliaser 
-                    textBox1.Clear();
-                    numericUpDown2.ResetText();
-                    numericUpDown3.ResetText();
+                        //initiliaser 
+                        textBox1.Clear();
+                        numericUpDown2.ResetText();
+                        numericUpDown3.ResetText();
+                        creationProfil.Enabled = false;
+
+                        FonctionsNatives.sauvegarderProfil(nomP, v, p);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Verifier les valeurs entrées", "erreur",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    } 
                }
            }
 
@@ -452,50 +508,13 @@ namespace InterfaceGraphique
                    if (i==listDeProfils.SelectedIndex)
                    {
                        profils[i].setNomProfil(textBox1.Text);
-                       profils[i].setVitesseProfil(Convert.ToDouble(textBox2.Text));
-                       profils[i].setProbProfil(Convert.ToDouble(textBox3.Text));
+                       profils[i].setVitesseProfil(Convert.ToDouble(numericUpDown2.Value));
+                       profils[i].setProbProfil(Convert.ToDouble(numericUpDown3.Value));
                        listDeProfils.Items.RemoveAt(i);
                        listDeProfils.Items.Insert(i,textBox1.Text);
                        creationProfil.Enabled=false;
                    }
-
            }
-
-
-            /*   double v = Convert.ToDouble(textBox2.Text);
-               double p = Convert.ToDouble(textBox3.Text);
-               Profil joueur = new Profil(textBox1.Text, v, p);
-
-
-               if (ajouterActif)
-               {
-                   if (!(listDeProfils.Items.Contains(textBox1.Text)))
-                   {
-                       profils.Add(joueur);
-                       listDeProfils.Items.Add(textBox1.Text);
-                       creationProfil.Enabled = false;
-
-                       //wajdi - sauvegarder 
-                       //FonctionsNatives.sauvegarderProfil(textBox1.ToString(), v, p);
-                   }
-               }
-
-               if (modifierActif)
-               {
-                   for (int i = 1; i < profils.Count; i++)
-
-                       if (i==listDeProfils.SelectedIndex)
-                       {
-                           profils[i].setNomProfil(textBox1.Text);
-                           profils[i].setVitesseProfil(Convert.ToDouble(textBox2.Text));
-                           profils[i].setProbProfil(Convert.ToDouble(textBox3.Text));
-                           listDeProfils.Items.RemoveAt(i);
-                           listDeProfils.Items.Insert(i,textBox1.Text);
-                           creationProfil.Enabled=false;
-                       }
-
-               }*/
-
         }
 
 

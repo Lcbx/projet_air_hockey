@@ -8,6 +8,9 @@
 /// @{
 ///////////////////////////////////////////////////////////////////////////////
 #include "NoeudTable.h"
+#include "ArbreRenduINF2990.h"
+#include "Utilitaire.h"
+#include "GL/glew.h"
 
 #include "GL/glew.h"
 #include <cmath>
@@ -843,10 +846,14 @@ bool NoeudTable::getPointControle(int numero, glm::vec3 & pointControle)
 		return false;
 	else
 	{
+		for (int i=0; i<3; i++)
+			if (pointControle[i] == NULL)
+				return false;
 		if (numero == 8)
 			pointControle = obtenirPositionRelative();
 		else
 			pointControle = pointControle_[numero];
+		//std::cout << "pointControle[" << numero << "]" << "= (" << pointControle[0] << "," << pointControle[1] << "," << pointControle[2] << ")" << std::endl;
 		return true;
 	}
 }
@@ -1248,47 +1255,72 @@ bool NoeudTable::mailletDansZone1(glm::dvec3 M, double rayon)
 		dist = distanceEntrePointDroite(p(2), p(3), M);
 		if (dist < rayon) // distance entre mur P2P3
 			return false;
-		else
+
+		else  // distance entre mur P2P0
 		{
-			
 			dist = distanceEntrePointDroite(p(0), p(2), M);
-			if (dist < rayon)	// distance entre mur P2P0
+			if (dist < rayon)
 			{
-				if(p(0).y >= p(2).y)
+				if (p(0).y >= p(2).y)
 					return false;
 				else
-				if (M.y > p(0).y)
-					return false;				
+					if (M.y >= p(0).y)
+						return false;
 			}
-			else
+
+			else // distance entre mur P0P6 			
 			{
 				dist = distanceEntrePointDroite(p(0), p(6), M);
-				if ((dist < rayon) && (M.y >= p(6).y)) // distance entre mur P0P6 et au dessus de P6
-					return false;
-				else
-				{
-					dist = distanceEntrePointDroite(p(6), p(1), M);
-					if ((dist < rayon) && (M.y <= p(6).y)) // distance entre mur P1P6 et au dessous de P6
+				if ((dist < rayon) && (M.y >= p(6).y))
+					if (p(0).x <= p(6).x)
 						return false;
 					else
+						if (p(0).y >= p(2).y)
+							return false;
+						else
+						{
+							glm::vec3 PI;
+							intersection2Droites(p(2), p(3), p(0), p(6), PI);
+							if (PI.y > p(2).y)
+								return false;
+						}
+				else // distance entre mur P6P1					
+				{
+					dist = distanceEntrePointDroite(p(6), p(1), M);
+					if ((dist < rayon) && (M.y <= p(6).y))
+						if (p(1).x <= p(6).x)
+							return false;
+						else
+							if (p(1).y < p(3).y)
+								return false;
+							else
+							{
+								glm::vec3 PI;
+								intersection2Droites(p(2), p(3), p(6), p(1), PI);
+								if (PI.y < p(3).y)
+									return false;
+							}
+
+					else // distance entre mur P3P1
 					{
 						dist = distanceEntrePointDroite(p(1), p(3), M);
-						if ( (dist < rayon) ) // && (M.y <= p(1).y) ) // distance entre mur P1P5 et au dessous de P1
-							return false;
+						if (dist < rayon)
+						{
+							if (p(1).y <= p(3).y)
+								return false;
+							else
+								if (M.y < p(1).y)
+									return false;
+						}
 						else
 							return true;
 					}
 				}
 			}
-
-
 		}
-
-
 	}
 	else // pas dans la zone
 		return false;
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1346,7 +1378,7 @@ bool NoeudTable::intersection2Droites(glm::vec3 D1P1, glm::vec3 D1P2, glm::vec3 
 
 	//std::cout << "P1(" << D1P1.x << "," << D1P1.y << ") P2(" << D1P2.x << "," << D1P2.y << ")" << std::endl;
 	//std::cout << "a1=" << a1 << " b1=" << b1 << std::endl;
-
+	
 	float a2 = calculPente(D2P1, D2P2);
 	float b2 = calculB(a2, D2P1);
 
