@@ -92,6 +92,7 @@ namespace InterfaceGraphique
                 participants.Add(participant);
             }
 
+            this.cbmZoneDeJeu.setChoixZone(nomZone);
             this.cbmZoneDeJeu.Validating += ValidateForm;
             this.createButton.Enabled = isValidForm();
 

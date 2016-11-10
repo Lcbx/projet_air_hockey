@@ -43,6 +43,9 @@ public:
 //////////////////////////////////////////////////////////////////////////
 class VisiteurCollision : public Visiteur
 {
+
+	friend class CollisionTest;
+
 	///le resultat a rendre
 	InfoCollision result_;
 	///la position de l'objet dont on verifie les collisions

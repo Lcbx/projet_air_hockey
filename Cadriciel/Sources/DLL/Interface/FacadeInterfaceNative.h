@@ -11,6 +11,7 @@
 
 #include <string.h>
 #include <iostream>
+#include <vector>
 
 
 
@@ -110,6 +111,13 @@ extern "C" {
 	__declspec(dllexport) void sauvegarderTypeButMax(int nbButMax, bool estVirtuel);
 	// Methode pour obtenir les options de jeu
 	__declspec(dllexport) struct OptionsJeu* obtenirOptionsJeu();
+	// Methode pour obtenir les options de debug
+	__declspec(dllexport) struct OptionsDebug* obtenirOptionsDebug();
+
+	// Methode pour obtenir la liste des noms des profils
+	__declspec(dllexport) void obtenirListeProfils(int *noms);
+	// Methode pour obtenir le nombre de profils
+	__declspec(dllexport) int obtenirNombreProfils();
 
 	__declspec(dllexport) bool objetEstDansLaTable();
 

@@ -19,29 +19,84 @@ namespace InterfaceGraphique
 {
     public partial class MenuPrincipal : Form
     {
-        private Edition edition_;
+        public Edition edition_;
         private Configuration configuration_;
-        private ModeTournoi tournoi_;
+        public ModeTournoi tournoi_;
 
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public MenuPrincipal()
+        /// 
+        /// @brief constructeur par defaut de la classe configuration
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         public MenuPrincipal()
         {
             InitializeComponent();
             this.tournoi.Click += new System.EventHandler(this.modeTournoiClick);
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void setMenu(Edition edition, Configuration configuration)
+        /// 
+        /// @brief cette fonction assigne aux attributs editions et configuration des nouvelles valeurs
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         public void setMenu(Edition edition, Configuration configuration)
         {
             edition_=edition;
             configuration_ = configuration;
         }
 
-
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void setTournoi(ModeTournoi tournoi)
+        /// 
+        /// @brief cette fonction assigne aux attributs tournoi uen nouvelle valeurs
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
+        public void setTournoi (ModeTournoi tournoi)
+        {
+            tournoi_ = tournoi;
+        }
+		
+		
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void quitter_Click(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction permet de quitter mode de menu principale
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void quitter_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void editeur_Click(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction permet d'afficher et de fermer Menu principale
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void editeur_Click(object sender, EventArgs e)
         {
          
@@ -50,12 +105,22 @@ namespace InterfaceGraphique
             edition_.passerModeTest(false);
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn private void partieRapide_Click(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction permet d'afficher la partie rapide
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void partieRapide_Click(object sender, EventArgs e)
         {
             ChoixProfil choix = new ChoixProfil();
             
             choix.setMenuPrincipal(this, edition_);
-            choix.Show();
+            choix.ShowDialog();
 
             //Chargement zoneChar = new Chargement(edition_);
             //zoneChar.ShowDialog();
@@ -68,6 +133,16 @@ namespace InterfaceGraphique
         }
 
        
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn private void configuration_Click(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction permet d'afficher la partie rapide
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void configuration_Click(object sender, EventArgs e)
         {
            configuration_.ShowDialog();  //  afficher la boite de configuration quand on clique sur  
@@ -87,6 +162,16 @@ namespace InterfaceGraphique
             this.Hide();
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public Edition getEdition()
+        /// 
+        /// @brief cette fonction permet de retourner edition_
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         public Edition getEdition()
         { return edition_; }
 

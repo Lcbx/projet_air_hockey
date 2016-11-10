@@ -47,6 +47,11 @@ namespace InterfaceGraphique
             this.parent_ = parent;
             InitializeComponent();
             this.initTournoi();
+
+
+            //State
+            this.parent_.edition_.state = Edition.States.Tournoi;
+            parent_.setTournoi(this);
         }
 
         /// @fn public SwitchStatusTournoi(StatusTournoi status)

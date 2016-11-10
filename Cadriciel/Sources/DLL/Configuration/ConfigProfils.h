@@ -48,8 +48,10 @@ public:
 	double getProbabilite(std::string nom);
 
 	/// Obtient un vecteur des noms des profils
-	std::vector<std::string> getNoms();
+	void getNoms(int *noms);
 
+	/// Obtient le nombre de profils
+	int getNombre();
 
 
 
@@ -60,6 +62,8 @@ private:
 
 	/// Liste des profils
 	std::list<Profil> _listeProfils;
+
+	std::vector<std::string> _listeNoms;
 
 	/// Nom du fichier de profils
 	static const std::string FICHIER_PROFILS;
