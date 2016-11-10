@@ -41,6 +41,12 @@ namespace InterfaceGraphique
             this.initParticipants();
         }
 
+        /// @fn public void refreshProfils() 
+        /// @brief Permet de rafraîchir la liste de profils des enfants
+        public void refreshProfils() {
+            this.participants.ForEach(x => x.refreshProfils());
+        }
+
         /// @fn private void creerTournoi(object sender, EventArgs e)
         /// @brief Permet de creer un tournoi
         /// Crée le tournoi et change à la prochaine fenêtre qui est celle du match making
@@ -66,7 +72,7 @@ namespace InterfaceGraphique
 
         /// @fn private void initParticipants()
         /// @brief Permet d'initialiser la liste des participants
-        private void initParticipants() {
+        private void initParticipants() { // TODO : Refactor
             char[] nomZone = new char[255];
             char[] nomsParticipants = new char[2000];
             bool[] sontHumains = new bool[NB_PARTICIPANTS];

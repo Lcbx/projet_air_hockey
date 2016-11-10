@@ -194,8 +194,6 @@ namespace InterfaceGraphique
             }
             foreach (string st in liste)
                Console.WriteLine(st);
-            
-
         }
 
 		/////////////////////////////////////////////////////////////////////////

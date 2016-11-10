@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace InterfaceGraphique
 {
@@ -122,9 +123,7 @@ namespace InterfaceGraphique
         private void typeJoueurCBO_Init() {
             this.typeJoueurCBO.BeginUpdate();
             this.typeJoueurCBO.Text = "Type de joueur";
-            this.profileList = new List<Profil>();
-            Profil profil = new Profil();
-            this.profileList.Add(profil);
+            this.profileList = Profil.obtenirListeNomsProfils();
             this.typeJoueurCBO.DataSource = this.profileList;
             this.typeJoueurCBO.DisplayMember = "Nom";
             this.typeJoueurCBO.EndUpdate();
@@ -136,6 +135,24 @@ namespace InterfaceGraphique
         /// @return rien
         private void isHuman_CheckedChanged(object sender, EventArgs e) {
             this.typeJoueurCBO.Enabled = !this.isHuman.Checked;
+        }
+
+        /// @fn public void refreshProfils()
+        /// @brief Permet de rafraichir la liste des profils
+        public void refreshProfils() {
+            string nom = this.TypeJoueur.Nom;
+            this.profileList = Profil.obtenirListeNomsProfils();
+            this.typeJoueurCBO.DataSource = this.profileList;
+            this.setTypeJoueur(nom);
+        }
+
+
+        static partial class FonctionsNatives {
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void obtenirListeProfils(int[] noms);
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern int obtenirNombreProfils();
         }
     }
 }
