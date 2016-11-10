@@ -1,12 +1,6 @@
 <listeProfil>
-    <Caradoc NOM="Caradoc" VITESSE="2" PROBABILITE="0.8"/>
+    <Defaut NOM="Defaut" VITESSE="10" PROBABILITE="0.2"/>
+    <Caradoc NOM="Caradoc" VITESSE="2" PROBABILITE="0.2"/>
     <Perceval NOM="Perceval" VITESSE="3" PROBABILITE="0.4"/>
     <Leodagan NOM="Leodagan" VITESSE="4" PROBABILITE="0.6"/>
-    <ddd NOM="ddd" VITESSE="3" PROBABILITE="0.1"/>
-    <sadsda NOM="sadsda" VITESSE="10" PROBABILITE="0.2"/>
-    <aa NOM="aa" VITESSE="7" PROBABILITE="0.5"/>
-    <aar NOM="aar" VITESSE="7" PROBABILITE="0.5"/>
-    <qwer NOM="qwer" VITESSE="7" PROBABILITE="0.40000001"/>
-    <alpha NOM="alpha" VITESSE="10" PROBABILITE="0.40000001"/>
-    <ii NOM="ii" VITESSE="10" PROBABILITE="1"/>
 </listeProfil>
