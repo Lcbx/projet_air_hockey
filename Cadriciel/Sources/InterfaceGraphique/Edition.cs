@@ -113,8 +113,8 @@ namespace InterfaceGraphique
            ancienPosY = panel1.Location.Y;
 
             panel2.Hide();
-        
 
+            this.Focus();
         }
 
 

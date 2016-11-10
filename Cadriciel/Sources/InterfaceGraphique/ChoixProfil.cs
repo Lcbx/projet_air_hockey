@@ -46,9 +46,10 @@ namespace InterfaceGraphique
                 edition_.passerModePartie(true);
                 edition_.resetPartie();
                 edition_.ArreterJoueurVirtuel();
+    
 
                 menu_.Hide();
-                this.Hide();
+                this.Close();
             }
 
         }
@@ -56,9 +57,10 @@ namespace InterfaceGraphique
         private void button2_Click(object sender, EventArgs e)
         {
             FenetreProfilVirtuel fenetre = new FenetreProfilVirtuel(edition_);
-            fenetre.ShowDialog();
+
             this.Hide();
             menu_.Hide();
+            fenetre.ShowDialog();
         }
 
     }

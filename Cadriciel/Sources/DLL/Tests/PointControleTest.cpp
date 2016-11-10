@@ -20,7 +20,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(PointControleTest);
 ///
 /// @fn void ConfigSceneTest::setUp()
 ///
-/// Effectue l'initialisation préalable à l'exécution de l'ensemble des
+///// Effectue l'initialisation préalable à l'exécution de l'ensemble des
 /// cas de tests de cette suite de tests (si nécessaire).
 /// 
 /// Si certains objets doivent être construits, il est conseillé de le
