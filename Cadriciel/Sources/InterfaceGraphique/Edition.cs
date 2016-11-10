@@ -1866,6 +1866,7 @@ namespace InterfaceGraphique
                         this.Hide();
                         menuPrincipal_.Show();
                         FonctionsNatives.initialiserScene();
+
                     }
                 }
 
