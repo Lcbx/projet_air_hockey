@@ -77,6 +77,12 @@
     <Compile Include="Utility\Profil.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="FenetreProfilVirtuel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FenetreProfilVirtuel.Designer.cs">
+      <DependentUpon>FenetreProfilVirtuel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Configuration.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Edition.resx">
       <DependentUpon>Edition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FenetreProfilVirtuel.resx">
+      <DependentUpon>FenetreProfilVirtuel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tournoi\MatchingTournoi.resx">
       <DependentUpon>MatchingTournoi.cs</DependentUpon>

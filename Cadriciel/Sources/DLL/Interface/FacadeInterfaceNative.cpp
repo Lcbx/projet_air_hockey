@@ -969,6 +969,47 @@ extern "C"
 	}
 
 	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) void obtenirListeProfils(const char **noms)
+	/// Author : Arthur
+	/// Cette fonction permet d'obtenir une liste des noms des profils
+	///
+	/// @return std::vector<std::string>
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl obtenirListeProfils(int *noms)
+	{
+		FacadeModele::obtenirInstance()->getConfigProfils()->getNoms(noms);
+		//std::cout << noms << std::endl;
+		//return noms[10];
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) int obtenirNombreProfils()
+	/// Author : Arthur
+	/// Cette fonction permet d'obtenir le nombre de profil
+	///
+	/// @return le nombre de profils
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) int __cdecl obtenirNombreProfils()
+	{
+		return FacadeModele::obtenirInstance()->getConfigProfils()->getNombre();
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) OptionsDebug obtenirListeProfils();
+	/// Author : Arthur
+	/// Cette fonction permet d'obtenir les options de debug
+	///
+	/// @return struct OptionsDebug
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) struct OptionsDebug* __cdecl obtenirOptionsDebug()
+	{
+		return FacadeModele::obtenirInstance()->getConfigDebug()->getOptionsDebug();
+	}
+
+	////////////////////////////////////////////////////////////////////////
 	/// @fn __declspec(dllexport) profilCourant(string nom, double vitesse, double probaDAgirPassivemnt)
 	/// Author : ikram
 	/// Cette fonction permet de envoyer le joueur courant 

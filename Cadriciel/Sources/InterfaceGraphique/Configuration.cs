@@ -23,7 +23,8 @@ namespace InterfaceGraphique
 {    
     public partial class Configuration : Form                   
     { 
-        private static MenuPrincipal menuPrincipal_;        
+        private static MenuPrincipal menuPrincipal_;
+        private static Edition edition_;
 
         //intilailser les touches du clavier par defaut
         public int toucheDeplaceAGauche_;
@@ -33,9 +34,6 @@ namespace InterfaceGraphique
 
         //le nombre de buts nécessaires (entre 1 et 5) pour gagner une partie.
         public int nbButMax;
-        
-        
-        
 
         public bool estHumain = false;    
         Profil joueurVirtuelDefault_ = new Profil();
@@ -58,6 +56,17 @@ namespace InterfaceGraphique
         private bool modifierActif = false;
         private bool ajouterActif = false;
 
+
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public Configuration()
+        /// 
+        /// @brief Constructeur par defaut de la classe Configuration
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        //////////////////////////////////////////////////////////////////////////////////////////    
         public Configuration()
         {
             InitializeComponent();
@@ -66,8 +75,8 @@ namespace InterfaceGraphique
             profils.Add(joueurVirtuelCourant_);
 
             textBox1.Text=(joueurVirtuelCourant_.getNomProfil());
-            textBox2.Text=(Convert.ToString(joueurVirtuelCourant_.getVitesseProfil()));
-            textBox3.Text=(Convert.ToString(joueurVirtuelCourant_.getProbProfil()));
+            numericUpDown2.Value = Convert.ToDecimal( (joueurVirtuelCourant_.getVitesseProfil()));
+            numericUpDown3.Value = Convert.ToDecimal(joueurVirtuelCourant_.getProbProfil());
             listDeProfils.Items.Add(joueurVirtuelCourant_.getNomProfil());
 
             creationProfil.Enabled = false;
@@ -88,14 +97,12 @@ namespace InterfaceGraphique
             this.bas.Text = ((Keys)touches[2]).ToString();
             this.gauche.Text = ((Keys)touches[3]).ToString();
 
-            // Charge les options de jeu
+            // Charge les options (unsafe pour cause de pointeur)
             unsafe
             {
+                // Options de jeu
                 OptionsJeu* data = (OptionsJeu*)FonctionsNatives.obtenirOptionsJeu();
-
-                Console.WriteLine(data->nbrBut);
-                Console.WriteLine(data->joueurTestEstHumain);
-
+                
                 numericUpDown1.Value = data->nbrBut;
                 nbButMax = data->nbrBut;
 
@@ -103,23 +110,121 @@ namespace InterfaceGraphique
                 {
                     comboBox1.Text = "Joueur humain";
                     estHumain = true;
+
+                   
                 }
                 else
                 {
                     comboBox1.Text = "Joueur virtuel";
                     estHumain = false;
                 }
+
+                // Options de debug
+                OptionsDebug* optsDebug = (OptionsDebug*)FonctionsNatives.obtenirOptionsDebug();
+                if(optsDebug->isDebugActif)
+                {
+                    debogageActif_ = true;
+                    checkBox1.Checked = true;
+
+                    if (optsDebug->showCollisionRondelle){
+                        debogCollision_ = true;
+                        checkBox2.Checked = true;}
+                    else
+                    {
+                        debogCollision_ = false;
+                        checkBox2.Checked = false; ;
+                    }
+
+                    if (optsDebug->showVitesseRondelle){
+                            debogVitesse_ = true;
+                            checkBox3.Checked = true;}
+                    else
+                    {
+                        debogVitesse_ = false;
+                        checkBox3.Checked = false;
+                    }
+
+                    if (optsDebug->showEclairage) {
+                        eclairageActif_ = true;
+                        checkBox4.Checked = true; }
+                    else
+                    {
+                        eclairageActif_ = false;
+                        checkBox4.Checked = false;
+                    }
+
+                    if (optsDebug->showAttractionPortail) {
+                        effetVisuelActif_ = true;
+                        checkBox5.Checked = true; }
+                    else
+                    {
+                        effetVisuelActif_ = false;
+                        checkBox5.Checked = true;
+                    }
+
+                    FonctionsNatives.debogConfig(debogageActif_, debogCollision_, debogVitesse_, eclairageActif_, effetVisuelActif_);
+                }
+                else
+                {
+                    debogageActif_ = false;
+                    checkBox1.Checked = false;
+                    FonctionsNatives.debogConfig(debogageActif_, debogCollision_, debogVitesse_, eclairageActif_, effetVisuelActif_);
+
+                }
+
             }
 
+            // Charge les profils
+            int nbrChar = FonctionsNatives.obtenirNombreProfils();
+            string temp = "";
+            List<string> liste = new List<string>();
+            int[] noms = new int[nbrChar];
+            FonctionsNatives.obtenirListeProfils(noms);
 
+            for (int i = 0; i < nbrChar; i++)
+            {
+                if ((char)noms[i] != '#' || (char)noms[i+1] != '?' || (char)noms[i+2] != '&') {
+                    temp += (char)noms[i];
+                }
+                else {
+                    liste.Add(temp);
+                    i += 2;
+                    temp = "";
+                }
+            }
+            foreach (string st in liste)
+               Console.WriteLine(st);
+            
 
         }
 
-        public void setMenuPrincipalConfig(MenuPrincipal menuPrincipal)
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public setMenuPrincipalConfig(MenuPrincipal menuPrincipal)
+        /// 
+        /// @brief assigner l'instance menu principale dans menu configuration
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
+        public void setMenuPrincipalConfig(MenuPrincipal menuPrincipal, Edition edition)
         {
             menuPrincipal_ = menuPrincipal;
+            edition_ = edition;
         }
                     
+					
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public renitialisation_Click(object sender, EventArgs e)
+        /// 
+        /// @brief rénitialise les touches de jeu par défaut
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void renitialisation_Click(object sender, EventArgs e)
         {
             toucheDeplaceAGauche_ = (int)Keys.A;
@@ -133,11 +238,32 @@ namespace InterfaceGraphique
             FonctionsNatives.sauvegarderTouches(toucheDeplaceEnHaut_, toucheDeplaceADroite_, toucheDeplaceEnBas_, toucheDeplaceAGauche_);
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public appliquer_Click(object sender, EventArgs e)
+        /// 
+        /// @brief applique les changements de touches   
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void appliquer_Click(object sender, EventArgs e)
         {
             FonctionsNatives.sauvegarderTouches(toucheDeplaceEnHaut_, toucheDeplaceADroite_, toucheDeplaceEnBas_, toucheDeplaceAGauche_);
         }
 
+		
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public  changerTouche(KeyEventArgs ke)
+        /// 
+        /// @brief cette fonction retourne le string d'une touche de clavier 
+        /// 
+        /// @param[in] la touche
+        ///
+        /// @return string
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private string changerTouche(KeyEventArgs ke)
             {
                 KeysConverter kc = new KeysConverter();
@@ -146,6 +272,15 @@ namespace InterfaceGraphique
             }
 
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public  void gauche_KeyDown(object sender, KeyEventArgs e)
+        /// 
+        /// @brief cette fonction assigne une touche de clavier au déplacement gauche du maillet 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void gauche_KeyDown(object sender, KeyEventArgs e)
         {
             if (toucheDeplaceADroite_ == e.KeyValue)
@@ -177,6 +312,15 @@ namespace InterfaceGraphique
             }         
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public  void droite_KeyDown(object sender, KeyEventArgs e)
+        /// 
+        /// @brief cette fonction assigne une touche de clavier au déplacement droite du maillet 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void droite_KeyDown(object sender, KeyEventArgs e)
         {
             if (toucheDeplaceAGauche_ == e.KeyValue)
@@ -207,6 +351,15 @@ namespace InterfaceGraphique
             }
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public  void bas_KeyDown(object sender, KeyEventArgs e)
+        /// 
+        /// @brief cette fonction assigne une touche de clavier au déplacement en bas du maillet 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void bas_KeyDown(object sender, KeyEventArgs e)
         {
             if (toucheDeplaceAGauche_ == e.KeyValue)
@@ -237,6 +390,15 @@ namespace InterfaceGraphique
             }
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public  void haut_KeyDown(object sender, KeyEventArgs e)
+        /// 
+        /// @brief cette fonction assigne une touche de clavier au déplacement en haut du maillet 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void haut_KeyDown(object sender, KeyEventArgs e)
         {
             if (toucheDeplaceAGauche_ == e.KeyValue)
@@ -268,6 +430,15 @@ namespace InterfaceGraphique
                 
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public  void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction assigne une valeur pour le nombre de but nécessaire pour gagner une partie . Les valeurs sont entre 1 et 5
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             if (numericUpDown1.Value >= 1 || numericUpDown1.Value <= 5)
@@ -277,6 +448,15 @@ namespace InterfaceGraphique
 
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public  void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction indique c'est le type du joueur adversaire est humain ou virtuel;
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.Text.Equals("Joueur humain"))
@@ -292,6 +472,16 @@ namespace InterfaceGraphique
 
        
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void checkBox1_CheckedChanged(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction assigne true ou false à l'affichage de débogage (l'interrupteur)
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked)
@@ -309,6 +499,16 @@ namespace InterfaceGraphique
             }
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void checkBox2_CheckedChanged(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction assigne true ou false à l'affichage de débogage de collision
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox2.Checked)
@@ -317,6 +517,16 @@ namespace InterfaceGraphique
                 debogCollision_ = false;
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void checkBox3_CheckedChanged(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction assigne true ou false à l'affichage de débogage de la vitesse de la rondelle après une collision
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox3.Checked)
@@ -326,6 +536,16 @@ namespace InterfaceGraphique
 
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void checkBox4_CheckedChanged(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction assigne true ou false à l'affichage ou non de l'éclairage
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void checkBox4_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox4.Checked)
@@ -334,6 +554,16 @@ namespace InterfaceGraphique
                 eclairageActif_ = false;
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void checkBox5_CheckedChanged(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction assigne true ou false à l'affichage ou non de la limite d'attraction du portail
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox5.Checked)
@@ -343,15 +573,38 @@ namespace InterfaceGraphique
         }
 
        
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void ajouter_Click(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction assigne true ou false à l'affichage ou non de la limite d'attraction du portail
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void ajouter_Click(object sender, EventArgs e)
         {
             textBox1.Clear();
+            numericUpDown2.ResetText();
+            numericUpDown3.ResetText();
+
             creationProfil.Enabled = true;
             ajouterActif = true;
             modifierActif = false;
 
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void listDeProfils_SelectedIndexChanged(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction attribue le profil selectionné au profil courant 
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void listDeProfils_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -360,11 +613,22 @@ namespace InterfaceGraphique
                 {
                     joueurVirtuelCourant_ = profils[i];
                     textBox1.Text = (joueurVirtuelCourant_.getNomProfil());
-                    textBox2.Text = (Convert.ToString(joueurVirtuelCourant_.getVitesseProfil()));
-                    textBox3.Text = (Convert.ToString(joueurVirtuelCourant_.getProbProfil()));
+                  
+                    numericUpDown2.Value = Convert.ToDecimal((joueurVirtuelCourant_.getVitesseProfil()));
+                    numericUpDown3.Value = Convert.ToDecimal(joueurVirtuelCourant_.getProbProfil());
                 }      
         }
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void modifierProfil_Click(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction active le champs de création de profil pour la modification
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void modifierProfil_Click(object sender, EventArgs e)
         {
             creationProfil.Enabled = true;
@@ -374,6 +638,16 @@ namespace InterfaceGraphique
 
         }
 
+		////////////////////////////////////////////////////////////////////////
+        /// @fn public button2_Click(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction supprime un profil de la liste
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void button2_Click(object sender, EventArgs e)
         {
             for (int i = 1; i < profils.Count; i++)
@@ -387,6 +661,16 @@ namespace InterfaceGraphique
         }
 
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn public void appliquer2_Click(object sender, EventArgs e)
+        /// 
+        /// @brief cette fonction applique l'ajout à la liste  et la modification d'un profil
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void appliquer2_Click(object sender, EventArgs e)
         {
             int v = Convert.ToInt32(numericUpDown2.Value);
@@ -400,17 +684,26 @@ namespace InterfaceGraphique
            {
                if (!(listDeProfils.Items.Contains(textBox1.Text)))
                {
-                   profils.Add(joueur);
-                   listDeProfils.Items.Add(nomP);
-                   creationProfil.Enabled = false;
+                    //wajdi - sauvegarder 
+                    if (numericUpDown2.Text != "" && numericUpDown3.Text != "" )
+                    {
 
-                   //wajdi - sauvegarder 
-                   FonctionsNatives.sauvegarderProfil(nomP, v, p);
+                        profils.Add(joueur);
+                        listDeProfils.Items.Add(nomP);
 
-                    //initiliaser 
-                    textBox1.Clear();
-                    numericUpDown2.ResetText();
-                    numericUpDown3.ResetText();
+                        //initiliaser 
+                        textBox1.Clear();
+                        numericUpDown2.ResetText();
+                        numericUpDown3.ResetText();
+                        creationProfil.Enabled = false;
+
+                        FonctionsNatives.sauvegarderProfil(nomP, v, p);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Verifier les valeurs entrées", "erreur",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    } 
                }
            }
 
@@ -421,53 +714,26 @@ namespace InterfaceGraphique
                    if (i==listDeProfils.SelectedIndex)
                    {
                        profils[i].setNomProfil(textBox1.Text);
-                       profils[i].setVitesseProfil(Convert.ToDouble(textBox2.Text));
-                       profils[i].setProbProfil(Convert.ToDouble(textBox3.Text));
+                       profils[i].setVitesseProfil(Convert.ToDouble(numericUpDown2.Value));
+                       profils[i].setProbProfil(Convert.ToDouble(numericUpDown3.Value));
                        listDeProfils.Items.RemoveAt(i);
                        listDeProfils.Items.Insert(i,textBox1.Text);
                        creationProfil.Enabled=false;
                    }
-
            }
-
-
-            /*   double v = Convert.ToDouble(textBox2.Text);
-               double p = Convert.ToDouble(textBox3.Text);
-               Profil joueur = new Profil(textBox1.Text, v, p);
-
-
-               if (ajouterActif)
-               {
-                   if (!(listDeProfils.Items.Contains(textBox1.Text)))
-                   {
-                       profils.Add(joueur);
-                       listDeProfils.Items.Add(textBox1.Text);
-                       creationProfil.Enabled = false;
-
-                       //wajdi - sauvegarder 
-                       //FonctionsNatives.sauvegarderProfil(textBox1.ToString(), v, p);
-                   }
-               }
-
-               if (modifierActif)
-               {
-                   for (int i = 1; i < profils.Count; i++)
-
-                       if (i==listDeProfils.SelectedIndex)
-                       {
-                           profils[i].setNomProfil(textBox1.Text);
-                           profils[i].setVitesseProfil(Convert.ToDouble(textBox2.Text));
-                           profils[i].setProbProfil(Convert.ToDouble(textBox3.Text));
-                           listDeProfils.Items.RemoveAt(i);
-                           listDeProfils.Items.Insert(i,textBox1.Text);
-                           creationProfil.Enabled=false;
-                       }
-
-               }*/
-
         }
 
 
+		/////////////////////////////////////////////////////////////////////////
+        /// @fn private void Configuration_FormClosing(object sender, FormClosingEventArgs e)
+        /// 
+        /// @brief cette fonction gere l'event de fermeture 
+        /// 
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void Configuration_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Hide();
@@ -504,6 +770,16 @@ namespace InterfaceGraphique
         public bool joueurTestEstHumain;
     };
 
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct OptionsDebug
+    {
+        public bool isDebugActif;
+        public bool showCollisionRondelle;
+        public bool showVitesseRondelle;
+        public bool showEclairage;
+        public bool showAttractionPortail;
+    };
+
     static partial class FonctionsNatives
     {
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -530,10 +806,20 @@ namespace InterfaceGraphique
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr obtenirOptionsJeu();
 
-       
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr obtenirOptionsDebug();
+
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void sauvegarderProfil(string nom, double vitesse, double proba);
+
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void obtenirListeProfils(int[] noms);
+
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int obtenirNombreProfils();
 
     }
 
