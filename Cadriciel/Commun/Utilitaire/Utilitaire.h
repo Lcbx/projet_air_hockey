@@ -133,6 +133,13 @@ namespace utilitaire {
    /// Permet d'obtenir le déterminant d'une matrice vecteur
    double det(glm::dmat2x2 matrice);
 
+
+
+   ///generer un random
+   int genererScore(int nbButsMax);
+
+
+
    ////////////////////////////////////////////////////////////////////////
    ///
    /// @fn T borneSuperieure(T const& valeur, T const& borne)

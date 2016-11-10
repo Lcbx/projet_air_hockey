@@ -669,6 +669,24 @@ namespace utilitaire {
 		return (matrice[0][0] * matrice[1][1]) - (matrice[0][1] * matrice[1][0]);
 	}
 
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn  int genererScore(int nbButsMax)
+	///
+	/// Cette fonction permet de generer un Score random inferieur(ou egale) a Parametre
+	///
+	/// @param[in]  nbButsMax : La valeur de l'expression à borner.
+	///
+	///
+	/// @return valeur random
+	///
+	///////////////////////////////////////////////////////////////////////
+	int genererScore(int nbButsMax)
+	{
+		return (rand() % nbButsMax);     // nombre entre 0 a nbButsMax;
+	}
+
 }; // Fin de l'espace de nom utilitaire.
 
 

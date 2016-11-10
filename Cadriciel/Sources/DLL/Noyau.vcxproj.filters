@@ -207,20 +207,11 @@
     <ClCompile Include="Application\JoeurVirtuel.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
-    <ClCompile Include="Tests\NoeudCompositeTest.cpp">
-      <Filter>Source Files\Tests</Filter>
-    </ClCompile>
     <ClCompile Include="AdaptateurJoueur.cpp">
       <Filter>Source Files\Tournoi</Filter>
     </ClCompile>
     <ClCompile Include="Tournoi.cpp">
       <Filter>Source Files\Tournoi</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\RedimensionnementTest.cpp">
-      <Filter>Source Files\Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraTest.cpp">
-      <Filter>Source Files\Tests</Filter>
     </ClCompile>
     <ClCompile Include="Configuration\ConfigProfils.cpp">
       <Filter>Source Files\Configuration</Filter>
@@ -234,13 +225,22 @@
     <ClCompile Include="Configuration\ConfigDebug.cpp">
       <Filter>Source Files\Configuration</Filter>
     </ClCompile>
-    <ClCompile Include="Tests\PointControleTest.cpp">
-      <Filter>Source Files\Tests</Filter>
-    </ClCompile>
     <ClCompile Include="Test.cpp">
       <Filter>Source Files\Arbre</Filter>
     </ClCompile>
-    <ClCompile Include="Tests\NoeudTableTest.cpp">
+    <ClCompile Include="Tests\NoeudCompositeTest.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\CameraTest.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\RedimensionnementTest.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\UtilitaireTest.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\PointControleTest.cpp">
       <Filter>Source Files\Tests</Filter>
     </ClCompile>
   </ItemGroup>
@@ -401,9 +401,6 @@
     <ClInclude Include="Application\JoueurVirtuel.h">
       <Filter>Header Files\Application</Filter>
     </ClInclude>
-    <ClInclude Include="Tests\NoeudCompositeTest.h">
-      <Filter>Header Files\Tests</Filter>
-    </ClInclude>
     <ClInclude Include="Affichage_debuggage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -412,12 +409,6 @@
     </ClInclude>
     <ClInclude Include="AdaptateurJoueur.h">
       <Filter>Header Files\Tournoi</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests\RedimensionnementTest.h">
-      <Filter>Header Files\Tests</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraTest.h">
-      <Filter>Header Files\Tests</Filter>
     </ClInclude>
     <ClInclude Include="Configuration\ConfigProfils.h">
       <Filter>Header Files\Configuration</Filter>
@@ -431,10 +422,19 @@
     <ClInclude Include="Configuration\ConfigDebug.h">
       <Filter>Header Files\Configuration</Filter>
     </ClInclude>
-    <ClInclude Include="Tests\PointControleTest.h">
+    <ClInclude Include="Tests\NoeudCompositeTest.h">
       <Filter>Header Files\Tests</Filter>
     </ClInclude>
-    <ClInclude Include="Tests\NoeudTableTest.h">
+    <ClInclude Include="Tests\CameraTest.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\RedimensionnementTest.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\UtilitaireTest.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\PointControleTest.h">
       <Filter>Header Files\Tests</Filter>
     </ClInclude>
   </ItemGroup>

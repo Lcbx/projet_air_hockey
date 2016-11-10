@@ -1,31 +1,25 @@
 //////////////////////////////////////////////////////////////////////////////
-/// @file NoeudTableTest.h
-/// @author Ali
-/// @date 2016-09-11
+/// @file UtilitaireTest.h
+/// @author Luc Courbariaux
+/// @date 2016-11-07
 /// @version 1.0
 ///
-/// @addtogroup inf2990 INF2990
-/// @{
 //////////////////////////////////////////////////////////////////////////////
 
-#ifndef _TESTS_NOEUDTABLETEST_H
-#define _TESTS_NOEUDTABLETEST_H
-
+#pragma once
+#include "../utilitaire.h"
 #include <cppunit/extensions/HelperMacros.h>
-#include <memory>
-#include "ArbreRenduINF2990.h"
 
-class NoeudTable;
 
 ///////////////////////////////////////////////////////////////////////////
-/// @class NoeudAbstraitTest
+/// @class UtilitaireTest
 /// @brief Classe de test cppunit pour tester le bon fonctionnement des
-///        méthodes de la classe NoeudAbstrait
+///        méthodes du namespace utilitaire
 ///
-/// @author Julien Gascon-Samson
-/// @date 2011-07-16
+/// @author Luc Courbariaux
+/// @date 2016-11-07
 ///////////////////////////////////////////////////////////////////////////
-class NoeudTableTest : public CppUnit::TestFixture
+class UtilitaireTest : public CppUnit::TestFixture
 {
 
 	// =================================================================
@@ -34,8 +28,10 @@ class NoeudTableTest : public CppUnit::TestFixture
 	// Important, vous devez définir chacun de vos cas de tests à l'aide
 	// de la macro CPPUNIT_TEST sinon ce dernier ne sera pas exécuté !
 	// =================================================================
-	CPPUNIT_TEST_SUITE(NoeudTableTest);
-	CPPUNIT_TEST(testDansTable);
+	CPPUNIT_TEST_SUITE(UtilitaireTest);
+	CPPUNIT_TEST(testCalculerAngle3D);
+	CPPUNIT_TEST(testMdansTriangleABC);
+	CPPUNIT_TEST(testRotater);
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -51,23 +47,20 @@ public:
 	void tearDown();
 
 
+
 	// =================================================================
 	// Définissez ici les différents cas de tests...
 	// =================================================================
-
-	/// Cas de test: tester si la position d'un objet est dans la table ou non
-	void testDansTable();
+	void testCalculerAngle3D();
+	void testMdansTriangleABC();
+	void testRotater();
 
 private:
-	/// Instance d'un noeud Table
-
-	std::unique_ptr<NoeudTable> noeud;
-	ArbreRenduINF2990 * arbre;
+	
 };
-
-#endif // _TESTS_NOEUDTABLETEST_H
 
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @}
 ///////////////////////////////////////////////////////////////////////////////
+
