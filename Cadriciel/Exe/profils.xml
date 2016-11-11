@@ -2,7 +2,8 @@
     <Defaut NOM="Defaut" VITESSE="10" PROBABILITE="0.2"/>
     <Caradoc NOM="Caradoc" VITESSE="2" PROBABILITE="0.2"/>
     <Leodagan NOM="Leodagan" VITESSE="4" PROBABILITE="0.6"/>
-    <Percevol NOM="Percevol" VITESSE="4" PROBABILITE="0.40000001"/>
-    <TropFort NOM="TropFort" VITESSE="10" PROBABILITE="1"/>
-    <TropFaible NOM="TropFaible" VITESSE="1" PROBABILITE="0.2"/>
+    <ddd NOM="ddd" VITESSE="3" PROBABILITE="0.1"/>
+    <sadsda NOM="sadsda" VITESSE="10" PROBABILITE="0.2"/>
+    <carl NOM="carl" VITESSE="10" PROBABILITE="1"/>
+    <Luc NOM="Luc" VITESSE="10" PROBABILITE="0.89999998"/>
 </listeProfil>

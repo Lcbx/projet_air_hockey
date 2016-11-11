@@ -89,13 +89,14 @@
     <Compile Include="ChoixProfil.Designer.cs">
       <DependentUpon>ChoixProfil.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utility\Fichier.cs" />
     <Compile Include="FenetreProfilVirtuel.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FenetreProfilVirtuel.Designer.cs">
       <DependentUpon>FenetreProfilVirtuel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Profil.cs">
+    <Compile Include="Utility\Profil.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Configuration.cs">
@@ -104,10 +105,10 @@
     <Compile Include="Configuration.Designer.cs">
       <DependentUpon>Configuration.cs</DependentUpon>
     </Compile>
-    <Compile Include="CreationTournoi.cs">
+    <Compile Include="Tournoi\CreationTournoi.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CreationTournoi.Designer.cs">
+    <Compile Include="Tournoi\CreationTournoi.Designer.cs">
       <DependentUpon>CreationTournoi.cs</DependentUpon>
     </Compile>
     <Compile Include="Edition.cs">
@@ -116,16 +117,16 @@
     <Compile Include="Edition.Designer.cs">
       <DependentUpon>Edition.cs</DependentUpon>
     </Compile>
-    <Compile Include="MatchingTournoi.cs">
+    <Compile Include="Tournoi\MatchingTournoi.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MatchingTournoi.Designer.cs">
+    <Compile Include="Tournoi\MatchingTournoi.Designer.cs">
       <DependentUpon>MatchingTournoi.cs</DependentUpon>
     </Compile>
-    <Compile Include="MatchJoueur.cs">
+    <Compile Include="Tournoi\MatchJoueur.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MatchJoueur.Designer.cs">
+    <Compile Include="Tournoi\MatchJoueur.Designer.cs">
       <DependentUpon>MatchJoueur.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuPrincipal.cs">
@@ -146,10 +147,10 @@
     <Compile Include="Nouveau.Designer.cs">
       <DependentUpon>Nouveau.cs</DependentUpon>
     </Compile>
-    <Compile Include="ParticipantTournoi.cs">
+    <Compile Include="Tournoi\ParticipantTournoi.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ParticipantTournoi.Designer.cs">
+    <Compile Include="Tournoi\ParticipantTournoi.Designer.cs">
       <DependentUpon>ParticipantTournoi.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -166,6 +167,13 @@
     <Compile Include="Sauvegarde.Designer.cs">
       <DependentUpon>Sauvegarde.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tournoi\ZoneDeJeu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tournoi\ZoneDeJeu.Designer.cs">
+      <DependentUpon>ZoneDeJeu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\Utility.cs" />
     <EmbeddedResource Include="BoiteAide.resx">
       <DependentUpon>BoiteAide.cs</DependentUpon>
     </EmbeddedResource>
@@ -178,7 +186,7 @@
     <EmbeddedResource Include="Configuration.resx">
       <DependentUpon>Configuration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CreationTournoi.resx">
+    <EmbeddedResource Include="Tournoi\CreationTournoi.resx">
       <DependentUpon>CreationTournoi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Edition.resx">
@@ -187,10 +195,10 @@
     <EmbeddedResource Include="FenetreProfilVirtuel.resx">
       <DependentUpon>FenetreProfilVirtuel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MatchingTournoi.resx">
+    <EmbeddedResource Include="Tournoi\MatchingTournoi.resx">
       <DependentUpon>MatchingTournoi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MatchJoueur.resx">
+    <EmbeddedResource Include="Tournoi\MatchJoueur.resx">
       <DependentUpon>MatchJoueur.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal.resx">
@@ -202,7 +210,7 @@
     <EmbeddedResource Include="Nouveau.resx">
       <DependentUpon>Nouveau.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ParticipantTournoi.resx">
+    <EmbeddedResource Include="Tournoi\ParticipantTournoi.resx">
       <DependentUpon>ParticipantTournoi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -220,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sauvegarde.resx">
       <DependentUpon>Sauvegarde.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tournoi\ZoneDeJeu.resx">
+      <DependentUpon>ZoneDeJeu.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

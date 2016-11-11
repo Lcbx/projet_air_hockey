@@ -220,7 +220,7 @@ Profil ConfigProfils::getProfil(std::string nom)
 			return *it;
 		}
 	}
-	return Profil("ERREUR", 0, 0);
+	return Profil(Profil::NOM_DEFAUT, 50, 0.2);
 }
 
 

@@ -88,11 +88,6 @@ void NoeudTableTest::testDansTable()
 		bool danstable = arbre->getTable()->dansTable(positionObjet2[i]);
 		CPPUNIT_ASSERT_MESSAGE("objet n'est pas dans la table!!", danstable == false);
 	}
-<<<<<<< .mine
-	*/
-=======
 
->>>>>>> .theirs
-	
-	
+	*/
 }

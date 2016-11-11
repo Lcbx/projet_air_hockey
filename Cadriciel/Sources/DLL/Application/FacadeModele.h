@@ -19,6 +19,8 @@
 #include "../Configuration/ConfigJeu.h"
 #include "../Configuration/ConfigDebug.h"
 #include "../Configuration/ConfigProfils.h"
+#include "../Tournoi.h"
+#include "../AdaptateurJoueur.h"
 
 class NoeudAbstrait;
 class ArbreRenduINF2990;
@@ -102,6 +104,13 @@ public:
 	inline const ArbreRenduINF2990* obtenirArbreRenduINF2990() const;
 	/// Retourne l'arbre de rendu.
 	inline ArbreRenduINF2990* obtenirArbreRenduINF2990();
+
+	/// Retourne le tournoi en cours
+	inline Tournoi<AdaptateurJoueur>* obtenirTournoi();
+	/// Permet de créer le tournoi
+	void creerTournoi(const char* nomZone, const int count, const char** nomsJoueurs, const bool* sontHumains, const char** nomProfils);
+	/// Permet d'obtenir la configuration du tournoi
+	void loadTournoi(char* nomZone, int count, char* nomsJoueurs, bool* sontHumains, char* nomProfils);
 
 	/// Réinitialise la scène.
 	void reinitialiser();
@@ -282,6 +291,8 @@ private:
    bool rondelleEnPause_{ false };
    /// Ali
 
+   // Tournoi pour le mode tournoi
+   Tournoi<AdaptateurJoueur>* tournoi_;
 };
 
 
@@ -331,6 +342,10 @@ inline const ArbreRenduINF2990* FacadeModele::obtenirArbreRenduINF2990() const
 inline ArbreRenduINF2990* FacadeModele::obtenirArbreRenduINF2990()
 {
    return arbre_;
+}
+
+inline Tournoi<AdaptateurJoueur>* FacadeModele::obtenirTournoi() {
+	return tournoi_;
 }
 
 
