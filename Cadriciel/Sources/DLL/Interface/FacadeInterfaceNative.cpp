@@ -1303,7 +1303,7 @@ extern "C"
 		int iNJLen = 0; //Itérateur sur les noms de joueurs
 		int i = 0;
 		for (auto scoreEtNomJoueur : arbre) {
-			scores[i] = scoreEtNomJoueur.second;
+			scores[i++] = scoreEtNomJoueur.second;
 			int j; std::string nom = scoreEtNomJoueur.first.getNomJoueur();
 			for (j = 0; j < nom.length(); j++, iNJLen++)
 				nomsJoueurs[iNJLen] = nom[j];
@@ -1312,5 +1312,45 @@ extern "C"
 
 		return FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirParticipants().size();
 	}
+
+	/// @fn __declspec(dllexport) void preparerProchainMatchTournoi()
+	/// @brief Permet de mettre en place les joueurs virtuels pour le match
+	__declspec(dllexport) void preparerProchainMatchTournoi() {
+		// On considère que le second joueur est le seul à pouvoir être virtuel
+		std::pair<AdaptateurJoueur,AdaptateurJoueur> tournoi = FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirProchainMatchup();
+		if (tournoi.first.estHumain()) {
+			FacadeModele::obtenirInstance()->setjoueurVirtuel(tournoi.second.estHumain());
+			FacadeModele::obtenirInstance()->setVitesseVirtuel(tournoi.second.getProfil().getVitesse());
+			FacadeModele::obtenirInstance()->setProbabiliteVirtuel(tournoi.second.getProfil().getProbabilite());
+		} else {
+			FacadeModele::obtenirInstance()->setjoueurVirtuel(tournoi.first.estHumain());
+			FacadeModele::obtenirInstance()->setVitesseVirtuel(tournoi.first.getProfil().getVitesse());
+			FacadeModele::obtenirInstance()->setProbabiliteVirtuel(tournoi.first.getProfil().getProbabilite());
+		}
+	}
+
+	/// @fn __declspec(dllexport) bool gagnerMatchVirtuelsTournoi()
+	/// @brief Permet de faire gagner un des joueurs virtuels par défaut si deux joueurs virtuels sont assignés
+	/// @return Si un match était formé par deux joueurs virtuels
+	__declspec(dllexport) bool gagnerMatchVirtuelsTournoi()	{
+		// On considère que le second joueur est le seul à pouvoir être virtuel
+		std::pair<AdaptateurJoueur, AdaptateurJoueur> tournoi = FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirProchainMatchup();
+		if (!tournoi.first.estHumain() && !tournoi.second.estHumain()) {
+			ConfigJeu *cfg = FacadeModele::obtenirInstance()->getConfigJeu();
+			int score1 = utilitaire::genererScore(cfg->getNombreDeButs());
+			int score2 = utilitaire::genererScore(cfg->getNombreDeButs());
+			if (score1 > score2) {
+				FacadeModele::obtenirInstance()->obtenirTournoi()->affecterScoreProchainMatchup(cfg->getNombreDeButs(), score2);
+			} else {
+				if (score1 == cfg->getNombreDeButs())
+					score1--;
+				FacadeModele::obtenirInstance()->obtenirTournoi()->affecterScoreProchainMatchup(score1, cfg->getNombreDeButs());
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }
 

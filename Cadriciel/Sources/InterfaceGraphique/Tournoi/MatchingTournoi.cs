@@ -69,7 +69,7 @@ namespace InterfaceGraphique
 
         /// @fn private void updateMatchups()
         /// @brief Permet de mettre à jour les participants des matchup avec le C++
-        private void updateMatchups() {
+        public void updateMatchups() {
             int nbMatchups = FonctionsNatives.nombreMatchupsTournoi();
             int tailleTableauChar = FonctionsNatives.plusLongNomTournoi() * nbMatchups; ;
 

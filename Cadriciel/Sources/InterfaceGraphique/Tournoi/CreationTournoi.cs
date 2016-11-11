@@ -64,10 +64,6 @@ namespace InterfaceGraphique
             t.Tick += new EventHandler(timer1_Tick);  //evenement qui se declanche a la fin des 5 sec
             //t.Start();
             this.parent_.SwitchStatusTournoi(ModeTournoi.StatusTournoi.MatchMaking);
-
-            //enable le boutton
-            this.parent_.button3.Enabled = true;
-
         }
 
         /// @fn private void initParticipants()
