@@ -14,7 +14,7 @@
 
 
 // Nom du fichier de profils
-const std::string ConfigProfils::FICHIER_PROFILS{ "profils.xml" };
+const std::string ConfigProfils::FICHIER_PROFILS{ "donnees\\profils.xml" };
 
 ////////////////////////////////////////////////////////////////////////
 ///
