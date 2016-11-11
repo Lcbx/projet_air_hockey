@@ -3,7 +3,8 @@
     <Caradoc NOM="Caradoc" VITESSE="2" PROBABILITE="0.2"/>
     <Perceval NOM="Perceval" VITESSE="3" PROBABILITE="0.4"/>
     <Leodagan NOM="Leodagan" VITESSE="4" PROBABILITE="0.6"/>
-    <Leodagao NOM="Leodagao" VITESSE="4" PROBABILITE="0.60000002"/>
-    <TropFort NOM="TropFort" VITESSE="10" PROBABILITE="1"/>
-    <TropFaible NOM="TropFaible" VITESSE="1" PROBABILITE="0.2"/>
+    <ddd NOM="ddd" VITESSE="3" PROBABILITE="0.1"/>
+    <sadsda NOM="sadsda" VITESSE="10" PROBABILITE="0.2"/>
+    <carl NOM="carl" VITESSE="10" PROBABILITE="1"/>
+    <Luc NOM="Luc" VITESSE="10" PROBABILITE="0.89999998"/>
 </listeProfil>

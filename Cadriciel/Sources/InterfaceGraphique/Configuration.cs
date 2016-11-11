@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;   
 using System.Runtime.InteropServices;
+using InterfaceGraphique.Utility;
 
 
 namespace InterfaceGraphique
@@ -210,7 +211,6 @@ namespace InterfaceGraphique
                 }
 
             }
-          
         }
 
         public void setMenuPrincipalConfig(MenuPrincipal menuPrincipal, Edition edition)
@@ -734,11 +734,12 @@ namespace InterfaceGraphique
                 listDeProfils.Items.Insert(index, textBox1.Text);
                 creationProfil.Enabled=false;
 
-                char[] cNom = nomP.ToCharArray();
+                /*char[] cNom = nomP.ToCharArray();
                 char[] nt_cNom = new char[nomJoueurVirtuelCourant_.Length + 1];
                 for (int i = 0; i < nomJoueurVirtuelCourant_.Length; i++)
                     nt_cNom[i] = cNom[i];
-                nt_cNom[nomJoueurVirtuelCourant_.Length] = '\0';
+                nt_cNom[nomJoueurVirtuelCourant_.Length] = '\0';*/
+
                 FonctionsNatives.sauvegarderProfil(nomP, v, p);
 
             }

@@ -32,6 +32,7 @@
             this.title = new System.Windows.Forms.Label();
             this.createButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.cbmZoneDeJeu = new InterfaceGraphique.Tournoi.ZoneDeJeu();
             this.SuspendLayout();
             // 
             // title
@@ -47,7 +48,7 @@
             // 
             // createButton
             // 
-            this.createButton.Location = new System.Drawing.Point(3, 28);
+            this.createButton.Location = new System.Drawing.Point(8, 54);
             this.createButton.Name = "createButton";
             this.createButton.Size = new System.Drawing.Size(150, 23);
             this.createButton.TabIndex = 10;
@@ -59,15 +60,24 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // cbmZoneDeJeu
+            // 
+            this.cbmZoneDeJeu.AutoSize = true;
+            this.cbmZoneDeJeu.Location = new System.Drawing.Point(8, 28);
+            this.cbmZoneDeJeu.Name = "cbmZoneDeJeu";
+            this.cbmZoneDeJeu.Size = new System.Drawing.Size(203, 24);
+            this.cbmZoneDeJeu.TabIndex = 11;
+            // 
             // CreationTournoi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.Controls.Add(this.cbmZoneDeJeu);
             this.Controls.Add(this.createButton);
             this.Controls.Add(this.title);
             this.Name = "CreationTournoi";
-            this.Size = new System.Drawing.Size(219, 54);
+            this.Size = new System.Drawing.Size(219, 80);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -77,5 +87,6 @@
         private System.Windows.Forms.Label title;
         private System.Windows.Forms.Button createButton;
         private System.Windows.Forms.Timer timer1;
+        private Tournoi.ZoneDeJeu cbmZoneDeJeu;
     }
 }

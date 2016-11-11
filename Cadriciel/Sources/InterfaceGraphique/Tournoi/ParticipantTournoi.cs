@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace InterfaceGraphique
 {
@@ -16,7 +17,7 @@ namespace InterfaceGraphique
     public partial class ParticipantTournoi : UserControl
     {
         private bool nameTextBoxIsSet = false;
-        private List<Profil> profileList;
+        private BindingList<Profil> profileList;
 
         /// @fn public int TypeJoueur
         /// @brief Permet de get le type de joueur sélectionné
@@ -26,7 +27,41 @@ namespace InterfaceGraphique
                 if (this.typeJoueurCBO.Enabled)
                     return (Profil)this.typeJoueurCBO.SelectedItem;
                 else
-                    return null;
+                    return new Profil();
+            }
+        }
+
+        /// @fn public void setTypeJoueur(string nomType)
+        /// @brief Permet de set le type de joueur sélectionné
+        /// @param nomType Nom du profil sélectionné
+        public void setTypeJoueur(string nomType) {
+            Profil profilChoisi = this.profileList.FirstOrDefault(x => x.Nom == nomType);
+            if (profilChoisi != null) {
+                this.typeJoueurCBO.SelectedItem = profilChoisi;
+            }
+        }
+
+        /// @fn public void setEstHumain(bool estHumain)
+        /// @brief Permet de changer si le joueur est humain ou non
+        /// @param estHumain : Si le joueur est humain ou non
+        public void setEstHumain(bool estHumain) {
+            this.isHuman.Checked = estHumain;
+        }
+
+        public void setNomJoueur(string nomJoueur) {
+            this.nameTextBox.Text = nomJoueur;
+            if (this.nameTextBox.Text.Trim() == "") {
+                this.nameTextBox_Init();
+            }
+            else
+            {
+                this.nameTextBoxIsSet = true;
+            }
+        }
+
+        public bool EstHumain {
+            get {
+                return this.isHuman.Checked;
             }
         }
 
@@ -35,7 +70,9 @@ namespace InterfaceGraphique
         /// @return Le nom du joueur
         public string NomJoueur {
             get {
-                return this.nameTextBox.Text;
+                if(this.nameTextBoxIsSet)
+                    return this.nameTextBox.Text;
+                return String.Empty;
             }
         }
 
@@ -86,9 +123,7 @@ namespace InterfaceGraphique
         private void typeJoueurCBO_Init() {
             this.typeJoueurCBO.BeginUpdate();
             this.typeJoueurCBO.Text = "Type de joueur";
-            this.profileList = new List<Profil>();
-            Profil profil = new Profil("Default", 10, 0.2);
-            this.profileList.Add(profil);
+            this.profileList = new BindingList<Profil>(Profil.obtenirListeNomsProfils());
             this.typeJoueurCBO.DataSource = this.profileList;
             this.typeJoueurCBO.DisplayMember = "Nom";
             this.typeJoueurCBO.EndUpdate();
@@ -100,6 +135,25 @@ namespace InterfaceGraphique
         /// @return rien
         private void isHuman_CheckedChanged(object sender, EventArgs e) {
             this.typeJoueurCBO.Enabled = !this.isHuman.Checked;
+        }
+
+        /// @fn public void refreshProfils()
+        /// @brief Permet de rafraichir la liste des profils
+        public void refreshProfils() {
+            List<Profil> liste = Profil.obtenirListeNomsProfils();
+            string nom = this.TypeJoueur.Nom;
+            this.profileList.Clear();
+            liste.ForEach(x => this.profileList.Add(x));
+            this.setTypeJoueur(nom);
+        }
+
+
+        static partial class FonctionsNatives {
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void obtenirListeProfils(int[] noms);
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern int obtenirNombreProfils();
         }
     }
 }
