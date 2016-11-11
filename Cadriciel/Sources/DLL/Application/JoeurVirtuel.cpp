@@ -76,6 +76,7 @@ void JoueurVirtuel::deplacerMailletVirtuel()
 	// deplacer le maillet selon un probabilite
 	if (agir())
 	{
+		maillet->choisirVitesse(getVitesse() * 15.f);
 		// a la fin on teste si la nouvelle position est dans la zone du jeu
 		if (facade->obtenirArbreRenduINF2990()->getTable()->mailletDansZone1(nouvellePositionMaillet, rayonMaillet))
 			//mailletVirtuel->assignerPositionRelative(nouvellePositionMaillet);

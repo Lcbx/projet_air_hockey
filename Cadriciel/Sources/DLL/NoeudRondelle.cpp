@@ -215,7 +215,8 @@ void NoeudRondelle::animer(float temps)
 				typeObjetDebug = "maillet";
 				positionActuelle = positionHorsCollision;
 				auto vitesseMaillet = ((NoeudMaillet*)resultat.objet)->getVitesse();
-				vitesse_ = glm::reflect(vitesse_, normale) + glm::dot(vitesseMaillet, normale) * normale;
+				auto temp = glm::reflect(vitesse_, normale);
+				vitesse_ = temp + glm::normalize(temp) * glm::dot(vitesseMaillet, glm::normalize(temp));
 				break;
 			}
 			default: break;
@@ -274,7 +275,8 @@ void NoeudRondelle::animer(float temps)
 ///
 ////////////////////////////////////////////////////////////////////////
 void NoeudRondelle::collisionMailletExterne(glm::vec3 vitesseMaillet, glm::vec3 normale) {
-	auto vitesseIntermediaire = glm::reflect(vitesse_, normale) + glm::dot(vitesseMaillet, normale) * (-normale);
+	auto temp = glm::reflect(vitesse_, normale);
+	auto vitesseIntermediaire = -(temp + glm::normalize(temp) * glm::dot(vitesseMaillet, glm::normalize(temp)));
 	float moduleVitesse = glm::clamp((float)glm::length(vitesseIntermediaire), 0.f, (float) 300.);
 	vitesse_ = moduleVitesse * glm::normalize(vitesseIntermediaire);
 	if (Debug::obtenirInstance().afficherCollision) Debug::obtenirInstance().afficher("Collision : maillet");
