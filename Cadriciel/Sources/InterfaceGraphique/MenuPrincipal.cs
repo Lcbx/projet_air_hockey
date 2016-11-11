@@ -55,7 +55,7 @@ namespace InterfaceGraphique
         {
             edition_=edition;
             configuration_ = configuration;
-        }
+        }  
 
 		/////////////////////////////////////////////////////////////////////////
         /// @fn public void setTournoi(ModeTournoi tournoi)
@@ -133,8 +133,8 @@ namespace InterfaceGraphique
             //}
         }
 
-       
-		/////////////////////////////////////////////////////////////////////////
+
+        /////////////////////////////////////////////////////////////////////////
         /// @fn private void configuration_Click(object sender, EventArgs e)
         /// 
         /// @brief cette fonction permet d'afficher la partie rapide

@@ -1555,7 +1555,7 @@ namespace InterfaceGraphique
                 else // activer joueur virtuel
                 {
                     estjoueurvirtuel = true;
-                    DemarerJoueurVirtuel(10, 1);
+                    DemarerJoueurVirtuel(4, 0.7);
                 }
 
                 toolStrip1.Hide();

@@ -56,7 +56,7 @@ namespace InterfaceGraphique
         private bool debogCollision_ = false;
         private bool debogVitesse_ = false;
         private bool eclairageActif_ = false;
-        private bool effetVisuelActif_ = true;
+        private bool effetVisuelActif_ = false;
 
         private bool modifierActif = false;
         private bool ajouterActif = false;
@@ -162,7 +162,7 @@ namespace InterfaceGraphique
 
                 // Options de debug
                 OptionsDebug* optsDebug = (OptionsDebug*)FonctionsNatives.obtenirOptionsDebug();
-                if(optsDebug->isDebugActif)
+                if (optsDebug->isDebugActif)
                 {
                     debogageActif_ = true;
                     checkBox1.Checked = true;
@@ -200,7 +200,7 @@ namespace InterfaceGraphique
                     else
                     {
                         effetVisuelActif_ = false;
-                        checkBox5.Checked = true;
+                        checkBox5.Checked = false;
                     }
 
                     FonctionsNatives.debogConfig(debogageActif_, debogCollision_, debogVitesse_, eclairageActif_, effetVisuelActif_);
