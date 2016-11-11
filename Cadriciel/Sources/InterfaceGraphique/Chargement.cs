@@ -17,6 +17,7 @@ namespace InterfaceGraphique
 
         Edition edition_;
 
+
        public bool estclique;
         ///////////////////////////////////////////////////////////////////////
         /// @fn public Chargement(Edition edition) 
@@ -35,7 +36,6 @@ namespace InterfaceGraphique
             this.MaximizeBox = false;
 
             this.edition_ = edition;
-
             estclique = false;
         }
 

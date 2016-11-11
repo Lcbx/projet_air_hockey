@@ -49,17 +49,17 @@ namespace InterfaceGraphique
     
 
                 menu_.Hide();
-                this.Close();
+                this.Hide();
             }
 
         }
         // click sur button joueur virtuel
         private void button2_Click(object sender, EventArgs e)
         {
-            FenetreProfilVirtuel fenetre = new FenetreProfilVirtuel(edition_);
+            FenetreProfilVirtuel fenetre = new FenetreProfilVirtuel(edition_, menu_);
 
             this.Hide();
-            menu_.Hide();
+           // menu_.Hide();
             fenetre.ShowDialog();
         }
 
