@@ -142,8 +142,6 @@ void SauvegardeZoneDeJeu::lireArbre(const tinyxml2::XMLDocument& document)
 
 	
 		// Parcours le reste des noeuds
-		SauvegardeZoneDeJeu::lireNoeudXML(*(elementArbreDeRendu->FirstChild()->ToElement()));
-		
 		if(elementArbreDeRendu->FirstChild() != nullptr) {
 			SauvegardeZoneDeJeu::lireNoeudXML(*(elementArbreDeRendu->FirstChild()->ToElement()));
 		}
@@ -181,13 +179,12 @@ void SauvegardeZoneDeJeu::restituerTable(const tinyxml2::XMLElement& element)
 ////////////////////////////////////////////////////////////////////////
 void SauvegardeZoneDeJeu::lireNoeudXML(const tinyxml2::XMLElement& element)
 {
-	std::cout << "Lecture d'un noeud" << std::endl;
-	std::cout << element.Name() << std::endl;
+	//std::cout << element.Name() << std::endl;
 
 	// Ajoute le noeud correspondant à l'arbre de rendu
 	//NoeudAbstrait *n = FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->creerNoeud(element.Attribute("TYPE"));
-	std::cout << element.Attribute("TYPE") << std::endl;
-	std::cout << typeid(FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->creerNoeud(element.Attribute("TYPE"))).name() << std::endl;
+	//std::cout << element.Attribute("TYPE") << std::endl;
+	//std::cout << typeid(FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->creerNoeud(element.Attribute("TYPE"))).name() << std::endl;
 	
 	if (element.Attribute("TYPE") == "table")
 		restituerTable(element);

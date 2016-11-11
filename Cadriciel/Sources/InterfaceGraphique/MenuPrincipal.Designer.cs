@@ -52,6 +52,7 @@
             this.partieRapide.Text = "Partie rapide";
             this.partieRapide.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.partieRapide.UseVisualStyleBackColor = true;
+            this.partieRapide.Click += new System.EventHandler(this.partieRapide_Click);
             // 
             // tournoi
             // 
@@ -85,6 +86,7 @@
             this.configuration.Text = "Configuration";
             this.configuration.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.configuration.UseVisualStyleBackColor = true;
+            this.configuration.Click += new System.EventHandler(this.configuration_Click);
             // 
             // editeur
             // 
@@ -122,7 +124,7 @@
             // 
             // MenuPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(31F, 55F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -146,13 +148,7 @@
 
         #endregion
 
-       //public MenuPrincipal(Edition exemple2)
-       //{
-          //exemple = exemple2;
-       //}
-
-
-      //private static Edition exemple;
+      
 
 
         private System.Windows.Forms.Button partieRapide;

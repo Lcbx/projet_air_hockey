@@ -129,14 +129,18 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AdaptateurJoueur.cpp" />
+    <ClCompile Include="Affichage_debuggage.cpp" />
     <ClCompile Include="Application\AjoutAccelerateur.cpp" />
     <ClCompile Include="Application\AjoutMur.cpp" />
     <ClCompile Include="Application\AjoutPortail.cpp" />
     <ClCompile Include="Application\Deplacement.cpp" />
     <ClCompile Include="Application\Duplication.cpp" />
     <ClCompile Include="Application\FacadeModele.cpp" />
+    <ClCompile Include="Application\JoeurVirtuel.cpp" />
     <ClCompile Include="Application\Loupe.cpp" />
     <ClCompile Include="Application\PointsControle.cpp" />
+    <ClCompile Include="Application\Profil.cpp" />
     <ClCompile Include="Application\Rotation.cpp" />
     <ClCompile Include="Application\Selection.cpp" />
     <ClCompile Include="Application\StrategieSouris.cpp" />
@@ -145,11 +149,16 @@
     <ClCompile Include="Arbre\Noeuds\NoeudPointControle.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudTable.cpp" />
     <ClCompile Include="BoiteCollision.cpp" />
+    <ClCompile Include="ConfigTournoi.cpp" />
+    <ClCompile Include="Configuration\ConfigDebug.cpp" />
+    <ClCompile Include="Configuration\ConfigJeu.cpp" />
+    <ClCompile Include="Configuration\ConfigProfils.cpp" />
     <ClCompile Include="Configuration\ConfigScene.cpp" />
     <ClCompile Include="Arbre\ArbreRendu.cpp" />
     <ClCompile Include="Arbre\ArbreRenduINF2990.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudAbstrait.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudComposite.cpp" />
+    <ClCompile Include="Configuration\ConfigTouches.cpp" />
     <ClCompile Include="Interface\FacadeInterfaceNative.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Trim\Desktop\inf2990-10\Cadriciel\Sources\DLL\Application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -163,10 +172,20 @@
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="SauvegardeZoneDeJeu.cpp" />
+    <ClCompile Include="Test.cpp" />
     <ClCompile Include="Tests\BancTests.cpp" />
+    <ClCompile Include="Tests\CameraTest.cpp" />
+    <ClCompile Include="Tests\CollisionTest.cpp" />
     <ClCompile Include="Tests\ConfigSceneTest.cpp" />
     <ClCompile Include="Tests\NoeudAbstraitTest.cpp" />
+    <ClCompile Include="Tests\NoeudCompositeTest.cpp" />
+    <ClCompile Include="Tests\PointControleTest.cpp" />
+    <ClCompile Include="Tests\RedimensionnementTest.cpp" />
+    <ClCompile Include="Tests\UtilitaireTest.cpp" />
+    <ClCompile Include="Tournoi.cpp" />
+    <ClCompile Include="TournoiTest.cpp" />
     <ClCompile Include="VisiteurAjout.cpp" />
+    <ClCompile Include="VisiteurCollision.cpp" />
     <ClCompile Include="VisiteurDansLaTable.cpp" />
     <ClCompile Include="VisiteurDeplacement.cpp" />
     <ClCompile Include="VisiteurDuplication.cpp" />
@@ -177,14 +196,18 @@
     <ClCompile Include="VisiteurSelection.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdaptateurJoueur.h" />
+    <ClInclude Include="Affichage_debuggage.h" />
     <ClInclude Include="Application\AjoutAccelerateur.h" />
     <ClInclude Include="Application\AjoutMur.h" />
     <ClInclude Include="Application\AjoutPortail.h" />
     <ClInclude Include="Application\Deplacement.h" />
     <ClInclude Include="Application\Duplication.h" />
     <ClInclude Include="Application\FacadeModele.h" />
+    <ClInclude Include="Application\JoueurVirtuel.h" />
     <ClInclude Include="Application\Loupe.h" />
     <ClInclude Include="Application\PointsControle.h" />
+    <ClInclude Include="Application\Profil.h" />
     <ClInclude Include="Application\Rotation.h" />
     <ClInclude Include="Application\Selection.h" />
     <ClInclude Include="Application\StrategieSouris.h" />
@@ -196,12 +219,18 @@
     <ClInclude Include="Arbre\Noeuds\NoeudTypes.h" />
     <ClInclude Include="BoiteCollision.h" />
     <ClInclude Include="BoiteCollisionAbstraite.h" />
+    <ClInclude Include="CameraTest.h" />
+    <ClInclude Include="ConfigTournoi.h" />
+    <ClInclude Include="Configuration\ConfigDebug.h" />
+    <ClInclude Include="Configuration\ConfigJeu.h" />
+    <ClInclude Include="Configuration\ConfigProfils.h" />
     <ClInclude Include="Configuration\ConfigScene.h" />
     <ClInclude Include="Arbre\ArbreRendu.h" />
     <ClInclude Include="Arbre\ArbreRenduINF2990.h" />
     <ClInclude Include="Arbre\Usines\UsineNoeud.h" />
     <ClInclude Include="Arbre\Noeuds\NoeudAbstrait.h" />
     <ClInclude Include="Arbre\Noeuds\NoeudComposite.h" />
+    <ClInclude Include="Configuration\ConfigTouches.h" />
     <ClInclude Include="Interface\FacadeInterfaceNative.h" />
     <ClInclude Include="MiseEchelle.h" />
     <ClInclude Include="NoeudBonus.h" />
@@ -211,11 +240,21 @@
     <ClInclude Include="NoeudRondelle.h" />
     <ClInclude Include="Application\Souris.h" />
     <ClInclude Include="SauvegardeZoneDeJeu.h" />
+    <ClInclude Include="Test.h" />
     <ClInclude Include="Tests\BancTests.h" />
+    <ClInclude Include="Tests\CameraTest.h" />
+    <ClInclude Include="Tests\CollisionTest.h" />
     <ClInclude Include="Tests\ConfigSceneTest.h" />
     <ClInclude Include="Tests\NoeudAbstraitTest.h" />
+    <ClInclude Include="Tests\NoeudCompositeTest.h" />
+    <ClInclude Include="Tests\PointControleTest.h" />
+    <ClInclude Include="Tests\RedimensionnementTest.h" />
+    <ClInclude Include="Tests\UtilitaireTest.h" />
+    <ClInclude Include="Tournoi.h" />
+    <ClInclude Include="TournoiTest.h" />
     <ClInclude Include="Visiteur.h" />
     <ClInclude Include="VisiteurAjout.h" />
+    <ClInclude Include="VisiteurCollision.h" />
     <ClInclude Include="VisiteurDansLaTable.h" />
     <ClInclude Include="VisiteurDeplacement.h" />
     <ClInclude Include="VisiteurDuplication.h" />

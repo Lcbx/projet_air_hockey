@@ -115,7 +115,8 @@ void VisiteurAjout::visiter(NoeudBonus* noeud)
 ////////////////////////////////////////////////////////////////////////
 void VisiteurAjout::visiter(NoeudMaillet* noeud)
 {
-
+	noeud->assignerPositionRelative(position);
+	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->ajouter(noeud); 
 }
 
 ////////////////////////////////////////////////////////////////////////

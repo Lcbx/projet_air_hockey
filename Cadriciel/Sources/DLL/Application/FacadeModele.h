@@ -12,11 +12,19 @@
 
 
 #include <windows.h>
+#include <ctime>
 #include <string>
 #include "EtatOpenGL.h"
+#include "../Configuration/ConfigTouches.h"
+#include "../Configuration/ConfigJeu.h"
+#include "../Configuration/ConfigDebug.h"
+#include "../Configuration/ConfigProfils.h"
+#include "../Tournoi.h"
+#include "../AdaptateurJoueur.h"
 
 class NoeudAbstrait;
 class ArbreRenduINF2990;
+class JoueurVirtuel;
 
 namespace vue {
    class Vue;
@@ -36,9 +44,9 @@ struct CoefficientConfiguration{
 	double acceleration;	//Accélération des bonus vitesse
 } typedef CoefficientConfiguration;
 
-const CoefficientConfiguration COEFFICIENTS_MINIMAUX = { 0.0, 0, 0 };
-const CoefficientConfiguration COEFFICIENTS_DEFAULT = { 1.2, 0.8, 5 };
-const CoefficientConfiguration COEFFICIENTS_MAXIMAUX = { 100, 1, 10 };
+const CoefficientConfiguration COEFFICIENTS_MINIMAUX = { 0, 0, 0 };
+const CoefficientConfiguration COEFFICIENTS_DEFAULT = { 10, 0.8, 10 };
+const CoefficientConfiguration COEFFICIENTS_MAXIMAUX = { 100, 1, 100 };
 
 ///////////////////////////////////////////////////////////////////////////
 /// @class FacadeModele
@@ -58,14 +66,31 @@ public:
 
 	/// Crée un contexte OpenGL et initialise celui-ci.
 	void initialiserOpenGL(HWND hWnd);
+
 	/// Charge la configuration à partir d'un fichier XML.
 	void chargerConfiguration() const;
 	/// Enregistre la configuration courante dans un fichier XML.
 	void enregistrerConfiguration() const;
+
 	/// Charge la zone de jeu à partir d'un fichier XML.
 	void chargerZoneJeu(char* fichierZoneJeu) const;
 	/// Enregistre la zone de jeu courante dans un fichier XML.
 	void enregistrerZoneJeu(char* fichierZoneJeu) const;
+	
+
+	/// Accède à l'objet ConfigTouches
+	ConfigTouches* getConfigTouches();
+
+	/// Accède à l'objet ConfigProfils
+	ConfigJeu* getConfigJeu();
+
+	/// Accède à l'objet ConfigProfils
+	ConfigDebug* getConfigDebug();
+
+	/// Accède à l'objet ConfigProfils
+	ConfigProfils* getConfigProfils();
+
+
 	/// Libère le contexte OpenGL.
 	void libererOpenGL();
 	/// Affiche le contenu du modèle.
@@ -80,6 +105,13 @@ public:
 	/// Retourne l'arbre de rendu.
 	inline ArbreRenduINF2990* obtenirArbreRenduINF2990();
 
+	/// Retourne le tournoi en cours
+	inline Tournoi<AdaptateurJoueur>* obtenirTournoi();
+	/// Permet de créer le tournoi
+	void creerTournoi(const char* nomZone, const int count, const char** nomsJoueurs, const bool* sontHumains, const char** nomProfils);
+	/// Permet d'obtenir la configuration du tournoi
+	void loadTournoi(char* nomZone, int count, char* nomsJoueurs, bool* sontHumains, char* nomProfils);
+
 	/// Réinitialise la scène.
 	void reinitialiser();
 
@@ -87,35 +119,29 @@ public:
 	void animer(float temps);
 
 
-   //ajouter Bonus
+   ///ajouter Bonus
 	void ajouterBonus(int x, int y);
 
-	//ajouter Portail
+	///ajouter Portail
 	void ajouterPortail(int x1, int y1);
-	//supprime le 1er Portail apres clic echap
- 	void supprimerPortail(bool escTouche);
-	//ajouter second Portail
+
+
+	///ajouter second Portail
 	void ajouterPortailDeux(int x2, int y2);
 	
 
-	//murets
+	///ajouter murets
 	void ajouterMuret(int x1, int y1, int x2, int y2);
-	void ajouterMuretFantome(int corXin, int corYin, int corX, int corY);
-	void supprimerMuret(bool escTouche);
+	
+	///supprime le 1er Portail apres clic echap
+	void supprimerDernierObjet();
 
-
-	// fonction bidon de test
-	void test();
-	// test deplacement du point de controle
-	void deplacerPointHaut(int index);
-
-	//retourner la pos X pour l'afficher dans la boite de configuration
+	///retourner la pos X pour l'afficher dans la boite de configuration
 	double getPosDataBidingX();
 
-	//retourner la pos X pour l'afficher dans la boite de configuration
+	///retourner la pos X pour l'afficher dans la boite de configuration
 	double getPosDataBidingY();
 
-	//void deplacerObjet(int x1 , int y1, int x2, int y2 );
 
 	///effacer un objet selectionné de la table
 	void effacerObjet();
@@ -137,14 +163,69 @@ public:
 
 	/// Permet d'obtenir les constantes de la zone de jeu (friction, rebond etc)
 	CoefficientConfiguration getCoefficient() const;
+
 	/// Permet de modifier les constantes de la zone de jeu (friction, rebond etc)
 	void setCoefficient(CoefficientConfiguration coeff);
 
+	///retourne si tous les objets sont dans la table
 	bool objetEstDansLaTable();
 
 
-	//initialiser la zone de jeu
+	///initialiser la zone de jeu
 	void initialiserScene();
+
+	///ajouter les maillets et la rondelle a la zone
+	void ajouterMailletEtRondelle();
+	
+	///enlever les maillets et la rondelle de la zone
+	void retirerMailletEtRondelle();
+
+
+	///permert de deplacer le maillet avec les touches de clavier
+    void deplacerMailletAvecClavier(double x, double y);
+
+
+	///Re initialiser la partie 
+	void reinitialiserPartieCourante();
+
+	///permert de deplacer le maillet avec la souris
+	void deplacerMailletAvecSouris(double x, double y);
+
+	/// Ali
+	/// activer ou deactiver le rayon d'attraction des portails
+	void activerRayonAttraction();
+	void deactiverRayonAttraction();
+	/// afficher ou effacer les points de controle
+	void afficherPointControle();
+	void effacerPointControle();
+	///deplacer le maillet du jouer virtuel
+	void ActiverJoueurVirtuel(double vitesse, double probabilite);
+	// activer deactiver joueur virtuel
+	void setjoueurVirtuel(bool activer);
+	bool getjoueurVirtuel();
+	double getVitesseVirtuel();
+	void setVitesseVirtuel(double vitesse);
+	double getProbabiliteVirtuel();
+	void setProbabiliteVirtuel(double probabilite);
+	// fonctions set/get des buts
+	void setButDroite(bool but);
+	void setButGauche(bool but);
+	bool getButDroite();
+	bool getButGauche();
+	// fonctions get/set nombre de but pour gagner la partie
+	int getNombreButs();
+	bool setNombreButs(int nombre);
+	// fonctions get/set pour activer/deactiver mode partierapide
+	bool getPartieRapide();
+	void setPartieRapide(bool activer);
+	// activer/deactiver la rondelle - mettre en pause
+	void activerRondelle();
+	void deactiverRondelle();
+	bool estEnPauseRondelle();
+	/// Ali
+	/// Renvoie la constante contenant le nom du fichier de configuration
+	//std::string getConfigFile();
+
 private:
 
    /// Constructeur par défaut.
@@ -177,8 +258,41 @@ private:
    /// Arbre de rendu contenant les différents objets de la scène.
    ArbreRenduINF2990* arbre_{ nullptr };
 
+   /// Arthur
+   /// Configuration des touches
+   ConfigTouches _configTouches;
+   /// Configuration des options de jeu
+   ConfigJeu _configJeu;
+   /// Configuration des options de debug
+   ConfigDebug _configDebug;
+   /// Configuration des profils
+   ConfigProfils _configProfils;
+
+
+
    /// Coefficients de configuration
    CoefficientConfiguration coeff_ = COEFFICIENTS_DEFAULT;
+
+   
+
+   /// Ali
+   /// joueur virtuel 
+   bool joueurVirtuelActive_{false};
+   double vitesseVirtuelle_{ 1. };
+   double probabilite_{ 0.5 };
+   // buts
+   bool butDroite_{ false };
+   bool butGauche_{ false };
+   // partieRapide
+   bool partieRapide_{ false };
+   // nombre de but pour gagner la partie
+   int nombreButsMax_{ 3 };
+   // rondelle en pause ?
+   bool rondelleEnPause_{ false };
+   /// Ali
+
+   // Tournoi pour le mode tournoi
+   Tournoi<AdaptateurJoueur>* tournoi_;
 };
 
 
@@ -228,6 +342,10 @@ inline const ArbreRenduINF2990* FacadeModele::obtenirArbreRenduINF2990() const
 inline ArbreRenduINF2990* FacadeModele::obtenirArbreRenduINF2990()
 {
    return arbre_;
+}
+
+inline Tournoi<AdaptateurJoueur>* FacadeModele::obtenirTournoi() {
+	return tournoi_;
 }
 
 

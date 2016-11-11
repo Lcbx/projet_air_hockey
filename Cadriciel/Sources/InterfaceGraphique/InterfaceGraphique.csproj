@@ -13,9 +13,24 @@
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
+    <PublishUrl>publier\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,6 +39,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,6 +50,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -66,11 +83,51 @@
     <Compile Include="BoitePropriete.Designer.cs">
       <DependentUpon>BoitePropriete.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChoixProfil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChoixProfil.Designer.cs">
+      <DependentUpon>ChoixProfil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\Fichier.cs" />
+    <Compile Include="FenetreProfilVirtuel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FenetreProfilVirtuel.Designer.cs">
+      <DependentUpon>FenetreProfilVirtuel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\Profil.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Configuration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuration.Designer.cs">
+      <DependentUpon>Configuration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tournoi\CreationTournoi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tournoi\CreationTournoi.Designer.cs">
+      <DependentUpon>CreationTournoi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Edition.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Edition.Designer.cs">
       <DependentUpon>Edition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tournoi\MatchingTournoi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tournoi\MatchingTournoi.Designer.cs">
+      <DependentUpon>MatchingTournoi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tournoi\MatchJoueur.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tournoi\MatchJoueur.Designer.cs">
+      <DependentUpon>MatchJoueur.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuPrincipal.cs">
       <SubType>Form</SubType>
@@ -78,11 +135,23 @@
     <Compile Include="MenuPrincipal.Designer.cs">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModeTournoi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModeTournoi.Designer.cs">
+      <DependentUpon>ModeTournoi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Nouveau.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Nouveau.Designer.cs">
       <DependentUpon>Nouveau.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tournoi\ParticipantTournoi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tournoi\ParticipantTournoi.Designer.cs">
+      <DependentUpon>ParticipantTournoi.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,20 +167,51 @@
     <Compile Include="Sauvegarde.Designer.cs">
       <DependentUpon>Sauvegarde.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tournoi\ZoneDeJeu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tournoi\ZoneDeJeu.Designer.cs">
+      <DependentUpon>ZoneDeJeu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\Utility.cs" />
     <EmbeddedResource Include="BoiteAide.resx">
       <DependentUpon>BoiteAide.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BoitePropriete.resx">
       <DependentUpon>BoitePropriete.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ChoixProfil.resx">
+      <DependentUpon>ChoixProfil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Configuration.resx">
+      <DependentUpon>Configuration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tournoi\CreationTournoi.resx">
+      <DependentUpon>CreationTournoi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Edition.resx">
       <DependentUpon>Edition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FenetreProfilVirtuel.resx">
+      <DependentUpon>FenetreProfilVirtuel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tournoi\MatchingTournoi.resx">
+      <DependentUpon>MatchingTournoi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tournoi\MatchJoueur.resx">
+      <DependentUpon>MatchJoueur.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModeTournoi.resx">
+      <DependentUpon>ModeTournoi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Nouveau.resx">
       <DependentUpon>Nouveau.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tournoi\ParticipantTournoi.resx">
+      <DependentUpon>ParticipantTournoi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -128,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sauvegarde.resx">
       <DependentUpon>Sauvegarde.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tournoi\ZoneDeJeu.resx">
+      <DependentUpon>ZoneDeJeu.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -204,6 +307,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Etat\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.1 %28x86 et x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

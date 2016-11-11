@@ -19,13 +19,21 @@
 
 #include "FacadeModele.h"
 
-/*INCLURE LES AUTRES NOUEDS !!*/
+/*INCLURE LES AUTRES NOEUDS !!*/
 
 using namespace std;
 
 
 class FacadeModele;
 
+
+///////////////////////////////////////////////////////////////////////////
+/// @class Visiteur
+/// @brief Classe abstraite du patron visiteur
+///
+/// @author Wajdi Gharsalli
+/// @date 2016-09-10
+///////////////////////////////////////////////////////////////////////////
 class Visiteur
 {
 public:

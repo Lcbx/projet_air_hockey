@@ -56,6 +56,8 @@ public:
    static const std::string NOM_RONDELLE;
     /// La chaîne représentant le type des point de control de la table
    static const std::string NOM_POINTCONTROLE;
+   /// La chaîne représentant le type des MAILLET.
+   static const std::string NOM_MAILLET;
 
    ///ajouter la table
    void ArbreRenduINF2990::ajouterTable();
@@ -66,11 +68,8 @@ public:
    void ajouterBonus(glm::dvec3 position);
    ///ajouter le premier portail
    void ajouterPortail(glm::dvec3 position);
-   ///supprime le 1er portail suite a clic echapp
-   void supprimerPortail(bool escTouche);
    ///ajoute 2eme portail
    void ajouterPortailDeux(glm::dvec3 position);
-
    ///ajouter le muret dans la table
    void ajouterMuret(glm::dvec3 position1, glm::dvec3 position2);
 
@@ -93,8 +92,6 @@ public:
    ///obtenir le scale d'un objet selectionne
    double getScaleDataBinding();
 
-   ///supprimer un muret a l'appui d'echap
-   void supprimerMuret(bool escTouche);
 
    ///un compteur d'objets
    int compteur ;
@@ -105,10 +102,39 @@ public:
 	///determiner si la position est dans la table
    bool estInterieur = false;
 
+   ///mettre les maillets et la rondelle sur la table
+   void  ajouterMailletEtRondelle();
 
+   ///permert de deplacer le maillet avec les touches de clavier
+   void deplacerMailletAvecClavier(double x, double y);
+
+
+   ///Re initialiser la partie courante 
+  void reinitialiserPartieCourante();
+
+  ///deplacer avec souris
+  void deplacerMailletAvecSouris(glm::dvec3 pos);
+
+  ///activer ou deactiver le rayon d'attraction d'un portail
+  void activerRayonPortail();
+  void deactiverRayonPortail();
+  /// afficher ou effacer les points de controle
+  void afficherPointControle();
+  void effacerPointControle();
+
+  int getScoreMoi() { return scoreMoi_; }
+  void setScoreMoi(int scoreMoi) { scoreMoi_ = scoreMoi; }
+
+  int getScoreAutre() { return scoreAutre_; }
+  void setScoreAutre(int scoreAutre) { scoreAutre_ = scoreAutre; }
+  NoeudAbstrait* obtenirMailletManuel();
+  // si le joueur Virtuel Defensif est active' ou non 
+  bool joueurVirtuelDefensif{ true };
 
 private :
 	NoeudTable* noeudTable_;
+	int scoreMoi_;
+	int scoreAutre_;
 };
 
 

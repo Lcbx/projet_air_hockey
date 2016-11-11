@@ -16,7 +16,7 @@
 
 
 ///////////////////////////////////////////////////////////////////////////
-/// @class NoeudMaillet
+/// @class NoeudPortail
 /// @brief Classe qui représente un le noeud Portail de l'arbre de rendu.
 ///
 /// @author Julien Gascon-Samson
@@ -35,8 +35,9 @@ public:
 	/// Effectue l'animation du cube.
 	virtual void animer(float temps);
 
+	void tracerCercle(const glm::mat4& vueProjection, double cx, double cy, double r, int nb_segments) const;
 
-	//Accepter le visiteur
+	///Accepter le visiteur
 	virtual void accepter(Visiteur* v);
 
 	////////////////////////////////////////////////////////////////////////
@@ -44,21 +45,19 @@ public:
 	/// Permet d'obtenir le rayon de la forme en fonction du rayon du modèle
 	/// @return Le rayon de l'objet
 	////////////////////////////////////////////////////////////////////////
-	virtual double obtenirRayon() { return obtenirRayonModele() * getScale().x; };
+	virtual double obtenirRayon() const { return obtenirRayonModele() * getScale().x; };
+
+	///pour l'attraction
+	bool attracte_ = true;
 
 private:
-
 
 	/// Angle selon l'axe des X.
 	float angleX_{ 0.f };
 	/// Angle selon l'axe des Y.
 	float angleY_{ 0.f };
 	/// Angle de rotation.
-	float angleRotation_{ 0.f };
-	
-
-
-	
+	float angleRotation_{ 0.f };	
 };
 
 

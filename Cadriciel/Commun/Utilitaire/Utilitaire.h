@@ -45,6 +45,13 @@ namespace utilitaire {
    /// Fonction globale pour l'affichage d'erreur.
    void afficherErreur(const std::string& message);
 
+   ///calcule l'angle de trois points en 3d
+   double calculerAngle3D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C);
+   ///calcule l'angle de trois points en 2d
+   double calculerAngle2D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C);
+   /// verifie si un point est dans un triangle
+   bool MdansTriangleABC(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C, glm::dvec3 M);
+
    /// Pour convertir les angles de radians en degrés.
    double RAD_TO_DEG( double AngleRad );
    /// Pour convertir les angles de degrés en radians.
@@ -125,6 +132,13 @@ namespace utilitaire {
 
    /// Permet d'obtenir le déterminant d'une matrice vecteur
    double det(glm::dmat2x2 matrice);
+
+
+
+   ///generer un random
+   int genererScore(int nbButsMax);
+
+
 
    ////////////////////////////////////////////////////////////////////////
    ///

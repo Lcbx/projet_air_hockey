@@ -18,6 +18,8 @@
 #include "Utilitaire.h"
 
 #include <../Visiteur.h>
+#include "Affichage_debuggage.h"
+
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -50,7 +52,6 @@ NoeudPortail::~NoeudPortail()
 {
 }
 
-
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void NoeudPortail::afficherConcret() const
@@ -66,10 +67,52 @@ NoeudPortail::~NoeudPortail()
 void NoeudPortail::afficherConcret(const glm::mat4& vueProjection) const
 {
 	// Affichage du modèle.
+	//vbo_->dessiner(vueProjection);
+	glm::vec3 p = { obtenirPositionRelative().x ,obtenirPositionRelative().y,obtenirPositionRelative().z };
+	glm::vec3 position = glm::vec3(vueProjection * glm::vec4(p, 1));
+	if (Debug::obtenirInstance().afficherAttraction)
+	{
+		//tracerCercle(vueProjection, position.x, position.y,  2*obtenirRayon(), 50);
+		tracerCercle(vueProjection, position.x, position.y, 3 * obtenirRayonModele(), 50);
+	}
+
+	vbo_->dessiner(vueProjection);
 	vbo_->dessiner(vueProjection);
 }
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void NoeudPortail::tracerCercle(const glm::mat4& vueProjection,float cx, float cy, float r, int nb_segments) const
+///
+/// @param[in] 
+///			 cx : x du centre du cercle
+///			 cy : y du centre du cercle
+///			 r : rayon du cercle
+///			nb_segments : nombre des segments utilises pour tracer le cercle
+/// Cette fonction trace un cercle de centre C (cx,cy) et de rayon r en utilisant un nombre de segments nb_segments
+/// qui constituent le perimetre du cercle
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void NoeudPortail::tracerCercle(const glm::mat4& vueProjection, double cx, double cy, double r, int nb_segments) const
+{
+#define vecPROJvec(arg)	glm::value_ptr(glm::vec3(vueProjection * glm::vec4(arg, 1)))
+	glColor3f(1, 0, 0);
 
+	glDisable(GL_TEXTURE_2D);
 
+	glBegin(GL_LINE_LOOP);
+	for (float ii = 0; ii < nb_segments; ii++)
+	{
+		float theta = 2.0f * 3.1415926f * ii / (float) nb_segments; //l'angle courant
+		float x = r * cosf(theta);
+		float y = r * sinf(theta);
+		glm::vec3 point{ x + cx, y + cy, 0 };
+		glVertex3fv(vecPROJvec(point));
+	}
+	glEnd();
+#undef vecProJvec
+}
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void NoeudCube::animer(float temps)

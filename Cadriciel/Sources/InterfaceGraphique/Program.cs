@@ -10,14 +10,17 @@ namespace InterfaceGraphique
 {
     static class Program
     {
-        private const int NB_IMAGES_PAR_SECONDE = 60;
+        private const int NB_IMAGES_PAR_SECONDE = 60; 
 
         public static Object unLock = new Object();
         public static bool peutAfficher = true;
 
+        
+        private static MenuPrincipal menuPrincipal; 
         private static Edition edition;
-        private static MenuPrincipal menuPrincipal;
-        private static TimeSpan dernierTemps;
+        public static Configuration configuration;
+        private static Profil joueurVirtuel;
+        private static TimeSpan dernierTemps; 
         private static TimeSpan tempsAccumule;
         private static Stopwatch chrono = Stopwatch.StartNew();
         private static TimeSpan tempsEcouleVoulu = TimeSpan.FromTicks(TimeSpan.TicksPerSecond / NB_IMAGES_PAR_SECONDE);
@@ -26,11 +29,11 @@ namespace InterfaceGraphique
         /// Point d'entrée principal de l'application.
         /// </summary>
         [STAThread]
-        static void Main(string[] args)
-        {
+        static void Main(string[] args)    
+        {    
             if (args.Length != 0)
                 if (args[0] == "testsC++")
-                {
+                { 
                     if (FonctionsNatives.executerTests())
                         System.Console.WriteLine("Échec d'un ou plusieurs tests.");
                     else
@@ -44,21 +47,37 @@ namespace InterfaceGraphique
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            menuPrincipal = new MenuPrincipal();
             edition = new Edition();
+            configuration = new Configuration();
+            joueurVirtuel = new Profil(); 
+             
+            ///Application.Run(edition); 
+           //
+            menuPrincipal.setMenu(edition, configuration);
+            edition.setMenuPrincipal(menuPrincipal);
+            configuration.setMenuPrincipalConfig(menuPrincipal,edition);
+
+            Application.Run(menuPrincipal); 
+        }
             
 
-            //Application.Run(edition);
-            menuPrincipal = new MenuPrincipal();
-            menuPrincipal.setMenuEdition(edition);
-            edition.setMenuPrincipal(menuPrincipal);
-            Application.Run(menuPrincipal);
-        }
-
+        ///////////////////////////////////////////////////////////////////////
+        /// @fn    static void ExecuterQuandInactif(object sender, EventArgs e)
+        ///
+        /// @brief refraichir le contexte OpenGl
+        ///
+        /// @param[in] sender: bouton
+        /// @param[in] e: gere l'evenement
+        ///
+        /// @return rien
+        //
+        /////////////////////////////////////////////////////////////////////////////////////////
         static void ExecuterQuandInactif(object sender, EventArgs e)
         {
             FonctionsNatives.Message message;
 
-            while (!FonctionsNatives.PeekMessage(out message, IntPtr.Zero, 0, 0, 0))
+            while (!FonctionsNatives.PeekMessage(out message, IntPtr.Zero, 0, 0, 0))            
             {
                 TimeSpan currentTime = chrono.Elapsed;
                 TimeSpan elapsedTime = currentTime - dernierTemps;
@@ -71,7 +90,9 @@ namespace InterfaceGraphique
                     lock (unLock)
                     {
                         if (edition != null && peutAfficher)
-                            edition.MettreAJour((double)tempsAccumule.Ticks / TimeSpan.TicksPerSecond);
+                            edition.MettreAJour((double)tempsAccumule.Ticks / TimeSpan.TicksPerSecond);                
+                         
+                    
                     }
                     tempsAccumule = TimeSpan.Zero;
                 }

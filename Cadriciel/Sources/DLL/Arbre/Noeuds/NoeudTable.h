@@ -39,7 +39,9 @@ public:
 
 	// fonctions d'affichage
 	/// tracer la table
-	void tracerTable(const glm::mat4& vueProjection)  const; 
+	void tracerTable(const glm::mat4& vueProjection)  const;
+	///si on doit tracer les points de controle
+	bool afficherPointsControles = true;
 	/// tracer les points de controle
 	void tracerPointsControle(const glm::mat4& vueProjection)  const;
 	/// tracer un cercle
@@ -86,19 +88,34 @@ public:
 	bool setCouleurContour(glm::vec4 couleur);
 
 
-	//determiner si dans la table
-	/// angle
-	double calculerAngle3D(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C);
-	double calculerAngle2D(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C);
-	/// dansTriangle
-	bool MdansTriangleABC(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C, glm::dvec3 M);
-	/// dansTable
+	///determiner si dans la table
 	bool dansTable(glm::dvec3 M);
+	/// dans la zone du jeu 
+	bool dansZone1(glm::dvec3 M);
+	bool dansZone2(glm::dvec3 M);
+	/// maillet dans la zone du jeu
+	bool mailletDansZone1(glm::dvec3 M, double rayon);
+	bool mailletDansZone2(glm::dvec3 M, double rayon);
+	/// distance entre un point et une droite
+	double distanceEntrePointDroite(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P);
+	
+	/// distance entre 2 pts 
+	double distanceEntre2Points(glm::dvec3 P1, glm::dvec3 P2);
+	/// point d'intersection entre 2 droites
+	bool intersection2Droites(glm::vec3 D1P1, glm::vec3 D1P2, glm::vec3 D2P1, glm::vec3 D2P2, glm::vec3 & pointIntersection); // const;
+	/// point appartient a une droite
+	bool appartientDroite( glm::dvec3 D1P1, glm::dvec3 D1P2, glm::dvec3 point );
+	/// get coordonnes des buts 
+	bool getButs(int index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas);
+
+	glm::vec3 getPc(int i) { return pointControle_[i]; }
+
 
 private:
 
 	///la largueur des murs 
 	double largeur_{ 7 };
+	double longueurButs_{ 20 };
 	/// la hauteur des murs 
 	double hauteur_{ 0.0 };
 	/// la couleur de la table 
@@ -129,14 +146,14 @@ private:
 
 	///table d'initialisation des points de controle
 	glm::vec3 pointControle_[8] = { 
-		{  -50,   50,  -0 },	//P0
-		{  -50,  -50,  -0 },	//P1
-		{  0.,    50,  -0 },	//P2
-		{  0.,   -50,  -0 },	//P3
-		{  50,    50,  -0 },	//P4
-		{  50,   -50,  -0 },	//P5
-		{ -50,   0.,   -0 },	//P6
-		{  50,   0.,   -0 }		//P7
+		{  -85,   75,  -0 },	//P0
+		{  -85,  -75,  -0 },	//P1
+		{  0.,    75,  -0 },	//P2
+		{  0.,   -75,  -0 },	//P3
+		{  85,    75,  -0 },	//P4
+		{  85,   -75,  -0 },	//P5
+		{ -85,   0.,   -0 },	//P6
+		{  85,   0.,   -0 }		//P7 
 	};
 
 };

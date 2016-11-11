@@ -140,6 +140,7 @@ void NoeudAbstraitTest::testSelection()
 ////////////////////////////////////////////////////////////////////////
 void NoeudAbstraitTest::testEnfants()
 {
+
 	// On vérifie qu'initialement, le noeud n'a pas d'enfant
 	CPPUNIT_ASSERT(noeud->obtenirNombreEnfants() == 0);
 	CPPUNIT_ASSERT(noeud->calculerProfondeur() == 1);

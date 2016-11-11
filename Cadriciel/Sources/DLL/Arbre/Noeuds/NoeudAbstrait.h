@@ -39,6 +39,7 @@ class VisiteurSelection;
 class VisiteurRotation;
 class VisiteurMiseEchelle;
 class VisiteurAjout;
+class VisiteurCollision;
 
 
 
@@ -177,6 +178,10 @@ public:
 	/// Permet d'obtenir la mise à l'échelle du noeud
 	inline const glm::dvec3& getScale() const; 
 
+	///definir le deuxieme joueur
+	bool estDeuxiemeJoueur = false;
+
+	
 protected:
 	/// Type du noeud.
 	std::string      type_;
@@ -420,6 +425,7 @@ inline void NoeudAbstrait::assignerEstSelectionnable(bool selectionnable)
 /// @return Le rayon du modèle
 ////////////////////////////////////////////////////////////////////////
 inline double NoeudAbstrait::obtenirRayonModele() const {
+	//obtenir le rayon via le calcul du cylindre englobant
 	return utilitaire::calculerCylindreEnglobant(*modele_).rayon;
 }
 

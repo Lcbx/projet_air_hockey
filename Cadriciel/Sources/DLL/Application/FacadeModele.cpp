@@ -48,6 +48,9 @@
 
 #include "../SauvegardeZoneDeJeu.h"
 
+#include "JoueurVirtuel.h"
+#include "../ConfigTournoi.h"
+
 
 
 /// Pointeur vers l'instance unique de la classe.
@@ -111,6 +114,10 @@ FacadeModele::~FacadeModele()
 {
 	delete arbre_;
 	delete vue_;
+	if (this->tournoi_ != nullptr) {
+		delete this->tournoi_;
+		this->tournoi_ = nullptr;
+	}
 }
 
 
@@ -165,7 +172,7 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 	// l'arbre après avoir créé le contexte OpenGL.
 	arbre_ = new ArbreRenduINF2990;
 	arbre_->initialiser();
-
+	
 	// On crée une vue par défaut.
 	vue_ = new vue::VueOrtho{
 		vue::Camera{ 
@@ -176,6 +183,7 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 				1, 1000, 5, 0.5, 0.25,
 				200, 200}
 	};
+	
 }
 
 
@@ -193,7 +201,7 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 void FacadeModele::chargerConfiguration() const
 {
 	// Vérification de l'existance du ficher
-
+	
 	// Si le fichier n'existe pas, on le crée.
 	if (!utilitaire::fichierExiste(FICHIER_CONFIGURATION)) {
 		enregistrerConfiguration();
@@ -248,6 +256,7 @@ void FacadeModele::enregistrerConfiguration() const
 ////////////////////////////////////////////////////////////////////////
 void FacadeModele::chargerZoneJeu(char* fichierZoneJeu) const
 {
+
 	// Créé le document XML à partir du fichier spécifié
 	tinyxml2::XMLDocument document;
 	document.LoadFile(fichierZoneJeu);
@@ -285,6 +294,70 @@ void FacadeModele::enregistrerZoneJeu(char* fichierZoneJeu) const
 
 	// Enregistrer le document XML dans le fichier
 	document.SaveFile(fichierZoneJeu);
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn ConfigTouches getConfigTouches()
+///
+/// Cette fonction retourne l'objet ConfigTouches de FacadeModele, afin
+/// de manipuler les touches du joueur 2
+///
+/// @return ConfigTouches : l'objet ConfigTouches de l'instance de FacadeModele
+///
+////////////////////////////////////////////////////////////////////////
+ConfigTouches* FacadeModele::getConfigTouches()
+{
+	return &_configTouches;
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn ConfigJeu getConfigJeu()
+///
+/// Cette fonction retourne l'objet ConfigJeu de FacadeModele, afin
+/// de manipuler les options de jeu
+///
+/// @return ConfigJeu : l'objet ConfigJeu de l'instance de FacadeModele
+///
+////////////////////////////////////////////////////////////////////////
+ConfigJeu* FacadeModele::getConfigJeu()
+{
+	return &_configJeu;
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn ConfigDebug getConfigDebug()
+///
+/// Cette fonction retourne l'objet ConfigDebug de FacadeModele, afin
+/// de manipuler les options de debug
+///
+/// @return ConfigDebug : l'objet ConfigDebug de l'instance de FacadeModele
+///
+////////////////////////////////////////////////////////////////////////
+ConfigDebug* FacadeModele::getConfigDebug()
+{
+	return &_configDebug;
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn ConfigProfils getConfigProfils()
+///
+/// Cette fonction retourne l'objet ConfigProfil de FacadeModele, afin
+/// de manipuler les profils enregistrés
+///
+/// @return ConfigProfils l'objet ConfigProfils de l'instance de FacadeModele
+///
+////////////////////////////////////////////////////////////////////////
+ConfigProfils* FacadeModele::getConfigProfils()
+{
+	return &_configProfils;
 }
 
 
@@ -433,27 +506,9 @@ void FacadeModele::ajouterPortail(int x1, int y1)
 	arbre_->ajouterPortail(position1);
 }
 
-
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn FacadeModele::void FacadeModele::supprimerPortail()
-///
-/// Cette fonction permet de supprimer un portail suite a clic d'Echap
-///
-/// @param[in]bool escTouche: bool
-///
-/// @return Aucune.
-///
-////////////////////////////////////////////////////////////////////////
-void FacadeModele::supprimerPortail(bool escTouche)
-{
-	arbre_->supprimerPortail(escTouche);
-}
-
-
-////////////////////////////////////////////////////////////////////////
-///
-/// @fn FacadeModele::void FacadeModele::ajouterPortailDeux(int x2, int y2)
+/// @fn void FacadeModele::ajouterPortailDeux(int x2, int y2)
 ///
 /// Cette fonction permet d'ajouter le deuxieme portail a la scene
 ///
@@ -469,7 +524,18 @@ void FacadeModele::ajouterPortailDeux(int x2, int y2)
 	arbre_->ajouterPortailDeux(position2);
 }
 
-
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::ajouterMuret(int x1, int y1, int x2, int y2)
+///
+/// Cette fonction permet d'ajouter un muret a la scene
+///
+/// @param[in]	x1, y1 : position du premier clic de la souris.
+///				x2, y2 : position du second clic de la souris .
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
 void FacadeModele::ajouterMuret(int x1, int y1, int x2, int y2)
 {
 	glm::dvec3 position1;
@@ -551,35 +617,6 @@ void FacadeModele::deplacerObjet(double x, double y, double angle, double scale)
 
 }
 
-
-
-
-// fonction bidon test
-void FacadeModele::test() {
-
-	std::printf("alooooooooooo test \n");
-}
-// deplacer un point de controle
-void FacadeModele::deplacerPointHaut(int index) {
-#define delta 0.1
-	if (index == 0)
-	{
-		std::cout << "Noeud deplace'" << std::endl;
-		//// effacer la table puis l'afficher avec les nouvelle coordonnees
-		//const NoeudAbstrait* noeudTable = arbre_->chercher("table");
-		//arbre_->effacer(noeudTable);
-		NoeudTable* noeudTable = arbre_->getTable();
-		glm::vec3 point;
-		noeudTable->getPointControle(0, point);
-		point.y += delta;
-		noeudTable->setPointControle(0, point);
-		
-	}
-#undef delta
-}
-
-
-
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn int FacadeModele::nombreObjetSelectionne()
@@ -631,39 +668,20 @@ double FacadeModele::getScale()
 	return arbre_->getScaleDataBinding();
 
 }
-////////////////////////////////////////////////////////////////////////
-///
-/// @fn void FacadeModele::ajouterMuretFantome(int corXin, int corYin, int corX, int corY)
-///
-/// Cette fonction effectue l'ajout des Murs.
-///
-/// @param[in] int corX : coordonnée dans l'axe des x
-///            int corY : coordonnée dans l'axe des y
-/// @return Aucune.
-///
-////////////////////////////////////////////////////////////////////////
-void FacadeModele::ajouterMuretFantome(int corXin, int corYin, int corX, int corY)
-{
-	// bloc d'instruction
-	if (arbre_->chercher(arbre_->obtenirNombreEnfants() - 1)->obtenirType() == "muret")
-		arbre_->effacer(arbre_->chercher(arbre_->obtenirNombreEnfants() - 1));
-	//ajouterMur(corXin, corYin, corX, corY);
-}
+
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn FacadeModele::void FacadeModele::supprimerMurat()
+/// @fn FacadeModele::void FacadeModele::supprimerDernierObjet()
 ///
-/// Cette fonction permet de supprimer un portail suite a clic d'Echap
-///
-/// @param[in]bool escTouche: bool
+/// Cette fonction permet de supprimer le dernier objet ajouté
 ///
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void FacadeModele::supprimerMuret(bool escTouche)
+void FacadeModele::supprimerDernierObjet()
 {
-	arbre_->supprimerMuret(escTouche);
+	arbre_->effacer(arbre_->chercher(arbre_->obtenirNombreEnfants()-1));
 }
 
 
@@ -729,4 +747,491 @@ void FacadeModele::setCoefficient(CoefficientConfiguration coeff) {
 void FacadeModele::initialiserScene()
 {
 	arbre_->initialiser();
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void ajouterMailletEtRondelle()
+///
+/// Cette fonction permet d'Ajouter les maillets et la rondelle
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::ajouterMailletEtRondelle()
+{
+	//ajout de la rondelle et les maillets
+	arbre_->ajouterMailletEtRondelle();
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void retirerMailletEtRondelle()
+///
+/// Cette fonction permet de retirer les maillets et la rondelle
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::retirerMailletEtRondelle()
+{
+	//effacer les maillets et la rondelle
+	arbre_->effacer(arbre_->chercher("rondelle"));
+
+	while (arbre_->chercher("maillet")) {
+		arbre_->effacer(arbre_->chercher("maillet"));
+	}
+
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn deplacerMailletAvecClavier(double x, double y)
+///
+/// Cette fonction permet de deplacer le maillet avedc les touches de clavier
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::deplacerMailletAvecClavier(double x, double y)
+{
+	arbre_->deplacerMailletAvecClavier(x, y);
+
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void reinitialiserPartieCourante()
+///
+/// Cette fonction permet de re-initialiser la scene, donc mettre les maillets et la rondelle
+/// a la position de depart
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::reinitialiserPartieCourante()
+{
+	arbre_->reinitialiserPartieCourante();
+
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void deplacerMailletAvecSouris(glm::dvec3 pos)
+///
+/// Cette fonction permet de deplacer le maillet avec la souris
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::deplacerMailletAvecSouris(double x, double y)
+{
+	glm::dvec3 posDeplacement;
+	vue_->convertirClotureAVirtuelle(x, y, posDeplacement);
+	arbre_->deplacerMailletAvecSouris(posDeplacement);
+
+	// test fct appartient
+	//if (arbre_->getTable()->appartientDroite({ 0,50,0 }, { 0,-50,0 }, { 0,0,0 }))
+	//	std::cout << "Yay!";
+
+
+	/*if (arbre_->joueurVirtuelDefensif)
+		this->virtuelDefensif(10.,1);*/
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void activerRayonAttraction()
+/// Author : Ali
+/// Cette fonction permet d'activer l'affichage du rayon d'attraction
+/// des portails 
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::activerRayonAttraction()
+{
+	arbre_->activerRayonPortail();
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void deactiverRayonAttraction()
+/// Author : Ali
+/// Cette fonction permet de desactiver l'affichage du rayon d'attraction
+/// des portails
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::deactiverRayonAttraction()
+{
+	arbre_->deactiverRayonPortail();
+
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void effacerPointControle()
+/// Author : Ali
+/// Cette fonction permet d'effacer les points de controle de la table
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::effacerPointControle()
+{
+	arbre_->effacerPointControle();
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void afficherPointControle()
+/// Author : Ali
+/// Cette fonction permet d'afficher les points de controle de la table
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::afficherPointControle()
+{
+	arbre_->afficherPointControle();
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void ActiverJoueurVirtuel(float vitesse, int probabilite )
+/// Author : Ali
+/// Cette fonction permet de deplacer le maillet du joueur virtuel
+/// param [in] vitesse : la vitesse du maillet virtuel
+///				probabilite : probabilite d'etre passif (rien faire)
+///
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::ActiverJoueurVirtuel(double vitesse, double probabilite)
+{	
+
+	if (joueurVirtuelActive_)
+		
+	{
+		JoueurVirtuel J;
+		J.setVitesse(vitesse);
+		J.setProbabilite(probabilite);
+		//J.setVitesse(vitesseVirtuelle_);
+		//J.setProbabilite(probabilite_);
+		J.deplacerMailletVirtuel();
+
+	}
+	
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setjoueurVirtuel(bool activer)
+/// Author : Ali
+/// Cette fonction permet de modifier la variable joueurVirtuelActive_
+/// qui determine si le joueur virtuel est active' ou non
+/// param[in] 
+///			activer : true pour activer le joueur , false le cas contraire
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setjoueurVirtuel(bool activer)
+{
+	joueurVirtuelActive_ = activer;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::getjoueurVirtuel()
+/// Author : Ali
+/// Cette fonction permet de savoir si le joueur virtuel est active ou non
+///
+/// @return bool : true si active' , false sinon
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::getjoueurVirtuel()
+{
+	return joueurVirtuelActive_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn double FacadeModele::getVitesseVirtuel()
+///
+/// Author : Ali
+/// Cette fonction permet de recuperer la vitesse du maillet virtuelle
+/// @return double
+///
+////////////////////////////////////////////////////////////////////////
+double FacadeModele::getVitesseVirtuel()
+{
+	return vitesseVirtuelle_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setVitesseVirtuel( double vitesse)
+///
+/// Author : Ali
+/// Cette fonction permet de modifier la vitesse du maillet virtuelle
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setVitesseVirtuel( double vitesse)
+{
+	vitesseVirtuelle_ = vitesse;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn double FacadeModele::getProbabiliteVirtuel()
+///
+/// Author : Ali
+/// Cette fonction permet de recuperer la prob d'etre passif du maillet virtuelle
+/// @return double
+///
+////////////////////////////////////////////////////////////////////////
+double FacadeModele::getProbabiliteVirtuel()
+{
+	return probabilite_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setProbabiliteVirtuel(double probabilite )
+///
+/// Author : Ali
+/// Cette fonction permet de modifier la prob d'etre passif du maillet virtuelle
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setProbabiliteVirtuel(double probabilite )
+{
+	probabilite_ = probabilite;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setButDroite(bool but)
+///
+/// Author : Ali
+/// Cette fonction permet de modifier la valeur but droit
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setButDroite(bool but)
+{
+	butDroite_ = but;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setButGauche(bool but)
+///
+/// Author : Ali
+/// Cette fonction permet de modifier la valeur but gauche
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setButGauche(bool but)
+{
+	butGauche_ = but;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::getButDroite()
+///
+/// Author : Ali
+/// Cette fonction permet de recuperer la valeur but droit
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::getButDroite()
+{
+	return butDroite_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::getButGauche()
+///
+/// Author : Ali
+/// Cette fonction permet de recuperer la valeur but gauche
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::getButGauche()
+{
+	return butGauche_;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::setNombreButs(int nombre)
+///
+/// Author : Ali
+/// Cette fonction permet de modifier la valeur du nombre 
+/// de but necessaire pour gagner une partie
+///
+/// parm[in] int nombre : nombre entre 1 et 5
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::setNombreButs(int nombre)
+{
+	if (nombre < 1 || nombre > 5)
+		return false;
+	nombreButsMax_ = nombre;
+	return true;	
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn int FacadeModele::getNombreButs()
+///
+/// Author : Ali
+/// Cette fonction permet de recuperer la valeur du nombre 
+/// de but necessaire pour gagner une partie
+/// @return int 
+///
+////////////////////////////////////////////////////////////////////////
+int FacadeModele::getNombreButs()
+{
+	return nombreButsMax_;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::getPartieRapide()
+///
+/// Author : Ali
+/// Cette fonction permet de savoir si on est en mode partie rapide ou non
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::getPartieRapide()
+{
+	return partieRapide_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setPartieRapide(bool activer)
+///
+/// Author : Ali
+/// Cette fonction permet d'activer ou deactiver le mode partie rapide 
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setPartieRapide(bool activer)
+{
+	partieRapide_ = activer;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::activerRondelle()
+///
+/// Author : Ali
+/// @Brief :  Cette fonction permet d'activer la rondelle - apres la pause
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::activerRondelle()
+{
+	rondelleEnPause_ = false;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::deactiverRondelle()
+///
+/// Author : Ali
+/// @Brief :  Cette fonction permet de mettre la rondelle en pause
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::deactiverRondelle()
+{
+	rondelleEnPause_ = true;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::estEnPauseRondelle()
+///
+/// Author : Ali
+/// @Brief :  Cette fonction permet de savoir si la rondelle est en pause 
+/// ou non 
+/// @return bool : true si en pause / false sinon
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::estEnPauseRondelle()
+{
+	return rondelleEnPause_;
+}
+ 
+ ////////////////////////////////////////////////////////////////////////
+///
+/// @fn std::string getConfigFile();
+///
+///	Permet d'obtenir la chaine de caractère correspondant au nom du
+/// fichier de configuration
+///
+/// @return	std::string	: Nom du fichier de configuration
+///
+////////////////////////////////////////////////////////////////////////
+/*std::string FacadeModele::getConfigFile() {
+	return FICHIER_CONFIGURATION;
+}*/
+
+/// @fn void FacadeModele::creerTournoi(const char* nomZone, const int count, const char** nomsJoueurs, const bool* sontHumains, const char** nomProfils)
+/// @brief Permet de créer un tournoi
+/// @param nomZone : Nom de la zone de jeu
+/// @param count : Nombre de joueurs
+/// @param nomsJoueurs : Noms des joueurs
+/// @param sontHumains : Si les joueurs sont humains ou non
+/// @param nomProfils : Si le joueur est virtuel, le nom du profil
+void FacadeModele::creerTournoi(const char* nomZone, const int count, const char** nomsJoueurs, const bool* sontHumains, const char** nomProfils) {
+	std::string zoneDeJeu(nomZone);
+	std::vector<AdaptateurJoueur> joueurs;
+	for (int i = 0; i < count; i++) {
+		std::string nomJoueur(nomsJoueurs[i]);
+		bool estHumain = sontHumains[i];
+		std::string nomProfil(nomProfils[i]);
+		AdaptateurJoueur joueur(nomJoueur, estHumain, nomProfil);
+		joueurs.push_back(joueur);
+	}
+	this->tournoi_ = new Tournoi<AdaptateurJoueur>(joueurs, nomZone);
+	ConfigTournoi::sauvegarderJoueurs(joueurs, nomZone);
+}
+
+
+/// @fn void FacadeModele::loadTournoi(const char* nomZone, const int count, const char** nomsJoueurs, const bool* sontHumains, const char** nomProfils)
+/// @brief Permet de charger la configuration d'un tournoi
+/// @param[out] nomZone : Nom de la zone de jeu
+/// @param[in] count : Nombre de joueurs
+/// @param[out] nomsJoueurs : Noms des joueurs
+/// @param[out] sontHumains : Si les joueurs sont humains ou non
+/// @param[out] nomProfils : Si le joueur est virtuel, le nom du profil
+void FacadeModele::loadTournoi(char* nomZone, int count, char* nomsJoueurs, bool* sontHumains, char* nomProfils) {
+	std::vector<AdaptateurJoueur> joueurs;
+	std::string zone;
+	ConfigTournoi::obtenirJoueurs(joueurs, zone);
+	strcpy(nomZone, zone.c_str());
+	
+	int iNom = 0;
+	int iProfil = 0;
+	for (int i = 0; i < count; i++) {
+		std::string nomJoueur = joueurs[i].getNomJoueur();
+		int j = 0;
+		while (j < nomJoueur.length()) {
+			nomsJoueurs[iNom + j] = nomJoueur[j];
+			j++;
+		}
+		nomsJoueurs[iNom + j] = '\0';
+		iNom += ++j;
+
+		sontHumains[i] = joueurs[i].estHumain();
+
+		std::string nomProfil = joueurs[i].getProfil().getNom();
+		j = 0;
+		while (j < nomProfil.length()) {
+			nomProfils[iProfil + j] = nomProfil[j];
+			j++;
+		}
+		nomProfils[iProfil + j] = '\0';
+		iProfil += ++j;
+	}
 }

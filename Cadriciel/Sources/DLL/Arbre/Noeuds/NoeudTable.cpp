@@ -8,6 +8,9 @@
 /// @{
 ///////////////////////////////////////////////////////////////////////////////
 #include "NoeudTable.h"
+#include "ArbreRenduINF2990.h"
+#include "Utilitaire.h"
+#include "GL/glew.h"
 
 #include "GL/glew.h"
 #include <cmath>
@@ -151,20 +154,59 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 	}
 	glEnd();
 	
-	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// tracer pt intersection
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//glm::vec3 PI;
+	//intersection2Droites(p(2), p(3), p(4), p(7), PI);
+	//{
+	//	glColor3f(0, 1, 1);
+	//	glPointSize(10);
+	//	glBegin(GL_POINTS);
+	//	glVertex3fv(PROJvec(PI));
+	//	glEnd();
+	//}
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 	// tracer les murs 
 	tracerMurs(vueProjection);
 	// tracer les buts 
-	tracerButs(vueProjection,15);
+	tracerButs(vueProjection,longueurButs_);
 	// tracer les lignes de decoration 
 	tracerLignesDecoration(vueProjection);
 	// tracer les points de Controle 
-	tracerPointsControle(vueProjection);
+	if (afficherPointsControles)
+		tracerPointsControle(vueProjection);
+
+	//// get point du but gauche
+	//glm::vec3  pointHaut, pointMilieu, pointBas;
+	//getbuts(2, pointHaut, pointMilieu, pointBas);
+	//glColor3f(1, 0, 1);
+	//glPointSize(10);
+	//glBegin(GL_POINTS);
+	//{
+	//	glVertex3fv(PROJvec(pointHaut));
+	//	glVertex3fv(PROJvec(pointMilieu));
+	//	glVertex3fv(PROJvec(pointBas));
+
+	//}
+	//glEnd();
+	//getbuts(1, pointHaut, pointMilieu, pointBas);
+	//glColor3f(0, 1, 1);
+	//glBegin(GL_POINTS);
+	//{
+	//	glVertex3fv(PROJvec(pointHaut));
+	//	glVertex3fv(PROJvec(pointMilieu));
+	//	glVertex3fv(PROJvec(pointBas));
+
+	//}
+	//glEnd();
 
 	// test 
 	//tracerMur2Points(vueProjection, { 0,0,0 }, { 20,20,0 },largeur_,true);
-
-
+	
 	//Activer le test de profondeur
 	glEnable(GL_DEPTH_TEST);
 	// activer le test de profondeur
@@ -485,13 +527,7 @@ double NoeudTable::calculPente(glm::vec3 P0, glm::vec3 P1) const
 ////////////////////////////////////////////////////////////////////////
 double NoeudTable::calculB(double pente, glm::vec3 point) const
 {
-	if (pente == 0.)
-		return point.y;
-	else
-		if (pente == 1.)
-			return point.x;
-		else
-			return (point.y - pente*point.x);	
+	return (point.y - pente*point.x);	
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -563,7 +599,7 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
 /// @param[in]  veProjection
 ///				longueur: la longueur du but
 //
-/// Cette fonction donne les quatres points du but selon une longueur et une largeur
+/// Cette fonction donne les quatres points du quadrilateur de la moitie-but a tracer selon une longueur et une largeur
 ///
 /// @return Aucune.
 ///
@@ -599,12 +635,25 @@ void  NoeudTable::calculerPointDistance(glm::vec3 p0, glm::vec3 p1, double longu
 	{
 		if (p0.y == p1.y)
 		{
-			//p2.x = p1.x - longueur;
-			//p2.y = p1.y;
-			//p3.x = p2.x ;
-			//p3.y = p2.y - largeur_;
-			//p4.x = p1.x ;
-			//p4.y = p1.y - largeur_;
+			if (p0.x > p1.x)
+			{
+				p2.y = p1.y;
+				p2.x = p1.x + longueur;
+				p3.y = p2.y - largeur_;
+				p3.x = p2.x;
+				p4.y = p1.y - largeur_;
+				p4.x = p1.x;
+			}
+			else
+			{
+				p2.y = p1.y;
+				p2.x = p1.x - longueur;
+				p3.y = p2.y - largeur_;
+				p3.x = p2.x;
+				p4.y = p1.y - largeur_;
+				p4.x = p1.x;
+			}
+			
 		}
 		else
 		{
@@ -635,6 +684,50 @@ void  NoeudTable::calculerPointDistance(glm::vec3 p0, glm::vec3 p1, double longu
 	}
 
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool getbuts(int index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas)
+///
+/// Cette fonction permet de recuperer les coordonnes des buts
+///  @param[in] 
+///		int index : 1 pour le but de droite, 2 pour celui du gauche
+///	 @param[out]
+///		pointHaut : le point haut de la ligne du but
+///		pointMilieu : le point milieu du but
+///		pointBas : point bas de la ligne du but
+/// @return bool : true s'il a reussi a trouver les coordonnees , false sinon
+///
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool NoeudTable::getButs(int index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas) 
+{
+	glm::vec3 point1, point2, point3, point4;
+	if (index == 2) // but a gauche
+	{
+		calculerPointDistance(p(0), p(6), longueurButs_, largeur_, point2, point3, point4);
+		pointHaut = point2;
+		pointMilieu = p(6);
+		calculerPointDistance(p(1), p(6), longueurButs_, largeur_, point2, point3, point4);
+		pointBas = point2;
+
+		return true;
+	}
+	else 
+	{
+		if (index == 1) // but a droite
+		{	
+			calculerPointDistance(p(4), p(7), longueurButs_, largeur_, point2, point3, point4);
+			pointHaut = point2;
+			pointMilieu = p(7);
+			calculerPointDistance(p(5), p(7), longueurButs_, largeur_, point2, point3, point4);
+			pointBas = point2;
+			return true;
+		}
+		else
+			return false;
+	}	
+}
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void NoeudTable::tracerButs(const glm::mat4& vueProjection, double longueur) const
@@ -653,15 +746,17 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection, double longueur) con
 	glm::vec3 point1, point2, point3, point4, point5;
 	//glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
 	glBegin(GL_QUADS);
+	//glPointSize(5);
+	//glBegin(GL_POINTS);
 	{
 		//1er but
 		point1 = p(6);
 		calculerPointDistance(p(0), p(6), longueur, largeur_, point2, point3, point4);
 		// 1er morceau P6P0
 		glColor4f(1., 0, 0, 1); // Rouge
-		glVertex3fv(PROJvec(glm::vec3(point1.x + delta, point1.y, point1.z)));
+		glVertex3fv(PROJvec(glm::vec3(point1.x + delta , point1.y, point1.z)));
 		glColor4f(1., 1, 0, 1); //Jaune
-		glVertex3fv(PROJvec(glm::vec3(point2.x + delta, point2.y, point2.z)));
+		glVertex3fv(PROJvec(glm::vec3(point2.x + delta , point2.y, point2.z)));
 		glColor4f(0., 1, 0, 1); //vert
 		glVertex3fv(PROJvec(glm::vec3(point3.x - delta, point3.y, point3.z)));
 		glColor4f(0., 0, 1, 1); //bleu
@@ -749,8 +844,13 @@ bool NoeudTable::getPointControle(int numero, glm::vec3 & pointControle)
 {
 	if (numero < 0 || numero >9)
 		return false;
-	else {
-		pointControle = pointControle_[numero];
+	else
+	{
+		if (numero == 8)
+			pointControle = obtenirPositionRelative();
+		else
+			pointControle = pointControle_[numero];
+		//std::cout << "pointControle[" << numero << "]" << "= (" << pointControle[0] << "," << pointControle[1] << "," << pointControle[2] << ")" << std::endl;
 		return true;
 	}
 }
@@ -773,7 +873,10 @@ bool NoeudTable::setPointControle(int numero, glm::vec3 pointControle)
 		return false;
 	else
 	{
-		pointControle_[numero] = pointControle;
+		if (numero = 8)
+			pointControle_[numero] = obtenirPositionRelative();
+		else
+			pointControle_[numero] = pointControle;
 		return true;
 	}
 }
@@ -793,7 +896,7 @@ bool NoeudTable::setPointControles()
 	for (int i = 0; i < obtenirNombreEnfants(); i++) 
 	{
 		chercher(i)->assignerPositionRelative(pointControle_[i]);
-		std::cout << "enfant n" << i << "\t" <<p(i).x << "\t" << p(i).y  << "\t" << p(i).z << "\n";
+		//std::cout << "enfant n" << i << "\t" <<p(i).x << "\t" << p(i).y  << "\t" << p(i).z << "\n";
 	}
 	return true;
 }
@@ -929,66 +1032,6 @@ bool NoeudTable::getCouleurLignes(glm::vec4 & couleur)
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn bool NoeudTable::calculerAngle3D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C)
-///
-/// Cette fonction calcule l'angle entre 3 points en 3d
-///  @param[in] 
-///		point M
-/// @return bool
-///
-////////////////////////////////////////////////////////////////////////
-double NoeudTable::calculerAngle3D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C) {
-	// theta = arcos( u.v/(|u|.|v|) )
-	double angle;
-	glm::dvec3 u(A - B);
-	glm::dvec3 v(C - B);
-	angle = glm::acos(glm::dot(u, v) / (glm::length(u)*glm::length(v)));
-	return angle;
-}
-
-////////////////////////////////////////////////////////////////////////
-///
-/// @fn bool NoeudTable::calculerAngle2D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C)
-///
-/// Cette fonction calcule l'angle entre 3 points en 2d
-///  @param[in] 
-///		point M
-/// @return bool
-///
-////////////////////////////////////////////////////////////////////////
-double NoeudTable::calculerAngle2D(const glm::dvec3 A, const glm::dvec3 B, const glm::dvec3 C) {
-	//on ignore la composante en z
-	glm::dvec3 D(A.x, A.y, 0);
-	glm::dvec3 E(B.x, B.y, 0);
-	glm::dvec3 F(C.x, C.y, 0);
-	return calculerAngle3D(D, E, F);
-}
-
-////////////////////////////////////////////////////////////////////////
-///
-/// @fn bool NoeudTable::MdansTriangleABC(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C, glm::dvec3 M)
-///
-/// Cette fonction permet de savoir si un point M est dans un triangle ABC
-///  @param[in] 
-///		point M
-/// @return bool
-///
-////////////////////////////////////////////////////////////////////////
-bool NoeudTable::MdansTriangleABC(glm::dvec3 A, glm::dvec3 B, glm::dvec3 C, glm::dvec3 M) {
-	//			B.							B.
-	//		   / \		. M     ou 		   /  \	
-	//		  /   \						  / .M \
-	//      A.______.C			         A.______.C
-	// -> M est dans ABC si la somme des angles AMC+AMB+BMC == 360
-	if (M == A || M == B || M == C) return true;
-	double angleTot = calculerAngle2D(A, M, B) + calculerAngle2D(B, M, C) + calculerAngle2D(C, M, A);
-	bool reponse = glm::round(glm::degrees(angleTot)) == 360;
-	//std::cout << glm::round(glm::degrees(angleTot)) << "|";
-	return reponse;
-}
-
-////////////////////////////////////////////////////////////////////////
-///
 /// @fn bool NoeudTable::dansTable(glm::dvec3 M
 ///
 /// Cette fonction permet de savoir si un point est dans la table
@@ -1011,14 +1054,370 @@ bool NoeudTable::dansTable(glm::dvec3 M) {
 	*/
 
 	glm::vec3 p8(p(2).x, obtenirPositionRelative().y, obtenirPositionRelative().z);
-	bool result =  MdansTriangleABC(p8, p(0), p(2), M)
-		|| MdansTriangleABC(p8, p(2), p(4), M)
-		|| MdansTriangleABC(p8, p(4), p(7), M)
-		|| MdansTriangleABC(p8, p(7), p(5), M)
-		|| MdansTriangleABC(p8, p(5), p(3), M)
-		|| MdansTriangleABC(p8, p(3), p(1), M)
-		|| MdansTriangleABC(p8, p(1), p(6), M)
-		|| MdansTriangleABC(p8, p(6), p(0), M);
+	bool result =  utilitaire::MdansTriangleABC(p8, p(0), p(2), M)
+		|| utilitaire::MdansTriangleABC(p8, p(2), p(4), M)
+		|| utilitaire::MdansTriangleABC(p8, p(4), p(7), M)
+		|| utilitaire::MdansTriangleABC(p8, p(7), p(5), M)
+		|| utilitaire::MdansTriangleABC(p8, p(5), p(3), M)
+		|| utilitaire::MdansTriangleABC(p8, p(3), p(1), M)
+		|| utilitaire::MdansTriangleABC(p8, p(1), p(6), M)
+		|| utilitaire::MdansTriangleABC(p8, p(6), p(0), M);
 	//std::cout << "\nresult " << (result? "dans" : "hors") << "\n";
 	return result;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::dansZone1(glm::dvec3 M
+///
+/// Cette fonction permet de savoir si un point est dans la zone1
+/// (zone gauche de la table)
+///  @param[in] 
+///		point M
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool NoeudTable::dansZone1(glm::dvec3 M)
+{
+	/*
+	etapes du check :
+	p0----------p2----------p4
+	| \___  1	 |			 |
+	|	2 \____  |			 |
+	p6 ________\p8			 p7
+	|  3  _____/ |			 |
+	| ___/	4	 |			 |
+	p1----------p3----------p5
+
+	*/
+
+	glm::vec3 p8(p(2).x, obtenirPositionRelative().y, obtenirPositionRelative().z);
+	bool result = utilitaire::MdansTriangleABC(p8, p(0), p(2), M)
+		|| utilitaire::MdansTriangleABC(p8, p(6), p(0), M)
+		|| utilitaire::MdansTriangleABC(p8, p(1), p(6), M)
+		|| utilitaire::MdansTriangleABC(p8, p(3), p(1), M);
+		
+	return result;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::dansZone2(glm::dvec3 M
+///
+/// Cette fonction permet de savoir si un point est dans la zone2
+/// (zone droite)
+///  @param[in] 
+///		point M
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool NoeudTable::dansZone2(glm::dvec3 M)
+{
+	/*
+	etapes du check :
+	p0----------p2----------p4
+	|			 | 1    ___/ |
+	|			 |  ___/  2  |
+	p6			p8 /________ p7
+	|			 |\____	  3  |
+	|			 |  4  \____ |
+	p1----------p3----------p5
+
+	*/
+
+	glm::vec3 p8(p(2).x, obtenirPositionRelative().y, obtenirPositionRelative().z);
+	bool result = utilitaire::MdansTriangleABC(p8, p(2), p(4), M)
+		|| utilitaire::MdansTriangleABC(p8, p(4), p(7), M)
+		|| utilitaire::MdansTriangleABC(p8, p(7), p(5), M)
+		|| utilitaire::MdansTriangleABC(p8, p(5), p(3), M);
+	return result;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::mailletDansZone2(glm::dvec3 M,double rayon)
+///
+/// Cette fonction permet de savoir si un point est dans la zone2 
+///  (zone droite) mais a une distance des murs
+/// pour que le maillet ne depasse pas les murs
+///  @param[in] 
+///		point M
+///		double rayon : rayon du maillet
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool NoeudTable::mailletDansZone2(glm::dvec3 M,double rayon) 
+{
+	if (dansZone2(M))
+	{
+		double dist;
+		//tester les distance entre le centre du maillet et les droites (murs) de la table
+		dist = distanceEntrePointDroite(p(2), p(3), M);
+		if (dist < rayon) // distance entre mur P2P3
+			return false;
+
+		else  // distance entre mur P2P4
+		{
+			dist = distanceEntrePointDroite(p(4), p(2), M);
+			if (dist < rayon) 
+			{
+				if (p(4).y >= p(2).y) 
+					return false;					
+				else
+					if (M.y >= p(4).y) 
+						return false;
+			}
+				
+			else // distance entre mur P4P7 			
+			{
+				dist = distanceEntrePointDroite(p(4), p(7), M);
+				if ((dist < rayon) && (M.y >= p(7).y))
+					if (p(4).x >= p(7).x)
+						return false;
+					else
+						if (p(4).y > p(2).y)
+							return false;
+						else
+						{
+							glm::vec3 PI;
+							intersection2Droites(p(2), p(3), p(4), p(7), PI);
+							if (PI.y > p(2).y)
+								return false;
+						}
+				else // distance entre mur P7P5					
+				{
+					dist = distanceEntrePointDroite(p(5), p(7), M);
+					if ( (dist < rayon) && (M.y <= p(7).y) )
+						if (p(5).x >= p(7).x)
+							return false;
+						else
+							if (p(5).y < p(3).y)
+								return false;
+							else
+							{
+								glm::vec3 PI;
+								intersection2Droites(p(2), p(3), p(5), p(7), PI);
+								if (PI.y < p(3).y)
+									return false;
+							}
+					
+					else // distance entre mur P3P5
+					{
+						dist = distanceEntrePointDroite(p(5), p(3), M);
+						if (dist < rayon) 
+						{
+							if (p(5).y <= p(3).y) 
+								return false;
+							else
+								if (M.y < p(5).y) 
+									return false;							
+						}
+						else
+							return true;
+					}
+				}
+			}
+			
+
+		}
+			
+		
+	}
+	else // pas dans la zone
+		return false;
+	
+}
+
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::mailletDansZone1(glm::dvec3 M,double rayon)
+///
+/// Cette fonction permet de savoir si un point est dans la zone1 
+///  (zone gauche) mais a une distance des murs 
+/// pour que le maillet ne depasse pas les murs
+/// utilise pour maillet touche et virtuel
+///  @param[in] 
+///		point M
+///		double rayon : rayon du maillet
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////
+bool NoeudTable::mailletDansZone1(glm::dvec3 M, double rayon)
+{
+
+	if (dansZone1(M))
+	{
+		double dist;
+		//tester les distance entre le centre du maillet et les droites (murs) de la table
+		dist = distanceEntrePointDroite(p(2), p(3), M);
+		if (dist < rayon) // distance entre mur P2P3
+			return false;
+
+		else  // distance entre mur P2P0
+		{
+			dist = distanceEntrePointDroite(p(0), p(2), M);
+			if (dist < rayon)
+			{
+				if (p(0).y >= p(2).y)
+					return false;
+				else
+					if (M.y >= p(0).y)
+						return false;
+			}
+
+			else // distance entre mur P0P6 			
+			{
+				dist = distanceEntrePointDroite(p(0), p(6), M);
+				if ((dist < rayon) && (M.y >= p(6).y))
+					if (p(0).x <= p(6).x)
+						return false;
+					else
+						if (p(0).y >= p(2).y)
+							return false;
+						else
+						{
+							glm::vec3 PI;
+							intersection2Droites(p(2), p(3), p(0), p(6), PI);
+							if (PI.y > p(2).y)
+								return false;
+						}
+				else // distance entre mur P6P1					
+				{
+					dist = distanceEntrePointDroite(p(6), p(1), M);
+					if ((dist < rayon) && (M.y <= p(6).y))
+						if (p(1).x <= p(6).x)
+							return false;
+						else
+							if (p(1).y < p(3).y)
+								return false;
+							else
+							{
+								glm::vec3 PI;
+								intersection2Droites(p(2), p(3), p(6), p(1), PI);
+								if (PI.y < p(3).y)
+									return false;
+							}
+
+					else // distance entre mur P3P1
+					{
+						dist = distanceEntrePointDroite(p(1), p(3), M);
+						if (dist < rayon)
+						{
+							if (p(1).y <= p(3).y)
+								return false;
+							else
+								if (M.y < p(1).y)
+									return false;
+						}
+						else
+							return true;
+					}
+				}
+			}
+		}
+	}
+	else // pas dans la zone
+		return false;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @fn double NoeudTable::distanceEntrePointDroite(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P)
+///
+/// Cette fonction calcule la distance entre un point P et la droite (P1P2) forme' par les points P1 et P2
+///  @param[in] 
+///		glm::vec3 P1,P2,P 
+///		
+/// @return double
+///
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+double NoeudTable::distanceEntrePointDroite(glm::dvec3 P1, glm::dvec3 P2, glm::dvec3 P)
+{
+	double numer = (P2.y - P1.y)*P.x - (P2.x - P1.x)*P.y + P2.x*P1.y - P2.y*P1.x;
+	//std::cout << "num = " << numer << std::endl;
+	double denum = sqrt(pow((P2.y-P1.y), 2) + pow((P2.x-P1.x), 2));
+	//std::cout << "denum = " << denum << std::endl;
+	return  fabs(numer ) / (denum);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @fn double NoeudTable::distanceEntre2Points(glm::dvec3 P1, glm::dvec3 P2)
+///
+/// Cette fonction calcule la distance entre 2 points P1 et P2
+///  @param[in] 
+///		glm::vec3 P1,P2 
+///		
+/// @return double
+///
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+double NoeudTable::distanceEntre2Points(glm::dvec3 P1, glm::dvec3 P2)
+{
+	return sqrt(pow((P2.y - P1.y), 2) + pow((P2.x - P1.x), 2));
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::intersection2Droites(glm::vec3 D1P1, glm::vec3 D1P2, glm::vec3 D2P1, glm::vec3 D2P2, glm::vec3 & pointIntersection)
+///
+/// Cette fonction permet de trouve le point d'intersection entre 2 droites
+///
+///  @param[in] 
+///		glm::vec3 D1P1,D1P2,D2P1,D2P2 : les points qui forment les 2 droites 
+///	 @param[out] : glm::vec3 pointIntersection : les coord. du point d'intersection
+/// @return bool : true si s'intersectent , false paralleles
+///
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool NoeudTable::intersection2Droites(glm::vec3 D1P1, glm::vec3 D1P2, glm::vec3 D2P1, glm::vec3 D2P2, glm::vec3 & pointIntersection) //const
+{
+	float a1 = calculPente(D1P1, D1P2);
+	float b1 = calculB(a1, D1P1);
+
+	//std::cout << "P1(" << D1P1.x << "," << D1P1.y << ") P2(" << D1P2.x << "," << D1P2.y << ")" << std::endl;
+	//std::cout << "a1=" << a1 << " b1=" << b1 << std::endl;
+	
+	float a2 = calculPente(D2P1, D2P2);
+	float b2 = calculB(a2, D2P1);
+
+	//std::cout << "P1(" << D2P1.x << "," << D2P1.y << ") P2(" << D2P2.x << "," << D2P2.y << ")" << std::endl;
+	//std::cout << "a2=" << a2 << " b2=" << b2 << std::endl;
+
+	if (D1P1.x == D1P2.x)  // mon cas -- TODO les autres cas
+	{
+		pointIntersection.y = a2*D1P1.x + b2;
+		pointIntersection.x = D1P1.x;
+		return true;
+	}
+	
+	if ((a1 - a2) == 0)
+		return false;
+	else
+	{
+		
+		pointIntersection.x = (b2 - b1) / (a1 - a2);
+		pointIntersection.y = a1*pointIntersection.x + b1;
+		//std::cout << "PointIntersection(" << pointIntersection.x << "," << pointIntersection.y << ")" << std::endl;
+		return true;
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool NoeudTable::appartientDroite(glm::dvec3 point, glm::dvec3 D1P1, glm::dvec3 D1P2)
+///
+/// Cette fonction permet de savoir si un tel point appartient a la droite
+///
+///  @param[in] 
+///		glm::vec3 D1P1,D1P2 : les points qui forment la droite
+///		glm::vec3 point : le point a verifier
+///		
+/// @return bool
+///
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool NoeudTable::appartientDroite( glm::dvec3 D1P1, glm::dvec3 D1P2, glm::dvec3 point)
+{
+	if (distanceEntrePointDroite(D1P1, D1P2, point) == 0)
+		return true;
+	else
+		return false;
 }
