@@ -249,6 +249,9 @@
     <ClCompile Include="ConfigTournoi.cpp">
       <Filter>Source Files\Configuration</Filter>
     </ClCompile>
+    <ClCompile Include="Tests\CollisionTest.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\FacadeModele.h">
@@ -449,8 +452,8 @@
     <ClInclude Include="ConfigTournoi.h">
       <Filter>Header Files\Configuration</Filter>
     </ClInclude>
-    <ClInclude Include="CameraTest.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Tests\CollisionTest.h">
+      <Filter>Header Files\Tests</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
