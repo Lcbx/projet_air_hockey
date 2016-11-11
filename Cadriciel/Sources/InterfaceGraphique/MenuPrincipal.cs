@@ -37,6 +37,7 @@ namespace InterfaceGraphique
         public MenuPrincipal()
         {
             InitializeComponent();
+            this.MinimumSize = new Size(100, 100);
             this.tournoi.Click += new System.EventHandler(this.modeTournoiClick);
         }
 

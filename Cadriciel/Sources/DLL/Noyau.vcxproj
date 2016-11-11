@@ -149,6 +149,7 @@
     <ClCompile Include="Arbre\Noeuds\NoeudPointControle.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudTable.cpp" />
     <ClCompile Include="BoiteCollision.cpp" />
+    <ClCompile Include="ConfigTournoi.cpp" />
     <ClCompile Include="Configuration\ConfigDebug.cpp" />
     <ClCompile Include="Configuration\ConfigJeu.cpp" />
     <ClCompile Include="Configuration\ConfigProfils.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="Tests\RedimensionnementTest.cpp" />
     <ClCompile Include="Tests\UtilitaireTest.cpp" />
     <ClCompile Include="Tournoi.cpp" />
+    <ClCompile Include="TournoiTest.cpp" />
     <ClCompile Include="VisiteurAjout.cpp" />
     <ClCompile Include="VisiteurCollision.cpp" />
     <ClCompile Include="VisiteurDansLaTable.cpp" />
@@ -217,6 +219,8 @@
     <ClInclude Include="Arbre\Noeuds\NoeudTypes.h" />
     <ClInclude Include="BoiteCollision.h" />
     <ClInclude Include="BoiteCollisionAbstraite.h" />
+    <ClInclude Include="CameraTest.h" />
+    <ClInclude Include="ConfigTournoi.h" />
     <ClInclude Include="Configuration\ConfigDebug.h" />
     <ClInclude Include="Configuration\ConfigJeu.h" />
     <ClInclude Include="Configuration\ConfigProfils.h" />
@@ -247,6 +251,7 @@
     <ClInclude Include="Tests\RedimensionnementTest.h" />
     <ClInclude Include="Tests\UtilitaireTest.h" />
     <ClInclude Include="Tournoi.h" />
+    <ClInclude Include="TournoiTest.h" />
     <ClInclude Include="Visiteur.h" />
     <ClInclude Include="VisiteurAjout.h" />
     <ClInclude Include="VisiteurCollision.h" />

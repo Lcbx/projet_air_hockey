@@ -33,6 +33,8 @@ namespace InterfaceGraphique
             Won
         };
 
+        private StatusTournoi mode;
+
         /// @fn public ModeTournoi()
         /// @brief Permet de créer le mode tournoi
         public ModeTournoi() {
@@ -44,20 +46,38 @@ namespace InterfaceGraphique
         /// @brief Permet de créer le mode tournoi
         public ModeTournoi(MenuPrincipal parent)
         {
+            mode = StatusTournoi.Creation;
             this.parent_ = parent;
             InitializeComponent();
             this.initTournoi();
 
+            this.VisibleChanged += ModeTournoi_Shown;
 
             //State
             this.parent_.edition_.state = Edition.States.Tournoi;
             parent_.setTournoi(this);
         }
 
+        /// @fn private void ModeTournoi_Shown(object sender, EventArgs e)
+        /// @brief Permet de réaliser des modifications à l'affichage
+        /// @param sender : Objet d'envois
+        /// @param e : Évènement
+        private void ModeTournoi_Shown(object sender, EventArgs e)
+        {
+            if (Visible == false) //Workaround for Shown
+                return;
+
+            if (mode == StatusTournoi.Creation)
+            {
+                this.creationTournoi_.refreshProfils();
+            }
+        }
+
         /// @fn public SwitchStatusTournoi(StatusTournoi status)
         /// @brief Permet de changer le status et changer le user control
         public void SwitchStatusTournoi(StatusTournoi status) {
             this.panel1.Controls.Clear();
+            this.mode = status;
             if (status == StatusTournoi.Creation) {
                 this.creationTournoi_ = new CreationTournoi(this);
                 this.panel1.Controls.Add(this.creationTournoi_);
@@ -90,9 +110,9 @@ namespace InterfaceGraphique
             this.panel1.Anchor = AnchorStyles.None;
         }
 
-        //Wajdi -- lier cette fenetre a edition
-        public void setEdition(Edition edition)
-        {
+        /// @fn public void setEdition(Edition edition) 
+        /// @brief Permet de lier la fenêtre d'édition au mode tournoi
+        public void setEdition(Edition edition) {
             edition_ = edition;
         }
 

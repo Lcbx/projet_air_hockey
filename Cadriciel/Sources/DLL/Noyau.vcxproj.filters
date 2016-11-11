@@ -243,8 +243,11 @@
     <ClCompile Include="Tests\PointControleTest.cpp">
       <Filter>Source Files\Tests</Filter>
     </ClCompile>
-    <ClCompile Include="Tests\CollisionTest.cpp">
+    <ClCompile Include="TournoiTest.cpp">
       <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigTournoi.cpp">
+      <Filter>Source Files\Configuration</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -440,8 +443,14 @@
     <ClInclude Include="Tests\PointControleTest.h">
       <Filter>Header Files\Tests</Filter>
     </ClInclude>
-    <ClInclude Include="Tests\CollisionTest.h">
+    <ClInclude Include="TournoiTest.h">
       <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigTournoi.h">
+      <Filter>Header Files\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraTest.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
