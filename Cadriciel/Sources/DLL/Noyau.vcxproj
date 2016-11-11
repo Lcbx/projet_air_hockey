@@ -175,6 +175,7 @@
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="Tests\BancTests.cpp" />
     <ClCompile Include="Tests\CameraTest.cpp" />
+    <ClCompile Include="Tests\CollisionTest.cpp" />
     <ClCompile Include="Tests\ConfigSceneTest.cpp" />
     <ClCompile Include="Tests\NoeudAbstraitTest.cpp" />
     <ClCompile Include="Tests\NoeudCompositeTest.cpp" />
@@ -242,6 +243,7 @@
     <ClInclude Include="Test.h" />
     <ClInclude Include="Tests\BancTests.h" />
     <ClInclude Include="Tests\CameraTest.h" />
+    <ClInclude Include="Tests\CollisionTest.h" />
     <ClInclude Include="Tests\ConfigSceneTest.h" />
     <ClInclude Include="Tests\NoeudAbstraitTest.h" />
     <ClInclude Include="Tests\NoeudCompositeTest.h" />
