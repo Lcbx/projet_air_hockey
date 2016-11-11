@@ -141,6 +141,7 @@ void NoeudMaillet::animer(float temps)
 		}
 		case InfoCollision::RONDELLE: {
 			positionActuelle = positionHorsCollision;
+			normale = glm::normalize(positionActuelle - resultat.objet->obtenirPositionRelative());
 			((NoeudRondelle*)resultat.objet)->collisionMailletExterne(vitesse_, normale);
 			break;
 		}
