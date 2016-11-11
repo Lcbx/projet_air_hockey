@@ -65,7 +65,8 @@ void JoueurVirtuel::deplacerMailletVirtuel()
 	{
 		//generalement tant il n'y a pas de collision il va deplacer vers le centre du maillet
 		// tant que la distance entre le centre du maillet et celui de la rondelle n'est pas egale a rayonMaillet + rayonRondelle
-		if (glm::distance(positionMaillet, positionRondelle) != (rayonMaillet + rayonRondelle))
+		//if (glm::distance(positionMaillet, positionRondelle) != (rayonMaillet + rayonRondelle))
+		if(positionRondelle.x <0)
 		{
 			double r = RandomMN(1.5, 3);
 			// multiplier la puissance du tir par un nombre aleatoire entre 1.5 et 3
