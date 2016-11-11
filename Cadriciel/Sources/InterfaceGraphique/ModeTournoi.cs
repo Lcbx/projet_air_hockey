@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,16 +19,13 @@ namespace InterfaceGraphique
         private CreationTournoi creationTournoi_;
         private MatchingTournoi matchingTournoi_;
         private MenuPrincipal parent_;
-        
-
-        //wajdi 
-        private Chargement menuChargement_;
         private Edition edition_;
 
 
         /// @enum public enum StatusTournoi 
         /// @brief Différents status du tournoi
-        public enum StatusTournoi {
+        public enum StatusTournoi
+        {
             Creation,
             MatchMaking,
             Won
@@ -37,9 +35,12 @@ namespace InterfaceGraphique
 
         /// @fn public ModeTournoi()
         /// @brief Permet de créer le mode tournoi
-        public ModeTournoi() {
+        public ModeTournoi()
+        {
             InitializeComponent();
             this.initTournoi();
+            this.KeyDown += ModeTournoi_KeyDown;
+            this.KeyPreview = true;
         }
 
         /// @fn public ModeTournoi(MenuPrincipal parent_)
@@ -50,11 +51,12 @@ namespace InterfaceGraphique
             this.parent_ = parent;
             InitializeComponent();
             this.initTournoi();
-
             this.VisibleChanged += ModeTournoi_Shown;
 
+            this.KeyDown += ModeTournoi_KeyDown;
+            this.KeyPreview = true;
+
             //State
-            this.parent_.edition_.state = Edition.States.Tournoi;
             parent_.setTournoi(this);
         }
 
@@ -75,23 +77,27 @@ namespace InterfaceGraphique
 
         /// @fn public SwitchStatusTournoi(StatusTournoi status)
         /// @brief Permet de changer le status et changer le user control
-        public void SwitchStatusTournoi(StatusTournoi status) {
+        public void SwitchStatusTournoi(StatusTournoi status)
+        {
             this.panel1.Controls.Clear();
             this.mode = status;
-            if (status == StatusTournoi.Creation) {
+            if (status == StatusTournoi.Creation)
+            {
                 this.creationTournoi_ = new CreationTournoi(this);
                 this.panel1.Controls.Add(this.creationTournoi_);
-            } else {
+            }
+            else
+            {
                 this.matchingTournoi_ = new MatchingTournoi(this);
                 this.panel1.Controls.Add(this.matchingTournoi_);
             }
         }
 
-        /// @fn private void button1_Click(object sender, EventArgs e)
+        /// @fn private void retourMenuPrincipal(object sender, EventArgs e)
         /// @brief Permet de revenir au menu principal
         /// @param sender, Objet d'envois
         /// @param e, Évènement
-        private void button1_Click(object sender, EventArgs e)
+        private void retourMenuPrincipal(object sender, EventArgs e)
         {
             this.parent_.Show();
             this.Hide();
@@ -99,7 +105,8 @@ namespace InterfaceGraphique
 
         /// @fn private void initTournoi()
         /// @brief Permet d'initialiser la fenêtre du tournoi
-        private void initTournoi(){
+        private void initTournoi()
+        {
             this.SwitchStatusTournoi(StatusTournoi.Creation);
 
             this.panel1.Size = new System.Drawing.Size(0, 0);
@@ -112,35 +119,50 @@ namespace InterfaceGraphique
 
         /// @fn public void setEdition(Edition edition) 
         /// @brief Permet de lier la fenêtre d'édition au mode tournoi
-        public void setEdition(Edition edition) {
+        public void setEdition(Edition edition)
+        {
             edition_ = edition;
         }
 
-
-        //wajdi -- permet de passer au mode partie rapide (a travers la selection de zone 
+        /// @fn public void passeModeJeu()
+        /// @brief Permet de jouer une partie du mode tournoi
         public void passeModeJeu()
         {
-            this.Hide();
-            setEdition(this.parent_.getEdition());
-
-            Chargement zoneChar = new Chargement(edition_);
-            zoneChar.ShowDialog();
-
-            if (zoneChar.estclique == true)
-            {
-                edition_.Show();
-                // 
-                edition_.estjoueurvirtuel = false;
-                edition_.passerModePartie(true);
-                edition_.resetPartie();
+            if(this.mode == StatusTournoi.MatchMaking) { 
+                if (!FonctionsNatives.gagnerMatchVirtuelsTournoi()) {
+                    this.Hide();
+                    Edition ptr = this.parent_.edition_;
+                    ptr.state = Edition.States.Tournoi;
+                    FonctionsNatives.preparerProchainMatchTournoi();
+                    ptr.passerModePartie(true);
+                    ptr.resetPartie();
+                    ptr.Show();
+                } else {
+                    this.matchingTournoi_.updateMatchups();
+                }
             }
         }
-        //wajdi -- sert a appeller la fct qui a son tour affiche la fenetre de chargement
-        private void button3_Click(object sender, EventArgs e)
-        {
-            passeModeJeu();
-        }
-        
 
+        /// @fn private void MatchingTournoi_KeyDown(object sender, KeyEventArgs e)
+        /// @brief Permet de capturer l'appuis de la barre d'espacement
+        private void ModeTournoi_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (this.mode != StatusTournoi.Creation)
+            {
+                if (e.KeyCode == Keys.Space) {
+                    this.passeModeJeu();
+                }
+            }
+        }
+
+        static partial class FonctionsNatives
+        {
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern void preparerProchainMatchTournoi();
+
+            [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+            public static extern bool gagnerMatchVirtuelsTournoi();
+
+        }
     }
 }

@@ -200,5 +200,9 @@ extern "C" {
 
 	// Permet d'obtenir l'arbre des participants d'un tournoi avec leurs scores
 	__declspec(dllexport) int loadArbreTournoi(char* nomsJoueurs, int* scores);
+	// Permet de mettre en place les joueurs virtuels pour le match
+	__declspec(dllexport) void preparerProchainMatchTournoi();
+	// Permet de faire gagner un des joueurs virtuels par défaut si deux joueurs virtuels sont assignés
+	__declspec(dllexport) bool gagnerMatchVirtuelsTournoi();
 } 
 #endif // __FACADE_INTERFACE_NATIVE_H__
