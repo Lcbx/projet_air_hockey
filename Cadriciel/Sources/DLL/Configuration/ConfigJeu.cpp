@@ -47,11 +47,11 @@ void ConfigJeu::chargerOptionsJeu()
 {
 	bool optionsJeuDejaDefinies = false;
 	// Vérification de l'existance du ficher
-	if (utilitaire::fichierExiste("configuration.xml")) {
+	if (utilitaire::fichierExiste("donnees\\configuration.xml")) {
 
 		// Charge le fichier de configuration
 		tinyxml2::XMLDocument document;
-		document.LoadFile("configuration.xml");
+		document.LoadFile("donnees\\configuration.xml");
 
 		// Obtenir le noeud 'Configuration'
 		const tinyxml2::XMLElement* elementConfiguration{ document.FirstChildElement("configuration") };
@@ -94,10 +94,10 @@ void ConfigJeu::setOptionsJeu(int nbrBut, bool joueurTestEstHumain)
 
 	// Créer un nouveau document XML si le fichier n'existe pas, ou le charger depuis le fichier dans le cas contraire
 	tinyxml2::XMLDocument document;
-	if (!utilitaire::fichierExiste("configuration.xml"))
+	if (!utilitaire::fichierExiste("donnees\\configuration.xml"))
 		document.NewDeclaration(R"(?xml version="1.0" standalone="yes"?)");
 	else
-		document.LoadFile("configuration.xml");
+		document.LoadFile("donnees\\configuration.xml");
 
 	// Obtenir le noeud 'configuration', le créer si il n'existe pas
 	tinyxml2::XMLElement* elementConfiguration{ document.FirstChildElement("configuration") };
@@ -119,7 +119,7 @@ void ConfigJeu::setOptionsJeu(int nbrBut, bool joueurTestEstHumain)
 	elementJeu->SetAttribute("JOUEUR_TEST_EST_HUMAIN", _optionsJeu.joueurTestEstHumain);
 
 	// Sauvegarder les changements dans le fichier
-	document.SaveFile("configuration.xml");
+	document.SaveFile("donnees\\configuration.xml");
 }
 
 

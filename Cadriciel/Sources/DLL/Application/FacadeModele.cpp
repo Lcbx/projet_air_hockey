@@ -58,7 +58,7 @@ FacadeModele* FacadeModele::instance_{ nullptr };
 
 
 /// Chaîne indiquant le nom du fichier de configuration du projet.
-const std::string FacadeModele::FICHIER_CONFIGURATION{ "configuration.xml" };
+const std::string FacadeModele::FICHIER_CONFIGURATION{ "donnees\\configuration.xml" };
 
 /// Chaîne indiquant le nom du fichier de la zone de jeu par défaut.
 const std::string FacadeModele::FICHIER_ZONEDEFAUT{ "ZoneDefaut.xml" };
