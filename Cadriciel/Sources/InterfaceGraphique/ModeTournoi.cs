@@ -93,11 +93,11 @@ namespace InterfaceGraphique
             }
         }
 
-        /// @fn private void button1_Click(object sender, EventArgs e)
+        /// @fn private void retourMenuPrincipal(object sender, EventArgs e)
         /// @brief Permet de revenir au menu principal
         /// @param sender, Objet d'envois
         /// @param e, Évènement
-        private void button1_Click(object sender, EventArgs e)
+        private void retourMenuPrincipal(object sender, EventArgs e)
         {
             this.parent_.Show();
             this.Hide();

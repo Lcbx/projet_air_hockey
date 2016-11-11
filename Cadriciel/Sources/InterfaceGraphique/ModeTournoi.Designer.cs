@@ -66,9 +66,11 @@
             // menuPrincipalToolStripMenuItem
             // 
             this.menuPrincipalToolStripMenuItem.Name = "menuPrincipalToolStripMenuItem";
-            this.menuPrincipalToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Q";
+            this.menuPrincipalToolStripMenuItem.ShortcutKeyDisplayString = "";
+            this.menuPrincipalToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
             this.menuPrincipalToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.menuPrincipalToolStripMenuItem.Text = "Menu principal";
+            this.menuPrincipalToolStripMenuItem.Click += new System.EventHandler(this.retourMenuPrincipal);
             // 
             // ModeTournoi
             // 
