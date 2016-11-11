@@ -1,4 +1,8 @@
-﻿namespace InterfaceGraphique
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace InterfaceGraphique
 {
     public class Profil : System.ComponentModel.Component
     {
@@ -32,7 +36,7 @@
         ////////////////////////////////////////////////////////////////////////////////////////
         public Profil()
         {
-            nom_ = "Defaut";
+            nom_ = "defaut";
             vitesse_ = 10;
             probaDAgirPassivemnt_ = 0.2;
         }
@@ -158,6 +162,21 @@
         public void setProbProfil(double p)
         {
             probaDAgirPassivemnt_ = p;
+        }
+
+        /// @fn static public List<Profil> obtenirListeNomsProfils() 
+        /// @brief Permet d'obtenir la liste des profils
+        /// @return La liste des profils en mémoire contenant seulement les noms
+        static public List<Profil> obtenirListeNomsProfils() { // TODO: Refactor
+            int nbCharacteresProfils = FonctionsNatives.obtenirNombreProfils();
+            int[] profils = new int[nbCharacteresProfils];
+            FonctionsNatives.obtenirListeProfils(profils);
+            string nomsProfils = new string(profils.Select(x => (char)x).ToArray());
+            Regex reg = new Regex("\\#\\?&");
+            nomsProfils = reg.Replace(nomsProfils, "\0");
+            List<Profil> ret = new List<Profil>(nomsProfils.Split('\0').Where(x => x.Length != 0).Select(x => new Profil(x, 0, 0)).ToList());
+            ret.Insert(0, new Profil());
+            return ret;
         }
     }
 }

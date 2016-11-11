@@ -199,46 +199,123 @@ extern "C"
 	}
 
 	
-	// Click
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl etatDelaSouris(int etat)
+	///
+	/// Cette fonction est appelée quand on change d,outil d'edition
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl etatDelaSouris(int etat) {
 		Souris::obtenirInstance()->EtatdelaSouris(etat);
 	}
-
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl clickStart(int x, int y)
+	///
+	/// Cette fonction est appelée au debut d'un click de la souris
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl clickStart(int x, int y)
 	{
 		Souris::obtenirInstance()->startClick(x, y);
 	}
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) bool __cdecl clickCurrent(int x, int y)
+	///
+	/// Cette fonction est appelée au cours d'un click de la souris
+	///
+	/// @return un booleen signifiant que l'emplacement est dans la table.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) bool __cdecl clickCurrent(int x, int y)
 	{
 		return Souris::obtenirInstance()->currentClick(x, y);
 	}
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl clickEnd(int x, int y)
+	///
+	/// Cette fonction est appelée à la fin d'un click de la souris
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl clickEnd(int x, int y)
 	{
 		Souris::obtenirInstance()->endClick(x, y);
 	}
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl positionSouris(int x, int y)
+	///
+	/// Cette fonction est appelée quand la souris n'est pas pesee
+	///
+	/// @return un booleen signifiant que l'emplacement est dans la table.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) bool __cdecl positionSouris(int x, int y)
 	{
 		return Souris::obtenirInstance()->sourisPostition(x, y);
 	}
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl rightClick(bool presse)
+	///
+	/// Cette fonction est appelée quand le bouton droit de la souris est pese
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void rightClick(bool presse)
 	{
 		Souris::obtenirInstance()->clickRight(presse);
 	}
 
-	//touche control
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl toucheControl(bool presse)
+	///
+	/// Cette fonction est appelée quand la touche control est pressée
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl toucheControl(bool presse)
 	{
 		Souris::obtenirInstance()->setControl(presse);
 	}
 
-	//touche alt
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl toucheAlt(bool presse)
+	///
+	/// Cette fonction est appelée quand la touche alt est pressée
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl toucheAlt(bool presse)
 	{
 		Souris::obtenirInstance()->setAlt(presse);
 	}
 	
-	
-	////touche escape
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl escEnfonce()
+	///
+	/// Cette fonction est appelée quand la touche echap est pressée
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void escEnfonce()
 	{
 		Souris::obtenirInstance()->escPresse();
@@ -1130,12 +1207,26 @@ extern "C"
 			Debug::obtenirInstance().afficher(message);
 		}
 	}
-
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) void __cdecl sauvegarderTypeButMax(int nbButMax, bool estHumain)
+	/// Author : Luc
+	/// Cette fonction permet d'enregistrer des infomation à propos d'un match
+	///
+	/// @return aucun
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl sauvegarderTypeButMax(int nbButMax, bool estHumain)
 	{
 		FacadeModele::obtenirInstance()->getConfigJeu()->setOptionsJeu(nbButMax, estHumain);
 	}
-
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport)  void __cdecl sauvegarderProfil(const char* nom, double vitesse, double proba)
+	///
+	/// Cette fonction permet d'enregistrer un profil
+	///
+	/// @return aucun
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl sauvegarderProfil(const char* nom, double vitesse, double proba)
 	{
 		std::string str(nom);
@@ -1145,6 +1236,81 @@ extern "C"
 		FacadeModele::obtenirInstance()->getConfigProfils()->setProfil(nom, vitesse, proba);
 	}
 	
+	/// @fn __declspec(dllexport) void createTournoi(const char* nomZone, const int count, const char** nomsJoueurs, const bool* sontHumains, const char** nomProfils)
+	/// @brief Permet de créer un tournoi
+	/// @param nomZone : Nom de la zone de jeu
+	/// @param count : Nombre de joueurs
+	/// @param nomsJoueurs : Noms des joueurs
+	/// @param sontHumains : Si les joueurs sont humains ou non
+	/// @param nomProfils : Si le joueur est virtuel, le nom du profil
+	__declspec(dllexport) void createTournoi(const char* nomZone, const int count, const char** nomsJoueurs, const bool* sontHumains, const char** nomProfils) {
+		FacadeModele::obtenirInstance()->creerTournoi(nomZone, count, nomsJoueurs, sontHumains, nomProfils);
+	}
 
+	/// @fn __declspec(dllexport) void loadTournoi(const char* nomZone, const int count, const char** nomsJoueurs, const bool* sontHumains, const char** nomProfils)
+	/// @brief Permet de charger la configuration d'un tournoi
+	/// @param nomZone : Nom de la zone de jeu
+	/// @param count : Nombre de joueurs
+	/// @param nomsJoueurs : Noms des joueurs
+	/// @param sontHumains : Si les joueurs sont humains ou non
+	/// @param nomProfils : Si le joueur est virtuel, le nom du profil
+	__declspec(dllexport) void loadTournoi(char* nomZone, int count, char* nomsJoueurs, bool* sontHumains, char* nomProfils) {
+		FacadeModele::obtenirInstance()->loadTournoi(nomZone, count, nomsJoueurs, sontHumains, nomProfils);
+	}
+
+	/// @fn __declspec(dllexport) void taillesArbreTournoi(int &nbMatchups, int &tailleChaineArbre)
+	/// @brief Permet d'obtenir la taille de l'arbre de tournoi
+	/// @param[out] nbMatchups : Nombre de matchups dans l'arbre
+	/// @param[out] tailleChaineArbre : Taille maximale à allouer pour le transport des noms des joueurs dans l'arbres
+	///TODO: Remove, became unused
+	__declspec(dllexport) void taillesArbreTournoi(int nbMatchups, int tailleChaineArbre) {
+		std::vector<AdaptateurJoueur> participants = FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirParticipants();
+		nbMatchups = FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirTailleArbre();
+
+		int maxLength = 1; //Une chaîne doit minimalement contenir \0
+		for (auto participant : participants) {
+			// On calcule le \0 additionnel
+			int len = participant.getNomJoueur().length() + 1;
+			maxLength = (maxLength < len ? len : maxLength);
+		}
+
+		tailleChaineArbre = maxLength * nbMatchups;
+	}
+	
+	/// @fn __declspec(dllexport) int nombreMatchupsTournoi()
+	/// @brief Permet d'obtenir le nombre de matchups dans le tournoi
+	/// @return Le nombre de matchups dans le tournoi
+	__declspec(dllexport) int nombreMatchupsTournoi() {
+		return FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirTailleArbre();
+	}
+
+
+	/// @fn __declspec(dllexport) int plusLongNomTournoi()
+	/// @brief Permet d'obtenir la longeur du plus long nom du tournoi
+	/// @return La longeur du plus long nom du tournoi
+	__declspec(dllexport) int plusLongNomTournoi() {
+		return FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirTailleArbre();
+	}
+
+	/// @fn __declspec(dllexport) int loadArbreTournoi(char* nomsJoueurs, int* scores)
+	/// @brief Permet d'obtenir l'arbre de tournoi
+	/// @param[out] nomsJoueurs : Noms des joueurs
+	/// @param[out] scores : Scores associés avec les joueurs
+	/// @return Le nombre de participants dans l'arbre
+	/// La case 0 représente le gagnant du tournoi. 1 et 2 la finale et ainsi de suite
+	__declspec(dllexport) int loadArbreTournoi(char* nomsJoueurs, int* scores) {
+		auto arbre = FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirMatchups();
+		int iNJLen = 0; //Itérateur sur les noms de joueurs
+		int i = 0;
+		for (auto scoreEtNomJoueur : arbre) {
+			scores[i] = scoreEtNomJoueur.second;
+			int j; std::string nom = scoreEtNomJoueur.first.getNomJoueur();
+			for (j = 0; j < nom.length(); j++, iNJLen++)
+				nomsJoueurs[iNJLen] = nom[j];
+			nomsJoueurs[iNJLen++] = '\0';
+		}
+
+		return FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirParticipants().size();
+	}
 }
 

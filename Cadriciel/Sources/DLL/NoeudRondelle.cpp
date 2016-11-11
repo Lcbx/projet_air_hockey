@@ -204,19 +204,18 @@ void NoeudRondelle::animer(float temps)
 				auto noeud = resultat.objet;
 				auto frere = noeud->getFrere();
 				positionActuelle = frere->obtenirPositionRelative()
-					- ((float)frere->obtenirRayon() * 0.9f + rayon)
+					- ((float)frere->obtenirRayon() * 0.8f + rayon)
 					* glm::normalize(positionHorsCollision - noeud->obtenirPositionRelative());
 				//desactive l'attraction du frere
-				//portails_[frere] = false;
 				((NoeudPortail*)frere)->attracte_ = false;
-				///std::cout << "portail " << frere->getScale().x << " desactive\n";
+				///std::cout << "portail " << frere->obtenirRayon() << " desactive " << ((NoeudPortail*)frere)->attracte_  << "\n";
 				break;
 			}
 			case InfoCollision::MAILLET: {
 				typeObjetDebug = "maillet";
 				positionActuelle = positionHorsCollision;
 				auto vitesseMaillet = ((NoeudMaillet*)resultat.objet)->getVitesse();
-				vitesse_ = - glm::reflect(vitesse_, normale) + glm::dot(vitesseMaillet, normale) * normale;
+				vitesse_ = glm::reflect(vitesse_, normale) + glm::dot(vitesseMaillet, normale) * normale;
 				break;
 			}
 			default: break;
@@ -228,7 +227,6 @@ void NoeudRondelle::animer(float temps)
 
 
 		//attraction des portails
-#define CST_ASPIRATION 10.f
 		for (int i = 0; i < arbre->obtenirNombreEnfants(); i++) {
 			auto noeud = arbre->chercher(i);
 			if (noeud->obtenirType() == "portail") {
@@ -239,17 +237,18 @@ void NoeudRondelle::animer(float temps)
 				//si on est dans le rayon d'attraction
 				if (distance < rayon_attraction) {
 					//et qu'on ne sort pas de ce portail, on a le droit d'attracter
-					if (portail->attracte_) vitesse_ += CST_ASPIRATION * rayon_attraction / distance  * glm::normalize(vecteur_distance);
+					if (portail->attracte_) vitesse_ += 5.f * rayon_attraction / distance  * glm::normalize(vecteur_distance);
 				}
 				//sinon on pourra de nouveau etre attracte dans le futur
 				else portail->attracte_ = true;
+				///std::cout << "portail " << i << " attracte " << portail->attracte_ <<  " distance " << distance  << " rayon attraction " << rayon_attraction << "\n";
 			}
 		}
+		///std::cout << "\n";
 
 		//application de la friction
 		float moduleVitesse = glm::length(vitesse_);
-#define VITESSE_MAX 300.
-		vitesse_ *= glm::clamp(moduleVitesse - coeff.friction * temps, 0.005, VITESSE_MAX) / moduleVitesse;
+		vitesse_ *= glm::clamp(moduleVitesse - coeff.friction * temps, 0.005, 300.) / moduleVitesse;
 		moduleVitesse = glm::length(vitesse_);
 
 		//affichages de Debug
@@ -275,8 +274,8 @@ void NoeudRondelle::animer(float temps)
 ///
 ////////////////////////////////////////////////////////////////////////
 void NoeudRondelle::collisionMailletExterne(glm::vec3 vitesseMaillet, glm::vec3 normale) {
-	auto vitesseIntermediaire = glm::reflect(vitesse_, normale) - glm::dot(vitesseMaillet, normale) * normale;
-	float moduleVitesse = glm::clamp((float)glm::length(vitesseIntermediaire), 0.f, (float) VITESSE_MAX);
+	auto vitesseIntermediaire = glm::reflect(vitesse_, normale) + glm::dot(vitesseMaillet, normale) * (-normale);
+	float moduleVitesse = glm::clamp((float)glm::length(vitesseIntermediaire), 0.f, (float) 300.);
 	vitesse_ = moduleVitesse * glm::normalize(vitesseIntermediaire);
 	if (Debug::obtenirInstance().afficherCollision) Debug::obtenirInstance().afficher("Collision : maillet");
 	if (Debug::obtenirInstance().afficherVitesse) Debug::obtenirInstance().afficher("Vitesse : " + std::to_string(moduleVitesse).substr(0, 3));

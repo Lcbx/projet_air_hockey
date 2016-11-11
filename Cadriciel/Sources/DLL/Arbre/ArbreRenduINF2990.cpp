@@ -631,10 +631,11 @@ NoeudAbstrait* ArbreRenduINF2990::obtenirMailletManuel()
 void ArbreRenduINF2990::deplacerMailletAvecClavier(double x, double y)
 {
 	auto maillet = (NoeudMaillet*)this->enfants_.back();//pour obtenir le maillet du 2eme joueur
-	auto pos = maillet->obtenirPositionRelative();
-	double rayon = maillet->obtenirRayon();
-	auto vitesseMaillet = glm::length(maillet->getVitesse());
-	float delta = 3.f * rayon + vitesseMaillet/10.f;
+	maillet->choisirAcceleration(10.f);
+	auto	pos = maillet->obtenirPositionRelative();
+	double	rayon = maillet->obtenirRayon();
+	auto	vitesseMaillet = glm::length(maillet->getVitesse());
+	float	delta = 3.f * rayon + vitesseMaillet / 10.f;
 	glm::vec3 nouvellePosition = { pos.x + glm::sign(x) * delta, pos.y + glm::sign(y) * delta, pos.z };
 	((NoeudMaillet*)maillet)->deplacer(nouvellePosition);
 }
@@ -703,8 +704,10 @@ void ArbreRenduINF2990::deplacerMailletAvecSouris(glm::dvec3 pos)
 		if (enfant->obtenirType() == "maillet") {
 			if (enfant->estDeuxiemeJoueur == false)
 			{
-				((NoeudMaillet*)enfant)->deplacer(pos);	
-				
+				NoeudMaillet* maillet = (NoeudMaillet*)enfant;
+				maillet->choisirVitesse(1000.f);
+				maillet->deplacer(pos);
+				break;
 			}
 		}
 	}
