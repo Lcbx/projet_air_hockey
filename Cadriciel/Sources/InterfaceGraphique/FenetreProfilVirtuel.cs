@@ -25,6 +25,9 @@ namespace InterfaceGraphique
         private string nom = "";
         private double probabilite_ = 0;
 
+
+        MenuPrincipal menu_;
+
         /////////////////////////////////////////////////////////////////////////
         /// @fn public FenetreProfilVirtuel(Edition edition)
         /// 
@@ -35,11 +38,11 @@ namespace InterfaceGraphique
         /// @return aucune
         //
         ////////////////////////////////////////////////////////////////////////////////////////// 
-        public FenetreProfilVirtuel(Edition edition)
+        public FenetreProfilVirtuel(Edition edition, MenuPrincipal menu)
         {
             InitializeComponent();
             edition_ = edition;
-
+            menu_ = menu;
             // Chargement des profils
 
             int nbrChar = FonctionsNatives.obtenirNombreProfils();
@@ -93,7 +96,7 @@ namespace InterfaceGraphique
         private void chargerProfil_Click(object sender, EventArgs e)
         {
             Chargement zoneChar = new Chargement(edition_);
-            
+            this.Hide();
             zoneChar.ShowDialog();
             if (zoneChar.estclique == true)
             {
@@ -121,8 +124,8 @@ namespace InterfaceGraphique
                 edition_.DemarerJoueurVirtuel(FonctionsNatives.obtenirVitesseProfil(nt_cNom), FonctionsNatives.obtenirProbabiliteProfil(nt_cNom));
                 //edition_.DemarerJoueurVirtuel(1, 0.5);
                 edition_.resetPartie();
-                this.Hide();
 
+                menu_.Hide();
             }
         }
 
