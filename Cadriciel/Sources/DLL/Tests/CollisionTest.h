@@ -32,7 +32,7 @@ class CollisionTest : public CppUnit::TestFixture
 	CPPUNIT_TEST_SUITE(CollisionTest);
 	CPPUNIT_TEST(testCollisionSegments);
 	CPPUNIT_TEST(testVisiterNoeudCercle);
-	CPPUNIT_TEST(testVisiterNoeudQuadrilatere);
+	//CPPUNIT_TEST(testVisiterNoeudQuadrilatere);
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -54,7 +54,7 @@ public:
 	// =================================================================
 	void testCollisionSegments();
 	void testVisiterNoeudCercle();
-	void testVisiterNoeudQuadrilatere();
+	//void testVisiterNoeudQuadrilatere();
 
 private:
 	/// Instance d'un noeud abstrait
