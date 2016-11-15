@@ -143,7 +143,9 @@ void ArbreRenduINF2990::initialiser()
 {
 	// On vide l'arbre
 	vider();
+	//on ajoute la skybox
 	ajouter((NoeudAbstrait*) new SkyBox);
+	//on ajoute la table
 	ajouterTable();
 }
 ////////////////////////////////////////////////////////////////////////

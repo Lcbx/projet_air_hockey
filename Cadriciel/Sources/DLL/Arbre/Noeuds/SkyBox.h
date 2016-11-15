@@ -27,8 +27,8 @@ class SkyBox : public NoeudAbstrait
 	mutable utilitaire::BoiteEnvironnement boite_{ 
 		"media/TropicalSunnyDay/TropicalSunnyDayLeft2048.png",
 		"media/TropicalSunnyDay/TropicalSunnyDayRight2048.png",
-		"media/TropicalSunnyDay/TropicalSunnyDayDown2048.png",
 		"media/TropicalSunnyDay/TropicalSunnyDayUp2048.png",
+		"media/TropicalSunnyDay/TropicalSunnyDayDown2048.png",
 		"media/TropicalSunnyDay/TropicalSunnyDayFront2048.png",
 		"media/TropicalSunnyDay/TropicalSunnyDayBack2048.png",
 		2048 };
