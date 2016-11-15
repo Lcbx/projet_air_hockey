@@ -15,8 +15,8 @@
 
 #include <map>
 #include <string>
-
 #include "Noeuds/NoeudTypes.h"
+
 
 ///////////////////////////////////////////////////////////////////////////
 /// @class ArbreRenduINF2990

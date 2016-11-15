@@ -24,6 +24,7 @@
 #include "Deplacement.h"
 
 #include "../Affichage_debuggage.h"
+#include "../Noeuds/SkyBox.h"
 
 using namespace std;
 
@@ -47,6 +48,8 @@ const std::string ArbreRenduINF2990::NOM_POINTCONTROLE{ "pointcontrole" };
 ///La chaîne représentant le type des points de controles de la table
 const std::string ArbreRenduINF2990::NOM_MAILLET{ "maillet" };
 
+
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn ArbreRenduINF2990::ArbreRenduINF2990()
@@ -58,7 +61,7 @@ const std::string ArbreRenduINF2990::NOM_MAILLET{ "maillet" };
 ///
 /// @return Aucune (constructeur).
 ///
-/////////////////////////////////////////////////////////////////////////6
+/////////////////////////////////////////////////////////////////////////
 ArbreRenduINF2990::ArbreRenduINF2990()
 {
 	// Construction des usines
@@ -85,8 +88,7 @@ ArbreRenduINF2990::ArbreRenduINF2990()
 ///
 ////////////////////////////////////////////////////////////////////////
 ArbreRenduINF2990::~ArbreRenduINF2990()
-{
-}
+{}
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void ArbreRenduINF2990::ajouterTable()
@@ -141,6 +143,7 @@ void ArbreRenduINF2990::initialiser()
 {
 	// On vide l'arbre
 	vider();
+	ajouter((NoeudAbstrait*) new SkyBox);
 	ajouterTable();
 }
 ////////////////////////////////////////////////////////////////////////

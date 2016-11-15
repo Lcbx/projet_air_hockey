@@ -255,6 +255,9 @@
     <ClCompile Include="Tests\ConfigProfilsTest.cpp">
       <Filter>Source Files\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="Arbre\Noeuds\SkyBox.cpp">
+      <Filter>Source Files\Arbre\Noeuds</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\FacadeModele.h">
@@ -463,6 +466,9 @@
     </ClInclude>
     <ClInclude Include="Tests\ConfigProfilsTest.h">
       <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Arbre\Noeuds\SkyBox.h">
+      <Filter>Header Files\Arbre\Noeuds</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
