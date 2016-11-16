@@ -14,10 +14,13 @@
 
 ////////////////////////////////////////////////////////////////////////
 /// @fn SkyBox::SkyBox()
-/// Ce constructeur crait un noeud héritant de la classe noeudAbstrait
+/// Ce constructeur crait un noeud héritant de la classe noeudAbstrait non selectionnable et non enregistrable
 /// @return Aucune (constructeur).
 /////////////////////////////////////////////////////////////////////////
-SkyBox::SkyBox() : NoeudAbstrait("skybox"){}
+SkyBox::SkyBox() : NoeudAbstrait("skybox"){
+	selectionnable_ = false;
+	enregistrable_ = false;
+}
 
 ////////////////////////////////////////////////////////////////////////
 /// @fn SkyBox::~SkyBox()
