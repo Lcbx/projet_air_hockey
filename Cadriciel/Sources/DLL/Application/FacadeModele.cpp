@@ -51,7 +51,7 @@
 #include "JoueurVirtuel.h"
 #include "../ConfigTournoi.h"
 
-
+#include "../Application/TextOpenGL.h"
 
 /// Pointeur vers l'instance unique de la classe.
 FacadeModele* FacadeModele::instance_{ nullptr };
@@ -183,7 +183,7 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 				1, 1000, 5, 0.5, 0.25,
 				200, 200}
 	};
-	
+
 }
 
 
@@ -405,6 +405,9 @@ void FacadeModele::afficher() const
 	// Compte de l'affichage
 	utilitaire::CompteurAffichage::obtenirInstance()->signalerAffichage();
 
+	// creation d'une instance TextOpenGL
+	TextOpenGL test;
+		
 	// Échange les tampons pour que le résultat du rendu soit visible.
 	::SwapBuffers(hDC_);
 }
