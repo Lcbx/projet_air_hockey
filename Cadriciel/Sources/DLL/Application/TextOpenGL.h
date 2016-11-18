@@ -25,7 +25,9 @@ public:
 	/// Constructeur par défaut
 	TextOpenGL();
 	~TextOpenGL();
-	bool initialiser();
+	bool initialiserFreeType();
+	bool initialiserFTGL();
+	bool test();
 	
 private:
 	// noms des joueurs

@@ -144,6 +144,7 @@
     <ClCompile Include="Application\Rotation.cpp" />
     <ClCompile Include="Application\Selection.cpp" />
     <ClCompile Include="Application\StrategieSouris.cpp" />
+    <ClCompile Include="Application\TextOpenGL.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudAraignee.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudConeCube.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudPointControle.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="Application\Rotation.h" />
     <ClInclude Include="Application\Selection.h" />
     <ClInclude Include="Application\StrategieSouris.h" />
+    <ClInclude Include="Application\TextOpenGL.h" />
     <ClInclude Include="Arbre\Noeuds\Couleurs.h" />
     <ClInclude Include="Arbre\Noeuds\SkyBox.h" />
     <ClInclude Include="Arbre\Noeuds\NoeudAraignee.h" />

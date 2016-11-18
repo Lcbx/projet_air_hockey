@@ -410,7 +410,8 @@ void FacadeModele::afficher() const
 	utilitaire::CompteurAffichage::obtenirInstance()->signalerAffichage();
 
 	// creation d'une instance TextOpenGL
-	TextOpenGL test;
+	TextOpenGL instance;
+	instance.test();
 		
 	// Échange les tampons pour que le résultat du rendu soit visible.
 	::SwapBuffers(hDC_);
