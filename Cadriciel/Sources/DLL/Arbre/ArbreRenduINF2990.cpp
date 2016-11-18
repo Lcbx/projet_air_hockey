@@ -24,6 +24,7 @@
 #include "Deplacement.h"
 
 #include "../Affichage_debuggage.h"
+#include "../Sons.h"
 
 using namespace std;
 
@@ -72,6 +73,8 @@ ArbreRenduINF2990::ArbreRenduINF2990()
 	ajouterUsine(NOM_POINTCONTROLE, new UsineNoeud<NoeudPointControle>{ NOM_POINTCONTROLE, std::string{ "" } });
 	ajouterUsine(NOM_MAILLET, new UsineNoeud<NoeudMaillet>{ NOM_MAILLET, std::string{ "media/maillet.obj" } });
 
+	//declarer un lecteur
+	player = new Sons();
 }
 
 
@@ -86,6 +89,8 @@ ArbreRenduINF2990::ArbreRenduINF2990()
 ////////////////////////////////////////////////////////////////////////
 ArbreRenduINF2990::~ArbreRenduINF2990()
 {
+	//detruire le lecteur
+	player->~Sons();
 }
 ////////////////////////////////////////////////////////////////////////
 ///

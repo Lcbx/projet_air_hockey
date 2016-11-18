@@ -17,6 +17,8 @@
 #include <string>
 
 #include "Noeuds/NoeudTypes.h"
+#include "../Sons.h"
+
 
 ///////////////////////////////////////////////////////////////////////////
 /// @class ArbreRenduINF2990
@@ -130,6 +132,8 @@ public:
   NoeudAbstrait* obtenirMailletManuel();
   // si le joueur Virtuel Defensif est active' ou non 
   bool joueurVirtuelDefensif{ true };
+
+  Sons  *player;
 
 private :
 	NoeudTable* noeudTable_;

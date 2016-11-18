@@ -226,6 +226,8 @@ public:
 	/// Renvoie la constante contenant le nom du fichier de configuration
 	//std::string getConfigFile();
 
+	void jouerSonModeJeu(bool mode);
+
 private:
 
    /// Constructeur par défaut.
@@ -293,6 +295,8 @@ private:
 
    // Tournoi pour le mode tournoi
    Tournoi<AdaptateurJoueur>* tournoi_;
+
+  
 };
 
 

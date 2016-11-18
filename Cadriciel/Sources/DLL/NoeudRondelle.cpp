@@ -20,6 +20,7 @@
 #include "ArbreRenduINF2990.h"
 #include "NoeudTable.h"
 #include "../Application/JoueurVirtuel.h"
+#include "Sons.h"
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -190,6 +191,10 @@ void NoeudRondelle::animer(float temps)
 				typeObjetDebug = "mur";
 				positionActuelle = positionHorsCollision;
 				vitesse_ = glm::reflect(vitesse_, normale) * (float)coeff.rebond;
+				std::cout << "wiiiiiiiiiiiiiiiiw" << std::endl;
+				
+				FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->player->jouerSon(1);
+				//player->jouerSon();
 				break;
 			}
 			case InfoCollision::BONUS: {
@@ -209,6 +214,8 @@ void NoeudRondelle::animer(float temps)
 				//desactive l'attraction du frere
 				((NoeudPortail*)frere)->attracte_ = false;
 				///std::cout << "portail " << frere->obtenirRayon() << " desactive " << ((NoeudPortail*)frere)->attracte_  << "\n";
+				
+				FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->player->jouerSon(2);
 				break;
 			}
 			case InfoCollision::MAILLET: {

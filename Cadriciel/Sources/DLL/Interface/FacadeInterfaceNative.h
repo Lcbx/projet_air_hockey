@@ -204,5 +204,8 @@ extern "C" {
 	__declspec(dllexport) void preparerProchainMatchTournoi();
 	// Permet de faire gagner un des joueurs virtuels par défaut si deux joueurs virtuels sont assignés
 	__declspec(dllexport) bool gagnerMatchVirtuelsTournoi();
+
+
+	__declspec(dllexport) void jouerSonModeJeu(bool mode);
 } 
 #endif // __FACADE_INTERFACE_NATIVE_H__

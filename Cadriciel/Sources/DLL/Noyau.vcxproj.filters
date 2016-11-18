@@ -255,6 +255,9 @@
     <ClCompile Include="Tests\ConfigProfilsTest.cpp">
       <Filter>Source Files\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="Sons.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\FacadeModele.h">
@@ -463,6 +466,9 @@
     </ClInclude>
     <ClInclude Include="Tests\ConfigProfilsTest.h">
       <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Sons.h">
+      <Filter>Header Files\Application</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

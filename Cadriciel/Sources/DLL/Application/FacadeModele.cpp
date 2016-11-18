@@ -1235,3 +1235,8 @@ void FacadeModele::loadTournoi(char* nomZone, int count, char* nomsJoueurs, bool
 		iProfil += ++j;
 	}
 }
+
+void FacadeModele::jouerSonModeJeu(bool mode)
+{
+	this->obtenirArbreRenduINF2990()->player->jouerSon(3);
+}

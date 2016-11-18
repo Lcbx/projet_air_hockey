@@ -1352,5 +1352,18 @@ extern "C"
 		}
 	}
 
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 		__declspec(dllexport) void sauvegarderTouches();
+	/// Author : Arthur
+	/// Cette fonction permet de modifier et enregistrer les touches de
+	/// déplacement du joueur 2
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl jouerSonModeJeu(bool mode)
+	{
+		FacadeModele::obtenirInstance()->jouerSonModeJeu(mode);
+	}
 }
 

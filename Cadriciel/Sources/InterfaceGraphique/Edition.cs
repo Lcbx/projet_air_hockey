@@ -1776,6 +1776,9 @@ namespace InterfaceGraphique
                 //score
                 panel2.Show();
 
+                //jouer musique
+                FonctionsNatives.jouerSonModeJeu(true);
+
             }
 
         }
@@ -2114,6 +2117,8 @@ namespace InterfaceGraphique
         public static extern void changerLumieresActives(bool jLumiereAmbiente, bool kLumiereDirectionnelle, bool jLumiereSpots );
         //Ali
 
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void jouerSonModeJeu(bool mode);
     }
 }
 
