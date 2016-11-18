@@ -1,6 +1,6 @@
 <joueurs>
     <joueur nom="Carl" esthumain="1" profil="defaut"/>
-    <joueur nom="Ali" esthumain="0" profil="Perceval"/>
+    <joueur nom="Ali" esthumain="0" profil="defaut"/>
     <joueur nom="Luc " esthumain="0" profil="defaut"/>
     <joueur nom="Wajdi" esthumain="0" profil="defaut"/>
 </joueurs>
