@@ -79,7 +79,8 @@ namespace InterfaceGraphique
         //
         //////////////////////////////////////////////////////////////////////////////////////////
         private void button1_Click(object sender, EventArgs e) {
-            if (filename.Text != "") {
+            if (filename.Text != "")
+            {
                 estclique = true;
                 edition_.setCurrentFile(filename.Text);
                 // Tentatives #1 et #2 de résoudre le crash 
@@ -92,6 +93,15 @@ namespace InterfaceGraphique
                     file[i] = f[i];
                 file[f.Length] = '\0';
                 FonctionsNatives.chargerZoneJeu(file);
+                FonctionsNatives.setPartieRapide(true);
+
+                // TODO -- set names of current players 
+
+                /// test changer le nom du joueur courant
+                char[] nom = new char [4];
+                nom[0] = 'A'; nom[1] = 'l'; nom[2] = 'i'; nom[3] = '\0';
+                FonctionsNatives.setNomJoueurCourant(nom, 1);
+
                 this.Hide();
             }
         }

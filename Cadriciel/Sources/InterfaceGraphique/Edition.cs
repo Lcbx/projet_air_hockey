@@ -2110,9 +2110,23 @@ namespace InterfaceGraphique
         public static extern void deactiverRondelle();
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool estEnPauseRondelle();
+        /// Livrable 3 -- Affichage texte openGL
+        // get,set nom des joueurs courants
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void getNomJoueurCourant(int index, char [] [] nom);
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool setNomJoueurCourant(char[] nom, int index);
+        // get/set score courant
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int getScoreCourant(int index);
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool setScoreCourant(int score, int index);
+        
+        /// Ali
+
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void changerLumieresActives(bool jLumiereAmbiente, bool kLumiereDirectionnelle, bool jLumiereSpots );
-        //Ali
+       
 
     }
 }

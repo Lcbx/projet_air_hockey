@@ -9,7 +9,8 @@
 #ifndef __TEXTOPENGL_H__
 #define __TEXTOPENGL_H__
 
-#include <string>
+//#include <map>
+//#include <string>
 
 ///////////////////////////////////////////////////////////////////////////
 /// @class TextOpenGL
@@ -27,7 +28,8 @@ public:
 	~TextOpenGL();
 	bool initialiserFreeType();
 	bool initialiserFTGL();
-	bool test();
+	bool afficher();
+	
 	
 private:
 	// noms des joueurs

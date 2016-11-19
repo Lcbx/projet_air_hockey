@@ -12,7 +12,6 @@
 #include "Utilitaire.h"
 #include "GL/glew.h"
 
-#include "GL/glew.h"
 #include <cmath>
 
 #include "Modele3D.h"
