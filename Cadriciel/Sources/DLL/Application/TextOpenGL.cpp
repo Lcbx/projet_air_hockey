@@ -108,8 +108,6 @@ bool TextOpenGL::afficher()
 	nomJoueur1.assign(facade->getNomJoueurCourant(1));
 	nomJoueur2.assign(facade->getNomJoueurCourant(2));
 
-	std::cout << nomJoueur1 << std::endl;
-
 	char * nom1 = new char[nomJoueur1.size() + 1];
 	std::copy(nomJoueur1.begin(), nomJoueur1.end(), nom1);
 	nom1[nomJoueur1.size()] = '\0'; // don't forget the terminating 0
@@ -118,27 +116,31 @@ bool TextOpenGL::afficher()
 	std::copy(nomJoueur2.begin(), nomJoueur2.end(), nom2);
 	nom2[nomJoueur2.size()] = '\0'; // don't forget the terminating 0
 
-	//std::cout << nom1 << std::endl << nom2 << std::endl;
+	
 		
 	////glPixelTransferf(GL_RED_BIAS, 1);
 	////glPixelTransferf(GL_GREEN_BIAS, 0 - 1);
 	////glPixelTransferf(GL_BLUE_BIAS, 0 - 1);
 
 
-	glPushAttrib(GL_ALL_ATTRIB_BITS);
-	glDisable(GL_LIGHTING);
-	glDisable(GL_DEPTH_TEST);
+	//glPushAttrib(GL_ALL_ATTRIB_BITS);
+	//glDisable(GL_LIGHTING);
+	//glDisable(GL_DEPTH_TEST);
 
 	glColor4f(1, 0, 0, 1);
 	font.FaceSize(20);
-	//font.Render("score1", -1, FTPoint(positionTable.x + 400, 500, 0));
-	//font.Render("score 2", -1, FTPoint(positionTable.x + 200, 500, 0));
-	font.Render(nom1, -1, FTPoint(10,10, 0));
-	font.Render(nom2, -1, FTPoint(100 +300, 10, 0));
+	// TODO 
+	// 1) afficher le texte selon les dimensions de la fenetre (viewport)
+	// 2) afficher le score  des joueurs
+	// 3) afficher le chronometre (temps ecoule' des le debt de la partie
+
+	// afficher les noms des joueurs
+	font.Render(nom1, -1, FTPoint(500,10, 0));
+	font.Render(nom2, -1, FTPoint(50, 10, 0));
 
 	delete[] nom1;
 	delete[] nom2;
-	glPopAttrib();
+	//glPopAttrib();
 
 	return true;
 

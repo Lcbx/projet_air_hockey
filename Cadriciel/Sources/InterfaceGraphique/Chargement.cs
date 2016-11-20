@@ -94,14 +94,6 @@ namespace InterfaceGraphique
                 file[f.Length] = '\0';
                 FonctionsNatives.chargerZoneJeu(file);
                 FonctionsNatives.setPartieRapide(true);
-
-                // TODO -- set names of current players 
-
-                /// test changer le nom du joueur courant
-                char[] nom = new char [4];
-                nom[0] = 'A'; nom[1] = 'l'; nom[2] = 'i'; nom[3] = '\0';
-                FonctionsNatives.setNomJoueurCourant(nom, 1);
-
                 this.Hide();
             }
         }
