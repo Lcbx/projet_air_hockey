@@ -23,7 +23,7 @@
 ///////////////////////////////////////////////////////////////////////////
 class SkyBox : public NoeudAbstrait
 {
-	///la boite d'environnement sous jacente, tirée du namespace utilitaire
+	///la boite d'environnement sous-jacente, tirée du namespace utilitaire
 	mutable utilitaire::BoiteEnvironnement boite_{ 
 		"media/TropicalSunnyDay/TropicalSunnyDayLeft2048.png",
 		"media/TropicalSunnyDay/TropicalSunnyDayRight2048.png",

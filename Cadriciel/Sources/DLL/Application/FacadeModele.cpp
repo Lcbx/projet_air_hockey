@@ -382,10 +382,6 @@ void FacadeModele::libererOpenGL()
 	assert(succes && "Le contexte OpenGL n'a pu être détruit.");
 
 	FreeImage_DeInitialise();
-
-	//destruction de la skybox
-	arbre_->effacer(arbre_->chercher(1));
-	///delete arbre_->chercher(1);
 }
 
 
