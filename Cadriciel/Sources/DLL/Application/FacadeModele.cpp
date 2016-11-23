@@ -1133,6 +1133,7 @@ void FacadeModele::setPartieRapide(bool activer)
 void FacadeModele::activerRondelle()
 {
 	rondelleEnPause_ = false;
+
 }
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -1238,5 +1239,17 @@ void FacadeModele::loadTournoi(char* nomZone, int count, char* nomsJoueurs, bool
 
 void FacadeModele::jouerSonModeJeu(bool mode)
 {
-	this->obtenirArbreRenduINF2990()->player->jouerSon(3);
+	if (mode == true)
+	{
+		this->obtenirArbreRenduINF2990()->player->jouerSon(3);
+	}
+	else {
+		this->obtenirArbreRenduINF2990()->player->arreterSon();
+	}
+}
+
+
+void FacadeModele::MettrePauseSonModeJeu(bool pause)
+{
+	this->obtenirArbreRenduINF2990()->player->pauseSon(pause);
 }

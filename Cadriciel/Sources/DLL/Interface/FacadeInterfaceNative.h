@@ -207,5 +207,7 @@ extern "C" {
 
 
 	__declspec(dllexport) void jouerSonModeJeu(bool mode);
+
+	__declspec(dllexport) void mettrePauseMusique(bool pause);
 } 
 #endif // __FACADE_INTERFACE_NATIVE_H__

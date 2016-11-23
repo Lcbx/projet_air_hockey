@@ -26,13 +26,19 @@ public:
 	~Sons();
 
 	void jouerSon(int choix);
+	void pauseSon(bool pause);
 	void arreterSon();
-
 
 private:
 	FMOD_SYSTEM *system;
 	
 	FMOD_SOUND *mur;
 	FMOD_SOUND  *portail;
+	FMOD_SOUND  *bonus;
+	FMOD_SOUND  *maillet;
+	FMOD_SOUND  *but;
 	FMOD_SOUND  *musiqueFond;
+
+	FMOD_CHANNELGROUP *canal;
+
 };

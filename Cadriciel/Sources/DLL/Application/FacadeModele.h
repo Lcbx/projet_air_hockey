@@ -227,6 +227,7 @@ public:
 	//std::string getConfigFile();
 
 	void jouerSonModeJeu(bool mode);
+	void MettrePauseSonModeJeu(bool pause);
 
 private:
 
