@@ -175,6 +175,6 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         public Edition getEdition()
         { return edition_; }
-
+        
     }
 }

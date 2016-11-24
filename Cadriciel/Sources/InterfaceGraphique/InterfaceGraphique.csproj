@@ -302,6 +302,14 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Icones\cup-1.png" />
+    <Content Include="Resources\Icones\edit.png" />
+    <Content Include="Resources\Icones\gamepad.png" />
+    <Content Include="Resources\Icones\power.png" />
+    <Content Include="Resources\Icones\settings-1.png" />
+    <Content Include="Resources\Images\air_hockey.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>$(TargetName).exe testsC++</PostBuildEvent>
