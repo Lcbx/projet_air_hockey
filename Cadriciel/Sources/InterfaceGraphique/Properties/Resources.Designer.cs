@@ -93,29 +93,9 @@ namespace InterfaceGraphique.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Éditeur {
-            get {
-                object obj = ResourceManager.GetObject("Éditeur", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Enregistrer {
             get {
                 object obj = ResourceManager.GetObject("Enregistrer", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Exit {
-            get {
-                object obj = ResourceManager.GetObject("Exit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,16 +143,6 @@ namespace InterfaceGraphique.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Partie_rapide {
-            get {
-                object obj = ResourceManager.GetObject("Partie_rapide", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Portail {
             get {
                 object obj = ResourceManager.GetObject("Portail", resourceCulture);
@@ -213,16 +183,6 @@ namespace InterfaceGraphique.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Selection {
-            get {
-                object obj = ResourceManager.GetObject("Selection", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Selection1 {
             get {
                 object obj = ResourceManager.GetObject("Selection1", resourceCulture);
@@ -233,29 +193,9 @@ namespace InterfaceGraphique.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap setting {
-            get {
-                object obj = ResourceManager.GetObject("setting", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Supprimer {
             get {
                 object obj = ResourceManager.GetObject("Supprimer", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap tournoi1 {
-            get {
-                object obj = ResourceManager.GetObject("tournoi1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

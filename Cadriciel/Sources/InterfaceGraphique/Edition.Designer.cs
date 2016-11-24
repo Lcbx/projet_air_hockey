@@ -293,7 +293,6 @@
             this.ToolStripMenuItemAccelerateur,
             this.portailToolStripMenuItem,
             this.muretToolStripMenuItem});
-            this.créationDobjetsToolStripMenuItem.Image = global::InterfaceGraphique.Properties.Resources.Éditeur;
             this.créationDobjetsToolStripMenuItem.Name = "créationDobjetsToolStripMenuItem";
             this.créationDobjetsToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
             this.créationDobjetsToolStripMenuItem.Text = "Création d\'objets";

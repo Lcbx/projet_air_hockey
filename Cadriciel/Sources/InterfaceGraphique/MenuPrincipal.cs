@@ -38,7 +38,7 @@ namespace InterfaceGraphique
         {
             InitializeComponent();
             this.MinimumSize = new Size(100, 100);
-            this.tournoi.Click += new System.EventHandler(this.modeTournoiClick);
+            this.btnQuitter.Click += new System.EventHandler(this.modeTournoiClick);
         }
 
 		/////////////////////////////////////////////////////////////////////////
