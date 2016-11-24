@@ -60,8 +60,9 @@ NoeudAraignee::~NoeudAraignee()
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudAraignee::afficherConcret(const glm::mat4& vueProjection) const
+void NoeudAraignee::afficherConcret(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 {
+	/*
 	// Appel à la version de la classe de base pour l'affichage des enfants.
 	NoeudComposite::afficherConcret(vueProjection);
 
@@ -69,6 +70,7 @@ void NoeudAraignee::afficherConcret(const glm::mat4& vueProjection) const
 	auto modele = glm::rotate(transformationRelative_, 35.0f, glm::vec3(sqrtf(2), sqrtf(2), 0));
 	// Affichage du modèle.
 	vbo_->dessiner(vueProjection * modele);
+	*/
 }
 
 

@@ -32,7 +32,7 @@ public:
 	~NoeudBonus();
 
 	/// Affiche le cube.
-	virtual void afficherConcret(const glm::mat4& vueProjection) const;
+	virtual void afficherConcret(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const;
 	/// Effectue l'animation du cube.
 	virtual void animer(float temps);
 

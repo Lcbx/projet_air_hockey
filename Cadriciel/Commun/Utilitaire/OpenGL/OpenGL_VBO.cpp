@@ -16,6 +16,7 @@
 #include "AideGL.h"
 #include "Utilitaire.h"
 
+
 /// Position de l'attribut de location dans le nuanceur de sommet
 #define VERTEX_LOCATION 0
 #define TEXCOORD_LOCATION 1
@@ -119,10 +120,10 @@ namespace opengl{
 	/// @return Aucune.
 	///
 	////////////////////////////////////////////////////////////////////////
-	void VBO::dessiner(const glm::mat4& transformation) const
+	void VBO::dessiner(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 	{
 		unsigned int bufferIndex = 0;
-		dessiner(modele_->obtenirNoeudRacine(), bufferIndex, transformation);
+		dessiner(modele_->obtenirNoeudRacine(), bufferIndex, modele, vue, projection);
 	}
 
 	////////////////////////////////////////////////////////////////////////
@@ -134,20 +135,19 @@ namespace opengl{
 	/// @return Aucune.
 	///
 	////////////////////////////////////////////////////////////////////////
-	void VBO::dessiner(modele::Noeud const& noeud, unsigned int& bufferIndex, const glm::mat4& transformation) const
+	void VBO::dessiner(modele::Noeud const& noeud, unsigned int& bufferIndex, const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 	{
 		// Matrice de transformation
-		glm::mat4x4 const& m{ transformation * noeud.obtenirTransformation() };
+		glm::mat4x4 const& m{ modele * vue * projection * noeud.obtenirTransformation() };
 
 		// Appliquer le nuanceur
-		if (utiliserNuanceur_) {
+#if 0
 			Programme::Start(programme_);
 			programme_.assignerUniforme("modelViewProjection", m);
-		}
-		else {
+#else
 			glMatrixMode(GL_PROJECTION);
 			glLoadMatrixf(glm::value_ptr(m));
-		}
+#endif
 
 		for (auto const& mesh : noeud.obtenirMeshes())
 		{
@@ -188,13 +188,12 @@ namespace opengl{
 			if (possedeTexCoords)
 				glDisableVertexAttribArray(TEXCOORD_LOCATION);
 		}
-		if(utiliserNuanceur_)
-			Programme::Stop(programme_);
+		Programme::Stop(programme_);
 
 		/// Dessin récursif.
 		for (auto const& n : noeud.obtenirEnfants())
 		{
-			dessiner(n, bufferIndex, m);
+			dessiner(n, bufferIndex, modele, vue, projection);
 		}
 	}
 
