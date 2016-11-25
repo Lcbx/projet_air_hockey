@@ -20,6 +20,7 @@
 #include "ArbreRenduINF2990.h"
 #include "NoeudTable.h"
 #include "../Application/JoueurVirtuel.h"
+#include "Sons.h"
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -158,6 +159,8 @@ void NoeudRondelle::animer(float temps)
 				facade->setButDroite(true);
 				positionActuelle = { 0,0,0 };
 				vitesse_ = {0.1,0,0};
+				FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->player->jouerSon(6);
+
 			}
 			else {
 				//recupere le but gauche
@@ -167,6 +170,7 @@ void NoeudRondelle::animer(float temps)
 					facade->setButGauche(true);
 					positionActuelle = { 0,0,0 };
 					vitesse_ = { 0.1,0,0 };
+					FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->player->jouerSon(6);
 				}
 				///else
 					///gere les situations bizarres
@@ -184,12 +188,16 @@ void NoeudRondelle::animer(float temps)
 			glm::vec3 normale = glm::normalize(resultat.details.direction);
 			//la position qui annulle la collision
 			glm::vec3 positionHorsCollision = positionActuelle + normale * (float)resultat.details.enfoncement;
+			
 			//en fonction du type de collision
 			switch (resultat.type) {
 			case InfoCollision::MUR: {
 				typeObjetDebug = "mur";
 				positionActuelle = positionHorsCollision;
 				vitesse_ = glm::reflect(vitesse_, normale) * (float)coeff.rebond;
+				
+				FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->player->jouerSon(1);
+				//player->jouerSon();
 				break;
 			}
 			case InfoCollision::BONUS: {
@@ -197,6 +205,9 @@ void NoeudRondelle::animer(float temps)
 				glm::vec3 direction = glm::normalize(-((NoeudBonus*)resultat.objet)->obtenirDroiteDirectrice().lireVecteur());
 				vitesse_ += direction * (float)glm::pow(coeff.acceleration, 1);
 				affecteParBonus_ = true;
+
+				FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->player->jouerSon(4);
+
 				break;
 			}
 			case InfoCollision::PORTAIL: {
@@ -209,14 +220,18 @@ void NoeudRondelle::animer(float temps)
 				//desactive l'attraction du frere
 				((NoeudPortail*)frere)->attracte_ = false;
 				///std::cout << "portail " << frere->obtenirRayon() << " desactive " << ((NoeudPortail*)frere)->attracte_  << "\n";
+				
+				FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->player->jouerSon(2);
 				break;
 			}
 			case InfoCollision::MAILLET: {
 				typeObjetDebug = "maillet";
 				positionActuelle = positionHorsCollision;
+
 				normale = glm::normalize(positionActuelle - resultat.objet->obtenirPositionRelative());
 				auto vitesseMaillet = ((NoeudMaillet*)resultat.objet)->getVitesse();
 				vitesse_ = glm::reflect(vitesse_, normale) + normale * glm::dot(vitesseMaillet, -normale);
+				FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->player->jouerSon(5);
 				break;
 			}
 			default: break;

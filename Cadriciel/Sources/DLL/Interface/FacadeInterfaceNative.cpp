@@ -1429,5 +1429,30 @@ extern "C"
 		}
 	}
 
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 		__declspec(dllexport) void __cdecl jouerSonModeJeu(bool mode)
+	/// Author : wajdi
+	/// Cette fonction permet de jouer la musique de fond
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl jouerSonModeJeu(bool mode)
+	{
+		FacadeModele::obtenirInstance()->jouerSonModeJeu(mode);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn void mettrePauseMusique()
+	/// Author : wajdi
+	/// Cette fonction permet de jouer la musique de fond
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl mettrePauseMusique(bool pause)
+	{
+		FacadeModele::obtenirInstance()->MettrePauseSonModeJeu(pause);
+	}
 }
 
