@@ -120,11 +120,11 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(249, 339);
+            this.label1.Location = new System.Drawing.Point(354, 348);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(323, 13);
+            this.label1.Size = new System.Drawing.Size(230, 13);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Icons designed by Lucy G and Freepik and from Flaticon";
+            this.label1.Text = "Icons designed by Freepik from Flaticon";
             // 
             // MenuPrincipal
             // 
