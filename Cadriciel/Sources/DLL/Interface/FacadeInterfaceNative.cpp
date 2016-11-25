@@ -1351,6 +1351,32 @@ extern "C"
 			return false;
 		}
 	}
+	
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) void __cdecl setVueOrtho()
+	/// Author : Arthur
+	/// Definie la vue orthogonale comme vue à utiliser
+	///
+	/// @return aucun
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl setVueOrtho()
+	{
+		FacadeModele::obtenirInstance()->setVueOrtho();
+	}
 
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) void __cdecl setVueOrbite()
+	/// Author : Arthur
+	/// Definie la vue orbite comme vue à utiliser
+	///
+	/// @return aucun
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl setVueOrbite()
+	{
+		FacadeModele::obtenirInstance()->setVueOrbite();
+	}
+	
 }
 

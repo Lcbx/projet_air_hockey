@@ -25,6 +25,7 @@
 #include "FacadeModele.h"
 
 #include "VueOrtho.h"
+#include "VueOrbite.h"
 #include "Camera.h"
 #include "Projection.h"
 
@@ -174,7 +175,7 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 	arbre_->initialiser();
 	
 	// On crée une vue par défaut.
-	vue_ = new vue::VueOrtho{
+	vueOrtho_ = new vue::VueOrtho{
 		vue::Camera{ 
 			glm::dvec3(0, 0, 200), glm::dvec3(0, 0, 0),
 			glm::dvec3(0, 1, 0),   glm::dvec3(0, 1, 0)},
@@ -183,7 +184,16 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 				1, 1000, 5, 0.5, 0.25,
 				200, 200}
 	};
-	
+	vueOrbite_ = new vue::VueOrtho{
+		vue::Camera{
+		glm::dvec3(0, 0, 200), glm::dvec3(0, 0, 0),
+		glm::dvec3(0, 1, 0),   glm::dvec3(0, 1, 0) },
+		vue::ProjectionOrtho{
+		606, 437,
+		1, 1000, 5, 0.5, 0.25,
+		200, 200 }
+	};
+	vue_ = vueOrtho_;
 }
 
 
@@ -1234,4 +1244,34 @@ void FacadeModele::loadTournoi(char* nomZone, int count, char* nomsJoueurs, bool
 		nomProfils[iProfil + j] = '\0';
 		iProfil += ++j;
 	}
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setVueOrtho()
+///
+/// Author : Arthur
+/// @Brief :  Cette fonction permet d'utiliser la vue orthogonale
+///
+/// @return void
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setVueOrtho()
+{
+	vue_ = vueOrtho_;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setVueOrbite()
+///
+/// Author : Arthur
+/// @Brief :  Cette fonction permet d'utiliser la vue orbite
+///
+/// @return void
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setVueOrbite()
+{
+	vue_ = vueOrbite_;
 }

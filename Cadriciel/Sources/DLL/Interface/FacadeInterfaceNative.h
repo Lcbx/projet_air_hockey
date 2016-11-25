@@ -204,5 +204,10 @@ extern "C" {
 	__declspec(dllexport) void preparerProchainMatchTournoi();
 	// Permet de faire gagner un des joueurs virtuels par défaut si deux joueurs virtuels sont assignés
 	__declspec(dllexport) bool gagnerMatchVirtuelsTournoi();
+	
+	// Defini la vue comme orthogonale
+	__declspec(dllexport) void setVueOrtho();
+	// Defini la vue comme orbite
+	__declspec(dllexport) void setVueOrbite();
 } 
 #endif // __FACADE_INTERFACE_NATIVE_H__

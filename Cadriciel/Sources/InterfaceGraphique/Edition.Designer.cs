@@ -354,12 +354,14 @@
             this.orthographiqueToolStripMenuItem.Name = "orthographiqueToolStripMenuItem";
             this.orthographiqueToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.orthographiqueToolStripMenuItem.Text = "Orthographique";
+            this.orthographiqueToolStripMenuItem.Click += new System.EventHandler(this.orthographiqueToolStripMenuItem_Click);
             // 
             // orbiteToolStripMenuItem
             // 
             this.orbiteToolStripMenuItem.Name = "orbiteToolStripMenuItem";
             this.orbiteToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.orbiteToolStripMenuItem.Text = "Orbite";
+            this.orbiteToolStripMenuItem.Click += new System.EventHandler(this.orbiteToolStripMenuItem_Click);
             // 
             // informationsToolStripMenuItem
             // 

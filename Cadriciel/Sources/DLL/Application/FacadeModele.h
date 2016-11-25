@@ -226,6 +226,11 @@ public:
 	/// Renvoie la constante contenant le nom du fichier de configuration
 	//std::string getConfigFile();
 
+	/// Choisi la vue ortho
+	void setVueOrtho();
+	/// Choisi la vue orbite
+	void setVueOrbite();
+
 private:
 
    /// Constructeur par défaut.
@@ -255,6 +260,11 @@ private:
 
    /// Vue courante de la scène.
    vue::Vue* vue_{ nullptr };
+   /// Vue courante de la scène.
+   vue::Vue* vueOrtho_{ nullptr };
+   /// Vue courante de la scène.
+   vue::Vue* vueOrbite_{ nullptr };
+
    /// Arbre de rendu contenant les différents objets de la scène.
    ArbreRenduINF2990* arbre_{ nullptr };
 

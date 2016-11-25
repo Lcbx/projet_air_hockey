@@ -1907,7 +1907,17 @@ namespace InterfaceGraphique
             resetPartie(); 
 
         }
+        
+        private void orthographiqueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FonctionsNatives.setVueOrtho();
+        }
 
+        private void orbiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FonctionsNatives.setVueOrbite();
+        }
+        
 
 
         ///////////////////////////////////////////////////////////////////////
@@ -2114,6 +2124,13 @@ namespace InterfaceGraphique
         public static extern void changerLumieresActives(bool jLumiereAmbiente, bool kLumiereDirectionnelle, bool jLumiereSpots );
         //Ali
 
+        // Arthur
+        // Fonctions pour les différentes caméras
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void setVueOrtho();
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void setVueOrbite();
+        
     }
 }
 
