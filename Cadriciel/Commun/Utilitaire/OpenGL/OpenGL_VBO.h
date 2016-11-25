@@ -78,11 +78,9 @@ namespace opengl{
 		/// Les identifiants OpenGL.
 		std::vector<unsigned int> handles_;
 
-
-
-	
-
-
+		///utilise-t-on le nuanceur?
+		bool utiliserNuanceur_ = true;
+		
 		/// Nuanceurs gérant l'affichage des VBO
 		static Programme programme_;
 		static Nuanceur nuanceurFragment_;

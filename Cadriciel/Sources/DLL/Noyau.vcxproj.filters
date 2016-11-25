@@ -255,6 +255,12 @@
     <ClCompile Include="Tests\ConfigProfilsTest.cpp">
       <Filter>Source Files\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="Arbre\Noeuds\SkyBox.cpp">
+      <Filter>Source Files\Arbre\Noeuds</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\TextOpenGL.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
     <ClCompile Include="Sons.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
@@ -466,6 +472,12 @@
     </ClInclude>
     <ClInclude Include="Tests\ConfigProfilsTest.h">
       <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Arbre\Noeuds\SkyBox.h">
+      <Filter>Header Files\Arbre\Noeuds</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\TextOpenGL.h">
+      <Filter>Header Files\Application</Filter>
     </ClInclude>
     <ClInclude Include="Sons.h">
       <Filter>Header Files\Application</Filter>

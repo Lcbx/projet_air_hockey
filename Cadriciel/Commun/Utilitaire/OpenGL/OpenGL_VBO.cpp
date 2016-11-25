@@ -140,8 +140,14 @@ namespace opengl{
 		glm::mat4x4 const& m{ transformation * noeud.obtenirTransformation() };
 
 		// Appliquer le nuanceur
-		Programme::Start(programme_);
-		programme_.assignerUniforme("modelViewProjection", m);
+		if (utiliserNuanceur_) {
+			Programme::Start(programme_);
+			programme_.assignerUniforme("modelViewProjection", m);
+		}
+		else {
+			glMatrixMode(GL_PROJECTION);
+			glLoadMatrixf(glm::value_ptr(m));
+		}
 
 		for (auto const& mesh : noeud.obtenirMeshes())
 		{
@@ -182,7 +188,8 @@ namespace opengl{
 			if (possedeTexCoords)
 				glDisableVertexAttribArray(TEXCOORD_LOCATION);
 		}
-		Programme::Stop(programme_);
+		if(utiliserNuanceur_)
+			Programme::Stop(programme_);
 
 		/// Dessin récursif.
 		for (auto const& n : noeud.obtenirEnfants())
@@ -226,7 +233,8 @@ namespace opengl{
 		if (modele_->possedeTexture(materiau.nomTexture_)) {
 			// Activer le texturage OpenGL et lier la texture appropriée
 			glEnable(GL_TEXTURE_2D);
-			glScalef(1.0, -1.0, 1.0);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 			glBindTexture(GL_TEXTURE_2D, modele_->obtenirTextureHandle(materiau.nomTexture_));
 		}
 		else {
@@ -243,10 +251,7 @@ namespace opengl{
 		materiau.emission_
 		Shininess = materiau.shininess_ * materiau.shininessStrength_*/
 
-		glPolygonMode(
-			GL_FRONT_AND_BACK,
-			materiau.filDeFer_ ? GL_LINE : GL_FILL);
-
+		glPolygonMode(	GL_FRONT_AND_BACK,	materiau.filDeFer_ ? GL_LINE : GL_FILL);
 		materiau.afficherDeuxCotes_ ? glEnable(GL_CULL_FACE) : glDisable(GL_CULL_FACE);
 
 	}

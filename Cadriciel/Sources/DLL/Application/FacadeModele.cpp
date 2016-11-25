@@ -51,7 +51,7 @@
 #include "JoueurVirtuel.h"
 #include "../ConfigTournoi.h"
 
-
+#include "../Application/TextOpenGL.h"
 
 /// Pointeur vers l'instance unique de la classe.
 FacadeModele* FacadeModele::instance_{ nullptr };
@@ -183,7 +183,7 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 				1, 1000, 5, 0.5, 0.25,
 				200, 200}
 	};
-	
+
 }
 
 
@@ -405,6 +405,14 @@ void FacadeModele::afficher() const
 	// Compte de l'affichage
 	utilitaire::CompteurAffichage::obtenirInstance()->signalerAffichage();
 
+	// creation d'une instance TextOpenGL
+	if (partieRapide_)	// TODO -- set partie rapide a false qd on sort de la partie rapide
+	{
+		TextOpenGL text;
+		text.afficher();
+	}
+	
+		
 	// Échange les tampons pour que le résultat du rendu soit visible.
 	::SwapBuffers(hDC_);
 }
@@ -1162,7 +1170,108 @@ bool FacadeModele::estEnPauseRondelle()
 {
 	return rondelleEnPause_;
 }
- 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn std::string FacadeModele::getnomJoueur(int index)
+///
+/// Author : Ali
+/// @Brief :  Cette fonction permet de recuperer le nom d'un joueur courant
+/// @ param[in] int index : le numero du joueur a recuperer
+/// @return  std::string 
+///
+////////////////////////////////////////////////////////////////////////
+std::string FacadeModele::getNomJoueurCourant(int index)
+{	
+	if (index == 1)
+		return nomJoueurCourant1_;
+	else
+		if (index == 2)
+			return nomJoueurCourant2_;
+		else
+		{
+			std::string default = "default";
+			return default;
+		}
+			
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::setNomJoueurCourant(std::string nom, int index)
+///
+/// Author : Ali
+/// @Brief :  Cette fonction permet de modifier le nom d'un joueur courant
+/// @ param[in] int index : le numero du joueur a recuperer
+///				std::string nom : le nom a assigner
+/// @return  bool 
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::setNomJoueurCourant(std::string nom, int index)
+{
+	if (index == 1)
+	{
+		nomJoueurCourant1_.assign(nom);
+		return true;
+	}
+		
+	else
+		if (index == 2)
+		{
+			nomJoueurCourant2_.assign(nom);
+			return true;
+		}
+		else
+			return false;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn int FacadeModele::getScoreCourant(int index)
+///
+/// Author : Ali
+/// @Brief :  Cette fonction permet de recuperer le score courant d'un joueur
+/// @ param[in] int index : le numero du joueur a recuperer
+/// @return  int
+///
+////////////////////////////////////////////////////////////////////////
+int FacadeModele::getScoreCourant(int index)
+{
+	if (index == 1)
+		return scoreJoueurCourant1_;
+	else
+		if (index == 2)
+			return scoreJoueurCourant2_;
+		else // soit joueur2 par default 
+			return scoreJoueurCourant2_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::setScoreCourant(int score, int index)
+///
+/// Author : Ali
+/// @Brief :  Cette fonction permet de modifier le score d'un joueur courant
+/// @ param[in] int index : le numero du joueur courant
+///				int score : le score a modifier 
+/// @return  bool 
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::setScoreCourant(int score, int index)
+{
+	if (index == 1)
+	{
+		scoreJoueurCourant1_ = score;
+		return true;
+	}
+
+	else
+		if (index == 2)
+		{
+			scoreJoueurCourant2_ = score;
+			return true;
+		}
+		else
+			return false;
+}
+
+
  ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn std::string getConfigFile();

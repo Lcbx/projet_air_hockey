@@ -79,7 +79,8 @@ namespace InterfaceGraphique
         //
         //////////////////////////////////////////////////////////////////////////////////////////
         private void button1_Click(object sender, EventArgs e) {
-            if (filename.Text != "") {
+            if (filename.Text != "")
+            {
                 estclique = true;
                 edition_.setCurrentFile(filename.Text);
                 // Tentatives #1 et #2 de résoudre le crash 
@@ -92,6 +93,7 @@ namespace InterfaceGraphique
                     file[i] = f[i];
                 file[f.Length] = '\0';
                 FonctionsNatives.chargerZoneJeu(file);
+                FonctionsNatives.setPartieRapide(true);
                 this.Hide();
             }
         }
