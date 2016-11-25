@@ -15,11 +15,8 @@
 
 Sons::Sons()
 {
-	std::cout << "Constructor" << std::endl;
-
 	FMOD_System_Create(&system);
 	FMOD_System_Init(system, 10, FMOD_INIT_NORMAL, NULL);
-
 
 	FMOD_System_CreateSound(system, "media/sons/pine.wav", FMOD_CREATESAMPLE, 0, &mur);
 	FMOD_System_CreateSound(system, "media/sons/veet.wav", FMOD_CREATESAMPLE, 0, &portail);
@@ -36,8 +33,6 @@ Sons::Sons()
 
 Sons::~Sons()
 {
-	std::cout << "Destructor" << std::endl;
-
 	FMOD_Sound_Release(mur);
 	FMOD_Sound_Release(portail);
 	FMOD_Sound_Release(bonus);
@@ -99,9 +94,6 @@ void Sons::pauseSon(bool pause)
 
 void Sons::arreterSon()
 {
-	std::cout << "stopppppppppp" << std::endl;
-
 	FMOD_ChannelGroup_SetPaused(canal, 0);
-
 	FMOD_ChannelGroup_Stop(canal);
 }
