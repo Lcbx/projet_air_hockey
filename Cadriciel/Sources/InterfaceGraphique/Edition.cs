@@ -689,6 +689,9 @@ namespace InterfaceGraphique
         {
             menuPrincipal_.Show();
             estEnModeTest = false;
+            //Livrable 3 
+            // besoin pour effacer l'affichage FTGL
+            FonctionsNatives.setPartieRapide(false);
             this.Hide();
             //this.Close();
         }
@@ -1827,6 +1830,9 @@ namespace InterfaceGraphique
                 //MessageBox.Show("Player 2 SCORES !","AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 nbButsJoueur2++;
                 textBox4.Text = nbButsJoueur2.ToString();
+                // Livrable 3 
+                FonctionsNatives.setScoreCourant(nbButsJoueur2, 2);
+
                 FonctionsNatives.setButDroite(false);
                 FonctionsNatives.reinitialiserPartieCourante();
                 //Console.WriteLine("But Droite !!");
@@ -1836,6 +1842,8 @@ namespace InterfaceGraphique
                 //MessageBox.Show("Player 1 SCORES !", "AirHockey" , MessageBoxButtons.OK, MessageBoxIcon.Information);
                 nbButsJoueur1++;
                 textBox5.Text = nbButsJoueur1.ToString();
+                // Livrable 3 
+                FonctionsNatives.setScoreCourant(nbButsJoueur1, 1);
                 FonctionsNatives.setButGauche(false);
                 FonctionsNatives.reinitialiserPartieCourante();
                 //Console.WriteLine("But Gauche !!");
@@ -1855,6 +1863,9 @@ namespace InterfaceGraphique
                         menuPrincipal_.tournoi_.Show();
                         nbButsJoueur1 = 0;
                         nbButsJoueur2 = 0;
+                        //Livrable 3
+                        FonctionsNatives.setScoreCourant(0, 1);
+                        FonctionsNatives.setScoreCourant(0, 2);
                         textBox4.Text = "0"; textBox5.Text = "0";
                   
 
@@ -1863,6 +1874,9 @@ namespace InterfaceGraphique
                     else if (dialog == DialogResult.No) //revenir menu principal
                     {
                         estEnModePartie = false;
+                        //Livrable 3
+                        FonctionsNatives.setScoreCourant(0, 1);
+                        FonctionsNatives.setScoreCourant(0, 2);
                         this.Hide();
                         menuPrincipal_.Show();
                         FonctionsNatives.initialiserScene();
@@ -1879,7 +1893,10 @@ namespace InterfaceGraphique
                 {
                     DialogResult dialog = MessageBox.Show("La partie est finie, vous voulez rejouer encore ? Yes pour Rejouer, No pour retourner au menu Principal",
                             "Rejouer ou retour au menu principal", MessageBoxButtons.YesNo);
-
+                    //Livrable 3
+                    // reinitaialiser le score courant pour l'affichage FTGL
+                    FonctionsNatives.setScoreCourant(0, 1);
+                    FonctionsNatives.setScoreCourant(0, 2);
                     if (dialog == DialogResult.Yes)
                     {
                         nbButsJoueur1 = 0;

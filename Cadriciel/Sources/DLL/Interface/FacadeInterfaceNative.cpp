@@ -1033,9 +1033,44 @@ extern "C"
 			return false;
 		return true;		
 	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) bool setScoreCourant(int score, int index)
+	/// Author : Ali
+	/// @brief : Cette fonction permet de modifier le score courant du joueur
+	/// @ param[in] 
+	///			int index : le numero du joueur courant (1 ou 2)
+	///			int score : le score a attribuer
+	/// @return bool  
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) bool setScoreCourant(int score, int index)
+	{
+		if ( (index == 1) || (index == 2) )
+		{
+			FacadeModele::obtenirInstance()->setScoreCourant(score, index);
+			return true;
+		}
+		else
+			return false;
+	}
 
-
-
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) int getScoreCourant(int index)
+	/// Author : Ali
+	/// @brief : Cette fonction permet de modifier le score courant du joueur
+	/// @ param[in] 
+	///			int index : le numero du joueur courant (1 ou 2)
+	///			
+	/// @return int  
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) int getScoreCourant(int index)
+	{
+		if ( (index == 1) || (index == 2) )
+			return FacadeModele::obtenirInstance()->getScoreCourant(index);
+		else 
+			return FacadeModele::obtenirInstance()->getScoreCourant(1);
+	}
 
 	////////////////////////////////////////////////////////////////////////
 	/// @fn 		__declspec(dllexport) void sauvegarderTouches();
