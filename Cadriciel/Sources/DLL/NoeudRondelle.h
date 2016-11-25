@@ -16,7 +16,7 @@
 #include "GL/glew.h"
 #include <list>
 #include <map>
-
+#include "Sons.h"
 ///////////////////////////////////////////////////////////////////////////
 /// @class NoeudRondelle
 /// @brief Classe qui représente un la rondelle de l'arbre de rendu.
@@ -60,6 +60,8 @@ private:
 	float angleY_{ 0.f };
 	/// Angle de rotation.
 	float angleRotation_{ 0.f };
+
+	//Sons *player;
 };
 
 

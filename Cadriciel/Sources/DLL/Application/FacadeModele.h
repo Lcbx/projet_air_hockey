@@ -233,6 +233,9 @@ public:
 	/// Renvoie la constante contenant le nom du fichier de configuration
 	//std::string getConfigFile();
 
+	void jouerSonModeJeu(bool mode);
+	void MettrePauseSonModeJeu(bool pause);
+
 	/// Choisi la vue ortho
 	void setVueOrtho();
 	/// Choisi la vue orbite
@@ -317,6 +320,8 @@ private:
 
    // Tournoi pour le mode tournoi
    Tournoi<AdaptateurJoueur>* tournoi_;
+
+  
 };
 
 

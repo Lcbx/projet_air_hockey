@@ -690,6 +690,7 @@ namespace InterfaceGraphique
             menuPrincipal_.Show();
             estEnModeTest = false;
             this.Hide();
+            FonctionsNatives.jouerSonModeJeu(false);
             //this.Close();
         }
 
@@ -1660,11 +1661,13 @@ namespace InterfaceGraphique
                 {    //si le menu est masqué, on l'Affiche + pause
                     estEnPause = true;
                     menuStrip1.Show();
+                    FonctionsNatives.mettrePauseMusique(false);
                 }
                 else
                 {     //si non le masque et on retourne dans le jeu
                     estEnPause = false;
                     menuStrip1.Hide();
+                    FonctionsNatives.mettrePauseMusique(true);
                 }
             }
         }
@@ -1775,6 +1778,9 @@ namespace InterfaceGraphique
 
                 //score
                 panel2.Show();
+
+                //jouer musique
+                FonctionsNatives.jouerSonModeJeu(true);
 
             }
 
@@ -2138,6 +2144,11 @@ namespace InterfaceGraphique
         public static extern void changerLumieresActives(bool jLumiereAmbiente, bool kLumiereDirectionnelle, bool jLumiereSpots );
        
 
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void jouerSonModeJeu(bool mode);
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void mettrePauseMusique(bool pause);
         // Arthur
         // Fonctions pour les différentes caméras
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
