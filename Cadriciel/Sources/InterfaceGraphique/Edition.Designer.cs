@@ -156,6 +156,7 @@
             // 
             // nouveauToolStripMenuItem
             // 
+            this.nouveauToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("nouveauToolStripMenuItem.Image")));
             this.nouveauToolStripMenuItem.Name = "nouveauToolStripMenuItem";
             this.nouveauToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
@@ -164,6 +165,7 @@
             // 
             // ouvrirToolStripMenuItem
             // 
+            this.ouvrirToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("ouvrirToolStripMenuItem.Image")));
             this.ouvrirToolStripMenuItem.Name = "ouvrirToolStripMenuItem";
             this.ouvrirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.ouvrirToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
@@ -227,7 +229,7 @@
             // 
             this.supprimerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("supprimerToolStripMenuItem.Image")));
             this.supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
-            this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(168, 38);
             this.supprimerToolStripMenuItem.Text = "Supprimer";
             this.supprimerToolStripMenuItem.Click += new System.EventHandler(this.supprimerToolStripMenuItem_Click);
             // 
@@ -370,8 +372,9 @@
             // 
             // aideToolStripMenuItem
             // 
+            this.aideToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("aideToolStripMenuItem.Image")));
             this.aideToolStripMenuItem.Name = "aideToolStripMenuItem";
-            this.aideToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.aideToolStripMenuItem.Size = new System.Drawing.Size(168, 38);
             this.aideToolStripMenuItem.Text = "Aide";
             this.aideToolStripMenuItem.Click += new System.EventHandler(this.aideToolStripMenuItem_Click);
             // 
