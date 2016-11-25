@@ -160,12 +160,15 @@ namespace vue {
 	////////////////////////////////////////////////////////////////////////
 	void VueOrbite::deplacerXY(double deplacementX, double deplacementY)
 	{
+		/*
 		// Calcul le déplacement en pixel à partir du pourcentage
 		glm::ivec2 deplacementPixel;
 		deplacementPixel[0] = deplacementX * projection_.obtenirDimensionCloture()[0];
 		deplacementPixel[1] = deplacementY * projection_.obtenirDimensionCloture()[1];
 
 		deplacerXY(deplacementPixel);
+		*/
+		rotaterXY(deplacementX, deplacementY);
 	}
 
 
@@ -184,6 +187,7 @@ namespace vue {
 	////////////////////////////////////////////////////////////////////////
 	void VueOrbite::deplacerXY(const glm::ivec2& deplacement)
 	{
+		/*
 		// Calcul du nouveau centre en coordonées de clôture
 		glm::ivec2 nouveauCentre;
 		nouveauCentre[0] = (projection_.obtenirDimensionCloture()[0] / 2) + deplacement[0];
@@ -200,6 +204,8 @@ namespace vue {
 		vDeplacement[1] = vNouveauCentre[1] - vCentreActuel[1];
 
 		camera_.deplacerXY(vDeplacement[0], vDeplacement[1], true);
+		*/
+		//rotaterXY(10, 10);
 	}
 
 
@@ -239,7 +245,7 @@ namespace vue {
 	////////////////////////////////////////////////////////////////////////
 	void VueOrbite::rotaterXY(double rotationX, double rotationY)
 	{
-		camera_.orbiterXY(rotationX * 360, rotationY * 180);
+		camera_.orbiterXY(rotationX * 2*3.14, rotationY * 3.14);
 	}
 
 
