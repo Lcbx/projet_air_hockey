@@ -995,6 +995,48 @@ extern "C"
 	{
 		return FacadeModele::obtenirInstance()->estEnPauseRondelle();
 	}
+	/// Livrable 3
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void getNomJoueurCourant(int index, char ** nom)
+	/// Author : Ali
+	/// @brief : Cette fonction permet d'obtenir le nom du joueur courant
+	/// @ param[in] 
+	///			int index : le numero du joueur courant (1 ou 2)
+	///			char ** nom : pointeur vers la chaine de caracteres du nom
+	/// @return rien 
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void getNomJoueurCourant(int index, char ** nom)
+	{
+		std::string str = FacadeModele::obtenirInstance()->getNomJoueurCourant(index);
+		char * ptr = new char[str.size() + 1];
+		std::copy(str.begin(), str.end(), ptr);
+		ptr[str.size()] = '\0'; 
+		** nom = *ptr;
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) bool setNomJoueurCourant(char* nom, int index)
+	/// Author : Ali
+	/// @brief : Cette fonction permet de modifier le nom du joueur courant
+	/// @ param[in] 
+	///			int index : le numero du joueur courant (1 ou 2)
+	///			char * nom : chaine de caracteres representant le nom du joueur
+	/// @return bool 
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) bool setNomJoueurCourant(char* nom, int index)
+	{
+		if ((index == 1) || (index == 2))
+			FacadeModele::obtenirInstance()->setNomJoueurCourant(std::string (nom), index);
+		else
+			return false;
+		return true;		
+	}
+
+
+
+
 	////////////////////////////////////////////////////////////////////////
 	/// @fn 		__declspec(dllexport) void sauvegarderTouches();
 	/// Author : Arthur
