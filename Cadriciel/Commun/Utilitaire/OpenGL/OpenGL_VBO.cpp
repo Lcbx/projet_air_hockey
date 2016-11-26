@@ -140,14 +140,15 @@ namespace opengl{
 		glm::mat4x4 const& m{ transformation * noeud.obtenirTransformation() };
 
 		// Appliquer le nuanceur
-		if (utiliserNuanceur_) {
+#if 1
 			Programme::Start(programme_);
 			programme_.assignerUniforme("modelViewProjection", m);
-		}
+#else
 		else {
 			glMatrixMode(GL_PROJECTION);
 			glLoadMatrixf(glm::value_ptr(m));
-		}
+			glActiveTexture(GL_TEXTURE0);
+#endif
 
 		for (auto const& mesh : noeud.obtenirMeshes())
 		{
@@ -175,7 +176,7 @@ namespace opengl{
 			{
 				glBindBuffer(GL_ARRAY_BUFFER, handles_[bufferIndex]); ++bufferIndex;
 				glEnableVertexAttribArray(TEXCOORD_LOCATION);
-				glVertexAttribPointer(TEXCOORD_LOCATION, 2, GL_FLOAT,	GL_FALSE, 0, nullptr);
+				glVertexAttribPointer(TEXCOORD_LOCATION, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
 			}
 			if (possedeFaces)
 			{
@@ -188,8 +189,7 @@ namespace opengl{
 			if (possedeTexCoords)
 				glDisableVertexAttribArray(TEXCOORD_LOCATION);
 		}
-		if(utiliserNuanceur_)
-			Programme::Stop(programme_);
+		Programme::Stop(programme_);
 
 		/// Dessin récursif.
 		for (auto const& n : noeud.obtenirEnfants())
@@ -233,8 +233,6 @@ namespace opengl{
 		if (modele_->possedeTexture(materiau.nomTexture_)) {
 			// Activer le texturage OpenGL et lier la texture appropriée
 			glEnable(GL_TEXTURE_2D);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 			glBindTexture(GL_TEXTURE_2D, modele_->obtenirTextureHandle(materiau.nomTexture_));
 		}
 		else {
