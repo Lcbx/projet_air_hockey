@@ -163,6 +163,17 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 	// Profondeur
 	glEnable(GL_DEPTH_TEST);
 
+	// intialisation da la lumière 
+	//Activer l'éclairage
+	glEnable(GL_LIGHTING);
+	//Allume la lumière Numéro 0 
+	glEnable(GL_LIGHT0);
+	//glEnable(GL_LIGHT1);
+	//glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
+	//glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+	//Activer la couleur du matériel
+	glEnable(GL_COLOR_MATERIAL);
+
 	// Le cull face
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
@@ -424,6 +435,43 @@ void FacadeModele::afficherBase() const
 {
 	// Positionner la caméra
 	glm::mat4 vueProjection(vue_->obtenirProjection().obtenirMatrice() * vue_->obtenirCamera().obtenirMatrice());
+	// Metter en place l'éclairage
+
+	// la position de la source luminuse, LE 4IÈME paramètre est égale à 0 ,ce qui veut dire que la source est situé à l'infini
+	glm::vec4 direction(0.5, 0.5, 0.5, 1.0);
+	//une couleur ambiante gris
+	glm::vec4 couleurAmbiante(0.1, 0.1, 0.1, 1.0);
+	//une couleur diffuse jaune
+	glm::vec4 couleurDiffuse(1.0, 1.0, 0.8, 1.0);
+	//Aucune lumière speculaire
+	glm::vec4 couleurSpeculaire(0.0, 0.0, 0.0, 1.0);
+
+
+	glm::vec4 position(0.0, 0.0, 1.5, 1.0);
+	//une couleur ambiante gris
+	glm::vec4 couleurAmbiante1(0.2, 0.2, 0.2, 1.0);
+	//une couleur diffuse jaune
+	glm::vec4 couleurDiffuse1(1.0, 1.0, 1.0, 1.0);
+	//Aucune lumière speculaire
+	glm::vec4 couleurSpeculaire1(1.0, 1.0, 1.0, 1.0);
+	//la direction du spot
+	glm::vec3 spotDirection(0.0, 0.0, -1.0);
+
+
+	glLightfv(GL_LIGHT0, GL_POSITION, glm::value_ptr(direction));
+	glLightfv(GL_LIGHT0, GL_AMBIENT, glm::value_ptr(couleurAmbiante));
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, glm::value_ptr(couleurDiffuse));
+	glLightfv(GL_LIGHT0, GL_SPECULAR, glm::value_ptr(couleurSpeculaire));
+	//spot
+	glLightfv(GL_LIGHT1, GL_POSITION, glm::value_ptr(position));
+	glLightfv(GL_LIGHT1, GL_AMBIENT, glm::value_ptr(couleurAmbiante1));
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, glm::value_ptr(couleurDiffuse1));
+	glLightfv(GL_LIGHT1, GL_SPECULAR, glm::value_ptr(couleurSpeculaire1 ));
+	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 45.0);
+	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, glm::value_ptr(spotDirection));
+	glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 20.0);
+
+	//glEnable(GL_LIGHT1);
 
 	// Afficher la scène.
 	arbre_->afficher(vueProjection);

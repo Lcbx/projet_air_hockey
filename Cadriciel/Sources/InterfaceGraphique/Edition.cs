@@ -1909,7 +1909,6 @@ namespace InterfaceGraphique
         }
 
 
-
         ///////////////////////////////////////////////////////////////////////
         /// @fn public void resetPartie()
         /// Author : Ali

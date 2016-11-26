@@ -14,11 +14,16 @@
 #include "glm/gtc/type_ptr.hpp"
 #include "Modele3D.h"
 #include "AideGL.h"
+#include "Materiau.h"
 #include "Utilitaire.h"
 
 /// Position de l'attribut de location dans le nuanceur de sommet
 #define VERTEX_LOCATION 0
 #define TEXCOORD_LOCATION 1
+#define NORMAL_LOCATION 2
+
+
+
 
 namespace opengl{
 
@@ -143,6 +148,7 @@ namespace opengl{
 		Programme::Start(programme_);
 		programme_.assignerUniforme("modelViewProjection", m);
 
+
 		for (auto const& mesh : noeud.obtenirMeshes())
 		{
 			// Appliquer le matériau pour le mesh courant
@@ -164,6 +170,9 @@ namespace opengl{
 			{
 				glBindBuffer(GL_ARRAY_BUFFER, handles_[bufferIndex]); ++bufferIndex;
 				/// À Faire: Envoyer les normales aux nuanceurs si nécessaire
+				glEnableVertexAttribArray(NORMAL_LOCATION);
+				glNormalPointer(GL_FLOAT, 0, nullptr);
+				
 			}
 			if (possedeTexCoords)
 			{
@@ -234,15 +243,18 @@ namespace opengl{
 			glBindTexture(GL_TEXTURE_2D, 0);
 			glDisable(GL_TEXTURE_2D);
 		}
-
+		
 		/// Assigner le matériau
 		/// À Faire : Envoyez les valeurs du matériau aux nuanceurs
-		/*materiau.diffuse_
-		materiau.speculaire_
-		materiau.ambiant_
-		materiau.emission_
-		Shininess = materiau.shininess_ * materiau.shininessStrength_*/
+		programme_.assignerUniforme("Kemission", materiau.emission_);
+		programme_.assignerUniforme("Kambient", materiau.ambiant_);
+		programme_.assignerUniforme("Kdiffuse", materiau.diffuse_) ;
+		programme_.assignerUniforme("Kspeculaire", materiau.speculaire_);
+		programme_.assignerUniforme("KShininess", materiau.shininess_ * materiau.shininessStrength_);
 
+		//Light
+
+		
 		glPolygonMode(
 			GL_FRONT_AND_BACK,
 			materiau.filDeFer_ ? GL_LINE : GL_FILL);
