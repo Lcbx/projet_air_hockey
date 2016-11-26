@@ -67,11 +67,11 @@ NoeudPortail::~NoeudPortail()
 void NoeudPortail::afficherConcret(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 {
 	// Affichage du modèle.
-	glm::vec3 position = glm::vec3(vue * projection * glm::vec4(obtenirPositionRelative(), 1));
+	glm::vec3 position = glm::vec3(projection * vue * modele * glm::vec4(obtenirPositionRelative(), 1));
 	if (Debug::obtenirInstance().afficherAttraction)
 	{
 		//tracerCercle(vueProjection, position.x, position.y,  2*obtenirRayon(), 50);
-		tracerCercle(vue * projection, position.x, position.y, 3 * obtenirRayonModele(), 50);
+		tracerCercle(projection * vue * modele, position.x, position.y, 3 * obtenirRayonModele(), 50);
 	}
 
 	vbo_->dessiner(modele, vue, projection);

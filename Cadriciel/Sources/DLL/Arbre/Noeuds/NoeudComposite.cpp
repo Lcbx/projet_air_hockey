@@ -474,10 +474,10 @@ void NoeudComposite::assignerModePolygones(GLenum modePolygones)
 ////////////////////////////////////////////////////////////////////////
 void NoeudComposite::afficherConcret(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 {
-	NoeudAbstrait::afficherConcret(modele, vue, projection);
+	NoeudAbstrait::afficherConcret(transformationRelative_ * modele, vue, projection);
 
 	for (NoeudAbstrait const* enfant : enfants_){
-		enfant->afficher(transformationRelative_, vue, projection);
+		enfant->afficher(transformationRelative_ * modele, vue, projection);
 	}
 }
 

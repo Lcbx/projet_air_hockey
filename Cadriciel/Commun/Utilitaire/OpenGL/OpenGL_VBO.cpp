@@ -138,10 +138,10 @@ namespace opengl{
 	void VBO::dessiner(modele::Noeud const& noeud, unsigned int& bufferIndex, const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 	{
 		// Matrice de transformation
-		glm::mat4x4 const& m{ modele * vue * projection * noeud.obtenirTransformation() };
+		glm::mat4x4 const& m{ projection * vue * modele };
 
 		// Appliquer le nuanceur
-#if 0
+#if 1
 			Programme::Start(programme_);
 			programme_.assignerUniforme("modelViewProjection", m);
 #else
