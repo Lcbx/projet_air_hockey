@@ -35,8 +35,8 @@ SkyBox::SkyBox() : NoeudAbstrait("skybox"){
 /// @param[in] vueprojection  : La matrice de la vue et projection utilisée.
 /// @return Aucune.
 ////////////////////////////////////////////////////////////////////////
-void SkyBox::afficherConcret(const glm::mat4& vueProjection) const {
-	boite_.afficher(vueProjection, glm::mat4(1.f));
+void SkyBox::afficherConcret(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const {
+	boite_.afficher(projection, vue * modele);
 }
 
 ////////////////////////////////////////////////////////////////////////

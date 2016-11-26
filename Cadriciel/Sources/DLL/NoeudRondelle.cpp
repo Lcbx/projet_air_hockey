@@ -74,12 +74,12 @@ NoeudRondelle::~NoeudRondelle()
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudRondelle::afficherConcret(const glm::mat4& vueProjection) const
+void NoeudRondelle::afficherConcret(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 {
 	// Affichage du modèle.
-	vbo_->dessiner(vueProjection);
+	vbo_->dessiner(modele, vue, projection);
 	// on retrace pour que le rayon d'attraction soit correctement affiche'
-	vbo_->dessiner(vueProjection);
+	vbo_->dessiner(modele, vue, projection);
 }
 
 
@@ -293,6 +293,7 @@ void NoeudRondelle::collisionMailletExterne(glm::vec3 vitesseMaillet, glm::vec3 
 	auto vitesseIntermediaire = -glm::reflect(vitesse_, normale) + normale * glm::dot(vitesseMaillet, -normale);
 	float moduleVitesse = glm::clamp((float)glm::length(vitesseIntermediaire), 0.f, (float) 300.);
 	vitesse_ = moduleVitesse * glm::normalize(vitesseIntermediaire);
+	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->player->jouerSon(5);
 	if (Debug::obtenirInstance().afficherCollision) Debug::obtenirInstance().afficher("Collision : maillet");
 	if (Debug::obtenirInstance().afficherVitesse) Debug::obtenirInstance().afficher("Vitesse : " + std::to_string(moduleVitesse).substr(0, 3));
 }

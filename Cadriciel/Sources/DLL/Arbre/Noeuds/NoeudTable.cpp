@@ -61,12 +61,12 @@ NoeudTable::~NoeudTable()
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudTable::afficherConcret(const glm::mat4& vueProjection) const
+void NoeudTable::afficherConcret(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 {
 	// tracer la table
-	tracerTable(vueProjection);
+	tracerTable(projection * vue * modele);
 	//pour afficher les noeuds composites -- points de controle
-	NoeudComposite::afficherConcret(vueProjection);
+	//NoeudComposite::afficherConcret(modele, vue, projection);
 }
 
 ////////////////////////////////////////////////////////////////////////

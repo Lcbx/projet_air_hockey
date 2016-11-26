@@ -52,7 +52,7 @@ namespace opengl{
 		/// Permet de charger les données/commandes sur la carte graphique
 		virtual void charger();
 		/// Permet d'effectuer le dessin du modèle 3D
-		virtual void dessiner(const glm::mat4& transformation) const;
+		virtual void dessiner(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const;
 		/// Permet de relâcher les données/commandes sur la crate graphique
 		virtual void liberer();
 
@@ -68,7 +68,7 @@ namespace opengl{
 		/// Création récursive des VBO
 		void creerVBO(modele::Noeud const& noeud);
 		/// Dessin récursif
-		void dessiner(modele::Noeud const& noeud, unsigned int& bufferIndex, const glm::mat4& transformation) const;
+		void dessiner(modele::Noeud const& noeud, unsigned int& bufferIndex, const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const;
 
 		/// Permet de vérifier si l'identifiant est valide
 		inline bool identifiantEstValide() const;
