@@ -131,7 +131,7 @@ void NoeudRondelle::animer(float temps)
 		for (float i = 0.1f; i < distance / rayon + 0.5f; i += 0.5f)
 		{
 			glm::vec3 positionIntermediaire = positionActuelle + glm::clamp(i * rayon, 0.f, distance) * direction;
-			resultat = v.calculerCollision(positionIntermediaire, obtenirRayon(), true);
+			resultat = v.calculerCollision(positionIntermediaire, rayon, true);
 			///std::cout << "test " << i << " result " << resultat.type << "\n";
 
 			//pour l'aplication des bonus
@@ -195,19 +195,17 @@ void NoeudRondelle::animer(float temps)
 				typeObjetDebug = "mur";
 				positionActuelle = positionHorsCollision;
 				vitesse_ = glm::reflect(vitesse_, normale) * (float)coeff.rebond;
-				
+				//le son du mur
 				FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->player->jouerSon(1);
-				//player->jouerSon();
 				break;
 			}
 			case InfoCollision::BONUS: {
 				typeObjetDebug = "bonus";
 				glm::vec3 direction = glm::normalize(-((NoeudBonus*)resultat.objet)->obtenirDroiteDirectrice().lireVecteur());
-				vitesse_ += direction * (float)glm::pow(coeff.acceleration, 1);
+				vitesse_ += direction * (float)coeff.acceleration;
 				affecteParBonus_ = true;
-
+				//le son du bonus
 				FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->player->jouerSon(4);
-
 				break;
 			}
 			case InfoCollision::PORTAIL: {
@@ -220,17 +218,17 @@ void NoeudRondelle::animer(float temps)
 				//desactive l'attraction du frere
 				((NoeudPortail*)frere)->attracte_ = false;
 				///std::cout << "portail " << frere->obtenirRayon() << " desactive " << ((NoeudPortail*)frere)->attracte_  << "\n";
-				
+				//le son du portail
 				FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->player->jouerSon(2);
 				break;
 			}
 			case InfoCollision::MAILLET: {
 				typeObjetDebug = "maillet";
 				positionActuelle = positionHorsCollision;
-
 				normale = glm::normalize(positionActuelle - resultat.objet->obtenirPositionRelative());
 				auto vitesseMaillet = ((NoeudMaillet*)resultat.objet)->getVitesse();
 				vitesse_ = glm::reflect(vitesse_, normale) + normale * glm::dot(vitesseMaillet, -normale);
+				//le son du maillet
 				FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->player->jouerSon(5);
 				break;
 			}
@@ -280,7 +278,7 @@ void NoeudRondelle::animer(float temps)
 ///
 /// @fn void NoeudRondelle::collisionMailletExterne(glm::vec3 vitesseMaillet, glm::vec3 normale)
 ///
-/// Cette fonction effectue l'animation du noeud pour un certaingere une collision provenant du deplacement du maillet
+/// Cette fonction gere une collision provenant du deplacement du maillet
 /// et non de celui de la rondelle (donc externe).
 ///
 /// @param[in]	vitesseMaillet : Ia vitesse du maillet lors de la collision
@@ -293,6 +291,7 @@ void NoeudRondelle::collisionMailletExterne(glm::vec3 vitesseMaillet, glm::vec3 
 	auto vitesseIntermediaire = -glm::reflect(vitesse_, normale) + normale * glm::dot(vitesseMaillet, -normale);
 	float moduleVitesse = glm::clamp((float)glm::length(vitesseIntermediaire), 0.f, (float) 300.);
 	vitesse_ = moduleVitesse * glm::normalize(vitesseIntermediaire);
+	//le son du maillet
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->player->jouerSon(5);
 	if (Debug::obtenirInstance().afficherCollision) Debug::obtenirInstance().afficher("Collision : maillet");
 	if (Debug::obtenirInstance().afficherVitesse) Debug::obtenirInstance().afficher("Vitesse : " + std::to_string(moduleVitesse).substr(0, 3));
