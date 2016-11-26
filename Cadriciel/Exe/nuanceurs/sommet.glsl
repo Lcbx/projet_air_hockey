@@ -11,44 +11,13 @@ uniform mat4 modelViewProjection;
 layout (location = 0) in vec3 position;
 layout (location = 1) in vec2 texCoordIn;
 //layout (location = 2) in vec3 normalIn;
-//layout (location = 3) in vec4 Color;
 
 //(varying)On communique les varaiables interpolées du nanceur de sommet vers le nuanceur de fragement 
 varying vec2 texCoord;
 
-/*layout (std140) uniform LightSourceParameters
-{
-   vec4 ambient;
-   vec4 diffuse;
-   vec4 specular;
-   vec4 position;
-   vec3 spotDirection;
-   float spotExponent;
-   float spotCutoff;            // ([0.0,90.0] ou 180.0)
-   float constantAttenuation;
-   float linearAttenuation;
-   float quadraticAttenuation;
-} LightSource[1];
-
-
-
-// Définition des paramètres globaux du modèle de lumière
-layout (std140) uniform LightModelParameters
-{
-   vec4 ambient;       // couleur ambiante
-   bool localViewer;   // observateur local ou à l'infini?
-   bool twoSide;       // éclairage sur les deux côtés ou un seul?
-} LightModel;
-
-uniform int typeIllumination;     // 0:Ambiante, 1:Phong , 2: spot*/
-
-
-
-
 /////////////////////////////////////////////////////////////////
 
 /*out Attribs {
-  vec4 couleur;
    vec3 lumier;
    vec3 normale;
    vec3 obsVec;

@@ -171,7 +171,8 @@ namespace opengl{
 				glBindBuffer(GL_ARRAY_BUFFER, handles_[bufferIndex]); ++bufferIndex;
 				/// À Faire: Envoyer les normales aux nuanceurs si nécessaire
 				glEnableVertexAttribArray(NORMAL_LOCATION);
-				glNormalPointer(GL_FLOAT, 0, nullptr);
+				glVertexAttribPointer(NORMAL_LOCATION, 3, GL_FLOAT, GL_FALSE, 0, 0);
+				//glNormalPointer(GL_FLOAT, 0, nullptr);
 				
 			}
 			if (possedeTexCoords)
@@ -253,7 +254,8 @@ namespace opengl{
 		programme_.assignerUniforme("KShininess", materiau.shininess_ * materiau.shininessStrength_);
 
 		//Light
-
+		int typeIllumination =0;
+		programme_.assignerUniforme("typeIllumination", typeIllumination);
 		
 		glPolygonMode(
 			GL_FRONT_AND_BACK,

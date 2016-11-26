@@ -13,8 +13,7 @@ uniform   vec3 Kspeculaire;
 uniform   float kshininess;
 
 // Définition des paramètres des sources de lumière
-
-   vec4 ambient = vec4(0.2,0.2,0.2,1.0);
+   vec4 LightAmbient = vec4(0.2,0.2,0.2,1.0);
    /*vec4 diffuse;
    vec4 specular;
    vec4 position;
@@ -29,7 +28,6 @@ uniform   float kshininess;
 
 
 // Définition des paramètres globaux du modèle de lumière
-
 vec4 LightModelAmbient = vec4(0.0,0.0,0.0,0.0);       // couleur ambiante
 //uniform bool localViewer;   // observateur local ou à l'infini?
 //uniform bool twoSide;       // éclairage sur les deux côtés ou un seul?
@@ -37,7 +35,7 @@ vec4 LightModelAmbient = vec4(0.0,0.0,0.0,0.0);       // couleur ambiante
 
 
    // partie 1: illumination
-//uniform int typeIllumination;     // // 0:toutes les sortes de la lumière sont activées, 1:Ambiante, 2:DirectionnellePhong , 3: spot,
+uniform int typeIllumination;     // // 0:toutes les sortes de la lumière sont activées, 1:Ambiante, 2:DirectionnellePhong , 3: spot,
 
 
 /////////////////////////////////////////////////////////////////
@@ -70,14 +68,12 @@ vec4 LightModelAmbient = vec4(0.0,0.0,0.0,0.0);       // couleur ambiante
    
 //}
 
-//vec4 calculerDirectionnelle( in vec3 L, in vec3 N, in vec3 O )
-//{
+vec4 calculerDirectionnelle( in vec3 L, in vec3 N, in vec3 O )
+{
      // calcul de la compostante ambiante
-     //LightSource[0].ambient= vec4(1,0,0,1);
-     //LightModel.ambient= vec4(1,0,0,1);
-	 //vec4 coul = FrontMaterial.emission * FrontMaterial.ambient *LightModel.ambient; 
-	 //vec4 coul = FrontMaterial.emission * FrontMaterial.ambient *vec4(1,0,0,1); 
-            //coul += FrontMaterial.ambient * vec4(1,0,0,1); 
+     vec4 coul = vec4(Kemission,1.0)+ vec4(Kambient,1.0) * LightModelAmbient; 
+     coul += vec4(Kambient,1.0)* LightAmbient; 
+
       
       //float NdotL = max( 0.0, dot( N,L) );
 	  // calcul de la composante diffuse
@@ -90,8 +86,8 @@ vec4 LightModelAmbient = vec4(0.0,0.0,0.0,0.0);       // couleur ambiante
 					   //coul +=  0.0;
 				 //else 
 					   //coul +=  FrontMaterial.specular * LightSource[0].specular * (pow( NdotHV, FrontMaterial.shininess ));    
- //return( coul );
-//}
+ return( coul );
+}
 
 
 void main(void)
@@ -104,18 +100,19 @@ void main(void)
 	  
 	  //vec4 couleurDepart = calculerDirectionnelle( L,N, O )*calculerSpot(DS,L);
 	  vec4 couleurTex = texture2D(diffuseTex,texCoord);
-       //si le type d illumination est ambiant
-     
-				
-			 //if (typeIllumination == 0) // lumière ambiante
-			//{
+	  
+	 
+       //si le type d illumination est ambiant	
+			 if (typeIllumination == 0) // lumière ambiante
+			{
 		
 	
 				//vec4 coul = vec4(Kdiffuse,1.0);
-				vec4 coul = vec4(Kemission,1.0)+ vec4(Kemission,1.0) * LightModelAmbient; 
-                coul += vec4(Kemission,1.0)* ambient; 
+				vec4 coul = vec4(Kemission,1.0)+ vec4(Kambient,1.0) * LightModelAmbient; 
+				coul += vec4(Kambient,1.0)* LightAmbient;
 				color = clamp(coul*couleurTex,0.0,1.0);
-			//}
+			}
+			
 			 //if (typeIllumination == 1) // lumière directionnelle
 					 //color = clamp((calculerDirectionnelle( L,N, O )*couleurTex),0.0,1.0);
    
