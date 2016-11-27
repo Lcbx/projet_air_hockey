@@ -88,7 +88,6 @@ namespace InterfaceGraphique
             numericUpDown1.ResetText();
 
             button1.Enabled = false;
-            label6.Show();
 
             this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
             FonctionsNatives.redimensionnerFenetre(panel1.Width, panel1.Height);
@@ -104,15 +103,10 @@ namespace InterfaceGraphique
             //masquer bouton mode edition quand on est dans le mode edition
             modeEditionToolStripMenuItem.Visible = false;
 
-            // make textbox joueur 1 et 2 uneditable
-            this.textBox4.ReadOnly = true;
-            this.textBox5.ReadOnly = true;
-
 
            ancienPosX = panel1.Location.X;
            ancienPosY = panel1.Location.Y;
 
-            panel2.Hide();
 
             this.Focus();
         }
@@ -689,6 +683,11 @@ namespace InterfaceGraphique
         {
             menuPrincipal_.Show();
             estEnModeTest = false;
+            //Livrable 3 
+            // besoin pour effacer l'affichage FTGL
+            FonctionsNatives.setPartieRapide(false);
+            FonctionsNatives.setScoreCourant(0, 1);
+            FonctionsNatives.setScoreCourant(0, 2);
             this.Hide();
             FonctionsNatives.jouerSonModeJeu(false);
             //this.Close();
@@ -1052,8 +1051,6 @@ namespace InterfaceGraphique
                 numericUpDown1.Enabled = true;
                 button1.Enabled = true;
 
-                label6.Hide();
-
                 //Position en X
                 double posX = (FonctionsNatives.getPosX());
                 posX = Math.Round(posX, 2); //arrondi la position 
@@ -1089,8 +1086,6 @@ namespace InterfaceGraphique
                 // textBox4.Enabled = false;
                 numericUpDown1.Enabled = false;
                 button1.Enabled = false;
-
-                label6.Show();
 
             }
         }
@@ -1586,7 +1581,6 @@ namespace InterfaceGraphique
                 // splitContainer1.Panel1.Hide();
                 //splitContainer1.Panel2.Hide();
 
-                panel2.Hide();
 
             }
             //si mode edition , afficher les menus a cotés + barre des menus
@@ -1636,7 +1630,6 @@ namespace InterfaceGraphique
                 //panel score afficher - panel proprietes desactiver
                 splitContainer1.Show();
 
-                panel2.Hide();
 
             }
         }
@@ -1776,8 +1769,6 @@ namespace InterfaceGraphique
                 //panel parametres
                 splitContainer1.Hide();
 
-                //score
-                panel2.Show();
 
                 //jouer musique
                 FonctionsNatives.jouerSonModeJeu(true);
@@ -1832,7 +1823,9 @@ namespace InterfaceGraphique
             {
                 //MessageBox.Show("Player 2 SCORES !","AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 nbButsJoueur2++;
-                textBox4.Text = nbButsJoueur2.ToString();
+                // Livrable 3 
+                FonctionsNatives.setScoreCourant(nbButsJoueur2, 2);
+
                 FonctionsNatives.setButDroite(false);
                 FonctionsNatives.reinitialiserPartieCourante();
                 //Console.WriteLine("But Droite !!");
@@ -1841,7 +1834,8 @@ namespace InterfaceGraphique
             {
                 //MessageBox.Show("Player 1 SCORES !", "AirHockey" , MessageBoxButtons.OK, MessageBoxIcon.Information);
                 nbButsJoueur1++;
-                textBox5.Text = nbButsJoueur1.ToString();
+                // Livrable 3 
+                FonctionsNatives.setScoreCourant(nbButsJoueur1, 1);
                 FonctionsNatives.setButGauche(false);
                 FonctionsNatives.reinitialiserPartieCourante();
                 //Console.WriteLine("But Gauche !!");
@@ -1861,14 +1855,22 @@ namespace InterfaceGraphique
                         menuPrincipal_.tournoi_.Show();
                         nbButsJoueur1 = 0;
                         nbButsJoueur2 = 0;
-                        textBox4.Text = "0"; textBox5.Text = "0";
+                        //Livrable 3
+                        FonctionsNatives.setScoreCourant(0, 1);
+                        FonctionsNatives.setScoreCourant(0, 2);
                   
 
                     }
 
                     else if (dialog == DialogResult.No) //revenir menu principal
                     {
+                
                         estEnModePartie = false;
+                    
+                        FonctionsNatives.jouerSonModeJeu(false);
+                        //Livrable 3
+                        FonctionsNatives.setScoreCourant(0, 1);
+                        FonctionsNatives.setScoreCourant(0, 2);
                         this.Hide();
                         menuPrincipal_.Show();
                         FonctionsNatives.initialiserScene();
@@ -1885,18 +1887,23 @@ namespace InterfaceGraphique
                 {
                     DialogResult dialog = MessageBox.Show("La partie est finie, vous voulez rejouer encore ? Yes pour Rejouer, No pour retourner au menu Principal",
                             "Rejouer ou retour au menu principal", MessageBoxButtons.YesNo);
-
+                    //Livrable 3
+                    // reinitaialiser le score courant pour l'affichage FTGL
+                    FonctionsNatives.setScoreCourant(0, 1);
+                    FonctionsNatives.setScoreCourant(0, 2);
                     if (dialog == DialogResult.Yes)
                     {
                         nbButsJoueur1 = 0;
                         nbButsJoueur2 = 0;
-                        textBox4.Text = "0"; textBox5.Text = "0";
                         FonctionsNatives.reinitialiserPartieCourante();
 
                     }
 
                     else if (dialog == DialogResult.No) //revenir menu principal
                     {
+
+                        FonctionsNatives.jouerSonModeJeu(false);
+
                         estEnModePartie = false;
                         this.Hide();
                         menuPrincipal_.Show();
@@ -1931,8 +1938,7 @@ namespace InterfaceGraphique
             nbButsJoueur2 = 0;
             FonctionsNatives.setButDroite(false);
             FonctionsNatives.setButGauche(false);
-            textBox4.Text = "0";
-            textBox5.Text = "0";
+          
         }
 
 
