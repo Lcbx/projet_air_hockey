@@ -88,7 +88,6 @@ namespace InterfaceGraphique
             numericUpDown1.ResetText();
 
             button1.Enabled = false;
-            label6.Show();
 
             this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
             FonctionsNatives.redimensionnerFenetre(panel1.Width, panel1.Height);
@@ -104,15 +103,10 @@ namespace InterfaceGraphique
             //masquer bouton mode edition quand on est dans le mode edition
             modeEditionToolStripMenuItem.Visible = false;
 
-            // make textbox joueur 1 et 2 uneditable
-            this.textBox4.ReadOnly = true;
-            this.textBox5.ReadOnly = true;
-
 
            ancienPosX = panel1.Location.X;
            ancienPosY = panel1.Location.Y;
 
-            panel2.Hide();
 
             this.Focus();
         }
@@ -1057,8 +1051,6 @@ namespace InterfaceGraphique
                 numericUpDown1.Enabled = true;
                 button1.Enabled = true;
 
-                label6.Hide();
-
                 //Position en X
                 double posX = (FonctionsNatives.getPosX());
                 posX = Math.Round(posX, 2); //arrondi la position 
@@ -1094,8 +1086,6 @@ namespace InterfaceGraphique
                 // textBox4.Enabled = false;
                 numericUpDown1.Enabled = false;
                 button1.Enabled = false;
-
-                label6.Show();
 
             }
         }
@@ -1591,7 +1581,6 @@ namespace InterfaceGraphique
                 // splitContainer1.Panel1.Hide();
                 //splitContainer1.Panel2.Hide();
 
-                panel2.Hide();
 
             }
             //si mode edition , afficher les menus a cotés + barre des menus
@@ -1641,7 +1630,6 @@ namespace InterfaceGraphique
                 //panel score afficher - panel proprietes desactiver
                 splitContainer1.Show();
 
-                panel2.Hide();
 
             }
         }
@@ -1781,8 +1769,6 @@ namespace InterfaceGraphique
                 //panel parametres
                 splitContainer1.Hide();
 
-                //score
-                panel2.Show();
 
                 //jouer musique
                 FonctionsNatives.jouerSonModeJeu(true);
@@ -1837,7 +1823,6 @@ namespace InterfaceGraphique
             {
                 //MessageBox.Show("Player 2 SCORES !","AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 nbButsJoueur2++;
-                textBox4.Text = nbButsJoueur2.ToString();
                 // Livrable 3 
                 FonctionsNatives.setScoreCourant(nbButsJoueur2, 2);
 
@@ -1849,7 +1834,6 @@ namespace InterfaceGraphique
             {
                 //MessageBox.Show("Player 1 SCORES !", "AirHockey" , MessageBoxButtons.OK, MessageBoxIcon.Information);
                 nbButsJoueur1++;
-                textBox5.Text = nbButsJoueur1.ToString();
                 // Livrable 3 
                 FonctionsNatives.setScoreCourant(nbButsJoueur1, 1);
                 FonctionsNatives.setButGauche(false);
@@ -1874,7 +1858,6 @@ namespace InterfaceGraphique
                         //Livrable 3
                         FonctionsNatives.setScoreCourant(0, 1);
                         FonctionsNatives.setScoreCourant(0, 2);
-                        textBox4.Text = "0"; textBox5.Text = "0";
                   
 
                     }
@@ -1909,7 +1892,6 @@ namespace InterfaceGraphique
                     {
                         nbButsJoueur1 = 0;
                         nbButsJoueur2 = 0;
-                        textBox4.Text = "0"; textBox5.Text = "0";
                         FonctionsNatives.reinitialiserPartieCourante();
 
                     }
@@ -1950,8 +1932,7 @@ namespace InterfaceGraphique
             nbButsJoueur2 = 0;
             FonctionsNatives.setButDroite(false);
             FonctionsNatives.setButGauche(false);
-            textBox4.Text = "0";
-            textBox5.Text = "0";
+          
         }
 
 

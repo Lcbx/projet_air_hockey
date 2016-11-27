@@ -114,8 +114,11 @@ namespace InterfaceGraphique
                 nt_cNom[i] = cNom[i];
             nt_cNom[nomJoueurVirtuelCourant_.Length] = '\0';
 
-            numericUpDown2.Value = Convert.ToDecimal(FonctionsNatives.obtenirVitesseProfil(nt_cNom));
-            numericUpDown3.Value = Convert.ToDecimal(FonctionsNatives.obtenirProbabiliteProfil(nt_cNom));
+           // numericUpDown2.Value = Convert.ToDecimal(FonctionsNatives.obtenirVitesseProfil(nt_cNom));
+            //numericUpDown3.Value = Convert.ToDecimal(FonctionsNatives.obtenirProbabiliteProfil(nt_cNom));
+
+            trackBar1.Value = Convert.ToInt32(FonctionsNatives.obtenirVitesseProfil(nt_cNom));
+            trackBar2.Value = Convert.ToInt32(FonctionsNatives.obtenirProbabiliteProfil(nt_cNom) * 10);
 
             creationProfil.Enabled = false;
 
@@ -594,8 +597,8 @@ namespace InterfaceGraphique
         private void ajouter_Click(object sender, EventArgs e)
         {
             textBox1.Clear();
-            numericUpDown2.ResetText();
-            numericUpDown3.ResetText();
+            //numericUpDown2.ResetText();
+            //numericUpDown3.ResetText();
 
             creationProfil.Enabled = true;
             ajouterActif = true;
@@ -626,8 +629,12 @@ namespace InterfaceGraphique
                     nt_cNom[i] = cNom[i];
                 nt_cNom[nomJoueurVirtuelCourant_.Length] = '\0';
 
-                numericUpDown2.Value = Convert.ToDecimal(FonctionsNatives.obtenirVitesseProfil(nt_cNom));
-                numericUpDown3.Value = Convert.ToDecimal(FonctionsNatives.obtenirProbabiliteProfil(nt_cNom));
+                trackBar1.Value = Convert.ToInt32(FonctionsNatives.obtenirVitesseProfil(nt_cNom));
+                trackBar2.Value = Convert.ToInt32(FonctionsNatives.obtenirProbabiliteProfil(nt_cNom) * 10);
+
+
+                // numericUpDown2.Value = Convert.ToDecimal(FonctionsNatives.obtenirVitesseProfil(nt_cNom));
+                //numericUpDown3.Value = Convert.ToDecimal(FonctionsNatives.obtenirProbabiliteProfil(nt_cNom));
             }
         }
 
@@ -696,9 +703,12 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void appliquer2_Click(object sender, EventArgs e)
         {
-            int v = Convert.ToInt32(numericUpDown2.Value);
-            decimal prob = numericUpDown3.Value;
-            float p = (float)prob;
+            int v = Convert.ToInt32(trackBar1.Value);
+            decimal prob = (trackBar2.Value) ;
+
+            //int v = Convert.ToInt32(numericUpDown2.Value);
+            //decimal prob = numericUpDown3.Value;
+            float p = (float)prob / 10;
             string nomP = textBox1.Text.ToString();
 
             if (ajouterActif)
@@ -706,24 +716,26 @@ namespace InterfaceGraphique
                 if (!(listDeProfils.Items.Contains(textBox1.Text)))
                 {
                     //wajdi - sauvegarder 
-                    if (numericUpDown2.Text != "" && numericUpDown3.Text != "" )
-                    {
+                    //if (numericUpDown2.Text != "" && numericUpDown3.Text != "" )
+                   // {
                         nomsProfils.Add(nomP);
                         listDeProfils.Items.Add(nomP);
 
                         //initiliaser 
                         textBox1.Clear();
-                        numericUpDown2.ResetText();
-                        numericUpDown3.ResetText();
+                      //  numericUpDown2.ResetText();
+                      //  numericUpDown3.ResetText();
                         creationProfil.Enabled = false;
 
+                    Console.WriteLine("name: " + nomP + " son vitesse: " + v + " son proba" + p);
                         FonctionsNatives.sauvegarderProfil(nomP, v, p);
-                    }
+
+                  /*  }
                     else
                     {
                         MessageBox.Show("Verifier les valeurs entrées", "erreur",
                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    } 
+                    } */
                }
             }
 
@@ -808,6 +820,21 @@ namespace InterfaceGraphique
 
         private void tabPage1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            label1.Text = trackBar1.Value.ToString();
+        }
+
+        private void trackBar2_ValueChanged(object sender, EventArgs e)
+        {
+            decimal prob = (trackBar2.Value);
+            float pro = (float)prob / 10;
+            Console.WriteLine(pro);
+
+            label9.Text = pro.ToString();
 
         }
     }
