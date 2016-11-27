@@ -143,6 +143,7 @@ namespace opengl{
 #if 1
 			Programme::Start(programme_);
 			programme_.assignerUniforme("modelViewProjection", m);
+			programme_.assignerUniforme("colorIn", glm::vec4(0.f, 0.f, 0.f, 1.f));
 #else
 			glMatrixMode(GL_PROJECTION);
 			glLoadMatrixf(glm::value_ptr(m));

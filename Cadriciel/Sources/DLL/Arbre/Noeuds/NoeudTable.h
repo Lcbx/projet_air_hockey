@@ -119,15 +119,15 @@ private:
 	/// la hauteur des murs 
 	double hauteur_{ 0.0 };
 	/// la couleur de la table 
-	glm::vec4 couleurTable_ = { 1., 1., 1., 1. };
+	glm::vec4 couleurTable_ = { 1.f, 1.f, 1.f, 0.f };
 	/// la couleur des murs autour de la table
-	glm::vec4 couleurMurs_ = { 0.662745, 0.662745, 0.662745, 1. };
+	glm::vec4 couleurMurs_ = { 0.662745f, 0.662745f, 0.662745f, 1.f };
 	/// la couleur des 2 buts 
-	glm::vec4 couleurButs_{ 1.,1.,0.,1. };
+	glm::vec4 couleurButs_{ 1.f,1.f,0.f,0.f };
 	/// la couleur des lignes sur le terrain
-	glm::vec4 couleurLignes_{ 1.,0.,0.,1. };
+	glm::vec4 couleurLignes_{ 1.f,0.f,0.f,0.f };
 	/// la couleur du contour
-	glm::vec4 couleurContour_{ 1.,0.,0.,1. };
+	glm::vec4 couleurContour_{ 1.f,0.f,0.f,0.f };
 
 	// les 8 points de controle de la table
 	/*
