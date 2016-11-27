@@ -1864,7 +1864,10 @@ namespace InterfaceGraphique
 
                     else if (dialog == DialogResult.No) //revenir menu principal
                     {
+                
                         estEnModePartie = false;
+                    
+                        FonctionsNatives.jouerSonModeJeu(false);
                         //Livrable 3
                         FonctionsNatives.setScoreCourant(0, 1);
                         FonctionsNatives.setScoreCourant(0, 2);
@@ -1898,6 +1901,9 @@ namespace InterfaceGraphique
 
                     else if (dialog == DialogResult.No) //revenir menu principal
                     {
+
+                        FonctionsNatives.jouerSonModeJeu(false);
+
                         estEnModePartie = false;
                         this.Hide();
                         menuPrincipal_.Show();
