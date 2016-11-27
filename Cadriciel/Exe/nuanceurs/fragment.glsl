@@ -13,8 +13,8 @@ uniform   vec3 Kspeculaire;
 uniform   float kshininess;
 
 // Définition des paramètres des sources de lumière
-   vec4 LightAmbient = vec4(0.2,0.2,0.2,1.0);
-   /*vec4 diffuse;
+   vec4 LightSourceAmbient = vec4(0.2,0.2,0.2,1.0);
+   vec4 LightSourcediffuse;
    vec4 specular;
    vec4 position;
    vec3 spotDirection;
@@ -40,13 +40,12 @@ uniform int typeIllumination;     // // 0:toutes les sortes de la lumière sont 
 
 /////////////////////////////////////////////////////////////////
 
-/*in Attribs {
-   vec4 couleur;
+in Attribs {
    vec3 lumier;
    vec3 normale;
    vec3 obsVec;
 
-} AttribsIn;*/
+} AttribsIn;
 
 
 
@@ -72,12 +71,12 @@ vec4 calculerDirectionnelle( in vec3 L, in vec3 N, in vec3 O )
 {
      // calcul de la compostante ambiante
      vec4 coul = vec4(Kemission,1.0)+ vec4(Kambient,1.0) * LightModelAmbient; 
-     coul += vec4(Kambient,1.0)* LightAmbient; 
+     coul += vec4(Kambient,1.0)* LightSourceAmbient; 
 
-      
+      // calcul de la composante diffuse
       //float NdotL = max( 0.0, dot( N,L) );
-	  // calcul de la composante diffuse
-	        //coul += FrontMaterial.diffuse * LightSource[0].diffuse * NdotL;
+	  
+	        //coul += Kdiffuse * LightSource[0].diffuse * NdotL;
 	  // calcul de la composante speculaire 
 	              //float NdotHV ;
 					   //NdotHV = max( 0.0, dot( normalize( L + O), N)  );
@@ -93,9 +92,9 @@ vec4 calculerDirectionnelle( in vec3 L, in vec3 N, in vec3 O )
 void main(void)
 {
    
-	  //vec3 N = normalize(AttribsIn.normale);
-	  //vec3 L = normalize(AttribsIn.lumier );
-	  //vec3 O = normalize(AttribsIn.obsVec);
+	  vec3 N = normalize(AttribsIn.normale);
+	  vec3 L = normalize(AttribsIn.lumier );
+	  vec3 O = normalize(AttribsIn.obsVec);
 	  //vec3 DS = normalize(-LightSource[0].spotDirection);
 	  
 	  //vec4 couleurDepart = calculerDirectionnelle( L,N, O )*calculerSpot(DS,L);
@@ -113,8 +112,8 @@ void main(void)
 				color = clamp(coul*couleurTex,0.0,1.0);
 			}
 			
-			 //if (typeIllumination == 1) // lumière directionnelle
-					 //color = clamp((calculerDirectionnelle( L,N, O )*couleurTex),0.0,1.0);
+			 if (typeIllumination == 1) // lumière directionnelle
+					 color = clamp((calculerDirectionnelle( L,N, O )*couleurTex),0.0,1.0);
    
 			 //if (typeIllumination == 2)
 				//color = clamp(calculerSpot(DS,L)* AttribsIn.couleur,0.0,1.0);// les spots
