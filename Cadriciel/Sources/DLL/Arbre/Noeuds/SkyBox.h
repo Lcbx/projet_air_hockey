@@ -24,7 +24,12 @@
 class SkyBox : public NoeudAbstrait
 {
 	///la boite d'environnement sous-jacente, tirée du namespace utilitaire
-	mutable utilitaire::BoiteEnvironnement boite_{ 
+	mutable utilitaire::BoiteEnvironnement boite_{
+		/* skybox mountain pas correcte
+		"media/Mountain/posx.jpg","media/Mountain/negx.jpg",
+		"media/Mountain/posy.jpg","media/Mountain/negy.jpg",
+		"media/Mountain/posz.jpg","media/Mountain/negz.jpg",
+		*/
 		"media/TropicalSunnyDay/TropicalSunnyDayLeft2048.png",
 		"media/TropicalSunnyDay/TropicalSunnyDayRight2048.png",
 		"media/TropicalSunnyDay/TropicalSunnyDayUp2048.png",

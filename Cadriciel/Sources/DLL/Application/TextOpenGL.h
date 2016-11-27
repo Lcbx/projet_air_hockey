@@ -10,7 +10,7 @@
 #define __TEXTOPENGL_H__
 
 //#include <map>
-//#include <string>
+#include <string>
 
 ///////////////////////////////////////////////////////////////////////////
 /// @class TextOpenGL
@@ -29,12 +29,15 @@ public:
 	bool initialiserFreeType();
 	bool initialiserFTGL();
 	bool afficher();
-	
+	void afficherChrono();
 	
 private:
 	// noms des joueurs
 	// score 
 	// temps
-
+	int millisecondes_;
+	int secondes_;
+	int minutes_;
+	std::string temps_;
 };
 #endif

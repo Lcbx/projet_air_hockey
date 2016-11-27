@@ -692,6 +692,8 @@ namespace InterfaceGraphique
             //Livrable 3 
             // besoin pour effacer l'affichage FTGL
             FonctionsNatives.setPartieRapide(false);
+            FonctionsNatives.setScoreCourant(0, 1);
+            FonctionsNatives.setScoreCourant(0, 2);
             this.Hide();
             FonctionsNatives.jouerSonModeJeu(false);
             //this.Close();

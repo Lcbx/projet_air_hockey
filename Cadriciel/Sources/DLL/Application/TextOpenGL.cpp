@@ -11,6 +11,7 @@
 #include "FacadeModele.h"
 #include "Vue.h"
 #include "Projection.h"
+#include "CompteurAffichage.h"
 
 #include "../ArbreRenduINF2990.h"
 #include "GL/glew.h"
@@ -83,7 +84,8 @@ bool TextOpenGL::initialiserFTGL()
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn bool TextOpenGL::afficher()
-/// @brief : afficher un texte avec FTGL
+/// @brief : afficher un texte avec FTGL 
+/// affiche les noms des joueurs, le score et le temps ecoule'
 /// @return bool
 ///
 ////////////////////////////////////////////////////////////////////////
@@ -136,32 +138,58 @@ bool TextOpenGL::afficher()
 
 
 	// Taille du texte
-	font.FaceSize(20);
+	font.FaceSize(30);
 
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glDisable(GL_LIGHTING);
 	glDisable(GL_DEPTH_TEST);
-	glColor4d(1.0, 0.0, 0.0, 1.0);
+	//glClear(GL_COLOR_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glColor3ub(255, 0, 0);
 
 	// TODO 
-	// 1) afficher le texte selon les dimensions de la fenetre (viewport)
-	// 2) afficher le score  des joueurs
 	// 3) afficher le chronometre (temps ecoule' des le debt de la partie
-	
+	// bug
+	// 1) changer le nom du joueur 2 a player2 quand on sort de mode partie rapide -> virtuel
+	// 2) reset aussi le score affiche' en opengl qd on pese sur la touche espace
+
+
 	// afficher les noms des joueurs	
 	// joueur a gauche
 	font.Render(nom2, -1, FTPoint(50, 10, 0));
-	font.Render(score2, -1, FTPoint(50, 50, 0));
+	font.Render(score2, -1, FTPoint(75, 50, 0));
 	// joeur a droite
-	font.Render(nom1, -1, FTPoint(W-100, 10, 0));
-	font.Render(score1, -1, FTPoint(W - 100, 50, 0));
+	font.Render(nom1, -1, FTPoint(W-150, 10, 0));
+	font.Render(score1, -1, FTPoint(W - 125, 50, 0));
+
+	//TODO --  afficher temps
+	//afficherChrono();
 
 	glPopAttrib();
 
 	// release memory
 	delete[] nom1;
 	delete[] nom2;
+	delete[] score1;
+	delete[] score2;
 
 	return true;
 }
+////////////////////////////////////////////////////////////////////////
+///
+/// @fnvoid TextOpenGL::afficherChrono()
+/// @brief : afficher le temps ecoule' depuis le debut de la partie
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void TextOpenGL::afficherChrono()
+{
+	// compteur
+	auto compteur = utilitaire::CompteurAffichage::obtenirInstance();
+	//compteur->reinitialiser();
+	compteur->signalerAffichage();
+	// if
+	std::cout << "Nombre affichage seconde = " << compteur->obtenirAffichagesSeconde() << std::endl;
 
+}
