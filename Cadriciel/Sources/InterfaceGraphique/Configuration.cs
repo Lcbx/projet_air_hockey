@@ -727,7 +727,6 @@ namespace InterfaceGraphique
                       //  numericUpDown3.ResetText();
                         creationProfil.Enabled = false;
 
-                    Console.WriteLine("name: " + nomP + " son vitesse: " + v + " son proba" + p);
                         FonctionsNatives.sauvegarderProfil(nomP, v, p);
 
                   /*  }
@@ -808,31 +807,34 @@ namespace InterfaceGraphique
             FonctionsNatives.debogConfig(debogageActif_, debogCollision_, debogVitesse_, eclairageActif_, effetVisuelActif_);
          }
 
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ajoutProfil_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        /////////////////////////////////////////////////////////////////////////
+        /// @fn  private void trackBar1_ValueChanged(object sender, EventArgs e)
+        /// 
+        /// @brief update le label au dessus du trackbar 1
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
             label1.Text = trackBar1.Value.ToString();
         }
 
+
+        /////////////////////////////////////////////////////////////////////////
+        /// @fn  private void trackBar2_ValueChanged(object sender, EventArgs e)
+        /// 
+        /// @brief update le label au dessus du trackbar 2
+        /// @param[in] aucun
+        ///
+        /// @return aucune
+        //
+        ////////////////////////////////////////////////////////////////////////////////////////// 
         private void trackBar2_ValueChanged(object sender, EventArgs e)
         {
             decimal prob = (trackBar2.Value);
             float pro = (float)prob / 10;
-            Console.WriteLine(pro);
 
             label9.Text = pro.ToString();
 

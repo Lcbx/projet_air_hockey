@@ -116,7 +116,6 @@
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // groupBox1
             // 
@@ -285,7 +284,6 @@
             // 
             resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // tabPage3
             // 
