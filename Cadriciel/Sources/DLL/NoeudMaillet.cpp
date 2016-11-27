@@ -64,12 +64,12 @@ NoeudMaillet::~NoeudMaillet()
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudMaillet::afficherConcret(const glm::mat4& vueProjection) const
+void NoeudMaillet::afficherConcret(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 {
 	// Affichage du modèle.
-	vbo_->dessiner(vueProjection);
+	vbo_->dessiner(modele, vue, projection);
 	// on retrace pour que le rayon d'attraction soit correctement affiche'
-	vbo_->dessiner(vueProjection);
+	vbo_->dessiner(modele, vue, projection);
 }
 
 
