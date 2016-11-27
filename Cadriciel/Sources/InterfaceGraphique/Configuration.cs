@@ -796,8 +796,20 @@ namespace InterfaceGraphique
             FonctionsNatives.debogConfig(debogageActif_, debogCollision_, debogVitesse_, eclairageActif_, effetVisuelActif_);
          }
 
+        private void label7_Click(object sender, EventArgs e)
+        {
 
+        }
 
+        private void ajoutProfil_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     [StructLayout(LayoutKind.Sequential)]

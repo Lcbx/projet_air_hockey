@@ -117,33 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tabControl1.Appearance" type="System.Windows.Forms.TabAppearance, System.Windows.Forms">
-    <value>Buttons</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label6.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9pt</value>
-  </data>
-  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 104</value>
-  </data>
-  <data name="label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 15</value>
-  </data>
-  <data name="label6.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>Cliquer sur un bouton , puis appuyer sur une touche</value>
-  </data>
   <data name="&gt;&gt;label6.Name" xml:space="preserve">
     <value>label6</value>
   </data>
@@ -155,21 +128,6 @@
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="haut.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 170</value>
-  </data>
-  <data name="haut.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="haut.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 40</value>
-  </data>
-  <data name="haut.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="haut.Text" xml:space="preserve">
-    <value>W</value>
   </data>
   <data name="&gt;&gt;haut.Name" xml:space="preserve">
     <value>haut</value>
@@ -183,21 +141,6 @@
   <data name="&gt;&gt;haut.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="bas.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 240</value>
-  </data>
-  <data name="bas.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="bas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 40</value>
-  </data>
-  <data name="bas.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="bas.Text" xml:space="preserve">
-    <value>S</value>
-  </data>
   <data name="&gt;&gt;bas.Name" xml:space="preserve">
     <value>bas</value>
   </data>
@@ -209,21 +152,6 @@
   </data>
   <data name="&gt;&gt;bas.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="droite.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 240</value>
-  </data>
-  <data name="droite.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="droite.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 40</value>
-  </data>
-  <data name="droite.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="droite.Text" xml:space="preserve">
-    <value>D</value>
   </data>
   <data name="&gt;&gt;droite.Name" xml:space="preserve">
     <value>droite</value>
@@ -237,21 +165,6 @@
   <data name="&gt;&gt;droite.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="gauche.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 240</value>
-  </data>
-  <data name="gauche.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="gauche.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 40</value>
-  </data>
-  <data name="gauche.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="gauche.Text" xml:space="preserve">
-    <value>A</value>
-  </data>
   <data name="&gt;&gt;gauche.Name" xml:space="preserve">
     <value>gauche</value>
   </data>
@@ -263,24 +176,6 @@
   </data>
   <data name="&gt;&gt;gauche.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 150</value>
-  </data>
-  <data name="label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 18</value>
-  </data>
-  <data name="label5.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>Haut</value>
   </data>
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>
@@ -294,24 +189,6 @@
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>230, 219</value>
-  </data>
-  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 18</value>
-  </data>
-  <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>Droite</value>
-  </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
   </data>
@@ -323,21 +200,6 @@
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 219</value>
-  </data>
-  <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 19</value>
-  </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Bas</value>
   </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
@@ -351,21 +213,6 @@
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 219</value>
-  </data>
-  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 19</value>
-  </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Gauche</value>
-  </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
@@ -378,47 +225,14 @@
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8pt</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 29</value>
-  </data>
-  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 39</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>   Spécifier les touches du clavier pour le contrôle du maillet
-du deuxième joueur. Ces touches permettent de déplacer 
-le maillet de gauche à droite et de haut en bas.</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="groupBox1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11pt</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 26</value>
+    <value>102, 27</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
@@ -426,8 +240,9 @@ le maillet de gauche à droite et de haut en bas.</value>
     <value>2, 2, 2, 2</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 319</value>
+    <value>397, 319</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -447,19 +262,19 @@ le maillet de gauche à droite et de haut en bas.</value>
     <value>0</value>
   </data>
   <data name="réintialisation.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9pt</value>
+    <value>Arial, 10pt</value>
   </data>
   <data name="réintialisation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 367</value>
+    <value>56, 367</value>
   </data>
   <data name="réintialisation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 26</value>
+    <value>119, 36</value>
   </data>
   <data name="réintialisation.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
   <data name="réintialisation.Text" xml:space="preserve">
-    <value>Rénitialisation</value>
+    <value>Rénitialiser</value>
   </data>
   <data name="&gt;&gt;réintialisation.Name" xml:space="preserve">
     <value>réintialisation</value>
@@ -474,19 +289,19 @@ le maillet de gauche à droite et de haut en bas.</value>
     <value>1</value>
   </data>
   <data name="appliquer.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8pt</value>
+    <value>Arial, 10pt</value>
   </data>
   <data name="appliquer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 368</value>
+    <value>434, 374</value>
   </data>
   <data name="appliquer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 26</value>
+    <value>119, 36</value>
   </data>
   <data name="appliquer.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="appliquer.Text" xml:space="preserve">
-    <value>Appliquer</value>
+    <value>Sauvegarder</value>
   </data>
   <data name="&gt;&gt;appliquer.Name" xml:space="preserve">
     <value>appliquer</value>
@@ -504,7 +319,7 @@ le maillet de gauche à droite et de haut en bas.</value>
     <value>Microsoft Sans Serif, 15pt</value>
   </data>
   <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 28</value>
+    <value>4, 25</value>
   </data>
   <data name="tabPage1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -513,7 +328,7 @@ le maillet de gauche à droite et de haut en bas.</value>
     <value>2, 2, 2, 2</value>
   </data>
   <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>524, 437</value>
+    <value>584, 455</value>
   </data>
   <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -534,10 +349,10 @@ le maillet de gauche à droite et de haut en bas.</value>
     <value>0</value>
   </data>
   <data name="Sauvegarder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>326, 386</value>
+    <value>434, 374</value>
   </data>
   <data name="Sauvegarder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 32</value>
+    <value>119, 36</value>
   </data>
   <data name="Sauvegarder.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -557,14 +372,11 @@ le maillet de gauche à droite et de haut en bas.</value>
   <data name="&gt;&gt;Sauvegarder.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="typeJoueur.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 96</value>
+    <value>76, 96</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 16</value>
@@ -591,16 +403,16 @@ le maillet de gauche à droite et de haut en bas.</value>
     <value>True</value>
   </data>
   <data name="type.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 8pt</value>
+    <value>Microsoft Sans Serif, 11.25pt</value>
   </data>
   <data name="type.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="type.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 48</value>
+    <value>101, 40</value>
   </data>
   <data name="type.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 14</value>
+    <value>242, 18</value>
   </data>
   <data name="type.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -627,7 +439,7 @@ le maillet de gauche à droite et de haut en bas.</value>
     <value>Joueur virtuel</value>
   </data>
   <data name="comboBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 96</value>
+    <value>163, 96</value>
   </data>
   <data name="comboBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>221, 24</value>
@@ -651,10 +463,10 @@ le maillet de gauche à droite et de haut en bas.</value>
     <value>2</value>
   </data>
   <data name="typeJoueur.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 224</value>
+    <value>70, 215</value>
   </data>
   <data name="typeJoueur.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 142</value>
+    <value>432, 142</value>
   </data>
   <data name="typeJoueur.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -674,9 +486,6 @@ le maillet de gauche à droite et de haut en bas.</value>
   <data name="&gt;&gt;typeJoueur.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="scoreGangant.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="scorePourGagner.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -684,7 +493,7 @@ le maillet de gauche à droite et de haut en bas.</value>
     <value>NoControl</value>
   </data>
   <data name="scorePourGagner.Location" type="System.Drawing.Point, System.Drawing">
-    <value>48, 125</value>
+    <value>74, 101</value>
   </data>
   <data name="scorePourGagner.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 16</value>
@@ -708,7 +517,7 @@ le maillet de gauche à droite et de haut en bas.</value>
     <value>0</value>
   </data>
   <data name="numericUpDown1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>137, 122</value>
+    <value>163, 98</value>
   </data>
   <data name="numericUpDown1.Size" type="System.Drawing.Size, System.Drawing">
     <value>221, 23</value>
@@ -732,20 +541,19 @@ le maillet de gauche à droite et de haut en bas.</value>
     <value>True</value>
   </data>
   <data name="label7.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 7.875pt</value>
+    <value>Microsoft Sans Serif, 11.25pt</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 53</value>
+    <value>16, 40</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 28</value>
+    <value>409, 18</value>
   </data>
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
-    <value>Faire entrer le nombre de buts nécessaires pour gagner une partie.
-Le nombre est entre 1 et 5</value>
+    <value>Entrer le nombre de buts nécessaires pour gagner une partie.</value>
   </data>
   <data name="&gt;&gt;label7.Name" xml:space="preserve">
     <value>label7</value>
@@ -760,10 +568,10 @@ Le nombre est entre 1 et 5</value>
     <value>2</value>
   </data>
   <data name="scoreGangant.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 39</value>
+    <value>70, 25</value>
   </data>
   <data name="scoreGangant.Size" type="System.Drawing.Size, System.Drawing">
-    <value>449, 174</value>
+    <value>431, 174</value>
   </data>
   <data name="scoreGangant.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -784,7 +592,7 @@ Le nombre est entre 1 et 5</value>
     <value>2</value>
   </data>
   <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 28</value>
+    <value>4, 25</value>
   </data>
   <data name="tabPage2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -793,7 +601,7 @@ Le nombre est entre 1 et 5</value>
     <value>2, 2, 2, 2</value>
   </data>
   <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>524, 437</value>
+    <value>584, 455</value>
   </data>
   <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -817,10 +625,10 @@ Le nombre est entre 1 et 5</value>
     <value>NoControl</value>
   </data>
   <data name="SauvegarderDebogage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>284, 388</value>
+    <value>434, 374</value>
   </data>
   <data name="SauvegarderDebogage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 29</value>
+    <value>119, 36</value>
   </data>
   <data name="SauvegarderDebogage.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -839,24 +647,6 @@ Le nombre est entre 1 et 5</value>
   </data>
   <data name="&gt;&gt;SauvegarderDebogage.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="checkBox5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="checkBox5.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9pt</value>
-  </data>
-  <data name="checkBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 40</value>
-  </data>
-  <data name="checkBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 19</value>
-  </data>
-  <data name="checkBox5.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="checkBox5.Text" xml:space="preserve">
-    <value>Identification de la limite d’attraction des portails</value>
   </data>
   <data name="&gt;&gt;checkBox5.Name" xml:space="preserve">
     <value>checkBox5</value>
@@ -898,6 +688,558 @@ Le nombre est entre 1 et 5</value>
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;checkBox4.Name" xml:space="preserve">
+    <value>checkBox4</value>
+  </data>
+  <data name="&gt;&gt;checkBox4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox4.Parent" xml:space="preserve">
+    <value>console</value>
+  </data>
+  <data name="&gt;&gt;checkBox4.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;checkBox3.Name" xml:space="preserve">
+    <value>checkBox3</value>
+  </data>
+  <data name="&gt;&gt;checkBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox3.Parent" xml:space="preserve">
+    <value>console</value>
+  </data>
+  <data name="&gt;&gt;checkBox3.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;checkBox2.Name" xml:space="preserve">
+    <value>checkBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox2.Parent" xml:space="preserve">
+    <value>console</value>
+  </data>
+  <data name="&gt;&gt;checkBox2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="console.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="console.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9pt, style=Bold</value>
+  </data>
+  <data name="console.Location" type="System.Drawing.Point, System.Drawing">
+    <value>26, 56</value>
+  </data>
+  <data name="console.Size" type="System.Drawing.Size, System.Drawing">
+    <value>345, 176</value>
+  </data>
+  <data name="console.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="console.Text" xml:space="preserve">
+    <value>Sortie à la console</value>
+  </data>
+  <data name="&gt;&gt;console.Name" xml:space="preserve">
+    <value>console</value>
+  </data>
+  <data name="&gt;&gt;console.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;console.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;console.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="checkBox1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBox1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10pt</value>
+  </data>
+  <data name="checkBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 31</value>
+  </data>
+  <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 20</value>
+  </data>
+  <data name="checkBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="checkBox1.Text" xml:space="preserve">
+    <value>Activer le débogage.</value>
+  </data>
+  <data name="&gt;&gt;checkBox1.Name" xml:space="preserve">
+    <value>checkBox1</value>
+  </data>
+  <data name="&gt;&gt;checkBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox1.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="groupBox2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10pt, style=Bold</value>
+  </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>110, 22</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 346</value>
+  </data>
+  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Affichage de débogage</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabPage3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 25</value>
+  </data>
+  <data name="tabPage3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tabPage3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>584, 455</value>
+  </data>
+  <data name="tabPage3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tabPage3.Text" xml:space="preserve">
+    <value>Débogage</value>
+  </data>
+  <data name="&gt;&gt;tabPage3.Name" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;tabPage3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage3.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPage3.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown3.Name" xml:space="preserve">
+    <value>numericUpDown3</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown3.Parent" xml:space="preserve">
+    <value>tabPage4</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;creationProfil.Name" xml:space="preserve">
+    <value>creationProfil</value>
+  </data>
+  <data name="&gt;&gt;creationProfil.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;creationProfil.Parent" xml:space="preserve">
+    <value>tabPage4</value>
+  </data>
+  <data name="&gt;&gt;creationProfil.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown2.Name" xml:space="preserve">
+    <value>numericUpDown2</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown2.Parent" xml:space="preserve">
+    <value>tabPage4</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;listDeProfil.Name" xml:space="preserve">
+    <value>listDeProfil</value>
+  </data>
+  <data name="&gt;&gt;listDeProfil.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;listDeProfil.Parent" xml:space="preserve">
+    <value>tabPage4</value>
+  </data>
+  <data name="&gt;&gt;listDeProfil.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;appliquer2.Name" xml:space="preserve">
+    <value>appliquer2</value>
+  </data>
+  <data name="&gt;&gt;appliquer2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;appliquer2.Parent" xml:space="preserve">
+    <value>tabPage4</value>
+  </data>
+  <data name="&gt;&gt;appliquer2.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tabPage4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 25</value>
+  </data>
+  <data name="tabPage4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tabPage4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>584, 455</value>
+  </data>
+  <data name="tabPage4.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tabPage4.Text" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="&gt;&gt;tabPage4.Name" xml:space="preserve">
+    <value>tabPage4</value>
+  </data>
+  <data name="&gt;&gt;tabPage4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage4.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPage4.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tabControl1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10pt</value>
+  </data>
+  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tabControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>592, 484</value>
+  </data>
+  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label6.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 59</value>
+  </data>
+  <data name="label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 20</value>
+  </data>
+  <data name="label6.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Cliquer sur un bouton , puis appuyer sur une touche</value>
+  </data>
+  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+    <value>label6</value>
+  </data>
+  <data name="&gt;&gt;label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="haut.Location" type="System.Drawing.Point, System.Drawing">
+    <value>165, 147</value>
+  </data>
+  <data name="haut.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="haut.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 40</value>
+  </data>
+  <data name="haut.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="haut.Text" xml:space="preserve">
+    <value>W</value>
+  </data>
+  <data name="&gt;&gt;haut.Name" xml:space="preserve">
+    <value>haut</value>
+  </data>
+  <data name="&gt;&gt;haut.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;haut.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;haut.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="bas.Location" type="System.Drawing.Point, System.Drawing">
+    <value>166, 217</value>
+  </data>
+  <data name="bas.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="bas.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 40</value>
+  </data>
+  <data name="bas.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="bas.Text" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="&gt;&gt;bas.Name" xml:space="preserve">
+    <value>bas</value>
+  </data>
+  <data name="&gt;&gt;bas.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bas.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;bas.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="droite.Location" type="System.Drawing.Point, System.Drawing">
+    <value>262, 217</value>
+  </data>
+  <data name="droite.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="droite.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 40</value>
+  </data>
+  <data name="droite.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="droite.Text" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="&gt;&gt;droite.Name" xml:space="preserve">
+    <value>droite</value>
+  </data>
+  <data name="&gt;&gt;droite.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;droite.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;droite.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="gauche.Location" type="System.Drawing.Point, System.Drawing">
+    <value>73, 217</value>
+  </data>
+  <data name="gauche.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="gauche.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 40</value>
+  </data>
+  <data name="gauche.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="gauche.Text" xml:space="preserve">
+    <value>A</value>
+  </data>
+  <data name="&gt;&gt;gauche.Name" xml:space="preserve">
+    <value>gauche</value>
+  </data>
+  <data name="&gt;&gt;gauche.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gauche.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;gauche.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>172, 127</value>
+  </data>
+  <data name="label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 18</value>
+  </data>
+  <data name="label5.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Haut</value>
+  </data>
+  <data name="&gt;&gt;label5.Name" xml:space="preserve">
+    <value>label5</value>
+  </data>
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>274, 196</value>
+  </data>
+  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 18</value>
+  </data>
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Droite</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>174, 196</value>
+  </data>
+  <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 19</value>
+  </data>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Bas</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>73, 196</value>
+  </data>
+  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 19</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Gauche</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="checkBox5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBox5.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9pt</value>
+  </data>
+  <data name="checkBox5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 40</value>
+  </data>
+  <data name="checkBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>289, 19</value>
+  </data>
+  <data name="checkBox5.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="checkBox5.Text" xml:space="preserve">
+    <value>Identification de la limite d’attraction des portails</value>
+  </data>
+  <data name="&gt;&gt;checkBox5.Name" xml:space="preserve">
+    <value>checkBox5</value>
+  </data>
+  <data name="&gt;&gt;checkBox5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox5.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;checkBox5.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="checkBox4.AutoSize" type="System.Boolean, mscorlib">
@@ -990,122 +1332,8 @@ Le nombre est entre 1 et 5</value>
   <data name="&gt;&gt;checkBox2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="console.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="console.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9pt, style=Bold</value>
-  </data>
-  <data name="console.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 56</value>
-  </data>
-  <data name="console.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 176</value>
-  </data>
-  <data name="console.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="console.Text" xml:space="preserve">
-    <value>Sortie à la console</value>
-  </data>
-  <data name="&gt;&gt;console.Name" xml:space="preserve">
-    <value>console</value>
-  </data>
-  <data name="&gt;&gt;console.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;console.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;console.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="checkBox1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="checkBox1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 10pt</value>
-  </data>
-  <data name="checkBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 31</value>
-  </data>
-  <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 20</value>
-  </data>
-  <data name="checkBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="checkBox1.Text" xml:space="preserve">
-    <value>Activer le débogage.</value>
-  </data>
-  <data name="&gt;&gt;checkBox1.Name" xml:space="preserve">
-    <value>checkBox1</value>
-  </data>
-  <data name="&gt;&gt;checkBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBox1.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;checkBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="groupBox2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 10pt, style=Bold</value>
-  </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 9</value>
-  </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 350</value>
-  </data>
-  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Affichage de débogage</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
-    <value>tabPage3</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tabPage3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 28</value>
-  </data>
-  <data name="tabPage3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="tabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>524, 437</value>
-  </data>
-  <data name="tabPage3.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="tabPage3.Text" xml:space="preserve">
-    <value>Débogage</value>
-  </data>
-  <data name="&gt;&gt;tabPage3.Name" xml:space="preserve">
-    <value>tabPage3</value>
-  </data>
-  <data name="&gt;&gt;tabPage3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage3.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabPage3.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="numericUpDown3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 207</value>
+    <value>290, 401</value>
   </data>
   <data name="numericUpDown3.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 23</value>
@@ -1120,101 +1348,160 @@ Le nombre est entre 1 et 5</value>
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;numericUpDown3.Parent" xml:space="preserve">
-    <value>creationProfil</value>
+    <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;numericUpDown3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="numericUpDown2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 150</value>
+  <data name="&gt;&gt;trackBar2.Name" xml:space="preserve">
+    <value>trackBar2</value>
   </data>
-  <data name="numericUpDown2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 23</value>
+  <data name="&gt;&gt;trackBar2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="numericUpDown2.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown2.Name" xml:space="preserve">
-    <value>numericUpDown2</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;trackBar2.Parent" xml:space="preserve">
     <value>creationProfil</value>
   </data>
-  <data name="&gt;&gt;numericUpDown2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;trackBar2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;trackBar1.Name" xml:space="preserve">
+    <value>trackBar1</value>
+  </data>
+  <data name="&gt;&gt;trackBar1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;trackBar1.Parent" xml:space="preserve">
+    <value>creationProfil</value>
+  </data>
+  <data name="&gt;&gt;trackBar1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="appliquer2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Proba.Name" xml:space="preserve">
+    <value>Proba</value>
   </data>
-  <data name="appliquer2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>148, 268</value>
-  </data>
-  <data name="appliquer2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="appliquer2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 29</value>
-  </data>
-  <data name="appliquer2.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="appliquer2.Text" xml:space="preserve">
-    <value>Appliquer</value>
-  </data>
-  <data name="&gt;&gt;appliquer2.Name" xml:space="preserve">
-    <value>appliquer2</value>
-  </data>
-  <data name="&gt;&gt;appliquer2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;appliquer2.Parent" xml:space="preserve">
-    <value>creationProfil</value>
-  </data>
-  <data name="&gt;&gt;appliquer2.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ajoutProfil.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="ajoutProfil.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 8pt</value>
-  </data>
-  <data name="ajoutProfil.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 38</value>
-  </data>
-  <data name="ajoutProfil.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="ajoutProfil.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 28</value>
-  </data>
-  <data name="ajoutProfil.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="ajoutProfil.Text" xml:space="preserve">
-    <value>Pour ajouter un joueur virtuel 
-cliquer sur l'icone + .</value>
-  </data>
-  <data name="&gt;&gt;ajoutProfil.Name" xml:space="preserve">
-    <value>ajoutProfil</value>
-  </data>
-  <data name="&gt;&gt;ajoutProfil.Type" xml:space="preserve">
+  <data name="&gt;&gt;Proba.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ajoutProfil.Parent" xml:space="preserve">
+  <data name="&gt;&gt;Proba.Parent" xml:space="preserve">
     <value>creationProfil</value>
   </data>
-  <data name="&gt;&gt;ajoutProfil.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;Proba.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;vitesse.Name" xml:space="preserve">
+    <value>vitesse</value>
+  </data>
+  <data name="&gt;&gt;vitesse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;vitesse.Parent" xml:space="preserve">
+    <value>creationProfil</value>
+  </data>
+  <data name="&gt;&gt;vitesse.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="&gt;&gt;textBox1.Name" xml:space="preserve">
+    <value>textBox1</value>
+  </data>
+  <data name="&gt;&gt;textBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox1.Parent" xml:space="preserve">
+    <value>creationProfil</value>
+  </data>
+  <data name="&gt;&gt;textBox1.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;nomProfil.Name" xml:space="preserve">
+    <value>nomProfil</value>
+  </data>
+  <data name="&gt;&gt;nomProfil.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nomProfil.Parent" xml:space="preserve">
+    <value>creationProfil</value>
+  </data>
+  <data name="&gt;&gt;nomProfil.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="creationProfil.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="creationProfil.Location" type="System.Drawing.Point, System.Drawing">
+    <value>323, 18</value>
+  </data>
+  <data name="creationProfil.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 335</value>
+  </data>
+  <data name="creationProfil.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="creationProfil.Text" xml:space="preserve">
+    <value>Création du profil</value>
+  </data>
+  <data name="&gt;&gt;creationProfil.Name" xml:space="preserve">
+    <value>creationProfil</value>
+  </data>
+  <data name="&gt;&gt;creationProfil.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;creationProfil.Parent" xml:space="preserve">
+    <value>tabPage4</value>
+  </data>
+  <data name="&gt;&gt;creationProfil.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="trackBar2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="trackBar2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>116, 188</value>
+  </data>
+  <data name="trackBar2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 45</value>
+  </data>
+  <data name="trackBar2.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;trackBar2.Name" xml:space="preserve">
+    <value>trackBar2</value>
+  </data>
+  <data name="&gt;&gt;trackBar2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;trackBar2.Parent" xml:space="preserve">
+    <value>creationProfil</value>
+  </data>
+  <data name="&gt;&gt;trackBar2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="trackBar1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>116, 137</value>
+  </data>
+  <data name="trackBar1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 45</value>
+  </data>
+  <data name="trackBar1.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;trackBar1.Name" xml:space="preserve">
+    <value>trackBar1</value>
+  </data>
+  <data name="&gt;&gt;trackBar1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;trackBar1.Parent" xml:space="preserve">
+    <value>creationProfil</value>
+  </data>
+  <data name="&gt;&gt;trackBar1.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="Proba.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="Proba.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 198</value>
+    <value>17, 180</value>
   </data>
   <data name="Proba.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 48</value>
@@ -1237,13 +1524,13 @@ passivement</value>
     <value>creationProfil</value>
   </data>
   <data name="&gt;&gt;Proba.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="vitesse.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="vitesse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 150</value>
+    <value>17, 137</value>
   </data>
   <data name="vitesse.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 16</value>
@@ -1264,13 +1551,13 @@ passivement</value>
     <value>creationProfil</value>
   </data>
   <data name="&gt;&gt;vitesse.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="textBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 98</value>
+    <value>121, 94</value>
   </data>
   <data name="textBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 23</value>
+    <value>99, 23</value>
   </data>
   <data name="textBox1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1285,7 +1572,7 @@ passivement</value>
     <value>creationProfil</value>
   </data>
   <data name="&gt;&gt;textBox1.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="nomProfil.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1294,7 +1581,7 @@ passivement</value>
     <value>NoControl</value>
   </data>
   <data name="nomProfil.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 98</value>
+    <value>17, 94</value>
   </data>
   <data name="nomProfil.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 16</value>
@@ -1315,43 +1602,112 @@ passivement</value>
     <value>creationProfil</value>
   </data>
   <data name="&gt;&gt;nomProfil.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>5</value>
   </data>
-  <data name="creationProfil.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="numericUpDown2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>149, 401</value>
   </data>
-  <data name="creationProfil.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 20</value>
+  <data name="numericUpDown2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 23</value>
   </data>
-  <data name="creationProfil.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 310</value>
+  <data name="numericUpDown2.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
-  <data name="creationProfil.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="&gt;&gt;numericUpDown2.Name" xml:space="preserve">
+    <value>numericUpDown2</value>
   </data>
-  <data name="creationProfil.Text" xml:space="preserve">
-    <value>Création du profil</value>
+  <data name="&gt;&gt;numericUpDown2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;creationProfil.Name" xml:space="preserve">
-    <value>creationProfil</value>
-  </data>
-  <data name="&gt;&gt;creationProfil.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;creationProfil.Parent" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDown2.Parent" xml:space="preserve">
     <value>tabPage4</value>
   </data>
-  <data name="&gt;&gt;creationProfil.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;numericUpDown2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;modifierProfil.Name" xml:space="preserve">
+    <value>modifierProfil</value>
+  </data>
+  <data name="&gt;&gt;modifierProfil.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;modifierProfil.Parent" xml:space="preserve">
+    <value>listDeProfil</value>
+  </data>
+  <data name="&gt;&gt;modifierProfil.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;listDeProfils.Name" xml:space="preserve">
+    <value>listDeProfils</value>
+  </data>
+  <data name="&gt;&gt;listDeProfils.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;listDeProfils.Parent" xml:space="preserve">
+    <value>listDeProfil</value>
+  </data>
+  <data name="&gt;&gt;listDeProfils.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;button2.Name" xml:space="preserve">
+    <value>button2</value>
+  </data>
+  <data name="&gt;&gt;button2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button2.Parent" xml:space="preserve">
+    <value>listDeProfil</value>
+  </data>
+  <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ajouter.Name" xml:space="preserve">
+    <value>ajouter</value>
+  </data>
+  <data name="&gt;&gt;ajouter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ajouter.Parent" xml:space="preserve">
+    <value>listDeProfil</value>
+  </data>
+  <data name="&gt;&gt;ajouter.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="listDeProfil.Location" type="System.Drawing.Point, System.Drawing">
+    <value>22, 18</value>
+  </data>
+  <data name="listDeProfil.Size" type="System.Drawing.Size, System.Drawing">
+    <value>295, 335</value>
+  </data>
+  <data name="listDeProfil.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="listDeProfil.Text" xml:space="preserve">
+    <value>Liste de profil</value>
+  </data>
+  <data name="&gt;&gt;listDeProfil.Name" xml:space="preserve">
+    <value>listDeProfil</value>
+  </data>
+  <data name="&gt;&gt;listDeProfil.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;listDeProfil.Parent" xml:space="preserve">
+    <value>tabPage4</value>
+  </data>
+  <data name="&gt;&gt;listDeProfil.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="modifierProfil.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10pt, style=Bold</value>
+  </data>
   <data name="modifierProfil.Location" type="System.Drawing.Point, System.Drawing">
-    <value>54, 368</value>
+    <value>90, 285</value>
   </data>
   <data name="modifierProfil.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
   <data name="modifierProfil.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 24</value>
+    <value>80, 24</value>
   </data>
   <data name="modifierProfil.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1375,10 +1731,10 @@ passivement</value>
     <value>16</value>
   </data>
   <data name="listDeProfils.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 27</value>
+    <value>61, 35</value>
   </data>
   <data name="listDeProfils.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 308</value>
+    <value>170, 228</value>
   </data>
   <data name="listDeProfils.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1395,17 +1751,20 @@ passivement</value>
   <data name="&gt;&gt;listDeProfils.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="button2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10pt, style=Bold</value>
+  </data>
   <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>131, 368</value>
+    <value>187, 285</value>
   </data>
   <data name="button2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 24</value>
+    <value>91, 24</value>
   </data>
   <data name="button2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="button2.Text" xml:space="preserve">
-    <value>-</value>
+    <value>Supprimer</value>
   </data>
   <data name="&gt;&gt;button2.Name" xml:space="preserve">
     <value>button2</value>
@@ -1419,17 +1778,20 @@ passivement</value>
   <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ajouter.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10pt, style=Bold</value>
+  </data>
   <data name="ajouter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 368</value>
+    <value>6, 285</value>
   </data>
   <data name="ajouter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 24</value>
+    <value>70, 24</value>
   </data>
   <data name="ajouter.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="ajouter.Text" xml:space="preserve">
-    <value>+</value>
+    <value>Ajouter</value>
   </data>
   <data name="&gt;&gt;ajouter.Name" xml:space="preserve">
     <value>ajouter</value>
@@ -1443,86 +1805,35 @@ passivement</value>
   <data name="&gt;&gt;ajouter.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="listDeProfil.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 11</value>
+  <data name="appliquer2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="listDeProfil.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 399</value>
+  <data name="appliquer2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>434, 374</value>
   </data>
-  <data name="listDeProfil.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="listDeProfil.Text" xml:space="preserve">
-    <value>Liste de profil</value>
-  </data>
-  <data name="&gt;&gt;listDeProfil.Name" xml:space="preserve">
-    <value>listDeProfil</value>
-  </data>
-  <data name="&gt;&gt;listDeProfil.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;listDeProfil.Parent" xml:space="preserve">
-    <value>tabPage4</value>
-  </data>
-  <data name="&gt;&gt;listDeProfil.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tabPage4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 28</value>
-  </data>
-  <data name="tabPage4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="appliquer2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
-  <data name="tabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>524, 437</value>
+  <data name="appliquer2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 36</value>
   </data>
-  <data name="tabPage4.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="appliquer2.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
-  <data name="tabPage4.Text" xml:space="preserve">
-    <value>Profil</value>
+  <data name="appliquer2.Text" xml:space="preserve">
+    <value>Sauvegarder</value>
   </data>
-  <data name="&gt;&gt;tabPage4.Name" xml:space="preserve">
+  <data name="&gt;&gt;appliquer2.Name" xml:space="preserve">
+    <value>appliquer2</value>
+  </data>
+  <data name="&gt;&gt;appliquer2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;appliquer2.Parent" xml:space="preserve">
     <value>tabPage4</value>
   </data>
-  <data name="&gt;&gt;tabPage4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage4.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabPage4.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tabControl1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 10pt</value>
-  </data>
-  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="tabControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>532, 469</value>
-  </data>
-  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;appliquer2.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1531,7 +1842,7 @@ passivement</value>
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>532, 469</value>
+    <value>592, 484</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

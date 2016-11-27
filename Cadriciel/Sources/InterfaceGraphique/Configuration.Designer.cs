@@ -41,7 +41,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.réintialisation = new System.Windows.Forms.Button();
             this.appliquer = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -65,20 +64,21 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.creationProfil = new System.Windows.Forms.GroupBox();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.appliquer2 = new System.Windows.Forms.Button();
-            this.ajoutProfil = new System.Windows.Forms.Label();
+            this.creationProfil = new System.Windows.Forms.GroupBox();
+            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.Proba = new System.Windows.Forms.Label();
             this.vitesse = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.nomProfil = new System.Windows.Forms.Label();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.listDeProfil = new System.Windows.Forms.GroupBox();
             this.modifierProfil = new System.Windows.Forms.Button();
             this.listDeProfils = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.ajouter = new System.Windows.Forms.Button();
+            this.appliquer2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -91,31 +91,34 @@
             this.groupBox3.SuspendLayout();
             this.console.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.creationProfil.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            this.creationProfil.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.listDeProfil.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
-            resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            resources.ApplyResources(this.tabControl1, "tabControl1");
+            this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
             // tabPage1
             // 
-            this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.réintialisation);
             this.tabPage1.Controls.Add(this.appliquer);
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // groupBox1
             // 
@@ -128,7 +131,6 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
@@ -185,11 +187,6 @@
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
             // 
             // réintialisation
             // 
@@ -290,6 +287,7 @@
             // 
             resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // tabPage3
             // 
@@ -368,25 +366,14 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.numericUpDown3);
             this.tabPage4.Controls.Add(this.creationProfil);
+            this.tabPage4.Controls.Add(this.numericUpDown2);
             this.tabPage4.Controls.Add(this.listDeProfil);
+            this.tabPage4.Controls.Add(this.appliquer2);
             resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // creationProfil
-            // 
-            this.creationProfil.Controls.Add(this.numericUpDown3);
-            this.creationProfil.Controls.Add(this.numericUpDown2);
-            this.creationProfil.Controls.Add(this.appliquer2);
-            this.creationProfil.Controls.Add(this.ajoutProfil);
-            this.creationProfil.Controls.Add(this.Proba);
-            this.creationProfil.Controls.Add(this.vitesse);
-            this.creationProfil.Controls.Add(this.textBox1);
-            this.creationProfil.Controls.Add(this.nomProfil);
-            resources.ApplyResources(this.creationProfil, "creationProfil");
-            this.creationProfil.Name = "creationProfil";
-            this.creationProfil.TabStop = false;
             // 
             // numericUpDown3
             // 
@@ -404,37 +391,35 @@
             0});
             this.numericUpDown3.Name = "numericUpDown3";
             // 
-            // numericUpDown2
+            // creationProfil
             // 
-            resources.ApplyResources(this.numericUpDown2, "numericUpDown2");
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.creationProfil.Controls.Add(this.trackBar2);
+            this.creationProfil.Controls.Add(this.trackBar1);
+            this.creationProfil.Controls.Add(this.Proba);
+            this.creationProfil.Controls.Add(this.vitesse);
+            this.creationProfil.Controls.Add(this.textBox1);
+            this.creationProfil.Controls.Add(this.nomProfil);
+            resources.ApplyResources(this.creationProfil, "creationProfil");
+            this.creationProfil.Name = "creationProfil";
+            this.creationProfil.TabStop = false;
             // 
-            // appliquer2
+            // trackBar2
             // 
-            resources.ApplyResources(this.appliquer2, "appliquer2");
-            this.appliquer2.Name = "appliquer2";
-            this.appliquer2.UseVisualStyleBackColor = true;
-            this.appliquer2.Click += new System.EventHandler(this.appliquer2_Click);
+            this.trackBar2.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.trackBar2, "trackBar2");
+            this.trackBar2.Name = "trackBar2";
+            this.trackBar2.Maximum = 10;
+            this.trackBar2.Minimum = 0;
             // 
-            // ajoutProfil
+            // trackBar1
             // 
-            resources.ApplyResources(this.ajoutProfil, "ajoutProfil");
-            this.ajoutProfil.Name = "ajoutProfil";
+            this.trackBar1.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.trackBar1, "trackBar1");
+            this.trackBar1.Maximum = 10;
+            this.trackBar1.Minimum = 1;
+
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Value = 1;
             // 
             // Proba
             // 
@@ -455,6 +440,26 @@
             // 
             resources.ApplyResources(this.nomProfil, "nomProfil");
             this.nomProfil.Name = "nomProfil";
+            // 
+            // numericUpDown2
+            // 
+            resources.ApplyResources(this.numericUpDown2, "numericUpDown2");
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // listDeProfil
             // 
@@ -482,18 +487,29 @@
             // 
             // button2
             // 
+            this.button2.BackColor = System.Drawing.Color.Red;
             resources.ApplyResources(this.button2, "button2");
+            this.button2.ForeColor = System.Drawing.Color.White;
             this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // ajouter
             // 
+            this.ajouter.BackColor = System.Drawing.Color.Green;
             resources.ApplyResources(this.ajouter, "ajouter");
+            this.ajouter.ForeColor = System.Drawing.Color.White;
             this.ajouter.Name = "ajouter";
-            this.ajouter.UseVisualStyleBackColor = true;
+            this.ajouter.UseVisualStyleBackColor = false;
             this.ajouter.Click += new System.EventHandler(this.ajouter_Click);
             this.ajouter.StyleChanged += new System.EventHandler(this.ajouter_Click);
+            // 
+            // appliquer2
+            // 
+            resources.ApplyResources(this.appliquer2, "appliquer2");
+            this.appliquer2.Name = "appliquer2";
+            this.appliquer2.UseVisualStyleBackColor = true;
+            this.appliquer2.Click += new System.EventHandler(this.appliquer2_Click);
             // 
             // Configuration
             // 
@@ -520,9 +536,11 @@
             this.console.ResumeLayout(false);
             this.console.PerformLayout();
             this.tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             this.creationProfil.ResumeLayout(false);
             this.creationProfil.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.listDeProfil.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -537,7 +555,6 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
@@ -577,9 +594,10 @@
         public System.Windows.Forms.ListBox listDeProfils;
         private System.Windows.Forms.GroupBox scoreGangant;
         private System.Windows.Forms.Button appliquer2;
-        private System.Windows.Forms.Label ajoutProfil;
         private System.Windows.Forms.Button modifierProfil;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.TrackBar trackBar1;
     }
 }
