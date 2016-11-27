@@ -277,7 +277,7 @@ void FacadeModele::chargerZoneJeu(char* fichierZoneJeu) const
 ///
 /// @return Aucune.
 ///
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////te/////////////////////////////////////
 
 void FacadeModele::enregistrerZoneJeu(char* fichierZoneJeu) const
 {
@@ -431,10 +431,10 @@ void FacadeModele::afficher() const
 void FacadeModele::afficherBase() const
 {
 	// Positionner la caméra
-	glm::mat4 vueProjection(vue_->obtenirProjection().obtenirMatrice() * vue_->obtenirCamera().obtenirMatrice());
+	//glm::mat4 vueProjection(vue_->obtenirProjection().obtenirMatrice() * vue_->obtenirCamera().obtenirMatrice());
 
 	// Afficher la scène.
-	arbre_->afficher(vueProjection);
+	arbre_->afficher(glm::mat4(1.f), vue_->obtenirCamera().obtenirMatrice(), vue_->obtenirProjection().obtenirMatrice() );
 }
 
 

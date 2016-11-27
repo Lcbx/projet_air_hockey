@@ -4,4 +4,5 @@
     <Leodagan NOM="Leodagan" VITESSE="4" PROBABILITE="0.6"/>
     <FacileABattre NOM="FacileABattre" VITESSE="2" PROBABILITE="0.80000001"/>
     <DifficileAbattre NOM="DifficileAbattre" VITESSE="10" PROBABILITE="0.2"/>
+    <noob NOM="noob" VITESSE="1" PROBABILITE="0"/>
 </listeProfil>

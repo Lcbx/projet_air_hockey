@@ -119,10 +119,10 @@ namespace opengl{
 	/// @return Aucune.
 	///
 	////////////////////////////////////////////////////////////////////////
-	void VBO::dessiner(const glm::mat4& transformation) const
+	void VBO::dessiner(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 	{
 		unsigned int bufferIndex = 0;
-		dessiner(modele_->obtenirNoeudRacine(), bufferIndex, transformation);
+		dessiner(modele_->obtenirNoeudRacine(), bufferIndex, modele, vue, projection);
 	}
 
 	////////////////////////////////////////////////////////////////////////
@@ -134,20 +134,20 @@ namespace opengl{
 	/// @return Aucune.
 	///
 	////////////////////////////////////////////////////////////////////////
-	void VBO::dessiner(modele::Noeud const& noeud, unsigned int& bufferIndex, const glm::mat4& transformation) const
+	void VBO::dessiner(modele::Noeud const& noeud, unsigned int& bufferIndex, const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 	{
 		// Matrice de transformation
-		glm::mat4x4 const& m{ transformation * noeud.obtenirTransformation() };
+		glm::mat4x4 const& m{ projection * vue * modele };
 
 		// Appliquer le nuanceur
-		if (utiliserNuanceur_) {
+#if 1
 			Programme::Start(programme_);
 			programme_.assignerUniforme("modelViewProjection", m);
-		}
-		else {
+			programme_.assignerUniforme("colorIn", glm::vec4(0.f, 0.f, 0.f, 1.f));
+#else
 			glMatrixMode(GL_PROJECTION);
 			glLoadMatrixf(glm::value_ptr(m));
-		}
+#endif
 
 		for (auto const& mesh : noeud.obtenirMeshes())
 		{
@@ -188,13 +188,12 @@ namespace opengl{
 			if (possedeTexCoords)
 				glDisableVertexAttribArray(TEXCOORD_LOCATION);
 		}
-		if(utiliserNuanceur_)
-			Programme::Stop(programme_);
+		Programme::Stop(programme_);
 
 		/// Dessin récursif.
 		for (auto const& n : noeud.obtenirEnfants())
 		{
-			dessiner(n, bufferIndex, m);
+			dessiner(n, bufferIndex, modele, vue, projection);
 		}
 	}
 
