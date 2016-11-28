@@ -474,6 +474,14 @@ void FacadeModele::animer(float temps)
 
 	// Mise à jour de la vue.
 	vue_->animer(temps);
+	//incrementer le compteur a chaque instant
+	AncienSecondes_ = compteurSecondes_;
+	temps_ = temps_ + temps;
+	compteurSecondes_ = (int)temps_;
+	if (compteurSecondes_ != AncienSecondes_)
+		cout << compteurSecondes_ << endl;
+
+
 }
 
 

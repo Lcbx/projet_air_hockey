@@ -100,7 +100,8 @@ bool TextOpenGL::afficher()
 	//std::cout <<"W = "<<WH.x << "H = " << WH.y << std::endl;
 		
 	// Create a pixmap font from a TrueType file.
-	FTGLPixmapFont font("media/calibrii.ttf");
+	FTGLPixmapFont	font("media/calibrii.ttf");
+	//FTGLTextureFont  font("media/calibrii.ttf");
 	// If something went wrong, bail out.
 	if (font.Error())
 	{
@@ -113,6 +114,7 @@ bool TextOpenGL::afficher()
 	FTPoint positionDepart (positionTable.x, positionTable.y, positionTable.z);
 	FTPoint positionFin  (positionTable.x + 10, positionTable.y + 10, positionTable.z);
 	
+	//TODO -- create a method for that
 	std::string nomJoueur1, nomJoueur2, scoreJoueur1, scoreJoueur2;
 
 	nomJoueur1.assign(facade->getNomJoueurCourant(1));
@@ -136,17 +138,17 @@ bool TextOpenGL::afficher()
 	std::copy(scoreJoueur2.begin(), scoreJoueur2.end(), score2);
 	score2[scoreJoueur2.size()] = '\0'; // don't forget the terminating 0
 
-
+	
 	// Taille du texte
 	font.FaceSize(30);
 
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glDisable(GL_LIGHTING);
 	glDisable(GL_DEPTH_TEST);
-	//glClear(GL_COLOR_BUFFER_BIT);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glColor3ub(255, 0, 0);
+	////glClear(GL_COLOR_BUFFER_BIT);
+	//glMatrixMode(GL_MODELVIEW);
+	//glLoadIdentity();
+	glColor3f(1.0, 0., 0.);
 
 	// TODO 
 	// 3) afficher le chronometre (temps ecoule' des le debt de la partie

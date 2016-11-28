@@ -306,6 +306,14 @@ private:
    std::string nomJoueurCourant2_ = "Player2";
    int scoreJoueurCourant1_{ 0 };
    int scoreJoueurCourant2_{ 0 };
+   int compteurSecondes_ { 0 };
+   int compteurMinutes_{ 0 };
+   int compteurHeures_{ 0 };
+   int AncienSecondes_ { 0 };
+   int AncienMinutes_{ 0 };
+   int AncienHeures_{ 0 };
+   float temps_ { 0. };
+
    /// Ali
 
    // Tournoi pour le mode tournoi

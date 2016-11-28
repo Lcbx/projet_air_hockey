@@ -36,6 +36,7 @@ SkyBox::SkyBox() : NoeudAbstrait("skybox"){
 /// @return Aucune.
 ////////////////////////////////////////////////////////////////////////
 void SkyBox::afficherConcret(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const {
+	
 	boite_.afficher(projection * vue * modele, glm::mat4(1));
 }
 
