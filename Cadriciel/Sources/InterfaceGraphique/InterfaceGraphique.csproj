@@ -246,12 +246,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Enregistrer.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Supprimer.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Etat\" />
   </ItemGroup>
   <ItemGroup>
@@ -278,6 +272,14 @@
     <Content Include="Resources\IconesEditeur\tool-bonus.png" />
     <Content Include="Resources\IconesEditeur\tool-muret.png" />
     <Content Include="Resources\IconesEditeur\tool-portail.png" />
+    <Content Include="Resources\IconesMenus\dialog-information.png" />
+    <Content Include="Resources\IconesMenus\document-new.png" />
+    <Content Include="Resources\IconesMenus\edit-delete.png" />
+    <Content Include="Resources\IconesMenus\floppy-disk-98413.png" />
+    <Content Include="Resources\IconesMenus\floppy-disk-as-98413.png" />
+    <Content Include="Resources\IconesMenus\folder.png" />
+    <Content Include="Resources\IconesMenus\gimp-info.png" />
+    <Content Include="Resources\IconesMenus\preferences-system.png" />
     <Content Include="Resources\Icones\edit.png" />
     <Content Include="Resources\Icones\gamepad.png" />
     <Content Include="Resources\Icones\power-button.png" />
