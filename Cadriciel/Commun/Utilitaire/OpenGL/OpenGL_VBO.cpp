@@ -254,7 +254,7 @@ namespace opengl{
 		programme_.assignerUniforme("KShininess", materiau.shininess_ * materiau.shininessStrength_);
 
 		//Light
-		int typeIllumination =0;
+		int typeIllumination =2;
 		programme_.assignerUniforme("typeIllumination", typeIllumination);
 		
 		glPolygonMode(

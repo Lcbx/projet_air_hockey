@@ -15,14 +15,14 @@ layout (location = 2) in vec3 normalIn;
 //(varying)On communique les varaiables interpolées du nanceur de sommet vers le nuanceur de fragement 
 varying vec2 texCoord;
 
-vec4 lightSourcePosition = vec4();
+vec4 lightSourcePosition = vec4 (0.0, 0.0, -1.0, 0.0);
 /////////////////////////////////////////////////////////////////
 
-/*out Attribs {
+out Attribs {
    vec3 lumiereDir;
    vec3 normale;
    vec3 obsVec;
-} AttribsOut;*/
+} AttribsOut;
 
 out vec4 couleur;
 
@@ -35,20 +35,21 @@ void main( void )
     
     //position de sommet par rapport au repere de la camera.
      //vec3 pos = vec3( matrModel*matrVisu* vec4(position, 1.0) ); 
-     
+     vec3 pos = vec3(gl_Position);
     //la normal normalise de chaque sommet.
     //vec3 N = normalize(transpose (inverse(matrModel*matrVisu) )* normalIn);
+    vec3 N = normalize(normalIn);
+    //direction de la lumiere. le vecteur entre le vertex (point de rebond)et la position de la lumière 
+	 vec3 L = normalize(vec3( lightSourcePosition.xyz) - pos);
+     //vec3 L = vec3(0.5,0.5,0.5);
     
-    //direction de la lumiere.
-    //vec3 L = normalize(vec3( lightSourcePosition.xyz) - pos);
-    
-    //la position de l'observateur 
-    //vec3 O = normalize(-pos);
+    //la position de l'observateur (ou la caméra)
+     vec3 O = normalize(-pos);
     
     // l'affectation des valeurs de sorties.
-    //AttribsOut.obsVec = normalize(-pos);  
-    //AttribsOut.normale =N;
-    //AttribsOut.lumiereDire = L;
+    AttribsOut.obsVec = normalize(-pos);  
+    AttribsOut.normale =N;
+    AttribsOut.lumiereDir = L;
  
    // envoie de la texture au nuanceur de fragment.
     texCoord = texCoordIn;

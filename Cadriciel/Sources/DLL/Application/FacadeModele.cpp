@@ -165,14 +165,14 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 
 	// intialisation da la lumière 
 	//Activer l'éclairage
-	glEnable(GL_LIGHTING);
+	//glEnable(GL_LIGHTING);
 	//Allume la lumière Numéro 0 
-	glEnable(GL_LIGHT0);
+	//glEnable(GL_LIGHT0);
 	//glEnable(GL_LIGHT1);
 	//glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
 	//glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
 	//Activer la couleur du matériel
-	glEnable(GL_COLOR_MATERIAL);
+	//glEnable(GL_COLOR_MATERIAL);
 
 	// Le cull face
 	glEnable(GL_CULL_FACE);
@@ -438,7 +438,7 @@ void FacadeModele::afficherBase() const
 	// Metter en place l'éclairage
 
 	// la position de la source luminuse, LE 4IÈME paramètre est égale à 0 ,ce qui veut dire que la source est situé à l'infini
-	glm::vec4 direction(0.5, 0.5, 0.5, 1.0);
+	glm::vec4 direction(0.5, 0.5, 0.5, 0.0);
 	//une couleur ambiante gris
 	glm::vec4 couleurAmbiante(0.1, 0.1, 0.1, 1.0);
 	//une couleur diffuse jaune
