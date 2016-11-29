@@ -55,6 +55,25 @@ bool TextOpenGL::initialiserFTGL()
 {
 	return true;
 }
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void TextOpenGL::afficherChrono()
+/// @brief : afficher le chronometre en FTGL  eh format 00:00:00
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void TextOpenGL::afficherChrono()
+{
+	//TODO
+	auto facade = FacadeModele::obtenirInstance();
+
+	glm::vec2 WH = facade->obtenirVue()->obtenirProjection().obtenirDimensionCloture();
+	float W = WH.x;
+	float H = WH.y;
+	afficherTextFTGL(facade->getChrono(), FTPoint(W / 2, H - H / 20, 0), 20);
+}
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void TextOpenGL::afficher()
@@ -75,14 +94,6 @@ void TextOpenGL::afficher()
 	afficherTextFTGL(facade->getNomJoueurCourant(1), FTPoint(W - 150, 10, 0), 30);
 	afficherTextFTGL(std::to_string(facade->getScoreCourant(1)), FTPoint(W - 125, 50, 0), 30);
 	afficherTextFTGL(facade->getChrono(), FTPoint(W/2, H - H/20, 0), 20);
-
-	// TODO 
-	// 3) afficher le chronometre (temps ecoule' des le debt de la partie
-	// bug
-	// 1) changer le nom du joueur 2 a player2 quand on sort de mode partie rapide -> virtuel
-	// 2) reset aussi le score affiche' en opengl qd on pese sur la touche espace
-
-
 }
 ////////////////////////////////////////////////////////////////////////
 ///

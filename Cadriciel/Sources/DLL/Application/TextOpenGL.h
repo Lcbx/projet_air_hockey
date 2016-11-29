@@ -30,7 +30,7 @@ public:
 	bool initialiserFTGL();
 	void afficher();
 	bool afficherTextFTGL(std::string Text, FTPoint position, int FontSize);
-
+	void afficherChrono();
 	
 private:
 	// noms des joueurs

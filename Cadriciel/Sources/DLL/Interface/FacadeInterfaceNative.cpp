@@ -1073,6 +1073,34 @@ extern "C"
 	}
 
 	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void initialiserFTGL()
+	/// Author : Ali
+	/// @brief : Cette fonction permet de remettre le score,le nom des 
+	///			joueurs ainsi que le compteur a zero.
+	///			dans l'affichage du Text en FTGL
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void initialiserFTGL()
+	{
+		FacadeModele::obtenirInstance()->initialiserTextFTGL();
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void initialiserCompteur()
+	/// Author : Ali
+	/// @brief : Cette fonction permet de remettre a zero le compteur
+	///			dans l'affichage du Text en FTGL
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void initialiserCompteur()
+	{
+		FacadeModele::obtenirInstance()->initialiserCompteur();
+	}
+
+
+	////////////////////////////////////////////////////////////////////////
 	/// @fn 		__declspec(dllexport) void sauvegarderTouches();
 	/// Author : Arthur
 	/// Cette fonction permet de modifier et enregistrer les touches de

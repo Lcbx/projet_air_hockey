@@ -402,11 +402,8 @@ void FacadeModele::afficher() const
 	// Afficher la scène
 	afficherBase();
 
-	// Compte de l'affichage
-	utilitaire::CompteurAffichage::obtenirInstance()->signalerAffichage();
-
 	// creation d'une instance TextOpenGL
-	if (partieRapide_)	// TODO -- set partie rapide a false qd on sort de la partie rapide
+	if (partieRapide_)	
 	{
 		TextOpenGL text;
 		text.afficher();
@@ -527,7 +524,7 @@ void FacadeModele::initialiserCompteur ()
 	compteurHeures_ = 0;
 	AncienSecondes_ = 0;
 	temps_ = 0.;
-
+	chrono_ = "0:0:0";
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -542,8 +539,8 @@ void FacadeModele::initialiserCompteur ()
 ////////////////////////////////////////////////////////////////////////
 void FacadeModele::initialiserTextFTGL()
 {
-	nomJoueurCourant1_.append("Joueur1");
-	nomJoueurCourant2_.append("Joueur2");
+	nomJoueurCourant1_ = "Player1";
+	nomJoueurCourant2_ = "Player2";
 	scoreJoueurCourant1_ = scoreJoueurCourant2_ = 0;
 	initialiserCompteur();
 }
@@ -1310,14 +1307,14 @@ bool FacadeModele::setNomJoueurCourant(std::string nom, int index)
 {
 	if (index == 1)
 	{
-		nomJoueurCourant1_.assign(nom);
+		nomJoueurCourant1_ = nom;
 		return true;
 	}
 		
 	else
 		if (index == 2)
 		{
-			nomJoueurCourant2_.assign(nom);
+			nomJoueurCourant2_ = nom;
 			return true;
 		}
 		else
