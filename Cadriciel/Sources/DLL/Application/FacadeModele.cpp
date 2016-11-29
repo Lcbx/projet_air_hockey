@@ -453,6 +453,100 @@ void FacadeModele::reinitialiser()
 	arbre_->initialiser();
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::activerCompteur(float temps)
+/// @ Author : Ali
+/// Cette fonction permet d'activer le compteur qui sera afficher 
+/// dans la partie rapide 
+/// @param[in] temps : Intervalle de temps sur lequel effectuer le calcul.
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::activerCompteur(float temps)
+{
+	//incrementer le compteur a chaque instant
+	AncienSecondes_ = compteurSecondes_;
+	temps_ = temps_ + temps;
+	compteurSecondes_ = (int)temps_;
+	
+	// corriger les valeurs 
+	if (compteurSecondes_ == 60)
+	{
+		compteurSecondes_ = 0;
+		temps_ = 0;
+		compteurMinutes_++;
+	}
+	if (compteurMinutes_ == 60)
+	{
+		compteurMinutes_ = 0;
+		compteurHeures_++;
+	}
+	if (compteurHeures_ == 24)
+		compteurHeures_ = 0;
+	//test afficher a la console
+	if (compteurSecondes_ != AncienSecondes_)
+	{
+		//cout << compteurHeures_ << ":" << compteurMinutes_ << ":" << compteurSecondes_ << endl;
+		std::string formatHeure = to_string(compteurHeures_);
+		std::string formatMinute = to_string(compteurMinutes_);
+		std::string formatSeconde = to_string(compteurSecondes_);
+		chrono_ = formatHeure + ":" + formatMinute + ":" + formatSeconde;
+		//cout << chrono_ << endl;
+	}
+		
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn std::string FacadeModele::getChrono()
+/// @ Author : Ali
+/// Cette fonction permet de recuper la chaine de caractere du temps 
+/// qui sera affichee en FTGL lors d'une partie
+///
+/// @return std::string
+///
+////////////////////////////////////////////////////////////////////////
+std::string FacadeModele::getChrono()
+{
+	return chrono_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::initialiserCompteur(float temps)
+/// @ Author : Ali
+/// Cette fonction permet d'initialiser le compteur a zero 
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::initialiserCompteur ()
+{
+	compteurSecondes_ = 0;
+	compteurMinutes_ = 0;
+	compteurHeures_ = 0;
+	AncienSecondes_ = 0;
+	temps_ = 0.;
+
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::initialiserTextFTGL()
+/// @ Author : Ali
+/// Cette fonction permet d'initialiser le nom des joueurs, le score
+/// et le compteur 
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::initialiserTextFTGL()
+{
+	nomJoueurCourant1_.append("Joueur1");
+	nomJoueurCourant2_.append("Joueur2");
+	scoreJoueurCourant1_ = scoreJoueurCourant2_ = 0;
+	initialiserCompteur();
+}
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -474,13 +568,12 @@ void FacadeModele::animer(float temps)
 
 	// Mise à jour de la vue.
 	vue_->animer(temps);
-	//incrementer le compteur a chaque instant
-	AncienSecondes_ = compteurSecondes_;
-	temps_ = temps_ + temps;
-	compteurSecondes_ = (int)temps_;
-	if (compteurSecondes_ != AncienSecondes_)
-		cout << compteurSecondes_ << endl;
 
+	//Livrable3
+	// demarer le compteur 
+	activerCompteur(temps);
+
+	
 
 }
 

@@ -227,8 +227,10 @@ public:
 	bool setNomJoueurCourant(std::string nom,int index);
 	int getScoreCourant(int index);
 	bool setScoreCourant(int score,int index);
-
-
+	void activerCompteur(float temps);
+	void initialiserCompteur();
+	void initialiserTextFTGL();
+	std::string getChrono();
 	/// Ali
 	/// Renvoie la constante contenant le nom du fichier de configuration
 	//std::string getConfigFile();
@@ -310,9 +312,8 @@ private:
    int compteurMinutes_{ 0 };
    int compteurHeures_{ 0 };
    int AncienSecondes_ { 0 };
-   int AncienMinutes_{ 0 };
-   int AncienHeures_{ 0 };
    float temps_ { 0. };
+   std::string chrono_;
 
    /// Ali
 
