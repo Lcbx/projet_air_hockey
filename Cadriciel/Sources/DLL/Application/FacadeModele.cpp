@@ -494,6 +494,9 @@ void FacadeModele::activerCompteur(float temps)
 		chrono_ = formatHeure + ":" + formatMinute + ":" + formatSeconde;
 		//cout << chrono_ << endl;
 	}
+
+	//TODO -- mettre le compteur en pause quand on pese sur ESC
+	// idea - sauvegarder les valeurs actuelle et l'afficher tout le temps
 		
 }
 ////////////////////////////////////////////////////////////////////////

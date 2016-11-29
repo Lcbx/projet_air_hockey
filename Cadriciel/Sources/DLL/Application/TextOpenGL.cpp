@@ -65,7 +65,6 @@ bool TextOpenGL::initialiserFTGL()
 ////////////////////////////////////////////////////////////////////////
 void TextOpenGL::afficherChrono()
 {
-	//TODO
 	auto facade = FacadeModele::obtenirInstance();
 
 	glm::vec2 WH = facade->obtenirVue()->obtenirProjection().obtenirDimensionCloture();
@@ -120,8 +119,9 @@ bool TextOpenGL::afficherTextFTGL(std::string Text, FTPoint position, int FontSi
 	}
 	char * chaine = new char[Text.size() + 1];
 	std::copy(Text.begin(), Text.end(), chaine);
-	chaine[Text.size()] = '\0'; // always add a '\0' if you want to convert from a string to a char*
+	chaine[Text.size()] = '\0'; // always add a '\0' if you want to convert from string to  char*
 	
+
 	font.FaceSize(FontSize);
 
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
@@ -130,6 +130,12 @@ bool TextOpenGL::afficherTextFTGL(std::string Text, FTPoint position, int FontSi
 	glDisable(GL_DEPTH_TEST);
 	// color doesn't work for now
 	glColor3f(1.0, 0., 0.);
+	
+	
+	glPixelTransferf(GL_RED_BIAS, -1);
+	glPixelTransferf(GL_GREEN_BIAS, -1);
+	glPixelTransferf(GL_BLUE_BIAS, -1);
+
 	font.Render(chaine, -1, position);
 	
 	glPopAttrib();
