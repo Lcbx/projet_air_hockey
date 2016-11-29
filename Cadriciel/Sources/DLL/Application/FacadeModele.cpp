@@ -79,8 +79,10 @@ const std::string FacadeModele::FICHIER_ZONEDEFAUT{ "ZoneDefaut.xml" };
 ////////////////////////////////////////////////////////////////////////
 FacadeModele* FacadeModele::obtenirInstance()
 {
-	if (instance_ == nullptr)
+	if (instance_ == nullptr) {
 		instance_ = new FacadeModele;
+		instance_->tournoi_ = nullptr;
+	}
 
 	return instance_;
 }
