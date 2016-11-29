@@ -144,13 +144,14 @@ namespace opengl{
 	{
 		// Matrice de transformation
 		glm::mat4x4 const& m{ projection * vue * modele };
-
+		glm::mat4x4 const& v{ vue };
 		// Appliquer le nuanceur
 #if 1
 			Programme::Start(programme_);
 			programme_.assignerUniforme("modelViewProjection", m);
 			programme_.assignerUniforme("colorIn", glm::vec4(0.f, 0.f, 0.f, 1.f));
-#else       programme_.assignerUniforme("colorIn", glm::vec4(0.f, 0.f, 0.f, 1.f));
+			programme_.assignerUniforme("matrVisu", v);
+#else      
 			glMatrixMode(GL_PROJECTION);
 			glLoadMatrixf(glm::value_ptr(m));
 #endif
