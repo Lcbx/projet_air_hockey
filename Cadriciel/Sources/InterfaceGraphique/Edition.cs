@@ -1465,7 +1465,7 @@ namespace InterfaceGraphique
             fenetreChargement_.Show();
         }
 
-        private string currentFile_;
+        private string currentFile_ = String.Empty;
         public static string SAVE_FILEPATH = "zones";
         public static string DEFAULT_FILENAME = "defaut";
 
