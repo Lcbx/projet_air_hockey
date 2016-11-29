@@ -117,17 +117,77 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="notifyIcon1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Bienvenue dans notre application "Hockey sur coussin d’air", qui est produite dans 
-le cadre du cours INF2990.
-Cette application est dévéloppée par l'équipe 10 en suivant le SRS fourni.
+    <value>Mode d'édition de la table
 
-L'utilisation est simple et accessible à tout le monde.
-Pour le mode "Édition", il suffit de choisir la commande à executer à partir de la boite 
-d'outils située à droite de la fenetre ou à partir de la barre des menus.
-Selon l'action choisi, il suffit de cliquer et/ou appuyer sur une touche pour voir le résultat.
-  
-Pour la barre de proprietes, vous pouvez changez la position, l'angle(en degre) et le scale(entre 0.5 et 8) d'un objet
-</value>
+La barre d'outils à gauche contiens l'ensemble des outils présentés dans l'onglet outils. 
+
+La barre des propriétés à droite présente les informations concernant les propriétés du seul objet sélectionné (Un seul objet doit être sélectionné):
+1. Contient la position sur l'axe des X et Y par rapport au centre de la table.
+2. Contient l'angle de rotation (en degrés).
+3. Contient le facteur de taille, nommé échelle, par rapport à la forme originale. Pour le muret, l'échelle n'a effet que sur la longeur.</value>
+  </data>
+  <data name="richTextBox2.Text" xml:space="preserve">
+    <value>Onglet Fichier
+
+1) Nouveau : Permet de créer une nouvelle table vide aux tailles prédéfinies. Supprime la table en cours d'édition, alors il est important de sauvegarder auparavant.
+
+2) Ouvrir : Permet d'ouvrir une table qui a déjà été enregistrée. Supprime la table en cours d'édition, alors il est important de sauvegarder auparavant.
+
+3) Enregistrer : Permet de sauvegarder la table. Si la table a déjà été enregistré sous un nom ou elle a été ouverte, elle est enregistré sous le nom précédent (à l'exception de la table par défaut). Sinon, effectue enregistrer sous.
+
+4) Enregistrer sous : Permet de sauvegarder la table avec un nom. Le nom de la table ne peut pas être défaut.
+
+5) Propriétés : Permet de modifier les propriétés de la table tel que le coefficient de friction de la surface, le coefficient de rebond des murs et murets et l'accélération des bonus accélérateurs.
+
+5.1) Friction : Coefficient de friction entre la surface et la rondelle. Le minimum 0 signifie aucune friction et le maximum 100 indique un forte décélération pour la distance parcourue.
+
+5.2) Rebond : Coefficient de rebond entre la rondelle et les murets et murs . Le minimum 0 signifie qu'il n'y a pas de rebondissement et le maximum 1 signifie que la collision est parfaitement élastique (vitesse conservée pour la rondelle)
+
+5.3) Accélération : Accélération à laquelle est soumise la rondelle lors de son passage sur un bonus accélérateur. Le minimum 0 signifie qu'il n'y a pas d'accélération et le maximum 10 signifie une accélération importante.6) Mode Test : Permet de tester la table en cours d'édition. Plus amples informations présentes plus loin.
+
+6) Menu Principal : Permet de revenir au menu principal.</value>
+  </data>
+  <data name="richTextBox4.Text" xml:space="preserve">
+    <value>Onglet Outils
+
+1) Sélection : Change l'outil en cours pour la sélection. Il est possible de cliquer sur un objet pour le sélectionner. Appuyer sur la touche Ctrl et cliquer pour inverser la sélection d'un objet. Il est possible de créer un rectangle de sélection afin de sélectionner tous les objets dans le rectangle. Appuyer sur la touche Ctrl et créer un rectangle de sélection inverse la sélection de tous les objets dans le rectangle.
+
+2) Déplacement : Permet de déplacer les objets sélectionnés via un clic et un déplacement de la souris. Si un des objets sélectionnés devais sortir de la table, le déplacement est bloqué à la dernière position valide.
+
+3) Rotation : Permet d'effectuer une rotation autour du centre géométrique des objets sélectionnés. Tant que le clic est enfoncé, se déplacer vers le haut de la fenêtre effectue une rotation dans le sens horaire alors que se déplacer vers le bas effecture une rotation dans le sens anti-horaire.
+
+4) Duplication : Permet de dupliquer les objets sélectionnés. Les objets sont ajoutés conservent leurs positions et rotation par rapport au centre géométrique de la sélection.
+
+5) Zoom : Permet d'effectuer un zoom à l'aide d'un rectangle élastique. La région sélectionnée sera agrandie afin de prendre tout l'espace disponible. Si la touche Alt est enfoncée, la région visible sera placée à l'intérieur du rectangle élastique. Respecte la limite de zoom.
+
+6) Création d'objets
+6.1) Bonus accélérateur : Cliquer à l'endroit désiré pour l'ajouter. Aucune partie du bonus ne doit être situé à l'extérieur de la table sans quoi son positionnement sera invalide.
+6.2) Portail : Cliquer à l'endroit désiré pour ajouter le premier portail puis cliquer à un second endroit pour ajouter sa paire. Si l'outils est changé sans que le second portail n'ait été posé, le premier portail sera retiré. Aucune partie du portail ne doit être situé à l'extérieur de la table sans quoi son positionnement sera invalide.
+6.3) Muret : Cliquer à l'endroit désiré pour commencer le muret et au second endroit désiré afin de terminer le muret. Aucune partie du muret ne doit être situé à l'extérieur de la table sans quoi son positionnement sera invalide et le muret annulé.
+
+7) Gestion des points de contrôle : Permet de modifier la forme de la table en cliquant sur un des 8 points délimiteurs en bleu et en les déplaçants. Les modifications sont effectuées en miroirs. Un point ne pourra pas être déplacé plus loin s'il causerait qu'un objet de la table sorte.</value>
+  </data>
+  <data name="richTextBox5.Text" xml:space="preserve">
+    <value>Onglet Vues
+
+1) Orthographique : Change la vue pour une vue aérienne sans rotation. La molette permet de changer le niveau de zoom et le clic droit permet de déplacer verticalement et horizontalement la vue.
+
+2) Orbite : Change la vue pour une vue aérienne avec rotation. La molette permet de changer l'élévation de la vue alors que le clic droit permet d'effectuer une révolution autour du centre de la table.</value>
+  </data>
+  <data name="richTextBox6.Text" xml:space="preserve">
+    <value>Mode test de la table
+
+La barre de menus est accessible à l'appuis de la touche escape. Le premier joueur utilise la souris pour contrôler le maillet et le second joueur, si configuré humain dans le menu de configuration, utilise les touches configurées.</value>
+  </data>
+  <data name="richTextBox8.Text" xml:space="preserve">
+    <value>Onglet vues
+
+1) Orthographique : Change la vue pour une vue aérienne sans rotation. La molette permet de changer le niveau de zoom et le clic droit permet de déplacer verticalement et horizontalement la vue.
+
+2) Orbite : Change la vue pour une vue aérienne avec rotation. La molette permet de changer l'élévation de la vue alors que le clic droit permet d'effectuer une révolution autour du centre de la table.</value>
   </data>
 </root>
