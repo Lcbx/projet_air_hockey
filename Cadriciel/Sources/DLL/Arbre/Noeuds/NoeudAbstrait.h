@@ -144,9 +144,9 @@ public:
 	/// Assigne le mode d'affichage des polygones.
 	virtual void assignerModePolygones(GLenum modePolygones);
 	/// Affiche le noeud.
-	virtual void afficher(const glm::mat4& vueProjection) const;
+	virtual void afficher(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const;
 	/// Affiche le noeud de manière concrète.
-	virtual void afficherConcret(const glm::mat4& vueProjection) const;
+	virtual void afficherConcret(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const;
 	/// Anime le noeud.
 	virtual void animer(float dt);
 

@@ -59,7 +59,7 @@ NoeudPointControle::~NoeudPointControle()
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudPointControle::afficherConcret(const glm::mat4& vueProjection) const
+void NoeudPointControle::afficherConcret(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 {
 	/*
 	glLoadIdentity();

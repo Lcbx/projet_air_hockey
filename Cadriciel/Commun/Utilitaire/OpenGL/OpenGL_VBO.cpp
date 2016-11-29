@@ -119,10 +119,10 @@ namespace opengl{
 	/// @return Aucune.
 	///
 	////////////////////////////////////////////////////////////////////////
-	void VBO::dessiner(const glm::mat4& transformation) const
+	void VBO::dessiner(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 	{
 		unsigned int bufferIndex = 0;
-		dessiner(modele_->obtenirNoeudRacine(), bufferIndex, transformation);
+		dessiner(modele_->obtenirNoeudRacine(), bufferIndex, modele, vue, projection);
 	}
 
 	////////////////////////////////////////////////////////////////////////
@@ -134,14 +134,20 @@ namespace opengl{
 	/// @return Aucune.
 	///
 	////////////////////////////////////////////////////////////////////////
-	void VBO::dessiner(modele::Noeud const& noeud, unsigned int& bufferIndex, const glm::mat4& transformation) const
+	void VBO::dessiner(modele::Noeud const& noeud, unsigned int& bufferIndex, const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 	{
 		// Matrice de transformation
-		glm::mat4x4 const& m{ transformation * noeud.obtenirTransformation() };
+		glm::mat4x4 const& m{ projection * vue * modele };
 
 		// Appliquer le nuanceur
-		Programme::Start(programme_);
-		programme_.assignerUniforme("modelViewProjection", m);
+#if 1
+			Programme::Start(programme_);
+			programme_.assignerUniforme("modelViewProjection", m);
+			programme_.assignerUniforme("colorIn", glm::vec4(0.f, 0.f, 0.f, 1.f));
+#else
+			glMatrixMode(GL_PROJECTION);
+			glLoadMatrixf(glm::value_ptr(m));
+#endif
 
 		for (auto const& mesh : noeud.obtenirMeshes())
 		{
@@ -187,7 +193,7 @@ namespace opengl{
 		/// Dessin récursif.
 		for (auto const& n : noeud.obtenirEnfants())
 		{
-			dessiner(n, bufferIndex, m);
+			dessiner(n, bufferIndex, modele, vue, projection);
 		}
 	}
 
@@ -226,7 +232,8 @@ namespace opengl{
 		if (modele_->possedeTexture(materiau.nomTexture_)) {
 			// Activer le texturage OpenGL et lier la texture appropriée
 			glEnable(GL_TEXTURE_2D);
-			glScalef(1.0, -1.0, 1.0);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 			glBindTexture(GL_TEXTURE_2D, modele_->obtenirTextureHandle(materiau.nomTexture_));
 		}
 		else {
@@ -243,10 +250,7 @@ namespace opengl{
 		materiau.emission_
 		Shininess = materiau.shininess_ * materiau.shininessStrength_*/
 
-		glPolygonMode(
-			GL_FRONT_AND_BACK,
-			materiau.filDeFer_ ? GL_LINE : GL_FILL);
-
+		glPolygonMode(	GL_FRONT_AND_BACK,	materiau.filDeFer_ ? GL_LINE : GL_FILL);
 		materiau.afficherDeuxCotes_ ? glEnable(GL_CULL_FACE) : glDisable(GL_CULL_FACE);
 
 	}

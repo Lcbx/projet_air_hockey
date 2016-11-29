@@ -222,9 +222,19 @@ public:
 	void activerRondelle();
 	void deactiverRondelle();
 	bool estEnPauseRondelle();
+	/// Livrable 3
+	std::string getNomJoueurCourant(int index);
+	bool setNomJoueurCourant(std::string nom,int index);
+	int getScoreCourant(int index);
+	bool setScoreCourant(int score,int index);
+
+
 	/// Ali
 	/// Renvoie la constante contenant le nom du fichier de configuration
 	//std::string getConfigFile();
+
+	void jouerSonModeJeu(bool mode);
+	void MettrePauseSonModeJeu(bool pause);
 
 private:
 
@@ -276,6 +286,7 @@ private:
    
 
    /// Ali
+   // Livrable 2
    /// joueur virtuel 
    bool joueurVirtuelActive_{false};
    double vitesseVirtuelle_{ 1. };
@@ -289,10 +300,26 @@ private:
    int nombreButsMax_{ 3 };
    // rondelle en pause ?
    bool rondelleEnPause_{ false };
+   // Livrable 3
+   /// nom et score des joueurs courants
+   std::string nomJoueurCourant1_ = "Player1";
+   std::string nomJoueurCourant2_ = "Player2";
+   int scoreJoueurCourant1_{ 0 };
+   int scoreJoueurCourant2_{ 0 };
+   int compteurSecondes_ { 0 };
+   int compteurMinutes_{ 0 };
+   int compteurHeures_{ 0 };
+   int AncienSecondes_ { 0 };
+   int AncienMinutes_{ 0 };
+   int AncienHeures_{ 0 };
+   float temps_ { 0. };
+
    /// Ali
 
    // Tournoi pour le mode tournoi
    Tournoi<AdaptateurJoueur>* tournoi_;
+
+  
 };
 
 

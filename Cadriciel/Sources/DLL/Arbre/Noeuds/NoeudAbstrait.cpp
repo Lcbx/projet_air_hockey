@@ -389,7 +389,7 @@ void NoeudAbstrait::assignerModePolygones(GLenum modePolygones)
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudAbstrait::afficher(const glm::mat4& vueProjection) const
+void NoeudAbstrait::afficher(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 {
 	if (affiche_) {
 		glPushAttrib(GL_CURRENT_BIT | GL_POLYGON_BIT);
@@ -416,12 +416,12 @@ void NoeudAbstrait::afficher(const glm::mat4& vueProjection) const
 			glLogicOp(GL_COPY_INVERTED);
 
 			// Affichage concret
-			afficherConcret(vueProjection * modele);
+			afficherConcret(modele, vue, projection);
 
 			//on désactive le mode logic_op 
 			glDisable(GL_COLOR_LOGIC_OP);
 
-		} else afficherConcret(vueProjection * modele);
+		} else afficherConcret(modele, vue, projection);
 
 		// Restauration
 		glPopAttrib();
@@ -443,7 +443,7 @@ void NoeudAbstrait::afficher(const glm::mat4& vueProjection) const
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudAbstrait::afficherConcret(const glm::mat4& vueProjection) const
+void NoeudAbstrait::afficherConcret(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 {
 }
 
