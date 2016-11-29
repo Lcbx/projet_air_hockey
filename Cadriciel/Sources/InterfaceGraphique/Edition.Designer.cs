@@ -150,11 +150,11 @@
             // 
             this.nouveauToolStripMenuItem.Name = "nouveauToolStripMenuItem";
             this.nouveauToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-<<<<<<< HEAD
+//<<<<<<< HEAD
             this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(362, 38);
-=======
-            this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
->>>>>>> developpement2
+//=======
+            //this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+//>>>>>>> developpement2
             this.nouveauToolStripMenuItem.Text = "Nouveau";
             this.nouveauToolStripMenuItem.Click += new System.EventHandler(this.nouveauToolStripMenuItem_Click_1);
             // 
@@ -162,11 +162,11 @@
             // 
             this.ouvrirToolStripMenuItem.Name = "ouvrirToolStripMenuItem";
             this.ouvrirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-<<<<<<< HEAD
+//<<<<<<< HEAD
             this.ouvrirToolStripMenuItem.Size = new System.Drawing.Size(362, 38);
-=======
-            this.ouvrirToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
->>>>>>> developpement2
+//=======
+           // this.ouvrirToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+//>>>>>>> developpement2
             this.ouvrirToolStripMenuItem.Text = "Ouvrir";
             this.ouvrirToolStripMenuItem.Click += new System.EventHandler(this.ouvrirToolStripMenuItem_Click);
             // 
@@ -175,54 +175,54 @@
             this.enregistrerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("enregistrerToolStripMenuItem.Image")));
             this.enregistrerToolStripMenuItem.Name = "enregistrerToolStripMenuItem";
             this.enregistrerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-<<<<<<< HEAD
+//<<<<<<< HEAD
             this.enregistrerToolStripMenuItem.Size = new System.Drawing.Size(362, 38);
-=======
-            this.enregistrerToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
->>>>>>> developpement2
+//=======
+          //  this.enregistrerToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+//>>>>>>> developpement2
             this.enregistrerToolStripMenuItem.Text = "Enregistrer";
             // 
             // enregistrerSousToolStripMenuItem
             // 
             this.enregistrerSousToolStripMenuItem.Name = "enregistrerSousToolStripMenuItem";
-<<<<<<< HEAD
+//<<<<<<< HEAD
             this.enregistrerSousToolStripMenuItem.Size = new System.Drawing.Size(362, 38);
-=======
-            this.enregistrerSousToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
->>>>>>> developpement2
+//=======
+            //this.enregistrerSousToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+//>>>>>>> developpement2
             this.enregistrerSousToolStripMenuItem.Text = "Enregistrer sous";
             this.enregistrerSousToolStripMenuItem.Click += new System.EventHandler(this.enregistrerSousToolStripMenuItem_Click);
             // 
             // propriétésToolStripMenuItem
             // 
             this.propriétésToolStripMenuItem.Name = "propriétésToolStripMenuItem";
-<<<<<<< HEAD
+//<<<<<<< HEAD
             this.propriétésToolStripMenuItem.Size = new System.Drawing.Size(362, 38);
-=======
-            this.propriétésToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
->>>>>>> developpement2
+//=======
+           // this.propriétésToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+//>>>>>>> developpement2
             this.propriétésToolStripMenuItem.Text = "Propriétés";
             this.propriétésToolStripMenuItem.Click += new System.EventHandler(this.propriétésToolStripMenuItem_Click);
             // 
             // modeTestToolStripMenuItem
             // 
             this.modeTestToolStripMenuItem.Name = "modeTestToolStripMenuItem";
-<<<<<<< HEAD
+//<<<<<<< HEAD
             this.modeTestToolStripMenuItem.Size = new System.Drawing.Size(362, 38);
-=======
-            this.modeTestToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
->>>>>>> developpement2
+//=======
+            //this.modeTestToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+//>>>>>>> developpement2
             this.modeTestToolStripMenuItem.Text = "Mode test";
             this.modeTestToolStripMenuItem.Click += new System.EventHandler(this.modeTestToolStripMenuItem_Click);
             // 
             // modeEditionToolStripMenuItem
             // 
             this.modeEditionToolStripMenuItem.Name = "modeEditionToolStripMenuItem";
-<<<<<<< HEAD
+//<<<<<<< HEAD
             this.modeEditionToolStripMenuItem.Size = new System.Drawing.Size(362, 38);
-=======
-            this.modeEditionToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
->>>>>>> developpement2
+//=======
+            //this.modeEditionToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+//>>>>>>> developpement2
             this.modeEditionToolStripMenuItem.Text = "Mode édition";
             this.modeEditionToolStripMenuItem.Click += new System.EventHandler(this.modeEditionToolStripMenuItem_Click);
             // 
@@ -230,11 +230,11 @@
             // 
             this.menuPrincipalToolStripMenuItem.Name = "menuPrincipalToolStripMenuItem";
             this.menuPrincipalToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-<<<<<<< HEAD
+//<<<<<<< HEAD
             this.menuPrincipalToolStripMenuItem.Size = new System.Drawing.Size(362, 38);
-=======
-            this.menuPrincipalToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
->>>>>>> developpement2
+//=======
+            //this.menuPrincipalToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+//>>>>>>> developpement2
             this.menuPrincipalToolStripMenuItem.Text = "Menu principal";
             this.menuPrincipalToolStripMenuItem.Click += new System.EventHandler(this.menuPrincipalToolStripMenuItem_Click);
             // 
@@ -745,10 +745,10 @@
             this.textBox3.Size = new System.Drawing.Size(110, 31);
             this.textBox3.TabIndex = 10;
             // 
-<<<<<<< HEAD
+//<<<<<<< HEAD
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+           /* this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.SystemColors.Control;
             this.panel2.Controls.Add(this.textBox5);
             this.panel2.Controls.Add(this.textBox4);
@@ -813,19 +813,19 @@
             this.label6.Text = "Score";
             // 
 =======
->>>>>>> developpement2
+>>>>>>> developpement2*/
             // Edition
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-<<<<<<< HEAD
+/*<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(1742, 1038);
-            this.Controls.Add(this.panel2);
-=======
-            this.ClientSize = new System.Drawing.Size(871, 540);
->>>>>>> developpement2
+            this.Controls.Add(this.panel2);*/
+//=======
+           this.ClientSize = new System.Drawing.Size(871, 540);
+//>>>>>>> developpement2
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panel1);
