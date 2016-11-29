@@ -123,6 +123,9 @@ namespace InterfaceGraphique
                 //probabilite_ = FonctionsNatives.obtenirProbabiliteProfil(nt_cNom);
                 edition_.DemarerJoueurVirtuel(FonctionsNatives.obtenirVitesseProfil(nt_cNom), FonctionsNatives.obtenirProbabiliteProfil(nt_cNom));
                 //edition_.DemarerJoueurVirtuel(1, 0.5);
+                // Livrable 3 
+                // changer le nom du joueur virtuelle courant
+                FonctionsNatives.setNomJoueurCourant(nt_cNom, 2);
                 edition_.resetPartie();
 
                 menu_.Hide();

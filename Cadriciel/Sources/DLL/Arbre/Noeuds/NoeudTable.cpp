@@ -12,7 +12,6 @@
 #include "Utilitaire.h"
 #include "GL/glew.h"
 
-#include "GL/glew.h"
 #include <cmath>
 
 #include "Modele3D.h"
@@ -21,6 +20,15 @@
 #include "Utilitaire.h"
 
 #include <../Visiteur.h>
+
+#include "glm/glm.hpp"
+#include "glm/gtc/type_ptr.hpp"
+#include "OpenGL_Nuanceur.h"
+#include "OpenGL_Programme.h"
+#include "Modele3D.h"
+#include "AideGL.h"
+#include "Utilitaire.h"
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn NoeudTable::NoeudTable(const std::string& typeNoeud)
@@ -62,12 +70,26 @@ NoeudTable::~NoeudTable()
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudTable::afficherConcret(const glm::mat4& vueProjection) const
+void NoeudTable::afficherConcret(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 {
+	
+	glm::mat4x4 const& m{ projection * vue * modele };
+
+	// Appliquer le nuanceur
+	opengl::Programme::Start(vbo_->programme_);
+	vbo_->programme_.assignerUniforme("modelViewProjection", m);
+	//vbo_->programme_.assignerUniforme("colorIn", glm::vec4(1.f,1.f,1.f,0.f));
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glDisable(GL_TEXTURE_2D);
+
 	// tracer la table
-	tracerTable(vueProjection);
+	tracerTable(glm::mat4(1.f));
+
+	opengl::Programme::Stop(vbo_->programme_);
+
 	//pour afficher les noeuds composites -- points de controle
-	NoeudComposite::afficherConcret(vueProjection);
+	//NoeudComposite::afficherConcret(modele, vue, projection);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -138,7 +160,7 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 	p1----------p3----------p5
 	*/
 	// tracer la table (zone du jeur)
-	glColor4fv(glm::value_ptr(couleurTable_));
+	vbo_->programme_.assignerUniforme("colorIn", couleurTable_);
 	glBegin(GL_TRIANGLE_FAN);
 	{
 		glVertex3fv(PROJ8);
@@ -235,7 +257,7 @@ void NoeudTable::tracerPointsControle(const glm::mat4& vueProjection) const {
 		glm::vec3 p2{ p(i).x + delta / 2, p(i).y - delta / 2, p(i).z };
 		glm::vec3 p3{ p(i).x + delta / 2, p(i).y + delta / 2, p(i).z };
 
-		glColor4fv(glm::value_ptr(couleur));
+		vbo_->programme_.assignerUniforme("colorIn", couleur);
 		glBegin(GL_QUADS);
 		{
 			glVertex3fv(PROJvec(p0));
@@ -260,7 +282,7 @@ void NoeudTable::tracerPointsControle(const glm::mat4& vueProjection) const {
 void NoeudTable::tracerLignesDecoration(const glm::mat4& vueProjection) const
 {
 	// tracer le contour
-	glColor4fv(glm::value_ptr(couleurContour_));
+	vbo_->programme_.assignerUniforme("colorIn", couleurContour_);
 	glLineWidth(2.);
 	glBegin(GL_LINE_LOOP);
 	{
@@ -277,7 +299,7 @@ void NoeudTable::tracerLignesDecoration(const glm::mat4& vueProjection) const
 
 	// tracer les lignes du terrain
 	glLineWidth(5.);
-	glColor4fv(glm::value_ptr(couleurLignes_));
+	vbo_->programme_.assignerUniforme("colorIn", couleurLignes_);
 	glBegin(GL_LINES);
 	{
 		glVertex3fv(PROJ(2));
@@ -287,7 +309,8 @@ void NoeudTable::tracerLignesDecoration(const glm::mat4& vueProjection) const
 
 	// tracer un cercle au milieu du terrain
 	glLineWidth(3.);
-	glColor4f(1., 1., 0., 1.);
+	vbo_->programme_.assignerUniforme("colorIn", glm::vec4(1.f, 1.f, 0.f, 1.f));
+
 #undef min
 	double distance = std::min({ glm::distance(p(2), vecPROJ8),
 								 glm::distance(p(6), vecPROJ8),
@@ -394,7 +417,7 @@ void NoeudTable::tracerMur2Points(const glm::mat4& vueProjection, glm::vec3 A, g
 		}
 	}
 
-	glColor4fv(glm::value_ptr(couleurMurs_));
+	vbo_->programme_.assignerUniforme("colorIn", couleurMurs_);
 	glBegin(GL_QUADS);
 	{
 		glVertex3fv(PROJvec(A));
@@ -443,7 +466,7 @@ void NoeudTable::tracerMurs3Points(const glm::mat4& vueProjection, glm::vec3 p1,
 void NoeudTable::tracerMurs(const glm::mat4& vueProjection) const
 {
 	// tracer murs
-	glColor4fv(glm::value_ptr(couleurMurs_));
+	vbo_->programme_.assignerUniforme("colorIn", couleurMurs_);
 	glBegin(GL_QUADS);
 	{
 		// mur p0p6
@@ -545,7 +568,7 @@ double NoeudTable::calculB(double pente, glm::vec3 point) const
 void NoeudTable::tracerButs(const glm::mat4& vueProjection) const 
 {
 #define delta 2
-	glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
+	vbo_->programme_.assignerUniforme("colorIn", couleurButs_);
 	glBegin(GL_QUADS);
 	{	
 		//1er but
@@ -745,6 +768,8 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection, double longueur) con
 {
 	glm::vec3 point1, point2, point3, point4, point5;
 	//glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
+	//Luc : les nuanceurs ne permettent qu'une couleur par set de points envoyés
+	vbo_->programme_.assignerUniforme("colorIn", glm::vec4(0.f, 0.6f, 0.8f, 0.f)); //vert
 	glBegin(GL_QUADS);
 	//glPointSize(5);
 	//glBegin(GL_POINTS);
@@ -753,46 +778,30 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection, double longueur) con
 		point1 = p(6);
 		calculerPointDistance(p(0), p(6), longueur, largeur_, point2, point3, point4);
 		// 1er morceau P6P0
-		glColor4f(1., 0, 0, 1); // Rouge
 		glVertex3fv(PROJvec(glm::vec3(point1.x + delta , point1.y, point1.z)));
-		glColor4f(1., 1, 0, 1); //Jaune
 		glVertex3fv(PROJvec(glm::vec3(point2.x + delta , point2.y, point2.z)));
-		glColor4f(0., 1, 0, 1); //vert
 		glVertex3fv(PROJvec(glm::vec3(point3.x - delta, point3.y, point3.z)));
-		glColor4f(0., 0, 1, 1); //bleu
 		glVertex3fv(PROJvec(glm::vec3(point4.x - delta, point4.y, point4.z)));
 		// 2eme morceau P1P6
 		calculerPointDistance(p(1), p(6), longueur, largeur_, point2, point3, point4);
-		glColor4f(1., 0, 0, 1); // Rouge
 		glVertex3fv(PROJvec(glm::vec3(point1.x + delta, point1.y, point1.z)));
-		glColor4f(0., 0, 1, 1); //bleu
 		glVertex3fv(PROJvec(glm::vec3(point4.x - delta, point4.y, point4.z)));
-		glColor4f(0., 1, 0, 1); //vert
 		glVertex3fv(PROJvec(glm::vec3(point3.x - delta, point3.y, point3.z)));
-		glColor4f(1., 1, 0, 1); //Jaune
 		glVertex3fv(PROJvec(glm::vec3(point2.x + delta, point2.y, point2.z)));
 	
 		//2eme but
 		point1 = p(7);
 		// 1ere morceau P7P4
 		calculerPointDistance(p(4), p(7), longueur, largeur_, point2, point3, point4);
-		glColor4f(1., 0, 0, 1); // Rouge
 		glVertex3fv(PROJvec(glm::vec3(point1.x - delta, point1.y, point1.z)));
-		glColor4f(0., 0, 1, 1); //bleu
 		glVertex3fv(PROJvec(glm::vec3(point4.x + delta + 2 * largeur_, point4.y, point4.z)));
-		glColor4f(0., 1, 0, 1); //vert
 		glVertex3fv(PROJvec(glm::vec3(point3.x + delta + 2*largeur_, point3.y, point3.z)));
-		glColor4f(1., 1, 0, 1); //Jaune
 		glVertex3fv(PROJvec(glm::vec3(point2.x - delta, point2.y, point2.z)));
 		//2eme morceau 
 		calculerPointDistance(p(5), p(7), longueur, largeur_, point2, point3, point4);
-		glColor4f(1., 0, 0, 1); // Rouge
 		glVertex3fv(PROJvec(glm::vec3(point1.x - delta, point1.y, point1.z)));
-		glColor4f(1., 1, 0, 1); //Jaune
 		glVertex3fv(PROJvec(glm::vec3(point2.x - delta, point2.y, point2.z)));
-		glColor4f(0., 1, 0, 1); //vert
 		glVertex3fv(PROJvec(glm::vec3(point3.x + delta + 2 * largeur_, point3.y, point3.z)));
-		glColor4f(0., 0, 1, 1); //bleu
 		glVertex3fv(PROJvec(glm::vec3(point4.x + delta + 2 * largeur_, point4.y, point4.z)));
 	}
 	glEnd();

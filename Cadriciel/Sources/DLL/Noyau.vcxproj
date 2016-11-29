@@ -144,10 +144,12 @@
     <ClCompile Include="Application\Rotation.cpp" />
     <ClCompile Include="Application\Selection.cpp" />
     <ClCompile Include="Application\StrategieSouris.cpp" />
+    <ClCompile Include="Application\TextOpenGL.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudAraignee.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudConeCube.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudPointControle.cpp" />
     <ClCompile Include="Arbre\Noeuds\NoeudTable.cpp" />
+    <ClCompile Include="Arbre\Noeuds\SkyBox.cpp" />
     <ClCompile Include="BoiteCollision.cpp" />
     <ClCompile Include="ConfigTournoi.cpp" />
     <ClCompile Include="Configuration\ConfigDebug.cpp" />
@@ -172,6 +174,7 @@
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="SauvegardeZoneDeJeu.cpp" />
+    <ClCompile Include="Sons.cpp" />
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="Tests\BancTests.cpp" />
     <ClCompile Include="Tests\CameraTest.cpp" />
@@ -212,7 +215,9 @@
     <ClInclude Include="Application\Rotation.h" />
     <ClInclude Include="Application\Selection.h" />
     <ClInclude Include="Application\StrategieSouris.h" />
+    <ClInclude Include="Application\TextOpenGL.h" />
     <ClInclude Include="Arbre\Noeuds\Couleurs.h" />
+    <ClInclude Include="Arbre\Noeuds\SkyBox.h" />
     <ClInclude Include="Arbre\Noeuds\NoeudAraignee.h" />
     <ClInclude Include="Arbre\Noeuds\NoeudConeCube.h" />
     <ClInclude Include="Arbre\Noeuds\NoeudPointControle.h" />
@@ -240,6 +245,7 @@
     <ClInclude Include="NoeudRondelle.h" />
     <ClInclude Include="Application\Souris.h" />
     <ClInclude Include="SauvegardeZoneDeJeu.h" />
+    <ClInclude Include="Sons.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="Tests\BancTests.h" />
     <ClInclude Include="Tests\CameraTest.h" />

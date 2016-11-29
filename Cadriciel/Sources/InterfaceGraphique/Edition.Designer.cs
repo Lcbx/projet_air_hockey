@@ -88,12 +88,6 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -101,7 +95,6 @@
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -157,7 +150,11 @@
             // 
             this.nouveauToolStripMenuItem.Name = "nouveauToolStripMenuItem";
             this.nouveauToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+<<<<<<< HEAD
             this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(362, 38);
+=======
+            this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+>>>>>>> developpement2
             this.nouveauToolStripMenuItem.Text = "Nouveau";
             this.nouveauToolStripMenuItem.Click += new System.EventHandler(this.nouveauToolStripMenuItem_Click_1);
             // 
@@ -165,7 +162,11 @@
             // 
             this.ouvrirToolStripMenuItem.Name = "ouvrirToolStripMenuItem";
             this.ouvrirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+<<<<<<< HEAD
             this.ouvrirToolStripMenuItem.Size = new System.Drawing.Size(362, 38);
+=======
+            this.ouvrirToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+>>>>>>> developpement2
             this.ouvrirToolStripMenuItem.Text = "Ouvrir";
             this.ouvrirToolStripMenuItem.Click += new System.EventHandler(this.ouvrirToolStripMenuItem_Click);
             // 
@@ -174,34 +175,54 @@
             this.enregistrerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("enregistrerToolStripMenuItem.Image")));
             this.enregistrerToolStripMenuItem.Name = "enregistrerToolStripMenuItem";
             this.enregistrerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+<<<<<<< HEAD
             this.enregistrerToolStripMenuItem.Size = new System.Drawing.Size(362, 38);
+=======
+            this.enregistrerToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+>>>>>>> developpement2
             this.enregistrerToolStripMenuItem.Text = "Enregistrer";
             // 
             // enregistrerSousToolStripMenuItem
             // 
             this.enregistrerSousToolStripMenuItem.Name = "enregistrerSousToolStripMenuItem";
+<<<<<<< HEAD
             this.enregistrerSousToolStripMenuItem.Size = new System.Drawing.Size(362, 38);
+=======
+            this.enregistrerSousToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+>>>>>>> developpement2
             this.enregistrerSousToolStripMenuItem.Text = "Enregistrer sous";
             this.enregistrerSousToolStripMenuItem.Click += new System.EventHandler(this.enregistrerSousToolStripMenuItem_Click);
             // 
             // propriétésToolStripMenuItem
             // 
             this.propriétésToolStripMenuItem.Name = "propriétésToolStripMenuItem";
+<<<<<<< HEAD
             this.propriétésToolStripMenuItem.Size = new System.Drawing.Size(362, 38);
+=======
+            this.propriétésToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+>>>>>>> developpement2
             this.propriétésToolStripMenuItem.Text = "Propriétés";
             this.propriétésToolStripMenuItem.Click += new System.EventHandler(this.propriétésToolStripMenuItem_Click);
             // 
             // modeTestToolStripMenuItem
             // 
             this.modeTestToolStripMenuItem.Name = "modeTestToolStripMenuItem";
+<<<<<<< HEAD
             this.modeTestToolStripMenuItem.Size = new System.Drawing.Size(362, 38);
+=======
+            this.modeTestToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+>>>>>>> developpement2
             this.modeTestToolStripMenuItem.Text = "Mode test";
             this.modeTestToolStripMenuItem.Click += new System.EventHandler(this.modeTestToolStripMenuItem_Click);
             // 
             // modeEditionToolStripMenuItem
             // 
             this.modeEditionToolStripMenuItem.Name = "modeEditionToolStripMenuItem";
+<<<<<<< HEAD
             this.modeEditionToolStripMenuItem.Size = new System.Drawing.Size(362, 38);
+=======
+            this.modeEditionToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+>>>>>>> developpement2
             this.modeEditionToolStripMenuItem.Text = "Mode édition";
             this.modeEditionToolStripMenuItem.Click += new System.EventHandler(this.modeEditionToolStripMenuItem_Click);
             // 
@@ -209,7 +230,11 @@
             // 
             this.menuPrincipalToolStripMenuItem.Name = "menuPrincipalToolStripMenuItem";
             this.menuPrincipalToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
+<<<<<<< HEAD
             this.menuPrincipalToolStripMenuItem.Size = new System.Drawing.Size(362, 38);
+=======
+            this.menuPrincipalToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
+>>>>>>> developpement2
             this.menuPrincipalToolStripMenuItem.Text = "Menu principal";
             this.menuPrincipalToolStripMenuItem.Click += new System.EventHandler(this.menuPrincipalToolStripMenuItem_Click);
             // 
@@ -720,6 +745,7 @@
             this.textBox3.Size = new System.Drawing.Size(110, 31);
             this.textBox3.TabIndex = 10;
             // 
+<<<<<<< HEAD
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -786,14 +812,20 @@
             this.label6.TabIndex = 14;
             this.label6.Text = "Score";
             // 
+=======
+>>>>>>> developpement2
             // Edition
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(1742, 1038);
             this.Controls.Add(this.panel2);
+=======
+            this.ClientSize = new System.Drawing.Size(871, 540);
+>>>>>>> developpement2
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panel1);
@@ -817,8 +849,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -884,12 +914,6 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Panel panel2;
-        public System.Windows.Forms.TextBox textBox5;
-        public System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
     }
 
 }

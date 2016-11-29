@@ -16,7 +16,7 @@
 #include "GL/glew.h"
 #include <list>
 #include <map>
-
+#include "Sons.h"
 ///////////////////////////////////////////////////////////////////////////
 /// @class NoeudRondelle
 /// @brief Classe qui représente un la rondelle de l'arbre de rendu.
@@ -33,7 +33,7 @@ public:
 	~NoeudRondelle();
 
 	/// Affiche le cube.
-	virtual void afficherConcret(const glm::mat4& vueProjection) const;
+	virtual void afficherConcret(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const;
 	/// Effectue l'animation du cube.
 	virtual void animer(float temps);
 	///applique ue modification à la vitesse en fonction d'une collision avec un maillet
@@ -60,6 +60,8 @@ private:
 	float angleY_{ 0.f };
 	/// Angle de rotation.
 	float angleRotation_{ 0.f };
+
+	//Sons *player;
 };
 
 

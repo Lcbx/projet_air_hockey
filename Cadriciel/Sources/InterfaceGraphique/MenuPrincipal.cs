@@ -122,7 +122,9 @@ namespace InterfaceGraphique
             
             choix.setMenuPrincipal(this, edition_);
             choix.ShowDialog();
-
+            //Livrable 3
+            // remettre a zero le compteur
+            FonctionsNatives.initialiserCompteur();
             //Chargement zoneChar = new Chargement(edition_);
             //zoneChar.ShowDialog();
             //if (zoneChar.estclique == true)

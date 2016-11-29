@@ -51,7 +51,7 @@
 #include "JoueurVirtuel.h"
 #include "../ConfigTournoi.h"
 
-
+#include "../Application/TextOpenGL.h"
 
 /// Pointeur vers l'instance unique de la classe.
 FacadeModele* FacadeModele::instance_{ nullptr };
@@ -413,9 +413,14 @@ void FacadeModele::afficher() const
 	// Afficher la scène
 	afficherBase();
 
-	// Compte de l'affichage
-	utilitaire::CompteurAffichage::obtenirInstance()->signalerAffichage();
-
+	// creation d'une instance TextOpenGL
+	if (partieRapide_)	
+	{
+		TextOpenGL text;
+		text.afficher();
+	}
+	
+		
 	// Échange les tampons pour que le résultat du rendu soit visible.
 	::SwapBuffers(hDC_);
 }
@@ -474,7 +479,7 @@ void FacadeModele::afficherBase() const
 	//glEnable(GL_LIGHT1);
 
 	// Afficher la scène.
-	arbre_->afficher(vueProjection);
+	arbre_->afficher(glm::mat4(1.f), vue_->obtenirCamera().obtenirMatrice(), vue_->obtenirProjection().obtenirMatrice() );
 }
 
 
@@ -493,6 +498,100 @@ void FacadeModele::reinitialiser()
 	arbre_->initialiser();
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::activerCompteur(float temps)
+/// @ Author : Ali
+/// Cette fonction permet d'activer le compteur qui sera afficher 
+/// dans la partie rapide 
+/// @param[in] temps : Intervalle de temps sur lequel effectuer le calcul.
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::activerCompteur(float temps)
+{
+	//incrementer le compteur a chaque instant
+	AncienSecondes_ = compteurSecondes_;
+	temps_ = temps_ + temps;
+	compteurSecondes_ = (int)temps_;
+	
+	// corriger les valeurs 
+	if (compteurSecondes_ == 60)
+	{
+		compteurSecondes_ = 0;
+		temps_ = 0;
+		compteurMinutes_++;
+	}
+	if (compteurMinutes_ == 60)
+	{
+		compteurMinutes_ = 0;
+		compteurHeures_++;
+	}
+	if (compteurHeures_ == 24)
+		compteurHeures_ = 0;
+	//test afficher a la console
+	if (compteurSecondes_ != AncienSecondes_)
+	{
+		//cout << compteurHeures_ << ":" << compteurMinutes_ << ":" << compteurSecondes_ << endl;
+		std::string formatHeure = to_string(compteurHeures_);
+		std::string formatMinute = to_string(compteurMinutes_);
+		std::string formatSeconde = to_string(compteurSecondes_);
+		chrono_ = formatHeure + ":" + formatMinute + ":" + formatSeconde;
+		//cout << chrono_ << endl;
+	}
+		
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn std::string FacadeModele::getChrono()
+/// @ Author : Ali
+/// Cette fonction permet de recuper la chaine de caractere du temps 
+/// qui sera affichee en FTGL lors d'une partie
+///
+/// @return std::string
+///
+////////////////////////////////////////////////////////////////////////
+std::string FacadeModele::getChrono()
+{
+	return chrono_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::initialiserCompteur(float temps)
+/// @ Author : Ali
+/// Cette fonction permet d'initialiser le compteur a zero 
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::initialiserCompteur ()
+{
+	compteurSecondes_ = 0;
+	compteurMinutes_ = 0;
+	compteurHeures_ = 0;
+	AncienSecondes_ = 0;
+	temps_ = 0.;
+	chrono_ = "0:0:0";
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::initialiserTextFTGL()
+/// @ Author : Ali
+/// Cette fonction permet d'initialiser le nom des joueurs, le score
+/// et le compteur 
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::initialiserTextFTGL()
+{
+	nomJoueurCourant1_ = "Player1";
+	nomJoueurCourant2_ = "Player2";
+	scoreJoueurCourant1_ = scoreJoueurCourant2_ = 0;
+	initialiserCompteur();
+}
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -514,6 +613,13 @@ void FacadeModele::animer(float temps)
 
 	// Mise à jour de la vue.
 	vue_->animer(temps);
+
+	//Livrable3
+	// demarer le compteur 
+	activerCompteur(temps);
+
+	
+
 }
 
 
@@ -1209,7 +1315,108 @@ bool FacadeModele::estEnPauseRondelle()
 {
 	return rondelleEnPause_;
 }
- 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn std::string FacadeModele::getnomJoueur(int index)
+///
+/// Author : Ali
+/// @Brief :  Cette fonction permet de recuperer le nom d'un joueur courant
+/// @ param[in] int index : le numero du joueur a recuperer
+/// @return  std::string 
+///
+////////////////////////////////////////////////////////////////////////
+std::string FacadeModele::getNomJoueurCourant(int index)
+{	
+	if (index == 1)
+		return nomJoueurCourant1_;
+	else
+		if (index == 2)
+			return nomJoueurCourant2_;
+		else
+		{
+			std::string default = "default";
+			return default;
+		}
+			
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::setNomJoueurCourant(std::string nom, int index)
+///
+/// Author : Ali
+/// @Brief :  Cette fonction permet de modifier le nom d'un joueur courant
+/// @ param[in] int index : le numero du joueur a recuperer
+///				std::string nom : le nom a assigner
+/// @return  bool 
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::setNomJoueurCourant(std::string nom, int index)
+{
+	if (index == 1)
+	{
+		nomJoueurCourant1_ = nom;
+		return true;
+	}
+		
+	else
+		if (index == 2)
+		{
+			nomJoueurCourant2_ = nom;
+			return true;
+		}
+		else
+			return false;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn int FacadeModele::getScoreCourant(int index)
+///
+/// Author : Ali
+/// @Brief :  Cette fonction permet de recuperer le score courant d'un joueur
+/// @ param[in] int index : le numero du joueur a recuperer
+/// @return  int
+///
+////////////////////////////////////////////////////////////////////////
+int FacadeModele::getScoreCourant(int index)
+{
+	if (index == 1)
+		return scoreJoueurCourant1_;
+	else
+		if (index == 2)
+			return scoreJoueurCourant2_;
+		else // soit joueur2 par default 
+			return scoreJoueurCourant2_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::setScoreCourant(int score, int index)
+///
+/// Author : Ali
+/// @Brief :  Cette fonction permet de modifier le score d'un joueur courant
+/// @ param[in] int index : le numero du joueur courant
+///				int score : le score a modifier 
+/// @return  bool 
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::setScoreCourant(int score, int index)
+{
+	if (index == 1)
+	{
+		scoreJoueurCourant1_ = score;
+		return true;
+	}
+
+	else
+		if (index == 2)
+		{
+			scoreJoueurCourant2_ = score;
+			return true;
+		}
+		else
+			return false;
+}
+
+
  ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn std::string getConfigFile();
@@ -1283,34 +1490,20 @@ void FacadeModele::loadTournoi(char* nomZone, int count, char* nomsJoueurs, bool
 		iProfil += ++j;
 	}
 }
-	///////////////////////////////////////////////////////////////////////
-	///
-	/// @fn  setTypeLumiereActive(int type);
-	///
-	///	Permet d'assigner une valeur au type d'illumination à activer
-	///
-	/// @return	aucun
-	///
-	////////////////////////////////////////////////////////////////////////
-void FacadeModele::setTypeLumiereActive(int type)
+
+void FacadeModele::jouerSonModeJeu(bool mode)
 {
-	if (type = 0)
-		typeLumiereActive_ = 0;
-	if (type=1)
-		typeLumiereActive_ = 1;
-	if (type = 2)
-		typeLumiereActive_ = 2;
+	if (mode == true)
+	{
+		this->obtenirArbreRenduINF2990()->player->jouerSon(3);
+	}
+	else {
+		this->obtenirArbreRenduINF2990()->player->arreterSon();
+	}
 }
-///////////////////////////////////////////////////////////////////////
-///
-/// @fn  setTypeLumiereActive(int type);
-///
-///	Permet d'assigner une valeur au type d'illumination à activer
-///
-/// @return	aucun
-///
-////////////////////////////////////////////////////////////////////////
-int FacadeModele::getTypeLumiereActive()
+
+
+void FacadeModele::MettrePauseSonModeJeu(bool pause)
 {
-	return(	typeLumiereActive_ );
+	this->obtenirArbreRenduINF2990()->player->pauseSon(pause);
 }

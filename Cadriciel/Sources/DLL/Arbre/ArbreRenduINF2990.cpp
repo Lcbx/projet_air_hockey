@@ -24,6 +24,8 @@
 #include "Deplacement.h"
 
 #include "../Affichage_debuggage.h"
+#include "../Noeuds/SkyBox.h"
+#include "../Sons.h"
 
 using namespace std;
 
@@ -47,6 +49,8 @@ const std::string ArbreRenduINF2990::NOM_POINTCONTROLE{ "pointcontrole" };
 ///La chaîne représentant le type des points de controles de la table
 const std::string ArbreRenduINF2990::NOM_MAILLET{ "maillet" };
 
+
+
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn ArbreRenduINF2990::ArbreRenduINF2990()
@@ -58,7 +62,7 @@ const std::string ArbreRenduINF2990::NOM_MAILLET{ "maillet" };
 ///
 /// @return Aucune (constructeur).
 ///
-/////////////////////////////////////////////////////////////////////////6
+/////////////////////////////////////////////////////////////////////////
 ArbreRenduINF2990::ArbreRenduINF2990()
 {
 	// Construction des usines
@@ -72,6 +76,8 @@ ArbreRenduINF2990::ArbreRenduINF2990()
 	ajouterUsine(NOM_POINTCONTROLE, new UsineNoeud<NoeudPointControle>{ NOM_POINTCONTROLE, std::string{ "" } });
 	ajouterUsine(NOM_MAILLET, new UsineNoeud<NoeudMaillet>{ NOM_MAILLET, std::string{ "media/maillet.obj" } });
 
+	//declarer un lecteur
+	player = new Sons();
 }
 
 
@@ -86,6 +92,8 @@ ArbreRenduINF2990::ArbreRenduINF2990()
 ////////////////////////////////////////////////////////////////////////
 ArbreRenduINF2990::~ArbreRenduINF2990()
 {
+	//detruire le lecteur
+	player->~Sons();
 }
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -141,6 +149,9 @@ void ArbreRenduINF2990::initialiser()
 {
 	// On vide l'arbre
 	vider();
+	//on ajoute la skybox
+	ajouter((NoeudAbstrait*) new SkyBox);
+	//on ajoute la table
 	ajouterTable();
 }
 ////////////////////////////////////////////////////////////////////////
