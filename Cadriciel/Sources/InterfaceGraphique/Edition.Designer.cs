@@ -88,6 +88,7 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripTextBox3 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.txtBoxErreurProprietes = new System.Windows.Forms.RichTextBox();
             this.pnlProperty.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -115,6 +116,7 @@
             // 
             // pnlProperty
             // 
+            this.pnlProperty.Controls.Add(this.txtBoxErreurProprietes);
             this.pnlProperty.Controls.Add(this.button1);
             this.pnlProperty.Controls.Add(this.numericUpDown1);
             this.pnlProperty.Controls.Add(this.label1);
@@ -133,7 +135,7 @@
             this.button1.Location = new System.Drawing.Point(12, 208);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(121, 44);
-            this.button1.TabIndex = 14;
+            this.button1.TabIndex = 15;
             this.button1.Text = "Modifier les valeurs";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -159,7 +161,7 @@
             65536});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(57, 20);
-            this.numericUpDown1.TabIndex = 15;
+            this.numericUpDown1.TabIndex = 14;
             this.numericUpDown1.Value = new decimal(new int[] {
             5,
             0,
@@ -186,7 +188,7 @@
             this.groupBox1.Location = new System.Drawing.Point(3, 42);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(136, 76);
-            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Position";
             // 
@@ -213,21 +215,21 @@
             this.textBox2.Location = new System.Drawing.Point(29, 45);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(101, 20);
-            this.textBox2.TabIndex = 1;
+            this.textBox2.TabIndex = 12;
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(28, 19);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(102, 20);
-            this.textBox1.TabIndex = 0;
+            this.textBox1.TabIndex = 11;
             // 
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(76, 133);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(57, 20);
-            this.textBox3.TabIndex = 10;
+            this.textBox3.TabIndex = 13;
             // 
             // label5
             // 
@@ -692,6 +694,19 @@
             this.toolStripButton1.ToolTipText = "Gestion de Contrôle DePoints";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
+            // txtBoxErreurProprietes
+            // 
+            this.txtBoxErreurProprietes.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.txtBoxErreurProprietes.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBoxErreurProprietes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxErreurProprietes.ForeColor = System.Drawing.Color.Red;
+            this.txtBoxErreurProprietes.Location = new System.Drawing.Point(12, 274);
+            this.txtBoxErreurProprietes.Name = "txtBoxErreurProprietes";
+            this.txtBoxErreurProprietes.Size = new System.Drawing.Size(121, 96);
+            this.txtBoxErreurProprietes.TabIndex = 17;
+            this.txtBoxErreurProprietes.Text = "L\'objet sort de la table avec les valeurs données.";
+            this.txtBoxErreurProprietes.Visible = false;
+            // 
             // Edition
             // 
             this.AllowDrop = true;
@@ -784,6 +799,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Panel pnlProperty;
+        private System.Windows.Forms.RichTextBox txtBoxErreurProprietes;
     }
 
 }

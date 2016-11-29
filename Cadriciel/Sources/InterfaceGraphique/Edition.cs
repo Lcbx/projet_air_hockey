@@ -68,7 +68,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         public Edition()
         {
-            this.KeyPreview = true;
+            //this.KeyPreview = true;
             (this as Control).KeyDown += new KeyEventHandler(keyDownHandler);
             (this as Control).KeyUp += new KeyEventHandler(keyUpHandler);
             (this as Control).KeyDown += new KeyEventHandler(toucheManuel);
@@ -1317,10 +1317,11 @@ namespace InterfaceGraphique
             else
             {
                 FonctionsNatives.configurerObjet(myX, myY, myAngle, myScale);
-                if (FonctionsNatives.objetEstDansLaTable() == false)
-                {
-                    MessageBox.Show("Les coordonnées saisies sont à l'éxterieur de la table ", "Position invalide!",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (FonctionsNatives.objetEstDansLaTable() == false) {
+                    txtBoxErreurProprietes.Visible = true;
+                } else {
+                    txtBoxErreurProprietes.Visible = false;
+                    this.mettreAjourPos();
                 }
             }
         }
