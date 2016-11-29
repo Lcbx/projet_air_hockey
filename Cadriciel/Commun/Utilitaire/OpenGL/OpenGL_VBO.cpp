@@ -253,7 +253,7 @@ namespace opengl{
 		programme_.assignerUniforme("Kspeculaire", materiau.speculaire_);
 		programme_.assignerUniforme("KShininess", materiau.shininess_ * materiau.shininessStrength_);
 
-		//Light
+		//Light 
 		int typeIllumination =2;
 		programme_.assignerUniforme("typeIllumination", typeIllumination);
 		

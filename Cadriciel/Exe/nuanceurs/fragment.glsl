@@ -46,6 +46,7 @@ uniform int typeIllumination;     // // 0:toutes les sortes de la lumière sont 
 
 in Attribs {
    vec3 lumiereDir;
+   vec3 lumiereSpotPos;
    vec3 normale;
    vec3 obsVec;
 
@@ -56,8 +57,8 @@ in Attribs {
 float calculerSpot( in vec3 spotDir1, in vec3 spotDir2, in vec3 L )
 {
    //Gama est l'angle entre le rayon lumineu et  la direction du spot  
-   float CosAngleGama1 =  dot(L,spotDir1); 
-   float CosAngleGama2 =  dot(L,spotDir2); 
+   float CosAngleGama1 =  dot(-L,spotDir1); 
+   float CosAngleGama2 =  dot(-L,spotDir2); 
    float CosAngleOuverture = cos(radians(spotCutoff)); 
    //float CosAngleIner  = CosAngleOuverture;
    //float CosAngleOuter = pow (CosAngleOuverture,(1.01+(spotExponent/2)));
@@ -103,8 +104,9 @@ void main(void)
 	  vec3 N = normalize(AttribsIn.normale);
 	  vec3 L = normalize(AttribsIn.lumiereDir);
 	  vec3 O = normalize(AttribsIn.obsVec);
-	  vec3 DS1 = normalize(-spotDirection1);
-	  vec3 DS2 = normalize(-spotDirection2);
+	  vec3 LSP= normalize(AttribsIn.lumiereSpotPos);
+	  vec3 DS1 = normalize(spotDirection1);
+	  vec3 DS2 = normalize(spotDirection2);
 	  //vec4 couleurDepart = calculerDirectionnelle( L,N, O )*calculerSpot(DS,L);
 	  vec4 couleurTex = texture2D(diffuseTex,texCoord);
 	  
@@ -122,7 +124,7 @@ void main(void)
 					 color = clamp((calculerDirectionnelle( L,N, O )*couleurTex),0.0,1.0);
    
 			 if (typeIllumination == 2) //spot
-				color = clamp(calculerSpot(DS1,DS2, L)* couleurTex,0.0,1.0);
+				color = clamp(calculerSpot(DS1,DS2, LSP)*calculerDirectionnelle( L,N, O )*couleurTex,0.0,1.0);
 			 
 			 //else  //toutes les sortes de la lumière sont activées
 				//color = clamp(couleurDepart* couleurTex,0.0,1.0);

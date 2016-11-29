@@ -1283,3 +1283,34 @@ void FacadeModele::loadTournoi(char* nomZone, int count, char* nomsJoueurs, bool
 		iProfil += ++j;
 	}
 }
+	///////////////////////////////////////////////////////////////////////
+	///
+	/// @fn  setTypeLumiereActive(int type);
+	///
+	///	Permet d'assigner une valeur au type d'illumination à activer
+	///
+	/// @return	aucun
+	///
+	////////////////////////////////////////////////////////////////////////
+void FacadeModele::setTypeLumiereActive(int type)
+{
+	if (type = 0)
+		typeLumiereActive_ = 0;
+	if (type=1)
+		typeLumiereActive_ = 1;
+	if (type = 2)
+		typeLumiereActive_ = 2;
+}
+///////////////////////////////////////////////////////////////////////
+///
+/// @fn  setTypeLumiereActive(int type);
+///
+///	Permet d'assigner une valeur au type d'illumination à activer
+///
+/// @return	aucun
+///
+////////////////////////////////////////////////////////////////////////
+int FacadeModele::getTypeLumiereActive()
+{
+	return(	typeLumiereActive_ );
+}

@@ -63,6 +63,10 @@ public:
 	static FacadeModele* obtenirInstance();
 	/// Libère l'instance unique de la classe.
 	static void libererInstance();
+	//ikram
+	// assigne un numéro au type de lumière active
+	void setTypeLumiereActive(int type);
+	int getTypeLumiereActive();
 
 	/// Crée un contexte OpenGL et initialise celui-ci.
 	void initialiserOpenGL(HWND hWnd);
@@ -237,6 +241,7 @@ private:
    /// Opérateur d'assignation désactivé.
    FacadeModele& operator =(const FacadeModele&) = delete;
 
+   int typeLumiereActive_;
    /// Nom du fichier XML dans lequel doit se trouver la configuration.
    static const std::string FICHIER_CONFIGURATION;
 
@@ -257,7 +262,7 @@ private:
    vue::Vue* vue_{ nullptr };
    /// Arbre de rendu contenant les différents objets de la scène.
    ArbreRenduINF2990* arbre_{ nullptr };
-
+   
    /// Arthur
    /// Configuration des touches
    ConfigTouches _configTouches;
