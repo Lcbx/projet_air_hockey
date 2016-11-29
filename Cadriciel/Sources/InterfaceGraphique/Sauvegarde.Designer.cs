@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Sauvegarde));
             this.bouttonSauvegarder = new System.Windows.Forms.Button();
             this.filename = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -91,6 +92,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.filename);
             this.Controls.Add(this.bouttonSauvegarder);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Sauvegarde";
             this.Text = "Sauvegarde";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Sauvegarde_FormClosing);

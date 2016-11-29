@@ -337,8 +337,9 @@
             this.ClientSize = new System.Drawing.Size(375, 396);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BoiteAide";
-            this.Text = "BoiteAide";
+            this.Text = "Aide";
             this.tabCtrlMode.ResumeLayout(false);
             this.tabModeEdition.ResumeLayout(false);
             this.tabCtrlModeEdition.ResumeLayout(false);
