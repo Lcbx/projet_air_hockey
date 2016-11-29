@@ -16,6 +16,7 @@
 #include "AideGL.h"
 #include "Materiau.h"
 #include "Utilitaire.h"
+#include "../../../Sources/DLL/Application/FacadeModele.h"
 
 /// Position de l'attribut de location dans le nuanceur de sommet
 #define VERTEX_LOCATION 0
@@ -149,7 +150,7 @@ namespace opengl{
 			Programme::Start(programme_);
 			programme_.assignerUniforme("modelViewProjection", m);
 			programme_.assignerUniforme("colorIn", glm::vec4(0.f, 0.f, 0.f, 1.f));
-#else
+#else       programme_.assignerUniforme("colorIn", glm::vec4(0.f, 0.f, 0.f, 1.f));
 			glMatrixMode(GL_PROJECTION);
 			glLoadMatrixf(glm::value_ptr(m));
 #endif
@@ -260,7 +261,8 @@ namespace opengl{
 		programme_.assignerUniforme("KShininess", materiau.shininess_ * materiau.shininessStrength_);
 
 		//Light 
-		int typeIllumination =2;
+		auto facade = FacadeModele::obtenirInstance();
+		int typeIllumination= facade->getTypeLumiereActive();
 		programme_.assignerUniforme("typeIllumination", typeIllumination);
 		
 		glPolygonMode(	GL_FRONT_AND_BACK,	materiau.filDeFer_ ? GL_LINE : GL_FILL);

@@ -1482,5 +1482,32 @@ extern "C"
 	{
 		FacadeModele::obtenirInstance()->MettrePauseSonModeJeu(pause);
 	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn void mettrePauseMusique()
+	/// Author : wajdi
+	/// Cette fonction permet de jouer la musique de fond
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl setTypeLumiereActive(int type)
+	{
+		FacadeModele::obtenirInstance()->setTypeLumiereActive(type);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn void mettrePauseMusique()
+	/// Author : wajdi
+	/// Cette fonction permet de jouer la musique de fond
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) int getTypeLumiereActive()
+	{
+		FacadeModele::obtenirInstance()->getTypeLumiereActive();
+	}
+
 }
 

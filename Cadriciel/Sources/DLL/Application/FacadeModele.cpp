@@ -1507,3 +1507,38 @@ void FacadeModele::MettrePauseSonModeJeu(bool pause)
 {
 	this->obtenirArbreRenduINF2990()->player->pauseSon(pause);
 }
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void setTypeLumiereActive(int type);
+///
+///	Permet d'assigner le type de lumière  
+//  @param[in]: type de lumière : 0 ambiante, 1 directionnelle et 2 spot
+///
+/// @return	aucun
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::  setTypeLumiereActive(int type)
+{
+
+	if (type == 0)
+		typeLumiereActive_ = 0;
+	if (type == 1)
+		typeLumiereActive_ = 1;
+	if (type == 2)
+		typeLumiereActive_ = 2;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void setTypeLumiereActive(int type);
+///
+///	Permet d'assigner le type de lumière  
+//  @param[in]: type de lumière : 0 ambiante, 1 directionnelle et 2 spot
+///
+/// @return	aucun
+///
+////////////////////////////////////////////////////////////////////////
+int FacadeModele::getTypeLumiereActive()
+{
+	return (typeLumiereActive_);
+}

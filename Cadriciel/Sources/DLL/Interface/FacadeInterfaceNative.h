@@ -48,6 +48,11 @@ extern "C" {
 	__declspec(dllexport) void supprimerObjet();
 
 
+	// type de lumière 
+	__declspec(dllexport) void setTypeLumiereActive(int type);
+	__declspec(dllexport) int getTypeLumiereActive();
+
+
 
 
 	//Click

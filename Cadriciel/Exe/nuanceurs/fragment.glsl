@@ -25,7 +25,7 @@ uniform   float Kshininess;
    //vec4 position;
    vec3 spotDirection1 = vec3(-0.5, 0.0, 0.6);
    vec3 spotDirection2 = vec3(0.5, 0.0, 0.6);
-   float spotExponent =25.0;
+   float spotExponent =45.0;
    // angle d'ouverture de spot delta
    float spotCutoff =5;            // ([0.0,90.0] ou 180.0)
    //float constantAttenuation;
@@ -138,6 +138,7 @@ void main(void)
 
 //luc
 //note : le canal alpha controle l'application des textures
-    //color = colorIn + colorIn.a * texture2D(diffuseTex, texCoord.st);
+      //else color = colorIn + colorIn.a * texture2D(diffuseTex, texCoord.st);
+      color = colorIn + color;
 
 }
