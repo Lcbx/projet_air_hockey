@@ -154,9 +154,9 @@ namespace InterfaceGraphique
                     FonctionsNatives.animer(tempsInterAffichage);
                     FonctionsNatives.dessinerOpenGL();
 
-                    /// Ali
-                    /// On demare la partie rapide
-                    // pour le bug de yesno
+                   /// Ali
+                   /// On demare la partie rapide
+                   // pour le bug de yesno
                     if (partieGagnee)
                         FonctionsNatives.initialiserCompteur();
 
@@ -1894,6 +1894,8 @@ namespace InterfaceGraphique
             {
                 if ((nbButsJoueur1 == nbButsMax) || (nbButsJoueur2 == nbButsMax))
                 {
+                    partieGagnee = true;
+
                     DialogResult dialog = MessageBox.Show("La partie est finie, vous voulez rejouer encore ? Yes pour Rejouer, No pour retourner au menu Principal",
                             "Rejouer ou retour au menu principal", MessageBoxButtons.YesNo);
                    
