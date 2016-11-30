@@ -405,9 +405,6 @@ void FacadeModele::afficher() const
 	afficherBase();
 
 	// creation d'une instance TextOpenGL
-	// TODO -- fix bug 
-	// partie rapide termine -> click No -> Edition -> text affiche'
-	// Info checker si je suis pas en mode edition pour l'affichage
 	if (partieRapide_)	
 	{
 		TextOpenGL text;

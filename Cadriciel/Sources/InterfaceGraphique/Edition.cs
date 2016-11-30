@@ -1917,6 +1917,8 @@ namespace InterfaceGraphique
 
                         FonctionsNatives.jouerSonModeJeu(false);
                         estEnModePartie = false;
+                        // pour regler le bug quand mode partie -> No -> edition -> textFTGL s'affiche
+                        FonctionsNatives.setPartieRapide(false);
                         this.Hide();
                         menuPrincipal_.Show();
                         FonctionsNatives.initialiserScene();
