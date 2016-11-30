@@ -53,10 +53,6 @@ namespace InterfaceGraphique
         public bool partieGagnee = false;
 
 
-        int ancienPosX;
-        int ancienPosY;
-
-
         public enum States {Edition = 0, Test, PartieRapide, Tournoi };
         public States state = States.Edition;
 
@@ -72,7 +68,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         public Edition()
         {
-            this.KeyPreview = true;
+            //this.KeyPreview = true;
             (this as Control).KeyDown += new KeyEventHandler(keyDownHandler);
             (this as Control).KeyUp += new KeyEventHandler(keyUpHandler);
             (this as Control).KeyDown += new KeyEventHandler(toucheManuel);
@@ -104,11 +100,6 @@ namespace InterfaceGraphique
 
             //masquer bouton mode edition quand on est dans le mode edition
             modeEditionToolStripMenuItem.Visible = false;
-
-
-           ancienPosX = panel1.Location.X;
-           ancienPosY = panel1.Location.Y;
-
 
             this.Focus();
         }
@@ -1326,10 +1317,11 @@ namespace InterfaceGraphique
             else
             {
                 FonctionsNatives.configurerObjet(myX, myY, myAngle, myScale);
-                if (FonctionsNatives.objetEstDansLaTable() == false)
-                {
-                    MessageBox.Show("Les coordonnées saisies sont à l'éxterieur de la table ", "Position invalide!",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (FonctionsNatives.objetEstDansLaTable() == false) {
+                    txtBoxErreurProprietes.Visible = true;
+                } else {
+                    txtBoxErreurProprietes.Visible = false;
+                    this.mettreAjourPos();
                 }
             }
         }
@@ -1479,7 +1471,7 @@ namespace InterfaceGraphique
             fenetreChargement_.Show();
         }
 
-        private string currentFile_;
+        private string currentFile_ = String.Empty;
         public static string SAVE_FILEPATH = "zones";
         public static string DEFAULT_FILENAME = "defaut";
 
@@ -1538,9 +1530,6 @@ namespace InterfaceGraphique
             if (mode == true)
             {
 
-                panel1.Location = new Point (0,0);
-                panel1.Dock = DockStyle.Fill;
-
                 this.Text = "Mode Test";
                 estEnModeTest = true;
                 estEnModePartie = false;
@@ -1587,7 +1576,7 @@ namespace InterfaceGraphique
                 menuPrincipalToolStripMenuItem.Visible = true;
                 vuesToolStripMenuItem.Visible = true;
 
-                splitContainer1.Hide();
+                pnlProperty.Hide();
                 //panel score
                 // splitContainer1.Panel1.Hide();
                 //splitContainer1.Panel2.Hide();
@@ -1598,8 +1587,6 @@ namespace InterfaceGraphique
             else
             {
                 if (estEnModePartie) { FonctionsNatives.initialiserScene(); }
-
-                panel1.Location = new Point(ancienPosX, ancienPosY);
 
                 this.Text = "Mode Edition";
                 this.changerMode(Etats.SELECTION);
@@ -1639,7 +1626,7 @@ namespace InterfaceGraphique
                 modeEditionToolStripMenuItem.Visible = false;
 
                 //panel score afficher - panel proprietes desactiver
-                splitContainer1.Show();
+                pnlProperty.Show();
 
 
             }
@@ -1741,9 +1728,6 @@ namespace InterfaceGraphique
             {
                 this.Text = "Partie Rapide";
 
-                panel1.Location = new Point(0, 0);
-                panel1.Dock = DockStyle.Fill;
-
                 estEnModePartie = true;
                 estEnModeTest = false;
                
@@ -1784,7 +1768,7 @@ namespace InterfaceGraphique
                 vuesToolStripMenuItem.Visible = true;
 
                 //panel parametres
-                splitContainer1.Hide();
+                pnlProperty.Hide();
 
 
                 //jouer musique

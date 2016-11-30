@@ -37,7 +37,7 @@ VisiteurMiseEchelle::VisiteurMiseEchelle()
 void VisiteurMiseEchelle::mettreEchelle(float facteur)
 {
 	facteur_ = facteur;
-	bool effectuer = true;
+	effectuer = true;
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
 	VisiteurDansLaTable v(effectuer);
 	if (!effectuer)

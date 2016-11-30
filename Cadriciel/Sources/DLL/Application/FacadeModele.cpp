@@ -79,8 +79,10 @@ const std::string FacadeModele::FICHIER_ZONEDEFAUT{ "ZoneDefaut.xml" };
 ////////////////////////////////////////////////////////////////////////
 FacadeModele* FacadeModele::obtenirInstance()
 {
-	if (instance_ == nullptr)
+	if (instance_ == nullptr) {
 		instance_ = new FacadeModele;
+		instance_->tournoi_ = nullptr;
+	}
 
 	return instance_;
 }
@@ -753,7 +755,7 @@ void FacadeModele::effacerObjet()
 void FacadeModele::deplacerObjet(double x, double y, double angle, double scale)
 {
 	glm::dvec3 NouvPos{x, y, 0.f}; //la nouvelle position a assigner
-	double nvAngle= utilitaire::DEG_TO_RAD(angle); //conversion degre en rad 
+	double nvAngle= utilitaire::DEG_TO_RAD(angle); //conversion degre en rad
 	arbre_->deplacerObjet(NouvPos, nvAngle, scale);
 
 }
