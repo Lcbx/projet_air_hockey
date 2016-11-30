@@ -145,11 +145,11 @@ namespace vue {
 		)
 	{
 		// Rotation autour de z
-		position_[0] = ((position_[0] - pointVise_[0])*cos(rotationX)) - ((position_[1] - pointVise_[1])*sin(rotationX)) + pointVise_[1];
-		position_[1] = ((position_[0] - pointVise_[0])*sin(rotationX)) + ((position_[1] - pointVise_[1])*cos(rotationX)) + pointVise_[2];
+		position_[0] = ((position_[0] - pointVise_[0])*cos(rotationX)) - ((position_[1] - pointVise_[1])*sin(rotationX)) + pointVise_[0];
+		position_[1] = ((position_[0] - pointVise_[0])*sin(rotationX)) + ((position_[1] - pointVise_[1])*cos(rotationX)) + pointVise_[1];
 
 		//  -- FAIT ACTUELLEMENT UNE ROTATION AUTOUR DE X, DOIT ETRE CORRIGÉ --
-		position_[1] = ((position_[1] - pointVise_[1])*cos(rotationY)) - ((position_[2] - pointVise_[2])*sin(rotationY)) + pointVise_[0];
+		position_[1] = ((position_[1] - pointVise_[1])*cos(rotationY)) - ((position_[2] - pointVise_[2])*sin(rotationY)) + pointVise_[1];
 		position_[2] = ((position_[1] - pointVise_[1])*sin(rotationY)) + ((position_[2] - pointVise_[2])*cos(rotationY)) + pointVise_[2];
 	}
 

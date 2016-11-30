@@ -168,7 +168,7 @@ namespace vue {
 
 		deplacerXY(deplacementPixel);
 		*/
-		rotaterXY(deplacementX, deplacementY);
+		rotaterXY(deplacementX/10, deplacementY/10);
 	}
 
 

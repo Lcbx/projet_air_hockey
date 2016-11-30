@@ -50,7 +50,7 @@ extern "C"
 		if (handle == nullptr)
 			return;
 
-		FacadeModele::obtenirInstance()->initialiserOpenGL((HWND)handle);
+		FacadeModele::obtenirInstance()->initialiserOpenGL((HWND) handle);
 	}
 
 
@@ -68,7 +68,7 @@ extern "C"
 	__declspec(dllexport) void __cdecl libererOpenGL()
 	{
 		FacadeModele::obtenirInstance()->libererOpenGL();
-
+		
 
 		// Désinitialisation de la façade.  Le fait de le faire après la
 		// désinitialisation du contexte OpenGL aura pour conséquence que la
@@ -134,7 +134,7 @@ extern "C"
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl animer(double temps)
 	{
-		FacadeModele::obtenirInstance()->animer((float)temps);
+		FacadeModele::obtenirInstance()->animer((float) temps);
 	}
 
 
@@ -198,47 +198,124 @@ extern "C"
 		return reussite ? 0 : 1;
 	}
 
-
-	// Click
+	
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl etatDelaSouris(int etat)
+	///
+	/// Cette fonction est appelée quand on change d,outil d'edition
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl etatDelaSouris(int etat) {
 		Souris::obtenirInstance()->EtatdelaSouris(etat);
 	}
-
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl clickStart(int x, int y)
+	///
+	/// Cette fonction est appelée au debut d'un click de la souris
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl clickStart(int x, int y)
 	{
 		Souris::obtenirInstance()->startClick(x, y);
 	}
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) bool __cdecl clickCurrent(int x, int y)
+	///
+	/// Cette fonction est appelée au cours d'un click de la souris
+	///
+	/// @return un booleen signifiant que l'emplacement est dans la table.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) bool __cdecl clickCurrent(int x, int y)
 	{
 		return Souris::obtenirInstance()->currentClick(x, y);
 	}
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl clickEnd(int x, int y)
+	///
+	/// Cette fonction est appelée à la fin d'un click de la souris
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl clickEnd(int x, int y)
 	{
 		Souris::obtenirInstance()->endClick(x, y);
 	}
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl positionSouris(int x, int y)
+	///
+	/// Cette fonction est appelée quand la souris n'est pas pesee
+	///
+	/// @return un booleen signifiant que l'emplacement est dans la table.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) bool __cdecl positionSouris(int x, int y)
 	{
 		return Souris::obtenirInstance()->sourisPostition(x, y);
 	}
+
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl rightClick(bool presse)
+	///
+	/// Cette fonction est appelée quand le bouton droit de la souris est pese
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void rightClick(bool presse)
 	{
 		Souris::obtenirInstance()->clickRight(presse);
 	}
 
-	//touche control
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl toucheControl(bool presse)
+	///
+	/// Cette fonction est appelée quand la touche control est pressée
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl toucheControl(bool presse)
 	{
 		Souris::obtenirInstance()->setControl(presse);
 	}
 
-	//touche alt
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl toucheAlt(bool presse)
+	///
+	/// Cette fonction est appelée quand la touche alt est pressée
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl toucheAlt(bool presse)
 	{
 		Souris::obtenirInstance()->setAlt(presse);
 	}
+	
 
-
-	////touche escape
+	////////////////////////////////////////////////////////////////////////
+	///
+	/// @fn __declspec(dllexport) void __cdecl escEnfonce()
+	///
+	/// Cette fonction est appelée quand la touche echap est pressée
+	///
+	/// @return Aucune.
+	///
+	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void escEnfonce()
 	{
 		Souris::obtenirInstance()->escPresse();
@@ -260,12 +337,12 @@ extern "C"
 	}
 
 
-	/*__declspec(dllexport) void escEnfonce(bool escTouche)
+	/*__declspec(dllexport) void escEnfonce(bool escTouche) 
 	{
 		std::printf("je suis ici dans facade native");
 		//prend un bool en param (touche esc est enfonce ou pas)
 		FacadeModele::obtenirInstance()->supprimerPortail(escTouche);
-
+		
 	}*/
 
 
@@ -426,9 +503,9 @@ extern "C"
 	/// 
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void setCoefficient(double friction, double rebond, double acceleration) {
-		FacadeModele::obtenirInstance()->setCoefficient({ friction, rebond, acceleration });
+		FacadeModele::obtenirInstance()->setCoefficient({friction, rebond, acceleration});
 	}
-
+	
 
 	////////////////////////////////////////////////////////////////////////
 	///
@@ -443,7 +520,7 @@ extern "C"
 	__declspec(dllexport) double getCoefficientFriction() {
 		return FacadeModele::obtenirInstance()->getCoefficient().friction;
 	}
-
+		
 
 
 	////////////////////////////////////////////////////////////////////////
@@ -490,7 +567,7 @@ extern "C"
 		FacadeModele::obtenirInstance()->enregistrerZoneJeu(fichierZoneJeu);
 	}
 
-
+	
 	////////////////////////////////////////////////////////////////////////
 	///
 	/// @fn __declspec(dllexport) void chargerZoneJeu(char *fichierZoneJeu)
@@ -565,7 +642,7 @@ extern "C"
 	}
 
 
-
+	
 	////////////////////////////////////////////////////////////////////////
 	///
 	/// @fn __declspec(dllexport) void reinitialiserPartieCourante();
@@ -593,7 +670,7 @@ extern "C"
 	//{
 		//FacadeModele:: obtenirInstance()
 	//}
-
+	
 
 
 
@@ -679,10 +756,10 @@ extern "C"
 	///
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void activerJoueurVirtuel(double vitesse, double probabilite)
-	{
+	{ 
 		FacadeModele::obtenirInstance()->setjoueurVirtuel(true);
-		FacadeModele::obtenirInstance()->ActiverJoueurVirtuel(vitesse, probabilite);
-
+		FacadeModele::obtenirInstance()->ActiverJoueurVirtuel(vitesse,probabilite);
+		
 	}
 	////////////////////////////////////////////////////////////////////////
 	/// @fn 		__declspec(dllexport) void __cdecl setjoueurVirtuel(bool activer)
@@ -812,7 +889,7 @@ extern "C"
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void setButDroite(bool etat)
 	{
-		FacadeModele::obtenirInstance()->setButDroite(etat);
+		FacadeModele::obtenirInstance()->setButDroite(etat);		
 	}
 	////////////////////////////////////////////////////////////////////////
 	/// @fn 	__declspec(dllexport) void setButGauche()
@@ -825,7 +902,7 @@ extern "C"
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void setButGauche(bool etat)
 	{
-		FacadeModele::obtenirInstance()->setButGauche(etat);
+		 FacadeModele::obtenirInstance()->setButGauche(etat);		
 	}
 	////////////////////////////////////////////////////////////////////////
 	/// @fn 	__declspec(dllexport) int getNombreButs()
@@ -918,6 +995,48 @@ extern "C"
 	{
 		return FacadeModele::obtenirInstance()->estEnPauseRondelle();
 	}
+	/// Livrable 3
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void getNomJoueurCourant(int index, char ** nom)
+	/// Author : Ali
+	/// @brief : Cette fonction permet d'obtenir le nom du joueur courant
+	/// @ param[in] 
+	///			int index : le numero du joueur courant (1 ou 2)
+	///			char ** nom : pointeur vers la chaine de caracteres du nom
+	/// @return rien 
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void getNomJoueurCourant(int index, char ** nom)
+	{
+		std::string str = FacadeModele::obtenirInstance()->getNomJoueurCourant(index);
+		char * ptr = new char[str.size() + 1];
+		std::copy(str.begin(), str.end(), ptr);
+		ptr[str.size()] = '\0'; 
+		** nom = *ptr;
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) bool setNomJoueurCourant(char* nom, int index)
+	/// Author : Ali
+	/// @brief : Cette fonction permet de modifier le nom du joueur courant
+	/// @ param[in] 
+	///			int index : le numero du joueur courant (1 ou 2)
+	///			char * nom : chaine de caracteres representant le nom du joueur
+	/// @return bool 
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) bool setNomJoueurCourant(char* nom, int index)
+	{
+		if ((index == 1) || (index == 2))
+			FacadeModele::obtenirInstance()->setNomJoueurCourant(std::string (nom), index);
+		else
+			return false;
+		return true;		
+	}
+
+
+
+
 	////////////////////////////////////////////////////////////////////////
 	/// @fn 		__declspec(dllexport) void sauvegarderTouches();
 	/// Author : Arthur
@@ -929,7 +1048,7 @@ extern "C"
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl sauvegarderTouches(int haut, int droite, int bas, int gauche)
 	{
-		FacadeModele::obtenirInstance()->getConfigTouches().enregistrerTouches(haut, droite, bas, gauche);
+		FacadeModele::obtenirInstance()->getConfigTouches()->enregistrerTouches(haut, droite, bas, gauche);
 	}
 
 	////////////////////////////////////////////////////////////////////////
@@ -943,8 +1062,120 @@ extern "C"
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl obtenirTouches(int *touches)
 	{
-		FacadeModele::obtenirInstance()->getConfigTouches().obtenirTouches(touches);
+		FacadeModele::obtenirInstance()->getConfigTouches()->obtenirTouches(touches);
 	}
+	////////////////////////////////////////////////////////////////////////
+	/// A DEPLACER ICI:
+	/// @fn 	__declspec(dllexport) void enregistrerOptionsJeu();
+	/// Author : Arthur
+	/// Cette fonction permet de modifier et enregistrer les options de jeu
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) OptionsJeu obtenirOptionsJeu();
+	/// Author : Arthur
+	/// Cette fonction permet d'obtenir les options de jeu
+	///
+	/// @return OptionsJeu : {nombre de buts, type de joueur}
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) struct OptionsJeu* __cdecl obtenirOptionsJeu()
+	{
+		return FacadeModele::obtenirInstance()->getConfigJeu()->getOptionsJeu();
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) void obtenirListeProfils(int *noms)
+	/// Author : Arthur
+	/// Cette fonction permet d'obtenir une liste des noms des profils,
+	///  enregistrée dans une chaine d'entier afin d'être transmise entre
+	///  les parties c# et c++ du programme
+	///
+	/// @param[out] noms : chaine d'entier correspondant à la liste des
+	///                      noms des profils
+	///
+	/// @return void
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl obtenirListeProfils(int *noms)
+	{
+		FacadeModele::obtenirInstance()->getConfigProfils()->getNoms(noms);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) double obtenirVitesseProfil(char *nom)
+	/// Author : Arthur
+	/// Cette fonction permet d'obtenir la vitesse d'un profil spécifié
+	///
+	/// @param[in] nom : nom du profil recherché
+	///
+	/// @return double : vitesse du profil spécifié
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) double __cdecl obtenirVitesseProfil(char *nom)
+	{
+		return FacadeModele::obtenirInstance()->getConfigProfils()->getVitesse((std::string) nom);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) double obtenirProbabiliteProfil(char *nom)
+	/// Author : Arthur
+	/// Cette fonction permet d'obtenir la probabilite d'un profil spécifié
+	///
+	/// @param[in] nom : nom du profil recherché
+	///
+	/// @return double : probabilite du profil spécifié
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) double __cdecl obtenirProbabiliteProfil(char *nom)
+	{
+		return FacadeModele::obtenirInstance()->getConfigProfils()->getProbabilite((std::string)nom);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) void supprimerProfil(char *nom)
+	/// Author : Arthur
+	/// Cette fonction permet de supprimer un profil spécifié
+	///
+	/// @param[in] nom : nom du profil à supprimer
+	///
+	/// @return void
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl supprimerProfil(char *nom)
+	{
+		FacadeModele::obtenirInstance()->getConfigProfils()->supprimerProfil(nom);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) int obtenirNombreProfils()
+	/// Author : Arthur
+	/// Cette fonction permet d'obtenir le nombre de profil
+	///
+	/// @return le nombre de profils
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) int __cdecl obtenirNombreProfils()
+	{
+		return FacadeModele::obtenirInstance()->getConfigProfils()->getNombre();
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) OptionsDebug obtenirListeProfils();
+	/// Author : Arthur
+	/// Cette fonction permet d'obtenir les options de debug
+	///
+	/// @return struct OptionsDebug
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) struct OptionsDebug* __cdecl obtenirOptionsDebug()
+	{
+		return FacadeModele::obtenirInstance()->getConfigDebug()->getOptionsDebug();
+	}
+
 	////////////////////////////////////////////////////////////////////////
 	/// @fn __declspec(dllexport) profilCourant(string nom, double vitesse, double probaDAgirPassivemnt)
 	/// Author : ikram
@@ -956,7 +1187,7 @@ extern "C"
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl  profilCourant(string nom, double vitesse_, double probaDAgirPassivemnt)
 	{
-
+		
 	}
 	////////////////////////////////////////////////////////////////////////
 	/// @fn __declspec(dllexport) debogConfig(bool debogageActif_, bool debogCollision_, bool debogVitesse_, bool eclairageActif_,bool effetVisuelActif_);
@@ -982,8 +1213,11 @@ extern "C"
 			Debug::obtenirInstance().afficherLumieres = false;
 			Debug::obtenirInstance().afficherAttraction = false;
 		}
+
+		FacadeModele::obtenirInstance()->getConfigDebug()->setOptionsDebug(debogageActif_, debogCollision_,
+			debogVitesse_, eclairageActif_, effetVisuelActif_);
+
 	}
-<<<<<<< HEAD
 
 	////////////////////////////////////////////////////////////////////////
 	/// @fn __declspec(dllexport) void __cdecl changerLumieresActives(bool jLumiereAmbiente, bool kLumiereDirectionnelle, bool jLumiereSpots)
@@ -1015,11 +1249,203 @@ extern "C"
 			Debug::obtenirInstance().afficher(message);
 		}
 	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) void __cdecl sauvegarderTypeButMax(int nbButMax, bool estHumain)
+	/// Author : Luc
+	/// Cette fonction permet d'enregistrer des infomation à propos d'un match
+	///
+	/// @return aucun
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl sauvegarderTypeButMax(int nbButMax, bool estHumain)
+	{
+		FacadeModele::obtenirInstance()->getConfigJeu()->setOptionsJeu(nbButMax, estHumain);
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport)  void __cdecl sauvegarderProfil(const char* nom, double vitesse, double proba)
+	///
+	/// Cette fonction permet d'enregistrer un profil
+	///
+	/// @return aucun
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl sauvegarderProfil(const char* nom, double vitesse, double proba)
+	{
+		std::string str(nom);
+		
+		std::cout <<"le nom est:  "<< nom <<"  son vitesse:  " << vitesse << "  proba: " << proba << std::endl;
+		
+		FacadeModele::obtenirInstance()->getConfigProfils()->setProfil(nom, vitesse, proba);
+	}
+	
+	/// @fn __declspec(dllexport) void createTournoi(const char* nomZone, const int count, const char** nomsJoueurs, const bool* sontHumains, const char** nomProfils)
+	/// @brief Permet de créer un tournoi
+	/// @param nomZone : Nom de la zone de jeu
+	/// @param count : Nombre de joueurs
+	/// @param nomsJoueurs : Noms des joueurs
+	/// @param sontHumains : Si les joueurs sont humains ou non
+	/// @param nomProfils : Si le joueur est virtuel, le nom du profil
+	__declspec(dllexport) void createTournoi(const char* nomZone, const int count, const char** nomsJoueurs, const bool* sontHumains, const char** nomProfils) {
+		FacadeModele::obtenirInstance()->creerTournoi(nomZone, count, nomsJoueurs, sontHumains, nomProfils);
+	}
 
+	/// @fn __declspec(dllexport) void loadTournoi(const char* nomZone, const int count, const char** nomsJoueurs, const bool* sontHumains, const char** nomProfils)
+	/// @brief Permet de charger la configuration d'un tournoi
+	/// @param nomZone : Nom de la zone de jeu
+	/// @param count : Nombre de joueurs
+	/// @param nomsJoueurs : Noms des joueurs
+	/// @param sontHumains : Si les joueurs sont humains ou non
+	/// @param nomProfils : Si le joueur est virtuel, le nom du profil
+	__declspec(dllexport) void loadTournoi(char* nomZone, int count, char* nomsJoueurs, bool* sontHumains, char* nomProfils) {
+		FacadeModele::obtenirInstance()->loadTournoi(nomZone, count, nomsJoueurs, sontHumains, nomProfils);
+	}
+
+	/// @fn __declspec(dllexport) void taillesArbreTournoi(int &nbMatchups, int &tailleChaineArbre)
+	/// @brief Permet d'obtenir la taille de l'arbre de tournoi
+	/// @param[out] nbMatchups : Nombre de matchups dans l'arbre
+	/// @param[out] tailleChaineArbre : Taille maximale à allouer pour le transport des noms des joueurs dans l'arbres
+	///TODO: Remove, became unused
+	__declspec(dllexport) void taillesArbreTournoi(int nbMatchups, int tailleChaineArbre) {
+		std::vector<AdaptateurJoueur> participants = FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirParticipants();
+		nbMatchups = FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirTailleArbre();
+
+		int maxLength = 1; //Une chaîne doit minimalement contenir \0
+		for (auto participant : participants) {
+			// On calcule le \0 additionnel
+			int len = participant.getNomJoueur().length() + 1;
+			maxLength = (maxLength < len ? len : maxLength);
+		}
+
+		tailleChaineArbre = maxLength * nbMatchups;
+	}
+	
+	/// @fn __declspec(dllexport) int nombreMatchupsTournoi()
+	/// @brief Permet d'obtenir le nombre de matchups dans le tournoi
+	/// @return Le nombre de matchups dans le tournoi
+	__declspec(dllexport) int nombreMatchupsTournoi() {
+		return FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirTailleArbre();
+	}
+
+
+	/// @fn __declspec(dllexport) int plusLongNomTournoi()
+	/// @brief Permet d'obtenir la longeur du plus long nom du tournoi
+	/// @return La longeur du plus long nom du tournoi
+	__declspec(dllexport) int plusLongNomTournoi() {
+		return FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirTailleArbre();
+	}
+
+	/// @fn __declspec(dllexport) int loadArbreTournoi(char* nomsJoueurs, int* scores)
+	/// @brief Permet d'obtenir l'arbre de tournoi
+	/// @param[out] nomsJoueurs : Noms des joueurs
+	/// @param[out] scores : Scores associés avec les joueurs
+	/// @return Le nombre de participants dans l'arbre
+	/// La case 0 représente le gagnant du tournoi. 1 et 2 la finale et ainsi de suite
+	__declspec(dllexport) int loadArbreTournoi(char* nomsJoueurs, int* scores) {
+		auto arbre = FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirMatchups();
+		int iNJLen = 0; //Itérateur sur les noms de joueurs
+		int i = 0;
+		for (auto scoreEtNomJoueur : arbre) {
+			scores[i++] = scoreEtNomJoueur.second;
+			int j; std::string nom = scoreEtNomJoueur.first.getNomJoueur();
+			for (j = 0; j < nom.length(); j++, iNJLen++)
+				nomsJoueurs[iNJLen] = nom[j];
+			nomsJoueurs[iNJLen++] = '\0';
+		}
+
+		return FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirParticipants().size();
+	}
+
+	/// @fn __declspec(dllexport) void preparerProchainMatchTournoi()
+	/// @brief Permet de mettre en place les joueurs virtuels pour le match
+	__declspec(dllexport) void preparerProchainMatchTournoi() {
+		// On considère que le second joueur est le seul à pouvoir être virtuel
+		std::pair<AdaptateurJoueur,AdaptateurJoueur> tournoi = FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirProchainMatchup();
+		if (tournoi.first.estHumain()) {
+			FacadeModele::obtenirInstance()->setjoueurVirtuel(tournoi.second.estHumain());
+			FacadeModele::obtenirInstance()->setVitesseVirtuel(tournoi.second.getProfil().getVitesse());
+			FacadeModele::obtenirInstance()->setProbabiliteVirtuel(tournoi.second.getProfil().getProbabilite());
+		} else {
+			FacadeModele::obtenirInstance()->setjoueurVirtuel(tournoi.first.estHumain());
+			FacadeModele::obtenirInstance()->setVitesseVirtuel(tournoi.first.getProfil().getVitesse());
+			FacadeModele::obtenirInstance()->setProbabiliteVirtuel(tournoi.first.getProfil().getProbabilite());
+		}
+	}
+
+	/// @fn __declspec(dllexport) bool gagnerMatchVirtuelsTournoi()
+	/// @brief Permet de faire gagner un des joueurs virtuels par défaut si deux joueurs virtuels sont assignés
+	/// @return Si un match était formé par deux joueurs virtuels
+	__declspec(dllexport) bool gagnerMatchVirtuelsTournoi()	{
+		// On considère que le second joueur est le seul à pouvoir être virtuel
+		std::pair<AdaptateurJoueur, AdaptateurJoueur> tournoi = FacadeModele::obtenirInstance()->obtenirTournoi()->obtenirProchainMatchup();
+		if (!tournoi.first.estHumain() && !tournoi.second.estHumain()) {
+			ConfigJeu *cfg = FacadeModele::obtenirInstance()->getConfigJeu();
+			int score1 = utilitaire::genererScore(cfg->getNombreDeButs());
+			int score2 = utilitaire::genererScore(cfg->getNombreDeButs());
+			if (score1 > score2) {
+				FacadeModele::obtenirInstance()->obtenirTournoi()->affecterScoreProchainMatchup(cfg->getNombreDeButs(), score2);
+			} else {
+				if (score1 == cfg->getNombreDeButs())
+					score1--;
+				FacadeModele::obtenirInstance()->obtenirTournoi()->affecterScoreProchainMatchup(score1, cfg->getNombreDeButs());
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) void __cdecl setVueOrtho()
+	/// Author : Arthur
+	/// Definie la vue orthogonale comme vue à utiliser
+	///
+	/// @return aucun
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl setVueOrtho()
+	{
+		FacadeModele::obtenirInstance()->setVueOrtho();
+	}
+
+	////////////////////////////////////////////////////////////////////////
+<<<<<<< HEAD
+	/// @fn __declspec(dllexport) void __cdecl setVueOrbite()
+	/// Author : Arthur
+	/// Definie la vue orbite comme vue à utiliser
+	///
+	/// @return aucun
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl setVueOrbite()
+	{
+		FacadeModele::obtenirInstance()->setVueOrbite();
+	}
+	
 =======
->>>>>>> a8973b0de25c59f67fad3b7cd6403b561941fdbb
+	/// @fn 		__declspec(dllexport) void __cdecl jouerSonModeJeu(bool mode)
+	/// Author : wajdi
+	/// Cette fonction permet de jouer la musique de fond
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl jouerSonModeJeu(bool mode)
+	{
+		FacadeModele::obtenirInstance()->jouerSonModeJeu(mode);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn void mettrePauseMusique()
+	/// Author : wajdi
+	/// Cette fonction permet de jouer la musique de fond
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl mettrePauseMusique(bool pause)
+	{
+		FacadeModele::obtenirInstance()->MettrePauseSonModeJeu(pause);
+	}
+>>>>>>> developpement2
 }
 
-///////////////////////////////////////////////////////////////////////////////
-/// @}
-///////////////////////////////////////////////////////////////////////////////

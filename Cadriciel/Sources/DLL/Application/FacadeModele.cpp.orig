@@ -175,17 +175,8 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 	arbre_->initialiser();
 	
 	// On crée une vue par défaut.
+
 	vueOrtho_ = new vue::VueOrtho{
-		vue::Camera{ 
-			glm::dvec3(0, 0, 200), glm::dvec3(0, 0, 0),
-			glm::dvec3(0, 1, 0),   glm::dvec3(0, 1, 0)},
-		vue::ProjectionOrtho{ 
-				606, 437,
-				1, 1000, 5, 0.5, 0.25,
-				200, 200}
-	};
-<<<<<<< HEAD
-	vueOrbite_ = new vue::VueOrtho{
 		vue::Camera{
 		glm::dvec3(0, 0, 200), glm::dvec3(0, 0, 0),
 		glm::dvec3(0, 1, 0),   glm::dvec3(0, 1, 0) },
@@ -194,10 +185,18 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 		1, 1000, 5, 0.5, 0.25,
 		200, 200 }
 	};
-	vue_ = vueOrtho_;
-=======
 
->>>>>>> developpement2
+	vueOrbite_ = new vue::VueOrbite{
+		vue::Camera{ 
+			glm::dvec3(0, 0, 10), glm::dvec3(0, 0, 0),
+			glm::dvec3(0, 0, 1),   glm::dvec3(0, 0, 1)},
+		vue::ProjectionOrbite{ 
+				606, 437,
+				1, 1000, 5, 0.5, 0.25,
+				200, 200}
+	};
+
+	vue_ = vueOrbite_;
 }
 
 
@@ -1155,6 +1154,7 @@ void FacadeModele::setPartieRapide(bool activer)
 void FacadeModele::activerRondelle()
 {
 	rondelleEnPause_ = false;
+
 }
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -1359,6 +1359,7 @@ void FacadeModele::loadTournoi(char* nomZone, int count, char* nomsJoueurs, bool
 	}
 }
 
+<<<<<<< HEAD
 ////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void FacadeModele::setVueOrtho()
@@ -1387,4 +1388,21 @@ void FacadeModele::setVueOrtho()
 void FacadeModele::setVueOrbite()
 {
 	vue_ = vueOrbite_;
+=======
+void FacadeModele::jouerSonModeJeu(bool mode)
+{
+	if (mode == true)
+	{
+		this->obtenirArbreRenduINF2990()->player->jouerSon(3);
+	}
+	else {
+		this->obtenirArbreRenduINF2990()->player->arreterSon();
+	}
+}
+
+
+void FacadeModele::MettrePauseSonModeJeu(bool pause)
+{
+	this->obtenirArbreRenduINF2990()->player->pauseSon(pause);
+>>>>>>> developpement2
 }
