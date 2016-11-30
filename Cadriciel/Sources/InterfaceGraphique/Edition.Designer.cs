@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Edition));
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnlProperty = new System.Windows.Forms.Panel();
+            this.txtBoxErreurProprietes = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
@@ -88,7 +89,6 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripTextBox3 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.txtBoxErreurProprietes = new System.Windows.Forms.RichTextBox();
             this.pnlProperty.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -129,6 +129,19 @@
             this.pnlProperty.Name = "pnlProperty";
             this.pnlProperty.Size = new System.Drawing.Size(142, 516);
             this.pnlProperty.TabIndex = 0;
+            // 
+            // txtBoxErreurProprietes
+            // 
+            this.txtBoxErreurProprietes.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.txtBoxErreurProprietes.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBoxErreurProprietes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxErreurProprietes.ForeColor = System.Drawing.Color.Red;
+            this.txtBoxErreurProprietes.Location = new System.Drawing.Point(12, 274);
+            this.txtBoxErreurProprietes.Name = "txtBoxErreurProprietes";
+            this.txtBoxErreurProprietes.Size = new System.Drawing.Size(121, 96);
+            this.txtBoxErreurProprietes.TabIndex = 17;
+            this.txtBoxErreurProprietes.Text = "L\'objet sort de la table avec les valeurs données.";
+            this.txtBoxErreurProprietes.Visible = false;
             // 
             // button1
             // 
@@ -212,9 +225,9 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(29, 45);
+            this.textBox2.Location = new System.Drawing.Point(28, 45);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(101, 20);
+            this.textBox2.Size = new System.Drawing.Size(102, 20);
             this.textBox2.TabIndex = 12;
             // 
             // textBox1
@@ -286,7 +299,7 @@
             this.nouveauToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("nouveauToolStripMenuItem.Image")));
             this.nouveauToolStripMenuItem.Name = "nouveauToolStripMenuItem";
             this.nouveauToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
             this.nouveauToolStripMenuItem.Text = "Nouveau";
             this.nouveauToolStripMenuItem.Click += new System.EventHandler(this.nouveauToolStripMenuItem_Click_1);
             // 
@@ -295,7 +308,7 @@
             this.ouvrirToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("ouvrirToolStripMenuItem.Image")));
             this.ouvrirToolStripMenuItem.Name = "ouvrirToolStripMenuItem";
             this.ouvrirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.ouvrirToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.ouvrirToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
             this.ouvrirToolStripMenuItem.Text = "Ouvrir";
             this.ouvrirToolStripMenuItem.Click += new System.EventHandler(this.ouvrirToolStripMenuItem_Click);
             // 
@@ -304,14 +317,14 @@
             this.enregistrerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("enregistrerToolStripMenuItem.Image")));
             this.enregistrerToolStripMenuItem.Name = "enregistrerToolStripMenuItem";
             this.enregistrerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.enregistrerToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.enregistrerToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
             this.enregistrerToolStripMenuItem.Text = "Enregistrer";
             // 
             // enregistrerSousToolStripMenuItem
             // 
             this.enregistrerSousToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("enregistrerSousToolStripMenuItem.Image")));
             this.enregistrerSousToolStripMenuItem.Name = "enregistrerSousToolStripMenuItem";
-            this.enregistrerSousToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.enregistrerSousToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
             this.enregistrerSousToolStripMenuItem.Text = "Enregistrer sous";
             this.enregistrerSousToolStripMenuItem.Click += new System.EventHandler(this.enregistrerSousToolStripMenuItem_Click);
             // 
@@ -319,21 +332,23 @@
             // 
             this.propriétésToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("propriétésToolStripMenuItem.Image")));
             this.propriétésToolStripMenuItem.Name = "propriétésToolStripMenuItem";
-            this.propriétésToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.propriétésToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
             this.propriétésToolStripMenuItem.Text = "Propriétés";
             this.propriétésToolStripMenuItem.Click += new System.EventHandler(this.propriétésToolStripMenuItem_Click);
             // 
             // modeTestToolStripMenuItem
             // 
             this.modeTestToolStripMenuItem.Name = "modeTestToolStripMenuItem";
-            this.modeTestToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.modeTestToolStripMenuItem.ShortcutKeyDisplayString = "T";
+            this.modeTestToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
             this.modeTestToolStripMenuItem.Text = "Mode test";
             this.modeTestToolStripMenuItem.Click += new System.EventHandler(this.modeTestToolStripMenuItem_Click);
             // 
             // modeEditionToolStripMenuItem
             // 
             this.modeEditionToolStripMenuItem.Name = "modeEditionToolStripMenuItem";
-            this.modeEditionToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.modeEditionToolStripMenuItem.ShortcutKeyDisplayString = "T";
+            this.modeEditionToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
             this.modeEditionToolStripMenuItem.Text = "Mode édition";
             this.modeEditionToolStripMenuItem.Click += new System.EventHandler(this.modeEditionToolStripMenuItem_Click);
             // 
@@ -341,7 +356,7 @@
             // 
             this.menuPrincipalToolStripMenuItem.Name = "menuPrincipalToolStripMenuItem";
             this.menuPrincipalToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.menuPrincipalToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.menuPrincipalToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
             this.menuPrincipalToolStripMenuItem.Text = "Menu principal";
             this.menuPrincipalToolStripMenuItem.Click += new System.EventHandler(this.menuPrincipalToolStripMenuItem_Click);
             // 
@@ -358,7 +373,8 @@
             // 
             this.supprimerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("supprimerToolStripMenuItem.Image")));
             this.supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
-            this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.supprimerToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(169, 38);
             this.supprimerToolStripMenuItem.Text = "Supprimer";
             this.supprimerToolStripMenuItem.Click += new System.EventHandler(this.supprimerToolStripMenuItem_Click);
             // 
@@ -370,8 +386,8 @@
             this.rotationToolStripMenuItem,
             this.miseÀLéchelleToolStripMenuItem,
             this.duplicationToolStripMenuItem,
-            this.créationDobjetsToolStripMenuItem,
             this.zoomToolStripMenuItem,
+            this.créationDobjetsToolStripMenuItem,
             this.gestionDesPointsDeContrôleToolStripMenuItem});
             this.outilsToolStripMenuItemPoints.Name = "outilsToolStripMenuItemPoints";
             this.outilsToolStripMenuItemPoints.Size = new System.Drawing.Size(50, 22);
@@ -382,7 +398,8 @@
             // 
             this.sélectionToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("sélectionToolStripMenuItem.Image")));
             this.sélectionToolStripMenuItem.Name = "sélectionToolStripMenuItem";
-            this.sélectionToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.sélectionToolStripMenuItem.ShortcutKeyDisplayString = "S";
+            this.sélectionToolStripMenuItem.Size = new System.Drawing.Size(250, 38);
             this.sélectionToolStripMenuItem.Text = "Sélection";
             this.sélectionToolStripMenuItem.Click += new System.EventHandler(this.sélectionToolStripMenuItem_Click);
             // 
@@ -390,7 +407,8 @@
             // 
             this.déplacementToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("déplacementToolStripMenuItem.Image")));
             this.déplacementToolStripMenuItem.Name = "déplacementToolStripMenuItem";
-            this.déplacementToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.déplacementToolStripMenuItem.ShortcutKeyDisplayString = "D";
+            this.déplacementToolStripMenuItem.Size = new System.Drawing.Size(250, 38);
             this.déplacementToolStripMenuItem.Text = "Déplacement";
             this.déplacementToolStripMenuItem.Click += new System.EventHandler(this.déplacementToolStripMenuItem_Click);
             // 
@@ -398,7 +416,8 @@
             // 
             this.rotationToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("rotationToolStripMenuItem.Image")));
             this.rotationToolStripMenuItem.Name = "rotationToolStripMenuItem";
-            this.rotationToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.rotationToolStripMenuItem.ShortcutKeyDisplayString = "R";
+            this.rotationToolStripMenuItem.Size = new System.Drawing.Size(250, 38);
             this.rotationToolStripMenuItem.Text = "Rotation";
             this.rotationToolStripMenuItem.Click += new System.EventHandler(this.rotationToolStripMenuItem_Click);
             // 
@@ -406,7 +425,8 @@
             // 
             this.miseÀLéchelleToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("miseÀLéchelleToolStripMenuItem.Image")));
             this.miseÀLéchelleToolStripMenuItem.Name = "miseÀLéchelleToolStripMenuItem";
-            this.miseÀLéchelleToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.miseÀLéchelleToolStripMenuItem.ShortcutKeyDisplayString = "E";
+            this.miseÀLéchelleToolStripMenuItem.Size = new System.Drawing.Size(265, 38);
             this.miseÀLéchelleToolStripMenuItem.Text = "Mise à l\'échelle";
             this.miseÀLéchelleToolStripMenuItem.Click += new System.EventHandler(this.miseÀLéchelleToolStripMenuItem_Click);
             // 
@@ -414,7 +434,8 @@
             // 
             this.duplicationToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("duplicationToolStripMenuItem.Image")));
             this.duplicationToolStripMenuItem.Name = "duplicationToolStripMenuItem";
-            this.duplicationToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.duplicationToolStripMenuItem.ShortcutKeyDisplayString = "C";
+            this.duplicationToolStripMenuItem.Size = new System.Drawing.Size(250, 38);
             this.duplicationToolStripMenuItem.Text = "Duplication";
             this.duplicationToolStripMenuItem.Click += new System.EventHandler(this.duplicationToolStripMenuItem_Click);
             // 
@@ -425,7 +446,7 @@
             this.portailToolStripMenuItem,
             this.muretToolStripMenuItem});
             this.créationDobjetsToolStripMenuItem.Name = "créationDobjetsToolStripMenuItem";
-            this.créationDobjetsToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.créationDobjetsToolStripMenuItem.Size = new System.Drawing.Size(265, 38);
             this.créationDobjetsToolStripMenuItem.Text = "Création d\'objets";
             // 
             // ToolStripMenuItemAccelerateur
@@ -433,7 +454,8 @@
             this.ToolStripMenuItemAccelerateur.CheckOnClick = true;
             this.ToolStripMenuItemAccelerateur.Image = ((System.Drawing.Image)(resources.GetObject("ToolStripMenuItemAccelerateur.Image")));
             this.ToolStripMenuItemAccelerateur.Name = "ToolStripMenuItemAccelerateur";
-            this.ToolStripMenuItemAccelerateur.Size = new System.Drawing.Size(174, 22);
+            this.ToolStripMenuItemAccelerateur.ShortcutKeyDisplayString = "B";
+            this.ToolStripMenuItemAccelerateur.Size = new System.Drawing.Size(204, 38);
             this.ToolStripMenuItemAccelerateur.Text = "Bonus accélérateur";
             this.ToolStripMenuItemAccelerateur.ToolTipText = "Bonus accélérateur";
             this.ToolStripMenuItemAccelerateur.Click += new System.EventHandler(this.ToolStripMenuItemAccelerateur_Click);
@@ -442,7 +464,8 @@
             // 
             this.portailToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("portailToolStripMenuItem.Image")));
             this.portailToolStripMenuItem.Name = "portailToolStripMenuItem";
-            this.portailToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.portailToolStripMenuItem.ShortcutKeyDisplayString = "P";
+            this.portailToolStripMenuItem.Size = new System.Drawing.Size(204, 38);
             this.portailToolStripMenuItem.Text = "Portail";
             this.portailToolStripMenuItem.Click += new System.EventHandler(this.portailToolStripMenuItem_Click);
             // 
@@ -450,7 +473,8 @@
             // 
             this.muretToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("muretToolStripMenuItem.Image")));
             this.muretToolStripMenuItem.Name = "muretToolStripMenuItem";
-            this.muretToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.muretToolStripMenuItem.ShortcutKeyDisplayString = "M";
+            this.muretToolStripMenuItem.Size = new System.Drawing.Size(204, 38);
             this.muretToolStripMenuItem.Text = "Muret";
             this.muretToolStripMenuItem.Click += new System.EventHandler(this.muretToolStripMenuItem_Click);
             // 
@@ -458,7 +482,8 @@
             // 
             this.zoomToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("zoomToolStripMenuItem.Image")));
             this.zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
-            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.zoomToolStripMenuItem.ShortcutKeyDisplayString = "Z";
+            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(250, 38);
             this.zoomToolStripMenuItem.Text = "Zoom";
             this.zoomToolStripMenuItem.Click += new System.EventHandler(this.zoomToolStripMenuItem_Click);
             // 
@@ -466,7 +491,8 @@
             // 
             this.gestionDesPointsDeContrôleToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("gestionDesPointsDeContrôleToolStripMenuItem.Image")));
             this.gestionDesPointsDeContrôleToolStripMenuItem.Name = "gestionDesPointsDeContrôleToolStripMenuItem";
-            this.gestionDesPointsDeContrôleToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.gestionDesPointsDeContrôleToolStripMenuItem.ShortcutKeyDisplayString = "G";
+            this.gestionDesPointsDeContrôleToolStripMenuItem.Size = new System.Drawing.Size(265, 38);
             this.gestionDesPointsDeContrôleToolStripMenuItem.Text = "Gestion des points de contrôle";
             this.gestionDesPointsDeContrôleToolStripMenuItem.Click += new System.EventHandler(this.gestionDesPointsDeContrôleToolStripMenuItem_Click);
             // 
@@ -693,19 +719,6 @@
             this.toolStripButton1.Text = "toolStripButtonControleDePoints";
             this.toolStripButton1.ToolTipText = "Gestion de Contrôle DePoints";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // txtBoxErreurProprietes
-            // 
-            this.txtBoxErreurProprietes.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.txtBoxErreurProprietes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtBoxErreurProprietes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxErreurProprietes.ForeColor = System.Drawing.Color.Red;
-            this.txtBoxErreurProprietes.Location = new System.Drawing.Point(12, 274);
-            this.txtBoxErreurProprietes.Name = "txtBoxErreurProprietes";
-            this.txtBoxErreurProprietes.Size = new System.Drawing.Size(121, 96);
-            this.txtBoxErreurProprietes.TabIndex = 17;
-            this.txtBoxErreurProprietes.Text = "L\'objet sort de la table avec les valeurs données.";
-            this.txtBoxErreurProprietes.Visible = false;
             // 
             // Edition
             // 
