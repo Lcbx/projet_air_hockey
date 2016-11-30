@@ -51,6 +51,8 @@ namespace InterfaceGraphique
         public int nbButsJoueur2 = 0;
         //Livrable 3 
         public bool partieGagnee = false;
+        // pour regler le bug de l'affichage du textFTGL qd on charge une zone ds edition
+        public bool ouvrirMenuTable_ = false;
 
 
         public enum States {Edition = 0, Test, PartieRapide, Tournoi };
@@ -687,9 +689,8 @@ namespace InterfaceGraphique
             //Livrable 3 
             // besoin pour effacer l'affichage FTGL
             FonctionsNatives.setPartieRapide(false);
-            //FonctionsNatives.setScoreCourant(0, 1);
-            //FonctionsNatives.setScoreCourant(0, 2);
-            //FonctionsNatives.initialiserFTGL();
+            ouvrirMenuTable_ = false;
+            
             this.Hide();
             FonctionsNatives.jouerSonModeJeu(false);
             //this.Close();
@@ -1469,6 +1470,9 @@ namespace InterfaceGraphique
         private void ouvrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fenetreChargement_.Show();
+            // bug affichage textopengl qd on ouvre une table
+            ouvrirMenuTable_ = true;
+            FonctionsNatives.setPartieRapide(false);
         }
 
         private string currentFile_ = String.Empty;
@@ -1653,12 +1657,17 @@ namespace InterfaceGraphique
                     estEnPause = true;
                     menuStrip1.Show();
                     FonctionsNatives.mettrePauseMusique(false);
+                    //compteur en pause
+                    FonctionsNatives.mettreCompteurEnPause(true);
                 }
                 else
                 {     //si non le masque et on retourne dans le jeu
                     estEnPause = false;
                     menuStrip1.Hide();
                     FonctionsNatives.mettrePauseMusique(true);
+                    //compteur marche de nouveau
+                    FonctionsNatives.mettreCompteurEnPause(false);
+
                 }
             }
         }
@@ -1737,7 +1746,8 @@ namespace InterfaceGraphique
                 FonctionsNatives.effacerPointControle();
 
                 estEnPause = false;
-
+                // compteur marche
+                FonctionsNatives.mettreCompteurEnPause(false);
 
                 toolStrip1.Hide();
                 menuStrip1.Hide();
@@ -1907,6 +1917,8 @@ namespace InterfaceGraphique
 
                         FonctionsNatives.jouerSonModeJeu(false);
                         estEnModePartie = false;
+                        // pour regler le bug quand mode partie -> No -> edition -> textFTGL s'affiche
+                        FonctionsNatives.setPartieRapide(false);
                         this.Hide();
                         menuPrincipal_.Show();
                         FonctionsNatives.initialiserScene();
@@ -2155,7 +2167,13 @@ namespace InterfaceGraphique
         // remettre a zero le compteur
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void initialiserCompteur();
-        
+        // modifier les valeurs du compteur
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void setCompteur(int heure, int minute, int seconde);
+        // mettre en pause le compteur
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void mettreCompteurEnPause(bool deactiver);
+
         /// Ali
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
