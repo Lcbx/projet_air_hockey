@@ -153,8 +153,62 @@
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="appliquer.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10pt</value>
+  </data>
+  <data name="appliquer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>281, 346</value>
+  </data>
+  <data name="appliquer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 36</value>
+  </data>
+  <data name="appliquer.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="appliquer.Text" xml:space="preserve">
+    <value>Sauvegarder</value>
+  </data>
+  <data name="&gt;&gt;appliquer.Name" xml:space="preserve">
+    <value>appliquer</value>
+  </data>
+  <data name="&gt;&gt;appliquer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;appliquer.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;appliquer.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="réintialisation.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10pt</value>
+  </data>
+  <data name="réintialisation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>46, 346</value>
+  </data>
+  <data name="réintialisation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 36</value>
+  </data>
+  <data name="réintialisation.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="réintialisation.Text" xml:space="preserve">
+    <value>Réinitialiser</value>
+  </data>
+  <data name="&gt;&gt;réintialisation.Name" xml:space="preserve">
+    <value>réintialisation</value>
+  </data>
+  <data name="&gt;&gt;réintialisation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;réintialisation.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;réintialisation.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="haut.Location" type="System.Drawing.Point, System.Drawing">
-    <value>165, 147</value>
+    <value>184, 163</value>
   </data>
   <data name="haut.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -178,10 +232,10 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;haut.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="bas.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 217</value>
+    <value>185, 233</value>
   </data>
   <data name="bas.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -205,10 +259,10 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;bas.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="droite.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 217</value>
+    <value>281, 233</value>
   </data>
   <data name="droite.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -232,10 +286,10 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;droite.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="gauche.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 217</value>
+    <value>92, 233</value>
   </data>
   <data name="gauche.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -259,13 +313,13 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;gauche.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 127</value>
+    <value>191, 143</value>
   </data>
   <data name="label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -289,13 +343,13 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>274, 196</value>
+    <value>293, 212</value>
   </data>
   <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -319,10 +373,10 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 196</value>
+    <value>193, 212</value>
   </data>
   <data name="label3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -346,10 +400,10 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 196</value>
+    <value>92, 212</value>
   </data>
   <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
@@ -373,13 +427,13 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="groupBox1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11pt</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 27</value>
+    <value>64, 27</value>
   </data>
   <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -388,7 +442,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>397, 319</value>
+    <value>448, 403</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -407,60 +461,6 @@
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="réintialisation.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 10pt</value>
-  </data>
-  <data name="réintialisation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 367</value>
-  </data>
-  <data name="réintialisation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 36</value>
-  </data>
-  <data name="réintialisation.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="réintialisation.Text" xml:space="preserve">
-    <value>Rénitialiser</value>
-  </data>
-  <data name="&gt;&gt;réintialisation.Name" xml:space="preserve">
-    <value>réintialisation</value>
-  </data>
-  <data name="&gt;&gt;réintialisation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;réintialisation.Parent" xml:space="preserve">
-    <value>tabPage1</value>
-  </data>
-  <data name="&gt;&gt;réintialisation.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="appliquer.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 10pt</value>
-  </data>
-  <data name="appliquer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>434, 374</value>
-  </data>
-  <data name="appliquer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 36</value>
-  </data>
-  <data name="appliquer.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="appliquer.Text" xml:space="preserve">
-    <value>Sauvegarder</value>
-  </data>
-  <data name="&gt;&gt;appliquer.Name" xml:space="preserve">
-    <value>appliquer</value>
-  </data>
-  <data name="&gt;&gt;appliquer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;appliquer.Parent" xml:space="preserve">
-    <value>tabPage1</value>
-  </data>
-  <data name="&gt;&gt;appliquer.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="tabPage1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 15pt</value>
@@ -495,8 +495,179 @@
   <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="label15.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label15.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>39, 270</value>
+  </data>
+  <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 16</value>
+  </data>
+  <data name="label15.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="label15.Text" xml:space="preserve">
+    <value>Joueur virtuel: controlé automatiquement </value>
+  </data>
+  <data name="&gt;&gt;label15.Name" xml:space="preserve">
+    <value>label15</value>
+  </data>
+  <data name="&gt;&gt;label15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label15.Parent" xml:space="preserve">
+    <value>scoreGangant</value>
+  </data>
+  <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label14.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label14.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>39, 236</value>
+  </data>
+  <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>333, 16</value>
+  </data>
+  <data name="label14.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="label14.Text" xml:space="preserve">
+    <value>Joueur humain: controlé manuellement par les touches </value>
+  </data>
+  <data name="&gt;&gt;label14.Name" xml:space="preserve">
+    <value>label14</value>
+  </data>
+  <data name="&gt;&gt;label14.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label14.Parent" xml:space="preserve">
+    <value>scoreGangant</value>
+  </data>
+  <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label13.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>222, 91</value>
+  </data>
+  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="label13.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="label13.Text" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;label13.Name" xml:space="preserve">
+    <value>label13</value>
+  </data>
+  <data name="&gt;&gt;label13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label13.Parent" xml:space="preserve">
+    <value>scoreGangant</value>
+  </data>
+  <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label12.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>303, 91</value>
+  </data>
+  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="label12.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="label12.Text" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;label12.Name" xml:space="preserve">
+    <value>label12</value>
+  </data>
+  <data name="&gt;&gt;label12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label12.Parent" xml:space="preserve">
+    <value>scoreGangant</value>
+  </data>
+  <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>147, 91</value>
+  </data>
+  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="label11.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="label11.Text" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;label11.Name" xml:space="preserve">
+    <value>label11</value>
+  </data>
+  <data name="&gt;&gt;label11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
+    <value>scoreGangant</value>
+  </data>
+  <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="trackBar3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 110</value>
+  </data>
+  <data name="trackBar3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 45</value>
+  </data>
+  <data name="trackBar3.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;trackBar3.Name" xml:space="preserve">
+    <value>trackBar3</value>
+  </data>
+  <data name="&gt;&gt;trackBar3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;trackBar3.Parent" xml:space="preserve">
+    <value>scoreGangant</value>
+  </data>
+  <data name="&gt;&gt;trackBar3.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="Sauvegarder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>434, 374</value>
+    <value>296, 367</value>
   </data>
   <data name="Sauvegarder.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 36</value>
@@ -514,16 +685,16 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Sauvegarder.Parent" xml:space="preserve">
-    <value>tabPage2</value>
+    <value>scoreGangant</value>
   </data>
   <data name="&gt;&gt;Sauvegarder.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>6</value>
   </data>
   <data name="label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>76, 96</value>
+    <value>61, 318</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 16</value>
@@ -541,10 +712,40 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label8.Parent" xml:space="preserve">
-    <value>typeJoueur</value>
+    <value>scoreGangant</value>
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>7</value>
+  </data>
+  <data name="scorePourGagner.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="scorePourGagner.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="scorePourGagner.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 125</value>
+  </data>
+  <data name="scorePourGagner.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 16</value>
+  </data>
+  <data name="scorePourGagner.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="scorePourGagner.Text" xml:space="preserve">
+    <value>Score </value>
+  </data>
+  <data name="&gt;&gt;scorePourGagner.Name" xml:space="preserve">
+    <value>scorePourGagner</value>
+  </data>
+  <data name="&gt;&gt;scorePourGagner.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;scorePourGagner.Parent" xml:space="preserve">
+    <value>scoreGangant</value>
+  </data>
+  <data name="&gt;&gt;scorePourGagner.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="type.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -556,7 +757,7 @@
     <value>NoControl</value>
   </data>
   <data name="type.Location" type="System.Drawing.Point, System.Drawing">
-    <value>101, 40</value>
+    <value>6, 193</value>
   </data>
   <data name="type.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 18</value>
@@ -574,10 +775,10 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;type.Parent" xml:space="preserve">
-    <value>typeJoueur</value>
+    <value>scoreGangant</value>
   </data>
   <data name="&gt;&gt;type.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>9</value>
   </data>
   <data name="comboBox1.Items" xml:space="preserve">
     <value>Joueur humain</value>
@@ -586,16 +787,13 @@
     <value>Joueur virtuel</value>
   </data>
   <data name="comboBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 96</value>
+    <value>153, 318</value>
   </data>
   <data name="comboBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 24</value>
+    <value>166, 24</value>
   </data>
   <data name="comboBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="comboBox1.Text" xml:space="preserve">
-    <value>Joueur virtuel</value>
   </data>
   <data name="&gt;&gt;comboBox1.Name" xml:space="preserve">
     <value>comboBox1</value>
@@ -604,85 +802,10 @@
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;comboBox1.Parent" xml:space="preserve">
-    <value>typeJoueur</value>
+    <value>scoreGangant</value>
   </data>
   <data name="&gt;&gt;comboBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="typeJoueur.Location" type="System.Drawing.Point, System.Drawing">
-    <value>70, 215</value>
-  </data>
-  <data name="typeJoueur.Size" type="System.Drawing.Size, System.Drawing">
-    <value>432, 142</value>
-  </data>
-  <data name="typeJoueur.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="typeJoueur.Text" xml:space="preserve">
-    <value>Type de joueur</value>
-  </data>
-  <data name="&gt;&gt;typeJoueur.Name" xml:space="preserve">
-    <value>typeJoueur</value>
-  </data>
-  <data name="&gt;&gt;typeJoueur.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;typeJoueur.Parent" xml:space="preserve">
-    <value>tabPage2</value>
-  </data>
-  <data name="&gt;&gt;typeJoueur.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="scorePourGagner.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="scorePourGagner.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="scorePourGagner.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 101</value>
-  </data>
-  <data name="scorePourGagner.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 16</value>
-  </data>
-  <data name="scorePourGagner.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="scorePourGagner.Text" xml:space="preserve">
-    <value>Nombre</value>
-  </data>
-  <data name="&gt;&gt;scorePourGagner.Name" xml:space="preserve">
-    <value>scorePourGagner</value>
-  </data>
-  <data name="&gt;&gt;scorePourGagner.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;scorePourGagner.Parent" xml:space="preserve">
-    <value>scoreGangant</value>
-  </data>
-  <data name="&gt;&gt;scorePourGagner.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="numericUpDown1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 98</value>
-  </data>
-  <data name="numericUpDown1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 23</value>
-  </data>
-  <data name="numericUpDown1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown1.Name" xml:space="preserve">
-    <value>numericUpDown1</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown1.Parent" xml:space="preserve">
-    <value>scoreGangant</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>10</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -691,7 +814,7 @@
     <value>Microsoft Sans Serif, 11.25pt</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 40</value>
+    <value>6, 53</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>409, 18</value>
@@ -712,19 +835,19 @@
     <value>scoreGangant</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>11</value>
   </data>
   <data name="scoreGangant.Location" type="System.Drawing.Point, System.Drawing">
     <value>70, 25</value>
   </data>
   <data name="scoreGangant.Size" type="System.Drawing.Size, System.Drawing">
-    <value>431, 174</value>
+    <value>443, 422</value>
   </data>
   <data name="scoreGangant.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="scoreGangant.Text" xml:space="preserve">
-    <value>Score</value>
+    <value>Options de jeu</value>
   </data>
   <data name="&gt;&gt;scoreGangant.Name" xml:space="preserve">
     <value>scoreGangant</value>
@@ -736,7 +859,7 @@
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;scoreGangant.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>
@@ -768,11 +891,14 @@
   <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="SauvegarderDebogage.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10pt</value>
+  </data>
   <data name="SauvegarderDebogage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="SauvegarderDebogage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>434, 374</value>
+    <value>271, 355</value>
   </data>
   <data name="SauvegarderDebogage.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 36</value>
@@ -790,7 +916,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;SauvegarderDebogage.Parent" xml:space="preserve">
-    <value>tabPage3</value>
+    <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;SauvegarderDebogage.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -829,7 +955,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="checkBox5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -889,7 +1015,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="checkBox4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1009,7 +1135,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;console.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="checkBox1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1039,7 +1165,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;checkBox1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="groupBox2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 10pt, style=Bold</value>
@@ -1048,7 +1174,7 @@
     <value>110, 17</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>384, 351</value>
+    <value>417, 406</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1066,7 +1192,7 @@
     <value>tabPage3</value>
   </data>
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="tabPage3.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>
@@ -1149,6 +1275,36 @@
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="appliquer2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="appliquer2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>121, 332</value>
+  </data>
+  <data name="appliquer2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="appliquer2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 36</value>
+  </data>
+  <data name="appliquer2.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="appliquer2.Text" xml:space="preserve">
+    <value>Sauvegarder</value>
+  </data>
+  <data name="&gt;&gt;appliquer2.Name" xml:space="preserve">
+    <value>appliquer2</value>
+  </data>
+  <data name="&gt;&gt;appliquer2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;appliquer2.Parent" xml:space="preserve">
+    <value>creationProfil</value>
+  </data>
+  <data name="&gt;&gt;appliquer2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="trackBar2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -1171,7 +1327,7 @@
     <value>creationProfil</value>
   </data>
   <data name="&gt;&gt;trackBar2.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="trackBar1.Location" type="System.Drawing.Point, System.Drawing">
     <value>116, 155</value>
@@ -1192,7 +1348,7 @@
     <value>creationProfil</value>
   </data>
   <data name="&gt;&gt;trackBar1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="Proba.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1221,7 +1377,7 @@ passivement</value>
     <value>creationProfil</value>
   </data>
   <data name="&gt;&gt;Proba.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="vitesse.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1248,7 +1404,7 @@ passivement</value>
     <value>creationProfil</value>
   </data>
   <data name="&gt;&gt;vitesse.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="textBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>121, 94</value>
@@ -1269,7 +1425,7 @@ passivement</value>
     <value>creationProfil</value>
   </data>
   <data name="&gt;&gt;textBox1.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="nomProfil.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1299,7 +1455,7 @@ passivement</value>
     <value>creationProfil</value>
   </data>
   <data name="&gt;&gt;nomProfil.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="creationProfil.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1308,7 +1464,7 @@ passivement</value>
     <value>323, 18</value>
   </data>
   <data name="creationProfil.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 335</value>
+    <value>244, 382</value>
   </data>
   <data name="creationProfil.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1332,7 +1488,7 @@ passivement</value>
     <value>Arial, 10pt, style=Bold</value>
   </data>
   <data name="modifierProfil.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 285</value>
+    <value>91, 312</value>
   </data>
   <data name="modifierProfil.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1386,7 +1542,7 @@ passivement</value>
     <value>Arial, 10pt, style=Bold</value>
   </data>
   <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>187, 285</value>
+    <value>188, 312</value>
   </data>
   <data name="button2.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 24</value>
@@ -1413,7 +1569,7 @@ passivement</value>
     <value>Arial, 10pt, style=Bold</value>
   </data>
   <data name="ajouter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 285</value>
+    <value>7, 312</value>
   </data>
   <data name="ajouter.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 24</value>
@@ -1440,7 +1596,7 @@ passivement</value>
     <value>22, 18</value>
   </data>
   <data name="listDeProfil.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 335</value>
+    <value>295, 382</value>
   </data>
   <data name="listDeProfil.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1459,36 +1615,6 @@ passivement</value>
   </data>
   <data name="&gt;&gt;listDeProfil.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="appliquer2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="appliquer2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>434, 374</value>
-  </data>
-  <data name="appliquer2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="appliquer2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 36</value>
-  </data>
-  <data name="appliquer2.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="appliquer2.Text" xml:space="preserve">
-    <value>Sauvegarder</value>
-  </data>
-  <data name="&gt;&gt;appliquer2.Name" xml:space="preserve">
-    <value>appliquer2</value>
-  </data>
-  <data name="&gt;&gt;appliquer2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;appliquer2.Parent" xml:space="preserve">
-    <value>tabPage4</value>
-  </data>
-  <data name="&gt;&gt;appliquer2.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="tabPage4.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>
@@ -1634,6 +1760,12 @@ passivement</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
+  </data>
+  <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>608, 523</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>608, 523</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
