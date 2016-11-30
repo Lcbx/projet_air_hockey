@@ -9,6 +9,10 @@
 
 #include "TextOpenGL.h"
 #include "FacadeModele.h"
+#include "Vue.h"
+#include "Projection.h"
+//#include "CompteurAffichage.h"
+
 #include "../ArbreRenduINF2990.h"
 #include "GL/glew.h"
 #include <string>
@@ -42,32 +46,6 @@ TextOpenGL::~TextOpenGL()
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn bool TextOpenGL::initialiserFreeType()
-/// @brief : initialisation de la librairy FreeType
-/// @return bool
-///
-////////////////////////////////////////////////////////////////////////
-
-bool TextOpenGL::initialiserFreeType()
-{
-	FT_Library ft;
-	//if (FT_Init_FreeType(&ft))
-	//{
-	//	fprintf(stderr, "Could not init freetype library\n");
-	//	return false;
-	//}
-	//FT_Face face;
-
-	//if (FT_New_Face(ft, "../../../../Commun/Externe/calibrii.ttf", 0, &face))
-	//{
-	//	fprintf(stderr, "Could not open font\n");
-	//	return false;
-	//}
-
-	return true;
-}
-////////////////////////////////////////////////////////////////////////
-///
 /// @fn bool TextOpenGL::initialiserFTGL()
 /// @brief : initialisation de la librairy FTGL
 /// @return bool
@@ -77,72 +55,90 @@ bool TextOpenGL::initialiserFTGL()
 {
 	return true;
 }
+
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn bool TextOpenGL::afficher()
-/// @brief : afficher un texte avec FTGL
-/// @return bool
+/// @fn void TextOpenGL::afficherChrono()
+/// @brief : afficher le chronometre en FTGL  eh format 00:00:00
+/// @return rien
 ///
 ////////////////////////////////////////////////////////////////////////
-bool TextOpenGL::afficher()
+void TextOpenGL::afficherChrono()
+{
+	auto facade = FacadeModele::obtenirInstance();
+
+	glm::vec2 WH = facade->obtenirVue()->obtenirProjection().obtenirDimensionCloture();
+	float W = WH.x;
+	float H = WH.y;
+	afficherTextFTGL(facade->getChrono(), FTPoint(W / 2, H - H / 20, 0), 20);
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void TextOpenGL::afficher()
+/// @brief : afficher un texte avec FTGL 
+/// affiche les noms des joueurs, le score et le temps ecoule'
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void TextOpenGL::afficher()
 {	
 	auto facade = FacadeModele::obtenirInstance();
 
+	glm::vec2 WH = facade->obtenirVue()->obtenirProjection().obtenirDimensionCloture();
+	float W = WH.x;
+	float H = WH.y;
+	afficherTextFTGL(facade->getNomJoueurCourant(2), FTPoint(50, 10, 0), 30);
+	afficherTextFTGL(std::to_string(facade->getScoreCourant(2)), FTPoint(75, 50, 0), 30);
+	afficherTextFTGL(facade->getNomJoueurCourant(1), FTPoint(W - 150, 10, 0), 30);
+	afficherTextFTGL(std::to_string(facade->getScoreCourant(1)), FTPoint(W - 125, 50, 0), 30);
+	afficherTextFTGL(facade->getChrono(), FTPoint(W/2, H - H/20, 0), 20);
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void TextOpenGL::afficherTextFTGL(std::string Text, FTPoint position, int FontSize)
+/// @Author : Ali
+/// @brief : permet d'afficher un text en FTGL a partir d'une position
+/// @param[in] : std::string Text : le text a afficher
+///				 FTPoint position : la position a afficher
+///				 int FontSize : la taille du texte affiche'
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+bool TextOpenGL::afficherTextFTGL(std::string Text, FTPoint position, int FontSize)
+{
 	// Create a pixmap font from a TrueType file.
-	FTGLPixmapFont font("media/calibrii.ttf");
-	FTGLPixmapFont font2("media/calibrii.ttf");
-	// If something went wrong, bail out.
+	FTGLPixmapFont	font("media/calibrii.ttf");
+	//FTGLTextureFont  font("media/calibrii.ttf");
+	
+	//if something goes wrong like can't find the font file
 	if (font.Error())
 	{
 		std::cout << "Font pas trouve'" << std::endl;
 		return false;
 	}
-
+	char * chaine = new char[Text.size() + 1];
+	std::copy(Text.begin(), Text.end(), chaine);
+	chaine[Text.size()] = '\0'; // always add a '\0' if you want to convert from string to  char*
 	
-	glm::vec3 positionTable = facade->obtenirArbreRenduINF2990()->getTable()->obtenirPositionRelative();
-	FTPoint positionDepart (positionTable.x, positionTable.y, positionTable.z);
-	FTPoint positionFin  (positionTable.x + 10, positionTable.y + 10, positionTable.z);
+
+	font.FaceSize(FontSize);
+
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	
-	std::string nomJoueur1, nomJoueur2, score1, score2;
-
-	nomJoueur1.assign(facade->getNomJoueurCourant(1));
-	nomJoueur2.assign(facade->getNomJoueurCourant(2));
-
-	char * nom1 = new char[nomJoueur1.size() + 1];
-	std::copy(nomJoueur1.begin(), nomJoueur1.end(), nom1);
-	nom1[nomJoueur1.size()] = '\0'; // don't forget the terminating 0
-
-	char * nom2 = new char[nomJoueur2.size() + 1];
-	std::copy(nomJoueur2.begin(), nomJoueur2.end(), nom2);
-	nom2[nomJoueur2.size()] = '\0'; // don't forget the terminating 0
-
+	glDisable(GL_LIGHTING);
+	glDisable(GL_DEPTH_TEST);
+	// color doesn't work for now
+	glColor3f(1.0, 0., 0.);
 	
-		
-	////glPixelTransferf(GL_RED_BIAS, 1);
-	////glPixelTransferf(GL_GREEN_BIAS, 0 - 1);
-	////glPixelTransferf(GL_BLUE_BIAS, 0 - 1);
+	
+	glPixelTransferf(GL_RED_BIAS, -1);
+	glPixelTransferf(GL_GREEN_BIAS, -1);
+	glPixelTransferf(GL_BLUE_BIAS, -1);
 
-
-	//glPushAttrib(GL_ALL_ATTRIB_BITS);
-	//glDisable(GL_LIGHTING);
-	//glDisable(GL_DEPTH_TEST);
-
-	glColor4f(1, 0, 0, 1);
-	font.FaceSize(20);
-	// TODO 
-	// 1) afficher le texte selon les dimensions de la fenetre (viewport)
-	// 2) afficher le score  des joueurs
-	// 3) afficher le chronometre (temps ecoule' des le debt de la partie
-
-	// afficher les noms des joueurs
-	font.Render(nom1, -1, FTPoint(500,10, 0));
-	font.Render(nom2, -1, FTPoint(50, 10, 0));
-
-	delete[] nom1;
-	delete[] nom2;
-	//glPopAttrib();
-
+	font.Render(chaine, -1, position);
+	
+	glPopAttrib();
+	delete[] chaine;
 	return true;
-
 }
-

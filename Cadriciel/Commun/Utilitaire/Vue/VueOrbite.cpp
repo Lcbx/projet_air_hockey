@@ -205,7 +205,7 @@ namespace vue {
 
 		camera_.deplacerXY(vDeplacement[0], vDeplacement[1], true);
 		*/
-		//rotaterXY(10, 10);
+		std::cout << "Deplacement erroné" << std::endl;
 	}
 
 
@@ -245,7 +245,7 @@ namespace vue {
 	////////////////////////////////////////////////////////////////////////
 	void VueOrbite::rotaterXY(double rotationX, double rotationY)
 	{
-		camera_.orbiterXY(rotationX * 2*3.14, rotationY * 3.14);
+		camera_.orbiterXY(rotationX * 360, rotationY * 180);
 	}
 
 

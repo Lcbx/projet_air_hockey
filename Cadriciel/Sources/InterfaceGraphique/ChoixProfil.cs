@@ -51,6 +51,8 @@ namespace InterfaceGraphique
                 menu_.Hide();
                 this.Hide();
             }
+            // remettre a zero FTGL
+            FonctionsNatives.initialiserFTGL();
 
         }
         // click sur button joueur virtuel
@@ -61,6 +63,7 @@ namespace InterfaceGraphique
             this.Hide();
            // menu_.Hide();
             fenetre.ShowDialog();
+            
         }
 
     }

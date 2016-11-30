@@ -38,7 +38,7 @@ namespace InterfaceGraphique
         {
             InitializeComponent();
             this.MinimumSize = new Size(100, 100);
-            this.tournoi.Click += new System.EventHandler(this.modeTournoiClick);
+            this.btnQuitter.Click += new System.EventHandler(this.modeTournoiClick);
         }
 
 		/////////////////////////////////////////////////////////////////////////
@@ -122,7 +122,9 @@ namespace InterfaceGraphique
             
             choix.setMenuPrincipal(this, edition_);
             choix.ShowDialog();
-
+            //Livrable 3
+            // remettre a zero le compteur
+            FonctionsNatives.initialiserCompteur();
             //Chargement zoneChar = new Chargement(edition_);
             //zoneChar.ShowDialog();
             //if (zoneChar.estclique == true)
@@ -175,6 +177,6 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         public Edition getEdition()
         { return edition_; }
-
+        
     }
 }

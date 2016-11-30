@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Chargement));
             this.bouttonSauvegarder = new System.Windows.Forms.Button();
             this.filename = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -94,6 +95,7 @@
             this.Controls.Add(this.filename);
             this.Controls.Add(this.bouttonSauvegarder);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Chargement";
             this.Text = "Choix de la zone du jeu";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Sauvegarde_FormClosing);

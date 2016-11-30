@@ -227,8 +227,10 @@ public:
 	bool setNomJoueurCourant(std::string nom,int index);
 	int getScoreCourant(int index);
 	bool setScoreCourant(int score,int index);
-
-
+	void activerCompteur(float temps);
+	void initialiserCompteur();
+	void initialiserTextFTGL();
+	std::string getChrono();
 	/// Ali
 	/// Renvoie la constante contenant le nom du fichier de configuration
 	//std::string getConfigFile();
@@ -240,6 +242,8 @@ public:
 	void setVueOrtho();
 	/// Choisi la vue orbite
 	void setVueOrbite();
+	/// Renvoie true si la vue est orthogonale, false si la vue est orbite
+	bool isVueOrtho();
 
 private:
 
@@ -316,6 +320,13 @@ private:
    std::string nomJoueurCourant2_ = "Player2";
    int scoreJoueurCourant1_{ 0 };
    int scoreJoueurCourant2_{ 0 };
+   int compteurSecondes_ { 0 };
+   int compteurMinutes_{ 0 };
+   int compteurHeures_{ 0 };
+   int AncienSecondes_ { 0 };
+   float temps_ { 0. };
+   std::string chrono_;
+
    /// Ali
 
    // Tournoi pour le mode tournoi

@@ -47,12 +47,10 @@ namespace InterfaceGraphique
 
         // Ali
         // mode partie rapide
-        
         public int nbButsJoueur1 = 0;
         public int nbButsJoueur2 = 0;
-
-        int ancienPosX;
-        int ancienPosY;
+        //Livrable 3 
+        public bool partieGagnee = false;
 
 
         public enum States {Edition = 0, Test, PartieRapide, Tournoi };
@@ -70,7 +68,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         public Edition()
         {
-            this.KeyPreview = true;
+            //this.KeyPreview = true;
             (this as Control).KeyDown += new KeyEventHandler(keyDownHandler);
             (this as Control).KeyUp += new KeyEventHandler(keyUpHandler);
             (this as Control).KeyDown += new KeyEventHandler(toucheManuel);
@@ -88,7 +86,6 @@ namespace InterfaceGraphique
             numericUpDown1.ResetText();
 
             button1.Enabled = false;
-            label6.Show();
 
             this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
             FonctionsNatives.redimensionnerFenetre(panel1.Width, panel1.Height);
@@ -103,16 +100,6 @@ namespace InterfaceGraphique
 
             //masquer bouton mode edition quand on est dans le mode edition
             modeEditionToolStripMenuItem.Visible = false;
-
-            // make textbox joueur 1 et 2 uneditable
-            this.textBox4.ReadOnly = true;
-            this.textBox5.ReadOnly = true;
-
-
-           ancienPosX = panel1.Location.X;
-           ancienPosY = panel1.Location.Y;
-
-            panel2.Hide();
 
             this.Focus();
         }
@@ -153,13 +140,21 @@ namespace InterfaceGraphique
         {
             try
             {   
-                this.Invoke((MethodInvoker)delegate 
-                {  
+                this.Invoke((MethodInvoker)delegate
+                {
                     FonctionsNatives.animer(tempsInterAffichage);
                     FonctionsNatives.dessinerOpenGL();
 
                     /// Ali
                     /// On demare la partie rapide
+                    // pour le bug de yesno
+                    if (partieGagnee)
+                    {
+                        FonctionsNatives.initialiserCompteur();
+                        FonctionsNatives.setScoreCourant(nbButsJoueur1, 1);
+                        FonctionsNatives.setScoreCourant(nbButsJoueur2, 2);
+
+                    }
 
                     if (estEnModePartie)
                         DemarrerPartie();
@@ -689,6 +684,12 @@ namespace InterfaceGraphique
         {
             menuPrincipal_.Show();
             estEnModeTest = false;
+            //Livrable 3 
+            // besoin pour effacer l'affichage FTGL
+            FonctionsNatives.setPartieRapide(false);
+            //FonctionsNatives.setScoreCourant(0, 1);
+            //FonctionsNatives.setScoreCourant(0, 2);
+            //FonctionsNatives.initialiserFTGL();
             this.Hide();
             FonctionsNatives.jouerSonModeJeu(false);
             //this.Close();
@@ -1052,8 +1053,6 @@ namespace InterfaceGraphique
                 numericUpDown1.Enabled = true;
                 button1.Enabled = true;
 
-                label6.Hide();
-
                 //Position en X
                 double posX = (FonctionsNatives.getPosX());
                 posX = Math.Round(posX, 2); //arrondi la position 
@@ -1089,8 +1088,6 @@ namespace InterfaceGraphique
                 // textBox4.Enabled = false;
                 numericUpDown1.Enabled = false;
                 button1.Enabled = false;
-
-                label6.Show();
 
             }
         }
@@ -1320,10 +1317,11 @@ namespace InterfaceGraphique
             else
             {
                 FonctionsNatives.configurerObjet(myX, myY, myAngle, myScale);
-                if (FonctionsNatives.objetEstDansLaTable() == false)
-                {
-                    MessageBox.Show("Les coordonnées saisies sont à l'éxterieur de la table ", "Position invalide!",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (FonctionsNatives.objetEstDansLaTable() == false) {
+                    txtBoxErreurProprietes.Visible = true;
+                } else {
+                    txtBoxErreurProprietes.Visible = false;
+                    this.mettreAjourPos();
                 }
             }
         }
@@ -1473,7 +1471,7 @@ namespace InterfaceGraphique
             fenetreChargement_.Show();
         }
 
-        private string currentFile_;
+        private string currentFile_ = String.Empty;
         public static string SAVE_FILEPATH = "zones";
         public static string DEFAULT_FILENAME = "defaut";
 
@@ -1532,9 +1530,6 @@ namespace InterfaceGraphique
             if (mode == true)
             {
 
-                panel1.Location = new Point (0,0);
-                panel1.Dock = DockStyle.Fill;
-
                 this.Text = "Mode Test";
                 estEnModeTest = true;
                 estEnModePartie = false;
@@ -1581,20 +1576,17 @@ namespace InterfaceGraphique
                 menuPrincipalToolStripMenuItem.Visible = true;
                 vuesToolStripMenuItem.Visible = true;
 
-                splitContainer1.Hide();
+                pnlProperty.Hide();
                 //panel score
                 // splitContainer1.Panel1.Hide();
                 //splitContainer1.Panel2.Hide();
 
-                panel2.Hide();
 
             }
             //si mode edition , afficher les menus a cotés + barre des menus
             else
             {
                 if (estEnModePartie) { FonctionsNatives.initialiserScene(); }
-
-                panel1.Location = new Point(ancienPosX, ancienPosY);
 
                 this.Text = "Mode Edition";
                 this.changerMode(Etats.SELECTION);
@@ -1634,9 +1626,8 @@ namespace InterfaceGraphique
                 modeEditionToolStripMenuItem.Visible = false;
 
                 //panel score afficher - panel proprietes desactiver
-                splitContainer1.Show();
+                pnlProperty.Show();
 
-                panel2.Hide();
 
             }
         }
@@ -1732,9 +1723,6 @@ namespace InterfaceGraphique
             {
                 this.Text = "Partie Rapide";
 
-                panel1.Location = new Point(0, 0);
-                panel1.Dock = DockStyle.Fill;
-
                 estEnModePartie = true;
                 estEnModeTest = false;
                
@@ -1774,10 +1762,8 @@ namespace InterfaceGraphique
                 vuesToolStripMenuItem.Visible = true;
 
                 //panel parametres
-                splitContainer1.Hide();
+                pnlProperty.Hide();
 
-                //score
-                panel2.Show();
 
                 //jouer musique
                 FonctionsNatives.jouerSonModeJeu(true);
@@ -1828,11 +1814,14 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         public void DemarrerPartie()
         {
+            partieGagnee = false;
             if (FonctionsNatives.estButDroite())
             {
                 //MessageBox.Show("Player 2 SCORES !","AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 nbButsJoueur2++;
-                textBox4.Text = nbButsJoueur2.ToString();
+                // Livrable 3 
+                FonctionsNatives.setScoreCourant(nbButsJoueur2, 2);
+
                 FonctionsNatives.setButDroite(false);
                 FonctionsNatives.reinitialiserPartieCourante();
                 //Console.WriteLine("But Droite !!");
@@ -1841,7 +1830,8 @@ namespace InterfaceGraphique
             {
                 //MessageBox.Show("Player 1 SCORES !", "AirHockey" , MessageBoxButtons.OK, MessageBoxIcon.Information);
                 nbButsJoueur1++;
-                textBox5.Text = nbButsJoueur1.ToString();
+                // Livrable 3 
+                FonctionsNatives.setScoreCourant(nbButsJoueur1, 1);
                 FonctionsNatives.setButGauche(false);
                 FonctionsNatives.reinitialiserPartieCourante();
                 //Console.WriteLine("But Gauche !!");
@@ -1853,6 +1843,8 @@ namespace InterfaceGraphique
             {
                 if ((nbButsJoueur1 == nbButsMax) || (nbButsJoueur2 == nbButsMax))
                 {
+                    partieGagnee = true;
+
                     DialogResult dialog = MessageBox.Show("La partie est finie, voulez-vous revenir au tournoi ! Yes pour tournoi , No pour retourner au menu Principal",
                             "Revenir mode Tournoi ", MessageBoxButtons.YesNo);
 
@@ -1861,14 +1853,22 @@ namespace InterfaceGraphique
                         menuPrincipal_.tournoi_.Show();
                         nbButsJoueur1 = 0;
                         nbButsJoueur2 = 0;
-                        textBox4.Text = "0"; textBox5.Text = "0";
-                  
+                        //Livrable 3
+                        FonctionsNatives.setScoreCourant(0, 1);
+                        FonctionsNatives.setScoreCourant(0, 2);
+                        FonctionsNatives.initialiserCompteur();
 
                     }
 
                     else if (dialog == DialogResult.No) //revenir menu principal
                     {
+                
                         estEnModePartie = false;
+                    
+                        FonctionsNatives.jouerSonModeJeu(false);
+                        //Livrable 3
+                        FonctionsNatives.setScoreCourant(0, 1);
+                        FonctionsNatives.setScoreCourant(0, 2);
                         this.Hide();
                         menuPrincipal_.Show();
                         FonctionsNatives.initialiserScene();
@@ -1883,20 +1883,29 @@ namespace InterfaceGraphique
             {
                 if ((nbButsJoueur1 == nbButsMax) || (nbButsJoueur2 == nbButsMax))
                 {
+                    partieGagnee = true;
+                    
                     DialogResult dialog = MessageBox.Show("La partie est finie, vous voulez rejouer encore ? Yes pour Rejouer, No pour retourner au menu Principal",
                             "Rejouer ou retour au menu principal", MessageBoxButtons.YesNo);
-
+                   
                     if (dialog == DialogResult.Yes)
                     {
                         nbButsJoueur1 = 0;
                         nbButsJoueur2 = 0;
-                        textBox4.Text = "0"; textBox5.Text = "0";
                         FonctionsNatives.reinitialiserPartieCourante();
+
+                        //Livrable 3
+                        // reinitaialiser le score courant pour l'affichage FTGL
+                        FonctionsNatives.setScoreCourant(0, 1);
+                        FonctionsNatives.setScoreCourant(0, 2);
+                        FonctionsNatives.initialiserCompteur();
 
                     }
 
                     else if (dialog == DialogResult.No) //revenir menu principal
                     {
+
+                        FonctionsNatives.jouerSonModeJeu(false);
                         estEnModePartie = false;
                         this.Hide();
                         menuPrincipal_.Show();
@@ -1941,8 +1950,11 @@ namespace InterfaceGraphique
             nbButsJoueur2 = 0;
             FonctionsNatives.setButDroite(false);
             FonctionsNatives.setButGauche(false);
-            textBox4.Text = "0";
-            textBox5.Text = "0";
+            //Livrable 3
+            FonctionsNatives.setScoreCourant(0, 1);
+            FonctionsNatives.setScoreCourant(0, 2);
+            FonctionsNatives.initialiserCompteur();
+
         }
 
 
@@ -2137,6 +2149,12 @@ namespace InterfaceGraphique
         public static extern int getScoreCourant(int index);
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool setScoreCourant(int score, int index);
+        // initialisation des texts pour FTGL
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void initialiserFTGL();
+        // remettre a zero le compteur
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void initialiserCompteur();
         
         /// Ali
 

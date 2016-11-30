@@ -80,8 +80,10 @@ const std::string FacadeModele::FICHIER_ZONEDEFAUT{ "ZoneDefaut.xml" };
 ////////////////////////////////////////////////////////////////////////
 FacadeModele* FacadeModele::obtenirInstance()
 {
-	if (instance_ == nullptr)
+	if (instance_ == nullptr) {
 		instance_ = new FacadeModele;
+		instance_->tournoi_ = nullptr;
+	}
 
 	return instance_;
 }
@@ -188,13 +190,14 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 
 	vueOrbite_ = new vue::VueOrbite{
 		vue::Camera{ 
-			glm::dvec3(0, 0, 10), glm::dvec3(0, 0, 0),
+			glm::dvec3(0, 10, 0), glm::dvec3(0, 0, 0),
 			glm::dvec3(0, 0, 1),   glm::dvec3(0, 0, 1)},
 		vue::ProjectionOrbite{ 
 				606, 437,
-				1, 1000, 5, 0.5, 0.25,
+				-200, 1000, 5, 0.5, 0.25,
 				200, 200}
 	};
+	vueOrbite_->rotaterXY(0, 100);
 
 	vue_ = vueOrtho_;
 }
@@ -290,7 +293,7 @@ void FacadeModele::chargerZoneJeu(char* fichierZoneJeu) const
 ///
 /// @return Aucune.
 ///
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////te/////////////////////////////////////
 
 void FacadeModele::enregistrerZoneJeu(char* fichierZoneJeu) const
 {
@@ -415,11 +418,8 @@ void FacadeModele::afficher() const
 	// Afficher la scène
 	afficherBase();
 
-	// Compte de l'affichage
-	utilitaire::CompteurAffichage::obtenirInstance()->signalerAffichage();
-
 	// creation d'une instance TextOpenGL
-	if (partieRapide_)	// TODO -- set partie rapide a false qd on sort de la partie rapide
+	if (partieRapide_)	
 	{
 		TextOpenGL text;
 		text.afficher();
@@ -444,10 +444,10 @@ void FacadeModele::afficher() const
 void FacadeModele::afficherBase() const
 {
 	// Positionner la caméra
-	glm::mat4 vueProjection(vue_->obtenirProjection().obtenirMatrice() * vue_->obtenirCamera().obtenirMatrice());
+	//glm::mat4 vueProjection(vue_->obtenirProjection().obtenirMatrice() * vue_->obtenirCamera().obtenirMatrice());
 
 	// Afficher la scène.
-	arbre_->afficher(vueProjection);
+	arbre_->afficher(glm::mat4(1.f), vue_->obtenirCamera().obtenirMatrice(), vue_->obtenirProjection().obtenirMatrice() );
 }
 
 
@@ -466,6 +466,103 @@ void FacadeModele::reinitialiser()
 	arbre_->initialiser();
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::activerCompteur(float temps)
+/// @ Author : Ali
+/// Cette fonction permet d'activer le compteur qui sera afficher 
+/// dans la partie rapide 
+/// @param[in] temps : Intervalle de temps sur lequel effectuer le calcul.
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::activerCompteur(float temps)
+{
+	//incrementer le compteur a chaque instant
+	AncienSecondes_ = compteurSecondes_;
+	temps_ = temps_ + temps;
+	compteurSecondes_ = (int)temps_;
+	
+	// corriger les valeurs 
+	if (compteurSecondes_ == 60)
+	{
+		compteurSecondes_ = 0;
+		temps_ = 0;
+		compteurMinutes_++;
+	}
+	if (compteurMinutes_ == 60)
+	{
+		compteurMinutes_ = 0;
+		compteurHeures_++;
+	}
+	if (compteurHeures_ == 24)
+		compteurHeures_ = 0;
+	//test afficher a la console
+	if (compteurSecondes_ != AncienSecondes_)
+	{
+		//cout << compteurHeures_ << ":" << compteurMinutes_ << ":" << compteurSecondes_ << endl;
+		std::string formatHeure = to_string(compteurHeures_);
+		std::string formatMinute = to_string(compteurMinutes_);
+		std::string formatSeconde = to_string(compteurSecondes_);
+		chrono_ = formatHeure + ":" + formatMinute + ":" + formatSeconde;
+		//cout << chrono_ << endl;
+	}
+
+	//TODO -- mettre le compteur en pause quand on pese sur ESC
+	// idea - sauvegarder les valeurs actuelle et l'afficher tout le temps
+		
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn std::string FacadeModele::getChrono()
+/// @ Author : Ali
+/// Cette fonction permet de recuper la chaine de caractere du temps 
+/// qui sera affichee en FTGL lors d'une partie
+///
+/// @return std::string
+///
+////////////////////////////////////////////////////////////////////////
+std::string FacadeModele::getChrono()
+{
+	return chrono_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::initialiserCompteur(float temps)
+/// @ Author : Ali
+/// Cette fonction permet d'initialiser le compteur a zero 
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::initialiserCompteur ()
+{
+	compteurSecondes_ = 0;
+	compteurMinutes_ = 0;
+	compteurHeures_ = 0;
+	AncienSecondes_ = 0;
+	temps_ = 0.;
+	chrono_ = "0:0:0";
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::initialiserTextFTGL()
+/// @ Author : Ali
+/// Cette fonction permet d'initialiser le nom des joueurs, le score
+/// et le compteur 
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::initialiserTextFTGL()
+{
+	nomJoueurCourant1_ = "Player1";
+	nomJoueurCourant2_ = "Player2";
+	scoreJoueurCourant1_ = scoreJoueurCourant2_ = 0;
+	initialiserCompteur();
+}
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -487,6 +584,13 @@ void FacadeModele::animer(float temps)
 
 	// Mise à jour de la vue.
 	vue_->animer(temps);
+
+	//Livrable3
+	// demarer le compteur 
+	activerCompteur(temps);
+
+	
+
 }
 
 
@@ -633,7 +737,7 @@ void FacadeModele::effacerObjet()
 void FacadeModele::deplacerObjet(double x, double y, double angle, double scale)
 {
 	glm::dvec3 NouvPos{x, y, 0.f}; //la nouvelle position a assigner
-	double nvAngle= utilitaire::DEG_TO_RAD(angle); //conversion degre en rad 
+	double nvAngle= utilitaire::DEG_TO_RAD(angle); //conversion degre en rad
 	arbre_->deplacerObjet(NouvPos, nvAngle, scale);
 
 }
@@ -1222,14 +1326,14 @@ bool FacadeModele::setNomJoueurCourant(std::string nom, int index)
 {
 	if (index == 1)
 	{
-		nomJoueurCourant1_.assign(nom);
+		nomJoueurCourant1_ = nom;
 		return true;
 	}
 		
 	else
 		if (index == 2)
 		{
-			nomJoueurCourant2_.assign(nom);
+			nomJoueurCourant2_ = nom;
 			return true;
 		}
 		else
@@ -1404,4 +1508,21 @@ void FacadeModele::setVueOrtho()
 void FacadeModele::setVueOrbite()
 {
 	vue_ = vueOrbite_;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::isVueOrtho()
+///
+/// Author : Arthur
+/// @Brief :  Cette fonction revoie un booleen determinant le type
+///               de vue utilisé
+///
+/// @return: true si la vue est orthogonale
+///          false si la vue est orbite
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::isVueOrtho()
+{
+	return (vue_ == vueOrtho_);
 }

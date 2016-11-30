@@ -186,6 +186,9 @@ extern "C" {
 	__declspec(dllexport) bool setNomJoueurCourant(char* nom, int index);
 	__declspec(dllexport) int getScoreCourant(int index);
 	__declspec(dllexport) bool setScoreCourant(int score, int index);
+	__declspec(dllexport) void initialiserFTGL();
+	__declspec(dllexport) void initialiserCompteur();
+	
 
 	/// Ali 
 	__declspec(dllexport) void profilCourant(string nom, double vitesse_, double probaDAgirPassivemnt);

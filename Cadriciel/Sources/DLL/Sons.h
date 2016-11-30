@@ -22,11 +22,15 @@
 class Sons  {
 
 public:
+	///Constructeur par defaut 
 	Sons();
+	///destructeur
 	~Sons();
-
+	///Permet de jouer le son
 	void jouerSon(int choix);
+	///mettre le son en pause
 	void pauseSon(bool pause);
+	///arreter le son
 	void arreterSon();
 
 private:

@@ -9,8 +9,9 @@
 #ifndef __TEXTOPENGL_H__
 #define __TEXTOPENGL_H__
 
-//#include <map>
-//#include <string>
+// FTGL library
+#include "../../../Commun/Externe/FTGL/include/FTGL/ftgl.h"
+#include <string>
 
 ///////////////////////////////////////////////////////////////////////////
 /// @class TextOpenGL
@@ -26,15 +27,15 @@ public:
 	/// Constructeur par défaut
 	TextOpenGL();
 	~TextOpenGL();
-	bool initialiserFreeType();
 	bool initialiserFTGL();
-	bool afficher();
-	
+	void afficher();
+	bool afficherTextFTGL(std::string Text, FTPoint position, int FontSize);
+	void afficherChrono();
 	
 private:
 	// noms des joueurs
 	// score 
 	// temps
-
+	
 };
 #endif

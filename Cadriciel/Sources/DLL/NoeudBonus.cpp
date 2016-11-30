@@ -63,12 +63,12 @@ NoeudBonus::~NoeudBonus()
 /// @return Aucune.
 ///
 ////////////////////////////////////////////////////////////////////////
-void NoeudBonus::afficherConcret(const glm::mat4& vueProjection) const
+void NoeudBonus::afficherConcret(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 {
 	// Affichage du modèle.
-	vbo_->dessiner(vueProjection);
+	vbo_->dessiner(modele, vue, projection);
 	// on retrace pour que le rayon d'attraction soit correctement affiche'
-	vbo_->dessiner(vueProjection);
+	vbo_->dessiner(modele, vue, projection);
 
 }
 
@@ -107,8 +107,8 @@ math::Droite3D NoeudBonus::obtenirDroiteDirectrice() {
 	double rayon = max(abs(box.coinMax.x - box.coinMin.x), abs(box.coinMin.y - box.coinMax.y)) / 2;
 
 	glm::dvec3 scale = this->getScale();
-	glm::dvec3 left{ -(rayon + scale.x), 0, 0 };
-	glm::dvec3 right{ (rayon + scale.x), 0, 0 };
+	glm::dvec3 left{ -(rayon * scale.x), 0, 0 };
+	glm::dvec3 right{ (rayon * scale.x), 0, 0 };
 
 	double angle = this->getAngle();
 
