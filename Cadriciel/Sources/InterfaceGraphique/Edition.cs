@@ -1666,12 +1666,17 @@ namespace InterfaceGraphique
                     estEnPause = true;
                     menuStrip1.Show();
                     FonctionsNatives.mettrePauseMusique(false);
+                    //compteur en pause
+                    FonctionsNatives.mettreCompteurEnPause(true);
                 }
                 else
                 {     //si non le masque et on retourne dans le jeu
                     estEnPause = false;
                     menuStrip1.Hide();
                     FonctionsNatives.mettrePauseMusique(true);
+                    //compteur marche de nouveau
+                    FonctionsNatives.mettreCompteurEnPause(false);
+
                 }
             }
         }
@@ -1753,7 +1758,8 @@ namespace InterfaceGraphique
                 FonctionsNatives.effacerPointControle();
 
                 estEnPause = false;
-
+                // compteur marche
+                FonctionsNatives.mettreCompteurEnPause(false);
 
                 toolStrip1.Hide();
                 menuStrip1.Hide();
@@ -2161,7 +2167,13 @@ namespace InterfaceGraphique
         // remettre a zero le compteur
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void initialiserCompteur();
-        
+        // modifier les valeurs du compteur
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void setCompteur(int heure, int minute, int seconde);
+        // mettre en pause le compteur
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void mettreCompteurEnPause(bool deactiver);
+
         /// Ali
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
