@@ -30,6 +30,8 @@ public:
 	bool initialiserFTGL();
 	void afficher();
 	bool afficherTextFTGL(std::string Text, FTPoint position, int FontSize);
+	bool afficherTextFTGL(std::string Text, FTPoint position, int FontSize, float Red, float Green, float Blue);
+	bool  afficherTextFTGL(std::string Text, FTPoint position, int FontSize, int shadow);
 	void afficherChrono();
 	
 private:
