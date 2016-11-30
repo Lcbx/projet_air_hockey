@@ -72,7 +72,10 @@ NoeudTable::~NoeudTable()
 ////////////////////////////////////////////////////////////////////////
 void NoeudTable::afficherConcret(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 {
-	
+	//dessiner la table
+	vbo_->dessiner(modele, vue, projection);
+	vbo_->dessiner(modele, vue, projection);
+
 	glm::mat4x4 const& m{ projection * vue * modele };
 
 	// Appliquer le nuanceur
@@ -85,6 +88,8 @@ void NoeudTable::afficherConcret(const glm::mat4& modele, const glm::mat4& vue, 
 
 	// tracer la table
 	tracerTable(glm::mat4(1.f));
+
+
 
 	opengl::Programme::Stop(vbo_->programme_);
 
@@ -160,21 +165,21 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 	p1----------p3----------p5
 	*/
 	// tracer la table (zone du jeur)
-	vbo_->programme_.assignerUniforme("colorIn", couleurTable_);
-	glBegin(GL_TRIANGLE_FAN);
-	{
-		glVertex3fv(PROJ8);
-		glVertex3fv(PROJ(0));
-		glVertex3fv(PROJ(6));
-		glVertex3fv(PROJ(1));
-		glVertex3fv(PROJ(3));
-		glVertex3fv(PROJ(5));
-		glVertex3fv(PROJ(7));
-		glVertex3fv(PROJ(4));
-		glVertex3fv(PROJ(2));
-		glVertex3fv(PROJ(0));
-	}
-	glEnd();
+	//vbo_->programme_.assignerUniforme("colorIn", couleurTable_);
+	//glBegin(GL_TRIANGLE_FAN);
+	//{
+	//	glVertex3fv(PROJ8);
+	//	glVertex3fv(PROJ(0));
+	//	glVertex3fv(PROJ(6));
+	//	glVertex3fv(PROJ(1));
+	//	glVertex3fv(PROJ(3));
+	//	glVertex3fv(PROJ(5));
+	//	glVertex3fv(PROJ(7));
+	//	glVertex3fv(PROJ(4));
+	//	glVertex3fv(PROJ(2));
+	//	glVertex3fv(PROJ(0));
+	//}
+	//glEnd();
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// tracer pt intersection
@@ -252,12 +257,14 @@ void NoeudTable::tracerPointsControle(const glm::mat4& vueProjection) const {
 		auto pControl = (NoeudPointControle*)chercher(i);
 		double delta; pControl->getDelta(delta);
 		glm::vec4 couleur; pControl->getCouleur(couleur);
+
 		glm::vec3 p0{ p(i).x - delta / 2, p(i).y + delta / 2, p(i).z };
 		glm::vec3 p1{ p(i).x - delta / 2, p(i).y - delta / 2, p(i).z };
 		glm::vec3 p2{ p(i).x + delta / 2, p(i).y - delta / 2, p(i).z };
 		glm::vec3 p3{ p(i).x + delta / 2, p(i).y + delta / 2, p(i).z };
 
-		vbo_->programme_.assignerUniforme("colorIn", couleur);
+		//vbo_->programme_.assignerUniforme("colorIn", couleur);
+		vbo_->programme_.assignerUniforme("colorIn", glm::vec4{ 0.,1.,0.,1. });
 		glBegin(GL_QUADS);
 		{
 			glVertex3fv(PROJvec(p0));
@@ -282,7 +289,7 @@ void NoeudTable::tracerPointsControle(const glm::mat4& vueProjection) const {
 void NoeudTable::tracerLignesDecoration(const glm::mat4& vueProjection) const
 {
 	// tracer le contour
-	vbo_->programme_.assignerUniforme("colorIn", couleurContour_);
+	vbo_->programme_.assignerUniforme("colorIn", glm::vec4{ 1.,1.,0.,1. });
 	glLineWidth(2.);
 	glBegin(GL_LINE_LOOP);
 	{
@@ -299,7 +306,8 @@ void NoeudTable::tracerLignesDecoration(const glm::mat4& vueProjection) const
 
 	// tracer les lignes du terrain
 	glLineWidth(5.);
-	vbo_->programme_.assignerUniforme("colorIn", couleurLignes_);
+	//vbo_->programme_.assignerUniforme("colorIn", couleurLignes_);
+	vbo_->programme_.assignerUniforme("colorIn", glm::vec4{ 1.,1.,0.,1. });
 	glBegin(GL_LINES);
 	{
 		glVertex3fv(PROJ(2));
@@ -466,7 +474,7 @@ void NoeudTable::tracerMurs3Points(const glm::mat4& vueProjection, glm::vec3 p1,
 void NoeudTable::tracerMurs(const glm::mat4& vueProjection) const
 {
 	// tracer murs
-	vbo_->programme_.assignerUniforme("colorIn", couleurMurs_);
+		vbo_->programme_.assignerUniforme("colorIn", glm::vec4{ (109.f / 255) , (7.f / 255), (26.f / 255), 1.f });
 	glBegin(GL_QUADS);
 	{
 		// mur p0p6
@@ -769,7 +777,7 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection, double longueur) con
 	glm::vec3 point1, point2, point3, point4, point5;
 	//glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
 	//Luc : les nuanceurs ne permettent qu'une couleur par set de points envoyés
-	vbo_->programme_.assignerUniforme("colorIn", glm::vec4(0.f, 0.6f, 0.8f, 0.f)); //vert
+	vbo_->programme_.assignerUniforme("colorIn", glm::vec4(0.f, 0.f, 1.f, 0.f)); //vert
 	glBegin(GL_QUADS);
 	//glPointSize(5);
 	//glBegin(GL_POINTS);
