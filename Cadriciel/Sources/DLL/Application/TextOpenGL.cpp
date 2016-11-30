@@ -88,11 +88,20 @@ void TextOpenGL::afficher()
 	glm::vec2 WH = facade->obtenirVue()->obtenirProjection().obtenirDimensionCloture();
 	float W = WH.x;
 	float H = WH.y;
-	afficherTextFTGL(facade->getNomJoueurCourant(2), FTPoint(50, 10, 0), 30);
-	afficherTextFTGL(std::to_string(facade->getScoreCourant(2)), FTPoint(75, 50, 0), 30);
-	afficherTextFTGL(facade->getNomJoueurCourant(1), FTPoint(W - 150, 10, 0), 30);
-	afficherTextFTGL(std::to_string(facade->getScoreCourant(1)), FTPoint(W - 125, 50, 0), 30);
-	afficherTextFTGL(facade->getChrono(), FTPoint(W/2, H - H/20, 0), 20);
+
+	//Player 2
+	//Name
+	afficherTextFTGL(facade->getNomJoueurCourant(2), FTPoint(50, 10, 0), 30, 4);
+	//Score
+	afficherTextFTGL(std::to_string(facade->getScoreCourant(2)), FTPoint(75, 50, 0), 30, 4);
+	//Player 1
+	//Name
+	afficherTextFTGL(facade->getNomJoueurCourant(1), FTPoint(W - 150, 10, 0), 30, 4);
+	//Score
+	afficherTextFTGL(std::to_string(facade->getScoreCourant(1)), FTPoint(W - 125, 50, 0), 30, 4);
+	
+	// Time
+	afficherTextFTGL(facade->getChrono(), FTPoint(W/20, H - H/10, 0), 40);
 }
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -102,7 +111,7 @@ void TextOpenGL::afficher()
 /// @param[in] : std::string Text : le text a afficher
 ///				 FTPoint position : la position a afficher
 ///				 int FontSize : la taille du texte affiche'
-/// @return rien
+/// @return bool
 ///
 ////////////////////////////////////////////////////////////////////////
 bool TextOpenGL::afficherTextFTGL(std::string Text, FTPoint position, int FontSize)
@@ -129,15 +138,118 @@ bool TextOpenGL::afficherTextFTGL(std::string Text, FTPoint position, int FontSi
 	glDisable(GL_LIGHTING);
 	glDisable(GL_DEPTH_TEST);
 	// color doesn't work for now
-	glColor3f(1.0, 0., 0.);
+	//glColor3f(1.0, 0., 0.);
 	
 	
+	glPixelTransferf(GL_RED_BIAS, 1);
+	glPixelTransferf(GL_GREEN_BIAS, 1);
+	glPixelTransferf(GL_BLUE_BIAS, 1);
+
+	font.Render(chaine, -1, position);
+	
+	glPopAttrib();
+	delete[] chaine;
+	return true;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @fn void TextOpenGL::afficherTextFTGL(std::string Text, FTPoint position, int FontSize, int Red, int Green, int Blue)
+/// @Author : Ali
+/// @brief : permet d'afficher un text en FTGL a partir d'une position avec couleur
+/// @param[in] : std::string Text : le text a afficher
+///				 FTPoint position : la position a afficher
+///				 int FontSize : la taille du texte affiche'
+///				 float Red, Green, Blue : couleur RGB
+///				 
+/// @return bool
+///
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool TextOpenGL::afficherTextFTGL(std::string Text, FTPoint position, int FontSize,float Red, float Green, float Blue)
+{
+	// Create a pixmap font from a TrueType file.
+	FTGLPixmapFont	font("media/calibrii.ttf");
+	//FTGLTextureFont  font("media/calibrii.ttf");
+
+	//if something goes wrong like can't find the font file
+	if (font.Error())
+	{
+		std::cout << "Font pas trouve'" << std::endl;
+		return false;
+	}
+	char * chaine = new char[Text.size() + 1];
+	std::copy(Text.begin(), Text.end(), chaine);
+	chaine[Text.size()] = '\0'; // always add a '\0' if you want to convert from string to  char*
+
+
+	font.FaceSize(FontSize);
+
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
+
+	glDisable(GL_LIGHTING);
+	glDisable(GL_DEPTH_TEST);
+	
+	glPixelTransferf(GL_RED_BIAS, Red);
+	glPixelTransferf(GL_GREEN_BIAS, Green);
+	glPixelTransferf(GL_BLUE_BIAS, Blue);
+
+	font.Render(chaine, -1, position);
+
+	glPopAttrib();
+	delete[] chaine;
+	return true;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///
+/// @fn void TextOpenGL::afficherTextFTGL(std::string Text, FTPoint position,int FontSize, int nombreShadow)
+/// @Author : Ali
+/// @brief : permet d'afficher un text en FTGL a partir d'une position en blanc avec ombrage noir
+/// @param[in] : std::string Text : le text a afficher
+///				 FTPoint position : la position a afficher
+///				 int FontSize : la taille du texte affiche'
+///				 int shadow : epaisseur du shadow ex: 5 va afficher le text 5 fois en noir et 1 fois en blanc
+///				 
+/// @return bool
+///
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool TextOpenGL::afficherTextFTGL(std::string Text, FTPoint position, int FontSize, int shadow)
+{
+	// Create a pixmap font from a TrueType file.
+	FTGLPixmapFont	font("media/calibrii.ttf");
+	//FTGLTextureFont  font("media/calibrii.ttf");
+
+	//if something goes wrong like can't find the font file
+	if (font.Error())
+	{
+		std::cout << "Font pas trouve'" << std::endl;
+		return false;
+	}
+	char * chaine = new char[Text.size() + 1];
+	std::copy(Text.begin(), Text.end(), chaine);
+	chaine[Text.size()] = '\0'; // always add a '\0' if you want to convert from string to  char*
+
+
+	font.FaceSize(FontSize);
+
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
+
+	glDisable(GL_LIGHTING);
+	glDisable(GL_DEPTH_TEST);
+
+	// shadow
 	glPixelTransferf(GL_RED_BIAS, -1);
 	glPixelTransferf(GL_GREEN_BIAS, -1);
 	glPixelTransferf(GL_BLUE_BIAS, -1);
 
-	font.Render(chaine, -1, position);
+	for (int i = 1; i <= shadow ; ++i)
+		font.Render(chaine, -1, FTPoint (position.X() - i, position.Y() - i, position.Z() ) );
 	
+	//White Text
+	glPixelTransferf(GL_RED_BIAS, 1);
+	glPixelTransferf(GL_GREEN_BIAS, 1);
+	glPixelTransferf(GL_BLUE_BIAS, 1);
+
+	font.Render(chaine, -1, position);
+
 	glPopAttrib();
 	delete[] chaine;
 	return true;

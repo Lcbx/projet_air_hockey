@@ -51,6 +51,8 @@ namespace InterfaceGraphique
         public int nbButsJoueur2 = 0;
         //Livrable 3 
         public bool partieGagnee = false;
+        // pour regler le bug de l'affichage du textFTGL qd on charge une zone ds edition
+        public bool ouvrirMenuTable_ = false;
 
 
         public enum States {Edition = 0, Test, PartieRapide, Tournoi };
@@ -687,9 +689,8 @@ namespace InterfaceGraphique
             //Livrable 3 
             // besoin pour effacer l'affichage FTGL
             FonctionsNatives.setPartieRapide(false);
-            //FonctionsNatives.setScoreCourant(0, 1);
-            //FonctionsNatives.setScoreCourant(0, 2);
-            //FonctionsNatives.initialiserFTGL();
+            ouvrirMenuTable_ = false;
+            
             this.Hide();
             FonctionsNatives.jouerSonModeJeu(false);
             //this.Close();
@@ -1469,6 +1470,9 @@ namespace InterfaceGraphique
         private void ouvrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fenetreChargement_.Show();
+            // bug affichage textopengl qd on ouvre une table
+            ouvrirMenuTable_ = true;
+            FonctionsNatives.setPartieRapide(false);
         }
 
         private string currentFile_ = String.Empty;

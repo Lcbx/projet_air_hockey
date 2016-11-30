@@ -93,7 +93,10 @@ namespace InterfaceGraphique
                     file[i] = f[i];
                 file[f.Length] = '\0';
                 FonctionsNatives.chargerZoneJeu(file);
-                FonctionsNatives.setPartieRapide(true);
+
+                if (!edition_.ouvrirMenuTable_)
+                    FonctionsNatives.setPartieRapide(true);
+
                 this.Hide();
             }
         }
