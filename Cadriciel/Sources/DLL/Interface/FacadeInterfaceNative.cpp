@@ -1506,7 +1506,7 @@ extern "C"
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) int getTypeLumiereActive()
 	{
-		FacadeModele::obtenirInstance()->getTypeLumiereActive();
+		return (FacadeModele::obtenirInstance()->getTypeLumiereActive());
 	}
 
 }

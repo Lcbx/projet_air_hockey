@@ -17,17 +17,17 @@ uniform   vec3 Kspeculaire;
 uniform   float Kshininess;
 
 // Définition des paramètres des sources de lumière
-   vec4 LightSourceAmbient = vec4(0.2,0.2,0.2,1.0);
+   vec4 LightSourceAmbient = vec4(0.2,0.2,0.2,0.2);
    vec4 LightSourceDiffuse = vec4(1.0,1.0,1.0,1.0);
    vec4 LightSourceSpecular = vec4(1.0,1.0,1.0,1.0);
    
    
    //vec4 position;
-   vec3 spotDirection1 = vec3(-0.5, 0.0, 0.6);
-   vec3 spotDirection2 = vec3(0.5, 0.0, 0.6);
-   float spotExponent =45.0;
+   vec3 spotDirection1 = vec3(-0.3, 0.0, 0.6);
+   vec3 spotDirection2 = vec3(0.3, 0.0, 0.6);
+   float spotExponent =20.0;
    // angle d'ouverture de spot delta
-   float spotCutoff =5;            // ([0.0,90.0] ou 180.0)
+   float spotCutoff =10;            // ([0.0,90.0] ou 180.0)
    //float constantAttenuation;
    //float linearAttenuation;
    //float quadraticAttenuation;
@@ -36,7 +36,7 @@ uniform   float Kshininess;
 
 
 // Définition des paramètres globaux du modèle de lumière
-vec4 LightModelAmbient = vec4(0.0,0.0,0.0,0.0);       // couleur ambiante
+vec4 LightModelAmbient = vec4(0.2,0.2,0.2, 1.0);       // couleur ambiante
 //uniform bool localViewer;   // observateur local ou à l'infini?
 //uniform bool twoSide;       // éclairage sur les deux côtés ou un seul?
 
@@ -68,10 +68,10 @@ float calculerSpot( in vec3 spotDir1, in vec3 spotDir2, in vec3 L )
    //float CosAngleOuter = pow (CosAngleOuverture,(1.01+(spotExponent/2)));
    float Ispot ;
                   		 
-				   if (CosAngleGama1 > CosAngleOuverture || CosAngleGama2 > CosAngleOuverture)//&& CosAngleGama2 > CosAngleOuverture)
+				   if (CosAngleGama1 >= CosAngleOuverture || CosAngleGama2 >= CosAngleOuverture)//&& CosAngleGama2 > CosAngleOuverture)
 					    Ispot = clamp(pow(CosAngleGama1+CosAngleGama2,spotExponent),0.0,1.0);
 				   else 
-					    Ispot = 0.0 ;
+					    Ispot = 0.4 ;
 					    
    return(Ispot );
    
@@ -120,15 +120,14 @@ void main(void)
 			{
 				//vec4 coul = vec4(Kdiffuse,1.0);
 				vec4 coul = vec4(Kemission,1.0)+ vec4(Kambient,1.0) * LightModelAmbient; 
-				coul += vec4(Kambient,1.0)* LightSourceAmbient;
 				color = clamp(coul*couleurTex,0.0,1.0);
 			}
 			
 			 if (typeIllumination == 1) // lumière directionnelle
-					 color = clamp((calculerDirectionnelle( L,N, O )*couleurTex),0.0,1.0);
+					 color = clamp((calculerDirectionnelle( L,N, O)*couleurTex),0.0,1.0);
    
 			 if (typeIllumination == 2) //spot
-				color = clamp(calculerSpot(DS1,DS2, LSP)*calculerDirectionnelle( L,N, O )*couleurTex,0.0,1.0);
+				color = clamp(calculerSpot(DS1,DS2, LSP)*couleurTex,0.0,1.0);
 			 
 			 //else  //toutes les sortes de la lumière sont activées
 				//color = clamp(couleurDepart* couleurTex,0.0,1.0);
