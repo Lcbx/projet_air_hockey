@@ -155,14 +155,23 @@ namespace InterfaceGraphique
             }
         }
 
-        static partial class FonctionsNatives
+        /// @fn private void ModeTournoi_FormClosing(object sender, FormClosingEventArgs e)
+        /// @brief Permet de fermer la fenêtre du mode tournoi de façon standard
+        private void ModeTournoi_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (e.CloseReason == CloseReason.UserClosing) {
+                e.Cancel = true;
+                parent_.Show();
+                this.Hide();
+            }
+        }
+
+        static partial class FonctionsNatives {
             [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
             public static extern void preparerProchainMatchTournoi();
 
             [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
             public static extern bool gagnerMatchVirtuelsTournoi();
-
         }
     }
 }

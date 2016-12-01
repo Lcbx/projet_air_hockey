@@ -85,6 +85,7 @@
             this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "ModeTournoi";
             this.Text = "ModeTournoi";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ModeTournoi_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

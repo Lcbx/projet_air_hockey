@@ -779,15 +779,16 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         private void Exemple_FormClosing(object sender, FormClosingEventArgs e)
         {
-            lock (Program.unLock)
-            {
-                FonctionsNatives.libererOpenGL();
-                Program.peutAfficher = false;
+            if (e.CloseReason == CloseReason.UserClosing) {
+                e.Cancel = true;
+                menuPrincipal_.Show();
+                this.Hide();
+            } else {
+                lock (Program.unLock) {
+                    FonctionsNatives.libererOpenGL();
+                    Program.peutAfficher = false;
+                }
             }
-
-            //e.Cancel = true;
-            //menuPrincipal_.Show();
-            //this.Hide();
         }
 
         /////////////////////////////////////////////////////////////////////////
