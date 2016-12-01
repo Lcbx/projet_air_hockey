@@ -78,6 +78,7 @@ namespace InterfaceGraphique
 
 
             // Chargement des profils
+          
 
             int nbrChar = FonctionsNatives.obtenirNombreProfils();
             string temp = "";
@@ -146,8 +147,9 @@ namespace InterfaceGraphique
             {
                 // Options de jeu
                 OptionsJeu* data = (OptionsJeu*)FonctionsNatives.obtenirOptionsJeu();
-                
-                numericUpDown1.Value = data->nbrBut;
+
+                //numericUpDown1.Value = data->nbrBut;
+                trackBar3.Value = data->nbrBut;
                 nbButMax = data->nbrBut;
 
                 if (data->joueurTestEstHumain == true)
@@ -217,6 +219,8 @@ namespace InterfaceGraphique
                 }
 
             }
+
+           
         }
 
         public void setMenuPrincipalConfig(MenuPrincipal menuPrincipal, Edition edition)
@@ -279,7 +283,11 @@ namespace InterfaceGraphique
             {
                 KeysConverter kc = new KeysConverter();
                 string keyChar = kc.ConvertToString(ke.KeyData);
-                return keyChar;
+
+            
+            return keyChar;
+
+
             }
 
 
@@ -450,14 +458,14 @@ namespace InterfaceGraphique
         /// @return aucune
         //
         ////////////////////////////////////////////////////////////////////////////////////////// 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        /*private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             if (numericUpDown1.Value >= 1 || numericUpDown1.Value <= 5)
             {
                 nbButMax = Convert.ToInt32(numericUpDown1.Value);
             }
 
-        }
+        }*/
 
 		/////////////////////////////////////////////////////////////////////////
         /// @fn public  void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -794,7 +802,7 @@ namespace InterfaceGraphique
         /// <param name="e"></param>
         private void Sauvegarder_Click(object sender, EventArgs e)
         {
-            FonctionsNatives.sauvegarderTypeButMax(nbButMax, estHumain);
+            FonctionsNatives.sauvegarderTypeButMax(trackBar3.Value, estHumain);
         }
 
         /// <summary>
@@ -840,7 +848,17 @@ namespace InterfaceGraphique
 
         }
 
+        private void trackBar3_ValueChanged(object sender, EventArgs e)
+        {
+            label13.Text = trackBar3.Value.ToString();
+        }
 
+        private void label14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+      
     }
 
     [StructLayout(LayoutKind.Sequential)]
