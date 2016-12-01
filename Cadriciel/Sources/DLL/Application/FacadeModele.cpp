@@ -79,8 +79,10 @@ const std::string FacadeModele::FICHIER_ZONEDEFAUT{ "ZoneDefaut.xml" };
 ////////////////////////////////////////////////////////////////////////
 FacadeModele* FacadeModele::obtenirInstance()
 {
-	if (instance_ == nullptr)
+	if (instance_ == nullptr) {
 		instance_ = new FacadeModele;
+		instance_->tournoi_ = nullptr;
+	}
 
 	return instance_;
 }
@@ -522,6 +524,24 @@ void FacadeModele::reinitialiser()
 
 ////////////////////////////////////////////////////////////////////////
 ///
+/// @fn void FacadeModele::setChrono(int heure, int minute, int seconde)
+/// @ Author : Ali
+/// Cette fonction permet de modifier les valeurs du chronometre affichees
+/// dans la partie rapide 
+/// @param[in] int heure, minute,seconde
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setChrono(int heure, int minute, int seconde)
+{
+	compteurHeures_ = heure;
+	compteurMinutes_ = minute;
+	compteurSecondes_ = seconde;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
 /// @fn void FacadeModele::activerCompteur(float temps)
 /// @ Author : Ali
 /// Cette fonction permet d'activer le compteur qui sera afficher 
@@ -533,35 +553,40 @@ void FacadeModele::reinitialiser()
 ////////////////////////////////////////////////////////////////////////
 void FacadeModele::activerCompteur(float temps)
 {
-	//incrementer le compteur a chaque instant
-	AncienSecondes_ = compteurSecondes_;
-	temps_ = temps_ + temps;
-	compteurSecondes_ = (int)temps_;
-	
-	// corriger les valeurs 
-	if (compteurSecondes_ == 60)
+	if (!compteurEnPause_)
 	{
-		compteurSecondes_ = 0;
-		temps_ = 0;
-		compteurMinutes_++;
+		//incrementer le compteur a chaque instant
+		AncienSecondes_ = compteurSecondes_;
+		temps_ = temps_ + temps;
+		compteurSecondes_ = (int)temps_;
+
+		// corriger les valeurs 
+		if (compteurSecondes_ == 60)
+		{
+			compteurSecondes_ = 0;
+			temps_ = 0;
+			compteurMinutes_++;
+		}
+		if (compteurMinutes_ == 60)
+		{
+			compteurMinutes_ = 0;
+			compteurHeures_++;
+		}
+		if (compteurHeures_ == 24)
+			compteurHeures_ = 0;
+		//test afficher a la console
+		if (compteurSecondes_ != AncienSecondes_)
+		{
+			//cout << compteurHeures_ << ":" << compteurMinutes_ << ":" << compteurSecondes_ << endl;
+			std::string formatHeure = to_string(compteurHeures_);
+			std::string formatMinute = to_string(compteurMinutes_);
+			std::string formatSeconde = to_string(compteurSecondes_);
+			chrono_ = formatHeure + ":" + formatMinute + ":" + formatSeconde;
+			//cout << chrono_ << endl;
+		}
 	}
-	if (compteurMinutes_ == 60)
-	{
-		compteurMinutes_ = 0;
-		compteurHeures_++;
-	}
-	if (compteurHeures_ == 24)
-		compteurHeures_ = 0;
-	//test afficher a la console
-	if (compteurSecondes_ != AncienSecondes_)
-	{
-		//cout << compteurHeures_ << ":" << compteurMinutes_ << ":" << compteurSecondes_ << endl;
-		std::string formatHeure = to_string(compteurHeures_);
-		std::string formatMinute = to_string(compteurMinutes_);
-		std::string formatSeconde = to_string(compteurSecondes_);
-		chrono_ = formatHeure + ":" + formatMinute + ":" + formatSeconde;
-		//cout << chrono_ << endl;
-	}
+	//TODO -- mettre le compteur en pause quand on pese sur ESC
+	// idea - sauvegarder les valeurs actuelle et l'afficher tout le temps
 		
 }
 ////////////////////////////////////////////////////////////////////////
@@ -577,6 +602,21 @@ void FacadeModele::activerCompteur(float temps)
 std::string FacadeModele::getChrono()
 {
 	return chrono_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::mettreCompteurEnPause(bool deactiver)
+/// @ Author : Ali
+/// param[in] : bool deactiver
+///				true -> compteur en pause				
+/// Cette fonction permet de mettre le compteur en pause
+/// utilise lorsque on pese sur ESC dans mode partie
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::mettreCompteurEnPause(bool deactiver)
+{
+	compteurEnPause_ = deactiver;
 }
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -639,9 +679,6 @@ void FacadeModele::animer(float temps)
 	//Livrable3
 	// demarer le compteur 
 	activerCompteur(temps);
-
-	
-
 }
 
 
@@ -788,7 +825,7 @@ void FacadeModele::effacerObjet()
 void FacadeModele::deplacerObjet(double x, double y, double angle, double scale)
 {
 	glm::dvec3 NouvPos{x, y, 0.f}; //la nouvelle position a assigner
-	double nvAngle= utilitaire::DEG_TO_RAD(angle); //conversion degre en rad 
+	double nvAngle= utilitaire::DEG_TO_RAD(angle); //conversion degre en rad
 	arbre_->deplacerObjet(NouvPos, nvAngle, scale);
 
 }

@@ -18,6 +18,7 @@
 #include "../VisiteurMiseEchelle.h"
 #include "../VisiteurRotation.h"
 #include "../VisiteurSelection.h"
+#include "../VisiteurDansLaTable.h"
 
 #include "Couleurs.h"
 
@@ -72,7 +73,7 @@ ArbreRenduINF2990::ArbreRenduINF2990()
 	ajouterUsine(NOM_PORTAIL, new UsineNoeud<NoeudPortail>{ NOM_PORTAIL, std::string{ "media/portail.obj" } });
 	ajouterUsine(NOM_MURET, new UsineNoeud<NoeudMuret>{ NOM_MURET, std::string{ "media/muret.obj" } });
 	ajouterUsine(NOM_RONDELLE, new UsineNoeud<NoeudRondelle>{ NOM_RONDELLE, std::string{ "media/rondelle.obj" } });
-	ajouterUsine(NOM_TABLE, new UsineNoeud<NoeudTable>{ NOM_TABLE, std::string{ "" } });
+	ajouterUsine(NOM_TABLE, new UsineNoeud<NoeudTable>{ NOM_TABLE, std::string{ "media/table.obj" } });
 	ajouterUsine(NOM_POINTCONTROLE, new UsineNoeud<NoeudPointControle>{ NOM_POINTCONTROLE, std::string{ "" } });
 	ajouterUsine(NOM_MAILLET, new UsineNoeud<NoeudMaillet>{ NOM_MAILLET, std::string{ "media/maillet.obj" } });
 
@@ -379,38 +380,30 @@ double ArbreRenduINF2990::getPosiY()
 ////////////////////////////////////////////////////////////////////////
 void ArbreRenduINF2990::deplacerObjet(glm::dvec3 posDep, double angle, double scale)
 {
-
+	
 	for (NoeudAbstrait * enfant : enfants_)
 	{
-		if (enfant->estSelectionne())
+		if (enfant->estSelectionne()) // Normalement, un seul enfant est sélectionné
 		{
 			//verifier si l'objet sort pas de la table 
 
 			glm::dvec3 posTemp = enfant->obtenirPositionRelative();
+			double angleTemp = enfant->getAngle();
+			glm::dvec3 scaleTemp = enfant->getScale();
+			glm::dvec3 scaleVec = scaleTemp;
+			scaleVec.x = scale;
+			scaleVec.y = scale;
 
-			if (this->getTable()->dansTable(posDep))
-			{
-				enfant->assignerPositionRelative(posDep);
-				this->estInterieur = true;
-			}
-			else
-			{
-				enfant->assignerPositionRelative(posTemp);
-				this->estInterieur = false ;
-
-			}
-
-			//setter l'angle
+			enfant->assignerPositionRelative(posDep);
 			enfant->setAngle(angle);
+			enfant->setScale(scaleVec);
 
-			//fixer des limites pour scale
-			if (scale > 8) {
-				scale = 8;
+			VisiteurDansLaTable dansLaTable(this->estInterieur);
+			if (!this->estInterieur) {
+				enfant->assignerPositionRelative(posTemp);
+				enfant->setAngle(angleTemp);
+				enfant->setScale(scaleTemp);
 			}
-			if (scale < 0.5) {
-				scale = 0.5;
-			}
-			enfant->setScale(glm::dvec3(scale, scale, 1.0));
 		}
 
 	}

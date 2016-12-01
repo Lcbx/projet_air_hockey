@@ -51,10 +51,8 @@ namespace InterfaceGraphique
         public int nbButsJoueur2 = 0;
         //Livrable 3 
         public bool partieGagnee = false;
-
-
-        int ancienPosX;
-        int ancienPosY;
+        // pour regler le bug de l'affichage du textFTGL qd on charge une zone ds edition
+        public bool ouvrirMenuTable_ = false;
 
 
         public enum States {Edition = 0, Test, PartieRapide, Tournoi };
@@ -72,7 +70,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         public Edition()
         {
-            this.KeyPreview = true;
+            //this.KeyPreview = true;
             (this as Control).KeyDown += new KeyEventHandler(keyDownHandler);
             (this as Control).KeyUp += new KeyEventHandler(keyUpHandler);
             (this as Control).KeyDown += new KeyEventHandler(toucheManuel);
@@ -104,11 +102,6 @@ namespace InterfaceGraphique
 
             //masquer bouton mode edition quand on est dans le mode edition
             modeEditionToolStripMenuItem.Visible = false;
-
-
-           ancienPosX = panel1.Location.X;
-           ancienPosY = panel1.Location.Y;
-
 
             this.Focus();
         }
@@ -149,16 +142,21 @@ namespace InterfaceGraphique
         {
             try
             {   
-                this.Invoke((MethodInvoker)delegate 
-                {  
+                this.Invoke((MethodInvoker)delegate
+                {
                     FonctionsNatives.animer(tempsInterAffichage);
                     FonctionsNatives.dessinerOpenGL();
 
-                   /// Ali
-                   /// On demare la partie rapide
-                   // pour le bug de yesno
+                    /// Ali
+                    /// On demare la partie rapide
+                    // pour le bug de yesno
                     if (partieGagnee)
+                    {
                         FonctionsNatives.initialiserCompteur();
+                        FonctionsNatives.setScoreCourant(nbButsJoueur1, 1);
+                        FonctionsNatives.setScoreCourant(nbButsJoueur2, 2);
+
+                    }
 
                     if (estEnModePartie)
                         DemarrerPartie();
@@ -691,9 +689,8 @@ namespace InterfaceGraphique
             //Livrable 3 
             // besoin pour effacer l'affichage FTGL
             FonctionsNatives.setPartieRapide(false);
-            //FonctionsNatives.setScoreCourant(0, 1);
-            //FonctionsNatives.setScoreCourant(0, 2);
-            //FonctionsNatives.initialiserFTGL();
+            ouvrirMenuTable_ = false;
+            
             this.Hide();
             FonctionsNatives.jouerSonModeJeu(false);
             //this.Close();
@@ -1321,10 +1318,11 @@ namespace InterfaceGraphique
             else
             {
                 FonctionsNatives.configurerObjet(myX, myY, myAngle, myScale);
-                if (FonctionsNatives.objetEstDansLaTable() == false)
-                {
-                    MessageBox.Show("Les coordonnées saisies sont à l'éxterieur de la table ", "Position invalide!",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (FonctionsNatives.objetEstDansLaTable() == false) {
+                    txtBoxErreurProprietes.Visible = true;
+                } else {
+                    txtBoxErreurProprietes.Visible = false;
+                    this.mettreAjourPos();
                 }
             }
         }
@@ -1472,9 +1470,12 @@ namespace InterfaceGraphique
         private void ouvrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fenetreChargement_.Show();
+            // bug affichage textopengl qd on ouvre une table
+            ouvrirMenuTable_ = true;
+            FonctionsNatives.setPartieRapide(false);
         }
 
-        private string currentFile_;
+        private string currentFile_ = String.Empty;
         public static string SAVE_FILEPATH = "zones";
         public static string DEFAULT_FILENAME = "defaut";
 
@@ -1533,9 +1534,6 @@ namespace InterfaceGraphique
             if (mode == true)
             {
 
-                panel1.Location = new Point (0,0);
-                panel1.Dock = DockStyle.Fill;
-
                 this.Text = "Mode Test";
                 estEnModeTest = true;
                 estEnModePartie = false;
@@ -1582,7 +1580,7 @@ namespace InterfaceGraphique
                 menuPrincipalToolStripMenuItem.Visible = true;
                 vuesToolStripMenuItem.Visible = true;
 
-                splitContainer1.Hide();
+                pnlProperty.Hide();
                 //panel score
                 // splitContainer1.Panel1.Hide();
                 //splitContainer1.Panel2.Hide();
@@ -1593,8 +1591,6 @@ namespace InterfaceGraphique
             else
             {
                 if (estEnModePartie) { FonctionsNatives.initialiserScene(); }
-
-                panel1.Location = new Point(ancienPosX, ancienPosY);
 
                 this.Text = "Mode Edition";
                 this.changerMode(Etats.SELECTION);
@@ -1634,7 +1630,7 @@ namespace InterfaceGraphique
                 modeEditionToolStripMenuItem.Visible = false;
 
                 //panel score afficher - panel proprietes desactiver
-                splitContainer1.Show();
+                pnlProperty.Show();
 
 
             }
@@ -1661,12 +1657,17 @@ namespace InterfaceGraphique
                     estEnPause = true;
                     menuStrip1.Show();
                     FonctionsNatives.mettrePauseMusique(false);
+                    //compteur en pause
+                    FonctionsNatives.mettreCompteurEnPause(true);
                 }
                 else
                 {     //si non le masque et on retourne dans le jeu
                     estEnPause = false;
                     menuStrip1.Hide();
                     FonctionsNatives.mettrePauseMusique(true);
+                    //compteur marche de nouveau
+                    FonctionsNatives.mettreCompteurEnPause(false);
+
                 }
             }
         }
@@ -1731,9 +1732,6 @@ namespace InterfaceGraphique
             {
                 this.Text = "Partie Rapide";
 
-                panel1.Location = new Point(0, 0);
-                panel1.Dock = DockStyle.Fill;
-
                 estEnModePartie = true;
                 estEnModeTest = false;
                
@@ -1748,7 +1746,8 @@ namespace InterfaceGraphique
                 FonctionsNatives.effacerPointControle();
 
                 estEnPause = false;
-
+                // compteur marche
+                FonctionsNatives.mettreCompteurEnPause(false);
 
                 toolStrip1.Hide();
                 menuStrip1.Hide();
@@ -1773,7 +1772,7 @@ namespace InterfaceGraphique
                 vuesToolStripMenuItem.Visible = true;
 
                 //panel parametres
-                splitContainer1.Hide();
+                pnlProperty.Hide();
 
 
                 //jouer musique
@@ -1895,7 +1894,7 @@ namespace InterfaceGraphique
                 if ((nbButsJoueur1 == nbButsMax) || (nbButsJoueur2 == nbButsMax))
                 {
                     partieGagnee = true;
-
+                    
                     DialogResult dialog = MessageBox.Show("La partie est finie, vous voulez rejouer encore ? Yes pour Rejouer, No pour retourner au menu Principal",
                             "Rejouer ou retour au menu principal", MessageBoxButtons.YesNo);
                    
@@ -1918,6 +1917,8 @@ namespace InterfaceGraphique
 
                         FonctionsNatives.jouerSonModeJeu(false);
                         estEnModePartie = false;
+                        // pour regler le bug quand mode partie -> No -> edition -> textFTGL s'affiche
+                        FonctionsNatives.setPartieRapide(false);
                         this.Hide();
                         menuPrincipal_.Show();
                         FonctionsNatives.initialiserScene();
@@ -2155,7 +2156,13 @@ namespace InterfaceGraphique
         // remettre a zero le compteur
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void initialiserCompteur();
-        
+        // modifier les valeurs du compteur
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void setCompteur(int heure, int minute, int seconde);
+        // mettre en pause le compteur
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void mettreCompteurEnPause(bool deactiver);
+
         /// Ali
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]

@@ -42,6 +42,10 @@ public:
 	virtual void visiter(NoeudMaillet* noeud);
 	virtual void visiter(NoeudPortail* noeud);
 
+	/// @fn bool reussi()
+	/// @brief Permet de vérifier si l'opération a pu être effectuée ou non
+	/// @return Vrai si l'opération s'est produite, faux sinon
+	bool reussi() { return effectuer_; }
 };
 #endif
 

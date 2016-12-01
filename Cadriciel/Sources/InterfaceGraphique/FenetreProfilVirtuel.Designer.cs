@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FenetreProfilVirtuel));
             this.chargerProfil = new System.Windows.Forms.Button();
             this.listDeProfils = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -80,6 +81,7 @@
             this.Controls.Add(this.profil);
             this.Controls.Add(this.chargerProfil);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FenetreProfilVirtuel";

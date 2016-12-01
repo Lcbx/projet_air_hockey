@@ -19,6 +19,7 @@
 
 class VisiteurMiseEchelle : public Visiteur
 {
+	bool effectuer = true;
 public:
 
 	VisiteurMiseEchelle();
@@ -40,6 +41,10 @@ public:
 
 	map<NoeudAbstrait*, glm::vec3> facteursOriginaux_;
 
+	/// @fn bool reussi()
+	/// @brief Permet de vérifier si l'opération a pu être effectuée ou non
+	/// @return Vrai si l'opération s'est produite, faux sinon
+	bool reussi() { return effectuer; }
 };
 #endif
 

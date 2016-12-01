@@ -150,7 +150,7 @@ public:
 	/// @fn std::vector<NoeudAbstrait*> obtenir_selection()
 	///
 	/// Permet d'obtenir la liste des noeuds sélectionnés
-	///
+	/// TODO: Refactoriser, car change les données lors de la visite
 	/// @return Un vecteur des noeuds sélectionnés
 	///
 	////////////////////////////////////////////////////////////////////////
@@ -159,12 +159,6 @@ public:
 		FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->accepter(this);
 		return selectionnes;
 	};
-
-
-
-
-
-
 };
 
 ///////////////////////////////////////////////////////////////////////////
