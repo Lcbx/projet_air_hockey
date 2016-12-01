@@ -227,14 +227,25 @@ public:
 	bool setNomJoueurCourant(std::string nom,int index);
 	int getScoreCourant(int index);
 	bool setScoreCourant(int score,int index);
-
-
+	void activerCompteur(float temps);
+	void initialiserCompteur();
+	void initialiserTextFTGL();
+	std::string getChrono();
+	void setChrono(int heure, int minute, int seconde);
+	void mettreCompteurEnPause(bool deactiver);
 	/// Ali
 	/// Renvoie la constante contenant le nom du fichier de configuration
 	//std::string getConfigFile();
 
 	void jouerSonModeJeu(bool mode);
 	void MettrePauseSonModeJeu(bool pause);
+
+	/// Choisi la vue ortho
+	void setVueOrtho();
+	/// Choisi la vue orbite
+	void setVueOrbite();
+	/// Renvoie true si la vue est orthogonale, false si la vue est orbite
+	bool isVueOrtho();
 
 private:
 
@@ -265,6 +276,11 @@ private:
 
    /// Vue courante de la scène.
    vue::Vue* vue_{ nullptr };
+   /// Vue courante de la scène.
+   vue::Vue* vueOrtho_{ nullptr };
+   /// Vue courante de la scène.
+   vue::Vue* vueOrbite_{ nullptr };
+
    /// Arbre de rendu contenant les différents objets de la scène.
    ArbreRenduINF2990* arbre_{ nullptr };
 
@@ -310,9 +326,9 @@ private:
    int compteurMinutes_{ 0 };
    int compteurHeures_{ 0 };
    int AncienSecondes_ { 0 };
-   int AncienMinutes_{ 0 };
-   int AncienHeures_{ 0 };
    float temps_ { 0. };
+   std::string chrono_;
+   bool compteurEnPause_ { false };
 
    /// Ali
 

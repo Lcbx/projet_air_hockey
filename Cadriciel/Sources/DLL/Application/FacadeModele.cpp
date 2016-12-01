@@ -25,6 +25,7 @@
 #include "FacadeModele.h"
 
 #include "VueOrtho.h"
+#include "VueOrbite.h"
 #include "Camera.h"
 #include "Projection.h"
 
@@ -79,8 +80,10 @@ const std::string FacadeModele::FICHIER_ZONEDEFAUT{ "ZoneDefaut.xml" };
 ////////////////////////////////////////////////////////////////////////
 FacadeModele* FacadeModele::obtenirInstance()
 {
-	if (instance_ == nullptr)
+	if (instance_ == nullptr) {
 		instance_ = new FacadeModele;
+		instance_->tournoi_ = nullptr;
+	}
 
 	return instance_;
 }
@@ -174,16 +177,29 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 	arbre_->initialiser();
 	
 	// On crée une vue par défaut.
-	vue_ = new vue::VueOrtho{
-		vue::Camera{ 
-			glm::dvec3(0, 0, 200), glm::dvec3(0, 0, 0),
-			glm::dvec3(0, 1, 0),   glm::dvec3(0, 1, 0)},
-		vue::ProjectionOrtho{ 
-				606, 437,
-				1, 1000, 5, 0.5, 0.25,
-				200, 200}
+
+	vueOrtho_ = new vue::VueOrtho{
+		vue::Camera{
+		glm::dvec3(0, 0, 200), glm::dvec3(0, 0, 0),
+		glm::dvec3(0, 1, 0),   glm::dvec3(0, 1, 0) },
+		vue::ProjectionOrtho{
+		606, 437,
+		1, 1000, 5, 0.5, 0.25,
+		200, 200 }
 	};
 
+	vueOrbite_ = new vue::VueOrbite{
+		vue::Camera{ 
+			glm::dvec3(0, 10, 0), glm::dvec3(0, 0, 0),
+			glm::dvec3(0, 0, 1),   glm::dvec3(0, 0, 1)},
+		vue::ProjectionOrbite{ 
+				606, 437,
+				-200, 1000, 5, 0.5, 0.25,
+				200, 200}
+	};
+	vueOrbite_->rotaterXY(0, 100);
+
+	vue_ = vueOrtho_;
 }
 
 
@@ -402,11 +418,8 @@ void FacadeModele::afficher() const
 	// Afficher la scène
 	afficherBase();
 
-	// Compte de l'affichage
-	utilitaire::CompteurAffichage::obtenirInstance()->signalerAffichage();
-
 	// creation d'une instance TextOpenGL
-	if (partieRapide_)	// TODO -- set partie rapide a false qd on sort de la partie rapide
+	if (partieRapide_)	
 	{
 		TextOpenGL text;
 		text.afficher();
@@ -453,6 +466,138 @@ void FacadeModele::reinitialiser()
 	arbre_->initialiser();
 }
 
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setChrono(int heure, int minute, int seconde)
+/// @ Author : Ali
+/// Cette fonction permet de modifier les valeurs du chronometre affichees
+/// dans la partie rapide 
+/// @param[in] int heure, minute,seconde
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setChrono(int heure, int minute, int seconde)
+{
+	compteurHeures_ = heure;
+	compteurMinutes_ = minute;
+	compteurSecondes_ = seconde;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::activerCompteur(float temps)
+/// @ Author : Ali
+/// Cette fonction permet d'activer le compteur qui sera afficher 
+/// dans la partie rapide 
+/// @param[in] temps : Intervalle de temps sur lequel effectuer le calcul.
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::activerCompteur(float temps)
+{
+	if (!compteurEnPause_)
+	{
+		//incrementer le compteur a chaque instant
+		AncienSecondes_ = compteurSecondes_;
+		temps_ = temps_ + temps;
+		compteurSecondes_ = (int)temps_;
+
+		// corriger les valeurs 
+		if (compteurSecondes_ == 60)
+		{
+			compteurSecondes_ = 0;
+			temps_ = 0;
+			compteurMinutes_++;
+		}
+		if (compteurMinutes_ == 60)
+		{
+			compteurMinutes_ = 0;
+			compteurHeures_++;
+		}
+		if (compteurHeures_ == 24)
+			compteurHeures_ = 0;
+		//test afficher a la console
+		if (compteurSecondes_ != AncienSecondes_)
+		{
+			//cout << compteurHeures_ << ":" << compteurMinutes_ << ":" << compteurSecondes_ << endl;
+			std::string formatHeure = to_string(compteurHeures_);
+			std::string formatMinute = to_string(compteurMinutes_);
+			std::string formatSeconde = to_string(compteurSecondes_);
+			chrono_ = formatHeure + ":" + formatMinute + ":" + formatSeconde;
+			//cout << chrono_ << endl;
+		}
+	}
+	//TODO -- mettre le compteur en pause quand on pese sur ESC
+	// idea - sauvegarder les valeurs actuelle et l'afficher tout le temps
+		
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn std::string FacadeModele::getChrono()
+/// @ Author : Ali
+/// Cette fonction permet de recuper la chaine de caractere du temps 
+/// qui sera affichee en FTGL lors d'une partie
+///
+/// @return std::string
+///
+////////////////////////////////////////////////////////////////////////
+std::string FacadeModele::getChrono()
+{
+	return chrono_;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::mettreCompteurEnPause(bool deactiver)
+/// @ Author : Ali
+/// param[in] : bool deactiver
+///				true -> compteur en pause				
+/// Cette fonction permet de mettre le compteur en pause
+/// utilise lorsque on pese sur ESC dans mode partie
+/// @return rien
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::mettreCompteurEnPause(bool deactiver)
+{
+	compteurEnPause_ = deactiver;
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::initialiserCompteur(float temps)
+/// @ Author : Ali
+/// Cette fonction permet d'initialiser le compteur a zero 
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::initialiserCompteur ()
+{
+	compteurSecondes_ = 0;
+	compteurMinutes_ = 0;
+	compteurHeures_ = 0;
+	AncienSecondes_ = 0;
+	temps_ = 0.;
+	chrono_ = "0:0:0";
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::initialiserTextFTGL()
+/// @ Author : Ali
+/// Cette fonction permet d'initialiser le nom des joueurs, le score
+/// et le compteur 
+///
+/// @return Aucune.
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::initialiserTextFTGL()
+{
+	nomJoueurCourant1_ = "Player1";
+	nomJoueurCourant2_ = "Player2";
+	scoreJoueurCourant1_ = scoreJoueurCourant2_ = 0;
+	initialiserCompteur();
+}
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -474,14 +619,10 @@ void FacadeModele::animer(float temps)
 
 	// Mise à jour de la vue.
 	vue_->animer(temps);
-	//incrementer le compteur a chaque instant
-	AncienSecondes_ = compteurSecondes_;
-	temps_ = temps_ + temps;
-	compteurSecondes_ = (int)temps_;
-	if (compteurSecondes_ != AncienSecondes_)
-		cout << compteurSecondes_ << endl;
 
-
+	//Livrable3
+	// demarer le compteur 
+	activerCompteur(temps);
 }
 
 
@@ -628,7 +769,7 @@ void FacadeModele::effacerObjet()
 void FacadeModele::deplacerObjet(double x, double y, double angle, double scale)
 {
 	glm::dvec3 NouvPos{x, y, 0.f}; //la nouvelle position a assigner
-	double nvAngle= utilitaire::DEG_TO_RAD(angle); //conversion degre en rad 
+	double nvAngle= utilitaire::DEG_TO_RAD(angle); //conversion degre en rad
 	arbre_->deplacerObjet(NouvPos, nvAngle, scale);
 
 }
@@ -1217,14 +1358,14 @@ bool FacadeModele::setNomJoueurCourant(std::string nom, int index)
 {
 	if (index == 1)
 	{
-		nomJoueurCourant1_.assign(nom);
+		nomJoueurCourant1_ = nom;
 		return true;
 	}
 		
 	else
 		if (index == 2)
 		{
-			nomJoueurCourant2_.assign(nom);
+			nomJoueurCourant2_ = nom;
 			return true;
 		}
 		else
@@ -1369,4 +1510,51 @@ void FacadeModele::jouerSonModeJeu(bool mode)
 void FacadeModele::MettrePauseSonModeJeu(bool pause)
 {
 	this->obtenirArbreRenduINF2990()->player->pauseSon(pause);
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setVueOrtho()
+///
+/// Author : Arthur
+/// @Brief :  Cette fonction permet d'utiliser la vue orthogonale
+///
+/// @return void
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setVueOrtho()
+{
+	vue_ = vueOrtho_;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void FacadeModele::setVueOrbite()
+///
+/// Author : Arthur
+/// @Brief :  Cette fonction permet d'utiliser la vue orbite
+///
+/// @return void
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::setVueOrbite()
+{
+	vue_ = vueOrbite_;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool FacadeModele::isVueOrtho()
+///
+/// Author : Arthur
+/// @Brief :  Cette fonction revoie un booleen determinant le type
+///               de vue utilisé
+///
+/// @return: true si la vue est orthogonale
+///          false si la vue est orbite
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::isVueOrtho()
+{
+	return (vue_ == vueOrtho_);
 }

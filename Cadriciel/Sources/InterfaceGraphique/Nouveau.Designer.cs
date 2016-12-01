@@ -28,51 +28,53 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Nouveau));
+            this.btnNouveau = new System.Windows.Forms.Button();
+            this.btnEnregistrer = new System.Windows.Forms.Button();
+            this.btnAnnuler = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // button1
+            // btnNouveau
             // 
-            this.button1.Location = new System.Drawing.Point(12, 99);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 27);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Nouveau";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnNouveau.Location = new System.Drawing.Point(119, 99);
+            this.btnNouveau.Name = "btnNouveau";
+            this.btnNouveau.Size = new System.Drawing.Size(104, 27);
+            this.btnNouveau.TabIndex = 0;
+            this.btnNouveau.Text = "Ne pas enregistrer";
+            this.btnNouveau.UseVisualStyleBackColor = true;
+            this.btnNouveau.Click += new System.EventHandler(this.nouvelleTable);
             // 
-            // button2
+            // btnEnregistrer
             // 
-            this.button2.Location = new System.Drawing.Point(123, 99);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(93, 27);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Enregistrer-sous";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnEnregistrer.Location = new System.Drawing.Point(12, 99);
+            this.btnEnregistrer.Name = "btnEnregistrer";
+            this.btnEnregistrer.Size = new System.Drawing.Size(93, 27);
+            this.btnEnregistrer.TabIndex = 1;
+            this.btnEnregistrer.Text = "Enregistrer";
+            this.btnEnregistrer.UseVisualStyleBackColor = true;
+            this.btnEnregistrer.Click += new System.EventHandler(this.enregistrerSous);
             // 
-            // button3
+            // btnAnnuler
             // 
-            this.button3.Location = new System.Drawing.Point(235, 99);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(88, 27);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Annuler";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnAnnuler.Location = new System.Drawing.Point(235, 99);
+            this.btnAnnuler.Name = "btnAnnuler";
+            this.btnAnnuler.Size = new System.Drawing.Size(88, 27);
+            this.btnAnnuler.TabIndex = 2;
+            this.btnAnnuler.Text = "Annuler";
+            this.btnAnnuler.UseVisualStyleBackColor = true;
+            this.btnAnnuler.Click += new System.EventHandler(this.annuler);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(21, 41);
+            this.label1.Location = new System.Drawing.Point(33, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(292, 17);
+            this.label1.Size = new System.Drawing.Size(274, 34);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Est-ce que vous voulez enregister le fichier ?";
+            this.label1.Text = "Voulez-vous enregistrer les changements \r\neffectués à table actuelle ?";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Nouveau
             // 
@@ -80,11 +82,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(335, 138);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnAnnuler);
+            this.Controls.Add(this.btnEnregistrer);
+            this.Controls.Add(this.btnNouveau);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Nouveau";
-            this.Text = "Nouveau";
+            this.Text = "Nouvelle table";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -92,9 +95,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnNouveau;
+        private System.Windows.Forms.Button btnEnregistrer;
+        private System.Windows.Forms.Button btnAnnuler;
         private System.Windows.Forms.Label label1;
     }
 }

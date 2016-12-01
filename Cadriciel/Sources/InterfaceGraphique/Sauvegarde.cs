@@ -15,7 +15,14 @@ namespace InterfaceGraphique
     {
         string[] files;
 
-        Edition edition_;
+        private Edition edition_;
+
+        public string Filename {
+            get { return edition_.getCurrentFile(); }
+            set { edition_.setCurrentFile(value); }
+        }
+
+        public bool WipeAfter = false;
 
         ///////////////////////////////////////////////////////////////////////
         /// @fn public Sauvegarde(Edition edition) 
@@ -33,6 +40,7 @@ namespace InterfaceGraphique
             InitializeComponent();
             this.MinimizeBox = false;
             this.MaximizeBox = false;
+            this.TopMost = true;
 
             edition_ = edition;
         }
@@ -51,6 +59,7 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         private void Sauvegarde_Load(object sender, EventArgs e)
         {
+
             if (!Directory.Exists(Edition.SAVE_FILEPATH))
                 Directory.CreateDirectory(Edition.SAVE_FILEPATH);
 
@@ -82,6 +91,14 @@ namespace InterfaceGraphique
         private void button1_Click(object sender, EventArgs e) {
             edition_.setCurrentFile(filename.Text);
             this.saveLastFile();
+
+            if (WipeAfter) {
+                FonctionsNatives.initialiserScene();
+                this.Filename = "";
+            }
+
+            WipeAfter = false;
+
             this.Hide();
         }
 
@@ -123,7 +140,8 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            filename.Text = files[listBox1.SelectedIndex];
+            if(listBox1.SelectedIndex >= 0)
+                filename.Text = files[listBox1.SelectedIndex];
         }
 
         ///////////////////////////////////////////////////////////////////////
@@ -139,6 +157,7 @@ namespace InterfaceGraphique
         /////////////////////////////////////////////////////////////////////////////////////////
         private void Sauvegarde_FormClosing(object sender, FormClosingEventArgs e)
         {
+            WipeAfter = false;
             e.Cancel = true;
             this.Hide();
         }

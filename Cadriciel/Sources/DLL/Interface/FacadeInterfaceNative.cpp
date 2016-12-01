@@ -1073,6 +1073,57 @@ extern "C"
 	}
 
 	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void initialiserFTGL()
+	/// Author : Ali
+	/// @brief : Cette fonction permet de remettre le score,le nom des 
+	///			joueurs ainsi que le compteur a zero.
+	///			dans l'affichage du Text en FTGL
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void initialiserFTGL()
+	{
+		FacadeModele::obtenirInstance()->initialiserTextFTGL();
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void initialiserCompteur()
+	/// Author : Ali
+	/// @brief : Cette fonction permet de remettre a zero le compteur
+	///			dans l'affichage du Text en FTGL
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void initialiserCompteur()
+	{
+		FacadeModele::obtenirInstance()->initialiserCompteur();
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void setCompteur(int heure, int minute, int seconde) 
+	/// Author : Ali
+	/// @brief : Cette fonction permet de modifier la valeur du compteur FTGL
+	/// param[in] : int heure, minute, seconde
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void setCompteur(int heure, int minute, int seconde) 
+	{
+		FacadeModele::obtenirInstance()->setChrono(heure, minute, seconde);
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void mettreCompteurEnPause(bool deactiver)
+	/// Author : Ali
+	/// @ param[in] : bool deactiver : true -> compteur en pause
+	/// @brief : Cette fonction permet de mettre le compteur en pause 
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void mettreCompteurEnPause(bool deactiver)
+	{
+		FacadeModele::obtenirInstance()->mettreCompteurEnPause(deactiver);
+	}
+	////////////////////////////////////////////////////////////////////////
 	/// @fn 		__declspec(dllexport) void sauvegarderTouches();
 	/// Author : Arthur
 	/// Cette fonction permet de modifier et enregistrer les touches de
@@ -1428,6 +1479,19 @@ extern "C"
 			return false;
 		}
 	}
+	
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) void __cdecl setVueOrtho()
+	/// Author : Arthur
+	/// Definie la vue orthogonale comme vue à utiliser
+	///
+	/// @return aucun
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl setVueOrtho()
+	{
+		FacadeModele::obtenirInstance()->setVueOrtho();
+	}
 
 	////////////////////////////////////////////////////////////////////////
 	/// @fn 		__declspec(dllexport) void __cdecl jouerSonModeJeu(bool mode)
@@ -1454,5 +1518,18 @@ extern "C"
 	{
 		FacadeModele::obtenirInstance()->MettrePauseSonModeJeu(pause);
 	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn __declspec(dllexport) void __cdecl setVueOrbite()
+	/// Author : Arthur
+	/// Definie la vue orbite comme vue à utiliser
+	///
+	/// @return aucun
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl setVueOrbite()
+	{
+		FacadeModele::obtenirInstance()->setVueOrbite();
+	}
+	
 }
 

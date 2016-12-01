@@ -71,12 +71,18 @@ namespace vue {
 	private:
 		/// La position de la caméra.
 		glm::dvec3 position_;
+		/// La position de départ de la caméra.
+		glm::dvec3 positionDef_;
 		/// La position du point visé par la caméra.
 		glm::dvec3 pointVise_;
 		/// La direction du haut de la caméra.
 		glm::dvec3 directionHaut_;
 		/// La direction du haut du monde de la caméra.
 		const glm::dvec3 directionHautMonde_;
+		/// L'angle d'elevation actuel
+		double _angleElev;
+		/// L'angle de rotation actuel
+		double _angleRota;
 
 	};
 

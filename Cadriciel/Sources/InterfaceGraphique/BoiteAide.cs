@@ -25,9 +25,6 @@ namespace InterfaceGraphique
         public BoiteAide()
         {
             InitializeComponent();
-            richTextBox1.ReadOnly = true;
         }
-
-       
     }
 }

@@ -107,8 +107,8 @@ math::Droite3D NoeudBonus::obtenirDroiteDirectrice() {
 	double rayon = max(abs(box.coinMax.x - box.coinMin.x), abs(box.coinMin.y - box.coinMax.y)) / 2;
 
 	glm::dvec3 scale = this->getScale();
-	glm::dvec3 left{ -(rayon + scale.x), 0, 0 };
-	glm::dvec3 right{ (rayon + scale.x), 0, 0 };
+	glm::dvec3 left{ -(rayon * scale.x), 0, 0 };
+	glm::dvec3 right{ (rayon * scale.x), 0, 0 };
 
 	double angle = this->getAngle();
 

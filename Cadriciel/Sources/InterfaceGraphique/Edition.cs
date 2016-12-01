@@ -16,11 +16,12 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using InterfaceGraphique.Utility;
 
  
 namespace InterfaceGraphique
 {
-    public partial class Edition : Form   
+    public partial class Edition : Form, INotifyPropertyChanged
     {
         private static MenuPrincipal menuPrincipal_;  
         //private static double friction_;
@@ -47,16 +48,168 @@ namespace InterfaceGraphique
 
         // Ali
         // mode partie rapide
-        
         public int nbButsJoueur1 = 0;
         public int nbButsJoueur2 = 0;
-
-        int ancienPosX;
-        int ancienPosY;
-
+        //Livrable 3 
+        public bool partieGagnee = false;
+        // pour regler le bug de l'affichage du textFTGL qd on charge une zone ds edition
+        public bool ouvrirMenuTable_ = false;
 
         public enum States {Edition = 0, Test, PartieRapide, Tournoi };
         public States state = States.Edition;
+
+
+        /////
+        ///// Section propriétés pour le databinding
+        /////
+        /// @brief Position en X pour l'objet sélectionné
+        private double? PositionX_ = null;
+        public double? PositionX {
+            get { if (PositionX_ == null) return 0; return PositionX_; }
+            set { SetField(ref PositionX_, value, "PositionX"); }
+        }
+
+        /// @brief Position en X pour l'objet sélectionné
+        private double? PositionY_ = null;
+        public double? PositionY {
+            get { if (PositionY_ == null) return 0; return PositionY_; }
+            set { SetField(ref PositionY_, value, "PositionY"); }
+        }
+
+        /// @brief Angle de l'objet sélectionné
+        private double? Angle_ = null;
+        public double? Angle {
+            get { if (Angle_ == null) return 0; return Angle_; }
+            set { SetField(ref Angle_, value, "Angle"); }
+        }
+
+        /// @brief Echelle de l'objet sélectionné
+        private double? Echelle_ = null;
+        public double? Echelle {
+            get { if (Echelle_ == null) return 0.5; return Echelle_; }
+            set { SetField(ref Echelle_, value, "Echelle"); }
+        }
+
+        /// @fn bool propertiesSet()
+        /// @brief Permet de savoir si propriétés ont été assignées (non-nulles)
+        /// Permet d'éviter un problème avec le databinding et l'évènement value changed
+        /// @return true si toutes les propriétées ne sont pas nulles, false autrement
+        bool propertiesSet() {
+            return !(Echelle_ == null || Angle_ == null || PositionY_ == null || PositionX_ == null);
+        }
+
+        /// @class ErrorSet
+        /// @brief Permet d'afficher des messages d'erreur personnalisés
+        private class PropertiesErrorSet {
+            public bool PositionX, PositionY, Angle, Echelle;
+            /// @brief Permet d'initialiser la structure
+            public PropertiesErrorSet(bool a_ = false, bool b_ = false, bool c_ = false, bool d_ = false) {
+                PositionX = a_; PositionY = b_; Angle = c_; Echelle = d_;
+            }
+
+            /// @brief Permet de remettre à faux toutes les erreurs
+            public void clear() { PositionX = false; PositionY = false; Angle = false; Echelle = false; }
+            /// @brief Permet d'obtenir la chaîne d'erreur
+            public string getError() {
+                List<string> errorsBuilder = new List<string>();
+                if (PositionX) errorsBuilder.Add("la position en x");
+                if (PositionY) errorsBuilder.Add("la position en y");
+                if (Angle) errorsBuilder.Add("l'angle");
+                if (Echelle) errorsBuilder.Add("l'échelle");
+                string str = "L'objet sort de la table, les propriétés suivantes ont été modifiées depuis la dernière position valide: ";
+                if (errorsBuilder.Count == 0)
+                    return "";
+                else if (errorsBuilder.Count == 1)
+                    return "L'objet sort de la table, la propriété suivante a été modifiée depuis la dernière position valide: " + errorsBuilder[0];
+                else if (errorsBuilder.Count == 2)
+                    return str + errorsBuilder[0] + " et " + errorsBuilder[1];
+                else if (errorsBuilder.Count == 3)
+                    return str + errorsBuilder[0] + ", " + errorsBuilder[1] + " et " + errorsBuilder[2];
+                else
+                    return str + errorsBuilder[0] + ", " + errorsBuilder[1] + ", " + errorsBuilder[2] + " et " + errorsBuilder[3];
+            }
+
+            /// @brief Permet de savoir s'il y a une erreur
+            public bool hasError() {
+                return PositionX || PositionY || Angle || Echelle;
+            }
+        }
+        PropertiesErrorSet propertiesErrorSet = new PropertiesErrorSet();
+
+        /////
+        ///// Fin section propriétés pour le databinding
+        /////
+
+        /// @brief Databinding pour les boutons de la vue
+        /// TODO : Refactoriser
+        public enum TypeVue { Unset, Orthographique, Orbite };
+        private TypeVue VueActuelle_ = TypeVue.Unset;
+        public TypeVue VueActuelle {
+            get { return VueActuelle_; }
+            set {
+                if(value != VueActuelle_) {
+                    switch (VueActuelle_) {
+                        case TypeVue.Orthographique: this.orthographiqueToolStripMenuItem.Checked = false; break;
+                        case TypeVue.Orbite:         this.orbiteToolStripMenuItem.Checked = false; break;
+                        default: break;
+                    }
+                    VueActuelle_ = value;
+                    switch (VueActuelle_) {
+                        case TypeVue.Orthographique: this.orthographiqueToolStripMenuItem.Checked = true; FonctionsNatives.setVueOrtho(); break;
+                        case TypeVue.Orbite:         this.orbiteToolStripMenuItem.Checked = true;         FonctionsNatives.setVueOrbite(); break;
+                        default: break;
+                    }
+                }
+            }
+        }
+
+        /////
+        ///// Section lumières
+        /////
+
+        /// @brief Permet de gérer le changement des lumières ambiante
+        /// TODO : Refactoriser
+        private bool LumiereAmbiante_ = false;
+        public bool LumiereAmbiante {
+            get { return LumiereAmbiante_; }
+            set {
+                if(value != LumiereAmbiante_) {
+                    FonctionsNatives.changerLumieresActives(true, false, false);
+                    LumiereAmbiante_ = value;
+                    lumiereAmbianteToolStripMenuItem.Checked = LumiereAmbiante_;
+                }
+            }
+        }
+
+        /// @brief Permet de gérer le changement des lumières ambiante
+        private bool LumiereDirectionnelle_ = false;
+        public bool LumiereDirectionnelle {
+            get { return LumiereDirectionnelle_; }
+            set {
+                if (value != LumiereDirectionnelle_)
+                {
+                    FonctionsNatives.changerLumieresActives(false, true, false);
+                    LumiereDirectionnelle_ = value;
+                    lumiereDirectionnelleToolStripMenuItem.Checked = LumiereDirectionnelle_;
+                }
+            }
+        }
+
+        /// @brief Permet de gérer le changement des lumières ambiante
+        private bool LumiereSpots_ = false;
+        public bool LumiereSpots {
+            get { return LumiereSpots_; }
+            set {
+                if (value != LumiereSpots_) {
+                    FonctionsNatives.changerLumieresActives(false, false, true);
+                    LumiereSpots_ = value;
+                    spotsLumineuxToolStripMenuItem.Checked = LumiereSpots_;
+                }
+            }
+        }
+        /////
+        ///// Fin section lumières
+        /////
 
         /////////////////////////////////////////////////////////////////////////
         ///  @fn public Edition()
@@ -70,7 +223,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         public Edition()
         {
-            this.KeyPreview = true;
+            //this.KeyPreview = true;
             (this as Control).KeyDown += new KeyEventHandler(keyDownHandler);
             (this as Control).KeyUp += new KeyEventHandler(keyUpHandler);
             (this as Control).KeyDown += new KeyEventHandler(toucheManuel);
@@ -80,14 +233,7 @@ namespace InterfaceGraphique
             InitialiserAnimation();
             supprimerToolStripMenuItem.Enabled = false;
 
-            textBox1.Enabled = false;
-            textBox2.Enabled = false;
-            textBox3.Enabled = false;
-            //  textBox4.Enabled = false;
-            numericUpDown1.Enabled = false;
-            numericUpDown1.ResetText();
-
-            button1.Enabled = false;
+            pnlProperty.Enabled = false;
 
             this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
             FonctionsNatives.redimensionnerFenetre(panel1.Width, panel1.Height);
@@ -103,10 +249,19 @@ namespace InterfaceGraphique
             //masquer bouton mode edition quand on est dans le mode edition
             modeEditionToolStripMenuItem.Visible = false;
 
+            /// Databinding pour ne plus à se soucier si une valeur a été set ou non
+            txtPositionX.DataBindings.Add("Value", this, "PositionX", true, DataSourceUpdateMode.OnPropertyChanged, 0.0);
+            txtPositionY.DataBindings.Add("Value", this, "PositionY", true, DataSourceUpdateMode.OnPropertyChanged, 0.0);
+                txtAngle.DataBindings.Add("Value", this, "Angle",     true, DataSourceUpdateMode.OnPropertyChanged, 0.0);
+              txtEchelle.DataBindings.Add("Value", this, "Echelle",   true, DataSourceUpdateMode.OnPropertyChanged, 0.0);
 
-           ancienPosX = panel1.Location.X;
-           ancienPosY = panel1.Location.Y;
+            /// Afin d'éviter que les utilisateurs ne puissent rentrer le nombre qu'ils désirent
+            txtPositionX.Minimum = decimal.MinValue; txtPositionX.Maximum = decimal.MaxValue;
+            txtPositionY.Minimum = decimal.MinValue; txtPositionY.Maximum = decimal.MaxValue;
+                txtAngle.Minimum = decimal.MinValue;     txtAngle.Maximum = decimal.MaxValue;
+              txtEchelle.Minimum = 0.5M;               txtEchelle.Maximum = decimal.MaxValue;
 
+            VueActuelle = TypeVue.Orthographique;
 
             this.Focus();
         }
@@ -147,13 +302,21 @@ namespace InterfaceGraphique
         {
             try
             {   
-                this.Invoke((MethodInvoker)delegate 
-                {  
+                this.Invoke((MethodInvoker)delegate
+                {
                     FonctionsNatives.animer(tempsInterAffichage);
                     FonctionsNatives.dessinerOpenGL();
 
                     /// Ali
                     /// On demare la partie rapide
+                    // pour le bug de yesno
+                    if (partieGagnee)
+                    {
+                        FonctionsNatives.initialiserCompteur();
+                        FonctionsNatives.setScoreCourant(nbButsJoueur1, 1);
+                        FonctionsNatives.setScoreCourant(nbButsJoueur2, 2);
+
+                    }
 
                     if (estEnModePartie)
                         DemarrerPartie();
@@ -200,6 +363,8 @@ namespace InterfaceGraphique
             if (e.KeyCode == Keys.Right) FonctionsNatives.deplacerVueXY(0.1, 0);
             if (e.KeyCode == Keys.Down) FonctionsNatives.deplacerVueXY(0, 0.1);
             if (e.KeyCode == Keys.Left) FonctionsNatives.deplacerVueXY(-0.1, 0);
+            if (e.KeyCode == Keys.NumPad1 || e.KeyCode == Keys.D1) VueActuelle = TypeVue.Orthographique;
+            if (e.KeyCode == Keys.NumPad2 || e.KeyCode == Keys.D2) VueActuelle = TypeVue.Orbite;
         }
 
 
@@ -333,90 +498,18 @@ namespace InterfaceGraphique
                     case Keys.Alt: { FonctionsNatives.toucheAlt(false); break; }
                     case Keys.Menu: { FonctionsNatives.toucheAlt(false); break; }
                     case Keys.Delete: { FonctionsNatives.supprimerObjet(); break; }
-                    case Keys.D:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButtonDeplacement.Checked = true;
-                            this.changerMode(Etats.DEPLACEMENT); break;
-                        }
-                    case Keys.S:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButtonSelection.Checked = true;
-                            this.changerMode(Etats.SELECTION); break;
-                        }
-                    case Keys.R:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButtonRotation.Checked = true;
-                            this.changerMode(Etats.ROTATION); break;
-                        }
-                    case Keys.E:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButtonMiseAEchelle.Checked = true;
-                            this.changerMode(Etats.MISEAECHELLE); break;
-                        }
-                    case Keys.C:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButtonDuplication.Checked = true;
-                            this.changerMode(Etats.DUPLICATION); break;
-                        }
-                    case Keys.Z:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButtonZoom.Checked = true;
-                            this.changerMode(Etats.LOUPE); break;
-                        }
-                    case Keys.M:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButtonMuret.Checked = true;
-                            this.changerMode(Etats.AJOUT_MUR); break;
-                        }
-                    case Keys.P:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButtonPortail.Checked = true;
-                            this.changerMode(Etats.AJOUT_PORTAIL); break;
-                        }
-                    case Keys.B:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButtonAccelerateur.Checked = true;
-                            this.changerMode(Etats.AJOUT_ACCELERATEUR); break;
-                        }
-                    case Keys.G:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButton1.Checked = true;
-                            this.changerMode(Etats.POINTSDECONTROLE); break;
-                        }
-                    case Keys.T:
-                        {
-                            //afficher fenetre test 
-                            passerModeTest(true);
-                            break;
-                        }
-                    case Keys.Escape:
-                        {
-                            FonctionsNatives.escEnfonce();
-                            break;
-                        }
-                    case Keys.J: {
-                            FonctionsNatives.changerLumieresActives(true, false, false);
-                            break;
-                        }
-                    case Keys.K: {
-                            FonctionsNatives.changerLumieresActives(false, true, false);
-                            break;
-                        }
-                    case Keys.L: {
-                            FonctionsNatives.changerLumieresActives(false, false, true);
-                            break;
-                        }
-
+                    case Keys.D: EtatSouris = Etats.DEPLACEMENT; break;
+                    case Keys.S: EtatSouris = Etats.SELECTION; break;
+                    case Keys.R: EtatSouris = Etats.ROTATION; break;
+                    case Keys.E: EtatSouris = Etats.MISEAECHELLE; break;
+                    case Keys.C: EtatSouris = Etats.DUPLICATION; break;
+                    case Keys.Z: EtatSouris = Etats.LOUPE; break;
+                    case Keys.M: EtatSouris = Etats.AJOUT_MUR; break;
+                    case Keys.P: EtatSouris = Etats.AJOUT_PORTAIL; break;
+                    case Keys.B: EtatSouris = Etats.AJOUT_ACCELERATEUR; break;
+                    case Keys.G: EtatSouris = Etats.POINTSDECONTROLE; break;
+                    case Keys.T: passerModeTest(true); break; //afficher fenetre test
+                    case Keys.Escape: FonctionsNatives.escEnfonce(); break;
                     default: break;
                 }
             }
@@ -425,6 +518,9 @@ namespace InterfaceGraphique
             {
                 switch (e.KeyCode)
                 {
+                    case Keys.J: LumiereAmbiante = !LumiereAmbiante; break;
+                    case Keys.K: LumiereDirectionnelle = !LumiereDirectionnelle; break;
+                    case Keys.L: LumiereSpots = !LumiereSpots; break;
                     case Keys.Escape:// pause
                         {
                             afficherBarreMenu(); break;
@@ -469,6 +565,9 @@ namespace InterfaceGraphique
             {
                 switch (e.KeyCode)
                 {
+                    case Keys.J: LumiereAmbiante = !LumiereAmbiante; break;
+                    case Keys.K: LumiereDirectionnelle = !LumiereDirectionnelle; break;
+                    case Keys.L: LumiereSpots = !LumiereSpots; break;
                     case Keys.Escape:// pause
                         {
                             afficherBarreMenu(); break;
@@ -497,9 +596,46 @@ namespace InterfaceGraphique
         } 
 
 
-        public enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, AJOUT_MUR, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, REDIMENSIONNEMENT, NBETATS, TEST };
-
-        private Etats EtatSouris = Etats.SELECTION;
+        public enum Etats { Unset = -1, SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, AJOUT_MUR, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, REDIMENSIONNEMENT, NBETATS, TEST };
+        private Etats EtatSouris_ = Etats.Unset;
+        public Etats EtatSouris {
+            get { return EtatSouris_; }
+            set {
+                if(value != EtatSouris_) {
+                    switch (EtatSouris_) {
+                        case Etats.SELECTION: toolStripButtonSelection.Checked = false; sélectionToolStripMenuItem.Checked = false; break;
+                        case Etats.LOUPE: toolStripButtonZoom.Checked = false; zoomToolStripMenuItem.Checked = false; break;
+                        case Etats.DEPLACEMENT: toolStripButtonDeplacement.Checked = false; déplacementToolStripMenuItem.Checked = false; break;
+                        case Etats.ROTATION: toolStripButtonRotation.Checked = false; rotationToolStripMenuItem.Checked = false; break;
+                        case Etats.DUPLICATION: toolStripButtonDuplication.Checked = false; duplicationToolStripMenuItem.Checked = false; break;
+                        case Etats.AJOUT_ACCELERATEUR: toolStripButtonAccelerateur.Checked = false; ToolStripMenuItemAccelerateur.Checked = false; break;
+                        case Etats.AJOUT_MUR: toolStripButtonMuret.Checked = false; muretToolStripMenuItem.Checked = false; break;
+                        case Etats.AJOUT_PORTAIL: toolStripButtonPortail.Checked = false; portailToolStripMenuItem.Checked = false; break;
+                        case Etats.MISEAECHELLE: toolStripButtonMiseAEchelle.Checked = false; miseÀLéchelleToolStripMenuItem.Checked = false; break;
+                        case Etats.POINTSDECONTROLE: toolStripButtonPointsDeControle.Checked = false; gestionDesPointsDeContrôleToolStripMenuItem.Checked = false; break;
+                        case Etats.TEST: lumieresToolStripMenuItem.Visible = false; LumiereSpots = true; LumiereDirectionnelle = true; LumiereAmbiante = true; break;
+                        default: break;
+                    }
+                    EtatSouris_ = value;
+                    switch (EtatSouris_)
+                    {
+                        case Etats.SELECTION: toolStripButtonSelection.Checked = true; sélectionToolStripMenuItem.Checked = true; break;
+                        case Etats.LOUPE: toolStripButtonZoom.Checked = true; zoomToolStripMenuItem.Checked = true; break;
+                        case Etats.DEPLACEMENT: toolStripButtonDeplacement.Checked = true; déplacementToolStripMenuItem.Checked = true; break;
+                        case Etats.ROTATION: toolStripButtonRotation.Checked = true; rotationToolStripMenuItem.Checked = true; break;
+                        case Etats.DUPLICATION: toolStripButtonDuplication.Checked = true; duplicationToolStripMenuItem.Checked = true; break;
+                        case Etats.AJOUT_ACCELERATEUR: toolStripButtonAccelerateur.Checked = true; ToolStripMenuItemAccelerateur.Checked = true; break;
+                        case Etats.AJOUT_MUR: toolStripButtonMuret.Checked = true; muretToolStripMenuItem.Checked = true; break;
+                        case Etats.AJOUT_PORTAIL: toolStripButtonPortail.Checked = true; portailToolStripMenuItem.Checked = true; break;
+                        case Etats.MISEAECHELLE: toolStripButtonMiseAEchelle.Checked = true; miseÀLéchelleToolStripMenuItem.Checked = true; break;
+                        case Etats.POINTSDECONTROLE: toolStripButtonPointsDeControle.Checked = true; gestionDesPointsDeContrôleToolStripMenuItem.Checked = true; break;
+                        case Etats.TEST: lumieresToolStripMenuItem.Visible = true; LumiereSpots = true; LumiereDirectionnelle = true; LumiereAmbiante = true; break;
+                        default: break;
+                    }
+                    FonctionsNatives.etatDelaSouris((int) EtatSouris_);
+                }
+            }
+        }
 
         private Boolean mousePressed = false;
 
@@ -686,8 +822,8 @@ namespace InterfaceGraphique
             //Livrable 3 
             // besoin pour effacer l'affichage FTGL
             FonctionsNatives.setPartieRapide(false);
-            FonctionsNatives.setScoreCourant(0, 1);
-            FonctionsNatives.setScoreCourant(0, 2);
+            ouvrirMenuTable_ = false;
+            
             this.Hide();
             FonctionsNatives.jouerSonModeJeu(false);
             //this.Close();
@@ -725,9 +861,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButtonSelection_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonSelection.Checked = true;
-            this.changerMode(Etats.SELECTION);
+            EtatSouris = Etats.SELECTION;
         }
         /////////////////////////////////////////////////////////////////////////
         ///  @fn private void toolStripButtonDeplacement_Click(object sender, EventArgs e)
@@ -745,10 +879,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButtonDeplacement_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonDeplacement.Checked = true;
-            this.changerMode(Etats.DEPLACEMENT);
-
+            EtatSouris = Etats.DEPLACEMENT;
         }
         /////////////////////////////////////////////////////////////////////////
         ///  @fn private void toolStripButtonRotation_Click(object sender, EventArgs e)
@@ -766,9 +897,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButtonRotation_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonRotation.Checked = true;
-            this.changerMode(Etats.ROTATION);
+            EtatSouris = Etats.ROTATION;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -788,9 +917,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButtonMiseAEchelle_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonMiseAEchelle.Checked = true;
-            this.changerMode(Etats.MISEAECHELLE);
+            EtatSouris = Etats.MISEAECHELLE;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -808,9 +935,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButtonDuplication_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonDuplication.Checked = true;
-            this.changerMode(Etats.DUPLICATION);
+            EtatSouris = Etats.DUPLICATION;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -829,9 +954,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButtonZoom_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonZoom.Checked = true;
-            this.changerMode(Etats.LOUPE);
+            EtatSouris = Etats.LOUPE;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -849,9 +972,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButtonAccelerateur_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonAccelerateur.Checked = true;
-            this.changerMode(Etats.AJOUT_ACCELERATEUR);
+            EtatSouris = Etats.AJOUT_ACCELERATEUR;
 
         }
         /////////////////////////////////////////////////////////////////////////
@@ -871,9 +992,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButtonPortail_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonPortail.Checked = true;
-            this.changerMode(Etats.AJOUT_PORTAIL);
+            EtatSouris = Etats.AJOUT_PORTAIL;
         }
         /////////////////////////////////////////////////////////////////////////
         /// 
@@ -892,9 +1011,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButtonMuret_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonMuret.Checked = true;
-            this.changerMode(Etats.AJOUT_MUR);
+            EtatSouris = Etats.AJOUT_MUR;
         }
         /////////////////////////////////////////////////////////////////////////
         ///  
@@ -911,9 +1028,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButton1.Checked = true;
-            this.changerMode(Etats.POINTSDECONTROLE);
+            EtatSouris = Etats.POINTSDECONTROLE;
 
         }
 
@@ -940,7 +1055,7 @@ namespace InterfaceGraphique
             toolStripButtonAccelerateur.Checked = false;
             toolStripButtonPortail.Checked = false;
             toolStripButtonMuret.Checked = false;
-            toolStripButton1.Checked = false;
+            toolStripButtonPointsDeControle.Checked = false;
         }
         ///////////////////////////////////////////////////////////////////////
         /// @fn bool Dans_Intervalle( double valeur, double borneMin, double borneMax ) 
@@ -1043,50 +1158,28 @@ namespace InterfaceGraphique
         {
             if (FonctionsNatives.nombreObjetSelectionne() == 1)
             {
-                textBox1.Enabled = true;
-                textBox2.Enabled = true;
-                textBox3.Enabled = true;
-                //textBox4.Enabled = true;
+                this.pnlProperty.Enabled = true;
 
-                numericUpDown1.Enabled = true;
-                button1.Enabled = true;
+                this.PositionX = FonctionsNatives.getPosX();
+                this.PositionY = FonctionsNatives.getPosY();
+                this.Angle     = FonctionsNatives.getAngle();
+                this.Echelle   = FonctionsNatives.getScale();
 
-                //Position en X
-                double posX = (FonctionsNatives.getPosX());
-                posX = Math.Round(posX, 2); //arrondi la position 
-                textBox1.Text = posX.ToString();
-
-                //Position Y
-                double posY = (FonctionsNatives.getPosY());
-                posY = Math.Round(posY, 2); //arrondi la position 
-                textBox2.Text = posY.ToString();
-
-                //Angle
-                double angle = (FonctionsNatives.getAngle());
-                angle = Math.Round(angle, 2);
-                textBox3.Text = angle.ToString();
-
-                //Scale
-                float scale = (float)(FonctionsNatives.getScale());
-                scale = (float)Math.Round(scale, 3);
-                // textBox4.Text = scale.ToString();
-                numericUpDown1.Value = Convert.ToDecimal(scale);
+                this.propertiesErrorSet.clear();
+                this.txtBoxErreurProprietes.Visible = false;
+                txtPositionX.ForeColor = Color.Black;
+                txtPositionY.ForeColor = Color.Black;
+                txtAngle.ForeColor = Color.Black;
+                txtEchelle.ForeColor = Color.Black;
             }
             else
             {
-                textBox1.Text = " ";
-                textBox2.Text = " ";
-                textBox3.Text = " ";
-                // textBox4.Text = " ";
-                numericUpDown1.ResetText();
+                this.PositionX = null;
+                this.PositionY = null;
+                this.Angle     = null;
+                this.Echelle   = null;
 
-                textBox1.Enabled = false;
-                textBox2.Enabled = false;
-                textBox3.Enabled = false;
-                // textBox4.Enabled = false;
-                numericUpDown1.Enabled = false;
-                button1.Enabled = false;
-
+                this.pnlProperty.Enabled = false;
             }
         }
 
@@ -1106,9 +1199,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void sélectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonSelection.Checked = true;
-            this.changerMode(Etats.SELECTION);
+            EtatSouris = Etats.SELECTION;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -1127,9 +1218,7 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         private void déplacementToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonDeplacement.Checked = true;
-            this.changerMode(Etats.DEPLACEMENT);
+            EtatSouris = Etats.DEPLACEMENT;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -1148,9 +1237,7 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         private void rotationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonRotation.Checked = true;
-            this.changerMode(Etats.ROTATION);
+            EtatSouris = Etats.ROTATION;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -1170,9 +1257,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void miseÀLéchelleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonMiseAEchelle.Checked = true;
-            this.changerMode(Etats.MISEAECHELLE);
+            EtatSouris = Etats.MISEAECHELLE;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -1190,9 +1275,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void duplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonDuplication.Checked = true;
-            this.changerMode(Etats.DUPLICATION);
+            EtatSouris = Etats.DUPLICATION;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -1212,9 +1295,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void ToolStripMenuItemAccelerateur_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonAccelerateur.Checked = true;
-            this.changerMode(Etats.AJOUT_ACCELERATEUR);
+            EtatSouris = Etats.AJOUT_ACCELERATEUR;
 
         }
 
@@ -1235,9 +1316,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void portailToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonPortail.Checked = true;
-            this.changerMode(Etats.AJOUT_PORTAIL);
+            EtatSouris = Etats.AJOUT_PORTAIL;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -1257,9 +1336,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void muretToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonMuret.Checked = true;
-            this.changerMode(Etats.AJOUT_MUR);
+            EtatSouris = Etats.AJOUT_MUR;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -1277,9 +1354,7 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         private void gestionDesPointsDeContrôleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButton1.Checked = true;
-            this.changerMode(Etats.POINTSDECONTROLE);
+            EtatSouris = Etats.POINTSDECONTROLE;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -1298,29 +1373,21 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            double myX;
-            double myY;
-            double myAngle;
-            double myScale = Convert.ToDouble(numericUpDown1.Value);
-
-
-            if (!double.TryParse(textBox1.Text, out myX) || !double.TryParse(textBox2.Text, out myY)
-                || !double.TryParse(textBox3.Text, out myAngle))// || !double.TryParse(textBox4.Text, out myScale))
-            {
-                MessageBox.Show("Veuillez vérifier les valeurs entrées", "Barre de proprietés",
-                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+            MettreAJourObjet();
+            if (FonctionsNatives.objetEstDansLaTable() == false) {
+                txtBoxErreurProprietes.Visible = true;
+            } else {
+                txtBoxErreurProprietes.Visible = false;
+                this.mettreAjourPos();
             }
-            else
-            {
-                FonctionsNatives.configurerObjet(myX, myY, myAngle, myScale);
-                if (FonctionsNatives.objetEstDansLaTable() == false)
-                {
-                    MessageBox.Show("Les coordonnées saisies sont à l'éxterieur de la table ", "Position invalide!",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
+        } // TODO: Supprimer
+
+        ///@fn private void MettreAJourObjet()
+        ///@brief Permet de mettre à jour les propriétés de l'objet
+        private void MettreAJourObjet() {
+            // Conversion à cause de l'ordre de mise à jour des NumericUpDown
+            FonctionsNatives.configurerObjet(decimal.ToDouble(txtPositionX.Value), decimal.ToDouble(txtPositionY.Value), 
+                decimal.ToDouble(txtAngle.Value), decimal.ToDouble(txtEchelle.Value));
         }
 
 
@@ -1339,9 +1406,7 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         private void zoomToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonZoom.Checked = true;
-            this.changerMode(Etats.LOUPE);
+            EtatSouris = Etats.LOUPE;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -1466,11 +1531,37 @@ namespace InterfaceGraphique
         private void ouvrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fenetreChargement_.Show();
+            // bug affichage textopengl qd on ouvre une table
+            ouvrirMenuTable_ = true;
+            FonctionsNatives.setPartieRapide(false);
         }
 
-        private string currentFile_;
+        private string currentFile_ = String.Empty;
         public static string SAVE_FILEPATH = "zones";
         public static string DEFAULT_FILENAME = "defaut";
+
+        /// @fn protected void OnPropertyChanged(string propertyName)
+        /// @brief Permet de réaliser du databinding complet
+        /// @param propertyName Nom de la propriété qui est mise à jour
+        /// @source http://stackoverflow.com/questions/1315621/implementing-inotifypropertychanged-does-a-better-way-exist
+        /// @author Marc Gravell
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// @fn protected bool SetField<T>(ref T field, T value, string propertyName)
+        /// @brief Permet de lever un property changed si l'objet est modifié
+        /// @param field Objet modifié
+        /// @param value Nouvelle valeur pour l'objet
+        /// @param propertyName Nom de la propriété modifié
+        /// @source http://stackoverflow.com/questions/1315621/implementing-inotifypropertychanged-does-a-better-way-exist
+        /// @author Marc Gravell
+        protected bool SetField<T>(ref T field, T value, string propertyName) {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value; OnPropertyChanged(propertyName); return true;
+        }
+
 
         ///////////////////////////////////////////////////////////////////////
         /// @fn string getCurrentFile()
@@ -1527,16 +1618,13 @@ namespace InterfaceGraphique
             if (mode == true)
             {
 
-                panel1.Location = new Point (0,0);
-                panel1.Dock = DockStyle.Fill;
-
                 this.Text = "Mode Test";
                 estEnModeTest = true;
                 estEnModePartie = false;
                 estEnPause = false;
-	        //State
+                //State
                 //state = States.Test;
-                this.changerMode(Etats.TEST);
+                EtatSouris = Etats.TEST;
                 //Permet d'ajouter les maillets et la rondelle dans la table
                 FonctionsNatives.ajouterMailletEtRondelle();
                 //effacer les points de controle
@@ -1576,7 +1664,7 @@ namespace InterfaceGraphique
                 menuPrincipalToolStripMenuItem.Visible = true;
                 vuesToolStripMenuItem.Visible = true;
 
-                splitContainer1.Hide();
+                pnlProperty.Hide();
                 //panel score
                 // splitContainer1.Panel1.Hide();
                 //splitContainer1.Panel2.Hide();
@@ -1588,10 +1676,8 @@ namespace InterfaceGraphique
             {
                 if (estEnModePartie) { FonctionsNatives.initialiserScene(); }
 
-                panel1.Location = new Point(ancienPosX, ancienPosY);
-
                 this.Text = "Mode Edition";
-                this.changerMode(Etats.SELECTION);
+                EtatSouris = Etats.SELECTION;
 
                 estEnModePartie = false;
                 estEnModeTest = false;
@@ -1628,7 +1714,7 @@ namespace InterfaceGraphique
                 modeEditionToolStripMenuItem.Visible = false;
 
                 //panel score afficher - panel proprietes desactiver
-                splitContainer1.Show();
+                pnlProperty.Show();
 
 
             }
@@ -1655,12 +1741,17 @@ namespace InterfaceGraphique
                     estEnPause = true;
                     menuStrip1.Show();
                     FonctionsNatives.mettrePauseMusique(false);
+                    //compteur en pause
+                    FonctionsNatives.mettreCompteurEnPause(true);
                 }
                 else
                 {     //si non le masque et on retourne dans le jeu
                     estEnPause = false;
                     menuStrip1.Hide();
                     FonctionsNatives.mettrePauseMusique(true);
+                    //compteur marche de nouveau
+                    FonctionsNatives.mettreCompteurEnPause(false);
+
                 }
             }
         }
@@ -1725,13 +1816,11 @@ namespace InterfaceGraphique
             {
                 this.Text = "Partie Rapide";
 
-                panel1.Location = new Point(0, 0);
-                panel1.Dock = DockStyle.Fill;
-
                 estEnModePartie = true;
                 estEnModeTest = false;
-               
-                this.changerMode(Etats.TEST);
+
+                LumiereSpots = true; LumiereDirectionnelle = true; LumiereAmbiante = true; // Pour reset les lumières au changement de fenêtre
+                EtatSouris = Etats.TEST;
 
                 //State
               // state = States.PartieRapide;
@@ -1742,7 +1831,8 @@ namespace InterfaceGraphique
                 FonctionsNatives.effacerPointControle();
 
                 estEnPause = false;
-
+                // compteur marche
+                FonctionsNatives.mettreCompteurEnPause(false);
 
                 toolStrip1.Hide();
                 menuStrip1.Hide();
@@ -1767,7 +1857,7 @@ namespace InterfaceGraphique
                 vuesToolStripMenuItem.Visible = true;
 
                 //panel parametres
-                splitContainer1.Hide();
+                pnlProperty.Hide();
 
 
                 //jouer musique
@@ -1819,6 +1909,7 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         public void DemarrerPartie()
         {
+            partieGagnee = false;
             if (FonctionsNatives.estButDroite())
             {
                 //MessageBox.Show("Player 2 SCORES !","AirHockey", MessageBoxButtons.OK, MessageBoxIcon.Hand);
@@ -1847,6 +1938,8 @@ namespace InterfaceGraphique
             {
                 if ((nbButsJoueur1 == nbButsMax) || (nbButsJoueur2 == nbButsMax))
                 {
+                    partieGagnee = true;
+
                     DialogResult dialog = MessageBox.Show("La partie est finie, voulez-vous revenir au tournoi ! Yes pour tournoi , No pour retourner au menu Principal",
                             "Revenir mode Tournoi ", MessageBoxButtons.YesNo);
 
@@ -1858,7 +1951,7 @@ namespace InterfaceGraphique
                         //Livrable 3
                         FonctionsNatives.setScoreCourant(0, 1);
                         FonctionsNatives.setScoreCourant(0, 2);
-                  
+                        FonctionsNatives.initialiserCompteur();
 
                     }
 
@@ -1885,17 +1978,22 @@ namespace InterfaceGraphique
             {
                 if ((nbButsJoueur1 == nbButsMax) || (nbButsJoueur2 == nbButsMax))
                 {
+                    partieGagnee = true;
+                    
                     DialogResult dialog = MessageBox.Show("La partie est finie, vous voulez rejouer encore ? Yes pour Rejouer, No pour retourner au menu Principal",
                             "Rejouer ou retour au menu principal", MessageBoxButtons.YesNo);
-                    //Livrable 3
-                    // reinitaialiser le score courant pour l'affichage FTGL
-                    FonctionsNatives.setScoreCourant(0, 1);
-                    FonctionsNatives.setScoreCourant(0, 2);
+                   
                     if (dialog == DialogResult.Yes)
                     {
                         nbButsJoueur1 = 0;
                         nbButsJoueur2 = 0;
                         FonctionsNatives.reinitialiserPartieCourante();
+
+                        //Livrable 3
+                        // reinitaialiser le score courant pour l'affichage FTGL
+                        FonctionsNatives.setScoreCourant(0, 1);
+                        FonctionsNatives.setScoreCourant(0, 2);
+                        FonctionsNatives.initialiserCompteur();
 
                     }
 
@@ -1903,8 +2001,9 @@ namespace InterfaceGraphique
                     {
 
                         FonctionsNatives.jouerSonModeJeu(false);
-
                         estEnModePartie = false;
+                        // pour regler le bug quand mode partie -> No -> edition -> textFTGL s'affiche
+                        FonctionsNatives.setPartieRapide(false);
                         this.Hide();
                         menuPrincipal_.Show();
                         FonctionsNatives.initialiserScene();
@@ -1915,12 +2014,102 @@ namespace InterfaceGraphique
 
         }
 
-        private void Edition_Load(object sender, EventArgs e)
+        /// @brief Permet de réinitialiser la partie à l'affichage de la fenêtre
+        private void Edition_Load(object sender, EventArgs e){
+            resetPartie();
+        }
+
+        /// @fn private void orthographiqueToolStripMenuItem_Click(object sender, EventArgs e)
+        /// @brief Permet de changer la vue pour la vue orthographique
+        /// @param sender Objet d'appel
+        /// @param e Évènement
+        private void orthographiqueToolStripMenuItem_Click(object sender, EventArgs e) {
+            VueActuelle = TypeVue.Orthographique;
+        }
+
+        /// @fn private void orbiteToolStripMenuItem_Click(object sender, EventArgs e)
+        /// @brief Permet de changer la vue pour la vue orbite
+        /// @param sender Objet d'appel
+        /// @param e Évènement
+        private void orbiteToolStripMenuItem_Click(object sender, EventArgs e) {
+            VueActuelle = TypeVue.Orbite;
+        }
+
+        /// @fn private void txtPositionX_ValueChanged(object sender, EventArgs e)
+        /// @brief Permet de modifier la position de l'objet sélectionné en temps réel
+        private void txtPositionX_ValueChanged(object sender, EventArgs e)
         {
-            resetPartie(); 
+            MettreAJourObjet();
+            if (FonctionsNatives.objetEstDansLaTable() == false) {
+                this.propertiesErrorSet.PositionX = true;
+                this.txtPositionX.ForeColor = Color.Red;
+                this.txtBoxErreurProprietes.Visible = true;
+                this.txtBoxErreurProprietes.Text = this.propertiesErrorSet.getError();
+            } else mettreAjourPos();
+        }
+
+        /// @fn private void txtPositionY_ValueChanged(object sender, EventArgs e)
+        /// @brief Permet de modifier la position de l'objet sélectionné en temps réel
+        private void txtPositionY_ValueChanged(object sender, EventArgs e)
+        {
+            MettreAJourObjet();
+            if (FonctionsNatives.objetEstDansLaTable() == false) {
+                this.propertiesErrorSet.PositionY = true;
+                this.txtPositionY.ForeColor = Color.Red;
+                this.txtBoxErreurProprietes.Visible = true;
+                this.txtBoxErreurProprietes.Text = this.propertiesErrorSet.getError();
+            } else mettreAjourPos();
 
         }
 
+        /// @fn private void txtAngle_ValueChanged(object sender, EventArgs e)
+        /// @brief Permet de modifier la position de l'objet sélectionné en temps réel
+        private void txtAngle_ValueChanged(object sender, EventArgs e)
+        {
+            MettreAJourObjet();
+            if (FonctionsNatives.objetEstDansLaTable() == false) {
+                this.propertiesErrorSet.Angle = true;
+                this.txtAngle.ForeColor = Color.Red;
+                this.txtBoxErreurProprietes.Visible = true;
+                this.txtBoxErreurProprietes.Text = this.propertiesErrorSet.getError();
+            } else mettreAjourPos();
+        }
+
+        /// @fn private void txtEchelle_ValueChanged(object sender, EventArgs e)
+        /// @brief Permet de modifier la position de l'objet sélectionné en temps réel
+        private void txtEchelle_ValueChanged(object sender, EventArgs e)
+        {
+            MettreAJourObjet();
+            if (FonctionsNatives.objetEstDansLaTable() == false) {
+                this.propertiesErrorSet.Echelle = true;
+                this.txtEchelle.ForeColor = Color.Red;
+                this.txtBoxErreurProprietes.Visible = true;
+                this.txtBoxErreurProprietes.Text = this.propertiesErrorSet.getError();
+            } else mettreAjourPos();
+
+        }
+
+        /// @brief Permet de changer l'état de la lumière ambiante
+        private void lumiereAmbianteToolStripMenuItem_Click(object sender, EventArgs e) {
+            this.LumiereAmbiante = !this.LumiereAmbiante;
+        }
+
+        /// @brief Permet de changer l'état de la lumière directionnelle
+        private void lumiereDirectionnelleToolStripMenuItem_Click(object sender, EventArgs e) {
+            this.LumiereDirectionnelle = !this.LumiereDirectionnelle;
+        }
+
+        /// @brief Permet de changer l'état des spots lumineux
+        private void spotsLumineuxToolStripMenuItem_Click(object sender, EventArgs e) {
+            this.LumiereSpots = !this.LumiereSpots;
+        }
+
+        /// @brief Permet de réinitialiser les valeurs nécessaires au chargement de la fenêtre
+        /// TODO: Ne s'exécute pas à l'appel de show()
+        private void Edition_Shown(object sender, EventArgs e) {
+            
+            //LumiereSpots = true; LumiereDirectionnelle = true; LumiereAmbiante = true; // Pour reset les lumières au changement de fenêtre
+        }
 
 
         ///////////////////////////////////////////////////////////////////////
@@ -1938,7 +2127,11 @@ namespace InterfaceGraphique
             nbButsJoueur2 = 0;
             FonctionsNatives.setButDroite(false);
             FonctionsNatives.setButGauche(false);
-          
+            //Livrable 3
+            FonctionsNatives.setScoreCourant(0, 1);
+            FonctionsNatives.setScoreCourant(0, 2);
+            FonctionsNatives.initialiserCompteur();
+
         }
 
 
@@ -2133,7 +2326,19 @@ namespace InterfaceGraphique
         public static extern int getScoreCourant(int index);
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern bool setScoreCourant(int score, int index);
-        
+        // initialisation des texts pour FTGL
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void initialiserFTGL();
+        // remettre a zero le compteur
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void initialiserCompteur();
+        // modifier les valeurs du compteur
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void setCompteur(int heure, int minute, int seconde);
+        // mettre en pause le compteur
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void mettreCompteurEnPause(bool deactiver);
+
         /// Ali
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -2145,6 +2350,13 @@ namespace InterfaceGraphique
 
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void mettrePauseMusique(bool pause);
+        // Arthur
+        // Fonctions pour les différentes caméras
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void setVueOrtho();
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void setVueOrbite();
+        
     }
 }
 

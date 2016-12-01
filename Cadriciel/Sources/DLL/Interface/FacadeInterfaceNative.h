@@ -186,6 +186,10 @@ extern "C" {
 	__declspec(dllexport) bool setNomJoueurCourant(char* nom, int index);
 	__declspec(dllexport) int getScoreCourant(int index);
 	__declspec(dllexport) bool setScoreCourant(int score, int index);
+	__declspec(dllexport) void initialiserFTGL();
+	__declspec(dllexport) void initialiserCompteur();
+	__declspec(dllexport) void setCompteur(int heure, int minute, int seconde);
+	__declspec(dllexport) void mettreCompteurEnPause(bool deactiver);
 
 	/// Ali 
 	__declspec(dllexport) void profilCourant(string nom, double vitesse_, double probaDAgirPassivemnt);
@@ -216,5 +220,10 @@ extern "C" {
 	__declspec(dllexport) void jouerSonModeJeu(bool mode);
 
 	__declspec(dllexport) void mettrePauseMusique(bool pause);
+	
+	// Defini la vue comme orthogonale
+	__declspec(dllexport) void setVueOrtho();
+	// Defini la vue comme orbite
+	__declspec(dllexport) void setVueOrbite();
 } 
 #endif // __FACADE_INTERFACE_NATIVE_H__

@@ -72,7 +72,10 @@ NoeudTable::~NoeudTable()
 ////////////////////////////////////////////////////////////////////////
 void NoeudTable::afficherConcret(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const
 {
-	
+	//dessiner la table
+	vbo_->dessiner(modele, vue, projection);
+	vbo_->dessiner(modele, vue, projection);
+
 	glm::mat4x4 const& m{ projection * vue * modele };
 
 	// Appliquer le nuanceur
@@ -85,6 +88,8 @@ void NoeudTable::afficherConcret(const glm::mat4& modele, const glm::mat4& vue, 
 
 	// tracer la table
 	tracerTable(glm::mat4(1.f));
+
+
 
 	opengl::Programme::Stop(vbo_->programme_);
 
@@ -138,7 +143,7 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 	// deactiver les textures (la table ne prend plus la texture des autres noeuds)
 	glDisable(GL_TEXTURE_2D);
 	// desactiver le test de profondeur
-	glDisable(GL_DEPTH_TEST);
+	//glDisable(GL_DEPTH_TEST);
 	
 
 	//multiplication par la matrice de proj
@@ -160,21 +165,21 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 	p1----------p3----------p5
 	*/
 	// tracer la table (zone du jeur)
-	vbo_->programme_.assignerUniforme("colorIn", couleurTable_);
-	glBegin(GL_TRIANGLE_FAN);
-	{
-		glVertex3fv(PROJ8);
-		glVertex3fv(PROJ(0));
-		glVertex3fv(PROJ(6));
-		glVertex3fv(PROJ(1));
-		glVertex3fv(PROJ(3));
-		glVertex3fv(PROJ(5));
-		glVertex3fv(PROJ(7));
-		glVertex3fv(PROJ(4));
-		glVertex3fv(PROJ(2));
-		glVertex3fv(PROJ(0));
-	}
-	glEnd();
+	//vbo_->programme_.assignerUniforme("colorIn", couleurTable_);
+	//glBegin(GL_TRIANGLE_FAN);
+	//{
+	//	glVertex3fv(PROJ8);
+	//	glVertex3fv(PROJ(0));
+	//	glVertex3fv(PROJ(6));
+	//	glVertex3fv(PROJ(1));
+	//	glVertex3fv(PROJ(3));
+	//	glVertex3fv(PROJ(5));
+	//	glVertex3fv(PROJ(7));
+	//	glVertex3fv(PROJ(4));
+	//	glVertex3fv(PROJ(2));
+	//	glVertex3fv(PROJ(0));
+	//}
+	//glEnd();
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// tracer pt intersection
@@ -198,10 +203,12 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 	tracerButs(vueProjection,longueurButs_);
 	// tracer les lignes de decoration 
 	tracerLignesDecoration(vueProjection);
+	
 	// tracer les points de Controle 
+	glDisable(GL_DEPTH_TEST);
 	if (afficherPointsControles)
 		tracerPointsControle(vueProjection);
-
+	glEnable(GL_DEPTH_TEST);
 	//// get point du but gauche
 	//glm::vec3  pointHaut, pointMilieu, pointBas;
 	//getbuts(2, pointHaut, pointMilieu, pointBas);
@@ -230,7 +237,7 @@ void NoeudTable::tracerTable(const glm::mat4& vueProjection) const
 	//tracerMur2Points(vueProjection, { 0,0,0 }, { 20,20,0 },largeur_,true);
 	
 	//Activer le test de profondeur
-	glEnable(GL_DEPTH_TEST);
+	//glEnable(GL_DEPTH_TEST);
 	// activer le test de profondeur
 	glEnable(GL_TEXTURE_2D);	
 }
@@ -252,12 +259,14 @@ void NoeudTable::tracerPointsControle(const glm::mat4& vueProjection) const {
 		auto pControl = (NoeudPointControle*)chercher(i);
 		double delta; pControl->getDelta(delta);
 		glm::vec4 couleur; pControl->getCouleur(couleur);
+
 		glm::vec3 p0{ p(i).x - delta / 2, p(i).y + delta / 2, p(i).z };
 		glm::vec3 p1{ p(i).x - delta / 2, p(i).y - delta / 2, p(i).z };
 		glm::vec3 p2{ p(i).x + delta / 2, p(i).y - delta / 2, p(i).z };
 		glm::vec3 p3{ p(i).x + delta / 2, p(i).y + delta / 2, p(i).z };
 
-		vbo_->programme_.assignerUniforme("colorIn", couleur);
+		//vbo_->programme_.assignerUniforme("colorIn", couleur);
+		vbo_->programme_.assignerUniforme("colorIn", glm::vec4{ 0.,1.,0.,1. });
 		glBegin(GL_QUADS);
 		{
 			glVertex3fv(PROJvec(p0));
@@ -282,7 +291,7 @@ void NoeudTable::tracerPointsControle(const glm::mat4& vueProjection) const {
 void NoeudTable::tracerLignesDecoration(const glm::mat4& vueProjection) const
 {
 	// tracer le contour
-	vbo_->programme_.assignerUniforme("colorIn", couleurContour_);
+	vbo_->programme_.assignerUniforme("colorIn", glm::vec4{ 1.,1.,0.,1. });
 	glLineWidth(2.);
 	glBegin(GL_LINE_LOOP);
 	{
@@ -299,7 +308,8 @@ void NoeudTable::tracerLignesDecoration(const glm::mat4& vueProjection) const
 
 	// tracer les lignes du terrain
 	glLineWidth(5.);
-	vbo_->programme_.assignerUniforme("colorIn", couleurLignes_);
+	//vbo_->programme_.assignerUniforme("colorIn", couleurLignes_);
+	vbo_->programme_.assignerUniforme("colorIn", glm::vec4{ 1.,1.,0.,1. });
 	glBegin(GL_LINES);
 	{
 		glVertex3fv(PROJ(2));
@@ -453,6 +463,60 @@ void NoeudTable::tracerMurs3Points(const glm::mat4& vueProjection, glm::vec3 p1,
 
 
 }
+
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// @fn void NoeudTable::tracerMur(const glm::mat4& vueProjection, 
+///		glm::vec3 point1, glm::vec3 point2, glm::vec3 point3, glm::vec3 point4) const
+/// @ Author Ali
+/// @param[in] : vueProjection
+/// Cette fonction permet de tracer un seul mur en 3D  parmis les murs autour de la Table
+/// Livrable 3
+/// @return Aucune.
+///
+///////////////////////////////////////////////////////////////////////////////////////
+void NoeudTable::tracerMur(const glm::mat4& vueProjection, glm::vec3 point1, glm::vec3 point2, glm::vec3 point3, glm::vec3 point4) const
+{
+	// tracer les 6 Quads de la boite representant le mur
+	glBegin(GL_QUADS);
+	{
+		// Quad 1
+		glVertex3fv(PROJvec(point1));
+		glVertex3fv(PROJvec(point2));
+		glVertex3fv(PROJvec(point3));
+		glVertex3fv(PROJvec(point4));
+		//Quad 2 
+		glVertex3fv(PROJvec( glm::vec3( point1.x,point1.y,hauteurMur_)));
+		glVertex3fv(PROJvec(glm::vec3(point2.x, point2.y, hauteurMur_)));
+		glVertex3fv(PROJvec(glm::vec3(point3.x, point3.y, hauteurMur_)));
+		glVertex3fv(PROJvec(glm::vec3(point4.x, point4.y, hauteurMur_)));
+		//Quad 3
+		glVertex3fv(PROJvec(glm::vec3(point1.x, point1.y, hauteurMur_)));
+		glVertex3fv(PROJvec(glm::vec3(point2.x, point2.y, hauteurMur_)));
+		glVertex3fv(PROJvec(point2));
+		glVertex3fv(PROJvec(point1));
+		//Quad 4
+		glVertex3fv(PROJvec(point4));
+		glVertex3fv(PROJvec(point3));
+		glVertex3fv(PROJvec(glm::vec3(point3.x, point3.y, hauteurMur_)));
+		glVertex3fv(PROJvec(glm::vec3(point4.x, point4.y, hauteurMur_)));
+		//Quad 5
+		glVertex3fv(PROJvec(point1));
+		glVertex3fv(PROJvec(point4));
+		glVertex3fv(PROJvec(glm::vec3(point4.x, point4.y, hauteurMur_)));
+		glVertex3fv(PROJvec(glm::vec3(point1.x, point1.y, hauteurMur_)));
+		//Quad 6
+		glVertex3fv(PROJvec(point2));
+		glVertex3fv(PROJvec(point3));
+		glVertex3fv(PROJvec(glm::vec3(point3.x, point3.y, hauteurMur_)));
+		glVertex3fv(PROJvec(glm::vec3(point2.x, point2.y, hauteurMur_)));
+		
+	}
+	glEnd();
+}
+
+
+
 ///////////////////////////////////////////////////////////////////////////
 ///
 /// @fn void NoeudTable::tracerMurs(const glm::mat4& vueProjection) const
@@ -466,29 +530,41 @@ void NoeudTable::tracerMurs3Points(const glm::mat4& vueProjection, glm::vec3 p1,
 void NoeudTable::tracerMurs(const glm::mat4& vueProjection) const
 {
 	// tracer murs
-	vbo_->programme_.assignerUniforme("colorIn", couleurMurs_);
+		vbo_->programme_.assignerUniforme("colorIn", glm::vec4{ (109.f / 255) , (7.f / 255), (26.f / 255), 0.5f });
+		//glEnable(GL_BLEND);
+		// test aficher mur p0p6
+		tracerMur(vueProjection, p(0), glm::vec3(p(0).x - largeur_, p(0).y, p(0).z), glm::vec3(p(6).x - largeur_, p(6).y, p(6).z), p(6));
+		tracerMur(vueProjection, p(6), glm::vec3(p(6).x - largeur_, p(6).y, p(6).z), glm::vec3(p(1).x - largeur_, p(1).y, p(1).z), p(1));
+		tracerMur(vueProjection, p(2), glm::vec3(p(2).x, p(2).y + largeur_, p(2).z), glm::vec3(p(0).x, p(0).y + largeur_, p(0).z), p(0));
+		tracerMur(vueProjection, p(4), glm::vec3(p(4).x, p(4).y + largeur_, p(4).z), glm::vec3(p(2).x, p(2).y + largeur_, p(2).z), p(2));
+		
+		tracerMur(vueProjection, glm::vec3(p(4).x + largeur_, p(4).y, p(4).z), p(4), p(7), glm::vec3(p(7).x + largeur_, p(7).y, p(7).z));
+
+
+		//glDisable(GL_BLEND);
+
 	glBegin(GL_QUADS);
 	{
-		// mur p0p6
-		glVertex3fv(PROJ(0));
-		glVertex3fv(PROJvec(glm::vec3(p(0).x - largeur_, p(0).y, p(0).z)));
-		glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y, p(6).z)));
-		glVertex3fv(PROJ(6));
+		//// mur p0p6
+		//glVertex3fv(PROJ(0));
+		//glVertex3fv(PROJvec(glm::vec3(p(0).x - largeur_, p(0).y, p(0).z)));
+		//glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y, p(6).z)));
+		//glVertex3fv(PROJ(6));
 		// mur p6p1
-		glVertex3fv(PROJ(6));
+		/*glVertex3fv(PROJ(6));
 		glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y, p(6).z)));
 		glVertex3fv(PROJvec(glm::vec3(p(1).x - largeur_, p(1).y, p(1).z)));
-		glVertex3fv(PROJ(1));
-		// mur p0p2
-		glVertex3fv(PROJ(2));
-		glVertex3fv(PROJvec(glm::vec3(p(2).x, p(2).y + largeur_, p(2).z)));
-		glVertex3fv(PROJvec(glm::vec3(p(0).x, p(0).y + largeur_, p(0).z)));
-		glVertex3fv(PROJ(0));
-		// mur p2p4
-		glVertex3fv(PROJ(4));
-		glVertex3fv(PROJvec(glm::vec3(p(4).x, p(4).y + largeur_, p(4).z)));
-		glVertex3fv(PROJvec(glm::vec3(p(2).x, p(2).y + largeur_, p(2).z)));
-		glVertex3fv(PROJ(2));
+		glVertex3fv(PROJ(1));*/
+		//// mur p0p2
+		//glVertex3fv(PROJ(2));
+		//glVertex3fv(PROJvec(glm::vec3(p(2).x, p(2).y + largeur_, p(2).z)));
+		//glVertex3fv(PROJvec(glm::vec3(p(0).x, p(0).y + largeur_, p(0).z)));
+		//glVertex3fv(PROJ(0));
+		//// mur p2p4
+		//glVertex3fv(PROJ(4));
+		//glVertex3fv(PROJvec(glm::vec3(p(4).x, p(4).y + largeur_, p(4).z)));
+		//glVertex3fv(PROJvec(glm::vec3(p(2).x, p(2).y + largeur_, p(2).z)));
+		//glVertex3fv(PROJ(2));
 		// mur p4p7
 		glVertex3fv(PROJvec(glm::vec3(p(4).x + largeur_, p(4).y, p(4).z)));
 		glVertex3fv(PROJ(4));
@@ -769,7 +845,7 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection, double longueur) con
 	glm::vec3 point1, point2, point3, point4, point5;
 	//glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
 	//Luc : les nuanceurs ne permettent qu'une couleur par set de points envoyés
-	vbo_->programme_.assignerUniforme("colorIn", glm::vec4(0.f, 0.6f, 0.8f, 0.f)); //vert
+	vbo_->programme_.assignerUniforme("colorIn", glm::vec4(0.f, 0.f, 1.f, 0.f)); //vert
 	glBegin(GL_QUADS);
 	//glPointSize(5);
 	//glBegin(GL_POINTS);

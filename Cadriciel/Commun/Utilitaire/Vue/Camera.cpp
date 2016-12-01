@@ -14,6 +14,8 @@
 #include "glm\gtc\matrix_transform.hpp"
 #include <iostream>
 
+#define PI   3.14159265358979323846264338327950288
+
 namespace vue {
 
 
@@ -42,6 +44,9 @@ namespace vue {
 		directionHaut_{ directionHautCamera },
 		directionHautMonde_{ directionHautMonde }
 	{
+		positionDef_ = position_;
+		_angleRota = 180;
+		_angleElev = 45;
 	}
 
 
@@ -144,7 +149,47 @@ namespace vue {
 		bool   empecheInversion //=true
 		)
 	{
-		//TODO TODO TODO ST-TROPEZ
+
+		// Se replace par rapport à la position de base
+		position_ = positionDef_;
+
+		// Calcul du nouvel angle d'élévation
+		if (_angleElev - rotationY < 90 * 0.03)
+			_angleElev = 90 * 0.03;
+		else if (_angleElev - rotationY > 90 * 0.99)
+			_angleElev = 90 * 0.99;
+		else
+			_angleElev -= rotationY;
+
+		double angleElevRad = _angleElev * PI / 180;
+
+		// Application du nouvel angle d'élévation
+		position_[1] = ((position_[1])*cos(angleElevRad)) + ((position_[2])*sin(angleElevRad));
+		position_[2] = ((position_[1])*sin(angleElevRad)) + ((position_[2])*cos(angleElevRad));
+
+		// Calcul du nouvel angle de rotation
+		_angleRota = fmod(_angleRota - rotationX, 360);
+
+		double angleRotaRad = _angleRota * PI / 180;
+
+		// Application du nouvel angle de rotation
+		position_[0] = ((position_[0])*cos(angleRotaRad)) + ((position_[1])*sin(angleRotaRad));
+		position_[1] = ((position_[0])*sin(angleRotaRad)) + ((position_[1])*cos(angleRotaRad));
+
+
+		// Rotation autour de z
+		//position_[0] = ((position_[0] - pointVise_[0])*cos(rotationX)) - ((position_[1] - pointVise_[1])*sin(rotationX)) + pointVise_[0];
+		//position_[1] = ((position_[0] - pointVise_[0])*sin(rotationX)) + ((position_[1] - pointVise_[1])*cos(rotationX)) + pointVise_[1];
+
+		//position_[0] = ((position_[0])*cos(rotationX)) - ((position_[1])*sin(rotationX));
+		//position_[1] = ((position_[0])*sin(rotationX)) + ((position_[1])*cos(rotationX));
+
+		//  -- FAIT ACTUELLEMENT UNE ROTATION AUTOUR DE X, DOIT ETRE CORRIGÉ --
+		//position_[1] = ((position_[1] - pointVise_[1])*cos(rotationY)) - ((position_[2] - pointVise_[2])*sin(rotationY)) + pointVise_[1];
+		//position_[2] = ((position_[1] - pointVise_[1])*sin(rotationY)) + ((position_[2] - pointVise_[2])*cos(rotationY)) + pointVise_[2];
+
+		//position_[1] = ((position_[1])*cos(rotationY)) - ((position_[2])*sin(rotationY));
+		//position_[2] = ((position_[1])*sin(rotationY)) + ((position_[2])*cos(rotationY));
 	}
 
 
