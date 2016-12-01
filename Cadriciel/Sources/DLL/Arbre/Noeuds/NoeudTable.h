@@ -109,7 +109,7 @@ public:
 	bool getButs(int index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas);
 
 	glm::vec3 getPc(int i) { return pointControle_[i]; }
-	void tracerMur(const glm::mat4& vueProjection, glm::vec3 point1, glm::vec3 point2, glm::vec3 point3, glm::vec3 point4) const;
+	void tracerMur3D(const glm::mat4& vueProjection, glm::vec3 point1, glm::vec3 point2, glm::vec3 point3, glm::vec3 point4,float hauteur) const;
 
 private:
 
