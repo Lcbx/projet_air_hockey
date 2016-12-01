@@ -1314,26 +1314,30 @@ extern "C"
 	///
 	////////////////////////////////////////////////////////////////////////
 	__declspec(dllexport) void __cdecl changerLumieresActives(bool jLumiereAmbiente, bool kLumiereDirectionnelle, bool jLumiereSpots) {
+		if(jLumiereAmbiente)
+			Debug::obtenirInstance().lumiereAmbiente = !Debug::obtenirInstance().lumiereAmbiente;
+		if(kLumiereDirectionnelle)
+			Debug::obtenirInstance().lumiereDirectionnelle = !Debug::obtenirInstance().lumiereDirectionnelle;
+		if(jLumiereSpots)
+			Debug::obtenirInstance().lumiereSpots = !Debug::obtenirInstance().lumiereSpots;
+
 		if (Debug::obtenirInstance().afficherLumieres) {
 			std::string message = "lumiere";
 			if (jLumiereAmbiente) {
-				Debug::obtenirInstance().lumiereAmbiente = !Debug::obtenirInstance().lumiereAmbiente;
 				message += " ambiente ";
 				message += Debug::obtenirInstance().lumiereAmbiente ? "ouverte" : "fermee";
-
 			}
 			if (kLumiereDirectionnelle) {
-				Debug::obtenirInstance().lumiereDirectionnelle = !Debug::obtenirInstance().lumiereDirectionnelle;
 				message += " directionnele ";
 				message += Debug::obtenirInstance().lumiereDirectionnelle ? "ouverte" : "fermee";
 			}
 			if (jLumiereSpots) {
-				Debug::obtenirInstance().lumiereSpots = !Debug::obtenirInstance().lumiereSpots;
 				message += "s des spots ";
 				message += Debug::obtenirInstance().lumiereSpots ? "ouvertes" : "fermees";
 			}
 			Debug::obtenirInstance().afficher(message);
 		}
+		FacadeModele::obtenirInstance()->setTypeLumiereActive(Debug::obtenirInstance().lumiereAmbiente, Debug::obtenirInstance().lumiereDirectionnelle, Debug::obtenirInstance().lumiereSpots);
 	}
 	////////////////////////////////////////////////////////////////////////
 	/// @fn __declspec(dllexport) void __cdecl sauvegarderTypeButMax(int nbButMax, bool estHumain)
@@ -1517,6 +1521,19 @@ extern "C"
 	__declspec(dllexport) void __cdecl mettrePauseMusique(bool pause)
 	{
 		FacadeModele::obtenirInstance()->MettrePauseSonModeJeu(pause);
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	/// @fn void mettrePauseMusique()
+	/// Author : ikram
+	/// Cette fonction permet d'assigner les bonnes valeurs de la lumière
+	///
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void __cdecl setTypeLumiereActive(bool lumiereAmbiante, bool lumiereDirectionnelle, bool lumiereSpot)
+	{
+		FacadeModele::obtenirInstance()->setTypeLumiereActive(lumiereAmbiante, lumiereDirectionnelle, lumiereSpot);
 	}
 	////////////////////////////////////////////////////////////////////////
 	/// @fn __declspec(dllexport) void __cdecl setVueOrbite()

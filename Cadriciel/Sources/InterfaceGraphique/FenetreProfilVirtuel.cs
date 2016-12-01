@@ -92,7 +92,8 @@ namespace InterfaceGraphique
 
         }
 
-
+        /// @fn private void chargerProfil_Click(object sender, EventArgs e)
+        /// @brief Permet de charger un profil virtuel
         private void chargerProfil_Click(object sender, EventArgs e)
         {
             Chargement zoneChar = new Chargement(edition_);

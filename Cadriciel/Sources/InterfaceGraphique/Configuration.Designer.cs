@@ -33,6 +33,8 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.appliquer = new System.Windows.Forms.Button();
+            this.réintialisation = new System.Windows.Forms.Button();
             this.haut = new System.Windows.Forms.Button();
             this.bas = new System.Windows.Forms.Button();
             this.droite = new System.Windows.Forms.Button();
@@ -41,17 +43,17 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.réintialisation = new System.Windows.Forms.Button();
-            this.appliquer = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.scoreGangant = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.trackBar3 = new System.Windows.Forms.TrackBar();
             this.Sauvegarder = new System.Windows.Forms.Button();
-            this.typeJoueur = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.scorePourGagner = new System.Windows.Forms.Label();
             this.type = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.scoreGangant = new System.Windows.Forms.GroupBox();
-            this.scorePourGagner = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.SauvegarderDebogage = new System.Windows.Forms.Button();
@@ -80,13 +82,14 @@
             this.button2 = new System.Windows.Forms.Button();
             this.ajouter = new System.Windows.Forms.Button();
             this.appliquer2 = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.typeJoueur.SuspendLayout();
             this.scoreGangant.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -112,8 +115,6 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.réintialisation);
-            this.tabPage1.Controls.Add(this.appliquer);
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -121,6 +122,8 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.appliquer);
+            this.groupBox1.Controls.Add(this.réintialisation);
             this.groupBox1.Controls.Add(this.haut);
             this.groupBox1.Controls.Add(this.bas);
             this.groupBox1.Controls.Add(this.droite);
@@ -137,6 +140,20 @@
             // 
             resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
+            // 
+            // appliquer
+            // 
+            resources.ApplyResources(this.appliquer, "appliquer");
+            this.appliquer.Name = "appliquer";
+            this.appliquer.UseVisualStyleBackColor = true;
+            this.appliquer.Click += new System.EventHandler(this.appliquer_Click);
+            // 
+            // réintialisation
+            // 
+            resources.ApplyResources(this.réintialisation, "réintialisation");
+            this.réintialisation.Name = "réintialisation";
+            this.réintialisation.UseVisualStyleBackColor = true;
+            this.réintialisation.Click += new System.EventHandler(this.renitialisation_Click);
             // 
             // haut
             // 
@@ -186,28 +203,54 @@
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             // 
-            // réintialisation
-            // 
-            resources.ApplyResources(this.réintialisation, "réintialisation");
-            this.réintialisation.Name = "réintialisation";
-            this.réintialisation.UseVisualStyleBackColor = true;
-            this.réintialisation.Click += new System.EventHandler(this.renitialisation_Click);
-            // 
-            // appliquer
-            // 
-            resources.ApplyResources(this.appliquer, "appliquer");
-            this.appliquer.Name = "appliquer";
-            this.appliquer.UseVisualStyleBackColor = true;
-            this.appliquer.Click += new System.EventHandler(this.appliquer_Click);
-            // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.Sauvegarder);
-            this.tabPage2.Controls.Add(this.typeJoueur);
             this.tabPage2.Controls.Add(this.scoreGangant);
             resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // scoreGangant
+            // 
+            this.scoreGangant.Controls.Add(this.label15);
+            this.scoreGangant.Controls.Add(this.label14);
+            this.scoreGangant.Controls.Add(this.label13);
+            this.scoreGangant.Controls.Add(this.label12);
+            this.scoreGangant.Controls.Add(this.label11);
+            this.scoreGangant.Controls.Add(this.trackBar3);
+            this.scoreGangant.Controls.Add(this.Sauvegarder);
+            this.scoreGangant.Controls.Add(this.label8);
+            this.scoreGangant.Controls.Add(this.scorePourGagner);
+            this.scoreGangant.Controls.Add(this.type);
+            this.scoreGangant.Controls.Add(this.comboBox1);
+            this.scoreGangant.Controls.Add(this.label7);
+            resources.ApplyResources(this.scoreGangant, "scoreGangant");
+            this.scoreGangant.Name = "scoreGangant";
+            this.scoreGangant.TabStop = false;
+            // 
+            // label13
+            // 
+            resources.ApplyResources(this.label13, "label13");
+            this.label13.Name = "label13";
+            // 
+            // label12
+            // 
+            resources.ApplyResources(this.label12, "label12");
+            this.label12.Name = "label12";
+            // 
+            // label11
+            // 
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.Name = "label11";
+            // 
+            // trackBar3
+            // 
+            resources.ApplyResources(this.trackBar3, "trackBar3");
+            this.trackBar3.Maximum = 5;
+            this.trackBar3.Minimum = 1;
+            this.trackBar3.Name = "trackBar3";
+            this.trackBar3.Value = 1;
+            this.trackBar3.ValueChanged += new System.EventHandler(this.trackBar3_ValueChanged);
             // 
             // Sauvegarder
             // 
@@ -216,19 +259,15 @@
             this.Sauvegarder.UseVisualStyleBackColor = true;
             this.Sauvegarder.Click += new System.EventHandler(this.Sauvegarder_Click);
             // 
-            // typeJoueur
-            // 
-            this.typeJoueur.Controls.Add(this.label8);
-            this.typeJoueur.Controls.Add(this.type);
-            this.typeJoueur.Controls.Add(this.comboBox1);
-            resources.ApplyResources(this.typeJoueur, "typeJoueur");
-            this.typeJoueur.Name = "typeJoueur";
-            this.typeJoueur.TabStop = false;
-            // 
             // label8
             // 
             resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
+            // 
+            // scorePourGagner
+            // 
+            resources.ApplyResources(this.scorePourGagner, "scorePourGagner");
+            this.scorePourGagner.Name = "scorePourGagner";
             // 
             // type
             // 
@@ -238,6 +277,7 @@
             // comboBox1
             // 
             this.comboBox1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             resources.GetString("comboBox1.Items"),
@@ -246,41 +286,6 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // scoreGangant
-            // 
-            this.scoreGangant.Controls.Add(this.scorePourGagner);
-            this.scoreGangant.Controls.Add(this.numericUpDown1);
-            this.scoreGangant.Controls.Add(this.label7);
-            resources.ApplyResources(this.scoreGangant, "scoreGangant");
-            this.scoreGangant.Name = "scoreGangant";
-            this.scoreGangant.TabStop = false;
-            // 
-            // scorePourGagner
-            // 
-            resources.ApplyResources(this.scorePourGagner, "scorePourGagner");
-            this.scorePourGagner.Name = "scorePourGagner";
-            // 
-            // numericUpDown1
-            // 
-            resources.ApplyResources(this.numericUpDown1, "numericUpDown1");
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
-            // 
             // label7
             // 
             resources.ApplyResources(this.label7, "label7");
@@ -288,7 +293,6 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.SauvegarderDebogage);
             this.tabPage3.Controls.Add(this.groupBox2);
             resources.ApplyResources(this.tabPage3, "tabPage3");
             this.tabPage3.Name = "tabPage3";
@@ -303,6 +307,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.SauvegarderDebogage);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Controls.Add(this.console);
@@ -371,7 +376,6 @@
             // 
             this.tabPage4.Controls.Add(this.creationProfil);
             this.tabPage4.Controls.Add(this.listDeProfil);
-            this.tabPage4.Controls.Add(this.appliquer2);
             resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -380,6 +384,7 @@
             // 
             this.creationProfil.Controls.Add(this.label1);
             this.creationProfil.Controls.Add(this.label9);
+            this.creationProfil.Controls.Add(this.appliquer2);
             this.creationProfil.Controls.Add(this.trackBar2);
             this.creationProfil.Controls.Add(this.trackBar1);
             this.creationProfil.Controls.Add(this.Proba);
@@ -486,6 +491,17 @@
             this.appliquer2.UseVisualStyleBackColor = true;
             this.appliquer2.Click += new System.EventHandler(this.appliquer2_Click);
             // 
+            // label14
+            // 
+            resources.ApplyResources(this.label14, "label14");
+            this.label14.Name = "label14";
+            this.label14.Click += new System.EventHandler(this.label14_Click);
+            // 
+            // label15
+            // 
+            resources.ApplyResources(this.label15, "label15");
+            this.label15.Name = "label15";
+            // 
             // Configuration
             // 
             resources.ApplyResources(this, "$this");
@@ -498,11 +514,9 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.typeJoueur.ResumeLayout(false);
-            this.typeJoueur.PerformLayout();
             this.scoreGangant.ResumeLayout(false);
             this.scoreGangant.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -541,8 +555,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label scorePourGagner;
-        public System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.GroupBox typeJoueur;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label type;
         private System.Windows.Forms.Label label8;
@@ -573,5 +585,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TrackBar trackBar3;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
     }
 }

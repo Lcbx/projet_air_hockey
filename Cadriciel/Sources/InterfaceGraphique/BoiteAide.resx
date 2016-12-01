@@ -120,6 +120,15 @@
   <metadata name="notifyIcon1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="richTextBox9.Text" xml:space="preserve">
+    <value>Onglet Lumieres
+
+1) Lumière ambiante : Permet d'activer ou désactiver la lumière ambiante.
+
+2) Lumière directionnelle : Permet d'activer ou désactiver la lumière directionnelle.
+
+3) Spots lumineux : Permet d'activer ou désactiver les spots lumineux.</value>
+  </data>
   <data name="richTextBox1.Text" xml:space="preserve">
     <value>Mode d'édition de la table
 
@@ -128,12 +137,14 @@ La barre d'outils à gauche contiens l'ensemble des outils présentés dans l'on
 La barre des propriétés à droite présente les informations concernant les propriétés du seul objet sélectionné (Un seul objet doit être sélectionné):
 1. Contient la position sur l'axe des X et Y par rapport au centre de la table.
 2. Contient l'angle de rotation (en degrés).
-3. Contient le facteur de taille, nommé échelle, par rapport à la forme originale. Pour le muret, l'échelle n'a effet que sur la longeur.</value>
+3. Contient le facteur de taille, nommé échelle, par rapport à la forme originale. Pour le muret, l'échelle n'a effet que sur la longeur.
+
+Lorsqu'un objet se retrouve à l'extérieur de la table à cause des transformations réalisées, ces coordonnées seront corrigées lors de la prochaine tentative de changer les valeurs </value>
   </data>
   <data name="richTextBox2.Text" xml:space="preserve">
     <value>Onglet Fichier
 
-1) Nouveau : Permet de créer une nouvelle table vide aux tailles prédéfinies. Supprime la table en cours d'édition, alors il est important de sauvegarder auparavant.
+1) Nouveau : Permet de créer une nouvelle table vide aux tailles prédéfinies. Propose de sauvegarder ou non la table en cours d'édition.
 
 2) Ouvrir : Permet d'ouvrir une table qui a déjà été enregistrée. Supprime la table en cours d'édition, alors il est important de sauvegarder auparavant.
 
@@ -174,9 +185,9 @@ La barre des propriétés à droite présente les informations concernant les pr
   <data name="richTextBox5.Text" xml:space="preserve">
     <value>Onglet Vues
 
-1) Orthographique : Change la vue pour une vue aérienne sans rotation. La molette permet de changer le niveau de zoom et le clic droit permet de déplacer verticalement et horizontalement la vue.
+1) Orthographique : Change la vue pour une vue aérienne sans rotation. La molette permet de changer le niveau de zoom et le clic droit permet de déplacer verticalement et horizontalement la vue. Les touches + et - peuvent joueur le rôle du zoom et les flèches le déplacement.
 
-2) Orbite : Change la vue pour une vue aérienne avec rotation. La molette permet de changer l'élévation de la vue alors que le clic droit permet d'effectuer une révolution autour du centre de la table.</value>
+2) Orbite : Change la vue pour une vue aérienne avec rotation. La molette permet de changer le zoom de la vue alors que le clic droit permet d'effectuer une révolution autour du centre de la table et changer l'élévation. Les touches + et - peuvent joueur le rôle du zoom et les flèches le déplacement.</value>
   </data>
   <data name="richTextBox6.Text" xml:space="preserve">
     <value>Mode test de la table
@@ -186,9 +197,9 @@ La barre de menus est accessible à l'appuis de la touche escape. Le premier jou
   <data name="richTextBox8.Text" xml:space="preserve">
     <value>Onglet vues
 
-1) Orthographique : Change la vue pour une vue aérienne sans rotation. La molette permet de changer le niveau de zoom et le clic droit permet de déplacer verticalement et horizontalement la vue.
+1) Orthographique : Change la vue pour une vue aérienne sans rotation. La molette permet de changer le niveau de zoom et le clic droit permet de déplacer verticalement et horizontalement la vue. Les touches + et - peuvent joueur le rôle du zoom et les flèches le déplacement.
 
-2) Orbite : Change la vue pour une vue aérienne avec rotation. La molette permet de changer l'élévation de la vue alors que le clic droit permet d'effectuer une révolution autour du centre de la table.</value>
+2) Orbite : Change la vue pour une vue aérienne avec rotation. La molette permet de changer l'élévation de la vue alors que le clic droit permet d'effectuer une révolution autour du centre de la table. Les touches + et - peuvent joueur le rôle du zoom et les flèches le déplacement.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

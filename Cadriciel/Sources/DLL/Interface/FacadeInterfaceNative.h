@@ -48,8 +48,6 @@ extern "C" {
 	__declspec(dllexport) void supprimerObjet();
 
 
-
-
 	//Click
 	__declspec(dllexport) void clickStart(int x, int y);
 	__declspec(dllexport) bool clickCurrent(int x, int y);

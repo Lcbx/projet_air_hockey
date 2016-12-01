@@ -101,6 +101,9 @@
     <Compile Include="FenetreProfilVirtuel.Designer.cs">
       <DependentUpon>FenetreProfilVirtuel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utility\NumericUpDownSafe.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Utility\Profil.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -196,6 +199,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Edition.resx">
       <DependentUpon>Edition.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FenetreProfilVirtuel.resx">
       <DependentUpon>FenetreProfilVirtuel.cs</DependentUpon>
@@ -269,6 +273,8 @@
     <Content Include="Resources\IconesEditeur\gimp-tool-scale.png" />
     <Content Include="Resources\IconesEditeur\gimp-tool-zoom.png" />
     <Content Include="Resources\IconesEditeur\select.png" />
+    <Content Include="Resources\IconesEditeur\soleil.png" />
+    <Content Include="Resources\IconesEditeur\spots.png" />
     <Content Include="Resources\IconesEditeur\tool-bonus.png" />
     <Content Include="Resources\IconesEditeur\tool-muret.png" />
     <Content Include="Resources\IconesEditeur\tool-portail.png" />
@@ -282,6 +288,7 @@
     <Content Include="Resources\IconesMenus\isometrique.png" />
     <Content Include="Resources\IconesMenus\orbite.png" />
     <Content Include="Resources\IconesMenus\preferences-system.png" />
+    <Content Include="Resources\IconesEditeur\directionnelle.png" />
     <Content Include="Resources\Icones\edit.png" />
     <Content Include="Resources\Icones\gamepad.png" />
     <Content Include="Resources\Icones\power-button.png" />
