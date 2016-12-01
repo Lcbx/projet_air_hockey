@@ -43,7 +43,14 @@
 ////////////////////////////////////////////////////////////////////////
 NoeudTable::NoeudTable(const std::string& typeNoeud)
 	: NoeudComposite{ typeNoeud }
-{}
+{
+	hauteurBut_ = 5;
+	hauteurMur_ = 10;
+	couleurButs_ = glm::vec4{ 0.f,1.f,1.f,0.f };
+	couleurMurs_ = glm::vec4{ 1.,1.,1.,1. };
+	couleurLignes_ = glm::vec4 { 1.,0.,0.,0. };
+
+}
 
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -266,7 +273,7 @@ void NoeudTable::tracerPointsControle(const glm::mat4& vueProjection) const {
 		glm::vec3 p3{ p(i).x + delta / 2, p(i).y + delta / 2, p(i).z };
 
 		//vbo_->programme_.assignerUniforme("colorIn", couleur);
-		vbo_->programme_.assignerUniforme("colorIn", glm::vec4{ 0.,1.,0.,1. });
+		vbo_->programme_.assignerUniforme("colorIn", glm::vec4{ 1.,1.,0.,1. });
 		glBegin(GL_QUADS);
 		{
 			glVertex3fv(PROJvec(p0));
@@ -291,7 +298,7 @@ void NoeudTable::tracerPointsControle(const glm::mat4& vueProjection) const {
 void NoeudTable::tracerLignesDecoration(const glm::mat4& vueProjection) const
 {
 	// tracer le contour
-	vbo_->programme_.assignerUniforme("colorIn", glm::vec4{ 1.,1.,0.,1. });
+	vbo_->programme_.assignerUniforme("colorIn", couleurLignes_);
 	glLineWidth(2.);
 	glBegin(GL_LINE_LOOP);
 	{
@@ -475,7 +482,7 @@ void NoeudTable::tracerMurs3Points(const glm::mat4& vueProjection, glm::vec3 p1,
 /// @return Aucune.
 ///
 ///////////////////////////////////////////////////////////////////////////////////////
-void NoeudTable::tracerMur(const glm::mat4& vueProjection, glm::vec3 point1, glm::vec3 point2, glm::vec3 point3, glm::vec3 point4) const
+void NoeudTable::tracerMur3D(const glm::mat4& vueProjection, glm::vec3 point1, glm::vec3 point2, glm::vec3 point3, glm::vec3 point4, float hauteur) const
 {
 	// tracer les 6 Quads de la boite representant le mur
 	glBegin(GL_QUADS);
@@ -486,30 +493,30 @@ void NoeudTable::tracerMur(const glm::mat4& vueProjection, glm::vec3 point1, glm
 		glVertex3fv(PROJvec(point3));
 		glVertex3fv(PROJvec(point4));
 		//Quad 2 
-		glVertex3fv(PROJvec( glm::vec3( point1.x,point1.y,hauteurMur_)));
-		glVertex3fv(PROJvec(glm::vec3(point2.x, point2.y, hauteurMur_)));
-		glVertex3fv(PROJvec(glm::vec3(point3.x, point3.y, hauteurMur_)));
-		glVertex3fv(PROJvec(glm::vec3(point4.x, point4.y, hauteurMur_)));
+		glVertex3fv(PROJvec( glm::vec3( point1.x,point1.y, hauteur)));
+		glVertex3fv(PROJvec(glm::vec3(point2.x, point2.y, hauteur)));
+		glVertex3fv(PROJvec(glm::vec3(point3.x, point3.y, hauteur)));
+		glVertex3fv(PROJvec(glm::vec3(point4.x, point4.y, hauteur)));
 		//Quad 3
-		glVertex3fv(PROJvec(glm::vec3(point1.x, point1.y, hauteurMur_)));
-		glVertex3fv(PROJvec(glm::vec3(point2.x, point2.y, hauteurMur_)));
+		glVertex3fv(PROJvec(glm::vec3(point1.x, point1.y, hauteur)));
+		glVertex3fv(PROJvec(glm::vec3(point2.x, point2.y, hauteur)));
 		glVertex3fv(PROJvec(point2));
 		glVertex3fv(PROJvec(point1));
 		//Quad 4
 		glVertex3fv(PROJvec(point4));
 		glVertex3fv(PROJvec(point3));
-		glVertex3fv(PROJvec(glm::vec3(point3.x, point3.y, hauteurMur_)));
-		glVertex3fv(PROJvec(glm::vec3(point4.x, point4.y, hauteurMur_)));
+		glVertex3fv(PROJvec(glm::vec3(point3.x, point3.y, hauteur)));
+		glVertex3fv(PROJvec(glm::vec3(point4.x, point4.y, hauteur)));
 		//Quad 5
 		glVertex3fv(PROJvec(point1));
 		glVertex3fv(PROJvec(point4));
-		glVertex3fv(PROJvec(glm::vec3(point4.x, point4.y, hauteurMur_)));
-		glVertex3fv(PROJvec(glm::vec3(point1.x, point1.y, hauteurMur_)));
+		glVertex3fv(PROJvec(glm::vec3(point4.x, point4.y, hauteur)));
+		glVertex3fv(PROJvec(glm::vec3(point1.x, point1.y, hauteur)));
 		//Quad 6
 		glVertex3fv(PROJvec(point2));
 		glVertex3fv(PROJvec(point3));
-		glVertex3fv(PROJvec(glm::vec3(point3.x, point3.y, hauteurMur_)));
-		glVertex3fv(PROJvec(glm::vec3(point2.x, point2.y, hauteurMur_)));
+		glVertex3fv(PROJvec(glm::vec3(point3.x, point3.y, hauteur)));
+		glVertex3fv(PROJvec(glm::vec3(point2.x, point2.y, hauteur)));
 		
 	}
 	glEnd();
@@ -530,64 +537,21 @@ void NoeudTable::tracerMur(const glm::mat4& vueProjection, glm::vec3 point1, glm
 void NoeudTable::tracerMurs(const glm::mat4& vueProjection) const
 {
 	// tracer murs
-		vbo_->programme_.assignerUniforme("colorIn", glm::vec4{ (109.f / 255) , (7.f / 255), (26.f / 255), 0.5f });
+		// couleur bourgogne
+		//vbo_->programme_.assignerUniforme("colorIn", glm::vec4{ (109.f / 255) , (7.f / 255), (26.f / 255), 0.5f });
+		vbo_->programme_.assignerUniforme("colorIn", couleurMurs_);
 		//glEnable(GL_BLEND);
 		// test aficher mur p0p6
-		tracerMur(vueProjection, p(0), glm::vec3(p(0).x - largeur_, p(0).y, p(0).z), glm::vec3(p(6).x - largeur_, p(6).y, p(6).z), p(6));
-		tracerMur(vueProjection, p(6), glm::vec3(p(6).x - largeur_, p(6).y, p(6).z), glm::vec3(p(1).x - largeur_, p(1).y, p(1).z), p(1));
-		tracerMur(vueProjection, p(2), glm::vec3(p(2).x, p(2).y + largeur_, p(2).z), glm::vec3(p(0).x, p(0).y + largeur_, p(0).z), p(0));
-		tracerMur(vueProjection, p(4), glm::vec3(p(4).x, p(4).y + largeur_, p(4).z), glm::vec3(p(2).x, p(2).y + largeur_, p(2).z), p(2));
-		
-		tracerMur(vueProjection, glm::vec3(p(4).x + largeur_, p(4).y, p(4).z), p(4), p(7), glm::vec3(p(7).x + largeur_, p(7).y, p(7).z));
-
+		tracerMur3D(vueProjection, p(0), glm::vec3(p(0).x - largeur_, p(0).y, p(0).z), glm::vec3(p(6).x - largeur_, p(6).y, p(6).z), p(6),hauteurMur_);
+		tracerMur3D(vueProjection, p(6), glm::vec3(p(6).x - largeur_, p(6).y, p(6).z), glm::vec3(p(1).x - largeur_, p(1).y, p(1).z), p(1), hauteurMur_);
+		tracerMur3D(vueProjection, p(2), glm::vec3(p(2).x, p(2).y + largeur_, p(2).z), glm::vec3(p(0).x, p(0).y + largeur_, p(0).z), p(0), hauteurMur_);
+		tracerMur3D(vueProjection, p(4), glm::vec3(p(4).x, p(4).y + largeur_, p(4).z), glm::vec3(p(2).x, p(2).y + largeur_, p(2).z), p(2), hauteurMur_);
+		tracerMur3D(vueProjection, glm::vec3(p(4).x + largeur_, p(4).y, p(4).z), p(4), p(7), glm::vec3(p(7).x + largeur_, p(7).y, p(7).z), hauteurMur_);
+		tracerMur3D(vueProjection, glm::vec3(p(7).x + largeur_, p(7).y, p(7).z), p(7), p(5), glm::vec3(p(5).x + largeur_, p(5).y, p(5).z), hauteurMur_);
+		tracerMur3D(vueProjection, glm::vec3(p(5).x, p(5).y - largeur_, p(5).z),  p(5), p(3), glm::vec3(p(3).x, p(3).y - largeur_, p(7).z), hauteurMur_);
+		tracerMur3D(vueProjection, glm::vec3(p(3).x, p(3).y - largeur_, p(3).z), p(3), p(1), glm::vec3(p(1).x, p(1).y - largeur_, p(1).z), hauteurMur_);
 
 		//glDisable(GL_BLEND);
-
-	glBegin(GL_QUADS);
-	{
-		//// mur p0p6
-		//glVertex3fv(PROJ(0));
-		//glVertex3fv(PROJvec(glm::vec3(p(0).x - largeur_, p(0).y, p(0).z)));
-		//glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y, p(6).z)));
-		//glVertex3fv(PROJ(6));
-		// mur p6p1
-		/*glVertex3fv(PROJ(6));
-		glVertex3fv(PROJvec(glm::vec3(p(6).x - largeur_, p(6).y, p(6).z)));
-		glVertex3fv(PROJvec(glm::vec3(p(1).x - largeur_, p(1).y, p(1).z)));
-		glVertex3fv(PROJ(1));*/
-		//// mur p0p2
-		//glVertex3fv(PROJ(2));
-		//glVertex3fv(PROJvec(glm::vec3(p(2).x, p(2).y + largeur_, p(2).z)));
-		//glVertex3fv(PROJvec(glm::vec3(p(0).x, p(0).y + largeur_, p(0).z)));
-		//glVertex3fv(PROJ(0));
-		//// mur p2p4
-		//glVertex3fv(PROJ(4));
-		//glVertex3fv(PROJvec(glm::vec3(p(4).x, p(4).y + largeur_, p(4).z)));
-		//glVertex3fv(PROJvec(glm::vec3(p(2).x, p(2).y + largeur_, p(2).z)));
-		//glVertex3fv(PROJ(2));
-		// mur p4p7
-		glVertex3fv(PROJvec(glm::vec3(p(4).x + largeur_, p(4).y, p(4).z)));
-		glVertex3fv(PROJ(4));
-		glVertex3fv(PROJ(7));
-		glVertex3fv(PROJvec(glm::vec3(p(7).x + largeur_, p(7).y, p(7).z)));
-		// mur p7p5		
-		glVertex3fv(PROJvec(glm::vec3(p(7).x + largeur_, p(7).y, p(7).z)));
-		glVertex3fv(PROJ(7));
-		glVertex3fv(PROJ(5));
-		glVertex3fv(PROJvec(glm::vec3(p(5).x + largeur_, p(5).y, p(5).z)));
-		// mur p5p3
-		glVertex3fv(PROJvec(glm::vec3(p(5).x, p(5).y - largeur_, p(5).z)));
-		glVertex3fv(PROJ(5));
-		glVertex3fv(PROJ(3));
-		glVertex3fv(PROJvec(glm::vec3(p(3).x, p(3).y - largeur_, p(7).z)));
-		// mur p3p1
-		glVertex3fv(PROJvec(glm::vec3(p(3).x, p(3).y - largeur_, p(3).z)));
-		glVertex3fv(PROJ(3));
-		glVertex3fv(PROJ(1));
-		glVertex3fv(PROJvec(glm::vec3(p(1).x, p(1).y - largeur_, p(1).z)));
-	}
-	glEnd();
-
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -645,6 +609,8 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection) const
 {
 #define delta 2
 	vbo_->programme_.assignerUniforme("colorIn", couleurButs_);
+	
+	
 	glBegin(GL_QUADS);
 	{	
 		//1er but
@@ -845,42 +811,61 @@ void NoeudTable::tracerButs(const glm::mat4& vueProjection, double longueur) con
 	glm::vec3 point1, point2, point3, point4, point5;
 	//glColor4f(couleurButs_[0], couleurButs_[1], couleurButs_[2], couleurButs_[3]);
 	//Luc : les nuanceurs ne permettent qu'une couleur par set de points envoyés
-	vbo_->programme_.assignerUniforme("colorIn", glm::vec4(0.f, 0.f, 1.f, 0.f)); //vert
-	glBegin(GL_QUADS);
-	//glPointSize(5);
-	//glBegin(GL_POINTS);
-	{
-		//1er but
-		point1 = p(6);
-		calculerPointDistance(p(0), p(6), longueur, largeur_, point2, point3, point4);
-		// 1er morceau P6P0
-		glVertex3fv(PROJvec(glm::vec3(point1.x + delta , point1.y, point1.z)));
-		glVertex3fv(PROJvec(glm::vec3(point2.x + delta , point2.y, point2.z)));
-		glVertex3fv(PROJvec(glm::vec3(point3.x - delta, point3.y, point3.z)));
-		glVertex3fv(PROJvec(glm::vec3(point4.x - delta, point4.y, point4.z)));
-		// 2eme morceau P1P6
-		calculerPointDistance(p(1), p(6), longueur, largeur_, point2, point3, point4);
-		glVertex3fv(PROJvec(glm::vec3(point1.x + delta, point1.y, point1.z)));
-		glVertex3fv(PROJvec(glm::vec3(point4.x - delta, point4.y, point4.z)));
-		glVertex3fv(PROJvec(glm::vec3(point3.x - delta, point3.y, point3.z)));
-		glVertex3fv(PROJvec(glm::vec3(point2.x + delta, point2.y, point2.z)));
+	vbo_->programme_.assignerUniforme("colorIn", couleurButs_); //vert
 	
-		//2eme but
-		point1 = p(7);
-		// 1ere morceau P7P4
-		calculerPointDistance(p(4), p(7), longueur, largeur_, point2, point3, point4);
-		glVertex3fv(PROJvec(glm::vec3(point1.x - delta, point1.y, point1.z)));
-		glVertex3fv(PROJvec(glm::vec3(point4.x + delta + 2 * largeur_, point4.y, point4.z)));
-		glVertex3fv(PROJvec(glm::vec3(point3.x + delta + 2*largeur_, point3.y, point3.z)));
-		glVertex3fv(PROJvec(glm::vec3(point2.x - delta, point2.y, point2.z)));
-		//2eme morceau 
-		calculerPointDistance(p(5), p(7), longueur, largeur_, point2, point3, point4);
-		glVertex3fv(PROJvec(glm::vec3(point1.x - delta, point1.y, point1.z)));
-		glVertex3fv(PROJvec(glm::vec3(point2.x - delta, point2.y, point2.z)));
-		glVertex3fv(PROJvec(glm::vec3(point3.x + delta + 2 * largeur_, point3.y, point3.z)));
-		glVertex3fv(PROJvec(glm::vec3(point4.x + delta + 2 * largeur_, point4.y, point4.z)));
-	}
-	glEnd();
+	//1er but
+	point1 = p(6);
+	calculerPointDistance(p(0), p(6), longueur, largeur_, point2, point3, point4);
+	tracerMur3D(vueProjection, glm::vec3(point1.x + delta, point1.y, point1.z), glm::vec3(point2.x + delta, point2.y, point2.z),
+		glm::vec3(point3.x - delta, point3.y, point3.z), glm::vec3(point4.x - delta, point4.y, point4.z),hauteurBut_);
+	calculerPointDistance(p(1), p(6), longueur, largeur_, point2, point3, point4);
+	tracerMur3D(vueProjection, glm::vec3(point1.x + delta, point1.y, point1.z), glm::vec3(point4.x - delta, point4.y, point4.z),
+		glm::vec3(point3.x - delta, point3.y, point3.z), glm::vec3(point2.x + delta, point2.y, point2.z), hauteurBut_);
+	// 2eme but	
+	point1 = p(7);
+	calculerPointDistance(p(4), p(7), longueur, largeur_, point2, point3, point4);
+	tracerMur3D(vueProjection, glm::vec3(point1.x - delta, point1.y, point1.z), glm::vec3(point4.x + delta + 2 * largeur_, point4.y, point4.z),
+		glm::vec3(point3.x + delta + 2 * largeur_, point3.y, point3.z), glm::vec3(point2.x - delta, point2.y, point2.z), hauteurBut_);
+
+	calculerPointDistance(p(5), p(7), longueur, largeur_, point2, point3, point4);
+	tracerMur3D(vueProjection, glm::vec3(point1.x - delta, point1.y, point1.z), glm::vec3(point2.x - delta, point2.y, point2.z),
+		glm::vec3(point3.x + delta + 2 * largeur_, point3.y, point3.z), glm::vec3(point4.x + delta + 2 * largeur_, point4.y, point4.z),hauteurBut_);
+
+	//glBegin(GL_QUADS);
+	////glPointSize(5);
+	////glBegin(GL_POINTS);
+	//{
+	//	////1er but
+	//	//point1 = p(6);
+	//	//calculerPointDistance(p(0), p(6), longueur, largeur_, point2, point3, point4);
+	//	////// 1er morceau P6P0
+	//	////glVertex3fv(PROJvec(glm::vec3(point1.x + delta , point1.y, point1.z)));
+	//	////glVertex3fv(PROJvec(glm::vec3(point2.x + delta , point2.y, point2.z)));
+	//	////glVertex3fv(PROJvec(glm::vec3(point3.x - delta, point3.y, point3.z)));
+	//	////glVertex3fv(PROJvec(glm::vec3(point4.x - delta, point4.y, point4.z)));
+	//	//// 2eme morceau P1P6
+	//	//calculerPointDistance(p(1), p(6), longueur, largeur_, point2, point3, point4);
+	//	//glVertex3fv(PROJvec(glm::vec3(point1.x + delta, point1.y, point1.z)));
+	//	//glVertex3fv(PROJvec(glm::vec3(point4.x - delta, point4.y, point4.z)));
+	//	//glVertex3fv(PROJvec(glm::vec3(point3.x - delta, point3.y, point3.z)));
+	//	//glVertex3fv(PROJvec(glm::vec3(point2.x + delta, point2.y, point2.z)));
+	//
+	//	//2eme but
+	//	point1 = p(7);
+	//	// 1ere morceau P7P4
+	//	calculerPointDistance(p(4), p(7), longueur, largeur_, point2, point3, point4);
+	//	glVertex3fv(PROJvec(glm::vec3(point1.x - delta, point1.y, point1.z)));
+	//	glVertex3fv(PROJvec(glm::vec3(point4.x + delta + 2 * largeur_, point4.y, point4.z)));
+	//	glVertex3fv(PROJvec(glm::vec3(point3.x + delta + 2*largeur_, point3.y, point3.z)));
+	//	glVertex3fv(PROJvec(glm::vec3(point2.x - delta, point2.y, point2.z)));
+	//	//2eme morceau 
+	//	calculerPointDistance(p(5), p(7), longueur, largeur_, point2, point3, point4);
+	//	glVertex3fv(PROJvec(glm::vec3(point1.x - delta, point1.y, point1.z)));
+	//	glVertex3fv(PROJvec(glm::vec3(point2.x - delta, point2.y, point2.z)));
+	//	glVertex3fv(PROJvec(glm::vec3(point3.x + delta + 2 * largeur_, point3.y, point3.z)));
+	//	glVertex3fv(PROJvec(glm::vec3(point4.x + delta + 2 * largeur_, point4.y, point4.z)));
+	//}
+	//glEnd();
 #undef Delta
 #undef delta 
 
