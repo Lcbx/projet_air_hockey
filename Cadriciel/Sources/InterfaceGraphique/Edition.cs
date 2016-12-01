@@ -1941,8 +1941,8 @@ namespace InterfaceGraphique
                 {
                     partieGagnee = true;
 
-                    DialogResult dialog = MessageBox.Show("La partie est finie, voulez-vous revenir au tournoi ! Yes pour tournoi , No pour retourner au menu Principal",
-                            "Revenir mode Tournoi ", MessageBoxButtons.YesNo);
+                    DialogResult dialog = MessageBox.Show("La partie est terminée. Voulez-vous poursuivre le tournoi?",
+                            "Matchup terminé", MessageBoxButtons.YesNo);
 
                     if (dialog == DialogResult.Yes)
                     {
@@ -1981,8 +1981,8 @@ namespace InterfaceGraphique
                 {
                     partieGagnee = true;
                     
-                    DialogResult dialog = MessageBox.Show("La partie est finie, vous voulez rejouer encore ? Yes pour Rejouer, No pour retourner au menu Principal",
-                            "Rejouer ou retour au menu principal", MessageBoxButtons.YesNo);
+                    DialogResult dialog = MessageBox.Show("La partie est terminée. Voulez-vous jouer à nouveau?",
+                            "Partie terminée", MessageBoxButtons.YesNo);
                    
                     if (dialog == DialogResult.Yes)
                     {
