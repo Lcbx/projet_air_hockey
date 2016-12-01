@@ -1311,6 +1311,7 @@ extern "C"
 			}
 			Debug::obtenirInstance().afficher(message);
 		}
+		FacadeModele::obtenirInstance()->setTypeLumiereActive(jLumiereAmbiente, kLumiereDirectionnelle, jLumiereSpots);
 	}
 	////////////////////////////////////////////////////////////////////////
 	/// @fn __declspec(dllexport) void __cdecl sauvegarderTypeButMax(int nbButMax, bool estHumain)
@@ -1485,29 +1486,15 @@ extern "C"
 
 	////////////////////////////////////////////////////////////////////////
 	/// @fn void mettrePauseMusique()
-	/// Author : wajdi
-	/// Cette fonction permet de jouer la musique de fond
+	/// Author : ikram
+	/// Cette fonction permet d'assigner les bonnes valeurs de la lumière
 	///
 	/// @return rien
 	///
 	////////////////////////////////////////////////////////////////////////
-	__declspec(dllexport) void __cdecl setTypeLumiereActive(int type)
+	__declspec(dllexport) void __cdecl setTypeLumiereActive(bool lumiereAmbiante, bool lumiereDirectionnelle, bool lumiereSpot)
 	{
-		FacadeModele::obtenirInstance()->setTypeLumiereActive(type);
+		FacadeModele::obtenirInstance()->setTypeLumiereActive(lumiereAmbiante, lumiereDirectionnelle, lumiereSpot);
 	}
-
-	////////////////////////////////////////////////////////////////////////
-	/// @fn void mettrePauseMusique()
-	/// Author : wajdi
-	/// Cette fonction permet de jouer la musique de fond
-	///
-	/// @return rien
-	///
-	////////////////////////////////////////////////////////////////////////
-	__declspec(dllexport) int getTypeLumiereActive()
-	{
-		return (FacadeModele::obtenirInstance()->getTypeLumiereActive());
-	}
-
 }
 

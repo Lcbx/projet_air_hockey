@@ -65,9 +65,10 @@ public:
 	static void libererInstance();
 	//ikram
 	// assigne un numéro au type de lumière active
-	void setTypeLumiereActive(int type);
-	int getTypeLumiereActive();
-
+	void setTypeLumiereActive(bool lumiereAmbiante, bool lumiereDirectionnelle, bool lumiereSpot);
+	bool getEtatLumiereAmbiante();
+	bool getEtatLumiereDirectionnelle();
+	bool getEtatLumiereSpot();
 	/// Crée un contexte OpenGL et initialise celui-ci.
 	void initialiserOpenGL(HWND hWnd);
 
@@ -253,7 +254,9 @@ private:
    /// Opérateur d'assignation désactivé.
    FacadeModele& operator =(const FacadeModele&) = delete;
 
-   int typeLumiereActive_;
+   bool lumiereAmbiante_;
+   bool lumiereDirectionnelle_;
+   bool lumiereSpot_;
    /// Nom du fichier XML dans lequel doit se trouver la configuration.
    static const std::string FICHIER_CONFIGURATION;
 

@@ -168,7 +168,8 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 	glEnable(GL_LIGHTING);
 	//Allume la lumière Numéro 0 
 	//
-	//glEnable(GL_LIGHT1);
+	glEnable(GL_LIGHT1);
+	glEnable(GL_LIGHT2);
 	glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
 	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
 	//Activer la couleur du matériel
@@ -468,12 +469,12 @@ void FacadeModele::afficherBase() const
 
 	}
 	if (typeLumiereActive_ == 2)*/
-	{
+	//{
 		glEnable(GL_LIGHT1);
 		glEnable(GL_LIGHT2);
 		glm::vec4 position(0.0, 0.0, -1.0, 1.0);
 		//une couleur ambiante gris
-		glm::vec4 couleurAmbiante(0.1, 0.1, 0.1, 1.0);
+		glm::vec4 couleurAmbiante(0., 0., 0., 1.0);
 		//une couleur diffuse jaune
 		glm::vec4 couleurDiffuse(1.0, 1.0, 0.8, 1.0);
 		//Aucune lumière speculaire
@@ -497,7 +498,7 @@ void FacadeModele::afficherBase() const
 		glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 10.0);
 		glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, glm::value_ptr(spotDirection2));
 		glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 20.0);
-	}
+	//}
 	//glEnable(GL_LIGHT1);
 
 	// Afficher la scène.
@@ -1539,20 +1540,20 @@ void FacadeModele::MettrePauseSonModeJeu(bool pause)
 /// @return	aucun
 ///
 ////////////////////////////////////////////////////////////////////////
-void FacadeModele::  setTypeLumiereActive(int type)
+void FacadeModele::  setTypeLumiereActive(bool lumiereAmbiante, bool lumiereDirectionnelle, bool lumiereSpot)
 {
 
-	if (type == 0)
-		typeLumiereActive_ = 0;
-	if (type == 1)
-		typeLumiereActive_ = 1;
-	if (type == 2)
-		typeLumiereActive_ = 2;
+	if (lumiereAmbiante)
+		lumiereAmbiante_ = true;
+	if (lumiereDirectionnelle)
+		lumiereDirectionnelle_ = true;
+	if (lumiereSpot)
+		lumiereSpot_ = true;
 }
 
 ////////////////////////////////////////////////////////////////////////
 ///
-/// @fn void setTypeLumiereActive(int type);
+/// @fn bool getEtatLumiereAmbiante()
 ///
 ///	Permet d'assigner le type de lumière  
 //  @param[in]: type de lumière : 0 ambiante, 1 directionnelle et 2 spot
@@ -1560,7 +1561,35 @@ void FacadeModele::  setTypeLumiereActive(int type)
 /// @return	aucun
 ///
 ////////////////////////////////////////////////////////////////////////
-int FacadeModele::getTypeLumiereActive()
+bool FacadeModele::getEtatLumiereAmbiante()
 {
-	return (typeLumiereActive_);
+	return (lumiereAmbiante_);
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool getEtatLumiereDirectionnelle()
+///
+///	Permet d'assigner le type de lumière  
+//  @param[in]: type de lumière : 0 ambiante, 1 directionnelle et 2 spot
+///
+/// @return	aucun
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::getEtatLumiereDirectionnelle()
+{
+	return (lumiereDirectionnelle_);
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool getEtatLumiereSpot()
+///
+///	Permet d'assigner le type de lumière  
+//  @param[in]: type de lumière : 0 ambiante, 1 directionnelle et 2 spot
+///
+/// @return	aucun
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::getEtatLumiereSpot()
+{
+	return (lumiereSpot_);
 }

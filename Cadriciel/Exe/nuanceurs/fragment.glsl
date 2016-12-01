@@ -1,5 +1,15 @@
 #version 420
 
+///////////////////////////////////////////////////////////////////////////////
+// @file fragment.glsl
+// @author Medaoud Ikram
+// @date 2016-11-15
+// @version 1.0
+//
+// 
+///////////////////////////////////////////////////////////////////////////////
+
+uniform mat4 modelViewProjection;
 layout(binding=0) uniform sampler2D diffuseTex;
 
 varying vec2 texCoord;
@@ -21,36 +31,29 @@ uniform   float Kshininess;
    vec4 LightSourceDiffuse = vec4(1.0,1.0,1.0,1.0);
    vec4 LightSourceSpecular = vec4(1.0,1.0,1.0,1.0);
    
-   
-   //vec4 position;
-   vec3 spotDirection1 = vec3(-0.3, 0.0, 0.6);
-   vec3 spotDirection2 = vec3(0.3, 0.0, 0.6);
-   float spotExponent =20.0;
+//Définition de paramètres de spot
+   vec3 spotDirection1 = vec3(-0.15, 0.0, -1.0);
+   vec3 spotDirection2 = vec3(0.15, 0.0, -1.0);
+   float spotExponent =1.0;
    // angle d'ouverture de spot delta
-   float spotCutoff =10;            // ([0.0,90.0] ou 180.0)
-   //float constantAttenuation;
-   //float linearAttenuation;
-   //float quadraticAttenuation;
+   float spotCutoff =4;            // ([0.0,90.0] ou 180.0)
 
 
 
 
 // Définition des paramètres globaux du modèle de lumière
 vec4 LightModelAmbient = vec4(0.2,0.2,0.2, 1.0);       // couleur ambiante
-//uniform bool localViewer;   // observateur local ou à l'infini?
-//uniform bool twoSide;       // éclairage sur les deux côtés ou un seul?
-
 
 
    // partie 1: illumination
 uniform int typeIllumination;     // // 0:toutes les sortes de la lumière sont activées, 1:Ambiante, 2:DirectionnellePhong , 3: spot,
-
-
+uniform bool lumiereAmbiante;
+uniform bool lumiereDirectionnelle;
+uniform bool lumiereSpot;
 /////////////////////////////////////////////////////////////////
 
 in Attribs {
    vec3 lumiereDir;
-   vec3 lumiereSpotPos;
    vec3 normale;
    vec3 obsVec;
 
@@ -64,12 +67,10 @@ float calculerSpot( in vec3 spotDir1, in vec3 spotDir2, in vec3 L )
    float CosAngleGama1 =  dot(-L,spotDir1); 
    float CosAngleGama2 =  dot(-L,spotDir2); 
    float CosAngleOuverture = cos(radians(spotCutoff)); 
-   //float CosAngleIner  = CosAngleOuverture;
-   //float CosAngleOuter = pow (CosAngleOuverture,(1.01+(spotExponent/2)));
    float Ispot ;
                   		 
 				   if (CosAngleGama1 >= CosAngleOuverture || CosAngleGama2 >= CosAngleOuverture)//&& CosAngleGama2 > CosAngleOuverture)
-					    Ispot = clamp(pow(CosAngleGama1+CosAngleGama2,spotExponent),0.0,1.0);
+					    Ispot = clamp(pow(CosAngleGama1,spotExponent),0.0,1.0);
 				   else 
 					    Ispot = 0.4 ;
 					    
@@ -108,29 +109,32 @@ void main(void)
 	  vec3 N = normalize(AttribsIn.normale);
 	  vec3 L = normalize(AttribsIn.lumiereDir);
 	  vec3 O = normalize(AttribsIn.obsVec);
-	  vec3 LSP= normalize(AttribsIn.lumiereSpotPos);
 	  vec3 DS1 = normalize(spotDirection1);
 	  vec3 DS2 = normalize(spotDirection2);
-	  //vec4 couleurDepart = calculerDirectionnelle( L,N, O )*calculerSpot(DS,L);
 	  vec4 couleurTex = texture2D(diffuseTex,texCoord);
 	  
 	 
        //si le type d illumination est ambiant	
-			 if (typeIllumination == 0) // lumière ambiante
+			 //if (lumiereAmbiante) // lumière ambiante
+			 if (typeIllumination==0)
 			{
-				//vec4 coul = vec4(Kdiffuse,1.0);
+				
 				vec4 coul = vec4(Kemission,1.0)+ vec4(Kambient,1.0) * LightModelAmbient; 
 				color = clamp(coul*couleurTex,0.0,1.0);
 			}
 			
-			 if (typeIllumination == 1) // lumière directionnelle
+			 //if (lumiereDirectionnelle) // lumière directionnelle
+			  if (typeIllumination==1)
 					 color = clamp((calculerDirectionnelle( L,N, O)*couleurTex),0.0,1.0);
    
-			 if (typeIllumination == 2) //spot
-				color = clamp(calculerSpot(DS1,DS2, LSP)*couleurTex,0.0,1.0);
+			  if (typeIllumination==2)
+			 //if (lumiereSpot) //spot
+				color = calculerSpot(DS1,DS2, L)*clamp(calculerDirectionnelle( L,N, O)*couleurTex,0.0,1.0);
 			 
-			 //else  //toutes les sortes de la lumière sont activées
+			 //if(typeIllumination == 3) //toutes les sortes de la lumière sont activées
 				//color = clamp(couleurDepart* couleurTex,0.0,1.0);
+			//else
+				//color=vec4(0,0,0,0);
           
    
     //color = vec4(couleurTex);
@@ -138,6 +142,6 @@ void main(void)
 //luc
 //note : le canal alpha controle l'application des textures
       //else color = colorIn + colorIn.a * texture2D(diffuseTex, texCoord.st);
-      color = colorIn + color;
+      color = colorIn + color ;
 
 }
