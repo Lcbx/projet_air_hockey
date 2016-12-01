@@ -250,6 +250,7 @@
             this.txtPositionX.Name = "txtPositionX";
             this.txtPositionX.Size = new System.Drawing.Size(102, 20);
             this.txtPositionX.TabIndex = 13;
+            this.txtPositionX.ValueChanged += new System.EventHandler(this.txtPositionX_ValueChanged);
             // 
             // label3
             // 

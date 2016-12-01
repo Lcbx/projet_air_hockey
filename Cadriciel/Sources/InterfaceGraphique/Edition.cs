@@ -89,6 +89,52 @@ namespace InterfaceGraphique
             set { SetField(ref Echelle_, value, "Echelle"); }
         }
 
+        /// @fn bool propertiesSet()
+        /// @brief Permet de savoir si propriétés ont été assignées (non-nulles)
+        /// Permet d'éviter un problème avec le databinding et l'évènement value changed
+        /// @return true si toutes les propriétées ne sont pas nulles, false autrement
+        bool propertiesSet() {
+            return !(Echelle_ == null || Angle_ == null || PositionY_ == null || PositionX_ == null);
+        }
+
+        /// @struct ErrorSet
+        /// @brief Permet d'afficher des messages d'erreur personnalisés
+        private class PropertiesErrorSet {
+            public bool PositionX, PositionY, Angle, Echelle;
+            /// @brief Permet d'initialiser la structure
+            public PropertiesErrorSet(bool a_ = false, bool b_ = false, bool c_ = false, bool d_ = false) {
+                PositionX = a_; PositionY = b_; Angle = c_; Echelle = d_;
+            }
+
+            /// @brief Permet de remettre à faux toutes les erreurs
+            public void clear() { PositionX = false; PositionY = false; Angle = false; Echelle = false; }
+            /// @brief Permet d'obtenir la chaîne d'erreur
+            public string getError() {
+                List<string> errorsBuilder = new List<string>();
+                if (PositionX) errorsBuilder.Add("la position en x");
+                if (PositionY) errorsBuilder.Add("la position en y");
+                if (Angle) errorsBuilder.Add("l'angle");
+                if (Echelle) errorsBuilder.Add("l'échelle");
+                string str = "L'objet sort de la table, les propriétés suivantes ont été modifiées depuis la dernière position valide: ";
+                if (errorsBuilder.Count == 0)
+                    return "";
+                else if (errorsBuilder.Count == 1)
+                    return "L'objet sort de la table, la propriété suivante a été modifiée depuis la dernière position valide: " + errorsBuilder[0];
+                else if (errorsBuilder.Count == 2)
+                    return str + errorsBuilder[0] + " et " + errorsBuilder[1];
+                else if (errorsBuilder.Count == 3)
+                    return str + errorsBuilder[0] + ", " + errorsBuilder[1] + " et " + errorsBuilder[2];
+                else
+                    return str + errorsBuilder[0] + ", " + errorsBuilder[1] + ", " + errorsBuilder[2] + " et " + errorsBuilder[3];
+            }
+
+            /// @brief Permet de savoir s'il y a une erreur
+            public bool hasError() {
+                return PositionX || PositionY || Angle || Echelle;
+            }
+        }
+        PropertiesErrorSet propertiesErrorSet = new PropertiesErrorSet();
+
         /////
         ///// Fin section propriétés pour le databinding
         /////
@@ -1094,6 +1140,13 @@ namespace InterfaceGraphique
                 this.PositionY = FonctionsNatives.getPosY();
                 this.Angle     = FonctionsNatives.getAngle();
                 this.Echelle   = FonctionsNatives.getScale();
+
+                this.propertiesErrorSet.clear();
+                this.txtBoxErreurProprietes.Visible = false;
+                txtPositionX.ForeColor = Color.Black;
+                txtPositionY.ForeColor = Color.Black;
+                txtAngle.ForeColor = Color.Black;
+                txtEchelle.ForeColor = Color.Black;
             }
             else
             {
@@ -1314,13 +1367,21 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void button1_Click(object sender, EventArgs e)
         {
-            FonctionsNatives.configurerObjet(PositionX.Value, PositionY.Value, Angle.Value, Echelle.Value);
+            MettreAJourObjet();
             if (FonctionsNatives.objetEstDansLaTable() == false) {
                 txtBoxErreurProprietes.Visible = true;
             } else {
                 txtBoxErreurProprietes.Visible = false;
                 this.mettreAjourPos();
             }
+        }
+
+        ///@fn private void MettreAJourObjet()
+        ///@brief Permet de mettre à jour les propriétés de l'objet
+        private void MettreAJourObjet() {
+            // Conversion à cause de l'ordre de mise à jour des NumericUpDown
+            FonctionsNatives.configurerObjet(decimal.ToDouble(txtPositionX.Value), decimal.ToDouble(txtPositionY.Value), 
+                decimal.ToDouble(txtAngle.Value), decimal.ToDouble(txtEchelle.Value));
         }
 
 
@@ -1962,6 +2023,24 @@ namespace InterfaceGraphique
         private void orbiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FonctionsNatives.setVueOrbite();
+        }
+
+        /// @fn private void txtPositionX_ValueChanged(object sender, EventArgs e)
+        /// @brief Permet de modifier la position de l'objet sélectionné en temps réel
+        private void txtPositionX_ValueChanged(object sender, EventArgs e)
+        {
+            // À cause du trigger à l'assignation de PositionX
+            if (this.propertiesSet()) {
+                MettreAJourObjet();
+                if (FonctionsNatives.objetEstDansLaTable() == false) {
+                    this.propertiesErrorSet.PositionX = true;
+                    this.txtPositionX.ForeColor = Color.Red;
+                    this.txtBoxErreurProprietes.Visible = true;
+                    this.txtBoxErreurProprietes.Text = this.propertiesErrorSet.getError();
+                } else {
+                    mettreAjourPos();
+                }
+            }
         }
 
 
