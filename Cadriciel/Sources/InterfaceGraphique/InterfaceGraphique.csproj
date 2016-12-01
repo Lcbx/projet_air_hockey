@@ -272,6 +272,8 @@
     <Content Include="Resources\IconesEditeur\gimp-tool-scale.png" />
     <Content Include="Resources\IconesEditeur\gimp-tool-zoom.png" />
     <Content Include="Resources\IconesEditeur\select.png" />
+    <Content Include="Resources\IconesEditeur\soleil.png" />
+    <Content Include="Resources\IconesEditeur\spots.png" />
     <Content Include="Resources\IconesEditeur\tool-bonus.png" />
     <Content Include="Resources\IconesEditeur\tool-muret.png" />
     <Content Include="Resources\IconesEditeur\tool-portail.png" />
@@ -285,6 +287,7 @@
     <Content Include="Resources\IconesMenus\isometrique.png" />
     <Content Include="Resources\IconesMenus\orbite.png" />
     <Content Include="Resources\IconesMenus\preferences-system.png" />
+    <Content Include="Resources\IconesEditeur\directionnelle.png" />
     <Content Include="Resources\Icones\edit.png" />
     <Content Include="Resources\Icones\gamepad.png" />
     <Content Include="Resources\Icones\power-button.png" />

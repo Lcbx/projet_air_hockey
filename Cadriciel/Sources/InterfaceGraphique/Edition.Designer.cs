@@ -31,14 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Edition));
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnlProperty = new System.Windows.Forms.Panel();
-            this.txtAngle = new InterfaceGraphique.Utility.NumericUpDownSafe();
             this.txtBoxErreurProprietes = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.txtEchelle = new InterfaceGraphique.Utility.NumericUpDownSafe();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtPositionY = new InterfaceGraphique.Utility.NumericUpDownSafe();
-            this.txtPositionX = new InterfaceGraphique.Utility.NumericUpDownSafe();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -72,6 +68,10 @@
             this.orbiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.informationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lumieresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lumiereAmbianteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lumiereDirectionnelleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spotsLumineuxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripLabel();
@@ -89,14 +89,18 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripTextBox3 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripButtonPointsDeControle = new System.Windows.Forms.ToolStripButton();
+            this.txtAngle = new InterfaceGraphique.Utility.NumericUpDownSafe();
+            this.txtEchelle = new InterfaceGraphique.Utility.NumericUpDownSafe();
+            this.txtPositionY = new InterfaceGraphique.Utility.NumericUpDownSafe();
+            this.txtPositionX = new InterfaceGraphique.Utility.NumericUpDownSafe();
             this.pnlProperty.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAngle)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEchelle)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPositionY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPositionX)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAngle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEchelle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPositionY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPositionX)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -133,29 +137,6 @@
             this.pnlProperty.Size = new System.Drawing.Size(142, 516);
             this.pnlProperty.TabIndex = 0;
             // 
-            // txtAngle
-            // 
-            this.txtAngle.Location = new System.Drawing.Point(76, 134);
-            this.txtAngle.Maximum = new decimal(new int[] {
-            180,
-            0,
-            0,
-            0});
-            this.txtAngle.Minimum = new decimal(new int[] {
-            180,
-            0,
-            0,
-            -2147483648});
-            this.txtAngle.Name = "txtAngle";
-            this.txtAngle.Size = new System.Drawing.Size(57, 20);
-            this.txtAngle.TabIndex = 15;
-            this.txtAngle.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtAngle.ValueChanged += new System.EventHandler(this.txtAngle_ValueChanged);
-            // 
             // txtBoxErreurProprietes
             // 
             this.txtBoxErreurProprietes.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -178,35 +159,6 @@
             this.button1.Text = "Modifier les valeurs";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // txtEchelle
-            // 
-            this.txtEchelle.DecimalPlaces = 1;
-            this.txtEchelle.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.txtEchelle.Location = new System.Drawing.Point(76, 168);
-            this.txtEchelle.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.txtEchelle.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.txtEchelle.Name = "txtEchelle";
-            this.txtEchelle.Size = new System.Drawing.Size(57, 20);
-            this.txtEchelle.TabIndex = 16;
-            this.txtEchelle.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.txtEchelle.ValueChanged += new System.EventHandler(this.txtEchelle_ValueChanged);
             // 
             // label1
             // 
@@ -231,44 +183,6 @@
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Position";
-            // 
-            // txtPositionY
-            // 
-            this.txtPositionY.DecimalPlaces = 2;
-            this.txtPositionY.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.txtPositionY.Location = new System.Drawing.Point(28, 43);
-            this.txtPositionY.Name = "txtPositionY";
-            this.txtPositionY.Size = new System.Drawing.Size(102, 20);
-            this.txtPositionY.TabIndex = 14;
-            this.txtPositionY.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtPositionY.ValueChanged += new System.EventHandler(this.txtPositionY_ValueChanged);
-            // 
-            // txtPositionX
-            // 
-            this.txtPositionX.DecimalPlaces = 2;
-            this.txtPositionX.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.txtPositionX.Location = new System.Drawing.Point(28, 20);
-            this.txtPositionX.Name = "txtPositionX";
-            this.txtPositionX.Size = new System.Drawing.Size(102, 20);
-            this.txtPositionX.TabIndex = 13;
-            this.txtPositionX.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtPositionX.ValueChanged += new System.EventHandler(this.txtPositionX_ValueChanged);
             // 
             // label3
             // 
@@ -314,7 +228,8 @@
             this.éditionToolStripMenuItem,
             this.outilsToolStripMenuItemPoints,
             this.vuesToolStripMenuItem,
-            this.informationsToolStripMenuItem});
+            this.informationsToolStripMenuItem,
+            this.lumieresToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
@@ -583,6 +498,44 @@
             this.aideToolStripMenuItem.Text = "Aide";
             this.aideToolStripMenuItem.Click += new System.EventHandler(this.aideToolStripMenuItem_Click);
             // 
+            // lumieresToolStripMenuItem
+            // 
+            this.lumieresToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lumiereAmbianteToolStripMenuItem,
+            this.lumiereDirectionnelleToolStripMenuItem,
+            this.spotsLumineuxToolStripMenuItem});
+            this.lumieresToolStripMenuItem.Name = "lumieresToolStripMenuItem";
+            this.lumieresToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
+            this.lumieresToolStripMenuItem.Text = "Lumieres";
+            this.lumieresToolStripMenuItem.Visible = false;
+            // 
+            // lumiereAmbianteToolStripMenuItem
+            // 
+            this.lumiereAmbianteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("lumiereAmbianteToolStripMenuItem.Image")));
+            this.lumiereAmbianteToolStripMenuItem.Name = "lumiereAmbianteToolStripMenuItem";
+            this.lumiereAmbianteToolStripMenuItem.ShortcutKeyDisplayString = "J";
+            this.lumiereAmbianteToolStripMenuItem.Size = new System.Drawing.Size(223, 38);
+            this.lumiereAmbianteToolStripMenuItem.Text = "Lumiere Ambiante";
+            this.lumiereAmbianteToolStripMenuItem.Click += new System.EventHandler(this.lumiereAmbianteToolStripMenuItem_Click);
+            // 
+            // lumiereDirectionnelleToolStripMenuItem
+            // 
+            this.lumiereDirectionnelleToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("lumiereDirectionnelleToolStripMenuItem.Image")));
+            this.lumiereDirectionnelleToolStripMenuItem.Name = "lumiereDirectionnelleToolStripMenuItem";
+            this.lumiereDirectionnelleToolStripMenuItem.ShortcutKeyDisplayString = "K";
+            this.lumiereDirectionnelleToolStripMenuItem.Size = new System.Drawing.Size(223, 38);
+            this.lumiereDirectionnelleToolStripMenuItem.Text = "Lumiere Directionnelle";
+            this.lumiereDirectionnelleToolStripMenuItem.Click += new System.EventHandler(this.lumiereDirectionnelleToolStripMenuItem_Click);
+            // 
+            // spotsLumineuxToolStripMenuItem
+            // 
+            this.spotsLumineuxToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("spotsLumineuxToolStripMenuItem.Image")));
+            this.spotsLumineuxToolStripMenuItem.Name = "spotsLumineuxToolStripMenuItem";
+            this.spotsLumineuxToolStripMenuItem.ShortcutKeyDisplayString = "L";
+            this.spotsLumineuxToolStripMenuItem.Size = new System.Drawing.Size(223, 38);
+            this.spotsLumineuxToolStripMenuItem.Text = "Spots lumineux";
+            this.spotsLumineuxToolStripMenuItem.Click += new System.EventHandler(this.spotsLumineuxToolStripMenuItem_Click);
+            // 
             // toolStrip1
             // 
             this.toolStrip1.CanOverflow = false;
@@ -770,6 +723,96 @@
             this.toolStripButtonPointsDeControle.ToolTipText = "Gestion de Contrôle DePoints";
             this.toolStripButtonPointsDeControle.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
+            // txtAngle
+            // 
+            this.txtAngle.Location = new System.Drawing.Point(76, 134);
+            this.txtAngle.Maximum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            0});
+            this.txtAngle.Minimum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            -2147483648});
+            this.txtAngle.Name = "txtAngle";
+            this.txtAngle.Size = new System.Drawing.Size(57, 20);
+            this.txtAngle.TabIndex = 15;
+            this.txtAngle.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtAngle.ValueChanged += new System.EventHandler(this.txtAngle_ValueChanged);
+            // 
+            // txtEchelle
+            // 
+            this.txtEchelle.DecimalPlaces = 1;
+            this.txtEchelle.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.txtEchelle.Location = new System.Drawing.Point(76, 168);
+            this.txtEchelle.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.txtEchelle.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.txtEchelle.Name = "txtEchelle";
+            this.txtEchelle.Size = new System.Drawing.Size(57, 20);
+            this.txtEchelle.TabIndex = 16;
+            this.txtEchelle.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.txtEchelle.ValueChanged += new System.EventHandler(this.txtEchelle_ValueChanged);
+            // 
+            // txtPositionY
+            // 
+            this.txtPositionY.DecimalPlaces = 2;
+            this.txtPositionY.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.txtPositionY.Location = new System.Drawing.Point(28, 43);
+            this.txtPositionY.Name = "txtPositionY";
+            this.txtPositionY.Size = new System.Drawing.Size(102, 20);
+            this.txtPositionY.TabIndex = 14;
+            this.txtPositionY.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtPositionY.ValueChanged += new System.EventHandler(this.txtPositionY_ValueChanged);
+            // 
+            // txtPositionX
+            // 
+            this.txtPositionX.DecimalPlaces = 2;
+            this.txtPositionX.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.txtPositionX.Location = new System.Drawing.Point(28, 20);
+            this.txtPositionX.Name = "txtPositionX";
+            this.txtPositionX.Size = new System.Drawing.Size(102, 20);
+            this.txtPositionX.TabIndex = 13;
+            this.txtPositionX.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtPositionX.ValueChanged += new System.EventHandler(this.txtPositionX_ValueChanged);
+            // 
             // Edition
             // 
             this.AllowDrop = true;
@@ -787,19 +830,20 @@
             this.Text = "Edition";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Exemple_FormClosing);
             this.Load += new System.EventHandler(this.Edition_Load);
+            this.Shown += new System.EventHandler(this.Edition_Shown);
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.Edition_MouseWheel);
             this.pnlProperty.ResumeLayout(false);
             this.pnlProperty.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAngle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEchelle)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPositionY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPositionX)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAngle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEchelle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPositionY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPositionX)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -866,6 +910,10 @@
         private InterfaceGraphique.Utility.NumericUpDownSafe txtAngle;
         private InterfaceGraphique.Utility.NumericUpDownSafe txtPositionX;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem lumieresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lumiereAmbianteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lumiereDirectionnelleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem spotsLumineuxToolStripMenuItem;
     }
 
 }

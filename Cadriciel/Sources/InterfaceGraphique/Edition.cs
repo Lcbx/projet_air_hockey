@@ -98,7 +98,7 @@ namespace InterfaceGraphique
             return !(Echelle_ == null || Angle_ == null || PositionY_ == null || PositionX_ == null);
         }
 
-        /// @struct ErrorSet
+        /// @class ErrorSet
         /// @brief Permet d'afficher des messages d'erreur personnalisés
         private class PropertiesErrorSet {
             public bool PositionX, PositionY, Angle, Echelle;
@@ -162,6 +162,54 @@ namespace InterfaceGraphique
                 }
             }
         }
+
+        /////
+        ///// Section lumières
+        /////
+
+        /// @brief Permet de gérer le changement des lumières ambiante
+        /// TODO : Refactoriser
+        private bool LumiereAmbiante_ = false;
+        public bool LumiereAmbiante {
+            get { return LumiereAmbiante_; }
+            set {
+                if(value != LumiereAmbiante_) {
+                    FonctionsNatives.changerLumieresActives(true, false, false);
+                    LumiereAmbiante_ = value;
+                    lumiereAmbianteToolStripMenuItem.Checked = LumiereAmbiante_;
+                }
+            }
+        }
+
+        /// @brief Permet de gérer le changement des lumières ambiante
+        private bool LumiereDirectionnelle_ = false;
+        public bool LumiereDirectionnelle {
+            get { return LumiereDirectionnelle_; }
+            set {
+                if (value != LumiereDirectionnelle_)
+                {
+                    FonctionsNatives.changerLumieresActives(false, true, false);
+                    LumiereDirectionnelle_ = value;
+                    lumiereDirectionnelleToolStripMenuItem.Checked = LumiereDirectionnelle_;
+                }
+            }
+        }
+
+        /// @brief Permet de gérer le changement des lumières ambiante
+        private bool LumiereSpots_ = false;
+        public bool LumiereSpots {
+            get { return LumiereSpots_; }
+            set {
+                if (value != LumiereSpots_) {
+                    FonctionsNatives.changerLumieresActives(false, false, true);
+                    LumiereSpots_ = value;
+                    spotsLumineuxToolStripMenuItem.Checked = LumiereSpots_;
+                }
+            }
+        }
+        /////
+        ///// Fin section lumières
+        /////
 
         /////////////////////////////////////////////////////////////////////////
         ///  @fn public Edition()
@@ -462,19 +510,6 @@ namespace InterfaceGraphique
                     case Keys.G: EtatSouris = Etats.POINTSDECONTROLE; break;
                     case Keys.T: passerModeTest(true); break; //afficher fenetre test
                     case Keys.Escape: FonctionsNatives.escEnfonce(); break;
-                    case Keys.J: {
-                            FonctionsNatives.changerLumieresActives(true, false, false);
-                            break;
-                        }
-                    case Keys.K: {
-                            FonctionsNatives.changerLumieresActives(false, true, false);
-                            break;
-                        }
-                    case Keys.L: {
-                            FonctionsNatives.changerLumieresActives(false, false, true);
-                            break;
-                        }
-
                     default: break;
                 }
             }
@@ -483,6 +518,9 @@ namespace InterfaceGraphique
             {
                 switch (e.KeyCode)
                 {
+                    case Keys.J: LumiereAmbiante = !LumiereAmbiante; break;
+                    case Keys.K: LumiereDirectionnelle = !LumiereDirectionnelle; break;
+                    case Keys.L: LumiereSpots = !LumiereSpots; break;
                     case Keys.Escape:// pause
                         {
                             afficherBarreMenu(); break;
@@ -527,6 +565,9 @@ namespace InterfaceGraphique
             {
                 switch (e.KeyCode)
                 {
+                    case Keys.J: LumiereAmbiante = !LumiereAmbiante; break;
+                    case Keys.K: LumiereDirectionnelle = !LumiereDirectionnelle; break;
+                    case Keys.L: LumiereSpots = !LumiereSpots; break;
                     case Keys.Escape:// pause
                         {
                             afficherBarreMenu(); break;
@@ -572,6 +613,7 @@ namespace InterfaceGraphique
                         case Etats.AJOUT_PORTAIL: toolStripButtonPortail.Checked = false; portailToolStripMenuItem.Checked = false; break;
                         case Etats.MISEAECHELLE: toolStripButtonMiseAEchelle.Checked = false; miseÀLéchelleToolStripMenuItem.Checked = false; break;
                         case Etats.POINTSDECONTROLE: toolStripButtonPointsDeControle.Checked = false; gestionDesPointsDeContrôleToolStripMenuItem.Checked = false; break;
+                        case Etats.TEST: lumieresToolStripMenuItem.Visible = false; LumiereSpots = true; LumiereDirectionnelle = true; LumiereAmbiante = true; break;
                         default: break;
                     }
                     EtatSouris_ = value;
@@ -587,6 +629,7 @@ namespace InterfaceGraphique
                         case Etats.AJOUT_PORTAIL: toolStripButtonPortail.Checked = true; portailToolStripMenuItem.Checked = true; break;
                         case Etats.MISEAECHELLE: toolStripButtonMiseAEchelle.Checked = true; miseÀLéchelleToolStripMenuItem.Checked = true; break;
                         case Etats.POINTSDECONTROLE: toolStripButtonPointsDeControle.Checked = true; gestionDesPointsDeContrôleToolStripMenuItem.Checked = true; break;
+                        case Etats.TEST: lumieresToolStripMenuItem.Visible = true; LumiereSpots = true; LumiereDirectionnelle = true; LumiereAmbiante = true; break;
                         default: break;
                     }
                     FonctionsNatives.etatDelaSouris((int) EtatSouris_);
@@ -1776,6 +1819,7 @@ namespace InterfaceGraphique
                 estEnModePartie = true;
                 estEnModeTest = false;
 
+                LumiereSpots = true; LumiereDirectionnelle = true; LumiereAmbiante = true; // Pour reset les lumières au changement de fenêtre
                 EtatSouris = Etats.TEST;
 
                 //State
@@ -1972,7 +2016,7 @@ namespace InterfaceGraphique
 
         /// @brief Permet de réinitialiser la partie à l'affichage de la fenêtre
         private void Edition_Load(object sender, EventArgs e){
-            resetPartie(); 
+            resetPartie();
         }
 
         /// @fn private void orthographiqueToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2043,6 +2087,28 @@ namespace InterfaceGraphique
                 this.txtBoxErreurProprietes.Text = this.propertiesErrorSet.getError();
             } else mettreAjourPos();
 
+        }
+
+        /// @brief Permet de changer l'état de la lumière ambiante
+        private void lumiereAmbianteToolStripMenuItem_Click(object sender, EventArgs e) {
+            this.LumiereAmbiante = !this.LumiereAmbiante;
+        }
+
+        /// @brief Permet de changer l'état de la lumière directionnelle
+        private void lumiereDirectionnelleToolStripMenuItem_Click(object sender, EventArgs e) {
+            this.LumiereDirectionnelle = !this.LumiereDirectionnelle;
+        }
+
+        /// @brief Permet de changer l'état des spots lumineux
+        private void spotsLumineuxToolStripMenuItem_Click(object sender, EventArgs e) {
+            this.LumiereSpots = !this.LumiereSpots;
+        }
+
+        /// @brief Permet de réinitialiser les valeurs nécessaires au chargement de la fenêtre
+        /// TODO: Ne s'exécute pas à l'appel de show()
+        private void Edition_Shown(object sender, EventArgs e) {
+            
+            //LumiereSpots = true; LumiereDirectionnelle = true; LumiereAmbiante = true; // Pour reset les lumières au changement de fenêtre
         }
 
 
