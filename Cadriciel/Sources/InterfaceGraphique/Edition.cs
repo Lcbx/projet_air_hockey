@@ -140,6 +140,29 @@ namespace InterfaceGraphique
         ///// Fin section propriétés pour le databinding
         /////
 
+        /// @brief Databinding pour les boutons de la vue
+        /// TODO : Refactoriser
+        public enum TypeVue { Unset, Orthographique, Orbite };
+        private TypeVue VueActuelle_ = TypeVue.Unset;
+        public TypeVue VueActuelle {
+            get { return VueActuelle_; }
+            set {
+                if(value != VueActuelle_) {
+                    switch (VueActuelle_) {
+                        case TypeVue.Orthographique: this.orthographiqueToolStripMenuItem.Checked = false; break;
+                        case TypeVue.Orbite:         this.orbiteToolStripMenuItem.Checked = false; break;
+                        default: break;
+                    }
+                    VueActuelle_ = value;
+                    switch (VueActuelle_) {
+                        case TypeVue.Orthographique: this.orthographiqueToolStripMenuItem.Checked = true; FonctionsNatives.setVueOrtho(); break;
+                        case TypeVue.Orbite:         this.orbiteToolStripMenuItem.Checked = true;         FonctionsNatives.setVueOrbite(); break;
+                        default: break;
+                    }
+                }
+            }
+        }
+
         /////////////////////////////////////////////////////////////////////////
         ///  @fn public Edition()
         /// 
@@ -189,6 +212,8 @@ namespace InterfaceGraphique
             txtPositionY.Minimum = decimal.MinValue; txtPositionY.Maximum = decimal.MaxValue;
                 txtAngle.Minimum = decimal.MinValue;     txtAngle.Maximum = decimal.MaxValue;
               txtEchelle.Minimum = 0.5M;               txtEchelle.Maximum = decimal.MaxValue;
+
+            VueActuelle = TypeVue.Orthographique;
 
             this.Focus();
         }
@@ -290,8 +315,8 @@ namespace InterfaceGraphique
             if (e.KeyCode == Keys.Right) FonctionsNatives.deplacerVueXY(0.1, 0);
             if (e.KeyCode == Keys.Down) FonctionsNatives.deplacerVueXY(0, 0.1);
             if (e.KeyCode == Keys.Left) FonctionsNatives.deplacerVueXY(-0.1, 0);
-            if (e.KeyCode == Keys.NumPad1 || e.KeyCode == Keys.D1) FonctionsNatives.setVueOrtho();
-            if (e.KeyCode == Keys.NumPad2 || e.KeyCode == Keys.D2) FonctionsNatives.setVueOrbite();
+            if (e.KeyCode == Keys.NumPad1 || e.KeyCode == Keys.D1) VueActuelle = TypeVue.Orthographique;
+            if (e.KeyCode == Keys.NumPad2 || e.KeyCode == Keys.D2) VueActuelle = TypeVue.Orbite;
         }
 
 
@@ -2014,15 +2039,21 @@ namespace InterfaceGraphique
         private void Edition_Load(object sender, EventArgs e){
             resetPartie(); 
         }
-        
-        private void orthographiqueToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FonctionsNatives.setVueOrtho();
+
+        /// @fn private void orthographiqueToolStripMenuItem_Click(object sender, EventArgs e)
+        /// @brief Permet de changer la vue pour la vue orthographique
+        /// @param sender Objet d'appel
+        /// @param e Évènement
+        private void orthographiqueToolStripMenuItem_Click(object sender, EventArgs e) {
+            VueActuelle = TypeVue.Orthographique;
         }
 
-        private void orbiteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FonctionsNatives.setVueOrbite();
+        /// @fn private void orbiteToolStripMenuItem_Click(object sender, EventArgs e)
+        /// @brief Permet de changer la vue pour la vue orbite
+        /// @param sender Objet d'appel
+        /// @param e Évènement
+        private void orbiteToolStripMenuItem_Click(object sender, EventArgs e) {
+            VueActuelle = TypeVue.Orbite;
         }
 
         /// @fn private void txtPositionX_ValueChanged(object sender, EventArgs e)
