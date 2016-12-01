@@ -54,9 +54,44 @@ namespace InterfaceGraphique
         // pour regler le bug de l'affichage du textFTGL qd on charge une zone ds edition
         public bool ouvrirMenuTable_ = false;
 
-
         public enum States {Edition = 0, Test, PartieRapide, Tournoi };
         public States state = States.Edition;
+
+
+        /////
+        ///// Section propriétés pour le databinding
+        /////
+        /// @brief Position en X pour l'objet sélectionné
+        private double? PositionX_ = null;
+        public double? PositionX {
+            get { if (PositionX_ == null) return 0; return PositionX_; }
+            set { SetField(ref PositionX_, value, "PositionX"); }
+        }
+
+        /// @brief Position en X pour l'objet sélectionné
+        private double? PositionY_ = null;
+        public double? PositionY {
+            get { if (PositionY_ == null) return 0; return PositionY_; }
+            set { SetField(ref PositionY_, value, "PositionY"); }
+        }
+
+        /// @brief Angle de l'objet sélectionné
+        private double? Angle_ = null;
+        public double? Angle {
+            get { if (Angle_ == null) return 0; return Angle_; }
+            set { SetField(ref Angle_, value, "Angle"); }
+        }
+
+        /// @brief Echelle de l'objet sélectionné
+        private double? Echelle_ = null;
+        public double? Echelle {
+            get { if (Echelle_ == null) return 0.5; return Echelle_; }
+            set { SetField(ref Echelle_, value, "Echelle"); }
+        }
+
+        /////
+        ///// Fin section propriétés pour le databinding
+        /////
 
         /////////////////////////////////////////////////////////////////////////
         ///  @fn public Edition()
@@ -80,14 +115,7 @@ namespace InterfaceGraphique
             InitialiserAnimation();
             supprimerToolStripMenuItem.Enabled = false;
 
-            textBox1.Enabled = false;
-            textBox2.Enabled = false;
-            textBox3.Enabled = false;
-            //  textBox4.Enabled = false;
-            numericUpDown1.Enabled = false;
-            numericUpDown1.ResetText();
-
-            button1.Enabled = false;
+            pnlProperty.Enabled = false;
 
             this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
             FonctionsNatives.redimensionnerFenetre(panel1.Width, panel1.Height);
@@ -102,6 +130,18 @@ namespace InterfaceGraphique
 
             //masquer bouton mode edition quand on est dans le mode edition
             modeEditionToolStripMenuItem.Visible = false;
+
+            /// Databinding pour ne plus à se soucier si une valeur a été set ou non
+            txtPositionX.DataBindings.Add("Value", this, "PositionX", true, DataSourceUpdateMode.OnPropertyChanged, 0.0);
+            txtPositionY.DataBindings.Add("Value", this, "PositionY", true, DataSourceUpdateMode.OnPropertyChanged, 0.0);
+                txtAngle.DataBindings.Add("Value", this, "Angle",     true, DataSourceUpdateMode.OnPropertyChanged, 0.0);
+              txtEchelle.DataBindings.Add("Value", this, "Echelle",   true, DataSourceUpdateMode.OnPropertyChanged, 0.0);
+
+            /// Afin d'éviter que les utilisateurs ne puissent rentrer le nombre qu'ils désirent
+            txtPositionX.Minimum = decimal.MinValue; txtPositionX.Maximum = decimal.MaxValue;
+            txtPositionY.Minimum = decimal.MinValue; txtPositionY.Maximum = decimal.MaxValue;
+                txtAngle.Minimum = decimal.MinValue;     txtAngle.Maximum = decimal.MaxValue;
+              txtEchelle.Minimum = 0.5M;               txtEchelle.Maximum = decimal.MaxValue;
 
             this.Focus();
         }
@@ -1048,50 +1088,21 @@ namespace InterfaceGraphique
         {
             if (FonctionsNatives.nombreObjetSelectionne() == 1)
             {
-                textBox1.Enabled = true;
-                textBox2.Enabled = true;
-                textBox3.Enabled = true;
-                //textBox4.Enabled = true;
+                this.pnlProperty.Enabled = true;
 
-                numericUpDown1.Enabled = true;
-                button1.Enabled = true;
-
-                //Position en X
-                double posX = (FonctionsNatives.getPosX());
-                posX = Math.Round(posX, 2); //arrondi la position 
-                textBox1.Text = posX.ToString();
-
-                //Position Y
-                double posY = (FonctionsNatives.getPosY());
-                posY = Math.Round(posY, 2); //arrondi la position 
-                textBox2.Text = posY.ToString();
-
-                //Angle
-                double angle = (FonctionsNatives.getAngle());
-                angle = Math.Round(angle, 2);
-                textBox3.Text = angle.ToString();
-
-                //Scale
-                float scale = (float)(FonctionsNatives.getScale());
-                scale = (float)Math.Round(scale, 3);
-                // textBox4.Text = scale.ToString();
-                numericUpDown1.Value = Convert.ToDecimal(scale);
+                this.PositionX = FonctionsNatives.getPosX();
+                this.PositionY = FonctionsNatives.getPosY();
+                this.Angle     = FonctionsNatives.getAngle();
+                this.Echelle   = FonctionsNatives.getScale();
             }
             else
             {
-                textBox1.Text = " ";
-                textBox2.Text = " ";
-                textBox3.Text = " ";
-                // textBox4.Text = " ";
-                numericUpDown1.ResetText();
+                this.PositionX = null;
+                this.PositionY = null;
+                this.Angle     = null;
+                this.Echelle   = null;
 
-                textBox1.Enabled = false;
-                textBox2.Enabled = false;
-                textBox3.Enabled = false;
-                // textBox4.Enabled = false;
-                numericUpDown1.Enabled = false;
-                button1.Enabled = false;
-
+                this.pnlProperty.Enabled = false;
             }
         }
 
@@ -1303,29 +1314,12 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            double myX;
-            double myY;
-            double myAngle;
-            double myScale = Convert.ToDouble(numericUpDown1.Value);
-
-
-            if (!double.TryParse(textBox1.Text, out myX) || !double.TryParse(textBox2.Text, out myY)
-                || !double.TryParse(textBox3.Text, out myAngle))// || !double.TryParse(textBox4.Text, out myScale))
-            {
-                MessageBox.Show("Veuillez vérifier les valeurs entrées", "Barre de proprietés",
-                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            else
-            {
-                FonctionsNatives.configurerObjet(myX, myY, myAngle, myScale);
-                if (FonctionsNatives.objetEstDansLaTable() == false) {
-                    txtBoxErreurProprietes.Visible = true;
-                } else {
-                    txtBoxErreurProprietes.Visible = false;
-                    this.mettreAjourPos();
-                }
+            FonctionsNatives.configurerObjet(PositionX.Value, PositionY.Value, Angle.Value, Echelle.Value);
+            if (FonctionsNatives.objetEstDansLaTable() == false) {
+                txtBoxErreurProprietes.Visible = true;
+            } else {
+                txtBoxErreurProprietes.Visible = false;
+                this.mettreAjourPos();
             }
         }
 
