@@ -203,6 +203,8 @@ namespace InterfaceGraphique
             if (e.KeyCode == Keys.Right) FonctionsNatives.deplacerVueXY(0.1, 0);
             if (e.KeyCode == Keys.Down) FonctionsNatives.deplacerVueXY(0, 0.1);
             if (e.KeyCode == Keys.Left) FonctionsNatives.deplacerVueXY(-0.1, 0);
+            if (e.KeyCode == Keys.NumPad1 || e.KeyCode == Keys.D1) FonctionsNatives.setVueOrtho();
+            if (e.KeyCode == Keys.NumPad2 || e.KeyCode == Keys.D2) FonctionsNatives.setVueOrbite();
         }
 
 
