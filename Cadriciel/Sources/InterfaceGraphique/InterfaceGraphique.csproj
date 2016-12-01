@@ -101,6 +101,9 @@
     <Compile Include="FenetreProfilVirtuel.Designer.cs">
       <DependentUpon>FenetreProfilVirtuel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utility\NumericUpDownSafe.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Utility\Profil.cs">
       <SubType>Component</SubType>
     </Compile>

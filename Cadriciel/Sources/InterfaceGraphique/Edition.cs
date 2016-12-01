@@ -16,6 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using InterfaceGraphique.Utility;
 
  
 namespace InterfaceGraphique
@@ -1374,7 +1375,7 @@ namespace InterfaceGraphique
                 txtBoxErreurProprietes.Visible = false;
                 this.mettreAjourPos();
             }
-        }
+        } // TODO: Supprimer
 
         ///@fn private void MettreAJourObjet()
         ///@brief Permet de mettre à jour les propriétés de l'objet
@@ -2009,10 +2010,9 @@ namespace InterfaceGraphique
 
         }
 
-        private void Edition_Load(object sender, EventArgs e)
-        {
+        /// @brief Permet de réinitialiser la partie à l'affichage de la fenêtre
+        private void Edition_Load(object sender, EventArgs e){
             resetPartie(); 
-
         }
         
         private void orthographiqueToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2029,18 +2029,54 @@ namespace InterfaceGraphique
         /// @brief Permet de modifier la position de l'objet sélectionné en temps réel
         private void txtPositionX_ValueChanged(object sender, EventArgs e)
         {
-            // À cause du trigger à l'assignation de PositionX
-            if (this.propertiesSet()) {
-                MettreAJourObjet();
-                if (FonctionsNatives.objetEstDansLaTable() == false) {
-                    this.propertiesErrorSet.PositionX = true;
-                    this.txtPositionX.ForeColor = Color.Red;
-                    this.txtBoxErreurProprietes.Visible = true;
-                    this.txtBoxErreurProprietes.Text = this.propertiesErrorSet.getError();
-                } else {
-                    mettreAjourPos();
-                }
-            }
+            MettreAJourObjet();
+            if (FonctionsNatives.objetEstDansLaTable() == false) {
+                this.propertiesErrorSet.PositionX = true;
+                this.txtPositionX.ForeColor = Color.Red;
+                this.txtBoxErreurProprietes.Visible = true;
+                this.txtBoxErreurProprietes.Text = this.propertiesErrorSet.getError();
+            } else mettreAjourPos();
+        }
+
+        /// @fn private void txtPositionY_ValueChanged(object sender, EventArgs e)
+        /// @brief Permet de modifier la position de l'objet sélectionné en temps réel
+        private void txtPositionY_ValueChanged(object sender, EventArgs e)
+        {
+            MettreAJourObjet();
+            if (FonctionsNatives.objetEstDansLaTable() == false) {
+                this.propertiesErrorSet.PositionY = true;
+                this.txtPositionY.ForeColor = Color.Red;
+                this.txtBoxErreurProprietes.Visible = true;
+                this.txtBoxErreurProprietes.Text = this.propertiesErrorSet.getError();
+            } else mettreAjourPos();
+
+        }
+
+        /// @fn private void txtAngle_ValueChanged(object sender, EventArgs e)
+        /// @brief Permet de modifier la position de l'objet sélectionné en temps réel
+        private void txtAngle_ValueChanged(object sender, EventArgs e)
+        {
+            MettreAJourObjet();
+            if (FonctionsNatives.objetEstDansLaTable() == false) {
+                this.propertiesErrorSet.Angle = true;
+                this.txtAngle.ForeColor = Color.Red;
+                this.txtBoxErreurProprietes.Visible = true;
+                this.txtBoxErreurProprietes.Text = this.propertiesErrorSet.getError();
+            } else mettreAjourPos();
+        }
+
+        /// @fn private void txtEchelle_ValueChanged(object sender, EventArgs e)
+        /// @brief Permet de modifier la position de l'objet sélectionné en temps réel
+        private void txtEchelle_ValueChanged(object sender, EventArgs e)
+        {
+            MettreAJourObjet();
+            if (FonctionsNatives.objetEstDansLaTable() == false) {
+                this.propertiesErrorSet.Echelle = true;
+                this.txtEchelle.ForeColor = Color.Red;
+                this.txtBoxErreurProprietes.Visible = true;
+                this.txtBoxErreurProprietes.Text = this.propertiesErrorSet.getError();
+            } else mettreAjourPos();
+
         }
 
 
