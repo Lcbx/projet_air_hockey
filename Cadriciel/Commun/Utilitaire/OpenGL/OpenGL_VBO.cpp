@@ -155,6 +155,7 @@ namespace opengl{
 			programme_.assignerUniforme("matrVisu", v);
 			programme_.assignerUniforme("matrProj", p);
 			programme_.assignerUniforme("matrModel", mo);
+			
 
 #else		
 		
@@ -268,20 +269,16 @@ namespace opengl{
 		programme_.assignerUniforme("Kspeculaire", materiau.speculaire_);
 		programme_.assignerUniforme("KShininess", materiau.shininess_ * materiau.shininessStrength_);
 
-		auto facade = FacadeModele::obtenirInstance();
-		//bool lumiereAmbiant = facade->getEtatLumiereAmbiante();
-		//bool lumiereDirectionelle = facade->getEtatLumiereDirectionnelle();
-		//bool lumiereAmbiantSpot = facade->getEtatLumiereSpot();
-		//bool lumiereAmbiant = true;
-		//bool lumiereDirectionelle = false;
-		//bool lumiereAmbiantSpot = false;
-		//programme_.assignerUniforme("lumiereAmbiante", lumiereAmbiant);
-		//programme_.assignerUniforme("lumiereDirectionnelle", lumiereDirectionelle);
-		//programme_.assignerUniforme("lumiereSpot", lumiereAmbiantSpot);
 		//Light 
-		
-		int typeIllumination= 2;
-		programme_.assignerUniforme("typeIllumination", typeIllumination);
+		auto facade = FacadeModele::obtenirInstance();
+		int lumiereAmbiant = facade->getEtatLumiereAmbiante();
+		int lumiereDirectionelle = facade->getEtatLumiereDirectionnelle();
+		int lumiereAmbiantSpot = facade->getEtatLumiereSpot();
+
+		programme_.assignerUniforme("lumiereAmbiante", lumiereAmbiant);
+		programme_.assignerUniforme("lumiereDirectionnelle", lumiereDirectionelle);
+		programme_.assignerUniforme("lumiereSpot", lumiereAmbiantSpot);
+
 
 		glPolygonMode(	GL_FRONT_AND_BACK,	materiau.filDeFer_ ? GL_LINE : GL_FILL);
 		materiau.afficherDeuxCotes_ ? glEnable(GL_CULL_FACE) : glDisable(GL_CULL_FACE);

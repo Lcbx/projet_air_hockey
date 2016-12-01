@@ -1543,12 +1543,10 @@ void FacadeModele::MettrePauseSonModeJeu(bool pause)
 void FacadeModele::  setTypeLumiereActive(bool lumiereAmbiante, bool lumiereDirectionnelle, bool lumiereSpot)
 {
 
-	if (lumiereAmbiante)
-		lumiereAmbiante_ = true;
-	if (lumiereDirectionnelle)
-		lumiereDirectionnelle_ = true;
-	if (lumiereSpot)
-		lumiereSpot_ = true;
+	
+		lumiereAmbiante_ = lumiereAmbiante;
+		lumiereDirectionnelle_ = lumiereDirectionnelle;
+		lumiereSpot_ = lumiereSpot;
 }
 
 ////////////////////////////////////////////////////////////////////////
