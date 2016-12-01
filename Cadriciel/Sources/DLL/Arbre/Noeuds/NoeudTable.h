@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////
 /// @file NoeudTable.h
-/// @author equipe10
+/// @author Ali
 /// @date september 2016
 /// @version 1.0
 ///
@@ -109,13 +109,16 @@ public:
 	bool getButs(int index, glm::vec3 & pointHaut, glm::vec3 & pointMilieu, glm::vec3 & pointBas);
 
 	glm::vec3 getPc(int i) { return pointControle_[i]; }
-
+	void tracerMur(const glm::mat4& vueProjection, glm::vec3 point1, glm::vec3 point2, glm::vec3 point3, glm::vec3 point4) const;
 
 private:
 
 	///la largueur des murs 
 	double largeur_{ 7 };
 	double longueurButs_{ 20 };
+	//Livrable 3
+	double hauteurMur_{ 20 };
+	double hauteurBut_{ 10 };
 	/// la hauteur des murs 
 	double hauteur_{ 0.0 };
 	/// la couleur de la table 
