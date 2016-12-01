@@ -117,17 +117,154 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="notifyIcon1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Bienvenue dans notre application "Hockey sur coussin d’air", qui est produite dans 
-le cadre du cours INF2990.
-Cette application est dévéloppée par l'équipe 10 en suivant le SRS fourni.
+    <value>Mode d'édition de la table
 
-L'utilisation est simple et accessible à tout le monde.
-Pour le mode "Édition", il suffit de choisir la commande à executer à partir de la boite 
-d'outils située à droite de la fenetre ou à partir de la barre des menus.
-Selon l'action choisi, il suffit de cliquer et/ou appuyer sur une touche pour voir le résultat.
-  
-Pour la barre de proprietes, vous pouvez changez la position, l'angle(en degre) et le scale(entre 0.5 et 8) d'un objet
+La barre d'outils à gauche contiens l'ensemble des outils présentés dans l'onglet outils. 
+
+La barre des propriétés à droite présente les informations concernant les propriétés du seul objet sélectionné (Un seul objet doit être sélectionné):
+1. Contient la position sur l'axe des X et Y par rapport au centre de la table.
+2. Contient l'angle de rotation (en degrés).
+3. Contient le facteur de taille, nommé échelle, par rapport à la forme originale. Pour le muret, l'échelle n'a effet que sur la longeur.</value>
+  </data>
+  <data name="richTextBox2.Text" xml:space="preserve">
+    <value>Onglet Fichier
+
+1) Nouveau : Permet de créer une nouvelle table vide aux tailles prédéfinies. Supprime la table en cours d'édition, alors il est important de sauvegarder auparavant.
+
+2) Ouvrir : Permet d'ouvrir une table qui a déjà été enregistrée. Supprime la table en cours d'édition, alors il est important de sauvegarder auparavant.
+
+3) Enregistrer : Permet de sauvegarder la table. Si la table a déjà été enregistré sous un nom ou elle a été ouverte, elle est enregistré sous le nom précédent (à l'exception de la table par défaut). Sinon, effectue enregistrer sous.
+
+4) Enregistrer sous : Permet de sauvegarder la table avec un nom. Le nom de la table ne peut pas être défaut.
+
+5) Propriétés : Permet de modifier les propriétés de la table tel que le coefficient de friction de la surface, le coefficient de rebond des murs et murets et l'accélération des bonus accélérateurs.
+
+5.1) Friction : Coefficient de friction entre la surface et la rondelle. Le minimum 0 signifie aucune friction et le maximum 100 indique un forte décélération pour la distance parcourue.
+
+5.2) Rebond : Coefficient de rebond entre la rondelle et les murets et murs . Le minimum 0 signifie qu'il n'y a pas de rebondissement et le maximum 1 signifie que la collision est parfaitement élastique (vitesse conservée pour la rondelle)
+
+5.3) Accélération : Accélération à laquelle est soumise la rondelle lors de son passage sur un bonus accélérateur. Le minimum 0 signifie qu'il n'y a pas d'accélération et le maximum 10 signifie une accélération importante.6) Mode Test : Permet de tester la table en cours d'édition. Plus amples informations présentes plus loin.
+
+6) Menu Principal : Permet de revenir au menu principal.</value>
+  </data>
+  <data name="richTextBox4.Text" xml:space="preserve">
+    <value>Onglet Outils
+
+1) Sélection : Change l'outil en cours pour la sélection. Il est possible de cliquer sur un objet pour le sélectionner. Appuyer sur la touche Ctrl et cliquer pour inverser la sélection d'un objet. Il est possible de créer un rectangle de sélection afin de sélectionner tous les objets dans le rectangle. Appuyer sur la touche Ctrl et créer un rectangle de sélection inverse la sélection de tous les objets dans le rectangle.
+
+2) Déplacement : Permet de déplacer les objets sélectionnés via un clic et un déplacement de la souris. Si un des objets sélectionnés devais sortir de la table, le déplacement est bloqué à la dernière position valide.
+
+3) Rotation : Permet d'effectuer une rotation autour du centre géométrique des objets sélectionnés. Tant que le clic est enfoncé, se déplacer vers le haut de la fenêtre effectue une rotation dans le sens horaire alors que se déplacer vers le bas effecture une rotation dans le sens anti-horaire.
+
+4) Duplication : Permet de dupliquer les objets sélectionnés. Les objets sont ajoutés conservent leurs positions et rotation par rapport au centre géométrique de la sélection.
+
+5) Zoom : Permet d'effectuer un zoom à l'aide d'un rectangle élastique. La région sélectionnée sera agrandie afin de prendre tout l'espace disponible. Si la touche Alt est enfoncée, la région visible sera placée à l'intérieur du rectangle élastique. Respecte la limite de zoom.
+
+6) Création d'objets
+6.1) Bonus accélérateur : Cliquer à l'endroit désiré pour l'ajouter. Aucune partie du bonus ne doit être situé à l'extérieur de la table sans quoi son positionnement sera invalide.
+6.2) Portail : Cliquer à l'endroit désiré pour ajouter le premier portail puis cliquer à un second endroit pour ajouter sa paire. Si l'outils est changé sans que le second portail n'ait été posé, le premier portail sera retiré. Aucune partie du portail ne doit être situé à l'extérieur de la table sans quoi son positionnement sera invalide.
+6.3) Muret : Cliquer à l'endroit désiré pour commencer le muret et au second endroit désiré afin de terminer le muret. Aucune partie du muret ne doit être situé à l'extérieur de la table sans quoi son positionnement sera invalide et le muret annulé.
+
+7) Gestion des points de contrôle : Permet de modifier la forme de la table en cliquant sur un des 8 points délimiteurs en bleu et en les déplaçants. Les modifications sont effectuées en miroirs. Un point ne pourra pas être déplacé plus loin s'il causerait qu'un objet de la table sorte.</value>
+  </data>
+  <data name="richTextBox5.Text" xml:space="preserve">
+    <value>Onglet Vues
+
+1) Orthographique : Change la vue pour une vue aérienne sans rotation. La molette permet de changer le niveau de zoom et le clic droit permet de déplacer verticalement et horizontalement la vue.
+
+2) Orbite : Change la vue pour une vue aérienne avec rotation. La molette permet de changer l'élévation de la vue alors que le clic droit permet d'effectuer une révolution autour du centre de la table.</value>
+  </data>
+  <data name="richTextBox6.Text" xml:space="preserve">
+    <value>Mode test de la table
+
+La barre de menus est accessible à l'appuis de la touche escape. Le premier joueur utilise la souris pour contrôler le maillet et le second joueur, si configuré humain dans le menu de configuration, utilise les touches configurées.</value>
+  </data>
+  <data name="richTextBox8.Text" xml:space="preserve">
+    <value>Onglet vues
+
+1) Orthographique : Change la vue pour une vue aérienne sans rotation. La molette permet de changer le niveau de zoom et le clic droit permet de déplacer verticalement et horizontalement la vue.
+
+2) Orbite : Change la vue pour une vue aérienne avec rotation. La molette permet de changer l'élévation de la vue alors que le clic droit permet d'effectuer une révolution autour du centre de la table.</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA
+        AAAgHyMAIB8jACAfIwAgHyMAIB8jAAAAAAAAAAAAIB8jACAfIwAgHyMAIB8jBSAfIxcgHyM7IB8jTiAf
+        Iy0gHyMsIB8jLCAfIy0gHyNOIB8jOyAfIxcgHyMFIB8jACAfIwAgHyMABAQEAAAAAAAgHyMAIB8jACAf
+        IwAgHyMAIB8jACAfIwMgHyMQIB8jDSAfIwMgHyMAIB8jACAfIwAgHyMAIB8jCCAfIxwgHyMrIB8jGSAf
+        IzYgHyNKIB8jDiAgJwAgIiYAIB8jDiAfI0ogHyM1IB8jGSAfIysgHyMcIB8jCCAfIwAgHyMAIB8jACAf
+        IwAgHyMCIB8jDiAfIxAgHyMDIB8jHSAfI0ogHyM+IB8jLiAfIxsgHyMFIB8jACAfIwAgHyMVIB8jZCAf
+        I0kgHyMZIB8jGiAfI0ogHyM0IB8jISAfIyEgHyM0IB8jSiAfIxogHyMZIB8jSSAfI2QgHyMVIB8jACAf
+        IwAgHyMEIB8jHiAfIzogHyMjIB8jJSAfIxwgHyM5IB8jPiAfIz0gHyMqIB8jGyAfIzUgHyMdIB8jBCAf
+        IwogHyNHIB8jPiAfI2EgHyNZIB8jUyAfI0MgHyM6IB8jOiAfI0QgHyNTIB8jWSAfI2EgHyM+IB8jRyAf
+        IwogHyMDIB8jGiAfIzkgHyNIIB8jUSAfIxYgHyMSIB8jMyAfI0kgHyMsIB8jQiAfIzQgHyMwIB8jRSAf
+        I04gHyM6IB8jLyAfIzUgHyMqIB8jQiAfIzkgHyNuIB8jXSAfI0AgHyNAIB8jXSAfI24gHyM5IB8jQiAf
+        IyogHyM2IB8jLCAfI0AgHyMmIB8jMSAfI0wgHyNLIB8jMyAfIyggHyNJIB8jJSAfIyYgHyMnIB8jOCAf
+        I0ggHyNOIB8jSyAfI1ogHyNdIB8jXSAfI0cgHyM7IB8jJyAfIysgHyNNIB8jaCAfI2kgHyNNIB8jKyAf
+        IyggHyMyIB8jHCAfI0MgHyNZIB8jSiAfIycgHyMoIB8jPSAfIzcgHyMoIB8jJiAfIyUgHyMAIB8jASAf
+        Iw0gHyMlIB8jCSAfIxcgHyMyIB8jRSAfI1EgHyNVIB8jRiAfIzwgHyMVIB8jSSAfI14gHyNVIB8jViAf
+        I14gHyNJIB8jFiAfIyogHyMKIB8jMCAfI08gHyNCIB8jNiAfIxYgHyMJIB8jJSAfIw0gHyMBIB8jACAf
+        IwANDgkAIB8jACAfIwAgHyMAIB8jACAfIwEgHyMOIB8jHSAfIzIgHyNWIB8jUyAfI2UgHyNDIB8jRSAf
+        I1UgHyNVIB8jRSAfI0MgHyNlIB8jUiAfI0ogHyMwIB8jHyAfIw0gHyMBIB8jACAfIwAgHyMAIB8jAAAD
+        AAAfHiIAAAAAAAAAAAAAAAAAIB8jACIhJgAgHyMAIB8jACAfIwAgHyMKIB8jQCAfI00gHyNeIB8jYCAf
+        IzAgHyNCIB8jPyAfIz8gHyNCIB8jMCAfI2AgHyNeIB8jTSAfI0AgHyMKIB8jACAfIwAhICQAIB8jACEg
+        JAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHRwgACAfIwAgHyMAIB8jDCAfIyggHyNkIB8jkSAf
+        I0UgHyMsIB8jIiAfIywgHyMpIB8jKSAfIywgHyMiIB8jLCAfI0UgHyORIB8jZCAfIyggHyMMIB8jACAf
+        IwAgHyMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdHSEAIB8jACAfIxkgHyMtIB8jTyAf
+        I00gHyNTIB8jJCAfIwogHyMsIB8jHiAfIwwgHyMMIB8jHiAfIywgHyMNIB8jJCAfI1QgHyNNIB8jTyAf
+        Iy0gHyMYIB8jAB8fIwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB8jACAfIwAgHyMIIB8jSyAf
+        I20gHyN8IB8jMiAfIw4gHyMAIB8jDyAfI20gHyOXIB8jtSAfI7wgHyObIB8jfSAfIyEgHyMAIB8jDiAf
+        IzIgHyN9IB8jbSAfI0sgHyMIIB8jAB8eIgAAAAAAAAAAAAAAAAAAAAAAAAAAAFdUYAAgHyMAIB8jACAf
+        Ix4gHyNIIB8jbyAfI1UgHyMWIB8jACAfIwAgHyMAIB8jDyAfIx0gHyOJIB8jrCAfIzIgHyMLHx4iACAf
+        IwAgHyMAIB8jFiAfI1UgHyNvIB8jSCAfIx4gHyMAIB8jACknLAAAAAAAAAAAAAAAAAAAAAAAHh0hACAf
+        IwAgHyMYIB8jPSAfI0cgHyMzIB8jCiAfIwAgHyMAIB8jBiAfIzkgHyNhIB8jiiAfI7ggHyPDIB8jpCAf
+        I1ogHyM5IB8jAiAfIwAgHyMAIB8jCiAfIzMgHyNHIB8jPSAfIxggHyMAIB4hAAAAAAAAAAAAAAAAAAAA
+        AAAgHyMAIB8jACAfIzYgHyOBIB8jhCAfIycgHyMBIB8jACAfIyYgHyNXIB8jwiAfI64gHyOWIB8jdiAf
+        I3cgHyOQIB8jwiAfI54gHyOBIB8jCyAgIgAgHyMBIB8jJyAfI4UgHyOBIB8jNiAfIwAgHyMAAAAAAAAA
+        AAAAAAAAOjg/ACAfIwAgHyMOIB8jKyAfI1MgHyNIIB8jDiAfIwAgHyMjIB8jaCAfI9AgHyNwIB8jHSAf
+        IwAgHyMAIB8jACAfIwEgHyMcIB8jeSAfI7YgHyOKIB8jHCAfIwAgHyMOIB8jSCAfI1MgHyMsIB8jDiAf
+        IwAcGx4AAAAAAAAAAAAfHyIAIB8jACAfIyYgHyNFIB8jWyAfIx4gHyMAIB8jAyAfI2QgHyPNIB8jTyAf
+        IxwgHyMHIB8jAiAfI0YgHyNGIB8jAiAfIwggHyMbIB8jVCAfI74gHyNhIB8jEiAfIwAgHyMeIB8jWyAf
+        I0UgHyMmIB8jACAfIwAAAAAAAAAAACAfIwAfHyMAIB8jMSAfI3AgHyNcIB8jLiAfIwAgHyNEIB8jvCAf
+        I28gHyMAIB8jMCAfI0AgHyMrIB8jliAfI5YgHyMqIB8jQSAfIzAgHyMAIB8jdCAfI70gHyMjIB8jASAf
+        Iy4gHyNcIB8jcCAfIzEgHyQAIB8jAAAAAAAAAAAAISAkACEfJAAgHyMjIB8jVyAfI3ggHyMvIB8jByAf
+        I18gHyOxIB8jIiAfIyQgHyM+IB8jfSAfI2UgHyONIB8jjSAfI2UgHyN9IB8jPSAfIyQgHyMhIB8jtyAf
+        I4QgHyMEIB8jLyAfI3ggHyNXIB8jIyAfIwAgHyMAAAAAAAAAAAAgHyMAIB8jAyAfIywgHyNlIB8jSyAf
+        Iw0gHyMLIB8jlyAfI5QgHyMPIB8jOSAfIxggHyNZIB8jfiAfI3EgHyNyIB8jfiAfI1kgHyMXIB8jOSAf
+        Iw8gHyOPIB8jgSAfIw8gHyMNIB8jSyAfI2UgHyMsIB8jAyAfIwAAAAAAAAAAACAfIwAgHyMLIB8jUSAf
+        I5UgHyNHIB8jIiAfIyAgHyOvIB8jdyAfIwAgHyMgIB8jNyAfIyggHyNEIB8jtiAfI7YgHyNEIB8jKSAf
+        IzYgHyMgIB8jACAfI3ggHyOpIB8jGSAfIyIgHyNHIB8jlSAfI1EgHyMLIB8jAAAAAAAAAAAAIB8jACAf
+        IwUgHyMuIB8jYyAfI3sgHyMqIB8jDyAfI40gHyN8IB8jACAfIyIgHyNIIB8jUCAfI1ogHyPmIB8j5iAf
+        I1ogHyNQIB8jSCAfIyIgHyMAIB8jfSAfI6wgHyMYIB8jKiAfI3sgHyNjIB8jLiAfIwUgHyMAAAAAAAAA
+        AAAgHyMAIB8jBiAfIycgHyNlIB8jYyAfIyQgHyMTIB8jnyAfI5ogHyMDIB8jDCAfI0IgHyNkIB8jnSAf
+        I/AgHyPwIB8jnCAfI2QgHyNCIB8jDCAfIwQgHyObIB8jdiAfIwwgHyMlIB8jYyAfI2UgHyMnIB8jBiAf
+        IwAAAAAAAAAAACAfIwAgHyMAIB8jMCAfI2EgHyNNIB8jMSAfIwMgHyNQIB8jySAfIywgHyMAIB8jACAf
+        IwggHyNrIB8jyiAfI8ogHyNqIB8jCCAfIwAgHyMAIB8jLCAfI7sgHyN1IB8jBiAfIzEgHyNNIB8jYiAf
+        IzAgHyMAIB8jAAAAAAAAAAAAJiUqACAfIwAgHyMMIB8jNiAfI1IgHyNFIB8jACAfIzAgHyORIB8jlyAf
+        IwcgHyMAIB8jCCAfI2IgHyONIB8jjSAfI2IgHyMIIB8jACAfIwcgHyOUIB8jsCAfIxYjHyMAIB8jRSAf
+        I1IgHyM2IB8jDCAfIwAeHSEAAAAAAAAAAAAAAAAAIB8jACAfIwIgHyMxIB8jhiAfI0MgHyMCIB8jACAf
+        I2kgHyOwIB8jgSAfIwwgHyMDIB8jJyAfI0IgHyNCIB8jJiAfIwMgHyMMIB8jgSAfI7ggHyNIIB8jCSAf
+        IwIgHyNDIB8jhiAfIzIgHyMCIB8jAAAAAAAAAAAAAAAAAAAAAAAiISUAIB8jACAfIyQgHyNoIB8jXCAf
+        Iy4gHyMOIB8jAiAfI2YgHyO4IB8joyAfI0kgHyMcIB8jBiAfIwYgHyMcIB8jSCAfI6kgHyOqIB8jbCAf
+        IwsgHyMMIB8jLiAfI1wgHyNoIB8jJCAfIwAhICQAAAAAAAAAAAAAAAAAAAAAAAAAAAAgHyMAIB8jACAf
+        Iy0gHyNpIB8jQCAfIzMgHyMBIB8jDSAfIzUgHyOlIB8jtCAfI7QgHyOrIB8jqyAfI68gHyPMIB8jfCAf
+        I1sgHyMAIB8jASAfIzMgHyNAIB8jaSAfIy0gHyMAIB8jAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAf
+        IwAgHyMAIB8jHiAfIzYgHyNaIB8jQSAfIwIgHyMAIB8jBSAfIwsgHyNMIB8jSCAfI7ogHyOlIB8jZyAf
+        IzsgHyMXIB8jACAfIwAgHyMCIB8jQSAfI1ogHyM2IB8jHiAfIwAgHyMAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAACAfIwAgHyMIIB8jMSAfI2MgHyM7IB8jHiAfIwIgHyMAIB8jCSAfIzEgHyNSIB8jxCAf
+        I6ggHyNNIB8jJiAfIwMgHyMAIB8jAiAfIx4gHyM7IB8jYiAfIzAgHyMIIB8jAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAIB8jACAfIwAgHyMSIB8jQiAfIzIgHyMuIB8jGiAfIwAgHyMfIB8jaiAf
+        I3ogHyN/IB8jfiAfI3cgHyNfIB8jDyAfIwAgHyMaIB8jLSAfIzIgHyNCIB8jEiAfIwAgHyMAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAgIAIB8jACAfIwAgHyMCIB8jECAfIzIgHyMmIB8jACAf
+        IwAgHyMAIB8jACAfIwAgHyMAIB8jACAfIwAgHyMAIB8jACAfIyYgHyMyIB8jECAfIwIgHyMAIB8jACAf
+        IwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
   </data>
 </root>

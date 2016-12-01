@@ -1099,7 +1099,30 @@ extern "C"
 		FacadeModele::obtenirInstance()->initialiserCompteur();
 	}
 
-
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void setCompteur(int heure, int minute, int seconde) 
+	/// Author : Ali
+	/// @brief : Cette fonction permet de modifier la valeur du compteur FTGL
+	/// param[in] : int heure, minute, seconde
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void setCompteur(int heure, int minute, int seconde) 
+	{
+		FacadeModele::obtenirInstance()->setChrono(heure, minute, seconde);
+	}
+	////////////////////////////////////////////////////////////////////////
+	/// @fn 	__declspec(dllexport) void mettreCompteurEnPause(bool deactiver)
+	/// Author : Ali
+	/// @ param[in] : bool deactiver : true -> compteur en pause
+	/// @brief : Cette fonction permet de mettre le compteur en pause 
+	/// @return rien
+	///
+	////////////////////////////////////////////////////////////////////////
+	__declspec(dllexport) void mettreCompteurEnPause(bool deactiver)
+	{
+		FacadeModele::obtenirInstance()->mettreCompteurEnPause(deactiver);
+	}
 	////////////////////////////////////////////////////////////////////////
 	/// @fn 		__declspec(dllexport) void sauvegarderTouches();
 	/// Author : Arthur

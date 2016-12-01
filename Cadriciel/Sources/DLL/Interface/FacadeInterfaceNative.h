@@ -186,7 +186,8 @@ extern "C" {
 	__declspec(dllexport) bool setScoreCourant(int score, int index);
 	__declspec(dllexport) void initialiserFTGL();
 	__declspec(dllexport) void initialiserCompteur();
-	
+	__declspec(dllexport) void setCompteur(int heure, int minute, int seconde);
+	__declspec(dllexport) void mettreCompteurEnPause(bool deactiver);
 
 	/// Ali 
 	__declspec(dllexport) void profilCourant(string nom, double vitesse_, double probaDAgirPassivemnt);

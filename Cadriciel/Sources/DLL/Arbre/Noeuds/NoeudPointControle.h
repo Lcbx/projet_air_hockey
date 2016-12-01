@@ -50,7 +50,7 @@ public:
 
 private:
 	/// la couleur du point de controle
-	glm::vec4 couleur_{ 0.,0.,1.,0. }; // couleur bleu par default
+	glm::vec4 couleur_{ 1.,0.,0.,0. }; // couleur bleu par default
 	/// la longueur du cote' du carre' du point de controle
 	double delta_{ 5 };
 };

@@ -236,6 +236,8 @@ public:
 	void initialiserCompteur();
 	void initialiserTextFTGL();
 	std::string getChrono();
+	void setChrono(int heure, int minute, int seconde);
+	void mettreCompteurEnPause(bool deactiver);
 	/// Ali
 	/// Renvoie la constante contenant le nom du fichier de configuration
 	//std::string getConfigFile();
@@ -322,6 +324,7 @@ private:
    int AncienSecondes_ { 0 };
    float temps_ { 0. };
    std::string chrono_;
+   bool compteurEnPause_ { false };
 
    /// Ali
 
