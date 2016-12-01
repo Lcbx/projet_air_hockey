@@ -116,20 +116,20 @@ void main(void)
        //si le type d illumination est ambiant	
        if( (lumiereAmbiante!=0) || (lumiereDirectionnelle!=0) || (lumiereSpot!=0))
        {
-			 if (lumiereAmbiante) // lumière ambiante
+			 if (lumiereAmbiante !=0) // lumière ambiante
 					coul = coulAmbiante;
-				//if(lumiereDirectionnelle)
+				//if(lumiereDirectionnelle !=0)
 					//color += calculerReflexion( L,N, O)*couleurTex;
-					//if(lumiereSpot)
+					//if(lumiereSpot!=0)
 						//color *= (calculerSpot(DS1,L)+calculerSpot(DS2,L)+0.4)*couleurTex;
 			
-			 if (lumiereDirectionnelle) // lumière directionnelle
+			 if (lumiereDirectionnelle!=0) // lumière directionnelle
 			 	 coul = coulAmbiante + calculerReflexion( L,N, O);
-			 	 //if(lumiereSpot)
+			 	 //if(lumiereSpot!=0)
 						//color *= (calculerSpot(DS1,L)+calculerSpot(DS2,L)+0.4);
    
 			  
-			 if (lumiereSpot) //spot
+			 if (lumiereSpot!=0) //spot
 				coul = (calculerSpot(DS1,L)+calculerSpot(DS2,L))*( calculerReflexion( L,N, O) );
 			if ( (lumiereAmbiante!=0) && (lumiereSpot!=0) )
 			{
