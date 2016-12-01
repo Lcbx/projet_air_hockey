@@ -111,26 +111,32 @@ void main(void)
 	  vec3 DS1 = normalize(spotDirection1);
 	  vec3 DS2 = normalize(spotDirection2);
 	  vec4 couleurTex = texture2D(diffuseTex,texCoord);
-	  vec4 coul = vec4(Kemission,1.0)+ (vec4(Kambient,1.0) * LightModelAmbient); 
-	 
+	  vec4 coulAmbiante = vec4(Kemission,1.0)+ (vec4(Kambient,1.0) * LightModelAmbient); 
+	  vec4 coul = vec4 (0,0,0,0);
        //si le type d illumination est ambiant	
        if( (lumiereAmbiante!=0) || (lumiereDirectionnelle!=0) || (lumiereSpot!=0))
        {
 			 if (lumiereAmbiante) // lumière ambiante
-					coul = coul;
-				if(lumiereDirectionnelle)
-					color += calculerReflexion( L,N, O)*couleurTex;
-					if(lumiereSpot)
-						color *= (calculerSpot(DS1,L)+calculerSpot(DS2,L)+0.4)*couleurTex;
+					coul = coulAmbiante;
+				//if(lumiereDirectionnelle)
+					//color += calculerReflexion( L,N, O)*couleurTex;
+					//if(lumiereSpot)
+						//color *= (calculerSpot(DS1,L)+calculerSpot(DS2,L)+0.4)*couleurTex;
 			
 			 if (lumiereDirectionnelle) // lumière directionnelle
-			 	 coul += calculerReflexion( L,N, O);
-			 	 if(lumiereSpot)
-						color *= (calculerSpot(DS1,L)+calculerSpot(DS2,L)+0.4);
+			 	 coul = coulAmbiante + calculerReflexion( L,N, O);
+			 	 //if(lumiereSpot)
+						//color *= (calculerSpot(DS1,L)+calculerSpot(DS2,L)+0.4);
    
 			  
 			 if (lumiereSpot) //spot
-				coul+= (calculerSpot(DS1,L)+calculerSpot(DS2,L))*calculerReflexion( L,N, O)
+				coul = (calculerSpot(DS1,L)+calculerSpot(DS2,L))*( calculerReflexion( L,N, O) );
+			if ( (lumiereAmbiante!=0) && (lumiereSpot!=0) )
+			{
+				if (coul == vec4(0,0,0,0)) 
+					coul  = coulAmbiante;
+			}
+		
 		} 
 			else
 				color=vec4(0,0,0,0);
