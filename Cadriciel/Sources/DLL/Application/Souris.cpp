@@ -160,7 +160,7 @@ bool Souris::currentClick(int x, int y) {
 		if (FacadeModele::obtenirInstance()->isVueOrtho())
 			FacadeModele::obtenirInstance()->obtenirVue()->obtenirCamera().deplacerXY((prevClicDroit_ - click).x, (prevClicDroit_ - click).y, true);
 		else
-			FacadeModele::obtenirInstance()->obtenirVue()->obtenirCamera().orbiterXY((prevClicDroit_ - click).x/5, (click - prevClicDroit_).y/10, true);
+			FacadeModele::obtenirInstance()->obtenirVue()->obtenirCamera().orbiterXY((prevClicDroit_ - click).x/5, (click - prevClicDroit_).y/5, true);
 		FacadeModele::obtenirInstance()->obtenirVue()->convertirClotureAVirtuelle(x, y, prevClicDroit_);
 	}
 	FacadeModele::obtenirInstance()->obtenirArbreRenduINF2990()->getTable()->dansTable(click);
