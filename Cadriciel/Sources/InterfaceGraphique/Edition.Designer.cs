@@ -31,10 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Edition));
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnlProperty = new System.Windows.Forms.Panel();
+            this.txtAngle = new InterfaceGraphique.Utility.NumericUpDownSafe();
             this.txtBoxErreurProprietes = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.txtEchelle = new InterfaceGraphique.Utility.NumericUpDownSafe();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtPositionY = new InterfaceGraphique.Utility.NumericUpDownSafe();
+            this.txtPositionX = new InterfaceGraphique.Utility.NumericUpDownSafe();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -89,18 +92,14 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripTextBox3 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripButtonPointsDeControle = new System.Windows.Forms.ToolStripButton();
-            this.txtAngle = new InterfaceGraphique.Utility.NumericUpDownSafe();
-            this.txtEchelle = new InterfaceGraphique.Utility.NumericUpDownSafe();
-            this.txtPositionY = new InterfaceGraphique.Utility.NumericUpDownSafe();
-            this.txtPositionX = new InterfaceGraphique.Utility.NumericUpDownSafe();
             this.pnlProperty.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAngle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEchelle)).BeginInit();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPositionY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPositionX)).BeginInit();
+            this.menuStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -125,7 +124,6 @@
             // 
             this.pnlProperty.Controls.Add(this.txtAngle);
             this.pnlProperty.Controls.Add(this.txtBoxErreurProprietes);
-            this.pnlProperty.Controls.Add(this.button1);
             this.pnlProperty.Controls.Add(this.txtEchelle);
             this.pnlProperty.Controls.Add(this.label1);
             this.pnlProperty.Controls.Add(this.groupBox1);
@@ -137,28 +135,70 @@
             this.pnlProperty.Size = new System.Drawing.Size(142, 516);
             this.pnlProperty.TabIndex = 0;
             // 
+            // txtAngle
+            // 
+            this.txtAngle.Location = new System.Drawing.Point(76, 134);
+            this.txtAngle.Maximum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            0});
+            this.txtAngle.Minimum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            -2147483648});
+            this.txtAngle.Name = "txtAngle";
+            this.txtAngle.Size = new System.Drawing.Size(57, 20);
+            this.txtAngle.TabIndex = 15;
+            this.txtAngle.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtAngle.ValueChanged += new System.EventHandler(this.txtAngle_ValueChanged);
+            // 
             // txtBoxErreurProprietes
             // 
             this.txtBoxErreurProprietes.BackColor = System.Drawing.SystemColors.ControlLight;
             this.txtBoxErreurProprietes.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtBoxErreurProprietes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxErreurProprietes.ForeColor = System.Drawing.Color.Red;
-            this.txtBoxErreurProprietes.Location = new System.Drawing.Point(12, 277);
+            this.txtBoxErreurProprietes.Location = new System.Drawing.Point(12, 194);
             this.txtBoxErreurProprietes.Name = "txtBoxErreurProprietes";
-            this.txtBoxErreurProprietes.Size = new System.Drawing.Size(121, 227);
+            this.txtBoxErreurProprietes.Size = new System.Drawing.Size(121, 310);
             this.txtBoxErreurProprietes.TabIndex = 17;
             this.txtBoxErreurProprietes.Text = "L\'objet sort de la table avec les valeurs données.";
             this.txtBoxErreurProprietes.Visible = false;
             // 
-            // button1
+            // txtEchelle
             // 
-            this.button1.Location = new System.Drawing.Point(12, 208);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(121, 44);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Modifier les valeurs";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.txtEchelle.DecimalPlaces = 1;
+            this.txtEchelle.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.txtEchelle.Location = new System.Drawing.Point(76, 168);
+            this.txtEchelle.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.txtEchelle.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.txtEchelle.Name = "txtEchelle";
+            this.txtEchelle.Size = new System.Drawing.Size(57, 20);
+            this.txtEchelle.TabIndex = 16;
+            this.txtEchelle.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.txtEchelle.ValueChanged += new System.EventHandler(this.txtEchelle_ValueChanged);
             // 
             // label1
             // 
@@ -183,6 +223,44 @@
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Position";
+            // 
+            // txtPositionY
+            // 
+            this.txtPositionY.DecimalPlaces = 2;
+            this.txtPositionY.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.txtPositionY.Location = new System.Drawing.Point(28, 43);
+            this.txtPositionY.Name = "txtPositionY";
+            this.txtPositionY.Size = new System.Drawing.Size(102, 20);
+            this.txtPositionY.TabIndex = 14;
+            this.txtPositionY.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtPositionY.ValueChanged += new System.EventHandler(this.txtPositionY_ValueChanged);
+            // 
+            // txtPositionX
+            // 
+            this.txtPositionX.DecimalPlaces = 2;
+            this.txtPositionX.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.txtPositionX.Location = new System.Drawing.Point(28, 20);
+            this.txtPositionX.Name = "txtPositionX";
+            this.txtPositionX.Size = new System.Drawing.Size(102, 20);
+            this.txtPositionX.TabIndex = 13;
+            this.txtPositionX.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtPositionX.ValueChanged += new System.EventHandler(this.txtPositionX_ValueChanged);
             // 
             // label3
             // 
@@ -514,7 +592,7 @@
             this.lumiereAmbianteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("lumiereAmbianteToolStripMenuItem.Image")));
             this.lumiereAmbianteToolStripMenuItem.Name = "lumiereAmbianteToolStripMenuItem";
             this.lumiereAmbianteToolStripMenuItem.ShortcutKeyDisplayString = "J";
-            this.lumiereAmbianteToolStripMenuItem.Size = new System.Drawing.Size(223, 38);
+            this.lumiereAmbianteToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.lumiereAmbianteToolStripMenuItem.Text = "Lumiere Ambiante";
             this.lumiereAmbianteToolStripMenuItem.Click += new System.EventHandler(this.lumiereAmbianteToolStripMenuItem_Click);
             // 
@@ -523,7 +601,7 @@
             this.lumiereDirectionnelleToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("lumiereDirectionnelleToolStripMenuItem.Image")));
             this.lumiereDirectionnelleToolStripMenuItem.Name = "lumiereDirectionnelleToolStripMenuItem";
             this.lumiereDirectionnelleToolStripMenuItem.ShortcutKeyDisplayString = "K";
-            this.lumiereDirectionnelleToolStripMenuItem.Size = new System.Drawing.Size(223, 38);
+            this.lumiereDirectionnelleToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.lumiereDirectionnelleToolStripMenuItem.Text = "Lumiere Directionnelle";
             this.lumiereDirectionnelleToolStripMenuItem.Click += new System.EventHandler(this.lumiereDirectionnelleToolStripMenuItem_Click);
             // 
@@ -532,7 +610,7 @@
             this.spotsLumineuxToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("spotsLumineuxToolStripMenuItem.Image")));
             this.spotsLumineuxToolStripMenuItem.Name = "spotsLumineuxToolStripMenuItem";
             this.spotsLumineuxToolStripMenuItem.ShortcutKeyDisplayString = "L";
-            this.spotsLumineuxToolStripMenuItem.Size = new System.Drawing.Size(223, 38);
+            this.spotsLumineuxToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.spotsLumineuxToolStripMenuItem.Text = "Spots lumineux";
             this.spotsLumineuxToolStripMenuItem.Click += new System.EventHandler(this.spotsLumineuxToolStripMenuItem_Click);
             // 
@@ -723,96 +801,6 @@
             this.toolStripButtonPointsDeControle.ToolTipText = "Gestion de Contrôle DePoints";
             this.toolStripButtonPointsDeControle.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
-            // txtAngle
-            // 
-            this.txtAngle.Location = new System.Drawing.Point(76, 134);
-            this.txtAngle.Maximum = new decimal(new int[] {
-            180,
-            0,
-            0,
-            0});
-            this.txtAngle.Minimum = new decimal(new int[] {
-            180,
-            0,
-            0,
-            -2147483648});
-            this.txtAngle.Name = "txtAngle";
-            this.txtAngle.Size = new System.Drawing.Size(57, 20);
-            this.txtAngle.TabIndex = 15;
-            this.txtAngle.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtAngle.ValueChanged += new System.EventHandler(this.txtAngle_ValueChanged);
-            // 
-            // txtEchelle
-            // 
-            this.txtEchelle.DecimalPlaces = 1;
-            this.txtEchelle.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.txtEchelle.Location = new System.Drawing.Point(76, 168);
-            this.txtEchelle.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.txtEchelle.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.txtEchelle.Name = "txtEchelle";
-            this.txtEchelle.Size = new System.Drawing.Size(57, 20);
-            this.txtEchelle.TabIndex = 16;
-            this.txtEchelle.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.txtEchelle.ValueChanged += new System.EventHandler(this.txtEchelle_ValueChanged);
-            // 
-            // txtPositionY
-            // 
-            this.txtPositionY.DecimalPlaces = 2;
-            this.txtPositionY.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.txtPositionY.Location = new System.Drawing.Point(28, 43);
-            this.txtPositionY.Name = "txtPositionY";
-            this.txtPositionY.Size = new System.Drawing.Size(102, 20);
-            this.txtPositionY.TabIndex = 14;
-            this.txtPositionY.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtPositionY.ValueChanged += new System.EventHandler(this.txtPositionY_ValueChanged);
-            // 
-            // txtPositionX
-            // 
-            this.txtPositionX.DecimalPlaces = 2;
-            this.txtPositionX.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.txtPositionX.Location = new System.Drawing.Point(28, 20);
-            this.txtPositionX.Name = "txtPositionX";
-            this.txtPositionX.Size = new System.Drawing.Size(102, 20);
-            this.txtPositionX.TabIndex = 13;
-            this.txtPositionX.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtPositionX.ValueChanged += new System.EventHandler(this.txtPositionX_ValueChanged);
-            // 
             // Edition
             // 
             this.AllowDrop = true;
@@ -834,16 +822,16 @@
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.Edition_MouseWheel);
             this.pnlProperty.ResumeLayout(false);
             this.pnlProperty.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAngle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEchelle)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPositionY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPositionX)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAngle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEchelle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPositionY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPositionX)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -909,7 +897,6 @@
         private InterfaceGraphique.Utility.NumericUpDownSafe txtPositionY;
         private InterfaceGraphique.Utility.NumericUpDownSafe txtAngle;
         private InterfaceGraphique.Utility.NumericUpDownSafe txtPositionX;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem lumieresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lumiereAmbianteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lumiereDirectionnelleToolStripMenuItem;
