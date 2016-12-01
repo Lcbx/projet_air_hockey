@@ -161,7 +161,7 @@ namespace InterfaceGraphique
 
         /// @brief Permet de gérer le changement des lumières ambiante
         /// TODO : Refactoriser
-        private bool LumiereAmbiante_ = false;
+        private bool LumiereAmbiante_ = true;
         public bool LumiereAmbiante {
             get { return LumiereAmbiante_; }
             set {
@@ -173,8 +173,8 @@ namespace InterfaceGraphique
             }
         }
 
-        /// @brief Permet de gérer le changement des lumières ambiante
-        private bool LumiereDirectionnelle_ = false;
+        /// @brief Permet de gérer le changement des lumières directionnelle
+        private bool LumiereDirectionnelle_ = true;
         public bool LumiereDirectionnelle {
             get { return LumiereDirectionnelle_; }
             set {
@@ -187,8 +187,8 @@ namespace InterfaceGraphique
             }
         }
 
-        /// @brief Permet de gérer le changement des lumières ambiante
-        private bool LumiereSpots_ = false;
+        /// @brief Permet de gérer le changement des lumières spot
+        private bool LumiereSpots_ = true;
         public bool LumiereSpots {
             get { return LumiereSpots_; }
             set {

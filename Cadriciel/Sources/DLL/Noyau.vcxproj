@@ -225,7 +225,6 @@
     <ClInclude Include="Arbre\Noeuds\NoeudTypes.h" />
     <ClInclude Include="BoiteCollision.h" />
     <ClInclude Include="BoiteCollisionAbstraite.h" />
-    <ClInclude Include="CameraTest.h" />
     <ClInclude Include="ConfigTournoi.h" />
     <ClInclude Include="Configuration\ConfigDebug.h" />
     <ClInclude Include="Configuration\ConfigJeu.h" />

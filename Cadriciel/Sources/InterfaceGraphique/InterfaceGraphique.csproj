@@ -199,6 +199,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Edition.resx">
       <DependentUpon>Edition.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FenetreProfilVirtuel.resx">
       <DependentUpon>FenetreProfilVirtuel.cs</DependentUpon>
