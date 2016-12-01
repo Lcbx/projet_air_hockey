@@ -299,7 +299,7 @@
             this.nouveauToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("nouveauToolStripMenuItem.Image")));
             this.nouveauToolStripMenuItem.Name = "nouveauToolStripMenuItem";
             this.nouveauToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(213, 38);
             this.nouveauToolStripMenuItem.Text = "Nouveau";
             this.nouveauToolStripMenuItem.Click += new System.EventHandler(this.nouveauToolStripMenuItem_Click_1);
             // 
@@ -374,7 +374,7 @@
             this.supprimerToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("supprimerToolStripMenuItem.Image")));
             this.supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
             this.supprimerToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.supprimerToolStripMenuItem.Text = "Supprimer";
             this.supprimerToolStripMenuItem.Click += new System.EventHandler(this.supprimerToolStripMenuItem_Click);
             // 
@@ -509,7 +509,8 @@
             // 
             this.orthographiqueToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("orthographiqueToolStripMenuItem.Image")));
             this.orthographiqueToolStripMenuItem.Name = "orthographiqueToolStripMenuItem";
-            this.orthographiqueToolStripMenuItem.Size = new System.Drawing.Size(175, 38);
+            this.orthographiqueToolStripMenuItem.ShortcutKeyDisplayString = "1";
+            this.orthographiqueToolStripMenuItem.Size = new System.Drawing.Size(188, 38);
             this.orthographiqueToolStripMenuItem.Text = "Orthographique";
             this.orthographiqueToolStripMenuItem.Click += new System.EventHandler(this.orthographiqueToolStripMenuItem_Click);
             // 
@@ -517,7 +518,8 @@
             // 
             this.orbiteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("orbiteToolStripMenuItem.Image")));
             this.orbiteToolStripMenuItem.Name = "orbiteToolStripMenuItem";
-            this.orbiteToolStripMenuItem.Size = new System.Drawing.Size(175, 38);
+            this.orbiteToolStripMenuItem.ShortcutKeyDisplayString = "2";
+            this.orbiteToolStripMenuItem.Size = new System.Drawing.Size(188, 38);
             this.orbiteToolStripMenuItem.Text = "Orbite";
             this.orbiteToolStripMenuItem.Click += new System.EventHandler(this.orbiteToolStripMenuItem_Click);
             // 
@@ -533,7 +535,7 @@
             // 
             this.aideToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("aideToolStripMenuItem.Image")));
             this.aideToolStripMenuItem.Name = "aideToolStripMenuItem";
-            this.aideToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.aideToolStripMenuItem.Size = new System.Drawing.Size(168, 38);
             this.aideToolStripMenuItem.Text = "Aide";
             this.aideToolStripMenuItem.Click += new System.EventHandler(this.aideToolStripMenuItem_Click);
             // 

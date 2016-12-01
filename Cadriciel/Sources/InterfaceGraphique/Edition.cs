@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
  
 namespace InterfaceGraphique
 {
-    public partial class Edition : Form   
+    public partial class Edition : Form, INotifyPropertyChanged
     {
         private static MenuPrincipal menuPrincipal_;  
         //private static double friction_;
@@ -1479,6 +1479,29 @@ namespace InterfaceGraphique
         public static string SAVE_FILEPATH = "zones";
         public static string DEFAULT_FILENAME = "defaut";
 
+        /// @fn protected void OnPropertyChanged(string propertyName)
+        /// @brief Permet de réaliser du databinding complet
+        /// @param propertyName Nom de la propriété qui est mise à jour
+        /// @source http://stackoverflow.com/questions/1315621/implementing-inotifypropertychanged-does-a-better-way-exist
+        /// @author Marc Gravell
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// @fn protected bool SetField<T>(ref T field, T value, string propertyName)
+        /// @brief Permet de lever un property changed si l'objet est modifié
+        /// @param field Objet modifié
+        /// @param value Nouvelle valeur pour l'objet
+        /// @param propertyName Nom de la propriété modifié
+        /// @source http://stackoverflow.com/questions/1315621/implementing-inotifypropertychanged-does-a-better-way-exist
+        /// @author Marc Gravell
+        protected bool SetField<T>(ref T field, T value, string propertyName) {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value; OnPropertyChanged(propertyName); return true;
+        }
+
+
         ///////////////////////////////////////////////////////////////////////
         /// @fn string getCurrentFile()
         ///
@@ -1944,7 +1967,6 @@ namespace InterfaceGraphique
         {
             FonctionsNatives.setVueOrbite();
         }
-        
 
 
         ///////////////////////////////////////////////////////////////////////
