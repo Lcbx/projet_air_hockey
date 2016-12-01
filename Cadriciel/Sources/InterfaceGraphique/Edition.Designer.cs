@@ -31,9 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Edition));
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnlProperty = new System.Windows.Forms.Panel();
+            this.txtAngle = new InterfaceGraphique.Utility.NumericUpDownSafe();
             this.txtBoxErreurProprietes = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.txtEchelle = new InterfaceGraphique.Utility.NumericUpDownSafe();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtPositionY = new InterfaceGraphique.Utility.NumericUpDownSafe();
+            this.txtPositionX = new InterfaceGraphique.Utility.NumericUpDownSafe();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -83,20 +88,15 @@
             this.toolStripButtonMuret = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripTextBox3 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.txtAngle = new InterfaceGraphique.Utility.NumericUpDownSafe();
-            this.txtEchelle = new InterfaceGraphique.Utility.NumericUpDownSafe();
-            this.txtPositionY = new InterfaceGraphique.Utility.NumericUpDownSafe();
-            this.txtPositionX = new InterfaceGraphique.Utility.NumericUpDownSafe();
-            this.button1 = new System.Windows.Forms.Button();
+            this.toolStripButtonPointsDeControle = new System.Windows.Forms.ToolStripButton();
             this.pnlProperty.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAngle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEchelle)).BeginInit();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPositionY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPositionX)).BeginInit();
+            this.menuStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -133,6 +133,29 @@
             this.pnlProperty.Size = new System.Drawing.Size(142, 516);
             this.pnlProperty.TabIndex = 0;
             // 
+            // txtAngle
+            // 
+            this.txtAngle.Location = new System.Drawing.Point(76, 134);
+            this.txtAngle.Maximum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            0});
+            this.txtAngle.Minimum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            -2147483648});
+            this.txtAngle.Name = "txtAngle";
+            this.txtAngle.Size = new System.Drawing.Size(57, 20);
+            this.txtAngle.TabIndex = 15;
+            this.txtAngle.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtAngle.ValueChanged += new System.EventHandler(this.txtAngle_ValueChanged);
+            // 
             // txtBoxErreurProprietes
             // 
             this.txtBoxErreurProprietes.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -145,6 +168,45 @@
             this.txtBoxErreurProprietes.TabIndex = 17;
             this.txtBoxErreurProprietes.Text = "L\'objet sort de la table avec les valeurs données.";
             this.txtBoxErreurProprietes.Visible = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 208);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(121, 44);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "Modifier les valeurs";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // txtEchelle
+            // 
+            this.txtEchelle.DecimalPlaces = 1;
+            this.txtEchelle.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.txtEchelle.Location = new System.Drawing.Point(76, 168);
+            this.txtEchelle.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.txtEchelle.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.txtEchelle.Name = "txtEchelle";
+            this.txtEchelle.Size = new System.Drawing.Size(57, 20);
+            this.txtEchelle.TabIndex = 16;
+            this.txtEchelle.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.txtEchelle.ValueChanged += new System.EventHandler(this.txtEchelle_ValueChanged);
             // 
             // label1
             // 
@@ -169,6 +231,44 @@
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Position";
+            // 
+            // txtPositionY
+            // 
+            this.txtPositionY.DecimalPlaces = 2;
+            this.txtPositionY.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.txtPositionY.Location = new System.Drawing.Point(28, 43);
+            this.txtPositionY.Name = "txtPositionY";
+            this.txtPositionY.Size = new System.Drawing.Size(102, 20);
+            this.txtPositionY.TabIndex = 14;
+            this.txtPositionY.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtPositionY.ValueChanged += new System.EventHandler(this.txtPositionY_ValueChanged);
+            // 
+            // txtPositionX
+            // 
+            this.txtPositionX.DecimalPlaces = 2;
+            this.txtPositionX.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.txtPositionX.Location = new System.Drawing.Point(28, 20);
+            this.txtPositionX.Name = "txtPositionX";
+            this.txtPositionX.Size = new System.Drawing.Size(102, 20);
+            this.txtPositionX.TabIndex = 13;
+            this.txtPositionX.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtPositionX.ValueChanged += new System.EventHandler(this.txtPositionX_ValueChanged);
             // 
             // label3
             // 
@@ -506,7 +606,7 @@
             this.toolStripButtonMuret,
             this.toolStripSeparator4,
             this.toolStripTextBox3,
-            this.toolStripButton1});
+            this.toolStripButtonPointsDeControle});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
@@ -658,117 +758,17 @@
             this.toolStripTextBox3.Size = new System.Drawing.Size(52, 15);
             this.toolStripTextBox3.Text = "Contrôle";
             // 
-            // toolStripButton1
+            // toolStripButtonPointsDeControle
             // 
-            this.toolStripButton1.CheckOnClick = true;
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(52, 29);
-            this.toolStripButton1.Text = "toolStripButtonControleDePoints";
-            this.toolStripButton1.ToolTipText = "Gestion de Contrôle DePoints";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // txtAngle
-            // 
-            this.txtAngle.Location = new System.Drawing.Point(76, 134);
-            this.txtAngle.Maximum = new decimal(new int[] {
-            180,
-            0,
-            0,
-            0});
-            this.txtAngle.Minimum = new decimal(new int[] {
-            180,
-            0,
-            0,
-            -2147483648});
-            this.txtAngle.Name = "txtAngle";
-            this.txtAngle.Size = new System.Drawing.Size(57, 20);
-            this.txtAngle.TabIndex = 15;
-            this.txtAngle.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtAngle.ValueChanged += new System.EventHandler(this.txtAngle_ValueChanged);
-            // 
-            // txtEchelle
-            // 
-            this.txtEchelle.DecimalPlaces = 1;
-            this.txtEchelle.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.txtEchelle.Location = new System.Drawing.Point(76, 168);
-            this.txtEchelle.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.txtEchelle.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.txtEchelle.Name = "txtEchelle";
-            this.txtEchelle.Size = new System.Drawing.Size(57, 20);
-            this.txtEchelle.TabIndex = 16;
-            this.txtEchelle.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            this.txtEchelle.ValueChanged += new System.EventHandler(this.txtEchelle_ValueChanged);
-            // 
-            // txtPositionY
-            // 
-            this.txtPositionY.DecimalPlaces = 2;
-            this.txtPositionY.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.txtPositionY.Location = new System.Drawing.Point(28, 43);
-            this.txtPositionY.Name = "txtPositionY";
-            this.txtPositionY.Size = new System.Drawing.Size(102, 20);
-            this.txtPositionY.TabIndex = 14;
-            this.txtPositionY.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtPositionY.ValueChanged += new System.EventHandler(this.txtPositionY_ValueChanged);
-            // 
-            // txtPositionX
-            // 
-            this.txtPositionX.DecimalPlaces = 2;
-            this.txtPositionX.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.txtPositionX.Location = new System.Drawing.Point(28, 20);
-            this.txtPositionX.Name = "txtPositionX";
-            this.txtPositionX.Size = new System.Drawing.Size(102, 20);
-            this.txtPositionX.TabIndex = 13;
-            this.txtPositionX.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtPositionX.ValueChanged += new System.EventHandler(this.txtPositionX_ValueChanged);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(12, 208);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(121, 44);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Modifier les valeurs";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.toolStripButtonPointsDeControle.CheckOnClick = true;
+            this.toolStripButtonPointsDeControle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonPointsDeControle.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonPointsDeControle.Image")));
+            this.toolStripButtonPointsDeControle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonPointsDeControle.Name = "toolStripButtonPointsDeControle";
+            this.toolStripButtonPointsDeControle.Size = new System.Drawing.Size(52, 29);
+            this.toolStripButtonPointsDeControle.Text = "toolStripButtonPointsDeControle";
+            this.toolStripButtonPointsDeControle.ToolTipText = "Gestion de Contrôle DePoints";
+            this.toolStripButtonPointsDeControle.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // Edition
             // 
@@ -790,16 +790,16 @@
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.Edition_MouseWheel);
             this.pnlProperty.ResumeLayout(false);
             this.pnlProperty.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAngle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEchelle)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPositionY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPositionX)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAngle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEchelle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPositionY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPositionX)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -848,7 +848,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton toolStripButtonZoom;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton toolStripButtonPointsDeControle;
         private System.Windows.Forms.ToolStripLabel toolStripTextBox1;
         private System.Windows.Forms.ToolStripLabel toolStripTextBox2;
         private System.Windows.Forms.ToolStripLabel toolStripTextBox3;

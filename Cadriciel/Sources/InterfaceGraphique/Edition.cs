@@ -450,77 +450,18 @@ namespace InterfaceGraphique
                     case Keys.Alt: { FonctionsNatives.toucheAlt(false); break; }
                     case Keys.Menu: { FonctionsNatives.toucheAlt(false); break; }
                     case Keys.Delete: { FonctionsNatives.supprimerObjet(); break; }
-                    case Keys.D:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButtonDeplacement.Checked = true;
-                            this.changerMode(Etats.DEPLACEMENT); break;
-                        }
-                    case Keys.S:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButtonSelection.Checked = true;
-                            this.changerMode(Etats.SELECTION); break;
-                        }
-                    case Keys.R:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButtonRotation.Checked = true;
-                            this.changerMode(Etats.ROTATION); break;
-                        }
-                    case Keys.E:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButtonMiseAEchelle.Checked = true;
-                            this.changerMode(Etats.MISEAECHELLE); break;
-                        }
-                    case Keys.C:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButtonDuplication.Checked = true;
-                            this.changerMode(Etats.DUPLICATION); break;
-                        }
-                    case Keys.Z:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButtonZoom.Checked = true;
-                            this.changerMode(Etats.LOUPE); break;
-                        }
-                    case Keys.M:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButtonMuret.Checked = true;
-                            this.changerMode(Etats.AJOUT_MUR); break;
-                        }
-                    case Keys.P:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButtonPortail.Checked = true;
-                            this.changerMode(Etats.AJOUT_PORTAIL); break;
-                        }
-                    case Keys.B:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButtonAccelerateur.Checked = true;
-                            this.changerMode(Etats.AJOUT_ACCELERATEUR); break;
-                        }
-                    case Keys.G:
-                        {
-                            desactiverAutresBoutons();
-                            toolStripButton1.Checked = true;
-                            this.changerMode(Etats.POINTSDECONTROLE); break;
-                        }
-                    case Keys.T:
-                        {
-                            //afficher fenetre test 
-                            passerModeTest(true);
-                            break;
-                        }
-                    case Keys.Escape:
-                        {
-                            FonctionsNatives.escEnfonce();
-                            break;
-                        }
+                    case Keys.D: EtatSouris = Etats.DEPLACEMENT; break;
+                    case Keys.S: EtatSouris = Etats.SELECTION; break;
+                    case Keys.R: EtatSouris = Etats.ROTATION; break;
+                    case Keys.E: EtatSouris = Etats.MISEAECHELLE; break;
+                    case Keys.C: EtatSouris = Etats.DUPLICATION; break;
+                    case Keys.Z: EtatSouris = Etats.LOUPE; break;
+                    case Keys.M: EtatSouris = Etats.AJOUT_MUR; break;
+                    case Keys.P: EtatSouris = Etats.AJOUT_PORTAIL; break;
+                    case Keys.B: EtatSouris = Etats.AJOUT_ACCELERATEUR; break;
+                    case Keys.G: EtatSouris = Etats.POINTSDECONTROLE; break;
+                    case Keys.T: passerModeTest(true); break; //afficher fenetre test
+                    case Keys.Escape: FonctionsNatives.escEnfonce(); break;
                     case Keys.J: {
                             FonctionsNatives.changerLumieresActives(true, false, false);
                             break;
@@ -614,9 +555,44 @@ namespace InterfaceGraphique
         } 
 
 
-        public enum Etats { SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, AJOUT_MUR, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, REDIMENSIONNEMENT, NBETATS, TEST };
-
-        private Etats EtatSouris = Etats.SELECTION;
+        public enum Etats { Unset = -1, SELECTION = 0, LOUPE, DEPLACEMENT, ROTATION, DUPLICATION, AJOUT_ACCELERATEUR, AJOUT_MUR, AJOUT_PORTAIL, MISEAECHELLE, POINTSDECONTROLE, REDIMENSIONNEMENT, NBETATS, TEST };
+        private Etats EtatSouris_ = Etats.Unset;
+        public Etats EtatSouris {
+            get { return EtatSouris_; }
+            set {
+                if(value != EtatSouris_) {
+                    switch (EtatSouris_) {
+                        case Etats.SELECTION: toolStripButtonSelection.Checked = false; sélectionToolStripMenuItem.Checked = false; break;
+                        case Etats.LOUPE: toolStripButtonZoom.Checked = false; zoomToolStripMenuItem.Checked = false; break;
+                        case Etats.DEPLACEMENT: toolStripButtonDeplacement.Checked = false; déplacementToolStripMenuItem.Checked = false; break;
+                        case Etats.ROTATION: toolStripButtonRotation.Checked = false; rotationToolStripMenuItem.Checked = false; break;
+                        case Etats.DUPLICATION: toolStripButtonDuplication.Checked = false; duplicationToolStripMenuItem.Checked = false; break;
+                        case Etats.AJOUT_ACCELERATEUR: toolStripButtonAccelerateur.Checked = false; ToolStripMenuItemAccelerateur.Checked = false; break;
+                        case Etats.AJOUT_MUR: toolStripButtonMuret.Checked = false; muretToolStripMenuItem.Checked = false; break;
+                        case Etats.AJOUT_PORTAIL: toolStripButtonPortail.Checked = false; portailToolStripMenuItem.Checked = false; break;
+                        case Etats.MISEAECHELLE: toolStripButtonMiseAEchelle.Checked = false; miseÀLéchelleToolStripMenuItem.Checked = false; break;
+                        case Etats.POINTSDECONTROLE: toolStripButtonPointsDeControle.Checked = false; gestionDesPointsDeContrôleToolStripMenuItem.Checked = false; break;
+                        default: break;
+                    }
+                    EtatSouris_ = value;
+                    switch (EtatSouris_)
+                    {
+                        case Etats.SELECTION: toolStripButtonSelection.Checked = true; sélectionToolStripMenuItem.Checked = true; break;
+                        case Etats.LOUPE: toolStripButtonZoom.Checked = true; zoomToolStripMenuItem.Checked = true; break;
+                        case Etats.DEPLACEMENT: toolStripButtonDeplacement.Checked = true; déplacementToolStripMenuItem.Checked = true; break;
+                        case Etats.ROTATION: toolStripButtonRotation.Checked = true; rotationToolStripMenuItem.Checked = true; break;
+                        case Etats.DUPLICATION: toolStripButtonDuplication.Checked = true; duplicationToolStripMenuItem.Checked = true; break;
+                        case Etats.AJOUT_ACCELERATEUR: toolStripButtonAccelerateur.Checked = true; ToolStripMenuItemAccelerateur.Checked = true; break;
+                        case Etats.AJOUT_MUR: toolStripButtonMuret.Checked = true; muretToolStripMenuItem.Checked = true; break;
+                        case Etats.AJOUT_PORTAIL: toolStripButtonPortail.Checked = true; portailToolStripMenuItem.Checked = true; break;
+                        case Etats.MISEAECHELLE: toolStripButtonMiseAEchelle.Checked = true; miseÀLéchelleToolStripMenuItem.Checked = true; break;
+                        case Etats.POINTSDECONTROLE: toolStripButtonPointsDeControle.Checked = true; gestionDesPointsDeContrôleToolStripMenuItem.Checked = true; break;
+                        default: break;
+                    }
+                    FonctionsNatives.etatDelaSouris((int) EtatSouris_);
+                }
+            }
+        }
 
         private Boolean mousePressed = false;
 
@@ -842,9 +818,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButtonSelection_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonSelection.Checked = true;
-            this.changerMode(Etats.SELECTION);
+            EtatSouris = Etats.SELECTION;
         }
         /////////////////////////////////////////////////////////////////////////
         ///  @fn private void toolStripButtonDeplacement_Click(object sender, EventArgs e)
@@ -862,10 +836,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButtonDeplacement_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonDeplacement.Checked = true;
-            this.changerMode(Etats.DEPLACEMENT);
-
+            EtatSouris = Etats.DEPLACEMENT;
         }
         /////////////////////////////////////////////////////////////////////////
         ///  @fn private void toolStripButtonRotation_Click(object sender, EventArgs e)
@@ -883,9 +854,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButtonRotation_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonRotation.Checked = true;
-            this.changerMode(Etats.ROTATION);
+            EtatSouris = Etats.ROTATION;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -905,9 +874,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButtonMiseAEchelle_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonMiseAEchelle.Checked = true;
-            this.changerMode(Etats.MISEAECHELLE);
+            EtatSouris = Etats.MISEAECHELLE;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -925,9 +892,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButtonDuplication_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonDuplication.Checked = true;
-            this.changerMode(Etats.DUPLICATION);
+            EtatSouris = Etats.DUPLICATION;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -946,9 +911,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButtonZoom_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonZoom.Checked = true;
-            this.changerMode(Etats.LOUPE);
+            EtatSouris = Etats.LOUPE;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -966,9 +929,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButtonAccelerateur_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonAccelerateur.Checked = true;
-            this.changerMode(Etats.AJOUT_ACCELERATEUR);
+            EtatSouris = Etats.AJOUT_ACCELERATEUR;
 
         }
         /////////////////////////////////////////////////////////////////////////
@@ -988,9 +949,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButtonPortail_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonPortail.Checked = true;
-            this.changerMode(Etats.AJOUT_PORTAIL);
+            EtatSouris = Etats.AJOUT_PORTAIL;
         }
         /////////////////////////////////////////////////////////////////////////
         /// 
@@ -1009,9 +968,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButtonMuret_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonMuret.Checked = true;
-            this.changerMode(Etats.AJOUT_MUR);
+            EtatSouris = Etats.AJOUT_MUR;
         }
         /////////////////////////////////////////////////////////////////////////
         ///  
@@ -1028,9 +985,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButton1.Checked = true;
-            this.changerMode(Etats.POINTSDECONTROLE);
+            EtatSouris = Etats.POINTSDECONTROLE;
 
         }
 
@@ -1057,7 +1012,7 @@ namespace InterfaceGraphique
             toolStripButtonAccelerateur.Checked = false;
             toolStripButtonPortail.Checked = false;
             toolStripButtonMuret.Checked = false;
-            toolStripButton1.Checked = false;
+            toolStripButtonPointsDeControle.Checked = false;
         }
         ///////////////////////////////////////////////////////////////////////
         /// @fn bool Dans_Intervalle( double valeur, double borneMin, double borneMax ) 
@@ -1201,9 +1156,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void sélectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonSelection.Checked = true;
-            this.changerMode(Etats.SELECTION);
+            EtatSouris = Etats.SELECTION;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -1222,9 +1175,7 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         private void déplacementToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonDeplacement.Checked = true;
-            this.changerMode(Etats.DEPLACEMENT);
+            EtatSouris = Etats.DEPLACEMENT;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -1243,9 +1194,7 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         private void rotationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonRotation.Checked = true;
-            this.changerMode(Etats.ROTATION);
+            EtatSouris = Etats.ROTATION;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -1265,9 +1214,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void miseÀLéchelleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonMiseAEchelle.Checked = true;
-            this.changerMode(Etats.MISEAECHELLE);
+            EtatSouris = Etats.MISEAECHELLE;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -1285,9 +1232,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void duplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonDuplication.Checked = true;
-            this.changerMode(Etats.DUPLICATION);
+            EtatSouris = Etats.DUPLICATION;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -1307,9 +1252,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void ToolStripMenuItemAccelerateur_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonAccelerateur.Checked = true;
-            this.changerMode(Etats.AJOUT_ACCELERATEUR);
+            EtatSouris = Etats.AJOUT_ACCELERATEUR;
 
         }
 
@@ -1330,9 +1273,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void portailToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonPortail.Checked = true;
-            this.changerMode(Etats.AJOUT_PORTAIL);
+            EtatSouris = Etats.AJOUT_PORTAIL;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -1352,9 +1293,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void muretToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonMuret.Checked = true;
-            this.changerMode(Etats.AJOUT_MUR);
+            EtatSouris = Etats.AJOUT_MUR;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -1372,9 +1311,7 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         private void gestionDesPointsDeContrôleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButton1.Checked = true;
-            this.changerMode(Etats.POINTSDECONTROLE);
+            EtatSouris = Etats.POINTSDECONTROLE;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -1426,9 +1363,7 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         private void zoomToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            desactiverAutresBoutons();
-            toolStripButtonZoom.Checked = true;
-            this.changerMode(Etats.LOUPE);
+            EtatSouris = Etats.LOUPE;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -1644,9 +1579,9 @@ namespace InterfaceGraphique
                 estEnModeTest = true;
                 estEnModePartie = false;
                 estEnPause = false;
-	        //State
+                //State
                 //state = States.Test;
-                this.changerMode(Etats.TEST);
+                EtatSouris = Etats.TEST;
                 //Permet d'ajouter les maillets et la rondelle dans la table
                 FonctionsNatives.ajouterMailletEtRondelle();
                 //effacer les points de controle
@@ -1699,7 +1634,7 @@ namespace InterfaceGraphique
                 if (estEnModePartie) { FonctionsNatives.initialiserScene(); }
 
                 this.Text = "Mode Edition";
-                this.changerMode(Etats.SELECTION);
+                EtatSouris = Etats.SELECTION;
 
                 estEnModePartie = false;
                 estEnModeTest = false;
@@ -1840,8 +1775,8 @@ namespace InterfaceGraphique
 
                 estEnModePartie = true;
                 estEnModeTest = false;
-               
-                this.changerMode(Etats.TEST);
+
+                EtatSouris = Etats.TEST;
 
                 //State
               // state = States.PartieRapide;
