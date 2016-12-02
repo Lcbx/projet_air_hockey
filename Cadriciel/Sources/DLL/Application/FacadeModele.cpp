@@ -209,7 +209,7 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 				-200, 1000, 5, 0.5, 0.25,
 				200, 200}
 	};
-	vueOrbite_->rotaterXY(0, 100);
+	vueOrbite_->rotaterXY(0, -0.25);
 
 	vue_ = vueOrtho_;
 }
