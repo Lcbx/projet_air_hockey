@@ -57,6 +57,8 @@
             this.richTextBox9 = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.richTextBox10 = new System.Windows.Forms.RichTextBox();
             this.tabCtrlMode.SuspendLayout();
             this.tabModeEdition.SuspendLayout();
             this.tabCtrlModeEdition.SuspendLayout();
@@ -73,6 +75,7 @@
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -90,6 +93,7 @@
             // 
             this.tabCtrlMode.Controls.Add(this.tabModeEdition);
             this.tabCtrlMode.Controls.Add(this.tabModeTest);
+            this.tabCtrlMode.Controls.Add(this.tabPage2);
             this.tabCtrlMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabCtrlMode.Location = new System.Drawing.Point(0, 0);
             this.tabCtrlMode.Name = "tabCtrlMode";
@@ -355,6 +359,26 @@
             this.panel2.Size = new System.Drawing.Size(375, 348);
             this.panel2.TabIndex = 6;
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.richTextBox10);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(367, 322);
+            this.tabPage2.TabIndex = 2;
+            this.tabPage2.Text = "Legal";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // richTextBox10
+            // 
+            this.richTextBox10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox10.Location = new System.Drawing.Point(3, 3);
+            this.richTextBox10.Name = "richTextBox10";
+            this.richTextBox10.Size = new System.Drawing.Size(361, 316);
+            this.richTextBox10.TabIndex = 0;
+            this.richTextBox10.Text = "Pack d\'icônes additionnelles utilisées:\nGIMP sous liscence GPL (Open source)\n\n";
+            // 
             // BoiteAide
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -382,6 +406,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -414,5 +439,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.RichTextBox richTextBox9;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.RichTextBox richTextBox10;
     }
 }
