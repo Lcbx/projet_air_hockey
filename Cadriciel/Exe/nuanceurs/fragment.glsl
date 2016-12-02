@@ -55,6 +55,7 @@ in Attribs {
    vec3 lumiereDir;
    vec3 normale;
    vec3 obsVec;
+   vec3 Lspot;
 
 } AttribsIn;
 
@@ -108,6 +109,7 @@ void main(void)
 	  couleurTable = colorIn;
 	  vec3 N = normalize(AttribsIn.normale);
 	  vec3 L = normalize(AttribsIn.lumiereDir);
+	  vec3 Lspot = normalize(AttribsIn.Lspot);
 	  vec3 O = normalize(AttribsIn.obsVec);
 	  vec3 DS1 = normalize(spotDirection1);
 	  vec3 DS2 = normalize(spotDirection2);
@@ -134,19 +136,21 @@ void main(void)
 			  
 			 if (lumiereSpot!=0) //spot
 			 {
-				coul = ( calculerReflexion( L,N, O))*(calculerSpot(DS1,L)+calculerSpot(DS2,L));
-				//( calculerReflexion( L,N, O) );
+				coul = ( calculerReflexion( Lspot,N, O))*(calculerSpot(DS1,Lspot)+calculerSpot(DS2,Lspot));
+				//( calculerReflexion( Lspot,N, O) );
 				couleurTable = colorIn*0.8;
-				if (lumiereDirectionnelle!=0)
-				{
-					coul = calculerReflexion( L,N, O) + ( calculerReflexion( L,N, O))*(calculerSpot(DS1,L)+calculerSpot(DS2,L));
-					couleurTable = colorIn;
-				}
 				if (lumiereAmbiante!=0)
 				{
-					coul = coulAmbiante + ( calculerReflexion( L,N, O))*(calculerSpot(DS1,L)+calculerSpot(DS2,L));
+					coul = coulAmbiante + ( calculerReflexion( L,N, O))*(calculerSpot(DS1,Lspot)+calculerSpot(DS2,Lspot));
 					couleurTable = 0.2*colorIn;
 				}
+				if (lumiereDirectionnelle!=0)
+				{
+					coul = calculerReflexion( L,N, O) + ( calculerReflexion( Lspot,N, O))*(calculerSpot(DS1,Lspot)+calculerSpot(DS2,Lspot));
+					couleurTable = colorIn;
+					
+				}
+				
 			 }
 
 		
