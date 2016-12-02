@@ -1,0 +1,6 @@
+<listeProfil>
+    <Defaut NOM="Defaut" VITESSE="7" PROBABILITE="0.69999999"/>
+    <difficile NOM="difficile" VITESSE="2" PROBABILITE="0.80000001"/>
+    <facile NOM="facile" VITESSE="10" PROBABILITE="0"/>
+    <normal NOM="normal" VITESSE="6" PROBABILITE="0.60000002"/>
+</listeProfil>
