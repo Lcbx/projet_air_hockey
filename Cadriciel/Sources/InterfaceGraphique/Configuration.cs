@@ -78,7 +78,7 @@ namespace InterfaceGraphique
 
 
             // Chargement des profils
-          
+
 
             int nbrChar = FonctionsNatives.obtenirNombreProfils();
             string temp = "";
@@ -127,7 +127,7 @@ namespace InterfaceGraphique
             nom = nomJoueurVirtuelCourant_;
             probaDAgirPassivemnt = FonctionsNatives.obtenirProbabiliteProfil(nomJoueurVirtuelCourant_.ToCharArray());
 
-
+            button2.Enabled = false;
 
 
             // Charge les touches du joueur 2
@@ -228,9 +228,10 @@ namespace InterfaceGraphique
             menuPrincipal_ = menuPrincipal;
             edition_ = edition;
         }
-                    
-					
-		/////////////////////////////////////////////////////////////////////////
+
+
+
+        /////////////////////////////////////////////////////////////////////////
         /// @fn public renitialisation_Click(object sender, EventArgs e)
         /// 
         /// @brief rénitialise les touches de jeu par défaut
@@ -238,8 +239,8 @@ namespace InterfaceGraphique
         /// @param[in] aucun
         ///
         /// @return aucune
-        //
-        ////////////////////////////////////////////////////////////////////////////////////////// 
+            //
+            ////////////////////////////////////////////////////////////////////////////////////////// 
         private void renitialisation_Click(object sender, EventArgs e)
         {
             toucheDeplaceAGauche_ = (int)Keys.A;
@@ -280,15 +281,11 @@ namespace InterfaceGraphique
         //
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private string changerTouche(KeyEventArgs ke)
-            {
-                KeysConverter kc = new KeysConverter();
-                string keyChar = kc.ConvertToString(ke.KeyData);
-
-            
+        {
+            KeysConverter kc = new KeysConverter();
+            string keyChar = kc.ConvertToString(ke.KeyData);
             return keyChar;
-
-
-            }
+        }
 
 
 		/////////////////////////////////////////////////////////////////////////
@@ -640,9 +637,12 @@ namespace InterfaceGraphique
                 trackBar1.Value = Convert.ToInt32(FonctionsNatives.obtenirVitesseProfil(nt_cNom));
                 trackBar2.Value = Convert.ToInt32(FonctionsNatives.obtenirProbabiliteProfil(nt_cNom) * 10);
 
-
+                button2.Enabled = true;
                 // numericUpDown2.Value = Convert.ToDecimal(FonctionsNatives.obtenirVitesseProfil(nt_cNom));
                 //numericUpDown3.Value = Convert.ToDecimal(FonctionsNatives.obtenirProbabiliteProfil(nt_cNom));
+            }
+            else{
+                button2.Enabled = false;
             }
         }
 
@@ -858,6 +858,111 @@ namespace InterfaceGraphique
 
         }
 
+        private void richTextBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+         
+        }
+
+      
+
+        private void Configuration_KeyUp(object sender, KeyEventArgs e)
+        {
+         
+        }
+
+        public enum choixTouche { haut_ = 0, bas_, gauche_, droite_ };
+        public choixTouche touche_;
+
+        private void tabControl1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                richTextBox1.Hide();
+                groupBox1.Show();
+            }
+
+           else if (touche_ == choixTouche.haut_)
+            {
+                richTextBox1.Hide();
+                groupBox1.Show();
+                haut_KeyDown(sender, e);
+            }
+            else if (touche_ == choixTouche.bas_)
+            {
+                richTextBox1.Hide();
+                groupBox1.Show();
+                bas_KeyDown(sender, e);
+            }
+           else if (touche_ == choixTouche.gauche_)
+            {
+                richTextBox1.Hide();
+                groupBox1.Show();
+                gauche_KeyDown(sender, e);
+            }
+            else if (touche_ == choixTouche.droite_)
+            {
+                richTextBox1.Hide();
+                groupBox1.Show();
+                droite_KeyDown(sender, e);
+            }
+        }
+
+        private void haut_Click(object sender, EventArgs e)
+        {
+           int pI= richTextBox1.Text.IndexOf('{');
+            int pF = richTextBox1.Text.IndexOf('}');
+            
+            richTextBox1.Text = richTextBox1.Text.Substring(0, pI+1) + "HAUT" + 
+                richTextBox1.Text.Substring(pF);
+
+            richTextBox1.Show();
+            groupBox1.Hide();
+            touche_ = choixTouche.haut_;
+        }
+
+        private void droite_Click(object sender, EventArgs e)
+        {
+            int pI = richTextBox1.Text.IndexOf('{');
+            int pF = richTextBox1.Text.IndexOf('}');
+            
+            richTextBox1.Text = richTextBox1.Text.Substring(0, pI+1) + "DROITE" +
+                richTextBox1.Text.Substring(pF);
+
+            richTextBox1.Show();
+            groupBox1.Hide();
+            touche_ = choixTouche.droite_;
+
+        }
+
+        private void bas_Click(object sender, EventArgs e)
+        {
+            int pI = richTextBox1.Text.IndexOf('{');
+            int pF = richTextBox1.Text.IndexOf('}');
+
+            richTextBox1.Text = richTextBox1.Text.Substring(0, pI+1) + "BAS" +
+                richTextBox1.Text.Substring(pF);
+
+            richTextBox1.Show();
+            groupBox1.Hide();
+            touche_ = choixTouche.bas_;
+
+        }
+
+        private void gauche_Click(object sender, EventArgs e)
+        {
+
+            int pI = richTextBox1.Text.IndexOf('{');
+            int pF = richTextBox1.Text.IndexOf('}');
+
+            richTextBox1.Text = richTextBox1.Text.Substring(0, pI+1) + "GAUCHE" +
+                richTextBox1.Text.Substring(pF);
+
+            richTextBox1.Show();
+            groupBox1.Hide();
+            touche_ = choixTouche.gauche_;
+        }
+
+  
       
     }
 

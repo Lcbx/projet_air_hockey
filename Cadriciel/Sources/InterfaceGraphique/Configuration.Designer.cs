@@ -43,8 +43,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.scoreGangant = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -56,8 +59,8 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.SauvegarderDebogage = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.SauvegarderDebogage = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
@@ -68,8 +71,13 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.creationProfil = new System.Windows.Forms.GroupBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.appliquer2 = new System.Windows.Forms.Button();
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.Proba = new System.Windows.Forms.Label();
@@ -81,9 +89,6 @@
             this.listDeProfils = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.ajouter = new System.Windows.Forms.Button();
-            this.appliquer2 = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -111,10 +116,12 @@
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tabControl1_KeyUp);
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.richTextBox1);
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -160,6 +167,7 @@
             resources.ApplyResources(this.haut, "haut");
             this.haut.Name = "haut";
             this.haut.UseVisualStyleBackColor = true;
+            this.haut.Click += new System.EventHandler(this.haut_Click);
             this.haut.KeyDown += new System.Windows.Forms.KeyEventHandler(this.haut_KeyDown);
             // 
             // bas
@@ -167,6 +175,7 @@
             resources.ApplyResources(this.bas, "bas");
             this.bas.Name = "bas";
             this.bas.UseVisualStyleBackColor = true;
+            this.bas.Click += new System.EventHandler(this.bas_Click);
             this.bas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.bas_KeyDown);
             // 
             // droite
@@ -174,6 +183,7 @@
             resources.ApplyResources(this.droite, "droite");
             this.droite.Name = "droite";
             this.droite.UseVisualStyleBackColor = true;
+            this.droite.Click += new System.EventHandler(this.droite_Click);
             this.droite.KeyDown += new System.Windows.Forms.KeyEventHandler(this.droite_KeyDown);
             // 
             // gauche
@@ -181,6 +191,7 @@
             resources.ApplyResources(this.gauche, "gauche");
             this.gauche.Name = "gauche";
             this.gauche.UseVisualStyleBackColor = true;
+            this.gauche.Click += new System.EventHandler(this.gauche_Click);
             this.gauche.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gauche_KeyDown);
             // 
             // label5
@@ -202,6 +213,13 @@
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            resources.ApplyResources(this.richTextBox1, "richTextBox1");
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyUp);
             // 
             // tabPage2
             // 
@@ -227,6 +245,17 @@
             resources.ApplyResources(this.scoreGangant, "scoreGangant");
             this.scoreGangant.Name = "scoreGangant";
             this.scoreGangant.TabStop = false;
+            // 
+            // label15
+            // 
+            resources.ApplyResources(this.label15, "label15");
+            this.label15.Name = "label15";
+            // 
+            // label14
+            // 
+            resources.ApplyResources(this.label14, "label14");
+            this.label14.Name = "label14";
+            this.label14.Click += new System.EventHandler(this.label14_Click);
             // 
             // label13
             // 
@@ -298,13 +327,6 @@
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // SauvegarderDebogage
-            // 
-            resources.ApplyResources(this.SauvegarderDebogage, "SauvegarderDebogage");
-            this.SauvegarderDebogage.Name = "SauvegarderDebogage";
-            this.SauvegarderDebogage.UseVisualStyleBackColor = true;
-            this.SauvegarderDebogage.Click += new System.EventHandler(this.SauvegarderDebogage_Click);
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.SauvegarderDebogage);
@@ -315,6 +337,13 @@
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            // 
+            // SauvegarderDebogage
+            // 
+            resources.ApplyResources(this.SauvegarderDebogage, "SauvegarderDebogage");
+            this.SauvegarderDebogage.Name = "SauvegarderDebogage";
+            this.SauvegarderDebogage.UseVisualStyleBackColor = true;
+            this.SauvegarderDebogage.Click += new System.EventHandler(this.SauvegarderDebogage_Click);
             // 
             // label10
             // 
@@ -382,6 +411,10 @@
             // 
             // creationProfil
             // 
+            this.creationProfil.Controls.Add(this.label19);
+            this.creationProfil.Controls.Add(this.label18);
+            this.creationProfil.Controls.Add(this.label17);
+            this.creationProfil.Controls.Add(this.label16);
             this.creationProfil.Controls.Add(this.label1);
             this.creationProfil.Controls.Add(this.label9);
             this.creationProfil.Controls.Add(this.appliquer2);
@@ -395,6 +428,26 @@
             this.creationProfil.Name = "creationProfil";
             this.creationProfil.TabStop = false;
             // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.Name = "label19";
+            // 
+            // label18
+            // 
+            resources.ApplyResources(this.label18, "label18");
+            this.label18.Name = "label18";
+            // 
+            // label17
+            // 
+            resources.ApplyResources(this.label17, "label17");
+            this.label17.Name = "label17";
+            // 
+            // label16
+            // 
+            resources.ApplyResources(this.label16, "label16");
+            this.label16.Name = "label16";
+            // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
@@ -404,6 +457,13 @@
             // 
             resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
+            // 
+            // appliquer2
+            // 
+            resources.ApplyResources(this.appliquer2, "appliquer2");
+            this.appliquer2.Name = "appliquer2";
+            this.appliquer2.UseVisualStyleBackColor = true;
+            this.appliquer2.Click += new System.EventHandler(this.appliquer2_Click);
             // 
             // trackBar2
             // 
@@ -484,24 +544,6 @@
             this.ajouter.Click += new System.EventHandler(this.ajouter_Click);
             this.ajouter.StyleChanged += new System.EventHandler(this.ajouter_Click);
             // 
-            // appliquer2
-            // 
-            resources.ApplyResources(this.appliquer2, "appliquer2");
-            this.appliquer2.Name = "appliquer2";
-            this.appliquer2.UseVisualStyleBackColor = true;
-            this.appliquer2.Click += new System.EventHandler(this.appliquer2_Click);
-            // 
-            // label14
-            // 
-            resources.ApplyResources(this.label14, "label14");
-            this.label14.Name = "label14";
-            this.label14.Click += new System.EventHandler(this.label14_Click);
-            // 
-            // label15
-            // 
-            resources.ApplyResources(this.label15, "label15");
-            this.label15.Name = "label15";
-            // 
             // Configuration
             // 
             resources.ApplyResources(this, "$this");
@@ -509,6 +551,7 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "Configuration";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Configuration_FormClosing);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Configuration_KeyUp);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -591,5 +634,10 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
