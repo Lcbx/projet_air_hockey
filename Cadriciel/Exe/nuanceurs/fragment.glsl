@@ -129,7 +129,7 @@ void main(void)
 			
 			 if (lumiereDirectionnelle!=0) // lumière directionnelle
 			 	 {
-					coul += calculerReflexion( L,N, O);
+					coul = calculerReflexion( L,N, O);
 					couleurTable = colorIn;
 			 	 }
    
