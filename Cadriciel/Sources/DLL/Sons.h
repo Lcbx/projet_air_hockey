@@ -45,4 +45,5 @@ private:
 
 	FMOD_CHANNELGROUP *canal;
 
+
 };
