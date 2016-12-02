@@ -89,6 +89,7 @@
             this.listDeProfils = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.ajouter = new System.Windows.Forms.Button();
+            this.label20 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -128,6 +129,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label20);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.appliquer);
             this.groupBox1.Controls.Add(this.réintialisation);
@@ -274,6 +276,7 @@
             // 
             // trackBar3
             // 
+            this.trackBar3.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this.trackBar3, "trackBar3");
             this.trackBar3.Maximum = 5;
             this.trackBar3.Minimum = 1;
@@ -544,6 +547,11 @@
             this.ajouter.Click += new System.EventHandler(this.ajouter_Click);
             this.ajouter.StyleChanged += new System.EventHandler(this.ajouter_Click);
             // 
+            // label20
+            // 
+            resources.ApplyResources(this.label20, "label20");
+            this.label20.Name = "label20";
+            // 
             // Configuration
             // 
             resources.ApplyResources(this, "$this");
@@ -639,5 +647,6 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label label20;
     }
 }
