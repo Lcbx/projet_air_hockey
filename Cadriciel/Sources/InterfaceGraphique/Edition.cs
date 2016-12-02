@@ -803,7 +803,13 @@ namespace InterfaceGraphique
                 e.Cancel = true;
                 menuPrincipal_.Show();
                 this.Hide();
-            } else {
+
+                FonctionsNatives.deactiverRondelle();
+                // FonctionsNatives.mettrePauseMusique(false);
+                FonctionsNatives.jouerSonModeJeu(false);
+
+            }
+            else {
                 lock (Program.unLock) {
                     FonctionsNatives.libererOpenGL();
                     Program.peutAfficher = false;
