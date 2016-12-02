@@ -106,12 +106,8 @@ void VisiteurMiseEchelle::visiter(NoeudMuret* noeud)
 	fact = ((noeud->getScale()[0])) + facteur_/5;
 
 
-	if (fact < 0.5)
-	{
+	if (fact < 0.5) {
 		fact = 0.5;
-	} else if (fact > 14)
-	{
-		fact = 14;
 	}
 
 	if (noeud->estSelectionne()) {
@@ -138,9 +134,6 @@ void VisiteurMiseEchelle::visiter(NoeudBonus* noeud)
 	if (fact < 0.5)
 	{
 		fact = 0.5;
-	} else if (fact > 2)
-	{
-		fact = 2;
 	}
 
 	if (noeud->estSelectionne()) {
@@ -179,13 +172,7 @@ void VisiteurMiseEchelle::visiter(NoeudPortail* noeud)
 	fact = ((noeud->getScale()[0])) + facteur_ / 30;
 	
 	//valeurs limites pour mise a echelle
-	if (fact > 6)
-	{
-		fact = 6;
-	}
-
-	if (fact < 0.5)
-	{
+	if (fact < 0.5) {
 		fact = 0.5;
 	}
 

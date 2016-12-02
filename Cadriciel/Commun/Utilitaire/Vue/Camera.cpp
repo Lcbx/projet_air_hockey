@@ -163,7 +163,6 @@ namespace vue {
 
 		double angleElevRad = _angleElev * PI / 180;
 
-		std::cout << "Degrees : " << _angleElev << "   Rad : " << angleElevRad << std::endl;
 
 		// Application du nouvel angle d'élévation
 		position_[1] = ((positionDef_[1])*cos(angleElevRad));
@@ -177,9 +176,6 @@ namespace vue {
 		// Application du nouvel angle de rotation
 		position_[0] = ((positionDef_[0])*cos(angleRotaRad)) + ((position_[1]) *sin(angleRotaRad));
 		position_[1] = ((positionDef_[0])*sin(angleRotaRad)) + ((position_[1]) *cos(angleRotaRad));
-
-		std::cout << "x : " << position_[0] << "   y : " << position_[1] << "   z : " << position_[2] << std::endl;
-		std::cout << "Rayon : " << pow(position_[0], 2.0) + pow(position_[1], 2.0) + pow(position_[2], 2.0) << std::endl;
 
 		// Rotation autour de z
 		//position_[0] = ((position_[0] - pointVise_[0])*cos(rotationX)) - ((position_[1] - pointVise_[1])*sin(rotationX)) + pointVise_[0];

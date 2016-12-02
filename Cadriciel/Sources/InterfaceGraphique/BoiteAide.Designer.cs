@@ -53,10 +53,10 @@
             this.richTextBox7 = new System.Windows.Forms.RichTextBox();
             this.tabTestVues = new System.Windows.Forms.TabPage();
             this.richTextBox8 = new System.Windows.Forms.RichTextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.richTextBox9 = new System.Windows.Forms.RichTextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.tabCtrlMode.SuspendLayout();
             this.tabModeEdition.SuspendLayout();
             this.tabCtrlModeEdition.SuspendLayout();
@@ -70,9 +70,9 @@
             this.tabTestGeneral.SuspendLayout();
             this.tabTestFichier.SuspendLayout();
             this.tabTestVues.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -316,24 +316,6 @@
             this.richTextBox8.TabIndex = 0;
             this.richTextBox8.Text = resources.GetString("richTextBox8.Text");
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(375, 48);
-            this.panel1.TabIndex = 5;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.tabCtrlMode);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 48);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(375, 348);
-            this.panel2.TabIndex = 6;
-            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.richTextBox9);
@@ -354,6 +336,24 @@
             this.richTextBox9.Size = new System.Drawing.Size(347, 284);
             this.richTextBox9.TabIndex = 0;
             this.richTextBox9.Text = resources.GetString("richTextBox9.Text");
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(375, 48);
+            this.panel1.TabIndex = 5;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.tabCtrlMode);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 48);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(375, 348);
+            this.panel2.TabIndex = 6;
             // 
             // BoiteAide
             // 
@@ -378,10 +378,10 @@
             this.tabTestGeneral.ResumeLayout(false);
             this.tabTestFichier.ResumeLayout(false);
             this.tabTestVues.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

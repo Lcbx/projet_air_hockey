@@ -10,6 +10,7 @@
 
 
 #include "Skybox.h"
+#include "FacadeModele.h"
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -36,7 +37,10 @@ SkyBox::SkyBox() : NoeudAbstrait("skybox"){
 /// @return Aucune.
 ////////////////////////////////////////////////////////////////////////
 void SkyBox::afficherConcret(const glm::mat4& modele, const glm::mat4& vue, const glm::mat4& projection) const {
-	boite_.afficher(projection * vue * modele, glm::mat4(1));
+	glm::mat4 vueTemp = vue;
+	if (!FacadeModele::obtenirInstance()->isVueOrtho())
+		vueTemp =  vueTemp * glm::rotate(modele, 1.57f, glm::vec3(1.0f, 0.0f, 0.0f));
+	boite_.afficher(projection * vueTemp * modele, glm::mat4(1));
 }
 
 ////////////////////////////////////////////////////////////////////////
