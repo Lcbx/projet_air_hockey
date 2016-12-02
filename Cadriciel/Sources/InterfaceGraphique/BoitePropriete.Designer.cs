@@ -33,15 +33,15 @@
             this.labelRebond = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.labelFriction = new System.Windows.Forms.Label();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.txtAcceleration = new System.Windows.Forms.NumericUpDown();
+            this.txtRebond = new System.Windows.Forms.NumericUpDown();
+            this.txtFriction = new System.Windows.Forms.NumericUpDown();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAcceleration)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRebond)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFriction)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,24 +50,24 @@
             this.labelAccélération.AutoSize = true;
             this.labelAccélération.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.labelAccélération.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.labelAccélération.Location = new System.Drawing.Point(10, 85);
+            this.labelAccélération.Location = new System.Drawing.Point(15, 85);
             this.labelAccélération.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAccélération.Name = "labelAccélération";
-            this.labelAccélération.Size = new System.Drawing.Size(112, 15);
+            this.labelAccélération.Size = new System.Drawing.Size(212, 15);
             this.labelAccélération.TabIndex = 6;
-            this.labelAccélération.Text = "Accélération(m/s²): ";
+            this.labelAccélération.Text = "Accélération des bonus vitesse(m/s²): ";
             // 
             // labelRebond
             // 
             this.labelRebond.AutoSize = true;
             this.labelRebond.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.labelRebond.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.labelRebond.Location = new System.Drawing.Point(64, 60);
+            this.labelRebond.Location = new System.Drawing.Point(44, 60);
             this.labelRebond.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelRebond.Name = "labelRebond";
-            this.labelRebond.Size = new System.Drawing.Size(57, 15);
+            this.labelRebond.Size = new System.Drawing.Size(183, 15);
             this.labelRebond.TabIndex = 5;
-            this.labelRebond.Text = "Rebond: ";
+            this.labelRebond.Text = "Coefficient de rebond des murs: ";
             // 
             // label1
             // 
@@ -84,83 +84,83 @@
             this.labelFriction.AutoSize = true;
             this.labelFriction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.labelFriction.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.labelFriction.Location = new System.Drawing.Point(71, 35);
+            this.labelFriction.Location = new System.Drawing.Point(68, 35);
             this.labelFriction.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelFriction.Name = "labelFriction";
-            this.labelFriction.Size = new System.Drawing.Size(50, 15);
+            this.labelFriction.Size = new System.Drawing.Size(159, 15);
             this.labelFriction.TabIndex = 3;
-            this.labelFriction.Text = "Friction:";
+            this.labelFriction.Text = "Coefficient de friction du sol:";
             // 
-            // numericUpDown3
+            // txtAcceleration
             // 
-            this.numericUpDown3.DecimalPlaces = 1;
-            this.numericUpDown3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.numericUpDown3.Increment = new decimal(new int[] {
+            this.txtAcceleration.DecimalPlaces = 1;
+            this.txtAcceleration.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.txtAcceleration.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.numericUpDown3.Location = new System.Drawing.Point(126, 83);
-            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown3.Maximum = new decimal(new int[] {
+            this.txtAcceleration.Location = new System.Drawing.Point(231, 83);
+            this.txtAcceleration.Margin = new System.Windows.Forms.Padding(2);
+            this.txtAcceleration.Maximum = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(60, 21);
-            this.numericUpDown3.TabIndex = 2;
+            this.txtAcceleration.Name = "txtAcceleration";
+            this.txtAcceleration.Size = new System.Drawing.Size(59, 21);
+            this.txtAcceleration.TabIndex = 2;
             // 
-            // numericUpDown2
+            // txtRebond
             // 
-            this.numericUpDown2.DecimalPlaces = 1;
-            this.numericUpDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.numericUpDown2.Increment = new decimal(new int[] {
+            this.txtRebond.DecimalPlaces = 1;
+            this.txtRebond.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.txtRebond.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.numericUpDown2.Location = new System.Drawing.Point(126, 58);
-            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
+            this.txtRebond.Location = new System.Drawing.Point(231, 58);
+            this.txtRebond.Margin = new System.Windows.Forms.Padding(2);
+            this.txtRebond.Maximum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(60, 21);
-            this.numericUpDown2.TabIndex = 1;
+            this.txtRebond.Name = "txtRebond";
+            this.txtRebond.Size = new System.Drawing.Size(59, 21);
+            this.txtRebond.TabIndex = 1;
             // 
-            // numericUpDown1
+            // txtFriction
             // 
-            this.numericUpDown1.DecimalPlaces = 1;
-            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.numericUpDown1.Increment = new decimal(new int[] {
+            this.txtFriction.DecimalPlaces = 1;
+            this.txtFriction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.txtFriction.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.numericUpDown1.Location = new System.Drawing.Point(126, 33);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(60, 21);
-            this.numericUpDown1.TabIndex = 0;
+            this.txtFriction.Location = new System.Drawing.Point(231, 33);
+            this.txtFriction.Margin = new System.Windows.Forms.Padding(2);
+            this.txtFriction.Name = "txtFriction";
+            this.txtFriction.Size = new System.Drawing.Size(59, 21);
+            this.txtFriction.TabIndex = 0;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.numericUpDown3);
+            this.groupBox1.Controls.Add(this.txtAcceleration);
             this.groupBox1.Controls.Add(this.labelFriction);
-            this.groupBox1.Controls.Add(this.numericUpDown1);
+            this.groupBox1.Controls.Add(this.txtFriction);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.labelAccélération);
             this.groupBox1.Controls.Add(this.labelRebond);
-            this.groupBox1.Controls.Add(this.numericUpDown2);
-            this.groupBox1.Location = new System.Drawing.Point(129, 37);
+            this.groupBox1.Controls.Add(this.txtRebond);
+            this.groupBox1.Location = new System.Drawing.Point(78, 47);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(202, 127);
+            this.groupBox1.Size = new System.Drawing.Size(295, 127);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Configurations";
+            this.groupBox1.Text = "Propriétés";
             // 
             // button2
             // 
@@ -192,13 +192,13 @@
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BoitePropriete";
-            this.Text = "boitePropriete";
+            this.Text = "Propriétés de la table";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BoitePropriete_FormClosing);
             this.Load += new System.EventHandler(this.BoitePropriete_Load);
             this.Shown += new System.EventHandler(this.BoitePropriete_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAcceleration)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRebond)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFriction)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -210,9 +210,9 @@
         private System.Windows.Forms.Label labelRebond;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelFriction;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown txtAcceleration;
+        private System.Windows.Forms.NumericUpDown txtRebond;
+        private System.Windows.Forms.NumericUpDown txtFriction;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;

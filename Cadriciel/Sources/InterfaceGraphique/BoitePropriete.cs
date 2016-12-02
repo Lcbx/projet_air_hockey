@@ -30,6 +30,27 @@ namespace InterfaceGraphique
             //this.ControlBox = false;
             this.MinimizeBox = false;
             this.MaximizeBox = false;
+
+            ToolTip Friction = new ToolTip();
+            Friction.ToolTipIcon = ToolTipIcon.Info;
+            Friction.IsBalloon = true;
+            Friction.ShowAlways = true;
+            Friction.SetToolTip(labelFriction, "Plus le coefficient de friction est élevé, plus la rondelle décélère rapidement. Situé entre 0 et 100.");
+            Friction.SetToolTip(txtFriction, "Plus le coefficient de friction est élevé, plus la rondelle décélère rapidement. Situé entre 0 et 100.");
+
+            ToolTip Rebond = new ToolTip();
+            Rebond.ToolTipIcon = ToolTipIcon.Info;
+            Rebond.IsBalloon = true;
+            Rebond.ShowAlways = true;
+            Rebond.SetToolTip(labelRebond, "Plus le coefficient de rebond est élevé, plus la rondelle rebondit sur les murs et murets. Situé entre 0 et 1 où 1 conserve la vitesse et 0 arrête la rondelle.");
+            Rebond.SetToolTip(txtRebond, "Plus le coefficient de rebond est élevé, plus la rondelle rebondit sur les murs et murets. Situé entre 0 et 1 où 1 conserve la vitesse et 0 arrête la rondelle.");
+
+            ToolTip Acceleration = new ToolTip();
+            Acceleration.ToolTipIcon = ToolTipIcon.Info;
+            Acceleration.IsBalloon = true;
+            Acceleration.ShowAlways = true;
+            Acceleration.SetToolTip(labelAccélération, "Plus l'accélération est élevé, plus la rondelle est accélérée lorsqu'elle passe sur un bonus de vitesse. Situé entre 0,1 et 10m/(s*s)");
+            Acceleration.SetToolTip(txtAcceleration, "Plus l'accélération est élevé, plus la rondelle est accélérée lorsqu'elle passe sur un bonus de vitesse. Situé entre 0,1 et 10m/(s*s)");
         }
 
         ///////////////////////////////////////////////////////////////////////
@@ -45,9 +66,9 @@ namespace InterfaceGraphique
         //
         //////////////////////////////////////////////////////////////////////////////////////////
         private void BoitePropriete_Load(object sender, EventArgs e) {
-            numericUpDown1.Value = Convert.ToDecimal(FonctionsNatives.getCoefficientFriction());
-            numericUpDown2.Value = Convert.ToDecimal(FonctionsNatives.getCoefficientRebond());
-            numericUpDown3.Value = Convert.ToDecimal(FonctionsNatives.getCoefficientAcceleration());
+            txtFriction.Value = Convert.ToDecimal(FonctionsNatives.getCoefficientFriction());
+            txtRebond.Value = Convert.ToDecimal(FonctionsNatives.getCoefficientRebond());
+            txtAcceleration.Value = Convert.ToDecimal(FonctionsNatives.getCoefficientAcceleration());
         }
 
 
@@ -82,9 +103,9 @@ namespace InterfaceGraphique
         //////////////////////////////////////////////////////////////////////////////////////////
         private void button3_Click(object sender, EventArgs e) {
             FonctionsNatives.setCoefficient(
-                Convert.ToDouble(numericUpDown1.Value),
-                Convert.ToDouble(numericUpDown2.Value),
-                Convert.ToDouble(numericUpDown3.Value)
+                Convert.ToDouble(txtFriction.Value),
+                Convert.ToDouble(txtRebond.Value),
+                Convert.ToDouble(txtAcceleration.Value)
                 );
             this.Hide();
         }
