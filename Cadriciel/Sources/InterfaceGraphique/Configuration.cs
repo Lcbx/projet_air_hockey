@@ -128,7 +128,7 @@ namespace InterfaceGraphique
             probaDAgirPassivemnt = FonctionsNatives.obtenirProbabiliteProfil(nomJoueurVirtuelCourant_.ToCharArray());
 
             button2.Enabled = false;
-
+            modifierProfil.Enabled = false;
 
             // Charge les touches du joueur 2
             int[] touches = new int[4];
@@ -608,7 +608,7 @@ namespace InterfaceGraphique
             creationProfil.Enabled = true;
             ajouterActif = true;
             modifierActif = false;
-
+            listDeProfils.Enabled = false;
         }
 
 		/////////////////////////////////////////////////////////////////////////
@@ -623,7 +623,7 @@ namespace InterfaceGraphique
         ////////////////////////////////////////////////////////////////////////////////////////// 
         private void listDeProfils_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listDeProfils.SelectedIndex >= 0)
+            if (listDeProfils.SelectedIndex > 0 )
             {
                 nomJoueurVirtuelCourant_ = nomsProfils[listDeProfils.SelectedIndex];
                 textBox1.Text = (nomJoueurVirtuelCourant_);
@@ -638,11 +638,13 @@ namespace InterfaceGraphique
                 trackBar2.Value = Convert.ToInt32(FonctionsNatives.obtenirProbabiliteProfil(nt_cNom) * 10);
 
                 button2.Enabled = true;
-                // numericUpDown2.Value = Convert.ToDecimal(FonctionsNatives.obtenirVitesseProfil(nt_cNom));
-                //numericUpDown3.Value = Convert.ToDecimal(FonctionsNatives.obtenirProbabiliteProfil(nt_cNom));
+                modifierProfil.Enabled = true;
+             
             }
             else{
                 button2.Enabled = false;
+                modifierProfil.Enabled = false;
+
             }
         }
 
@@ -664,7 +666,9 @@ namespace InterfaceGraphique
                 ajouterActif = false;
                 modifierActif = true;
                 nomOriginalModif = nomsProfils[listDeProfils.SelectedIndex];
-
+                listDeProfils.Enabled = false;
+                ajouter.Enabled = false;
+                button2.Enabled = false;
             }
         }
 
@@ -683,7 +687,7 @@ namespace InterfaceGraphique
             if (nomsProfils[listDeProfils.SelectedIndex] != "Defaut")
             {
 
-
+               
                 char[] cNom = nomsProfils[listDeProfils.SelectedIndex].ToCharArray();
                 char[] nt_cNom = new char[nomsProfils[listDeProfils.SelectedIndex].Length + 1];
                 for (int i = 0; i < nomsProfils[listDeProfils.SelectedIndex].Length; i++)
@@ -723,48 +727,61 @@ namespace InterfaceGraphique
             {
                 if (!(listDeProfils.Items.Contains(textBox1.Text)))
                 {
-                    //wajdi - sauvegarder 
-                    //if (numericUpDown2.Text != "" && numericUpDown3.Text != "" )
-                   // {
-                        nomsProfils.Add(nomP);
-                        listDeProfils.Items.Add(nomP);
+                
+                    nomsProfils.Add(nomP);
+                    listDeProfils.Items.Add(nomP);
 
-                        //initiliaser 
-                        textBox1.Clear();
-                      //  numericUpDown2.ResetText();
-                      //  numericUpDown3.ResetText();
-                        creationProfil.Enabled = false;
+                    //initiliaser 
+                    textBox1.Clear();
+                    this.trackBar1.Value = 1;
+                    this.trackBar2.Value = 0;
 
-                        FonctionsNatives.sauvegarderProfil(nomP, v, p);
-
-                  /*  }
-                    else
-                    {
-                        MessageBox.Show("Verifier les valeurs entrées", "erreur",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    } */
-               }
+                    creationProfil.Enabled = false;
+                    FonctionsNatives.sauvegarderProfil(nomP, v, p);
+                    
+                    //disable la liste
+                    listDeProfils.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("Un profil existe deja avec le même nom! Changer le nom de ce profil pour le créer", 
+                        "Même nom du profil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
             if (modifierActif)
             {
+
+              
+                //disable la liste
+                listDeProfils.Enabled = true;
+
                 int index = listDeProfils.SelectedIndex;
 
                    
                 nomsProfils[index] = textBox1.Text;
-                //nomsProfils[index].setVitesseProfil(Convert.ToDouble(textBox2.Text));
-                //nomsProfils[index].setProbProfil(Convert.ToDouble(textBox3.Text));
-                listDeProfils.Items.RemoveAt(index);
-                listDeProfils.Items.Insert(index, textBox1.Text);
-                creationProfil.Enabled=false;
+            
+               
 
-                /*char[] cNom = nomP.ToCharArray();
-                char[] nt_cNom = new char[nomJoueurVirtuelCourant_.Length + 1];
-                for (int i = 0; i < nomJoueurVirtuelCourant_.Length; i++)
-                    nt_cNom[i] = cNom[i];
-                nt_cNom[nomJoueurVirtuelCourant_.Length] = '\0';*/
+                if (!(listDeProfils.Items.Contains(textBox1.Text)))
+                {
+                    listDeProfils.Items.RemoveAt(index);
+                    listDeProfils.Items.Insert(index, textBox1.Text);
 
-                FonctionsNatives.sauvegarderProfil(nomP, v, p);
+                    creationProfil.Enabled=false;
+                    FonctionsNatives.sauvegarderProfil(nomP, v, p);
+                   
+                    //initiliaser 
+                    textBox1.Clear();
+                    this.trackBar1.Value = 1;
+                    this.trackBar2.Value = 0;
+                    ajouter.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("Un profil existe deja avec le même nom! Changer le nom de ce profil pour le modifier",
+                        "Même nom du profil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
                 if (nomP != nomOriginalModif)
                 {
