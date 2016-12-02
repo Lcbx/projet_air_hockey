@@ -1,6 +1,6 @@
 <listeProfil>
     <Defaut NOM="Defaut" VITESSE="10" PROBABILITE="0.2"/>
     <Leodagan NOM="Leodagan" VITESSE="4" PROBABILITE="0.6"/>
-    <DifficileAbattre NOM="DifficileAbattre" VITESSE="10" PROBABILITE="0.2"/>
-    <test NOM="test" VITESSE="7" PROBABILITE="0.2"/>
+    <Leodagan2 NOM="Leodagan2" VITESSE="4" PROBABILITE="0.60000002"/>
+    <Leodagan3 NOM="Leodagan3" VITESSE="4" PROBABILITE="0.60000002"/>
 </listeProfil>
