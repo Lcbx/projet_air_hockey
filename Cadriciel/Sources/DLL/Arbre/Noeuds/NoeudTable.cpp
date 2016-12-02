@@ -47,7 +47,7 @@ NoeudTable::NoeudTable(const std::string& typeNoeud)
 	hauteurBut_ = 5;
 	hauteurMur_ = 10;
 	couleurButs_ = glm::vec4{ 0.f,1.f,1.f,0.f };
-	couleurMurs_ = glm::vec4{ 1.,1.,1.,1. };
+	couleurMurs_ = glm::vec4{ 0.8,0.8,0.8,1. };
 	couleurLignes_ = glm::vec4 { 1.,0.,0.,0. };
 
 }

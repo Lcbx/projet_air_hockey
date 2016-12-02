@@ -25,7 +25,8 @@ layout (location = 2) in vec3 normalIn;
 varying vec2 texCoord;
 
 // la position de la source lumineuse
-vec4 lightSourcePosition = vec4 (0.0, 0.0, 0.5, 0.0);
+vec4 lightSourcePosition = vec4 (0.0, 0.0, 100, 0.0);
+vec4 lightSpotPosition =  vec4 (0.0, 0.0, 0.5, 0.0);
 /////////////////////////////////////////////////////////////////
 
 // structure contient tous les variables qui sortent du nuanceur de sommet
@@ -33,6 +34,7 @@ out Attribs {
    vec3 lumiereDir;
    vec3 normale;
    vec3 obsVec;
+   vec3 Lspot;
 } AttribsOut;
 
 out vec4 couleur;
@@ -55,7 +57,8 @@ void main( void )
 	  
 	 
 	 //La direction de la lumière 
-	 vec3 L = normalize(vec3(matrVisu* lightSourcePosition) - pos.xyz);
+	  vec3 L = normalize(vec3(matrVisu* lightSourcePosition) );
+	 vec3 Lspot = normalize(vec3(matrVisu* lightSpotPosition) - pos.xyz);
 	 
     
     //la position de l'observateur (ou la caméra)
@@ -65,7 +68,7 @@ void main( void )
     AttribsOut.obsVec = O;  
     AttribsOut.normale =N;
     AttribsOut.lumiereDir = L;
- 
+	AttribsOut.Lspot = Lspot;
    // envoie de la texture au nuanceur de fragment.
     texCoord = texCoordIn;
    

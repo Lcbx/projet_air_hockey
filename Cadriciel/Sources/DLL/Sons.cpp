@@ -73,6 +73,8 @@ Sons::~Sons()
 /////////////////////////////////////////////////////////////////////////
 void Sons::jouerSon(int choix)
 {
+	FMOD_ChannelGroup_SetPaused(canal, 0);
+
 	switch (choix) {
 	case 1:
 	{
@@ -85,7 +87,7 @@ void Sons::jouerSon(int choix)
 	case 3:
 	{	
 		//FMOD_Sound_SetLoopCount(musiqueFond, -1);
-		FMOD_ChannelGroup_SetPaused(canal, 0);
+		//FMOD_ChannelGroup_SetPaused(canal, 0);
 		FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE, musiqueFond, 0, NULL);
 		break; }
 	case 4:
@@ -140,6 +142,6 @@ void Sons::pauseSon(bool pause)
 /////////////////////////////////////////////////////////////////////////
 void Sons::arreterSon()
 {
-	FMOD_ChannelGroup_SetPaused(canal, 0);
+	FMOD_ChannelGroup_SetPaused(canal,1);
 	FMOD_ChannelGroup_Stop(canal);
 }
