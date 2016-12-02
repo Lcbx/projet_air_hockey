@@ -46,9 +46,9 @@ vec4 LightModelAmbient = vec4(0.2,0.2,0.2, 1.0);       // couleur ambiante
 
 
    // partie 1: illumination
-uniform int lumiereAmbiante;
-uniform int lumiereDirectionnelle;
-uniform int lumiereSpot;
+uniform int lumiereAmbiante =1;
+uniform int lumiereDirectionnelle =1;
+uniform int lumiereSpot =1;
 /////////////////////////////////////////////////////////////////
 
 in Attribs {
@@ -71,7 +71,7 @@ float calculerSpot( in vec3 spotDir, in vec3 L )
 				   if (CosAngleGama >= CosAngleOuverture )//|| CosAngleGama2 >= CosAngleOuverture)//&& CosAngleGama2 > CosAngleOuverture)
 					    Ispot = clamp(pow(CosAngleGama,spotExponent),0.0,1.0);
 				   else 
-					    Ispot = 0.4;
+					    Ispot = 0;
 					    
    return(Ispot );
    
@@ -104,7 +104,8 @@ vec4 calculerReflexion( in vec3 L, in vec3 N, in vec3 O )
 
 void main(void)
 {
-   
+	  vec4 couleurTable ;
+	  couleurTable = colorIn;
 	  vec3 N = normalize(AttribsIn.normale);
 	  vec3 L = normalize(AttribsIn.lumiereDir);
 	  vec3 O = normalize(AttribsIn.obsVec);
@@ -116,31 +117,46 @@ void main(void)
        //si le type d illumination est ambiant	
        if( (lumiereAmbiante!=0) || (lumiereDirectionnelle!=0) || (lumiereSpot!=0))
        {
-			 if (lumiereAmbiante !=0) // lumière ambiante
-					coul = coulAmbiante;
-				//if(lumiereDirectionnelle !=0)
-					//color += calculerReflexion( L,N, O)*couleurTex;
-					//if(lumiereSpot!=0)
-						//color *= (calculerSpot(DS1,L)+calculerSpot(DS2,L)+0.4)*couleurTex;
+			 if (lumiereAmbiante!=0) // lumière ambiante
+					{
+						coul = coulAmbiante;
+						couleurTable= 0.2*colorIn;
+					}
+
+				
 			
 			 if (lumiereDirectionnelle!=0) // lumière directionnelle
-			 	 coul = coulAmbiante + calculerReflexion( L,N, O);
-			 	 //if(lumiereSpot!=0)
-						//color *= (calculerSpot(DS1,L)+calculerSpot(DS2,L)+0.4);
+			 	 {
+					coul += calculerReflexion( L,N, O);
+					couleurTable = colorIn;
+			 	 }
    
 			  
 			 if (lumiereSpot!=0) //spot
-				coul = (calculerSpot(DS1,L)+calculerSpot(DS2,L))*( calculerReflexion( L,N, O) );
-			if ( (lumiereAmbiante!=0) && (lumiereSpot!=0) )
-			{
-				if (coul == vec4(0,0,0,0)) 
-					coul  = coulAmbiante;
-			}
+			 {
+				coul = ( calculerReflexion( L,N, O))*(calculerSpot(DS1,L)+calculerSpot(DS2,L));
+				//( calculerReflexion( L,N, O) );
+				couleurTable = colorIn*0.8;
+				if (lumiereDirectionnelle!=0)
+				{
+					coul = calculerReflexion( L,N, O) + ( calculerReflexion( L,N, O))*(calculerSpot(DS1,L)+calculerSpot(DS2,L));
+					couleurTable = colorIn;
+				}
+				if (lumiereAmbiante!=0)
+				{
+					coul = coulAmbiante + ( calculerReflexion( L,N, O))*(calculerSpot(DS1,L)+calculerSpot(DS2,L));
+					couleurTable = 0.2*colorIn;
+				}
+			 }
+
 		
 		} 
 			else
+			{
+				couleurTable = vec4 (0,0,0,0);
 				color=vec4(0,0,0,0);
+			}
           
-      color = clamp((colorIn + coul)*couleurTex,0.0,1.0);
+      color = clamp((couleurTable + coul*couleurTex),0.0,1.0);
 
 }
