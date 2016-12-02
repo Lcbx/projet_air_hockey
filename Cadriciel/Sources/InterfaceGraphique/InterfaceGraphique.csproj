@@ -286,9 +286,11 @@
     <Content Include="Resources\IconesMenus\folder.png" />
     <Content Include="Resources\IconesMenus\gimp-info.png" />
     <Content Include="Resources\IconesMenus\isometrique.png" />
+    <Content Include="Resources\IconesMenus\menuprincipal.png" />
     <Content Include="Resources\IconesMenus\orbite.png" />
     <Content Include="Resources\IconesMenus\preferences-system.png" />
     <Content Include="Resources\IconesEditeur\directionnelle.png" />
+    <Content Include="Resources\IconesMenus\test.png" />
     <Content Include="Resources\Icones\edit.png" />
     <Content Include="Resources\Icones\gamepad.png" />
     <Content Include="Resources\Icones\power-button.png" />
