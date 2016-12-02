@@ -161,7 +161,7 @@ namespace InterfaceGraphique
 
         /// @brief Permet de gérer le changement des lumières ambiante
         /// TODO : Refactoriser
-        private bool LumiereAmbiante_ = true;
+        private bool LumiereAmbiante_ = false;
         public bool LumiereAmbiante {
             get { return LumiereAmbiante_; }
             set {
@@ -174,7 +174,7 @@ namespace InterfaceGraphique
         }
 
         /// @brief Permet de gérer le changement des lumières directionnelle
-        private bool LumiereDirectionnelle_ = true;
+        private bool LumiereDirectionnelle_ = false;
         public bool LumiereDirectionnelle {
             get { return LumiereDirectionnelle_; }
             set {
@@ -188,7 +188,7 @@ namespace InterfaceGraphique
         }
 
         /// @brief Permet de gérer le changement des lumières spot
-        private bool LumiereSpots_ = true;
+        private bool LumiereSpots_ = false;
         public bool LumiereSpots {
             get { return LumiereSpots_; }
             set {
@@ -282,6 +282,9 @@ namespace InterfaceGraphique
             ttEchelle.ShowAlways = true;
             ttEchelle.SetToolTip(lblEchelle, "Ratio de taille par rapport à l'objet initial de l'objet sélectionné. Sortir un objet de la table n'est pas possible.");
             ttEchelle.SetToolTip(txtEchelle, "Ratio de taille par rapport à l'objet initial de l'objet sélectionné. Sortir un objet de la table n'est pas possible.");
+
+            LumiereAmbiante = true; LumiereDirectionnelle = true; LumiereSpots = true;
+            FonctionsNatives.setTypeLumiereActive(true, true, true);
 
             this.Focus();
         }
@@ -2391,7 +2394,11 @@ namespace InterfaceGraphique
         public static extern void setVueOrtho();
         [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void setVueOrbite();
-        
+
+        [DllImport(@"Noyau.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void setTypeLumiereActive(bool lumiereAmbiante, bool lumiereDirectionnelle, bool lumiereSpot);
+
+
     }
 }
 

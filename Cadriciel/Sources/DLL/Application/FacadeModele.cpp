@@ -1638,7 +1638,7 @@ bool FacadeModele::isVueOrtho()
 /// @return	aucun
 ///
 ////////////////////////////////////////////////////////////////////////
-void FacadeModele::  setTypeLumiereActive(bool lumiereAmbiante, bool lumiereDirectionnelle, bool lumiereSpot)
+void FacadeModele::setTypeLumiereActive(bool lumiereAmbiante, bool lumiereDirectionnelle, bool lumiereSpot)
 {
 		lumiereAmbiante_ = lumiereAmbiante;
 		lumiereDirectionnelle_ = lumiereDirectionnelle;
