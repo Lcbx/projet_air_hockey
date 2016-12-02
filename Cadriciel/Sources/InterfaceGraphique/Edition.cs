@@ -112,21 +112,13 @@ namespace InterfaceGraphique
             /// @brief Permet d'obtenir la chaîne d'erreur
             public string getError() {
                 List<string> errorsBuilder = new List<string>();
-                if (PositionX) errorsBuilder.Add("la position en x");
-                if (PositionY) errorsBuilder.Add("la position en y");
-                if (Angle) errorsBuilder.Add("l'angle");
-                if (Echelle) errorsBuilder.Add("l'échelle");
-                string str = "L'objet sort de la table, les propriétés suivantes ont été modifiées depuis la dernière position valide: ";
-                if (errorsBuilder.Count == 0)
-                    return "";
-                else if (errorsBuilder.Count == 1)
-                    return "L'objet sort de la table, la propriété suivante a été modifiée depuis la dernière position valide: " + errorsBuilder[0];
-                else if (errorsBuilder.Count == 2)
-                    return str + errorsBuilder[0] + " et " + errorsBuilder[1];
-                else if (errorsBuilder.Count == 3)
-                    return str + errorsBuilder[0] + ", " + errorsBuilder[1] + " et " + errorsBuilder[2];
-                else
-                    return str + errorsBuilder[0] + ", " + errorsBuilder[1] + ", " + errorsBuilder[2] + " et " + errorsBuilder[3];
+                string preStr = "La valeur donné pour ";
+                string str = " causerait la sortie de l'objet de la table.";
+                if (PositionX) return preStr + "la position en x" + str;
+                if (PositionY) return preStr + "la position en y" + str;
+                if (Angle) return preStr + "l'angle" + str;
+                if (Echelle) return preStr + "l'échelle" + str;
+                return "";
             }
 
             /// @brief Permet de savoir s'il y a une erreur
@@ -169,7 +161,7 @@ namespace InterfaceGraphique
 
         /// @brief Permet de gérer le changement des lumières ambiante
         /// TODO : Refactoriser
-        private bool LumiereAmbiante_ = false;
+        private bool LumiereAmbiante_ = true;
         public bool LumiereAmbiante {
             get { return LumiereAmbiante_; }
             set {
@@ -181,8 +173,8 @@ namespace InterfaceGraphique
             }
         }
 
-        /// @brief Permet de gérer le changement des lumières ambiante
-        private bool LumiereDirectionnelle_ = false;
+        /// @brief Permet de gérer le changement des lumières directionnelle
+        private bool LumiereDirectionnelle_ = true;
         public bool LumiereDirectionnelle {
             get { return LumiereDirectionnelle_; }
             set {
@@ -195,8 +187,8 @@ namespace InterfaceGraphique
             }
         }
 
-        /// @brief Permet de gérer le changement des lumières ambiante
-        private bool LumiereSpots_ = false;
+        /// @brief Permet de gérer le changement des lumières spot
+        private bool LumiereSpots_ = true;
         public bool LumiereSpots {
             get { return LumiereSpots_; }
             set {
@@ -1165,13 +1157,6 @@ namespace InterfaceGraphique
                 this.PositionY = FonctionsNatives.getPosY();
                 this.Angle     = FonctionsNatives.getAngle();
                 this.Echelle   = FonctionsNatives.getScale();
-
-                this.propertiesErrorSet.clear();
-                this.txtBoxErreurProprietes.Visible = false;
-                txtPositionX.ForeColor = Color.Black;
-                txtPositionY.ForeColor = Color.Black;
-                txtAngle.ForeColor = Color.Black;
-                txtEchelle.ForeColor = Color.Black;
             }
             else
             {
@@ -1182,6 +1167,16 @@ namespace InterfaceGraphique
 
                 this.pnlProperty.Enabled = false;
             }
+        }
+
+        /// @brief Permet de mettre à 0 les différentes informations du databinding et erreurs
+        private void clearErrorMiseAJour() {
+            this.propertiesErrorSet.clear();
+            this.txtBoxErreurProprietes.Visible = false;
+            txtPositionX.ForeColor = Color.Black;
+            txtPositionY.ForeColor = Color.Black;
+            txtAngle.ForeColor = Color.Black;
+            txtEchelle.ForeColor = Color.Black;
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -2041,12 +2036,14 @@ namespace InterfaceGraphique
         private void txtPositionX_ValueChanged(object sender, EventArgs e)
         {
             MettreAJourObjet();
+            clearErrorMiseAJour();
             if (FonctionsNatives.objetEstDansLaTable() == false) {
                 this.propertiesErrorSet.PositionX = true;
                 this.txtPositionX.ForeColor = Color.Red;
                 this.txtBoxErreurProprietes.Visible = true;
                 this.txtBoxErreurProprietes.Text = this.propertiesErrorSet.getError();
-            } else mettreAjourPos();
+            }
+            mettreAjourPos();
         }
 
         /// @fn private void txtPositionY_ValueChanged(object sender, EventArgs e)
@@ -2054,13 +2051,14 @@ namespace InterfaceGraphique
         private void txtPositionY_ValueChanged(object sender, EventArgs e)
         {
             MettreAJourObjet();
+            clearErrorMiseAJour();
             if (FonctionsNatives.objetEstDansLaTable() == false) {
                 this.propertiesErrorSet.PositionY = true;
                 this.txtPositionY.ForeColor = Color.Red;
                 this.txtBoxErreurProprietes.Visible = true;
                 this.txtBoxErreurProprietes.Text = this.propertiesErrorSet.getError();
-            } else mettreAjourPos();
-
+            }
+            mettreAjourPos();
         }
 
         /// @fn private void txtAngle_ValueChanged(object sender, EventArgs e)
@@ -2068,12 +2066,14 @@ namespace InterfaceGraphique
         private void txtAngle_ValueChanged(object sender, EventArgs e)
         {
             MettreAJourObjet();
+            clearErrorMiseAJour();
             if (FonctionsNatives.objetEstDansLaTable() == false) {
                 this.propertiesErrorSet.Angle = true;
                 this.txtAngle.ForeColor = Color.Red;
                 this.txtBoxErreurProprietes.Visible = true;
                 this.txtBoxErreurProprietes.Text = this.propertiesErrorSet.getError();
-            } else mettreAjourPos();
+            }
+            mettreAjourPos();
         }
 
         /// @fn private void txtEchelle_ValueChanged(object sender, EventArgs e)
@@ -2081,13 +2081,15 @@ namespace InterfaceGraphique
         private void txtEchelle_ValueChanged(object sender, EventArgs e)
         {
             MettreAJourObjet();
+            clearErrorMiseAJour();
             if (FonctionsNatives.objetEstDansLaTable() == false) {
                 this.propertiesErrorSet.Echelle = true;
                 this.txtEchelle.ForeColor = Color.Red;
                 this.txtBoxErreurProprietes.Visible = true;
                 this.txtBoxErreurProprietes.Text = this.propertiesErrorSet.getError();
-            } else mettreAjourPos();
+            }
 
+            mettreAjourPos();
         }
 
         /// @brief Permet de changer l'état de la lumière ambiante
@@ -2108,10 +2110,8 @@ namespace InterfaceGraphique
         /// @brief Permet de réinitialiser les valeurs nécessaires au chargement de la fenêtre
         /// TODO: Ne s'exécute pas à l'appel de show()
         private void Edition_Shown(object sender, EventArgs e) {
-            
             //LumiereSpots = true; LumiereDirectionnelle = true; LumiereAmbiante = true; // Pour reset les lumières au changement de fenêtre
         }
-
 
         ///////////////////////////////////////////////////////////////////////
         /// @fn public void resetPartie()

@@ -55,6 +55,8 @@
             this.richTextBox8 = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.richTextBox9 = new System.Windows.Forms.RichTextBox();
             this.tabCtrlMode.SuspendLayout();
             this.tabModeEdition.SuspendLayout();
             this.tabCtrlModeEdition.SuspendLayout();
@@ -70,6 +72,7 @@
             this.tabTestVues.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -146,7 +149,7 @@
             this.tabEditionFichier.Location = new System.Drawing.Point(4, 22);
             this.tabEditionFichier.Name = "tabEditionFichier";
             this.tabEditionFichier.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEditionFichier.Size = new System.Drawing.Size(353, 284);
+            this.tabEditionFichier.Size = new System.Drawing.Size(353, 290);
             this.tabEditionFichier.TabIndex = 1;
             this.tabEditionFichier.Text = "Fichier";
             this.tabEditionFichier.UseVisualStyleBackColor = true;
@@ -157,7 +160,7 @@
             this.richTextBox2.Location = new System.Drawing.Point(3, 3);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.ReadOnly = true;
-            this.richTextBox2.Size = new System.Drawing.Size(347, 278);
+            this.richTextBox2.Size = new System.Drawing.Size(347, 284);
             this.richTextBox2.TabIndex = 0;
             this.richTextBox2.Text = resources.GetString("richTextBox2.Text");
             // 
@@ -167,7 +170,7 @@
             this.tabEditionEdition.Location = new System.Drawing.Point(4, 22);
             this.tabEditionEdition.Name = "tabEditionEdition";
             this.tabEditionEdition.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEditionEdition.Size = new System.Drawing.Size(353, 284);
+            this.tabEditionEdition.Size = new System.Drawing.Size(353, 290);
             this.tabEditionEdition.TabIndex = 2;
             this.tabEditionEdition.Text = "Édition";
             this.tabEditionEdition.UseVisualStyleBackColor = true;
@@ -178,7 +181,7 @@
             this.richTextBox3.Location = new System.Drawing.Point(3, 3);
             this.richTextBox3.Name = "richTextBox3";
             this.richTextBox3.ReadOnly = true;
-            this.richTextBox3.Size = new System.Drawing.Size(347, 278);
+            this.richTextBox3.Size = new System.Drawing.Size(347, 284);
             this.richTextBox3.TabIndex = 0;
             this.richTextBox3.Text = "Onglet Édition\n\n1) Supprimer : Permet de supprimer les objets sélectionnés. Les p" +
     "ortails non-sélectionnés ayant une paire sélectionnée se verront supprimés.";
@@ -189,7 +192,7 @@
             this.tabEditionOutils.Location = new System.Drawing.Point(4, 22);
             this.tabEditionOutils.Name = "tabEditionOutils";
             this.tabEditionOutils.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEditionOutils.Size = new System.Drawing.Size(353, 284);
+            this.tabEditionOutils.Size = new System.Drawing.Size(353, 290);
             this.tabEditionOutils.TabIndex = 3;
             this.tabEditionOutils.Text = "Outils";
             this.tabEditionOutils.UseVisualStyleBackColor = true;
@@ -200,7 +203,7 @@
             this.richTextBox4.Location = new System.Drawing.Point(3, 3);
             this.richTextBox4.Name = "richTextBox4";
             this.richTextBox4.ReadOnly = true;
-            this.richTextBox4.Size = new System.Drawing.Size(347, 278);
+            this.richTextBox4.Size = new System.Drawing.Size(347, 284);
             this.richTextBox4.TabIndex = 0;
             this.richTextBox4.Text = resources.GetString("richTextBox4.Text");
             // 
@@ -210,7 +213,7 @@
             this.tabEditionVues.Location = new System.Drawing.Point(4, 22);
             this.tabEditionVues.Name = "tabEditionVues";
             this.tabEditionVues.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEditionVues.Size = new System.Drawing.Size(353, 284);
+            this.tabEditionVues.Size = new System.Drawing.Size(353, 290);
             this.tabEditionVues.TabIndex = 4;
             this.tabEditionVues.Text = "Vues";
             this.tabEditionVues.UseVisualStyleBackColor = true;
@@ -221,7 +224,7 @@
             this.richTextBox5.Location = new System.Drawing.Point(3, 3);
             this.richTextBox5.Name = "richTextBox5";
             this.richTextBox5.ReadOnly = true;
-            this.richTextBox5.Size = new System.Drawing.Size(347, 278);
+            this.richTextBox5.Size = new System.Drawing.Size(347, 284);
             this.richTextBox5.TabIndex = 0;
             this.richTextBox5.Text = resources.GetString("richTextBox5.Text");
             // 
@@ -231,7 +234,7 @@
             this.tabModeTest.Location = new System.Drawing.Point(4, 22);
             this.tabModeTest.Name = "tabModeTest";
             this.tabModeTest.Padding = new System.Windows.Forms.Padding(3);
-            this.tabModeTest.Size = new System.Drawing.Size(367, 316);
+            this.tabModeTest.Size = new System.Drawing.Size(367, 322);
             this.tabModeTest.TabIndex = 1;
             this.tabModeTest.Text = "Mode test";
             this.tabModeTest.UseVisualStyleBackColor = true;
@@ -241,11 +244,12 @@
             this.tabCtrlModeTest.Controls.Add(this.tabTestGeneral);
             this.tabCtrlModeTest.Controls.Add(this.tabTestFichier);
             this.tabCtrlModeTest.Controls.Add(this.tabTestVues);
+            this.tabCtrlModeTest.Controls.Add(this.tabPage1);
             this.tabCtrlModeTest.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabCtrlModeTest.Location = new System.Drawing.Point(3, 3);
             this.tabCtrlModeTest.Name = "tabCtrlModeTest";
             this.tabCtrlModeTest.SelectedIndex = 0;
-            this.tabCtrlModeTest.Size = new System.Drawing.Size(361, 310);
+            this.tabCtrlModeTest.Size = new System.Drawing.Size(361, 316);
             this.tabCtrlModeTest.TabIndex = 0;
             // 
             // tabTestGeneral
@@ -254,7 +258,7 @@
             this.tabTestGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabTestGeneral.Name = "tabTestGeneral";
             this.tabTestGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTestGeneral.Size = new System.Drawing.Size(353, 284);
+            this.tabTestGeneral.Size = new System.Drawing.Size(353, 290);
             this.tabTestGeneral.TabIndex = 0;
             this.tabTestGeneral.Text = "Général";
             this.tabTestGeneral.UseVisualStyleBackColor = true;
@@ -265,7 +269,7 @@
             this.richTextBox6.Location = new System.Drawing.Point(3, 3);
             this.richTextBox6.Name = "richTextBox6";
             this.richTextBox6.ReadOnly = true;
-            this.richTextBox6.Size = new System.Drawing.Size(347, 278);
+            this.richTextBox6.Size = new System.Drawing.Size(347, 284);
             this.richTextBox6.TabIndex = 0;
             this.richTextBox6.Text = resources.GetString("richTextBox6.Text");
             // 
@@ -275,7 +279,7 @@
             this.tabTestFichier.Location = new System.Drawing.Point(4, 22);
             this.tabTestFichier.Name = "tabTestFichier";
             this.tabTestFichier.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTestFichier.Size = new System.Drawing.Size(353, 284);
+            this.tabTestFichier.Size = new System.Drawing.Size(353, 290);
             this.tabTestFichier.TabIndex = 1;
             this.tabTestFichier.Text = "Fichier";
             this.tabTestFichier.UseVisualStyleBackColor = true;
@@ -286,7 +290,7 @@
             this.richTextBox7.Location = new System.Drawing.Point(3, 3);
             this.richTextBox7.Name = "richTextBox7";
             this.richTextBox7.ReadOnly = true;
-            this.richTextBox7.Size = new System.Drawing.Size(347, 278);
+            this.richTextBox7.Size = new System.Drawing.Size(347, 284);
             this.richTextBox7.TabIndex = 0;
             this.richTextBox7.Text = "Onglet Fichier\n\n1) Mode édition : Permet de retourner au mode d\'édition.\n\n2) Menu" +
     " principal : Permet de retourner au menu principal.";
@@ -297,7 +301,7 @@
             this.tabTestVues.Location = new System.Drawing.Point(4, 22);
             this.tabTestVues.Name = "tabTestVues";
             this.tabTestVues.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTestVues.Size = new System.Drawing.Size(353, 284);
+            this.tabTestVues.Size = new System.Drawing.Size(353, 290);
             this.tabTestVues.TabIndex = 2;
             this.tabTestVues.Text = "Vues";
             this.tabTestVues.UseVisualStyleBackColor = true;
@@ -308,7 +312,7 @@
             this.richTextBox8.Location = new System.Drawing.Point(3, 3);
             this.richTextBox8.Name = "richTextBox8";
             this.richTextBox8.ReadOnly = true;
-            this.richTextBox8.Size = new System.Drawing.Size(347, 278);
+            this.richTextBox8.Size = new System.Drawing.Size(347, 284);
             this.richTextBox8.TabIndex = 0;
             this.richTextBox8.Text = resources.GetString("richTextBox8.Text");
             // 
@@ -329,6 +333,27 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(375, 348);
             this.panel2.TabIndex = 6;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.richTextBox9);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(353, 290);
+            this.tabPage1.TabIndex = 3;
+            this.tabPage1.Text = "Lumières";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // richTextBox9
+            // 
+            this.richTextBox9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox9.Location = new System.Drawing.Point(3, 3);
+            this.richTextBox9.Name = "richTextBox9";
+            this.richTextBox9.ReadOnly = true;
+            this.richTextBox9.Size = new System.Drawing.Size(347, 284);
+            this.richTextBox9.TabIndex = 0;
+            this.richTextBox9.Text = resources.GetString("richTextBox9.Text");
             // 
             // BoiteAide
             // 
@@ -356,6 +381,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -386,5 +412,7 @@
         private System.Windows.Forms.RichTextBox richTextBox8;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.RichTextBox richTextBox9;
     }
 }

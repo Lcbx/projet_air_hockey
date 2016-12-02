@@ -14,11 +14,17 @@
 #include "glm/gtc/type_ptr.hpp"
 #include "Modele3D.h"
 #include "AideGL.h"
+#include "Materiau.h"
 #include "Utilitaire.h"
+#include "../../../Sources/DLL/Application/FacadeModele.h"
 
 /// Position de l'attribut de location dans le nuanceur de sommet
 #define VERTEX_LOCATION 0
 #define TEXCOORD_LOCATION 1
+#define NORMAL_LOCATION 2
+
+
+
 
 namespace opengl{
 
@@ -138,13 +144,22 @@ namespace opengl{
 	{
 		// Matrice de transformation
 		glm::mat4x4 const& m{ projection * vue * modele };
-
+		glm::mat4x4 const& v{ vue };
+		glm::mat4x4 const& p{ projection };
+		glm::mat4x4 const& mo{ modele };
 		// Appliquer le nuanceur
 #if 1
 			Programme::Start(programme_);
 			programme_.assignerUniforme("modelViewProjection", m);
 			programme_.assignerUniforme("colorIn", glm::vec4(0.f, 0.f, 0.f, 1.f));
-#else
+			programme_.assignerUniforme("matrVisu", v);
+			programme_.assignerUniforme("matrProj", p);
+			programme_.assignerUniforme("matrModel", mo);
+			
+
+#else		
+		
+			
 			glMatrixMode(GL_PROJECTION);
 			glLoadMatrixf(glm::value_ptr(m));
 #endif
@@ -170,6 +185,10 @@ namespace opengl{
 			{
 				glBindBuffer(GL_ARRAY_BUFFER, handles_[bufferIndex]); ++bufferIndex;
 				/// À Faire: Envoyer les normales aux nuanceurs si nécessaire
+				glEnableVertexAttribArray(NORMAL_LOCATION);
+				glVertexAttribPointer(NORMAL_LOCATION, 3, GL_FLOAT, GL_FALSE, 0, 0);
+				//glNormalPointer(GL_FLOAT, 0, nullptr);
+				
 			}
 			if (possedeTexCoords)
 			{
@@ -244,15 +263,30 @@ namespace opengl{
 
 		/// Assigner le matériau
 		/// À Faire : Envoyez les valeurs du matériau aux nuanceurs
-		/*materiau.diffuse_
-		materiau.speculaire_
-		materiau.ambiant_
-		materiau.emission_
-		Shininess = materiau.shininess_ * materiau.shininessStrength_*/
+		programme_.assignerUniforme("Kemission", materiau.emission_);
+		programme_.assignerUniforme("Kambient", materiau.ambiant_);
+		programme_.assignerUniforme("Kdiffuse", materiau.diffuse_) ;
+		programme_.assignerUniforme("Kspeculaire", materiau.speculaire_);
+		programme_.assignerUniforme("KShininess", materiau.shininess_ * materiau.shininessStrength_);
+
+		//Light 
+		auto facade = FacadeModele::obtenirInstance();
+		int lumiereAmbiant = facade->getEtatLumiereAmbiante();
+		int lumiereDirectionelle = facade->getEtatLumiereDirectionnelle();
+		int lumiereAmbiantSpot = facade->getEtatLumiereSpot();
+
+		programme_.assignerUniforme("lumiereAmbiante", lumiereAmbiant);
+		programme_.assignerUniforme("lumiereDirectionnelle", lumiereDirectionelle);
+		programme_.assignerUniforme("lumiereSpot", lumiereAmbiantSpot);
+
 
 		glPolygonMode(	GL_FRONT_AND_BACK,	materiau.filDeFer_ ? GL_LINE : GL_FILL);
 		materiau.afficherDeuxCotes_ ? glEnable(GL_CULL_FACE) : glDisable(GL_CULL_FACE);
 
+
+
+
+		
 	}
 
 	

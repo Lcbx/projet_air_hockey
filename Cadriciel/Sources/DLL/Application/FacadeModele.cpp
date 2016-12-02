@@ -166,6 +166,18 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 	// Profondeur
 	glEnable(GL_DEPTH_TEST);
 
+	// intialisation da la lumière 
+	//Activer l'éclairage
+	glEnable(GL_LIGHTING);
+	//Allume la lumière Numéro 0 
+	//
+	glEnable(GL_LIGHT1);
+	glEnable(GL_LIGHT2);
+	glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
+	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+	//Activer la couleur du matériel
+	glEnable(GL_COLOR_MATERIAL);
+
 	// Le cull face
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
@@ -197,7 +209,7 @@ void FacadeModele::initialiserOpenGL(HWND hWnd)
 				-200, 1000, 5, 0.5, 0.25,
 				200, 200}
 	};
-	vueOrbite_->rotaterXY(0, 100);
+	vueOrbite_->rotaterXY(0, -0.25);
 
 	vue_ = vueOrtho_;
 }
@@ -293,7 +305,7 @@ void FacadeModele::chargerZoneJeu(char* fichierZoneJeu) const
 ///
 /// @return Aucune.
 ///
-///////////////////////////////////te/////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 void FacadeModele::enregistrerZoneJeu(char* fichierZoneJeu) const
 {
@@ -444,7 +456,66 @@ void FacadeModele::afficher() const
 void FacadeModele::afficherBase() const
 {
 	// Positionner la caméra
-	//glm::mat4 vueProjection(vue_->obtenirProjection().obtenirMatrice() * vue_->obtenirCamera().obtenirMatrice());
+	glm::mat4 vueProjection(vue_->obtenirProjection().obtenirMatrice() * vue_->obtenirCamera().obtenirMatrice());
+	// Metter en place l'éclairage
+
+	/*if (typeLumiereActive_ == 0)
+	{
+
+		glm::vec4 Ambient{ 0.2, 0.2, 0.2, 1.0 };
+			glLightModelfv(GL_LIGHT_MODEL_AMBIENT, glm::value_ptr(Ambient));
+	}
+
+	if (typeLumiereActive_==1)
+	{
+		glEnable(GL_LIGHT0);
+		// la position de la source luminuse, LE 4IÈME paramètre est égale à 0 ,ce qui veut dire que la source est situé à l'infini
+		glm::vec4 direction(0.5, 0.5, 0.5, 0.0);
+		//une couleur ambiante gris
+		glm::vec4 couleurAmbiante(0.1, 0.1, 0.1, 1.0);
+		//une couleur diffuse jaune
+		glm::vec4 couleurDiffuse(1.0, 1.0, 0.8, 1.0);
+		//Aucune lumière speculaire
+		glm::vec4 couleurSpeculaire(0.0, 0.0, 0.0, 1.0);
+
+		glLightfv(GL_LIGHT0, GL_POSITION, glm::value_ptr(direction));
+		glLightfv(GL_LIGHT0, GL_AMBIENT, glm::value_ptr(couleurAmbiante));
+		glLightfv(GL_LIGHT0, GL_DIFFUSE, glm::value_ptr(couleurDiffuse));
+		glLightfv(GL_LIGHT0, GL_SPECULAR, glm::value_ptr(couleurSpeculaire));
+
+	}
+	if (typeLumiereActive_ == 2)*/
+	//{
+		glEnable(GL_LIGHT1);
+		glEnable(GL_LIGHT2);
+		glm::vec4 position(0.0, 0.0, -1.0, 1.0);
+		//une couleur ambiante gris
+		glm::vec4 couleurAmbiante(0., 0., 0., 1.0);
+		//une couleur diffuse jaune
+		glm::vec4 couleurDiffuse(1.0, 1.0, 0.8, 1.0);
+		//Aucune lumière speculaire
+		glm::vec4 couleurSpeculaire(0.0, 0.0, 0.0, 1.0);
+		glm::vec4 spotDirection1(-0.3, 0.0, 0.6, 1.0);
+		glm::vec4 spotDirection2(0.3, 0.0, 0.6, 1.0);
+		//spot
+		glLightfv(GL_LIGHT1, GL_POSITION, glm::value_ptr(position));
+		glLightfv(GL_LIGHT1, GL_AMBIENT, glm::value_ptr(couleurAmbiante));
+		glLightfv(GL_LIGHT1, GL_DIFFUSE, glm::value_ptr(couleurDiffuse));
+		glLightfv(GL_LIGHT1, GL_SPECULAR, glm::value_ptr(couleurSpeculaire));
+		glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 45.0);
+		glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, glm::value_ptr(spotDirection1));
+		glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 20.0);
+
+
+		glLightfv(GL_LIGHT2, GL_POSITION, glm::value_ptr(position));
+		glLightfv(GL_LIGHT2, GL_AMBIENT, glm::value_ptr(couleurAmbiante));
+		glLightfv(GL_LIGHT2, GL_DIFFUSE, glm::value_ptr(couleurDiffuse));
+		glLightfv(GL_LIGHT2, GL_SPECULAR, glm::value_ptr(couleurSpeculaire));
+		glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 10.0);
+		glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, glm::value_ptr(spotDirection2));
+		glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 20.0);
+	//}
+	//glEnable(GL_LIGHT1);
 
 	// Afficher la scène.
 	arbre_->afficher(glm::mat4(1.f), vue_->obtenirCamera().obtenirMatrice(), vue_->obtenirProjection().obtenirMatrice() );
@@ -1290,7 +1361,6 @@ void FacadeModele::setPartieRapide(bool activer)
 void FacadeModele::activerRondelle()
 {
 	rondelleEnPause_ = false;
-
 }
 ////////////////////////////////////////////////////////////////////////
 ///
@@ -1557,4 +1627,63 @@ void FacadeModele::setVueOrbite()
 bool FacadeModele::isVueOrtho()
 {
 	return (vue_ == vueOrtho_);
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn void setTypeLumiereActive(int type);
+///
+///	Permet d'assigner le type de lumière  
+//  @param[in]: type de lumière : 0 ambiante, 1 directionnelle et 2 spot
+///
+/// @return	aucun
+///
+////////////////////////////////////////////////////////////////////////
+void FacadeModele::  setTypeLumiereActive(bool lumiereAmbiante, bool lumiereDirectionnelle, bool lumiereSpot)
+{
+		lumiereAmbiante_ = lumiereAmbiante;
+		lumiereDirectionnelle_ = lumiereDirectionnelle;
+		lumiereSpot_ = lumiereSpot;
+}
+
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool getEtatLumiereAmbiante()
+///
+///	Permet d'assigner le type de lumière  
+//  @param[in]: type de lumière : 0 ambiante, 1 directionnelle et 2 spot
+///
+/// @return	aucun
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::getEtatLumiereAmbiante()
+{
+	return (lumiereAmbiante_);
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool getEtatLumiereDirectionnelle()
+///
+///	Permet d'assigner le type de lumière  
+//  @param[in]: type de lumière : 0 ambiante, 1 directionnelle et 2 spot
+///
+/// @return	aucun
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::getEtatLumiereDirectionnelle()
+{
+	return (lumiereDirectionnelle_);
+}
+////////////////////////////////////////////////////////////////////////
+///
+/// @fn bool getEtatLumiereSpot()
+///
+///	Permet d'assigner le type de lumière  
+//  @param[in]: type de lumière : 0 ambiante, 1 directionnelle et 2 spot
+///
+/// @return	aucun
+///
+////////////////////////////////////////////////////////////////////////
+bool FacadeModele::getEtatLumiereSpot()
+{
+	return (lumiereSpot_);
 }
