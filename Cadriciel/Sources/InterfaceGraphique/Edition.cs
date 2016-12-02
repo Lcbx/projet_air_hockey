@@ -255,6 +255,34 @@ namespace InterfaceGraphique
 
             VueActuelle = TypeVue.Orthographique;
 
+            ToolTip ttPositionX = new ToolTip();
+            ttPositionX.ToolTipIcon = ToolTipIcon.Info;
+            ttPositionX.IsBalloon = true;
+            ttPositionX.ShowAlways = true;
+            ttPositionX.SetToolTip(lblPositionX, "Position sur l'axe des X de l'objet sélectionné. Sortir un objet de la table n'est pas possible.");
+            ttPositionX.SetToolTip(txtPositionX, "Position sur l'axe des X de l'objet sélectionné. Sortir un objet de la table n'est pas possible.");
+
+            ToolTip ttPositionY = new ToolTip();
+            ttPositionY.ToolTipIcon = ToolTipIcon.Info;
+            ttPositionY.IsBalloon = true;
+            ttPositionY.ShowAlways = true;
+            ttPositionY.SetToolTip(lblPositionY, "Position sur l'axe des Y de l'objet sélectionné. Sortir un objet de la table n'est pas possible.");
+            ttPositionY.SetToolTip(txtPositionY, "Position sur l'axe des Y de l'objet sélectionné. Sortir un objet de la table n'est pas possible.");
+
+            ToolTip ttAngle = new ToolTip();
+            ttAngle.ToolTipIcon = ToolTipIcon.Info;
+            ttAngle.IsBalloon = true;
+            ttAngle.ShowAlways = true;
+            ttAngle.SetToolTip(lblAngle, "Angle de rotation par rapport au centre de l'objet sélectionné. Sortir un objet de la table n'est pas possible.");
+            ttAngle.SetToolTip(txtAngle, "Angle de rotation par rapport au centre de l'objet sélectionné. Sortir un objet de la table n'est pas possible.");
+
+            ToolTip ttEchelle = new ToolTip();
+            ttEchelle.ToolTipIcon = ToolTipIcon.Info;
+            ttEchelle.IsBalloon = true;
+            ttEchelle.ShowAlways = true;
+            ttEchelle.SetToolTip(lblEchelle, "Ratio de taille par rapport à l'objet initial de l'objet sélectionné. Sortir un objet de la table n'est pas possible.");
+            ttEchelle.SetToolTip(txtEchelle, "Ratio de taille par rapport à l'objet initial de l'objet sélectionné. Sortir un objet de la table n'est pas possible.");
+
             this.Focus();
         }
 

@@ -120,15 +120,6 @@
   <metadata name="notifyIcon1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="richTextBox9.Text" xml:space="preserve">
-    <value>Onglet Lumieres
-
-1) Lumière ambiante : Permet d'activer ou désactiver la lumière ambiante.
-
-2) Lumière directionnelle : Permet d'activer ou désactiver la lumière directionnelle.
-
-3) Spots lumineux : Permet d'activer ou désactiver les spots lumineux.</value>
-  </data>
   <data name="richTextBox1.Text" xml:space="preserve">
     <value>Mode d'édition de la table
 
@@ -180,7 +171,7 @@ Lorsqu'un objet se retrouve à l'extérieur de la table à cause des transformat
 6.2) Portail : Cliquer à l'endroit désiré pour ajouter le premier portail puis cliquer à un second endroit pour ajouter sa paire. Si l'outils est changé sans que le second portail n'ait été posé, le premier portail sera retiré. Aucune partie du portail ne doit être situé à l'extérieur de la table sans quoi son positionnement sera invalide.
 6.3) Muret : Cliquer à l'endroit désiré pour commencer le muret et au second endroit désiré afin de terminer le muret. Aucune partie du muret ne doit être situé à l'extérieur de la table sans quoi son positionnement sera invalide et le muret annulé.
 
-7) Gestion des points de contrôle : Permet de modifier la forme de la table en cliquant sur un des 8 points délimiteurs en bleu et en les déplaçants. Les modifications sont effectuées en miroirs. Un point ne pourra pas être déplacé plus loin s'il causerait qu'un objet de la table sorte.</value>
+7) Gestion des points de contrôle : Permet de modifier la forme de la table en cliquant sur un des 8 points délimiteurs et en les déplaçants. Les modifications sont effectuées en miroirs. Un point ne pourra pas être déplacé s'il causerait qu'un objet de la table sorte.</value>
   </data>
   <data name="richTextBox5.Text" xml:space="preserve">
     <value>Onglet Vues
@@ -200,6 +191,15 @@ La barre de menus est accessible à l'appuis de la touche escape. Le premier jou
 1) Orthographique : Change la vue pour une vue aérienne sans rotation. La molette permet de changer le niveau de zoom et le clic droit permet de déplacer verticalement et horizontalement la vue. Les touches + et - peuvent joueur le rôle du zoom et les flèches le déplacement.
 
 2) Orbite : Change la vue pour une vue aérienne avec rotation. La molette permet de changer l'élévation de la vue alors que le clic droit permet d'effectuer une révolution autour du centre de la table. Les touches + et - peuvent joueur le rôle du zoom et les flèches le déplacement.</value>
+  </data>
+  <data name="richTextBox9.Text" xml:space="preserve">
+    <value>Onglet Lumieres
+
+1) Lumière ambiante : Permet d'activer ou désactiver la lumière ambiante.
+
+2) Lumière directionnelle : Permet d'activer ou désactiver la lumière directionnelle.
+
+3) Spots lumineux : Permet d'activer ou désactiver les spots lumineux.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

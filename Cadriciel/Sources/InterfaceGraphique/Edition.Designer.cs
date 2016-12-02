@@ -34,10 +34,10 @@
             this.txtBoxErreurProprietes = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblPositionY = new System.Windows.Forms.Label();
+            this.lblPositionX = new System.Windows.Forms.Label();
+            this.lblEchelle = new System.Windows.Forms.Label();
+            this.lblAngle = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fichierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nouveauToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -129,8 +129,8 @@
             this.pnlProperty.Controls.Add(this.txtEchelle);
             this.pnlProperty.Controls.Add(this.label1);
             this.pnlProperty.Controls.Add(this.groupBox1);
-            this.pnlProperty.Controls.Add(this.label5);
-            this.pnlProperty.Controls.Add(this.label4);
+            this.pnlProperty.Controls.Add(this.lblEchelle);
+            this.pnlProperty.Controls.Add(this.lblAngle);
             this.pnlProperty.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnlProperty.Location = new System.Drawing.Point(729, 24);
             this.pnlProperty.Name = "pnlProperty";
@@ -165,8 +165,8 @@
             // 
             this.groupBox1.Controls.Add(this.txtPositionY);
             this.groupBox1.Controls.Add(this.txtPositionX);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.lblPositionY);
+            this.groupBox1.Controls.Add(this.lblPositionX);
             this.groupBox1.Location = new System.Drawing.Point(3, 42);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(136, 76);
@@ -174,41 +174,41 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Position";
             // 
-            // label3
+            // lblPositionY
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 45);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(17, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Y:";
+            this.lblPositionY.AutoSize = true;
+            this.lblPositionY.Location = new System.Drawing.Point(6, 45);
+            this.lblPositionY.Name = "lblPositionY";
+            this.lblPositionY.Size = new System.Drawing.Size(17, 13);
+            this.lblPositionY.TabIndex = 3;
+            this.lblPositionY.Text = "Y:";
             // 
-            // label2
+            // lblPositionX
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(17, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "X:";
+            this.lblPositionX.AutoSize = true;
+            this.lblPositionX.Location = new System.Drawing.Point(6, 22);
+            this.lblPositionX.Name = "lblPositionX";
+            this.lblPositionX.Size = new System.Drawing.Size(17, 13);
+            this.lblPositionX.TabIndex = 2;
+            this.lblPositionX.Text = "X:";
             // 
-            // label5
+            // lblEchelle
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(28, 170);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(45, 13);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Échelle:";
+            this.lblEchelle.AutoSize = true;
+            this.lblEchelle.Location = new System.Drawing.Point(28, 170);
+            this.lblEchelle.Name = "lblEchelle";
+            this.lblEchelle.Size = new System.Drawing.Size(45, 13);
+            this.lblEchelle.TabIndex = 13;
+            this.lblEchelle.Text = "Échelle:";
             // 
-            // label4
+            // lblAngle
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 136);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Angle (deg):";
+            this.lblAngle.AutoSize = true;
+            this.lblAngle.Location = new System.Drawing.Point(9, 136);
+            this.lblAngle.Name = "lblAngle";
+            this.lblAngle.Size = new System.Drawing.Size(64, 13);
+            this.lblAngle.TabIndex = 12;
+            this.lblAngle.Text = "Angle (deg):";
             // 
             // menuStrip1
             // 
@@ -917,11 +917,11 @@
         private System.Windows.Forms.ToolStripMenuItem modeEditionToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private InterfaceGraphique.Utility.NumericUpDownSafe txtEchelle;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblEchelle;
+        private System.Windows.Forms.Label lblAngle;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblPositionY;
+        private System.Windows.Forms.Label lblPositionX;
         private System.Windows.Forms.Panel pnlProperty;
         private System.Windows.Forms.RichTextBox txtBoxErreurProprietes;
         private InterfaceGraphique.Utility.NumericUpDownSafe txtPositionY;
